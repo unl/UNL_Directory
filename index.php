@@ -14,6 +14,8 @@ if (isset($_GET['chooser'])) {
 $peepObj  = new UNL_Peoplefinder();
 $renderer = new UNL_Peoplefinder_Renderer_HTML($renderer_options);
 
+$myself = htmlentities(str_replace('index.php', '', $_SERVER['PHP_SELF']), ENT_QUOTES);
+
 if (!isset($_SESSION['lastResultDisplayed']))
 	$_SESSION['lastResultDisplayed']=0;
 
@@ -151,10 +153,10 @@ if (!isset($_SESSION['lastResultDisplayed']))
 							}
 						
 							if (isset($_GET['q']) || isset($_GET['uid']) || isset($_GET['cn']) || isset($_GET['p'])) { ?>
-		                    <div id="backButton"><a class="imagelink" href="<? echo $_SERVER['PHP_SELF']; ?>" onclick="history.go(-1); return false;" title="Go back to search results"><img src="images/btn_back.gif" alt="Back" /></a></div>
+		                    <div id="backButton"><a class="imagelink" href="<?php echo $myself; ?>" onclick="history.go(-1); return false;" title="Go back to search results"><img src="images/btn_back.gif" alt="Back" /></a></div>
 		                    <?php }
 							if (!isset($_GET['uid'])) { ?>
-		                     	<a href="<? echo $_SERVER['PHP_SELF']; ?>" title="Click here to run a basic People Finder search">Basic</a>&nbsp;|&nbsp;<a href="<? echo $_SERVER['PHP_SELF']; ?>?adv=y" title="Click here to perform a detailed Peoplefinder search">Detailed</a>
+		                     	<a href="<?php echo $myself; ?>" title="Click here to run a basic People Finder search">Basic</a>&nbsp;|&nbsp;<a href="<?php echo $myself; ?>?adv=y" title="Click here to perform a detailed Peoplefinder search">Detailed</a>
 		                    <?php } 
 							//show instructions if no results are showing
 							if (!isset($_GET['uid']) && !isset($records)) {
