@@ -16,7 +16,7 @@ if (isset($_GET['chooser'])) {
 }
 
 if (isset($_GET['q']) && !empty($_GET['q'])) {
-    require_once 'Peoplefinder/Renderer/HTML.php';
+    require_once 'UNL/Peoplefinder/Renderer/HTML.php';
     $renderer = new UNL_Peoplefinder_Renderer_HTML($renderer_options);
 	// Basic query, build filter and display results
 	if (strlen($_GET['q']) > 3) {
@@ -48,12 +48,12 @@ if (isset($_GET['q']) && !empty($_GET['q'])) {
 } elseif (isset($_GET['uid']) && !empty($_GET['uid'])) {
 	switch(@$_GET['format']) {
 		case 'vcard':
-		    require_once 'Peoplefinder/Renderer/vCard.php';
+		    require_once 'UNL/Peoplefinder/Renderer/vCard.php';
 		    $renderer = new UNL_Peoplefinder_Renderer_vCard();
 		break;
 		case 'hcard':
 	    default:
-		    require_once 'Peoplefinder/Renderer/HTML.php';
+		    require_once 'UNL/Peoplefinder/Renderer/HTML.php';
 		    $renderer = new UNL_Peoplefinder_Renderer_HTML($renderer_options);
 		break;
 	}
