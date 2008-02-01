@@ -174,7 +174,8 @@ class UNL_Peoplefinder
     
     public function getExactMatches($q)
     {
-        $this->query($this->buildStandardFilter($q,'|',false), $this->listAttributes);
+        require_once dirname(__FILE__).'/Peoplefinder/StandardFilter.php';
+        $this->query(new UNL_Peoplefinder_StandardFilter($q,'|',false), $this->listAttributes);
         return $this->getRecordsFromResults();
     }
     
@@ -196,18 +197,18 @@ class UNL_Peoplefinder
     
     public function getAdvancedSearchMatches($sn, $cn, $eppa)
     {
-        $this->query($this->buildAdvancedFilter($sn, $cn, $eppa, '&', true), $this->listAttributes);
+        require_once dirname(__FILE__).'/Peoplefinder/AdvancedFilter.php';
+        $this->query(new UNL_Peoplefinder_AdvancedFilter($sn, $cn, $eppa, '&', true), $this->listAttributes);
 		return $this->getRecordsFromResults();
     }
     
     public function getLikeMatches($q, $excluded_records = array())
     {
+        require_once dirname(__FILE__).'/Peoplefinder/StandardFilter.php';
         // Build filter excluding those displayed above
-        $filter = '';
-		foreach ($excluded_records as $record) {
-			$filter .= '(uid='.$record->uid.')';
-		}
-		$this->query('(&'.$this->buildStandardFilter($q,'|',true).'(!(|'.$filter.')))', $this->listAttributes);
+        $filter = new UNL_Peoplefinder_StandardFilter($q,'|',true);
+        $filter->excludeRecords($excluded_records);
+		$this->query($filter, $this->listAttributes);
 		return $this->getRecordsFromResults();
     }
     
@@ -220,7 +221,8 @@ class UNL_Peoplefinder
      */
     public function getPhoneMatches($q)
     {
-        $this->query('(telephoneNumber=*'.str_replace('-','*',$q).')', $this->listAttributes);
+        require_once dirname(__FILE__).'/Peoplefinder/TelephoneFilter.php';
+        $this->query(new UNL_Peoplefinder_TelephoneFilter($q), $this->listAttributes);
 		return $this->getRecordsFromResults();
     }
 
@@ -265,87 +267,6 @@ class UNL_Peoplefinder
         return $marray;
     }
     
-    function buildStandardFilter($inquery,$operator='&',$wild=false)
-    {
-        if ($inquery != '') {
-            //try and clean up the incoming query....
-            $inquery = str_replace('"','',$inquery);
-            $inquery = str_replace(',','',$inquery);
-            $inquery = str_replace(')','',$inquery);
-            $inquery = str_replace('(','',$inquery);
-            $inquery = str_replace('=','',$inquery);
-            $inquery = trim($inquery);
-            //put the query into an array of words
-            $query = explode(' ',$inquery,4);
-            //determine if a wildcard should be used
-            if ($wild == false)
-                $wildcard = '';
-            else
-                $wildcard = '*';
-            
-            if ($operator!='&') $operator = '|';
-            //create our filter
-            $filter = '(&';
-            for ($i=0;$i<sizeof($query);$i++) {
-                $trimmed = trim($query[$i]);
-                $filter = $filter.'('.$operator.'
-                                    (givenname='.$trimmed.$wildcard.')
-                                    (sn='.$trimmed.$wildcard.')
-                                    (mail='.str_replace('*','',$trimmed).')
-                                    (unlemailnickname='.str_replace('*','',$trimmed).')
-                                    (unlemailalias='.str_replace('*','',$trimmed).'))';
-            }
-            $filter = $filter.')';
-            $filter = '(|(sn='.$inquery.')(cn='.$inquery.')'.$filter.')';
-            $filter = ereg_replace('\*\*','*',$filter);
-        }
-        return $filter;
-    }
-    
-    function buildAdvancedFilter($sn='',$cn='',$eppa='',$operator='&', $wild=false)
-    {
-        // Advanced Query, search by LastName (sn) and First Name (cn), and affiliation
-        if ($wild == false)
-            $wildcard = '';
-        else
-            $wildcard = '*';
-        $filterfields = array();
-        $filterfields['sn'] = $sn.$wildcard;
-        $filterfields['cn'] = $cn.$wildcard;
-        $primaryAffiliation ='';
-        // Determine the eduPersonPrimaryAffiliation to query by
-        switch ($eppa) {
-            case 'stu':
-            case 'student':
-                $primaryAffiliation = '(eduPersonPrimaryAffiliation=student)';
-                break;
-            case 'fs':
-            case 'faculty':
-            case 'staff':
-                $primaryAffiliation = '(|(eduPersonPrimaryAffiliation=faculty)(eduPersonPrimaryAffiliation=staff))';
-                break;
-            default:
-                $primaryAffiliation = '(eduPersonPrimaryAffiliation=*)';
-                break;
-        }
-        return '('.$operator.$this->buildFilter($filterfields).$primaryAffiliation.')';
-    }
-    
-    function buildFilter(&$field_arr,$op=''){
-        $filter='';
-        foreach($field_arr as $key=>$value) {
-            if(is_array($value)) {
-                $tmpvar = array();
-                $tmpvar[$key]=$value;
-                $filter .= buildFilter($tmpvar);
-            } else {
-                $filter .= "($key=$value)";
-            }
-        }
-        if ($op!='') $filter = "({$op}{$filter})";
-        return $filter;
-    }
-    
     function displayInstructions($adv=false){
         echo '<div style="padding-top:10px;width:270px;" id="instructions">';
         if ($adv) {
@@ -357,5 +278,3 @@ class UNL_Peoplefinder
     }
 
 }
-
-?>
