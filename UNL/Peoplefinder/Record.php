@@ -98,6 +98,11 @@ class UNL_Peoplefinder_Record
         
         return $address;
     }
+    
+    function __toString()
+    {
+        return $this->uid;
+    }
 }
 
 ?>
