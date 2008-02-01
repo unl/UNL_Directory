@@ -7,9 +7,7 @@
  * $filter = new UNL_Peoplefinder_StandardFilter('brett bieber','|',false);
  * echo $filter;
  * ?>
- * (|(sn=brett bieber)(cn=brett bieber)
- *   (&(| (givenname=brett) (sn=brett) (mail=brett) (unlemailnickname=brett) (unlemailalias=brett))
- *     (| (givenname=bieber) (sn=bieber) (mail=bieber) (unlemailnickname=bieber) (unlemailalias=bieber))))
+ * (|(sn=brett bieber)(cn=brett bieber)(&(| (givenname=brett) (sn=brett) (mail=brett) (unlemailnickname=brett) (unlemailalias=brett))(| (givenname=bieber) (sn=bieber) (mail=bieber) (unlemailnickname=bieber) (unlemailalias=bieber))))
  * </code>
  *
  * PHP version 5
