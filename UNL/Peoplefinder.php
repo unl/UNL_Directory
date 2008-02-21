@@ -175,7 +175,8 @@ class UNL_Peoplefinder
     public function getExactMatches($q)
     {
         require_once dirname(__FILE__).'/Peoplefinder/StandardFilter.php';
-        $this->query(new UNL_Peoplefinder_StandardFilter($q,'|',false), $this->listAttributes);
+        $filter = new UNL_Peoplefinder_StandardFilter($q,'|',false);
+        $this->query($filter->__toString(), $this->listAttributes);
         return $this->getRecordsFromResults();
     }
     
