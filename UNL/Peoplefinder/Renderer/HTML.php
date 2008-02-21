@@ -120,6 +120,12 @@ class UNL_Peoplefinder_Renderer_HTML
         if (isset($r->postalAddress)) {
             if (strpos($r->postalAddress,'UNL')!= -1 || strpos($r->postalAddress,'UNO')!= -1) {
                 $address = $r->formatpostalAddress();
+
+                if( strpos($address['postal-code'],'68588') == 0 )
+                {
+                    $address['street-address'] = $this->replaceBuildingCode($address['street-address']);
+                }
+
                 echo '<div id="workAdr" class="adr">
                      <span class="type">Work</span>
                      <span class="street-address">'. $address['street-address'] . '</span>
@@ -168,6 +174,23 @@ class UNL_Peoplefinder_Renderer_HTML
         echo $addr;
     }
     
+
+    private function replaceBuildingCode($streetaddress)
+    {
+       /********************************************************
+        *    Takes in a street address of a staff or faculty member, a building code in a string
+        *    with a link to the building in the virtual tour
+        *
+        *    $streetaddress = Street Address of a staff or faculty member
+        *********************************************************/
+
+        $regex = "/([A-Za-z0-9].) ([A-Z0-9\&]{2,4})/" ; //& is for M&N Building
+
+        $replace = '${1} <a href="http://www1.unl.edu/tour/${2}">${2}</a>';
+
+        return preg_replace($regex, $replace, $streetaddress);
+    }
+
     public function formatAddress($addressArray)
     {
         /********************************************************
