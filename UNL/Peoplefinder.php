@@ -199,7 +199,8 @@ class UNL_Peoplefinder
     public function getAdvancedSearchMatches($sn, $cn, $eppa)
     {
         require_once dirname(__FILE__).'/Peoplefinder/AdvancedFilter.php';
-        $this->query(new UNL_Peoplefinder_AdvancedFilter($sn, $cn, $eppa, '&', true), $this->listAttributes);
+        $filter = new UNL_Peoplefinder_AdvancedFilter($sn, $cn, $eppa, '&', true);
+        $this->query($filter->__toString(), $this->listAttributes);
 		return $this->getRecordsFromResults();
     }
     
@@ -209,7 +210,7 @@ class UNL_Peoplefinder
         // Build filter excluding those displayed above
         $filter = new UNL_Peoplefinder_StandardFilter($q,'|',true);
         $filter->excludeRecords($excluded_records);
-		$this->query($filter, $this->listAttributes);
+		$this->query($filter->__toString(), $this->listAttributes);
 		return $this->getRecordsFromResults();
     }
     
@@ -223,7 +224,8 @@ class UNL_Peoplefinder
     public function getPhoneMatches($q)
     {
         require_once dirname(__FILE__).'/Peoplefinder/TelephoneFilter.php';
-        $this->query(new UNL_Peoplefinder_TelephoneFilter($q), $this->listAttributes);
+        $filter = new UNL_Peoplefinder_TelephoneFilter($q);
+        $this->query($filter->__toString(), $this->listAttributes);
 		return $this->getRecordsFromResults();
     }
 
