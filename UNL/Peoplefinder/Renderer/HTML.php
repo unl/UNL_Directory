@@ -27,6 +27,17 @@ function net_match($network, $ip) {
      return ($ip_long & $mask) == ($network_long & $mask);
 }
 
+/**
+ * Class to render html output for results
+ *
+ * PHP version 5
+ * 
+ * @package   UNL_Peoplefinder
+ * @author    Brett Bieber <brett.bieber@gmail.com>
+ * @copyright 2007 Regents of the University of Nebraska
+ * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
+ * @link      http://peoplefinder.unl.edu/
+ */
 class UNL_Peoplefinder_Renderer_HTML
 {
     
@@ -76,7 +87,7 @@ class UNL_Peoplefinder_Renderer_HTML
     public function renderRecord(UNL_Peoplefinder_Record $r)
     {
         echo "<div class='vcard'>\n";
-        if(isset($r->mail) && ($r->eduPersonPrimaryAffiliation != 'student' || $this->displayStudentEmail==true)) {
+        if (isset($r->mail) && ($r->eduPersonPrimaryAffiliation != 'student' || $this->displayStudentEmail==true)) {
             $displayEmail = true;
         } else {
             $displayEmail = false;
@@ -174,15 +185,16 @@ class UNL_Peoplefinder_Renderer_HTML
         echo $addr;
     }
     
-
+    /**
+     * Takes in a street address of a staff or faculty member, a building 
+     * code in a string with a link to the building in the virtual tour
+     *
+     * @param string $streetaddress Street Address of a staff or faculty member
+     * 
+     * @return string
+     */
     private function replaceBuildingCode($streetaddress)
     {
-       /********************************************************
-        *    Takes in a street address of a staff or faculty member, a building code in a string
-        *    with a link to the building in the virtual tour
-        *
-        *    $streetaddress = Street Address of a staff or faculty member
-        *********************************************************/
 
         $regex = "/([A-Za-z0-9].) ([A-Z0-9\&]{2,4})/" ; //& is for M&N Building
 
@@ -190,25 +202,32 @@ class UNL_Peoplefinder_Renderer_HTML
 
         return preg_replace($regex, $replace, $streetaddress);
     }
-
+    
+    /**
+     * This function takes in an array of address information and formats it
+     *
+     * @param array $addressArray Address information
+     * <code>
+     * $addressArray[0] = Address line 1
+     * $addressArray[1] = Address line 2
+     * $addressArray[2] = City
+     * $addressArray[3] = State
+     * $addressArray[4] = Zip
+     * $addressArray[5] = Country
+     * </code>
+     * 
+     * @return string
+     */
     public function formatAddress($addressArray)
     {
-        /********************************************************
-        *    This function takes in an array of address information and formats it
-        *    $addressArray[0] = Address line 1
-        *    $addressArray[1] = Address line 2
-        *    $addressArray[2] = City
-        *    $addressArray[3] = State
-        *    $addressArray[4] = Zip
-        *    $addressArray[5] = Country
-        *********************************************************/
         if (isset($addressArray[0])) {
             $address = $addressArray[0]."<br />";
             if (isset($addressArray[1])) $address .= $addressArray[1]."<br />";
             $address .= $addressArray[2].", ".$addressArray[3]." ".$addressArray[4];
             if (isset($addressArray[5])) $address .= "<br />".$addressArray[4];
+        } else {
+            $address = 'Unlisted';
         }
-        else $address = 'Unlisted';
         return $address;
     }
     
