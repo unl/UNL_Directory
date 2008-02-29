@@ -198,7 +198,7 @@ class UNL_Peoplefinder_Renderer_HTML
 
         $regex = "/([A-Za-z0-9].) ([A-Z0-9\&]{2,4})/" ; //& is for M&N Building
 
-        $replace = '${1} <a href="http://www1.unl.edu/tour/${2}">${2}</a>';
+        $replace = '${1} <a class="location mapurl" href="http://www1.unl.edu/tour/${2}">${2}</a>';
 
         return preg_replace($regex, $replace, $streetaddress);
     }
