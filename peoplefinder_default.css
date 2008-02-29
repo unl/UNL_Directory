@@ -20,11 +20,11 @@
 	border-left:1px solid #ccc;
 }
 #maincontent ul li.ppl_Sresult:hover, #maincontent ul li.ppl_Sresult.alt:hover{
-	background:#DFDFDF;
+	background:#FFFEF0;
 	border-bottom:1px solid #d3d3d3;
 }
 #maincontent ul li.ppl_Sresult.alt{
-	background:#eee;
+	background:#FAFAFA;
 }
 #maincontent ul li.ppl_Sresult div.tel{
 	background:url(images/mobile.gif) no-repeat 0 0.75em;
