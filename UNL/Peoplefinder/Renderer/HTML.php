@@ -54,11 +54,13 @@ class UNL_Peoplefinder_Renderer_HTML
     
     function __construct(array $options = null)
     {
-        $validIPs = array('129.93.0.0/16','65.123.32.0/19','64.39.240.0/20','216.128.208.0/20');
-        foreach ($validIPs as $range) {
-            if (net_match($range, $_SERVER['REMOTE_ADDR'])) {
-                $this->trustedIP = true;
-                break;
+        if (isset($_SERVER['REMOTE_ADDR'])) {
+            $validIPs = array('129.93.0.0/16','65.123.32.0/19','64.39.240.0/20','216.128.208.0/20');
+            foreach ($validIPs as $range) {
+                if (net_match($range, $_SERVER['REMOTE_ADDR'])) {
+                    $this->trustedIP = true;
+                    break;
+                }
             }
         }
         $this->displayLimit = UNL_PF_DISPLAY_LIMIT;
@@ -84,6 +86,11 @@ class UNL_Peoplefinder_Renderer_HTML
         }
     }
 
+    /**
+     * Renders a peoplefinder record object
+     *
+     * @param UNL_Peoplefinder_Record $r record to render
+     */
     public function renderRecord(UNL_Peoplefinder_Record $r)
     {
         echo "<div class='vcard'>\n";
@@ -120,10 +127,12 @@ class UNL_Peoplefinder_Renderer_HTML
             }
             echo '<span class="title">'.$class." ".$r->unlSISMajor."&ndash;".$r->unlSISCollege.'</span>';
         }
-        if (isset($r->unlSISLocalAddr1) || isset($r->unlSISPermAddr1)) {
+        if (isset($r->unlSISLocalAddr1)) {
             $localaddr = array($r->unlSISLocalAddr1, $r->unlSISLocalAddr2, $r->unlSISLocalCity, $r->unlSISLocalState, $r->unlSISLocalZip);
-            $permaddr  = array($r->unlSISPermAddr1, $r->unlSISPermAddr2, $r->unlSISPermCity, $r->unlSISPermState, $r->unlSISPermZip);
             $this->renderAddress($localaddr, 'Local', 'workAdr');
+        }
+        if (isset($r->unlSISPermAddr1)) {
+            $permaddr  = array($r->unlSISPermAddr1, $r->unlSISPermAddr2, $r->unlSISPermCity, $r->unlSISPermState, $r->unlSISPermZip);
             $this->renderAddress($permaddr, 'Home', 'homeAdr');
         }
         echo "<span class='title'>{$r->title}</span>\n";
