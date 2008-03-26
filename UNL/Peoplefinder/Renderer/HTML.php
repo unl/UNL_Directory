@@ -166,7 +166,7 @@ class UNL_Peoplefinder_Renderer_HTML
         }
         if ($displayEmail) {
             echo "<span class='email'><a class='email' href='mailto:{$r->unlEmailAlias}@unl.edu'>{$r->unlEmailAlias}@unl.edu</a></span>\n";
-            if ($this->trustedIP===true) echo "<span class='email'>Delivery Address: {$r->mail}</span>\n";
+            if ($this->trustedIP===true) echo "<span class='email delivery'>Delivery Address: {$r->mail}</span>\n";
         }
         $linktext = '<img src="http://www.unl.edu/unlpub/2004sharedgraphics/icon_vcard.gif" alt="V-Card" />'.PHP_EOL;
         echo $this->getVCardLink($r->uid, $linktext, null, 'Download V-Card for '.$r->givenName.' '.$r->sn);
