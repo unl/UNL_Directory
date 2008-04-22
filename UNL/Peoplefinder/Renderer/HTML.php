@@ -254,10 +254,15 @@ class UNL_Peoplefinder_Renderer_HTML
     
     public function renderListRecord(UNL_Peoplefinder_Record $r)
     {
-        $linktext = $r->sn . ',&nbsp;'. $r->givenName;
-        if (isset($r->eduPersonNickname)) {
-            $linktext .= ' "'.$r->eduPersonNickname.'"';
+        if ($r->ou == 'org') {
+            $linktext = $r->cn;
+        } else {
+            $linktext = $r->sn . ',&nbsp;'. $r->givenName;
+            if (isset($r->eduPersonNickname)) {
+                $linktext .= ' "'.$r->eduPersonNickname.'"';
+            }
         }
+        
         echo '<div class="fn">'.$this->getUIDLink($r->uid, $linktext, $this->uid_onclick).'</div>'.PHP_EOL;
         if (isset($r->eduPersonPrimaryAffiliation)) echo '<div class="eppa">('.$r->eduPersonPrimaryAffiliation.')</div>'.PHP_EOL;
         if (isset($r->unlHRPrimaryDepartment)) echo '<div class="organization-unit">'.$r->unlHRPrimaryDepartment.'</div>'.PHP_EOL;
@@ -285,7 +290,12 @@ class UNL_Peoplefinder_Renderer_HTML
         echo '<ul>';
         for ($i = $start; $i<$end; $i++) {
             $even_odd = ($i % 2) ? '' : 'alt';
-            echo '<li class="ppl_Sresult '.$even_odd.'">';
+            if ($records[$i]->ou == 'org') {
+                $class = 'org_Sresult';
+            } else {
+                $class = 'ppl_Sresult';
+            }
+            echo '<li class="'.$class.' '.$even_odd.'">';
             $this->renderListRecord($records[$i]);
             echo '</li>'.PHP_EOL;
         }

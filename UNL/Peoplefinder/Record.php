@@ -13,6 +13,7 @@
 class UNL_Peoplefinder_Record
 {
     public $cn;
+    public $ou;
     public $eduPersonNickname;
     public $eduPersonPrimaryAffiliation;
     public $givenName;

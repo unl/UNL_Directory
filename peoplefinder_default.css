@@ -14,23 +14,32 @@
     margin-bottom:5px;
 	border-top:1px solid #ddd;clear:both;
 }
-#maincontent ul li.ppl_Sresult{
+#maincontent ul li.ppl_Sresult,
+#maincontent ul li.org_Sresult{
 	border-bottom:1px solid #ddd;
 	padding:0.7em 0 0.7em 0.7em;
 	border-left:1px solid #ccc;
 }
-#maincontent ul li.ppl_Sresult:hover, #maincontent ul li.ppl_Sresult.alt:hover{
-	background:#FFFEF0;
+#maincontent ul li.ppl_Sresult:hover,
+#maincontent ul li.ppl_Sresult.alt:hover,
+#maincontent ul li.org_Sresult:hover,
+#maincontent ul li.org_Sresult.alt:hover{
+	background:#EBF6FF;
 	border-bottom:1px solid #d3d3d3;
 }
-#maincontent ul li.ppl_Sresult.alt{
+#maincontent ul li.ppl_Sresult.alt,
+#maincontent ul li.org_Sresult.alt{
 	background:#FAFAFA;
 }
-#maincontent ul li.ppl_Sresult div.tel{
+#maincontent ul li.ppl_Sresult div.tel,
+#maincontent ul li.org_Sresult div.tel{
 	background:url(images/mobile.gif) no-repeat 0 0.75em;
 	padding:0.5em 0 0 1em;
 	position:relative;
 	color:#333;
+}
+#maincontent ul li.org_Sresult {
+	
 }
 #maincontent .fn{
 	float:left;
@@ -65,9 +74,14 @@
 	padding:0;
 }
 #maincontent a.cInfo{
-	background:url(images/person.gif) no-repeat 0 3px;
 	padding:0 0 0 1em;
 	margin-left:0.8em;color:#555;text-decoration:underline;
+}
+#maincontent ul li.ppl_Sresult a.cInfo {
+    background:url(images/person.gif) no-repeat 0 3px;
+}
+#maincontent ul li.org_Sresult a.cInfo {
+    background:url(images/home.gif) no-repeat 0 3px;
 }
 #maincontent .eppa{
 	font-size:0.75em;
