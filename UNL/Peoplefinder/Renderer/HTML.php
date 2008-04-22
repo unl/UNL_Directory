@@ -100,10 +100,14 @@ class UNL_Peoplefinder_Renderer_HTML
             $displayEmail = false;
         }
         if ($displayEmail && isset($r->unlEmailAlias)) echo "<a class='email' href='mailto:{$r->unlEmailAlias}@unl.edu'>";
-        echo '<span class="fn">'.$r->displayName.'</span>'.PHP_EOL;
-        if (isset($r->eduPersonNickname)) echo '<span class="nickname">'.$r->eduPersonNickname.'</span>'.PHP_EOL;
+        if ($r->ou == 'org') {
+            echo '<span class="cn">'.$r->cn.'</span>'.PHP_EOL;
+        } else {
+            echo '<span class="fn">'.$r->displayName.'</span>'.PHP_EOL;
+            if (isset($r->eduPersonNickname)) echo '<span class="nickname">'.$r->eduPersonNickname.'</span>'.PHP_EOL;
+        }
         if ($displayEmail && isset($r->unlEmailAlias)) echo "</a>\n";
-        echo '<span class="eppa">('.$r->eduPersonPrimaryAffiliation.')</span>'.PHP_EOL;
+        if (!empty($r->eduPersonPrimaryAffiliation)) echo '<span class="eppa">('.$r->eduPersonPrimaryAffiliation.')</span>'.PHP_EOL;
         echo '<div class="vcardInfo">'.PHP_EOL;
         if (isset($r->unlSISClassLevel)) {
             switch ($r->unlSISClassLevel) {
