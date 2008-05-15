@@ -118,6 +118,8 @@ if (!isset($_SESSION['lastResultDisplayed']))
 											        }
 											        echo '</div>';
 													$renderer->renderSearchResults($records);
+												} else {
+												    echo '<p>Sorry, I couldn\'t find anyone matching '.htmlentities($_GET['q']).'.</p>';
 												}
 												if (count($records) < UNL_Peoplefinder::$displayResultLimit) {
 													// More room to display LIKE results
