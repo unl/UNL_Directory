@@ -17,7 +17,24 @@ if (isset($_GET['chooser'])) {
 
 if (isset($_GET['q']) && !empty($_GET['q'])) {
     require_once 'UNL/Peoplefinder/Renderer/HTML.php';
-    $renderer = new UNL_Peoplefinder_Renderer_HTML($renderer_options);
+    if (isset($_GET['renderer'])) {
+        switch($_GET['renderer']) {
+            default:
+            case 'html':
+                $renderer = new UNL_Peoplefinder_Renderer_HTML($renderer_options);
+                break;
+            case 'serialized':
+            case 'php':
+                include_once 'UNL/Peoplefinder/Renderer/Serialized.php';
+                $renderer = new UNL_Peoplefinder_Renderer_Serialized($renderer_options);
+                break;
+            case 'xml':
+                $renderer = new UNL_Peoplefinder_Renderer_XML($renderer_options);
+                break;
+        }
+    } else {
+        $renderer = new UNL_Peoplefinder_Renderer_HTML($renderer_options);
+    }
 	// Basic query, build filter and display results
 	if (strlen($_GET['q']) > 3) {
 		if (is_numeric(str_replace('-','',str_replace('(','',str_replace(')','',$_GET['q']))))) {
@@ -27,7 +44,9 @@ if (isset($_GET['q']) && !empty($_GET['q'])) {
 			
 			$records = $peepObj->getExactMatches($_GET['q']);
 			if (count($records) > 0) {
-				echo "<div class='cMatch'>Exact matches:</div>\n";
+			    if ($renderer instanceof UNL_Peoplefinder_Renderer_HTML) {
+				    echo "<div class='cMatch'>Exact matches:</div>\n";
+			    }
 				$renderer->renderSearchResults($records);
 			} else {
 				echo 'No exact matches found.';
@@ -51,6 +70,11 @@ if (isset($_GET['q']) && !empty($_GET['q'])) {
 		    require_once 'UNL/Peoplefinder/Renderer/vCard.php';
 		    $renderer = new UNL_Peoplefinder_Renderer_vCard();
 		break;
+		case 'serialized':
+		case 'php':
+		    require_once 'UNL/Peoplefinder/Renderer/Serialized.php';
+            $renderer = new UNL_Peoplefinder_Renderer_Serialized();
+		    break;
 		case 'hcard':
 	    default:
 		    require_once 'UNL/Peoplefinder/Renderer/HTML.php';
