@@ -70,6 +70,10 @@ if (isset($_GET['q']) && !empty($_GET['q'])) {
 		    require_once 'UNL/Peoplefinder/Renderer/vCard.php';
 		    $renderer = new UNL_Peoplefinder_Renderer_vCard();
 		break;
+		case 'json':
+		    require_once 'UNL/Peoplefinder/Renderer/JSON.php';
+		    $renderer = new UNL_Peoplefinder_Renderer_JSON();
+		    break;
 		case 'serialized':
 		case 'php':
 		    require_once 'UNL/Peoplefinder/Renderer/Serialized.php';
