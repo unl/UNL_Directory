@@ -61,6 +61,7 @@ class UNL_Peoplefinder_StandardFilter
                                     (givenname='.$trimmed.$wildcard.')
                                     (sn='.$trimmed.$wildcard.')
                                     (sn=*-'.$trimmed.$wildcard.')
+                                    (sn=* '.$trimmed.$wildcard.')
                                     (mail='.str_replace('*', '', $trimmed).')
                                     (unlemailnickname='.str_replace('*', '', $trimmed).')
                                     (unlemailalias='.str_replace('*', '', $trimmed).'))';
