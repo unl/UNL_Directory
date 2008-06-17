@@ -36,19 +36,21 @@ class UNL_Peoplefinder_StandardFilter
     {
         if (!empty($inquery)) {
             //try and clean up the incoming query....
-            $inquery = str_replace('"','',$inquery);
-            $inquery = str_replace(',','',$inquery);
-            $inquery = str_replace(')','',$inquery);
-            $inquery = str_replace('(','',$inquery);
-            $inquery = str_replace('=','',$inquery);
+            $inquery = str_replace(array('"',
+                                         ',',
+                                         ')',
+                                         '(',
+                                         '='),'',$inquery);
             $inquery = trim($inquery);
             //put the query into an array of words
             $query = explode(' ',$inquery,4);
+            
             //determine if a wildcard should be used
-            if ($wild == false)
+            if ($wild == false) {
                 $wildcard = '';
-            else
+            } else {
                 $wildcard = '*';
+            }
             
             if ($operator!='&') $operator = '|';
             //create our filter
@@ -58,13 +60,14 @@ class UNL_Peoplefinder_StandardFilter
                 $filter = $filter.'('.$operator.'
                                     (givenname='.$trimmed.$wildcard.')
                                     (sn='.$trimmed.$wildcard.')
-                                    (mail='.str_replace('*','',$trimmed).')
-                                    (unlemailnickname='.str_replace('*','',$trimmed).')
-                                    (unlemailalias='.str_replace('*','',$trimmed).'))';
+                                    (sn=*-'.$trimmed.$wildcard.')
+                                    (mail='.str_replace('*', '', $trimmed).')
+                                    (unlemailnickname='.str_replace('*', '', $trimmed).')
+                                    (unlemailalias='.str_replace('*', '', $trimmed).'))';
             }
             $filter = $filter.')';
             $filter = '(|(sn='.$inquery.')(cn='.$inquery.')'.$filter.')';
-            $filter = ereg_replace('\*\*','*',$filter);
+            $filter = preg_replace('/\*\*/', '*', $filter);
         }
         $this->_filter = $filter;
     }
