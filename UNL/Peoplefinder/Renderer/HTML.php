@@ -327,7 +327,8 @@ class UNL_Peoplefinder_Renderer_HTML
     
     public function getVCardLink($uid, $linktext = null,$onclick = null,$title = null)
     {
-        $uri = 'http://peoplefinder.unl.edu/vcards/'.$uid;
+
+        $uri = $this->uri.'vcards/'.$uid;
         if (isset($linktext)) {
             $link = '<a href="'.$uri.'"';
             if (isset($onclick)) {

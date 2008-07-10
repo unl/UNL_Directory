@@ -6,7 +6,7 @@ require_once 'UNL/Peoplefinder/Renderer/HTML.php';
 session_start();
 session_cache_expire(5);
 
-$renderer_options = array('uri'=>'http://peoplefinder.unl.edu/');
+$renderer_options = array('uri'=>UNL_PEOPLEFINDER_URI);
 if (isset($_GET['chooser'])) {
 	$renderer_options['choose_uid'] = true;
 }

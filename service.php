@@ -9,8 +9,8 @@ require_once 'UNL/Peoplefinder.php';
 
 $peepObj = new UNL_Peoplefinder();
 
-$renderer_options = array('uid_onclick'=>'pf_getUID',
-                          'uri'=>'http://peoplefinder.unl.edu/');
+$renderer_options = array('uid_onclick' => 'pf_getUID',
+                          'uri'         => UNL_PEOPLEFINDER_URI);
 if (isset($_GET['chooser'])) {
     $renderer_options['choose_uid'] = true;
 }
