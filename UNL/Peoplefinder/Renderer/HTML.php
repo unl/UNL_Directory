@@ -129,7 +129,7 @@ class UNL_Peoplefinder_Renderer_HTML
                 default:
                     $class = $r->unlSISClassLevel;
             }
-            echo '<span class="title">'.$class." ".$r->unlSISMajor."&ndash;".$r->unlSISCollege.'</span>';
+            echo '<span class="title">'.$class." ".$this->formatMajor($r->unlSISMajor)."&ndash;".$r->unlSISCollege.'</span>';
         }
         
         if (isset($r->unlSISLocalAddr1)) {
@@ -348,6 +348,38 @@ class UNL_Peoplefinder_Renderer_HTML
         } else {
             return $uri;
         }
+    }
+    
+    /**
+     * Formats a major subject code into a text description.
+     *
+     * @param string $subject Subject code for the major eg: MSYM
+     * 
+     * @return string
+     */
+    public function formatMajor($subject)
+    {
+        $subject_xml = file_get_contents('http://bulletin.unl.edu/?view=subjects&format=xml');
+
+        include_once 'Cache/Lite.php';
+        $c = new Cache_Lite();
+        if ($subject_xml = $c->get('catalog subjects')) {
+            
+        } else {
+            if ($subject_xml = file_get_contents('http://bulletin.unl.edu/?view=subjects&format=xml')) {
+                $c->save($subject_xml);
+            } else {
+                $c->extendLife();
+                $c->get('catalog subjects');
+            }
+        }
+        $d = new DOMDocument();
+        $d->loadXML($subject_xml);
+        if ($subject_el = $d->getElementById($subject)) {
+            return $subject_el->textContent;
+        }
+        
+        return $subject;
     }
     
     public function getVCardLink($uid, $linktext = null,$onclick = null,$title = null)
