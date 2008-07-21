@@ -225,12 +225,20 @@ class UNL_Peoplefinder_Renderer_HTML
      */
     private function replaceBuildingCode($streetaddress)
     {
-
+        require_once 'UNL/Common/Building.php';
         $regex = "/([A-Za-z0-9].) ([A-Z0-9\&]{2,4})/" ; //& is for M&N Building
-
-        $replace = '${1} <a class="location mapurl" href="http://www1.unl.edu/tour/${2}">${2}</a>';
-
-        return preg_replace($regex, $replace, $streetaddress);
+        
+        if (preg_match($regex, $streetaddress, $matches)) {
+            $bldgs = new UNL_Common_Building();
+            
+            if ($bldgs->buildingExists($matches[2])) {
+                
+                $replace = '${1} <a class="location mapurl" href="http://www1.unl.edu/tour/${2}">${2}</a>';
+                return preg_replace($regex, $replace, $streetaddress);
+            }
+        }
+        
+        return $streetaddress;
     }
     
     /**
