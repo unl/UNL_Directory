@@ -131,16 +131,25 @@ class UNL_Peoplefinder_Renderer_HTML
             }
             echo '<span class="title">'.$class." ".$r->unlSISMajor."&ndash;".$r->unlSISCollege.'</span>';
         }
+        
         if (isset($r->unlSISLocalAddr1)) {
             $localaddr = array($r->unlSISLocalAddr1, $r->unlSISLocalAddr2, $r->unlSISLocalCity, $r->unlSISLocalState, $r->unlSISLocalZip);
             $this->renderAddress($localaddr, 'Local', 'workAdr');
         }
+        
         if (isset($r->unlSISPermAddr1)) {
             $permaddr  = array($r->unlSISPermAddr1, $r->unlSISPermAddr2, $r->unlSISPermCity, $r->unlSISPermState, $r->unlSISPermZip);
             $this->renderAddress($permaddr, 'Home', 'homeAdr');
         }
-        echo "<span class='title'>{$r->title}</span>\n";
-        echo "<span class='org'>\n\t<span class='organization-name'>University of Nebraska-Lincoln</span>\n\t<span class='organization-unit'>{$r->unlHRPrimaryDepartment}</span>\n</span>\n";
+        
+        if (isset($r->title)) {
+            echo "<span class='title'>{$r->title}</span>\n";
+        }
+        
+        if (isset($r->unlHRPrimaryDepartment)) {
+            echo "<span class='org'>\n\t<span class='organization-name'>University of Nebraska-Lincoln</span>\n\t<span class='organization-unit'>{$r->unlHRPrimaryDepartment}</span>\n</span>\n";
+        }
+        
         if (isset($r->postalAddress)) {
             if (strpos($r->postalAddress,'UNL')!= -1 || strpos($r->postalAddress,'UNO')!= -1) {
                 $address = $r->formatpostalAddress();
@@ -162,17 +171,25 @@ class UNL_Peoplefinder_Renderer_HTML
                 echo "<span class='adr'>{$r->postalAddress}</span>\n";
             }
         }
-        if ($r->eduPersonPrimaryAffiliation != 'student') {
+        if (isset($r->telephoneNumber)) {
             echo '<div id="workTel" class="tel">
                      <span class="type">Work</span>
                      <span class="value"><a href="tel:'.$r->telephoneNumber.'">'.$r->telephoneNumber.'</a></span>
                     </div>'.PHP_EOL;
         }
+        
+        if (isset($r->unlSISLocalPhone)) {
+            echo '<div id="homeTel" class="tel">
+                     <span class="type">Phone</span>
+                     <span class="value"><a href="tel:'.$r->unlSISLocalPhone.'">'.$r->unlSISLocalPhone.'</a></span>
+                    </div>'.PHP_EOL;
+        }
+        
         if ($displayEmail) {
             echo "<span class='email'><a class='email' href='mailto:{$r->unlEmailAlias}@unl.edu'>{$r->unlEmailAlias}@unl.edu</a></span>\n";
             if ($this->trustedIP===true) echo "<span class='email delivery'>Delivery Address: {$r->mail}</span>\n";
         }
-        $linktext = '<img src="http://www.unl.edu/unlpub/2004sharedgraphics/icon_vcard.gif" alt="V-Card" />'.PHP_EOL;
+        $linktext = '<img src="http://www.unl.edu/unlpub/2004sharedgraphics/icon_vcard.gif" alt="V-Card" /> <span class="caption">vCard</span>'.PHP_EOL;
         echo $this->getVCardLink($r->uid, $linktext, null, 'Download V-Card for '.$r->givenName.' '.$r->sn);
         echo '</div>'.PHP_EOL.'</div>'.PHP_EOL;
     }

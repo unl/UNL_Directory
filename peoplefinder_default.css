@@ -90,23 +90,26 @@
 
 /** Individual Record */
 #maincontent .vcard{
-	border-bottom:1px solid #d3d3d3;
-	border-right:1px solid #d3d3d3;
-	background:#e3e3e3;
-	margin-top:8px;
-	padding:5px;
+    border:1px solid #d3d3d3;
+    
+    margin-top:8px;
 }
 #maincontent .vcard .fn{
-	color:#900;
-	margin-bottom:2px;	
+    color:#900;
+    margin-bottom:2px;
+    padding:8px 0px 2px 5px;
+}
+#maincontent .vcard .eppa {
+    float:left;
+    margin-top:10px;
 }
 #maincontent .vcardInfo{
-	background: #f6f6f6;
-	padding:6px;
-	line-height:1.1;
-	position:relative;
-	border-bottom:1px solid #d6d6d6;
-	border-right:1px solid #d6d6d6;
+    clear:both;
+    background: #FAFAFA;
+    padding:6px;
+    line-height:1.1;
+    position:relative;
+    border-top:2px solid #E3E3E3;
 }
 #maincontent .vcard .adr, #maincontent .vcard .tel{
 	margin-top:10px;

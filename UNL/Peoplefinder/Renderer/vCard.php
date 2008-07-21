@@ -31,7 +31,9 @@ class UNL_Peoplefinder_Renderer_vCard
         }
         if ($r->eduPersonPrimaryAffiliation != "student" || $this->displayStudentTelephone==true) echo "TEL;type=WORK;type=pref:".$r->telephoneNumber."\n";
         //echo "TEL;type=CELL:(402) 555-1111\n";
-        //echo "TEL;type=HOME:(402) 666-2222\n";
+        if (isset($r->unlSISLocalPhone)) {
+            echo "TEL;type=HOME:{$r->unlSISLocalPhone}\n";
+        }
         if (isset($r->unlSISLocalAddr1)) {
             echo "item1.ADR;type=WORK;type=pref:;;".$r->unlSISLocalAddr1;
             if (isset($r->unlSISLocalAddr2)) echo "\\n".$r->unlSISLocalAddr2;

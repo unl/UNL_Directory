@@ -31,6 +31,7 @@ class UNL_Peoplefinder_Record
     public $unlSISLocalAddr1;
     public $unlSISLocalAddr2;
     public $unlSISLocalCity;
+    public $unlSISLocalPhone;
     public $unlSISLocalState;
     public $unlSISLocalZip;
     public $unlSISPermAddr1;
