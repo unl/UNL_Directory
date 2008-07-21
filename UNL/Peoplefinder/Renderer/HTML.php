@@ -359,7 +359,6 @@ class UNL_Peoplefinder_Renderer_HTML
      */
     public function formatMajor($subject)
     {
-        $subject_xml = file_get_contents('http://bulletin.unl.edu/?view=subjects&format=xml');
 
         include_once 'Cache/Lite.php';
         $c = new Cache_Lite();
