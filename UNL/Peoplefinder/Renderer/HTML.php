@@ -147,7 +147,7 @@ class UNL_Peoplefinder_Renderer_HTML
         }
         
         if (isset($r->unlHRPrimaryDepartment)) {
-            echo "<span class='org'>\n\t<span class='organization-unit'>{$r->unlHRPrimaryDepartment}</span>\n\t<span class='organization-name'>University of Nebraska-Lincoln</span></span>\n";
+            echo "<span class='org'>\n\t<span class='organization-unit'>{$r->unlHRPrimaryDepartment}</span>\n\t<span class='organization-name'>University of Nebraska&ndash;Lincoln</span></span>\n";
         }
         
         if (isset($r->postalAddress)) {
