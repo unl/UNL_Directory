@@ -1,7 +1,6 @@
 <?php
 require_once 'config.inc.php';
 
-
 require_once 'UNL/Peoplefinder/Renderer/HTML.php';
 session_start();
 session_cache_expire(5);
@@ -31,9 +30,9 @@ if (!isset($_SESSION['lastResultDisplayed']))
 <link rel="stylesheet" type="text/css" media="screen" href="/ucomm/templatedependents/templatecss/layouts/main.css" />
 <script type="text/javascript" src="/ucomm/templatedependents/templatesharedcode/scripts/sifr.js"></script>
 
-<?php virtual('/ucomm/templatedependents/templatesharedcode/includes/browsersniffers/ie.html'); ?>
-<?php virtual('/ucomm/templatedependents/templatesharedcode/includes/comments/developersnote.html'); ?>
-<?php virtual('/ucomm/templatedependents/templatesharedcode/includes/metanfavico/metanfavico.html'); ?>
+<?php include(DOCUMENT_ROOT.'/ucomm/templatedependents/templatesharedcode/includes/browsersniffers/ie.html'); ?>
+<?php include(DOCUMENT_ROOT.'/ucomm/templatedependents/templatesharedcode/includes/comments/developersnote.html'); ?>
+<?php include(DOCUMENT_ROOT.'/ucomm/templatedependents/templatesharedcode/includes/metanfavico/metanfavico.html'); ?>
 
 <meta name="description" content="UNL Peoplefinder is the Faculty, Staff and Student online directory for the University. Information obtained from this directory may not be used to provide addresses for mailings to students, faculty or staff. Any solicitation of business, information, contributions or other response from individuals listed in this publication by mail, telephone or other means is forbidden." />
 <meta name="keywords" content="university of nebraska-lincoln student faculty staff directory vcard" />
@@ -87,7 +86,12 @@ if (!isset($_SESSION['lastResultDisplayed']))
 				<!--THIS IS THE MAIN CONTENT AREA; WDN: see glossary item 'main content area' -->
 				<?php
 							if (isset($_GET['uid'])) {
-								$renderer->renderRecord($peepObj->getUID($_GET['uid']));
+							    try {
+								    $renderer->renderRecord($peepObj->getUID($_GET['uid']));
+							    } catch (Exception $e) {
+							        header('HTTP/1.0 404 Not Found');
+							        echo '<p><br />Sorry, no one with that name could be found!</p>';
+							    }
 							} else {
 								// Display form
 								(@$_GET['adv'] == 'y')?$peepObj->displayAdvancedForm():$peepObj->displayStandardForm();
