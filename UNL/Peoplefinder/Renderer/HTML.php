@@ -370,10 +370,15 @@ class UNL_Peoplefinder_Renderer_HTML
                 $c->get('catalog subjects');
             }
         }
+        
         $d = new DOMDocument();
         $d->loadXML($subject_xml);
         if ($subject_el = $d->getElementById($subject)) {
             return $subject_el->textContent;
+        }
+        
+        if ($subject == 'UNDL') {
+            return 'Undeclared';
         }
         
         return $subject;
