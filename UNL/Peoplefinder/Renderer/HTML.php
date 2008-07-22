@@ -129,7 +129,7 @@ class UNL_Peoplefinder_Renderer_HTML
                 default:
                     $class = $r->unlSISClassLevel;
             }
-            echo '<span class="title">'.$class." ".$this->formatMajor($r->unlSISMajor)."&ndash;".$r->unlSISCollege.'</span>';
+            echo '<span class="title">'.$class." ".$this->formatMajor($r->unlSISMajor).'&ndash;'.$this->formatCollege($r->unlSISCollege).'</span>';
         }
         
         if (isset($r->unlSISLocalAddr1)) {
@@ -377,6 +377,17 @@ class UNL_Peoplefinder_Renderer_HTML
         }
         
         return $subject;
+    }
+    
+    public function formatCollege($college)
+    {
+        include_once 'UNL/Common/Colleges.php';
+        $colleges = new UNL_Common_Colleges();
+        if (isset($colleges->colleges[$college])) {
+            return htmlentities($colleges->colleges[$college]);
+        }
+        
+        return $college;
     }
     
     public function getVCardLink($uid, $linktext = null,$onclick = null,$title = null)
