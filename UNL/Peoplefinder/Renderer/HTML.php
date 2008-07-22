@@ -189,7 +189,7 @@ class UNL_Peoplefinder_Renderer_HTML
             echo "<span class='email'><a class='email' href='mailto:{$r->unlEmailAlias}@unl.edu'>{$r->unlEmailAlias}@unl.edu</a></span>\n";
             if ($this->trustedIP===true) echo "<span class='email delivery'>Delivery Address: {$r->mail}</span>\n";
         }
-        $linktext = '<img src="http://www.unl.edu/unlpub/2004sharedgraphics/icon_vcard.gif" alt="V-Card" /> <span class="caption">vCard</span>'.PHP_EOL;
+        $linktext = '<img src="/ucomm/templatedependents/templatecss/images/mimetypes/text-vcard.gif" alt="vCard" /> <span class="caption">vCard</span>'.PHP_EOL;
         echo $this->getVCardLink($r->uid, $linktext, null, 'Download V-Card for '.$r->givenName.' '.$r->sn);
         echo '</div>'.PHP_EOL.'</div>'.PHP_EOL;
     }
