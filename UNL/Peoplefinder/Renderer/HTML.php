@@ -377,11 +377,14 @@ class UNL_Peoplefinder_Renderer_HTML
             return $subject_el->textContent;
         }
         
-        if ($subject == 'UNDL') {
-            return 'Undeclared';
+        switch ($subject) {
+            case 'UNDL':
+                return 'Undeclared';
+            case 'PBAC':
+                return 'Non-Degree Post-Baccalaureate';
+            default:
+                return $subject;
         }
-        
-        return $subject;
     }
     
     /**
