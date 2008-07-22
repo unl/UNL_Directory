@@ -147,7 +147,7 @@ class UNL_Peoplefinder_Renderer_HTML
         }
         
         if (isset($r->unlHRPrimaryDepartment)) {
-            echo "<span class='org'>\n\t<span class='organization-name'>University of Nebraska-Lincoln</span>\n\t<span class='organization-unit'>{$r->unlHRPrimaryDepartment}</span>\n</span>\n";
+            echo "<span class='org'>\n\t<span class='organization-unit'>{$r->unlHRPrimaryDepartment}</span>\n\t<span class='organization-name'>University of Nebraska-Lincoln</span></span>\n";
         }
         
         if (isset($r->postalAddress)) {
@@ -384,6 +384,13 @@ class UNL_Peoplefinder_Renderer_HTML
         return $subject;
     }
     
+    /**
+     * Format a three letter college abbreviation into the full college name.
+     *
+     * @param string $college College abbreviation = FPA
+     * 
+     * @return string College of Fine &amp; Performing Arts
+     */
     public function formatCollege($college)
     {
         include_once 'UNL/Common/Colleges.php';
