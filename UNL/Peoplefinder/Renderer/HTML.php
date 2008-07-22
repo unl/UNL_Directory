@@ -159,7 +159,7 @@ class UNL_Peoplefinder_Renderer_HTML
                     $address['street-address'] = $this->replaceBuildingCode($address['street-address']);
                 }
 
-                echo '<div id="workAdr" class="adr">
+                echo '<div class="adr workAdr">
                      <span class="type">Work</span>
                      <span class="street-address">'. $address['street-address'] . '</span>
                      <span class="locality">' . $address['locality'] . '</span> 
@@ -172,14 +172,14 @@ class UNL_Peoplefinder_Renderer_HTML
             }
         }
         if (isset($r->telephoneNumber)) {
-            echo '<div id="workTel" class="tel">
+            echo '<div class="tel workTel">
                      <span class="type">Work</span>
                      <span class="value"><a href="tel:'.$r->telephoneNumber.'">'.$r->telephoneNumber.'</a></span>
                     </div>'.PHP_EOL;
         }
         
         if (isset($r->unlSISLocalPhone)) {
-            echo '<div id="homeTel" class="tel">
+            echo '<div class="tel homeTel">
                      <span class="type">Phone</span>
                      <span class="value"><a href="tel:'.$r->unlSISLocalPhone.'">'.$r->unlSISLocalPhone.'</a></span>
                     </div>'.PHP_EOL;
@@ -194,15 +194,13 @@ class UNL_Peoplefinder_Renderer_HTML
         echo '</div>'.PHP_EOL.'</div>'.PHP_EOL;
     }
     
-    public function renderAddress($address, $type, $id = null)
+    public function renderAddress($address, $type, $class = null)
     {
-        if (isset($id)) {
-            $id = 'id="'.$id.'" ';
-        } else {
-            $id = '';
+        if (!isset($class)) {
+            $class = '';
         }
         $addr = '
-        <div '.$id.'class="adr">
+        <div class="adr '.$class.'">
          <span class="type">'.$type.'</span>
          <span class="street-address">'.$address[0].'</span>
          <span class="locality">'.$address[2].'</span>
