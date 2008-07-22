@@ -393,7 +393,7 @@ class UNL_Peoplefinder_Renderer_HTML
             if (isset($title)) {
                 $link .= ' title="'.$title.'"';
             }
-            $link .= '>'.$linktext.'</a>';
+            $link .= ' class="vcf">'.$linktext.'</a>';
             return $link;
         } else {
             return $uri;
