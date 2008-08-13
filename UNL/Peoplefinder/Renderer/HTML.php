@@ -147,7 +147,11 @@ class UNL_Peoplefinder_Renderer_HTML
         }
         
         if (isset($r->unlHRPrimaryDepartment)) {
-            echo "<span class='org'>\n\t<span class='organization-unit'>{$r->unlHRPrimaryDepartment}</span>\n\t<span class='organization-name'>University of Nebraska&ndash;Lincoln</span></span>\n";
+            $org_name = 'University of Nebraska&ndash;Lincoln';
+            if ($r->unlHRPrimaryDepartment == 'Office of the President') {
+                $org_name = 'University of Nebraska';
+            }
+            echo "<span class='org'>\n\t<span class='organization-unit'>{$r->unlHRPrimaryDepartment}</span>\n\t<span class='organization-name'>$org_name</span></span>\n";
         }
         
         if (isset($r->postalAddress)) {
@@ -186,7 +190,12 @@ class UNL_Peoplefinder_Renderer_HTML
         }
         
         if ($displayEmail) {
-            echo "<span class='email'><a class='email' href='mailto:{$r->unlEmailAlias}@unl.edu'>{$r->unlEmailAlias}@unl.edu</a></span>\n";
+            if ($r->unlEmailAlias != 'president') {
+                $email = $r->unlEmailAlias.'@unl.edu';
+            } else {
+                $email = $r->unlEmailAlias.'@nebraska.edu';
+            }
+            echo "<span class='email'><a class='email' href='mailto:$email'>$email</a></span>\n";
             if ($this->trustedIP===true) echo "<span class='email delivery'>Delivery Address: {$r->mail}</span>\n";
         }
         $linktext = '<img src="/ucomm/templatedependents/templatecss/images/mimetypes/text-vcard.gif" alt="vCard" /> <span class="caption">vCard</span>'.PHP_EOL;
