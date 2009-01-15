@@ -130,8 +130,11 @@ class UNL_Peoplefinder
             $this->connected = ldap_bind($this->linkID,
                                          UNL_Peoplefinder::$bindDN,
                                          UNL_Peoplefinder::$bindPW);
+            if ($this->connected) {
+                return $this->connected;
+            }
         }
-        return $this->connected;
+        throw new Exception('Cound not connect to LDAP directory.');
     }
 
     /**
