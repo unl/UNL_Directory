@@ -9,10 +9,8 @@ To use, copy the config-sample.inc.php to config.inc.php and provide your LDAP
 username and password. Then browse to http://localhost/peoplefinder/ and try it out.
 
 TODO:
-Add links to office buildings for faculty/staff records http://www1.unl.edu/tour/CBA 
 Move LDAP connection into a singleton class UNL_LDAP
 Change renderers to work like Savant/Zend_View
-Add XML renderer, and serialized PHP renderer
 Change UNL_Peoplefinder_Record to use overloading with __get/__set for all attributes
 
 LICENSE
