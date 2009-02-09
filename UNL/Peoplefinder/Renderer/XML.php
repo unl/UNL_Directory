@@ -7,6 +7,11 @@ class UNL_Peoplefinder_Renderer_XML
     
     protected $sent_headers = false;
     
+    /**
+     * Sends the headers and XML preamble.
+     *
+     * @return void
+     */
     function sendHeaders()
     {
         if ($this->sent_headers) {
@@ -18,14 +23,28 @@ class UNL_Peoplefinder_Renderer_XML
         $this->sent_headers = true;
     }
     
+    /**
+     * Render an individual record
+     *
+     * @param UNL_Peoplefinder_Record $r
+     */
     public function renderRecord(UNL_Peoplefinder_Record $r)
     {
         $this->sendHeaders();
         echo '<person>';
         foreach (get_object_vars($r) as $key=>$val) {
+            $val = htmlspecialchars($val);
             echo "<$key>{$val}</$key>\n";
         }
         echo '</person>'.PHP_EOL;
+    }
+    
+    public function renderSearchResults(array $records, $start=0, $num_rows=UNL_PF_DISPLAY_LIMIT)
+    {
+        $this->sendHeaders();
+        foreach ($records as $record) {
+            $this->renderRecord($record);
+        }
     }
     
     function __destruct()
