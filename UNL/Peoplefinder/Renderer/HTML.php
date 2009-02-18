@@ -175,17 +175,26 @@ class UNL_Peoplefinder_Renderer_HTML
                 echo "<span class='adr'>{$r->postalAddress}</span>\n";
             }
         }
+        
+        if (strpos($_SERVER['HTTP_USER_AGENT'], "iPhone") === false) {
+            $href = "wtai://wp/mc;";
+            $isIPhone = false;
+        } else {
+            $href = "tel:";
+            $isIPhone = true;
+        }
         if (isset($r->telephoneNumber)) {
+            
             echo '<div class="tel workTel">
                      <span class="type">Work</span>
-                     <span class="value"><a href="tel:'.$r->telephoneNumber.'">'.$r->telephoneNumber.'</a></span>
+                     <span class="value">'.$this->formatPhone($r->telephoneNumber).'</span>
                     </div>'.PHP_EOL;
         }
         
         if (isset($r->unlSISLocalPhone)) {
             echo '<div class="tel homeTel">
                      <span class="type">Phone</span>
-                     <span class="value"><a href="tel:'.$r->unlSISLocalPhone.'">'.$r->unlSISLocalPhone.'</a></span>
+                     <span class="value">'.$this->formatPhone($r->unlSISLocalPhone).'</span>
                     </div>'.PHP_EOL;
         }
         
@@ -249,6 +258,25 @@ class UNL_Peoplefinder_Renderer_HTML
     }
     
     /**
+     * This function takes in a string representing a phone number
+     * and formats it to be rendered as a clickable calling link
+     * 
+     * @param string $phone A telephone number
+     * @return string
+     */
+    public function formatPhone($phone)
+    {
+        $link = '<a href="';
+        if (strpos($_SERVER['HTTP_USER_AGENT'], "iPhone") === false) {
+            $link .= "wtai://wp/mc;".str_replace(array("(", ")", "-"), "", $phone);
+        } else {
+            $link .= "tel:".$phone;
+        }
+        $link .= '">'.$phone.'</a>';
+        return $link;
+    }
+    
+    /**
      * This function takes in an array of address information and formats it
      *
      * @param array $addressArray Address information
@@ -302,7 +330,7 @@ class UNL_Peoplefinder_Renderer_HTML
         echo '<div class="fn">'.$this->getUIDLink($r->uid, $linktext, $this->uid_onclick).'</div>'.PHP_EOL;
         if (isset($r->eduPersonPrimaryAffiliation)) echo '<div class="eppa">('.$r->eduPersonPrimaryAffiliation.')</div>'.PHP_EOL;
         if (isset($r->unlHRPrimaryDepartment)) echo '<div class="organization-unit">'.$r->unlHRPrimaryDepartment.'</div>'.PHP_EOL;
-        if (isset($r->telephoneNumber)) echo '<div class="tel"><a href="tel:'.$r->telephoneNumber.'">'.$r->telephoneNumber.'</a></div>'.PHP_EOL;
+        if (isset($r->telephoneNumber)) echo '<div class="tel">'.$this->formatPhone($r->telephoneNumber).'</div>'.PHP_EOL;
         
         echo $this->getUIDLink($r->uid, 'contact info', $this->uid_onclick, 'cInfo');
 		if ($this->choose_uid) {
