@@ -1,9 +1,9 @@
 <?php
 /**
  * Peoplefinder HTML Renderer
- * 
+ *
  * PHP version 5
- * 
+ *
  * @package   UNL_Peoplefinder
  * @author    Brett Bieber <brett.bieber@gmail.com>
  * @copyright 2007 Regents of the University of Nebraska
@@ -31,7 +31,7 @@ function net_match($network, $ip) {
  * Class to render html output for results
  *
  * PHP version 5
- * 
+ *
  * @package   UNL_Peoplefinder
  * @author    Brett Bieber <brett.bieber@gmail.com>
  * @copyright 2007 Regents of the University of Nebraska
@@ -72,7 +72,7 @@ class UNL_Peoplefinder_Renderer_HTML
     
     /**
      * This function sets parameters for this class.
-     * 
+     *
      * @param array $options an associative array of options to set.
      */
     function setOptions(array $options)
@@ -166,7 +166,7 @@ class UNL_Peoplefinder_Renderer_HTML
                 echo '<div class="adr workAdr">
                      <span class="type">Work</span>
                      <span class="street-address">'. $address['street-address'] . '</span>
-                     <span class="locality">' . $address['locality'] . '</span> 
+                     <span class="locality">' . $address['locality'] . '</span>
                      <span class="region">' . $address['region'] . '</span>
                      <span class="postal-code">' . $address['postal-code'] . '</span>
                      <div class="country-name">USA</div>
@@ -225,18 +225,18 @@ class UNL_Peoplefinder_Renderer_HTML
          <span class="region">'.$address[3].'</span>
          <span class="postal-code">'.$address[4].'</span>';
         if (isset($address[5])) {
-            $addr .= '<div class="country-name">'.$address[5].'</div>'; 
+            $addr .= '<div class="country-name">'.$address[5].'</div>';
         }
         $addr .= '</div>';
         echo $addr;
     }
     
     /**
-     * Takes in a street address of a staff or faculty member, a building 
+     * Takes in a street address of a staff or faculty member, a building
      * code in a string with a link to the building in the virtual tour
      *
      * @param string $streetaddress Street Address of a staff or faculty member
-     * 
+     *
      * @return string
      */
     private function replaceBuildingCode($streetaddress)
@@ -288,7 +288,7 @@ class UNL_Peoplefinder_Renderer_HTML
      * $addressArray[4] = Zip
      * $addressArray[5] = Country
      * </code>
-     * 
+     *
      * @return string
      */
     public function formatAddress($addressArray)
@@ -459,6 +459,11 @@ class UNL_Peoplefinder_Renderer_HTML
         } else {
             return $uri;
         }
+    }
+    
+    public function renderError()
+    {
+        echo "<p>Please enter more information or <a href='".$_SERVER['PHP_SELF']."?adv=y' title='Click here to perform a detailed Peoplefinder search'>try a Detailed Search.</a></p>";
     }
 }
 

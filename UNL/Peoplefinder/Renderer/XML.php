@@ -47,6 +47,12 @@ class UNL_Peoplefinder_Renderer_XML
         }
     }
     
+    public function renderError()
+    {
+        $this->sendHeaders();
+        echo '<error>Please enter more information</error>';
+    }
+    
     function __destruct()
     {
         if ($this->sent_headers) {
