@@ -70,7 +70,7 @@ if (isset($_GET['q']) && !empty($_GET['q'])) {
 			}
 		}
 	} else {
-	    echo "<p>Please enter more information or <a href='".$_SERVER['PHP_SELF']."?adv=y' title='Click here to perform a detailed Peoplefinder search'>try a Detailed Search.</a></p>";
+	    $renderer->renderError();
 	}
 } elseif (isset($_GET['uid']) && !empty($_GET['uid'])) {
 	$renderer->renderRecord($peepObj->getUID($_GET['uid']));
