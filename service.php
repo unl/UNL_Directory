@@ -57,14 +57,18 @@ if (isset($_GET['q']) && !empty($_GET['q'])) {
 			    }
 				$renderer->renderSearchResults($records);
 			} else {
-				echo 'No exact matches found.';
+			    if ($renderer instanceof UNL_Peoplefinder_Renderer_HTML) {
+				    echo 'No exact matches found.';
+			    }
 			}
 			if (count($records) < UNL_Peoplefinder::$displayResultLimit) {
 				// More room to display LIKE results
 				UNL_Peoplefinder::$displayResultLimit = UNL_Peoplefinder::$displayResultLimit-$peepObj->lastResultCount;
 				$records = $peepObj->getLikeMatches($_GET['q'], $records);
 				if (count($records) > 0) {
-					echo "<div class='cMatch'>Possible matches:</div>\n";
+				    if ($renderer instanceof UNL_Peoplefinder_Renderer_HTML) {
+					   echo "<div class='cMatch'>Possible matches:</div>\n";
+				    }
 					$renderer->renderSearchResults($records);
 				}
 			}
