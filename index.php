@@ -168,9 +168,8 @@ if (!isset($_SESSION['lastResultDisplayed']))
 							if (!isset($_GET['uid']) && !isset($records)) {
 								$peepObj->displayInstructions((@$_GET['adv'] == 'y')?true:false);
 							} ?>
-                    <div style="padding-top:3.5em;"> <a href="#" class="imagelink" onclick="document.getElementById('disclaimer').style.display='block'; return false;" title="More information about Peoplefinder"><img src="images/icon_question.gif" alt="Question Mark" width="15" height="14" /></a> UNL | Office of University Communications
+                    <div style="padding-top:3.5em;"> <a href="#" class="imagelink" onclick="document.getElementById('disclaimer').style.display='block'; return false;" title="More information about Peoplefinder"><img src="images/icon_question.gif" alt="Question Mark" width="15" height="14" /></a> UNL | Office of University Communications | <a href="http://www1.unl.edu/wdn/wiki/About_Peoplefinder" onclick="window.open(this.href); return false;">About Peoplefinder</a>
                         <div id="disclaimer" style="display:none;">
-                            <p><a href="http://www1.unl.edu/wdn/wiki/How_to_update_information_in_Peoplefinder">How to update your information listed in this directory.</a></p>
                             <p><strong>Information obtained from this directory may not be used to provide addresses for mailings to students, faculty or staff. Any solicitation of business, information, contributions or other response from individuals listed in this publication by mail, telephone or other means is forbidden.</strong></p>
                         </div>
                     </div>
