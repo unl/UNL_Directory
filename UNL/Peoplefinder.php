@@ -31,7 +31,7 @@ require_once dirname(__FILE__).'/Peoplefinder/Record.php';
 class UNL_Peoplefinder
 {
     /** Connection credentials */
-    static public $ldapServer = 'ldap.unl.edu';
+    static public $ldapServer = 'ldap.unl.edu ldap-backup.unl.edu';
     /**
      * LDAP Connection bind distinguised name
      *
