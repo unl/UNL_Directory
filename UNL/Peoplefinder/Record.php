@@ -1,9 +1,9 @@
 <?php
 /**
  * Peoplefinder class for UNL's online directory.
- * 
+ *
  * PHP version 5
- * 
+ *
  * @package   UNL_Peoplefinder
  * @author    Brett Bieber <brett.bieber@gmail.com>
  * @copyright 2007 Regents of the University of Nebraska
@@ -58,7 +58,7 @@ class UNL_Peoplefinder_Record
      * Takes in a string from the LDAP directory, usually formatted like:
      *     ### ___ UNL 68588-####
      *    Where ### is the room number, ___ = Building Abbreviation, #### zip extension
-     * 
+     *
      * @param string
      * @return array Associative array.
      */
@@ -87,12 +87,11 @@ class UNL_Peoplefinder_Record
         } else {
             $address['postal-code'] = '';
         }
-        switch (substr($address['postal-code'],0,5)) {
-            case '68182':
+        switch (substr($address['postal-code'],0,3)) {
+            case '681':
                 $address['locality'] = 'Omaha';
             break;
-            case '68583':
-            case '68588':
+            case '685':
             default:
                 $address['locality'] = 'Lincoln';
             break;
