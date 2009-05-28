@@ -77,8 +77,12 @@ class UNL_Peoplefinder_Record
         // treat UNL as the delimiter for the streetaddress and zip
         if (strpos($this->postalAddress,'UNL')) {
             $addressComponent = explode('UNL', $this->postalAddress);
-        } else {
+        } elseif (strpos($this->postalAddress,'UNO')) {
             $addressComponent = explode('UNO', $this->postalAddress);
+        } elseif (strpos($this->postalAddress,'Omaha')) {
+            $addressComponent = explode('Omaha', $this->postalAddress);
+        } else {
+            $addressComponent = array($this->postalAddress);
         }
         $address['region']         = 'NE';
         $address['street-address'] = trim($addressComponent[0]);
