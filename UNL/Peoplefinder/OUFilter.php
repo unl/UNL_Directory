@@ -23,12 +23,13 @@ class UNL_Peoplefinder_OUFilter
     function __construct($ou)
     {
         if (!empty($ou)) {
-            $this->_filter = '(&(ou='.str_replace('-', '*', $ou).')(!(eduPersonPrimaryAffiliation=guest)))';
+            $this->_filter = '(ou='.str_replace('-', '*', $ou).')';
         }
     }
     
     function __toString()
     {
+        $this->_filter = '(&'.$this->_filter.'(!(eduPersonPrimaryAffiliation=guest)))';
         return $this->_filter;
     }
 }

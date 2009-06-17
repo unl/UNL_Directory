@@ -18,12 +18,13 @@ class UNL_Peoplefinder_TelephoneFilter
     function __construct($q)
     {
         if (!empty($q)) {
-            $this->_filter = '(&(telephoneNumber=*'.str_replace('-','*',$q).')(!(eduPersonPrimaryAffiliation=guest)))';
+            $this->_filter = '(telephoneNumber=*'.str_replace('-','*',$q).')';
         }
     }
     
     function __toString()
     {
+        $this->_filter = '(&'.$this->_filter.'(!(eduPersonPrimaryAffiliation=guest)))';
         return $this->_filter;
     }
 }

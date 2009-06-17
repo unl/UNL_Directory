@@ -66,7 +66,7 @@ class UNL_Peoplefinder_StandardFilter
                                     (unlemailnickname='.str_replace('*', '', $trimmed).')
                                     (unlemailalias='.str_replace('*', '', $trimmed).'))';
             }
-            $filter = $filter.'(!(eduPersonPrimaryAffiliation=guest)))';
+            $filter = $filter.')';
             $filter = '(|(sn='.$inquery.')(cn='.$inquery.')'.$filter.')';
             $filter = preg_replace('/\*\*/', '*', $filter);
         }
@@ -92,6 +92,7 @@ class UNL_Peoplefinder_StandardFilter
             }
             $this->_filter = '(&'.$this->_filter.'(!(|'.$excludeFilter.')))';
         }
+        $this->_filter = '(&'.$this->_filter.'(!(eduPersonPrimaryAffiliation=guest)))';
         return $this->_filter;
     }
 }
