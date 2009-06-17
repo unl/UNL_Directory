@@ -23,7 +23,7 @@ class UNL_Peoplefinder_OUFilter
     function __construct($ou)
     {
         if (!empty($ou)) {
-            $this->_filter = '(ou='.str_replace('-', '*', $ou).')';
+            $this->_filter = '(&(ou='.str_replace('-', '*', $ou).')(!(eduPersonPrimaryAffiliation=guest)))';
         }
     }
     

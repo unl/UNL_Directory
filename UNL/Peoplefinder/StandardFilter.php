@@ -66,7 +66,7 @@ class UNL_Peoplefinder_StandardFilter
                                     (unlemailnickname='.str_replace('*', '', $trimmed).')
                                     (unlemailalias='.str_replace('*', '', $trimmed).'))';
             }
-            $filter = $filter.')';
+            $filter = $filter.'(!(eduPersonPrimaryAffiliation=guest)))';
             $filter = '(|(sn='.$inquery.')(cn='.$inquery.')'.$filter.')';
             $filter = preg_replace('/\*\*/', '*', $filter);
         }

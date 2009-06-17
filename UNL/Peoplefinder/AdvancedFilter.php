@@ -51,7 +51,7 @@ class UNL_Peoplefinder_AdvancedFilter
                 $primaryAffiliation = '(eduPersonPrimaryAffiliation=*)';
                 break;
         }
-        $this->_filter = '('.$operator.$this->buildFilter($filterfields).$primaryAffiliation.')';
+        $this->_filter = '(&('.$operator.$this->buildFilter($filterfields).$primaryAffiliation.')(!(eduPersonPrimaryAffiliation=guest)))';
     }
     
     private function buildFilter(&$field_arr, $op='')

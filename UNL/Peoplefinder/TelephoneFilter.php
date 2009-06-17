@@ -18,7 +18,7 @@ class UNL_Peoplefinder_TelephoneFilter
     function __construct($q)
     {
         if (!empty($q)) {
-            $this->_filter = '(telephoneNumber=*'.str_replace('-','*',$q).')';
+            $this->_filter = '(&(telephoneNumber=*'.str_replace('-','*',$q).')(!(eduPersonPrimaryAffiliation=guest)))';
         }
     }
     
