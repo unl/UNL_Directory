@@ -1,0 +1,2807 @@
+<tree>
+ <declarations>
+   <attributeDecl name="name" type="String"/>
+ </declarations>
+<branch>
+ <attribute name="name" value="University of Nebraska Board of Regents"/>
+ <branch>
+  <attribute name="name" value="Office of the President"/>
+  <branch>
+   <attribute name="name" value="University of Nebraska Central Admin"/>
+   <branch>
+    <attribute name="name" value="Office of the President"/>
+    <branch>
+     <attribute name="name" value="Executive VP and Provost"/>
+     <branch>
+      <attribute name="name" value="Planning and Budget"/>
+     </branch>
+    </branch>
+    <branch>
+     <attribute name="name" value="VP for Business and Finance"/>
+     <branch>
+      <attribute name="name" value="Facilities Planning"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Finance"/>
+      <branch>
+       <attribute name="name" value="Administrative Systems Group"/>
+      </branch>
+     </branch>
+    </branch>
+    <branch>
+     <attribute name="name" value="VP for University Affairs"/>
+    </branch>
+    <branch>
+     <attribute name="name" value="VP and General Counsel"/>
+    </branch>
+    <branch>
+     <attribute name="name" value="CIO &amp; UN Computing Serv Network"/>
+     <branch>
+      <attribute name="name" value="Applications Team"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Infrastructure Team"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Information Access Team"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="UNO CSN Operations"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Directorate Team"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Applications Team (UNL)"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Customer Support Team"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Data Home Team"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Customer Administration Team"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Financial Management"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Information Security Team"/>
+     </branch>
+    </branch>
+   </branch>
+  </branch>
+  <branch>
+   <attribute name="name" value="University of Nebraska - Lincoln"/>
+   <branch>
+    <attribute name="name" value="Office of the Chancellor"/>
+    <branch>
+     <attribute name="name" value="Business and Finance"/>
+     <branch>
+      <attribute name="name" value="Financial Services"/>
+      <branch>
+       <attribute name="name" value="Accounting"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Budget"/>
+       <branch>
+        <attribute name="name" value="Available Positions"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Bursar"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Payroll Services"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Student Accounts"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Academic Conferences"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="FM&amp;P Administration"/>
+      <branch>
+       <attribute name="name" value="FM&amp;P Facilities Plan &amp; Construction"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="FM&amp;P Building Systems Maintenance"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="FM&amp;P Custodial Services"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="FM&amp;P Utility Services"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="FM&amp;P Landscape Services"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Human Resources"/>
+      <branch>
+       <attribute name="name" value="Retirees"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Ancillary Units"/>
+       <branch>
+        <attribute name="name" value="NE Alumni Assn"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="UN Foundation"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="SPF Swine Accrediting Agency"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="NE Crop Improvement Assn"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="NE Pork Producers"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="UN Board of Regents"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="UN Federal Credit Union"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="NE 4-H Foundation"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Volunteers"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Operations Analysis"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="University Police"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="University Services"/>
+      <branch>
+       <attribute name="name" value="Environmental Health &amp; Safety"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Inventory Control"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Mail Services"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Printing Services"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Purchasing"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Transportation Services"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Parking and Transit Services"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="University Stores"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Shared Services"/>
+       <branch>
+        <attribute name="name" value="NCard Office"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="University Services Business Center"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Department of E-Commerce"/>
+      </branch>
+     </branch>
+    </branch>
+    <branch>
+     <attribute name="name" value="Academic Affairs"/>
+     <branch>
+      <attribute name="name" value="Extended Education &amp; Outreach"/>
+      <branch>
+       <attribute name="name" value="EE&amp;O Business Operations"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="EE&amp;O Independent Study HS"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="EE&amp;O Distance Education Srvcs"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="EE&amp;O Distance Education Pgms"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="EE&amp;O Instructional Design &amp; Dev"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="EE&amp;O Information Services"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="College of Architecture"/>
+      <branch>
+       <attribute name="name" value="Architecture"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Community &amp; Regional Planning"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Interior Design"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Landscape Architecture Program"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="College of Business Administration"/>
+      <branch>
+       <attribute name="name" value="Bureau Business Research"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Economics"/>
+       <branch>
+        <attribute name="name" value="Economic Education"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Finance"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Management"/>
+       <branch>
+        <attribute name="name" value="Ctr for Entrepreneurship"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Marketing"/>
+       <branch>
+        <attribute name="name" value="Agribusiness"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="School of Accountancy"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Hixson-Lied Fine &amp; Performing Arts"/>
+      <branch>
+       <attribute name="name" value="Art &amp; Art History"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Mary Riepma Ross Media Arts Center"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="School of Music"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Johnny Carson School-Theatre &amp; Film"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="College of Law"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="International Affairs"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Ofc of Dean - Undergraduate Studies"/>
+      <branch>
+       <attribute name="name" value="Division of General Studies"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="University Honors Program"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="University Foundations Program"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Information Services"/>
+      <branch>
+       <attribute name="name" value="Telecommunications Center"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="University Libraries"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="College of Arts &amp; Sciences"/>
+      <branch>
+       <attribute name="name" value="School of Biological Sciences"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Center of Great Plains Studies"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Chemistry"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Classics &amp; Religious Studies"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Communication Studies"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Computer Science &amp; Engineering"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Ctr Children Family &amp; the Law"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="English"/>
+       <branch>
+        <attribute name="name" value="Program of English as 2nd Language"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Ethnic Studies"/>
+       <branch>
+        <attribute name="name" value="African American &amp; African Studies"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Latin American &amp; Latino Studies"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Native American Studies"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Geosciences"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="History"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Mathematics"/>
+       <branch>
+        <attribute name="name" value="Mathematics Association of America"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Ctr for Science Math &amp; Computer Ed"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Modern Language &amp; Literature"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Philosophy"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Physics &amp; Astronomy"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Political Science"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Psychology"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Sociology"/>
+       <branch>
+        <attribute name="name" value="Bureau of Sociological Research"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="A&amp;S General"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Environmental Studies"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Judaic Studies"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Women&#39;s &amp; Gender Studies"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Anthropology and Geography"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="International Studies"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Statistics"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Antarctic Drilling Program"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Survey Research &amp; Methodology/Gallup"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="College of Engineering"/>
+      <branch>
+       <attribute name="name" value="Eng Dean&#39;s Office-Omaha"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Chemical &amp; Biomolecular Engineering"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Civil Engineering-Lincoln"/>
+       <branch>
+        <attribute name="name" value="Civil Engineering-Omaha"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Computer &amp; Electronics Engineering"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="School of Architecture &amp; ConstructionUNL"/>
+       <branch>
+        <attribute name="name" value="Construction Management"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Construction Systems"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Architectural Engineering"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Electrical Engineering"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Engineering Mechanics"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Industrial &amp; Mgmt Syst Engineering"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Mechanical Engineering"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Engineering Research Center"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Nebraska Transportation Center"/>
+       <branch>
+        <attribute name="name" value="Mid-America Transportation Center"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Midwest Roadside Safety Facility"/>
+       </branch>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="College of Journalism &amp; Mass Comm"/>
+      <branch>
+       <attribute name="name" value="Advertising"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Broadcasting"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="News - Editorial"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="College Human Res &amp; Family Sciences"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="College of Education &amp; Human Sci"/>
+      <branch>
+       <attribute name="name" value="Child, Youth &amp; Family Studies"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Nutrition &amp; Health Sciences"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Textiles Clothing &amp; Design"/>
+       <branch>
+        <attribute name="name" value="Intl Quilt Study Center &amp; Museum"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Education &amp; Human Sciences @ Omaha"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Buros Center for Testing"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Teaching, Learning &amp; Teacher Ed"/>
+       <branch>
+        <attribute name="name" value="Instructional Design Center"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Educational Administration"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Educational Psychology"/>
+       <branch>
+        <attribute name="name" value="Center for Instructional Innovation"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Health &amp; Human Performance"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Special Ed &amp; Communic Disorders"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Natl Ctr for Info Technology in Educ"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="NE Ctr  Rsrch on Youth,Fam &amp; School"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="University Television"/>
+      <branch>
+       <attribute name="name" value="Great Plains NITV Library"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Academic Senate"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Summer Sessions"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="J S Raikes School of Comp Sci &amp; Mgmt"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Public Policy Center"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Plains Humanities Alliance"/>
+     </branch>
+    </branch>
+    <branch>
+     <attribute name="name" value="Research"/>
+     <branch>
+      <attribute name="name" value="Graduate Studies"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Technology Development"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="University Museum"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="University Press"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Nebraska Research Initiative"/>
+      <branch>
+       <attribute name="name" value="NRI Center of Biotechnology"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Nebr Ctr for Materials &amp; Nanoscience"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Sponsored Programs"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Sponsored Pgm-Pre Award"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Research Resp-Human Res Prot  Prog"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="EPSCOR"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Center for Plant Science Innovation"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Research Resp-Inst Animal Care  Prog"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Center for Energy Sciences Research"/>
+     </branch>
+    </branch>
+    <branch>
+     <attribute name="name" value="Institute of Ag &amp; Natural Resources"/>
+     <branch>
+      <attribute name="name" value="Office of Vice Pres/Vice Chancellor"/>
+      <branch>
+       <attribute name="name" value="IANR Finance &amp; Personnel Office"/>
+       <branch>
+        <attribute name="name" value="Filley Hall Business Center"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Natural Resources Business Center"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Beadle Business Center"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="ASSIST Business Center"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="VBI Business Center"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="IANR Vacant Positions"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Deans/Directors"/>
+       <branch>
+        <attribute name="name" value="Agricultural Rsch Division"/>
+        <branch>
+         <attribute name="name" value="Sustain Ag Rsch &amp; Ed Program"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="Husker Genetics"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="USMARC"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="South Central Ag Rsch Lab"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="Agricultural Rsch &amp; Dev Center"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="INTSORMIL - Sorghum/Millet CRSP"/>
+        </branch>
+       </branch>
+       <branch>
+        <attribute name="name" value="College of Ag Sci &amp; Nat Res"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Cooperative Ext Division"/>
+        <branch>
+         <attribute name="name" value="4-H Youth Development"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="e-Extension"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="Nebraska  LTAP"/>
+        </branch>
+       </branch>
+       <branch>
+        <attribute name="name" value="International Programs"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="College of Education &amp; Human Sci"/>
+        <branch>
+         <attribute name="name" value="Child, Youth &amp; Family Studies"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="Nutrition &amp; Health Sciences"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="Textile Clothing &amp; Design"/>
+        </branch>
+       </branch>
+       <branch>
+        <attribute name="name" value="Agronomy &amp; Horticulture"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Agricultural Economics"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Ag Leadership Educ &amp; Comm"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Animal Science"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Biochemistry"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Statistics"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Biological Systems Engineering"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Entomology"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Comm Information Technology"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Food Science &amp; Technology"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Plant Pathology"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="School of Natural Resources"/>
+        <branch>
+         <attribute name="name" value="Survey Division - School of Nat Res"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="Nebraska Coop Fish &amp; Wildlife Rsch"/>
+        </branch>
+       </branch>
+       <branch>
+        <attribute name="name" value="Vet &amp; Biomedical Sciences"/>
+        <branch>
+         <attribute name="name" value="Great Plains Vet Ed Center"/>
+        </branch>
+       </branch>
+       <branch>
+        <attribute name="name" value="College Park/Grand Island"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Center for Applied Rural Innovation"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Southeast Rsch &amp; Ext Center"/>
+        <branch>
+         <attribute name="name" value="Farm Business Association"/>
+        </branch>
+       </branch>
+       <branch>
+        <attribute name="name" value="Panhandle Rsch &amp; Ext Center"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Northeast Rsch &amp; Ext Center"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="West Central Rsch &amp; Ext Center"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Nebraska LEAD Program"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Grassland Studies Center"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Food Processing Center"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Industrial Ag Products Center"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Water Center"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="ISU/UNL Coop Vet Med Education Prog"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Nebraska Forest Service"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="NE College of Technical Agriculture"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Office Prof/Org Development"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Nebraska Network 21"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Nebraska Statewide Arboretum"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Information Services"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="ADEC"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Nebraska Rural Initiative"/>
+      </branch>
+     </branch>
+    </branch>
+    <branch>
+     <attribute name="name" value="Student Affairs"/>
+     <branch>
+      <attribute name="name" value="University Housing"/>
+      <branch>
+       <attribute name="name" value="Abel Sandoz Complex"/>
+       <branch>
+        <attribute name="name" value="AS Residence Life"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="AS Dining Service"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="AS Facilities Operations"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="AS Snack Bar"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Burr Fedde Complex"/>
+       <branch>
+        <attribute name="name" value="BF Residence Life"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="BF Facilities Operations"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Cather Pound Neihardt Complex"/>
+       <branch>
+        <attribute name="name" value="CPN Residence Life"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="CPN Dining Service"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="CPN Facilities Operations"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="CPN Snack Bar"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Harper Schramm Smith Complex"/>
+       <branch>
+        <attribute name="name" value="HSS Residence Life"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="HSS Dining Service"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="HSS Facilities Operations"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Husker Hall"/>
+       <branch>
+        <attribute name="name" value="Husker Residence Life"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Love Cooperative Hall"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Selleck Quadrangle"/>
+       <branch>
+        <attribute name="name" value="Selleck Residence Life"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Selleck Dining Service"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Selleck Facilities Operations"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Selleck Snack Bar"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Housing Administration"/>
+       <branch>
+        <attribute name="name" value="Educational Testing Service"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Housing Conference Services"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Housing Information Systems"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Housing Marketing"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Housing Dining Service"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Housing Facilities Operations"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Housing Business &amp; Fiscal Operations"/>
+       <branch>
+        <attribute name="name" value="Housing Accounting"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Housing Payroll &amp; Personnel"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Housing Contracts &amp; Student Accts"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Housing Residence Life"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Kauffman Center"/>
+       <branch>
+        <attribute name="name" value="Kauffman Residence Life"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Kauffman Facilities Operations"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Graduate House"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="The Courtyards"/>
+       <branch>
+        <attribute name="name" value="Courtyards Facilities Operations"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Courtyards Residence Life"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="The Village"/>
+       <branch>
+        <attribute name="name" value="Village Facilities Operations"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Village Residence Life"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Village Snack Bar"/>
+       </branch>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="University Health Center"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Nebraska Union"/>
+      <branch>
+       <attribute name="name" value="Child Care"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Nebraska East Union"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="University Dining Srvcs East"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Student Involvement"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="University Dining Srvcs City"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Scholarship &amp; Financial Aid"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Admissions"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Career Services"/>
+      <branch>
+       <attribute name="name" value="Internships @ Government Agencies"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Off-Campus Work-Study Units"/>
+       <branch>
+        <attribute name="name" value="Criminal Justice (UNO Recv)"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Game &amp; Parks Commission"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="NE Historical Society"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="US Attorney&#39;s Office"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Trinity Child Care"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Saratoga Elementary School"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Calvert Elementary School"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Clinton Elementary School"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Hartley Elementary School"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="YMCA"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Everett Elementary"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Lakeview Elementary"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Randolph Elementary"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="ACLU Nebraska Foundation"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Seward County Attorney&#39;s Ofc"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="YWCA of Lincoln"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Nebraska Pork Producers Assoc"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Seward County District Court"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Nebraska Appleseed Center"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="United Way of Lincoln/Lancaster Cnty"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Northeast Family Center"/>
+       </branch>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Registration &amp; Records"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="TRIO Programs"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Office of the Dean of Students"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Greek Affairs"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Campus Recreation"/>
+      <branch>
+       <attribute name="name" value="Campus Rec-Admin"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Campus Rec-Intramurals"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Campus Rec-Fitness/Wellness"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Campus Rec-Outdoor Adventure"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Campus Rec-Child Care"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Campus Rec-Equip Check-Out"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Campus Rec-Wilderness Rental"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Campus Rec-Fam Pgm/Club Spts"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Campus Rec-Acad/Instruct"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Campus Rec-Injury Prevent Care"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Campus Rec-Grounds/Custodial"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Campus Rec-EC Activity Bldg"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Campus Rec-Informal"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Students w/ Disabilities Services"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="ASUN"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Daily Nebraskan"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="OASIS"/>
+     </branch>
+    </branch>
+    <branch>
+     <attribute name="name" value="Athletics"/>
+    </branch>
+    <branch>
+     <attribute name="name" value="Equity, Access &amp; Diversity Programs"/>
+    </branch>
+    <branch>
+     <attribute name="name" value="Office of University Communications"/>
+    </branch>
+    <branch>
+     <attribute name="name" value="Institutional Research &amp; Planning"/>
+    </branch>
+    <branch>
+     <attribute name="name" value="Lied Center for Performing Arts"/>
+    </branch>
+    <branch>
+     <attribute name="name" value="Sheldon Museum of Art"/>
+    </branch>
+    <branch>
+     <attribute name="name" value="Lentz Center for Asian Culture"/>
+    </branch>
+    <branch>
+     <attribute name="name" value="ROTC Units"/>
+     <branch>
+      <attribute name="name" value="Aerospace Studies"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Military Science"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Naval Science"/>
+     </branch>
+    </branch>
+    <branch>
+     <attribute name="name" value="Publications &amp; Photography"/>
+    </branch>
+    <branch>
+     <attribute name="name" value="Alumni Association"/>
+    </branch>
+   </branch>
+  </branch>
+  <branch>
+   <attribute name="name" value="University of Nebraska Medical Center"/>
+   <branch>
+    <attribute name="name" value="Office of the Chancellor"/>
+    <branch>
+     <attribute name="name" value="Business and Finance"/>
+     <branch>
+      <attribute name="name" value="Human Resources"/>
+      <branch>
+       <attribute name="name" value="HR Employee Relations"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="HR Staffing/Compensation/Records/IT"/>
+       <branch>
+        <attribute name="name" value="HR Records &amp; Information Technology"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="HR Staffing &amp; Compensation"/>
+        <branch>
+         <attribute name="name" value="Old Org Units-Positions"/>
+        </branch>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="HR EE Benefits &amp; Work Life Programs"/>
+       <branch>
+        <attribute name="name" value="HR Benefits"/>
+        <branch>
+         <attribute name="name" value="Lab-Interlink"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="UNMC Physicians"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="Specialty Retirement Cost"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="Retirees"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="Ximerex Inc."/>
+        </branch>
+       </branch>
+       <branch>
+        <attribute name="name" value="HR Child Development Center"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="HR Center for Healthy Living"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="HR Faculty/Employee Assistance Prog"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Finance and Business Services"/>
+      <branch>
+       <attribute name="name" value="Security Office"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Controller"/>
+       <branch>
+        <attribute name="name" value="General Accounting"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Sponsored Programs Accounting"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Payroll"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Inventory Control"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Business Services"/>
+       <branch>
+        <attribute name="name" value="Lions Eye Bank"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Parking"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Printing Services"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="University Bookstore"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Mail Services"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Transportation"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Recycling"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Procurement"/>
+       <branch>
+        <attribute name="name" value="Furniture Stores"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="General Supply"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Accounts Payable"/>
+       </branch>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="FMP"/>
+      <branch>
+       <attribute name="name" value="FMP-Architecture/Engineering"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="FMP-Administration"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="FMP-Maintenance and Utilities"/>
+       <branch>
+        <attribute name="name" value="FMP-Controls"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="FMP-Maintenance"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="FMP-Carpenters"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="FMP-Grounds and Labor"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="FMP-Electricians"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="FMP-Preventive/Bldg Maint"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="FMP-Plumbers"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="FMP-Central Utilities"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="FMP-Refrigeration"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="FMP-Construction and Renovation"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Budget Analysis &amp; Financial Cmpl"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Internal Audit"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Computer Assisted Surgery"/>
+      <branch>
+       <attribute name="name" value="Advanced Clinical Application Prog"/>
+      </branch>
+     </branch>
+    </branch>
+    <branch>
+     <attribute name="name" value="College of Medicine"/>
+     <branch>
+      <attribute name="name" value="Genetics Cell Biology &amp; Anatomy"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Anesthesiology"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Biochem and Molecular Biology"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Dean College of Medicine"/>
+      <branch>
+       <attribute name="name" value="Graduate Medical Education"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Academic Affairs Office"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Educational Support Office"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="General Education"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Dean&#39;s Business Office"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Student Research"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Family Medicine"/>
+      <branch>
+       <attribute name="name" value="Lincoln Family Practice PG"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Family Medicine Volunteer"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Family Medicine House Officers"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Internal Medicine"/>
+      <branch>
+       <attribute name="name" value="Int Med Administration"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Int Med Billing/Clinic"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Int Med Education"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Int Med Cardiology"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Int Med Dermatology"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Int Med DEM"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Int Med General Medicine"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Int Med Geriatrics"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Int Med Infectious Diseases"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Int Med Neurology"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Int Med Oncology/Hematology"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Int Med Pulmonary"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Int Med Nephrology"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Int Med Rheumatology"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Clinical Research Center"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Int Med Occupational Health"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Int Med GI"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Obstetrics/Gynecology"/>
+      <branch>
+       <attribute name="name" value="Ob/Gyn Maternal Care Prgm/Fam Plng"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Ob/Gyn Women, Infants &amp; Children"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Ob/Gyn Research Lab"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Ophthalmology"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Orthopaedic Surgery"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Otol-Head and Neck Surgery"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Pathology/Microbiology"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Pediatrics"/>
+      <branch>
+       <attribute name="name" value="Pediatrics Administration"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Pediatrics Cardiology"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Pediatrics Child Health"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Pediatrics Rheumatology"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Pediatrics Gastroenterology"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Pediatrics Hematology/Oncology"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Pediatrics Nephrology"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Pediatrics Newborn Medicine"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Pediatrics Pulmonology"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Pediatrics Toxicology"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Pediatrics Endocrine"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Pediatrics Infectious Disease"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Pediatrics Neurology"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Pediatrics Metabolism"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Pediatrics House Officers"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Pediatrics General"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Pediatrics Human Molecular Genetics"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Pediatrics Volunteer Faculty"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Pediatrics Genetics"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Pediatrics Psychology"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Pharmacology/Exp Neuroscience"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Cellular/Integrative Physiology"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Psychiatry"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Radiology"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Surgery"/>
+      <branch>
+       <attribute name="name" value="Surgery-Billing &amp; Compliance"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Surgery-Cardiovascular&amp;Thoracic Surg"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Surgery-General Surgery"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Surgery-House Officers"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Surgery-Neurosurgery"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Surgery-Oral &amp; Maxillofacial"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Surgery-Plastic&amp;Reconstructive"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Surgery-Research"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Surgery-Transplant"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Surgery-Urologic Surgery"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Surgical Oncology"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Radiation Oncology"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Emergency Medicine"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Neurological Sciences"/>
+     </branch>
+    </branch>
+    <branch>
+     <attribute name="name" value="College of Nursing"/>
+     <branch>
+      <attribute name="name" value="CON-Omaha"/>
+      <branch>
+       <attribute name="name" value="CON-Rural Nursing Education"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="CON-Learning Resource Center"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="CON-Student Services"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="CON-Niedfelt Nursing Research Center"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="CON-Community-Based Health"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="CON-Adult Health &amp; Illness Dpt"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="CON-Families &amp; Health Systems"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="CON-Continuing Education"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="CON-Nursing Centers"/>
+       <branch>
+        <attribute name="name" value="CON-Family Health Center"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="CON-Mobile Nursing Center"/>
+       </branch>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="CON-Lincoln"/>
+      <branch>
+       <attribute name="name" value="CON-Lincoln GPCH"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="CON-Lincoln AHI"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="CON-Lincoln PAES"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="CON-West Ne Division"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="CON-Kearney"/>
+     </branch>
+    </branch>
+    <branch>
+     <attribute name="name" value="College of Pharmacy"/>
+     <branch>
+      <attribute name="name" value="COP Dean&#39;s Office"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="COP Pharmacy Practice"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="COP Pharmaceutical Science"/>
+     </branch>
+    </branch>
+    <branch>
+     <attribute name="name" value="Eppley Institute"/>
+     <branch>
+      <attribute name="name" value="Eppley Inst Research"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Eppley Inst Administration"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Eppley Inst Faculty"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Eppley Inst Students"/>
+     </branch>
+    </branch>
+    <branch>
+     <attribute name="name" value="Munroe-Meyer Institute"/>
+     <branch>
+      <attribute name="name" value="MMI Administration"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="MMI Patient Information Office"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="MMI Education and Child Development"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="MMI Recreation Program"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="MMI Business Office"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="MMI Health Policy and Planning"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="MMI Genetic Medicine"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="MMI Nursing"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="MMI Occupational Therapy"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="MMI Physical Therapy"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="MMI Psychology"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="MMI Speech Pathology"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="MMI Social Services"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="MMI Cytogenetics"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="MMI Nutrition"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="MMI Media Department"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="MMI Pediatric Diabetes"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="MMI HBM Molecular Genetics"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="MMI Brace Place"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="MMI Developmental Medicine"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="MMI HBM Center for Human Genetics"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="MMI Ctr for Autism Spec Disord"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="MMI Ctr for Ped Feeding Disord"/>
+     </branch>
+    </branch>
+    <branch>
+     <attribute name="name" value="Information Technology Services"/>
+     <branch>
+      <attribute name="name" value="ITS Data Center Operations"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="ITS Customer Support Services"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="ITS Application Services"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="ITS Telecommunications"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="ITS Technical Services"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="ITS Video Services"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="ITS Learning Env/Internet Services"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="ITS Data Installation Services"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="ITS Network/Technical Services"/>
+     </branch>
+    </branch>
+    <branch>
+     <attribute name="name" value="UNMC Physicians"/>
+     <branch>
+      <attribute name="name" value="UNMC Physicians-Administration"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="UNMC Physicians-Compliance"/>
+     </branch>
+    </branch>
+    <branch>
+     <attribute name="name" value="Academic Affairs"/>
+     <branch>
+      <attribute name="name" value="Student Affairs"/>
+      <branch>
+       <attribute name="name" value="Continuing Education"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Financial Aid"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Academic Records"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Office for Std Equity &amp; Multi-Cultrl"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Student Financial Services"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Graduate Studies"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Library of Medicine"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Office of Regulatory Affairs"/>
+      <branch>
+       <attribute name="name" value="Institutional Review Board"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Chemical and Radiation Safety"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="IACUC"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Academic Services"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="International Studies and Programs"/>
+     </branch>
+    </branch>
+    <branch>
+     <attribute name="name" value="College of Dentistry"/>
+     <branch>
+      <attribute name="name" value="COD-Dental Administration"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="COD-Adult Restorative"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="COD-Lincoln Clinic Administration"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="COD-Dental Practice Management"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="COD-Dental Hygiene"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="COD-Oral Biology"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="COD-University Dental Associates"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="COD-Surgical Specialties"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="COD-Hospital Dentistry"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="COD-Growth and Development"/>
+     </branch>
+    </branch>
+    <branch>
+     <attribute name="name" value="School of Allied Health Professions"/>
+     <branch>
+      <attribute name="name" value="Allied Health-Hlth Serv Admin Div"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Medical Nutrition Education Div"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Division of Laboratory Sciences"/>
+      <branch>
+       <attribute name="name" value="Clinical Laboratory Science"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Cytotechnology"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Radiation Science Technology Div"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Physician Assistant"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Physical Therapy Education"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Radiation Therapy Technology Div"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Radiologic Technology Division"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Clinical Perfusion Education"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Diagnostic Medical Sonography"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Nuclear Medicine Technology"/>
+     </branch>
+    </branch>
+    <branch>
+     <attribute name="name" value="Chancellor&#39;s Support Staff"/>
+     <branch>
+      <attribute name="name" value="International Health &amp; Medical Ed"/>
+     </branch>
+    </branch>
+    <branch>
+     <attribute name="name" value="Vice Chancellor  External Affairs"/>
+     <branch>
+      <attribute name="name" value="Public Affairs"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Alumni Affairs"/>
+     </branch>
+    </branch>
+    <branch>
+     <attribute name="name" value="College of Public Health"/>
+     <branch>
+      <attribute name="name" value="COPH Health Prof Tracking Center"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="COPH Rural Health Education Ntwk"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="COPH Office of the Dean"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="COPH Biosecurity &amp; Biopreparedness"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="COPH Biostatistics"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="COPH Environ, Agri &amp; Occ Health Sci"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="COPH Epidemiology"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="COPH Health Disparities"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="COPH Hlth Prm, Soc, &amp; Behv Hlth Sci"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="COPH Health Services Res &amp; Admin"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="COPH Research Design and Analysis"/>
+     </branch>
+    </branch>
+    <branch>
+     <attribute name="name" value="Vice Chancellor for Research"/>
+     <branch>
+      <attribute name="name" value="Intellectual Property Office"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Sponsored Programs Administration"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Comparative Medicine"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Clinical Trials Office"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="UNeMED Corporation"/>
+     </branch>
+    </branch>
+   </branch>
+  </branch>
+  <branch>
+   <attribute name="name" value="University of Nebraska at Omaha"/>
+   <branch>
+    <attribute name="name" value="Office of the Chancellor"/>
+    <branch>
+     <attribute name="name" value="Business and Finance"/>
+     <branch>
+      <attribute name="name" value="Finance"/>
+      <branch>
+       <attribute name="name" value="Controller"/>
+       <branch>
+        <attribute name="name" value="Accounting Services"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Cashiering/Student Accounts"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Grants Accounting"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Budget"/>
+       <branch>
+        <attribute name="name" value="Position Number Holding Area"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Operations Analysis &amp; Internal Audit"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Purchasing Department"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Facilities Management and Planning"/>
+      <branch>
+       <attribute name="name" value="Support Services"/>
+       <branch>
+        <attribute name="name" value="Security and Traffic"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Mail Services"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Environmental Health &amp; Safety"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Auto Pool"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Telecommunications"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Environmental Services"/>
+       <branch>
+        <attribute name="name" value="Custodial Services"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Grounds"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Maintenance and Operations"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Construction Services"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Planning and Architectural Services"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Human Resources/Payroll Services"/>
+      <branch>
+       <attribute name="name" value="Human Resources"/>
+       <branch>
+        <attribute name="name" value="Retirees"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Volunteers"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Payroll"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Milo Bail Student Center"/>
+      <branch>
+       <attribute name="name" value="Food Service"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="MBSC Business Operations"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Child Care Center"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Bookstore"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Mav Card Services"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Special Projects"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Career Exploration and Outreach"/>
+     </branch>
+    </branch>
+    <branch>
+     <attribute name="name" value="Academic and Student Affairs"/>
+     <branch>
+      <attribute name="name" value="Student Affairs"/>
+      <branch>
+       <attribute name="name" value="Student Services"/>
+       <branch>
+        <attribute name="name" value="Student Org &amp; Leadership Programs"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Campus Recreation"/>
+        <branch>
+         <attribute name="name" value="Aquatic Activities"/>
+         <branch>
+          <attribute name="name" value="Adult Swim Program"/>
+         </branch>
+        </branch>
+        <branch>
+         <attribute name="name" value="Fclties, Intmrl Sprts &amp; Spcl Events"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="Outdoor Recreation"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="Sports Clubs &amp; Youth Programs"/>
+        </branch>
+       </branch>
+       <branch>
+        <attribute name="name" value="Career Center"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Counseling/University Division"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Health Services"/>
+        <branch>
+         <attribute name="name" value="Achol &amp; Drug Education"/>
+        </branch>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Academic Records and Registration"/>
+       <branch>
+        <attribute name="name" value="Academic Support Services"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Enrollment Services"/>
+       <branch>
+        <attribute name="name" value="Testing Center"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Orientation"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Recruitment Services"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Multicultural Affairs"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Undergraduate Admissions"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Records &amp; Registration"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Financial Aid"/>
+       <branch>
+        <attribute name="name" value="Veteran Services"/>
+       </branch>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="College of Arts and Sciences"/>
+      <branch>
+       <attribute name="name" value="Biology"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Black Studies"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Chemistry"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="English"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Foreign Languages"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Geography/Geology"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="History"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Mathematics"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Philosophy &amp; Religion"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Physics"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Political Science"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Psychology"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Sociology"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="College of Business Administration"/>
+      <branch>
+       <attribute name="name" value="Department of Accounting"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Economics"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Finance, Banking and Law"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Marketing and Management"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Executive MBA Program"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Nebraska Business Development Center"/>
+       <branch>
+        <attribute name="name" value="NBDC Business &amp; Technology Solutions"/>
+       </branch>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="College of Education"/>
+      <branch>
+       <attribute name="name" value="Educational Admin/Supervision"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Teacher Education"/>
+       <branch>
+        <attribute name="name" value="Teacher Placement"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Counseling"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Health Physical Educ &amp; Recreation"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Special Education Comm Disorders"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="College of Comm,  Fine Arts &amp; Media"/>
+      <branch>
+       <attribute name="name" value="Communication"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Art and Art History"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Music"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Theatre"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Writer&#39;s Workshop"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Media"/>
+       <branch>
+        <attribute name="name" value="Radio"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Television"/>
+       </branch>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="College of Info Science and Tech"/>
+      <branch>
+       <attribute name="name" value="ISQA"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Computer Science"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="CMIT"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Info Tech/Info Systems eng"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="College of Public Affrs &amp; Comm Svcs"/>
+      <branch>
+       <attribute name="name" value="Division of Continuing Studies"/>
+       <branch>
+        <attribute name="name" value="Off Campus Programs"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="DCS Degree Programs"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="NonCredit Programs"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Center for Public Affairs Research"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="School of Criminology &amp; Criminal Justice"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Public Administration"/>
+       <branch>
+        <attribute name="name" value="Aviation Institute"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Gerontology"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Social Work"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Goodrich"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Labor Studies Institute"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Graduate Studies and Research"/>
+      <branch>
+       <attribute name="name" value="Sponsored Programs"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Criss Library"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Academic Affairs - Technology"/>
+      <branch>
+       <attribute name="name" value="Information Technology Services"/>
+       <branch>
+        <attribute name="name" value="Academic Computing"/>
+        <branch>
+         <attribute name="name" value="Client Services"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="Academic Information Systems"/>
+        </branch>
+       </branch>
+       <branch>
+        <attribute name="name" value="Administrative Computing"/>
+        <branch>
+         <attribute name="name" value="Operations"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="Applications Development"/>
+        </branch>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Multimedia Technology Services"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Acad Partnerships for Instruction"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Information Tech Infrastructure"/>
+       <branch>
+        <attribute name="name" value="Customer Services"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Administrative Information Services"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Project Management"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Academic Affairs - General"/>
+      <branch>
+       <attribute name="name" value="Assessment Office"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Honors Program"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Air Science"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Institutional Research"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Faculty Development"/>
+       <branch>
+        <attribute name="name" value="Center for Faculty Development"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Srvc Learning Acad &amp; Amer Humanics"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Engineering"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="International Studies and Programs"/>
+      <branch>
+       <attribute name="name" value="Afghanistan"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="International Programs"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="International Studies"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Faculty Senate"/>
+     </branch>
+    </branch>
+    <branch>
+     <attribute name="name" value="Intercollegiate Athletics"/>
+     <branch>
+      <attribute name="name" value="Combined Services"/>
+      <branch>
+       <attribute name="name" value="Sports Information"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="NCAA Compliance"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Marketing"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Training Room"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Strength and Conditioning"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Equipment Room"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Business Office"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Men&#39;s Athletics"/>
+      <branch>
+       <attribute name="name" value="Men&#39;s Basketball"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Baseball"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Football"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Wrestling"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Hockey"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Women&#39;s Athletics"/>
+      <branch>
+       <attribute name="name" value="Women&#39;s Basketball"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Softball"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Women&#39;s Cross Country/Track"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Volleyball"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Women&#39;s Swimming/Diving"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Women&#39;s Soccer"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Women&#39;s Tennis"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Women&#39;s Golf"/>
+      </branch>
+     </branch>
+    </branch>
+    <branch>
+     <attribute name="name" value="Alumni Association"/>
+    </branch>
+    <branch>
+     <attribute name="name" value="Diversity and Equal Opportunity"/>
+     <branch>
+      <attribute name="name" value="Project Achieve"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Srvs for Students with Disabilities"/>
+     </branch>
+    </branch>
+    <branch>
+     <attribute name="name" value="University Relations"/>
+     <branch>
+      <attribute name="name" value="Communications and Media"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Photography"/>
+     </branch>
+    </branch>
+   </branch>
+  </branch>
+  <branch>
+   <attribute name="name" value="University of Nebraska at Kearney"/>
+   <branch>
+    <attribute name="name" value="Office of the Chancellor"/>
+    <branch>
+     <attribute name="name" value="Academic Affairs"/>
+     <branch>
+      <attribute name="name" value="Student Life Division"/>
+      <branch>
+       <attribute name="name" value="Academic Success"/>
+       <branch>
+        <attribute name="name" value="Learning Strategies"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Student Support Services"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Career Services"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Counseling and Health Care"/>
+       <branch>
+        <attribute name="name" value="Counseling"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Health Care"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Residential and Greek Life"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Student Center/Union"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Multi-Cultural"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Fine Arts &amp; Humanities"/>
+      <branch>
+       <attribute name="name" value="Museum of Nebraska Art"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Art &amp; Art History"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="English"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Communication"/>
+       <branch>
+        <attribute name="name" value="University Newspaper"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Modern Languages"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Music &amp; Performing Arts"/>
+       <branch>
+        <attribute name="name" value="Theatre"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Philosophy"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Writing Center"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Information Technology Services"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Natural &amp; Social Sciences"/>
+      <branch>
+       <attribute name="name" value="Biology"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Chemistry"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Computer Science &amp; Information Syst"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Health Science Programs"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="History"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Mathematics &amp; Statistics"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Physics &amp; Physical Science"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Political Science"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Psychology"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Criminal Justice &amp; Social Work"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Sociology Geography &amp; Earth Sciences"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Business &amp; Technology"/>
+      <branch>
+       <attribute name="name" value="Accounting/Finance"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Marketing &amp; MIS"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Economics"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Family Studies and Interior Design"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Industrial Technology"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Management"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Nebraska Safety Center"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Nebraska Business &amp; Development CNTR"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Center for Rural Rsch Development"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="MBA Program"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="WC Computer Lab"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Military Science"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Education"/>
+      <branch>
+       <attribute name="name" value="Counseling &amp; School Psychology"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Educational Administration"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Health, Physical Ed &amp; Recreation"/>
+       <branch>
+        <attribute name="name" value="Intramurals"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Teacher Education"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Communication Disorders"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="KASE"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="COE-CIT"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Graduate Studies &amp; Research"/>
+      <branch>
+       <attribute name="name" value="eCampus"/>
+       <branch>
+        <attribute name="name" value="Video Services"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Elderhostel"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Sponsored Programs"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Research Service Center"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Library"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Institutional Research"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="International Education"/>
+      <branch>
+       <attribute name="name" value="World Affairs"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="International Student Services"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Honors Program"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="General Studies"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Academic Advising"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Admissions"/>
+      <branch>
+       <attribute name="name" value="Summer Advising Enrollment"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Financial Aid"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Student Records"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Women&#39;s Studies"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Center for Teaching Excellence"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Ethnic Studies"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="1st Year Program"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Assessment Office"/>
+     </branch>
+    </branch>
+    <branch>
+     <attribute name="name" value="Business and Finance"/>
+     <branch>
+      <attribute name="name" value="Finance Office"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Business Services"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Human Resources"/>
+      <branch>
+       <attribute name="name" value="Retirees"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Health/Wellness Program"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Volunteers"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Child Development Center"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Police and Parking Services"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Budget Office"/>
+      <branch>
+       <attribute name="name" value="Budget Adjustments"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Facilities Mgt &amp; Planning"/>
+      <branch>
+       <attribute name="name" value="Facilities Spprt Srvcs/Business Oper"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Facilities Operation"/>
+       <branch>
+        <attribute name="name" value="East Zone"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="West Zone"/>
+       </branch>
+      </branch>
+     </branch>
+    </branch>
+    <branch>
+     <attribute name="name" value="University Relations"/>
+     <branch>
+      <attribute name="name" value="Frank House"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Office of Communication"/>
+     </branch>
+    </branch>
+    <branch>
+     <attribute name="name" value="Intercollegiate Athletics"/>
+    </branch>
+    <branch>
+     <attribute name="name" value="Alumni Association"/>
+    </branch>
+    <branch>
+     <attribute name="name" value="EO/Affirmative Action"/>
+    </branch>
+   </branch>
+  </branch>
+ </branch>
+</branch>
+</tree>
