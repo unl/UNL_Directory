@@ -1,5 +1,6 @@
 <?php
 require_once '../config.inc.php';
+set_include_path(dirname(dirname(__FILE__)).PATH_SEPARATOR.get_include_path());
 require_once 'UNL/Autoload.php';
 
 UNL_Templates::$options['version'] = 3;

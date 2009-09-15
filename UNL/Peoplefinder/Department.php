@@ -24,7 +24,10 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
     
     function count()
     {
-        return count($this->_results);
+        if ($this->valid()) {
+            return count($this->_results);
+        }
+        return false;
     }
     
     function rewind()
