@@ -28,6 +28,7 @@ if (!empty($_GET['q'])) {
 }
 
 $page->maincontentarea = <<<FORM
+<p>Search for UNL departments:</p>
 <form method="get" action="?">
     <div>
     <label for="q">Search Departments:&nbsp;</label> 
