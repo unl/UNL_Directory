@@ -22,6 +22,7 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
         $this->_results =  $this->_ldap->search('dc=unl,dc=edu',
                                                  '(unlHRPrimaryDepartment='.$name.')');
         $this->_results->sort('cn');
+        $this->_results->sort('sn');
     }
     
     function count()
