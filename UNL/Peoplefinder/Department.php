@@ -5,6 +5,8 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
 {
     public $name;
     
+    protected $_ldap;
+
     protected $_results;
     
     function __construct($name)
@@ -15,19 +17,16 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
             'bind_password' => UNL_Peoplefinder::$bindPW,
             );
         
-        $ldap = UNL_LDAP::getConnection($options);
+        $this->_ldap = UNL_LDAP::getConnection($options);
         $name = str_replace(array('(',')','*','\'','"'), '', $name);
-        $this->_results = $ldap->search('dc=unl,dc=edu',
-                                        '(unlHRPrimaryDepartment='.$name.')');
+        $this->_results =&  $this->_ldap->search('dc=unl,dc=edu',
+                                                 '(unlHRPrimaryDepartment='.$name.')');
         $this->_results->sort('cn');
     }
     
     function count()
     {
-        if ($this->valid()) {
-            return count($this->_results);
-        }
-        return false;
+        return count($this->_results);
     }
     
     function rewind()
