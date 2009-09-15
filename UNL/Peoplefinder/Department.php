@@ -17,7 +17,7 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
         
         $ldap = UNL_LDAP::getConnection($options);
         $name = str_replace(array('(',')','*','\'','"'), '', $name);
-        $this->_results = $ldap->search(UNL_Peoplefinder::$baseDN,
+        $this->_results = $ldap->search('dc=unl,dc=edu',
                                         '(unlHRPrimaryDepartment='.$name.')');
         $this->_results->sort('cn');
     }
