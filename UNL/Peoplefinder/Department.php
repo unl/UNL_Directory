@@ -19,7 +19,7 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
         $name = str_replace(array('(',')','*','\'','"'), '', $name);
         $this->_results = $ldap->search(UNL_Peoplefinder::$baseDN,
                                         '(unlHRPrimaryDepartment='.$name.')');
-        $this->results->sort('cn');
+        $this->_results->sort('cn');
     }
     
     function count()
