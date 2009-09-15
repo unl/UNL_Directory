@@ -5,7 +5,9 @@ require_once 'UNL/Autoload.php';
 
 UNL_Templates::$options['version'] = 3;
 $page = UNL_Templates::factory('Popup');
-
+$page->doctitle = '<title>UNL | Officefinder</title>';
+$page->titlegraphic = '<h1>Officefinder</h1>';
+$page->addStylesheet('../peoplefinder_default.css');
 $q = '';
 if (!empty($_GET['q'])) {
     $q = $_GET['q'];
