@@ -8,6 +8,18 @@ $page = UNL_Templates::factory('Popup');
 $page->doctitle = '<title>UNL | Officefinder</title>';
 $page->titlegraphic = '<h1>Officefinder</h1>';
 $page->addStylesheet('../peoplefinder_default.css');
+$page->head .= <<<META
+<meta name="description" content="UNL Officefinder is the searchable department directory for the University. Information obtained from this directory may not be used to provide addresses for mailings to students, faculty or staff. Any solicitation of business, information, contributions or other response from individuals listed in this publication by mail, telephone or other means is forbidden." />';
+<meta name="keywords" content="university of nebraska-lincoln student faculty staff directory vcard" />
+<meta name="author" content="Brett Bieber, UNL Office of University Communications" />
+<meta name="viewport" content="width = 320" />
+<link media="only screen and (max-device-width: 480px)" href="../small_devices.css" type="text/css" rel="stylesheet" />
+META;
+
+if(isset($_GET['q'])) {
+    $page->head .= '<meta name="robots" content="NOINDEX, NOFOLLOW" />';
+}
+
 $q = '';
 if (!empty($_GET['q'])) {
     $q = $_GET['q'];
