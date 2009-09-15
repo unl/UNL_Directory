@@ -54,6 +54,15 @@ class UNL_Peoplefinder_Record
         return $r;
     }
     
+    static function fromUNLLDAPEntry(UNL_LDAP_Entry $entry)
+    {
+        $r = new self();
+        foreach (get_object_vars($r) as $var=>$val) {
+            $r->$var = $entry->$var;
+        }
+        return $r;
+    }
+    
     /**
      * Takes in a string from the LDAP directory, usually formatted like:
      *     ### ___ UNL 68588-####

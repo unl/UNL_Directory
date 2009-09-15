@@ -34,7 +34,7 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
     
     function current()
     {
-        return $this->_results->current();
+        return UNL_Peoplefinder_Record::fromUNLLDAPEntry($this->_results->current());
     }
     
     function key()
