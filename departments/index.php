@@ -30,12 +30,14 @@ if (isset($department)) {
         $renderer_options = array('uri'=>UNL_PEOPLEFINDER_URI);
         $renderer = new UNL_Peoplefinder_Renderer_HTML($renderer_options);
         $page->maincontentarea .= count($department).' results.';
-        $page->maincontentarea .= '<h2>'.htmlentities($department->name).'</h2>';
+        $page->maincontentarea .= '<h2>'.htmlentities($department->name).'</h2><ul>';
         ob_start();
         foreach ($department as $employee) {
+            echo '<li class="ppl_Sresult">';
             $renderer->renderListRecord($employee);
+            echo '</li>';
         }
-        $page->maincontentarea .= ob_get_clean();
+        $page->maincontentarea .= ob_get_clean().'</ul>';
     } else {
         $page->maincontentarea .= 'No results could be found.';
     }
