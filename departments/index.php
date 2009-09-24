@@ -23,10 +23,13 @@ if(isset($_GET['q'])) {
 $q = '';
 if (!empty($_GET['q'])) {
     $q = $_GET['q'];
+    $departments = new UNL_Peoplefinder_Department_Search($q);
+}
+if (!empty($_GET['d'])) {
+    $q = $_GET['d'];
     $department = new UNL_Peoplefinder_Department($q);
     $q = htmlentities($q, ENT_QUOTES);
 }
-
 $page->maincontentarea = <<<FORM
 <p>Search for UNL departments:</p>
 <form method="get" action="?">
@@ -53,6 +56,15 @@ if (isset($department)) {
         $page->maincontentarea .= ob_get_clean().'</ul>';
     } else {
         $page->maincontentarea .= 'No results could be found.';
+    }
+}
+if (isset($departments)) {
+    if (count($departments)) {
+        $page->maincontentarea .= '<ul class="departments">';
+        foreach($departments as $department) {
+            $page->maincontentarea .= '<li class="department"><a href="'.UNL_PEOPLEFINDER_URI.'/departments/?d='.urlencode($department->name).'">'.$department->name.'</a></li>';
+        }
+        $page->maincontentarea .= '</ul>';
     }
 }
 
