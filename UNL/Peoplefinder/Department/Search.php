@@ -23,7 +23,7 @@ class UNL_Peoplefinder_Department_Search implements Countable, Iterator
     
     function current()
     {
-        return $this->results[$this->current];
+        return new UNL_Peoplefinder_Department($this->results[$this->current]['value']);
     }
     
     function next()

@@ -12,47 +12,54 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
     function __construct($name)
     {
         $this->name = $name;
-        $options = array(
-            'bind_dn'       => UNL_Peoplefinder::$bindDN,
-            'bind_password' => UNL_Peoplefinder::$bindPW,
-            );
-        
-        $this->_ldap = UNL_LDAP::getConnection($options);
-        $name = str_replace(array('(',')','*','\'','"'), '', $name);
-        $this->_results =  $this->_ldap->search('dc=unl,dc=edu',
-                                                 '(unlHRPrimaryDepartment='.$name.')');
-        $this->_results->sort('cn');
-        $this->_results->sort('sn');
+    }
+    
+    function getLDAPResults()
+    {
+        if (!isset($this->_results)) {
+            $options = array(
+                'bind_dn'       => UNL_Peoplefinder::$bindDN,
+                'bind_password' => UNL_Peoplefinder::$bindPW,
+                );
+            
+            $this->_ldap = UNL_LDAP::getConnection($options);
+            $name = str_replace(array('(',')','*','\'','"'), '', $this->name);
+            $this->_results =  $this->_ldap->search('dc=unl,dc=edu',
+                                                     '(unlHRPrimaryDepartment='.$name.')');
+            $this->_results->sort('cn');
+            $this->_results->sort('sn');
+        }
+        return $this->_results;
     }
     
     function count()
     {
-        return count($this->_results);
+        return count($this->getLDAPResults());
     }
     
     function rewind()
     {
-        $this->_results->rewind();
+        $this->getLDAPResults()->rewind();
     }
     
     function current()
     {
-        return UNL_Peoplefinder_Record::fromUNLLDAPEntry($this->_results->current());
+        return UNL_Peoplefinder_Record::fromUNLLDAPEntry($this->getLDAPResults()->current());
     }
     
     function key()
     {
-        return $this->_results->key();
+        return $this->getLDAPResults()->key();
     }
     
     function next()
     {
-        $this->_results->next();
+        $this->getLDAPResults()->next();
     }
     
     function valid()
     {
-        return $this->_results->valid();
+        return $this->getLDAPResults()->valid();
     }
 }
 ?>
