@@ -330,6 +330,7 @@ class UNL_Peoplefinder_Renderer_HTML
         echo '<div class="fn">'.$this->getUIDLink($r->uid, $linktext, $this->uid_onclick).'</div>'.PHP_EOL;
         if (isset($r->eduPersonPrimaryAffiliation)) echo '<div class="eppa">('.$r->eduPersonPrimaryAffiliation.')</div>'.PHP_EOL;
         if (isset($r->unlHRPrimaryDepartment)) echo '<div class="organization-unit">'.$r->unlHRPrimaryDepartment.'</div>'.PHP_EOL;
+        if (isset($r->title)) echo '<div class="title">'.$r->title.'</div>'.PHP_EOL;
         if (isset($r->telephoneNumber)) echo '<div class="tel">'.$this->formatPhone($r->telephoneNumber).'</div>'.PHP_EOL;
         
         echo $this->getUIDLink($r->uid, 'contact info', $this->uid_onclick, 'cInfo');
