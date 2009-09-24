@@ -41,6 +41,9 @@
 #maincontent ul li.org_Sresult {
 	
 }
+#maincontent ul.department li.ppl_Sresult .organization-unit {
+	display:none;
+}
 #maincontent .fn{
 	float:left;
 	margin-right:0.2em;

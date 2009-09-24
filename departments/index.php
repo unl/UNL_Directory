@@ -46,7 +46,7 @@ if (isset($department)) {
         $renderer_options = array('uri'=>UNL_PEOPLEFINDER_URI);
         $renderer = new UNL_Peoplefinder_Renderer_HTML($renderer_options);
         $page->maincontentarea .= count($department).' results.';
-        $page->maincontentarea .= '<h2>'.htmlentities($department->name).'</h2><ul>';
+        $page->maincontentarea .= '<h2>'.htmlentities($department->name).'</h2><ul class="department">';
         ob_start();
         foreach ($department as $employee) {
             echo '<li class="ppl_Sresult">';
