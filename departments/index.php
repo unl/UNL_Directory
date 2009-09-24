@@ -62,9 +62,11 @@ if (isset($departments)) {
     if (count($departments)) {
         $page->maincontentarea .= '<ul class="departments">';
         foreach($departments as $department) {
-            $page->maincontentarea .= '<li class="department"><a href="'.UNL_PEOPLEFINDER_URI.'/departments/?d='.urlencode($department->name).'">'.$department->name.'</a></li>';
+            $page->maincontentarea .= '<li class="department"><a href="'.UNL_PEOPLEFINDER_URI.'departments/?d='.urlencode($department['value']).'">'.$department['value'].'</a></li>';
         }
         $page->maincontentarea .= '</ul>';
+    } else {
+        $page->maincontentarea .= 'No results could be found.';
     }
 }
 

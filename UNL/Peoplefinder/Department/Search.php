@@ -18,12 +18,12 @@ class UNL_Peoplefinder_Department_Search implements Countable, Iterator
     {
         $q = str_replace('"', '', $q);
         $this->xml = new SimpleXMLElement(file_get_contents(dirname(__FILE__).'/../../../data/hr_tree.xml'));
-        $this->results = $this->xml->xpath('//attribute[@name="name"][contains(@value,"'.$q.'")]');
+        $this->results = $this->xml->xpath('//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="name"][contains(@value,"'.$q.'")]');
     }
     
     function current()
     {
-        return new UNL_Peoplefinder_Department($this->results[$this->current]['value']);
+        return $this->results[$this->current];
     }
     
     function next()
