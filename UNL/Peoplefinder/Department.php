@@ -22,7 +22,9 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
         $results = $this->xml->xpath('//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="name"][@value="'.$this->name.'"]/..');
         if (isset($results[0])) {
             foreach ($results[0] as $attribute) {
-                $this->{$attribute['name']} = $attribute['value'];
+                if (isset($attribute['name'])) {
+                    $this->{$attribute['name']} = (string)$attribute['value'];
+                }
             }
         }
     }

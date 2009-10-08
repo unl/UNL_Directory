@@ -47,6 +47,13 @@ if (isset($department)) {
         $renderer = new UNL_Peoplefinder_Renderer_HTML($renderer_options);
         $page->maincontentarea .= count($department).' results.';
         $page->maincontentarea .= '<h2>'.htmlentities($department->name).'</h2>';
+        if (isset($department->building)) {
+            $bldgs = new UNL_Common_Building();
+            if ($bldgs->buildingExists($department->building)) {
+                $sd = new UNL_Geography_SpatialData_Campus();
+                $department->building = '<a href="'.$sd->getMapUrl($department->building).'">'.htmlentities($bldgs->codes[$department->building]).'</a>';
+            }
+        }
         $page->maincontentarea .= "<p>{$department->room} <span class='location'>{$department->building}</span><br />{$department->city}, {$department->state} {$department->postal_code}</p>".'<ul class="department">';
         ob_start();
         foreach ($department as $employee) {
