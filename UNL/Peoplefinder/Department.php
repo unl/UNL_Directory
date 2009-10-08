@@ -4,6 +4,12 @@ require_once 'UNL/LDAP.php';
 class UNL_Peoplefinder_Department implements Countable, Iterator
 {
     public $name;
+    public $org_unit;
+    public $building;
+    public $room;
+    public $city;
+    public $state;
+    public $postal_code;
     
     protected $_ldap;
 
@@ -12,6 +18,13 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
     function __construct($name)
     {
         $this->name = $name;
+        $this->xml = new SimpleXMLElement(file_get_contents(dirname(__FILE__).'/../../data/hr_tree.xml'));
+        $results = $this->xml->xpath('//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="name"][@value="'.$this->name.'"]/..');
+        if (isset($results[0])) {
+            foreach ($results[0] as $attribute) {
+                $this->{$attribute['name']} = $attribute['value'];
+            }
+        }
     }
     
     function getLDAPResults()
@@ -25,7 +38,7 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
             $this->_ldap = UNL_LDAP::getConnection($options);
             $name = str_replace(array('(',')','*','\'','"'), '', $this->name);
             $this->_results =  $this->_ldap->search('dc=unl,dc=edu',
-                                                     '(unlHRPrimaryDepartment='.$name.')');
+                                                    '(unlHRPrimaryDepartment='.$name.')');
             $this->_results->sort('cn');
             $this->_results->sort('sn');
         }

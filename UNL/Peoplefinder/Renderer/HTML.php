@@ -151,7 +151,8 @@ class UNL_Peoplefinder_Renderer_HTML
             if ($r->unlHRPrimaryDepartment == 'Office of the President') {
                 $org_name = 'University of Nebraska';
             }
-            echo "<span class='org'>\n\t<span class='organization-unit'>{$r->unlHRPrimaryDepartment}</span>\n\t<span class='organization-name'>$org_name</span></span>\n";
+            $dept_url = UNL_PEOPLEFINDER_URI.'departments/?d='.urlencode($r->unlHRPrimaryDepartment);
+            echo "<span class='org'>\n\t<span class='organization-unit'><a href='{$dept_url}'>{$r->unlHRPrimaryDepartment}</a></span>\n\t<span class='organization-name'>$org_name</span></span>\n";
         }
         
         if (isset($r->postalAddress)) {
