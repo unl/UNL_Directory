@@ -39,6 +39,8 @@ $page->maincontentarea = <<<FORM
     <input style="margin-bottom:-7px;" name="submitbutton" type="image" src="/ucomm/templatedependents/templatecss/images/go.gif" value="Submit" id="submitbutton" />
     </div> 
 </form>
+<div id="backButton"><a class="imagelink" href="#" onclick="history.go(-1); return false;" title="Go back to search results"><img src="../images/btn_back.gif" alt="Back" /></a></div>
+
 FORM;
 
 if (isset($department)) {
