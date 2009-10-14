@@ -132,15 +132,15 @@ class UNL_Peoplefinder_Renderer_HTML
             echo '<span class="title">'.$class." ".$this->formatMajor($r->unlSISMajor).'&ndash;'.$this->formatCollege($r->unlSISCollege).'</span>';
         }
         
-        if (isset($r->unlSISLocalAddr1)) {
-            $localaddr = array($r->unlSISLocalAddr1, $r->unlSISLocalAddr2, $r->unlSISLocalCity, $r->unlSISLocalState, $r->unlSISLocalZip);
-            $this->renderAddress($localaddr, 'Local', 'workAdr');
-        }
-        
-        if (isset($r->unlSISPermAddr1)) {
-            $permaddr  = array($r->unlSISPermAddr1, $r->unlSISPermAddr2, $r->unlSISPermCity, $r->unlSISPermState, $r->unlSISPermZip);
-            $this->renderAddress($permaddr, 'Home', 'homeAdr');
-        }
+//        if (isset($r->unlSISLocalAddr1)) {
+//            $localaddr = array($r->unlSISLocalAddr1, $r->unlSISLocalAddr2, $r->unlSISLocalCity, $r->unlSISLocalState, $r->unlSISLocalZip);
+//            $this->renderAddress($localaddr, 'Local', 'workAdr');
+//        }
+//        
+//        if (isset($r->unlSISPermAddr1)) {
+//            $permaddr  = array($r->unlSISPermAddr1, $r->unlSISPermAddr2, $r->unlSISPermCity, $r->unlSISPermState, $r->unlSISPermZip);
+//            $this->renderAddress($permaddr, 'Home', 'homeAdr');
+//        }
         
         if (isset($r->title)) {
             echo "<span class='title'>{$r->title}</span>\n";

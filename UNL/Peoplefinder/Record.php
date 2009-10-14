@@ -28,17 +28,17 @@ class UNL_Peoplefinder_Record
     public $unlHRAddress;
     public $unlSISClassLevel;
     public $unlSISCollege;
-    public $unlSISLocalAddr1;
-    public $unlSISLocalAddr2;
-    public $unlSISLocalCity;
-    public $unlSISLocalPhone;
-    public $unlSISLocalState;
-    public $unlSISLocalZip;
-    public $unlSISPermAddr1;
-    public $unlSISPermAddr2;
-    public $unlSISPermCity;
-    public $unlSISPermState;
-    public $unlSISPermZip;
+//    public $unlSISLocalAddr1;
+//    public $unlSISLocalAddr2;
+//    public $unlSISLocalCity;
+//    public $unlSISLocalPhone;
+//    public $unlSISLocalState;
+//    public $unlSISLocalZip;
+//    public $unlSISPermAddr1;
+//    public $unlSISPermAddr2;
+//    public $unlSISPermCity;
+//    public $unlSISPermState;
+//    public $unlSISPermZip;
     public $unlSISMajor;
     public $unlEmailAlias;
     
