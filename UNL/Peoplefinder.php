@@ -225,7 +225,7 @@ class UNL_Peoplefinder
     public function getExactMatches($q)
     {
         include_once dirname(__FILE__).'/Peoplefinder/StandardFilter.php';
-        $filter = new UNL_Peoplefinder_StandardFilter($q, '|', false);
+        $filter = new UNL_Peoplefinder_StandardFilter($q, '&', false);
         $this->query($filter->__toString(), $this->listAttributes);
         return $this->getRecordsFromResults();
     }
@@ -276,7 +276,7 @@ class UNL_Peoplefinder
     {
         include_once dirname(__FILE__).'/Peoplefinder/StandardFilter.php';
         // Build filter excluding those displayed above
-        $filter = new UNL_Peoplefinder_StandardFilter($q, '|', true);
+        $filter = new UNL_Peoplefinder_StandardFilter($q, '&', true);
         $filter->excludeRecords($excluded_records);
         $this->query($filter->__toString(), $this->listAttributes);
         return $this->getRecordsFromResults();
