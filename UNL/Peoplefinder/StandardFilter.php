@@ -35,6 +35,10 @@ class UNL_Peoplefinder_StandardFilter
     function __construct($inquery, $operator = '&', $wild = false)
     {
         if (!empty($inquery)) {
+            //ignore grouping and wildcard characters
+            $inquery = str_replace(array('"',',','*'),'',$inquery);
+
+            //escape query
             include_once dirname(__FILE__).'/LDAPUtil.php';
             
             $inquery = UNL_Peoplefinder_LDAPUtil::escape_filter_value($inquery);
@@ -48,14 +52,20 @@ class UNL_Peoplefinder_StandardFilter
             //search for the string parts
             $filter = "($operator";
             foreach ($query as $arg) {
-                //escape the incoming query....
-
                 //determine if a wildcard should be used
                 if ($wild) {
                     $arg = "*$arg*";
                 }
 
-                $filter .= "(|(mail=$arg)(cn=$arg)(givenName=$arg)(sn=$arg))";
+                $filter .= '(|';
+                $filter .= "(mail=$arg)(cn=$arg)(givenName=$arg)(sn=$arg)";
+
+                //find hyphenated and multi-word surnames in the exact matches query
+                if (!$wild) {
+                    $filter .= "(sn=$arg-*)(sn=*$arg)";
+                }
+
+                $filter .= ")";
             }
             $filter .= ")";
 
