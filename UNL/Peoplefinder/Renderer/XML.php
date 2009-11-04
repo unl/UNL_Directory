@@ -34,7 +34,7 @@ class UNL_Peoplefinder_Renderer_XML
         echo '<person>';
         foreach (get_object_vars($r) as $key=>$val) {
             $val = htmlspecialchars($val);
-            echo "<$key>{$val}</$key>\n";
+            echo "<$key>".htmlspecialchars($val)."</$key>\n";
         }
         echo '</person>'.PHP_EOL;
     }
