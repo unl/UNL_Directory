@@ -184,7 +184,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
     public function getExactMatches($q)
     {
         $filter = new UNL_Peoplefinder_Driver_LDAP_StandardFilter($q, '&', false);
-        $this->query($filter->__toString(), $this->listAttributes);
+        $this->query($filter->__toString(), $this->detailAttribtues);
         return $this->getRecordsFromResults();
     }
     
@@ -217,7 +217,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
     public function getAdvancedSearchMatches($sn, $cn, $eppa)
     {
         $filter = new UNL_Peoplefinder_Driver_LDAP_AdvancedFilter($sn, $cn, $eppa, '&', true);
-        $this->query($filter->__toString(), $this->listAttributes);
+        $this->query($filter->__toString(), $this->detailAttributes);
         return $this->getRecordsFromResults();
     }
     
@@ -234,7 +234,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
         // Build filter excluding those displayed above
         $filter = new UNL_Peoplefinder_Driver_LDAP_StandardFilter($q, '&', true);
         $filter->excludeRecords($excluded_records);
-        $this->query($filter->__toString(), $this->listAttributes);
+        $this->query($filter->__toString(), $this->detailAttribtues);
         return $this->getRecordsFromResults();
     }
     
@@ -248,7 +248,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
     public function getPhoneMatches($q)
     {
         $filter = new UNL_Peoplefinder_Driver_LDAP_TelephoneFilter($q);
-        $this->query($filter->__toString(), $this->listAttributes);
+        $this->query($filter->__toString(), $this->detailAttribtues);
         return $this->getRecordsFromResults();
     }
 
