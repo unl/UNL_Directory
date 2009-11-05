@@ -463,9 +463,52 @@ class UNL_Peoplefinder_Renderer_HTML
         }
     }
     
+    
+    
     public function renderError()
     {
         echo "<p>Please enter more information or <a href='".$_SERVER['PHP_SELF']."?adv=y' title='Click here to perform a detailed Peoplefinder search'>try a Detailed Search.</a></p>";
+    }
+    
+    /**
+     * Displays the instructions for using peoplefinder.
+     *
+     * @param bool $adv Show advanced instructions or default instructions.
+     * 
+     * @return void
+     */
+    function displayInstructions($adv=false)
+    {
+        echo '<div style="padding-top:10px;width:270px;" id="instructions">';
+        if ($adv) {
+            echo 'Enter in as much of the first and/or last name you know, ' .
+                 'you can also select a primary affiliation to refine your search.';
+        } else {
+            echo 'Enter in as much of the name as you know, first and/or last '.
+                 'name in any order.<br /><br />Reverse telephone number lookup: '.
+                 'enter last three or more digits.';
+        }
+        echo '</div>';
+    }
+    
+    /**
+     * Display the standard search form.
+     *
+     * @return void
+     */
+    function displayStandardForm()
+    {
+        include 'standardForm.php';
+    }
+
+    /**
+     * Display the advanced form.
+     *
+     * @return void
+     */
+    function displayAdvancedForm()
+    {
+        include 'advancedForm.php';
     }
 }
 

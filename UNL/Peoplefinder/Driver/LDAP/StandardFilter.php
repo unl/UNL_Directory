@@ -19,7 +19,7 @@
  * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
  * @link      http://peoplefinder.unl.edu/
  */
-class UNL_Peoplefinder_StandardFilter
+class UNL_Peoplefinder_Driver_LDAP_StandardFilter
 {
     private $_filter;
     

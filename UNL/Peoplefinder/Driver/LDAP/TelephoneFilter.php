@@ -1,9 +1,9 @@
 <?php
 /**
- * Builds a simple ou filter for records.
+ * Builds a simple telephone filter for searching for records.
  *
  * PHP version 5
- *
+ * 
  * @category  Default
  * @package   UNL_Peoplefinder
  * @author    Brett Bieber <brett.bieber@gmail.com>
@@ -11,19 +11,14 @@
  * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
  * @link      http://peoplefinder.unl.edu/
  */
-class UNL_Peoplefinder_OUFilter
+class UNL_Peoplefinder_Driver_LDAP_TelephoneFilter
 {
     private $_filter;
     
-    /**
-     * Create a filter for OU filtering.
-     *
-     * @param string $ou Organizational Unit eg:org|College of Engineering
-     */
-    function __construct($ou)
+    function __construct($q)
     {
-        if (!empty($ou)) {
-            $this->_filter = '(ou='.str_replace('-', '*', $ou).')';
+        if (!empty($q)) {
+            $this->_filter = '(telephoneNumber=*'.str_replace('-','*',$q).')';
         }
     }
     

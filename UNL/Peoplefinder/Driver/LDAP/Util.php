@@ -8,7 +8,7 @@
  * @package   UNL_Peoplefinder
  * @link      http://peoplefinder.unl.edu/
  */
-class UNL_Peoplefinder_LDAPUtil
+class UNL_Peoplefinder_Driver_LDAP_Util
 {
     /**
     * Escapes the given VALUES according to RFC 2254 so that they can be safely used in LDAP filters.
@@ -73,5 +73,33 @@ class UNL_Peoplefinder_LDAPUtil
             }
         }
         return $string;
+    }
+    
+    /**
+     * sort a multidimensional array
+     *
+     * @return array
+     */
+    function array_csort()
+    {
+        $args   = func_get_args();
+        $marray = array_shift($args);
+        
+        $msortline = "return(array_multisort(";
+        foreach ($args as $arg) {
+            @$i++;
+            if (is_string($arg)) {
+                foreach ($marray as $row) {
+                    $sortarr[$i][] = $row[$arg];
+                }
+            } else {
+                $sortarr[$i] = $arg;
+            }
+            $msortline .= "\$sortarr[".$i."],";
+        }
+        $msortline .= "\$marray));";
+        
+        eval($msortline);
+        return $marray;
     }
 }
