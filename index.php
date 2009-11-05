@@ -1,7 +1,6 @@
 <?php
 require_once 'config.inc.php';
 
-require_once 'UNL/Peoplefinder/Renderer/HTML.php';
 session_start();
 session_cache_expire(5);
 
@@ -10,7 +9,7 @@ if (isset($_GET['chooser'])) {
 	$renderer_options['choose_uid'] = true;
 }
 
-$peepObj  = new UNL_Peoplefinder();
+$peepObj  = new UNL_Peoplefinder($driver);
 $renderer = new UNL_Peoplefinder_Renderer_HTML($renderer_options);
 
 $myself = htmlentities(str_replace('index.php', '', $_SERVER['PHP_SELF']), ENT_QUOTES);

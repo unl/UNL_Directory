@@ -14,8 +14,6 @@
 define('UNL_PF_DISPLAY_LIMIT', 30);
 define('UNL_PF_RESULT_LIMIT', 100);
 
-require_once dirname(__FILE__).'/Peoplefinder/Record.php';
-
 /**
  * Peoplefinder class for UNL's online directory.
  * 
@@ -43,7 +41,7 @@ class UNL_Peoplefinder
     /**
      * Constructor for the object.
      */
-    function __construct(UNL_Peoplefinder_DriverInteface $driver = null)
+    function __construct(UNL_Peoplefinder_DriverInterface $driver = null)
     {
         if (!$driver) {
             $driver = new UNL_Peoplefinder_Driver_LDAP();
