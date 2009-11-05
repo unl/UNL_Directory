@@ -51,7 +51,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
      * Details are for UID detail display only.
      * @var array
      */
-    public $detailAttribtues = array(
+    public $detailAttributes = array(
         'cn',
         'eduPersonNickname',
         'eduPersonPrimaryAffiliation',
