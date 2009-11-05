@@ -5,7 +5,6 @@
  */
 
 require_once 'config.inc.php';
-require_once 'UNL/Peoplefinder.php';
 
 $peepObj = new UNL_Peoplefinder();
 
@@ -40,7 +39,6 @@ case 'html':
     $renderer_class = 'HTML';
     break;
 }
-require_once 'UNL/Peoplefinder/Renderer/'.$renderer_class.'.php';
 $renderer_class = 'UNL_Peoplefinder_Renderer_'.$renderer_class;
 $renderer = new $renderer_class($renderer_options);
 if (isset($_GET['q']) && !empty($_GET['q'])) {
