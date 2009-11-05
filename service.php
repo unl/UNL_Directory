@@ -39,6 +39,19 @@ case 'html':
     $renderer_class = 'HTML';
     break;
 }
+
+$method = false;
+
+if (isset($_GET['method'])) {
+    switch ($_GET['method']) {
+    case 'getLikeMatches':
+    case 'getExactMatches':
+    case 'getPhoneMatches':
+        $method = $_GET['method'];
+        break;
+    }
+}
+
 $renderer_class = 'UNL_Peoplefinder_Renderer_'.$renderer_class;
 $renderer = new $renderer_class($renderer_options);
 if (isset($_GET['q']) && !empty($_GET['q'])) {
@@ -48,26 +61,35 @@ if (isset($_GET['q']) && !empty($_GET['q'])) {
             $records = $peepObj->getPhoneMatches($_GET['q']);
             $renderer->renderSearchResults($records);
         } else {
-            $records = $peepObj->getExactMatches($_GET['q']);
-            if (count($records) > 0) {
-                if ($renderer instanceof UNL_Peoplefinder_Renderer_HTML) {
-                    echo "<div class='cMatch'>Exact matches:</div>\n";
+            if ($method) {
+                $records = $peepObj->getExactMatches($_GET['q']);
+                if (count($records) > 0) {
+                    $renderer->renderSearchResults($records);
+                } else {
+                    $renderer->renderError();
                 }
-                $renderer->renderSearchResults($records);
             } else {
-                if ($renderer instanceof UNL_Peoplefinder_Renderer_HTML) {
-                    echo 'No exact matches found.';
-                }
-            }
-            if (count($records) < UNL_Peoplefinder::$displayResultLimit) {
-                // More room to display LIKE results
-                UNL_Peoplefinder::$displayResultLimit = UNL_Peoplefinder::$displayResultLimit-$peepObj->lastResultCount;
-                $records = $peepObj->getLikeMatches($_GET['q'], $records);
+                $records = $peepObj->getExactMatches($_GET['q']);
                 if (count($records) > 0) {
                     if ($renderer instanceof UNL_Peoplefinder_Renderer_HTML) {
-                       echo "<div class='cMatch'>Possible matches:</div>\n";
+                        echo "<div class='cMatch'>Exact matches:</div>\n";
                     }
                     $renderer->renderSearchResults($records);
+                } else {
+                    if ($renderer instanceof UNL_Peoplefinder_Renderer_HTML) {
+                        echo 'No exact matches found.';
+                    }
+                }
+                if (count($records) < UNL_Peoplefinder::$displayResultLimit) {
+                    // More room to display LIKE results
+                    UNL_Peoplefinder::$displayResultLimit = UNL_Peoplefinder::$displayResultLimit-$peepObj->lastResultCount;
+                    $records = $peepObj->getLikeMatches($_GET['q'], $records);
+                    if (count($records) > 0) {
+                        if ($renderer instanceof UNL_Peoplefinder_Renderer_HTML) {
+                           echo "<div class='cMatch'>Possible matches:</div>\n";
+                        }
+                        $renderer->renderSearchResults($records);
+                    }
                 }
             }
         }

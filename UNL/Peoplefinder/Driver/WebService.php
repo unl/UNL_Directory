@@ -5,7 +5,7 @@ class UNL_Peoplefinder_Driver_WebService implements UNL_Peoplefinder_DriverInter
     
     function getExactMatches($query)
     {
-        $results = file_get_contents($this->service_url.'?q='.urlencode($query).'&format=php');
+        $results = file_get_contents($this->service_url.'?q='.urlencode($query).'&format=php&method=getExactMatches');
         if ($results) {
             $results = unserialize($results);
         }
@@ -17,7 +17,11 @@ class UNL_Peoplefinder_Driver_WebService implements UNL_Peoplefinder_DriverInter
     }
     function getLikeMatches($query)
     {
-        throw new Exception('Not implemented yet');
+        $results = file_get_contents($this->service_url.'?q='.urlencode($query).'&format=php&method=getLikeMatches');
+        if ($results) {
+            $results = unserialize($results);
+        }
+        return $results;
     }
     function getPhoneMatches($query)
     {
