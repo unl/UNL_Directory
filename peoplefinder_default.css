@@ -38,8 +38,8 @@
     position:relative;
     color:#333;
 }
-#maincontent ul li.org_Sresult {
-    
+#maincontent ul li.org_Sresult .organization-unit {
+    clear:both;
 }
 #maincontent ul.department li.ppl_Sresult .organization-unit {
     display:none;
