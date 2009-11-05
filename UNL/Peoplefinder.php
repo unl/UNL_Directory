@@ -53,7 +53,7 @@ class UNL_Peoplefinder
 
     function __call($method, $args)
     {
-        return call_user_func_array(array($this->driver), $args);
+        return call_user_func_array(array($this->driver, $method), $args);
     }
 
 }

@@ -39,9 +39,7 @@ class UNL_Peoplefinder_Driver_LDAP_StandardFilter
             $inquery = str_replace(array('"',',','*'),'',$inquery);
 
             //escape query
-            include_once dirname(__FILE__).'/LDAPUtil.php';
-            
-            $inquery = UNL_Peoplefinder_LDAPUtil::escape_filter_value($inquery);
+            $inquery = UNL_Peoplefinder_Driver_LDAP_Util::escape_filter_value($inquery);
             
             //put the query into an array of words
             $query = preg_split('/\s+/', $inquery, 4);

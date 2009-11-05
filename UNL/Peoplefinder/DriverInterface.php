@@ -1,5 +1,5 @@
 <?php
-class UNL_Peoplefinder_DriverInterface
+interface UNL_Peoplefinder_DriverInterface
 {
     function getExactMatches($query);
     function getAdvancedSearchMatches($sn, $cn, $eppa);

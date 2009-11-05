@@ -31,12 +31,12 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
      * Attributes are the fields retrieved in an LDAP QUERY, limit this to
      * ONLY what is USED/DISPLAYED!
      */
-    //List attributes are the attributes displayed in a list of results
-    public $listAttributes = array();
-
-    // Details are for UID detail display only.
-    public $detailAttributes = array();
     
+    /**
+     * List attributes are the attributes displayed in a list of results
+     * 
+     * @var array
+     */
     public $listAttributes = array(
         'cn',
         'eduPersonNickname',
@@ -47,6 +47,10 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
         'uid',
         'unlHRPrimaryDepartment');
     
+    /**
+     * Details are for UID detail display only.
+     * @var array
+     */
     public $detailAttribtues = array(
         'cn',
         'eduPersonNickname',
@@ -98,11 +102,11 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
      */
     function bind()
     {
-        $this->linkID = ldap_connect(UNL_Peoplefinder::$ldapServer);
+        $this->linkID = ldap_connect(self::$ldapServer);
         if ($this->linkID) {
             $this->connected = ldap_bind($this->linkID,
-                                         UNL_Peoplefinder::$bindDN,
-                                         UNL_Peoplefinder::$bindPW);
+                                         self::$bindDN,
+                                         self::$bindPW);
             if ($this->connected) {
                 return $this->connected;
             }
@@ -135,12 +139,12 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
         $this->bind();
         $this->lastQuery = $filter;
         $sr              = @ldap_search($this->linkID, 
-                                        UNL_Peoplefinder::$baseDN,
+                                        self::$baseDN,
                                         $filter,
                                         $attributes,
                                         0,
                                         UNL_Peoplefinder::$resultLimit,
-                                        UNL_Peoplefinder::$ldapTimeout);
+                                        self::$ldapTimeout);
         if ($setResult) {
             $this->lastResultCount = @ldap_count_entries($this->linkID, $sr);
             $this->lastResult      = @ldap_get_entries($this->linkID, $sr);
@@ -157,7 +161,8 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
                 $this->lastResult[$i]['insensitiveName'] = strtoupper($name);
             }
             @reset($this->lastResult);
-            $this->lastResult = @$this->array_csort($this->lastResult,
+            $this->lastResult = @UNL_Peoplefinder_Driver_LDAP_Util::array_csort(
+                                                    $this->lastResult,
                                                     'insensitiveName',
                                                     SORT_ASC);
             return $this->lastResult;
@@ -178,8 +183,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
      */
     public function getExactMatches($q)
     {
-        include_once dirname(__FILE__).'/Peoplefinder/StandardFilter.php';
-        $filter = new UNL_Peoplefinder_StandardFilter($q, '&', false);
+        $filter = new UNL_Peoplefinder_Driver_LDAP_StandardFilter($q, '&', false);
         $this->query($filter->__toString(), $this->listAttributes);
         return $this->getRecordsFromResults();
     }
@@ -212,8 +216,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
      */
     public function getAdvancedSearchMatches($sn, $cn, $eppa)
     {
-        include_once dirname(__FILE__).'/Peoplefinder/AdvancedFilter.php';
-        $filter = new UNL_Peoplefinder_AdvancedFilter($sn, $cn, $eppa, '&', true);
+        $filter = new UNL_Peoplefinder_Driver_LDAP_AdvancedFilter($sn, $cn, $eppa, '&', true);
         $this->query($filter->__toString(), $this->listAttributes);
         return $this->getRecordsFromResults();
     }
@@ -228,9 +231,8 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
      */
     public function getLikeMatches($q, $excluded_records = array())
     {
-        include_once dirname(__FILE__).'/Peoplefinder/StandardFilter.php';
         // Build filter excluding those displayed above
-        $filter = new UNL_Peoplefinder_StandardFilter($q, '&', true);
+        $filter = new UNL_Peoplefinder_Driver_LDAP_StandardFilter($q, '&', true);
         $filter->excludeRecords($excluded_records);
         $this->query($filter->__toString(), $this->listAttributes);
         return $this->getRecordsFromResults();
@@ -245,8 +247,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
      */
     public function getPhoneMatches($q)
     {
-        include_once dirname(__FILE__).'/Peoplefinder/TelephoneFilter.php';
-        $filter = new UNL_Peoplefinder_TelephoneFilter($q);
+        $filter = new UNL_Peoplefinder_Driver_LDAP_TelephoneFilter($q);
         $this->query($filter->__toString(), $this->listAttributes);
         return $this->getRecordsFromResults();
     }

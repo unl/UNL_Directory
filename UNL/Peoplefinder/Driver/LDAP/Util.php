@@ -80,7 +80,7 @@ class UNL_Peoplefinder_Driver_LDAP_Util
      *
      * @return array
      */
-    function array_csort()
+    public static function array_csort()
     {
         $args   = func_get_args();
         $marray = array_shift($args);

@@ -94,7 +94,7 @@ if (!isset($_SESSION['lastResultDisplayed']))
 							    }
 							} else {
 								// Display form
-								(@$_GET['adv'] == 'y')?$peepObj->displayAdvancedForm():$peepObj->displayStandardForm();
+								(@$_GET['adv'] == 'y')?$renderer->displayAdvancedForm():$renderer->displayStandardForm();
 								if (isset($_GET['p'])) {
 									// Display the next page
 									if ($_SESSION['lastResultCount']>0) {
@@ -166,7 +166,7 @@ if (!isset($_SESSION['lastResultDisplayed']))
 		                    <?php } 
 							//show instructions if no results are showing
 							if (!isset($_GET['uid']) && !isset($records)) {
-								$peepObj->displayInstructions((@$_GET['adv'] == 'y')?true:false);
+								$renderer->displayInstructions((@$_GET['adv'] == 'y')?true:false);
 							} ?>
                     <div style="padding-top:3.5em;"> <a href="#" class="imagelink" onclick="document.getElementById('disclaimer').style.display='block'; return false;" title="More information about Peoplefinder"><img src="images/icon_question.gif" alt="Question Mark" width="15" height="14" /></a> UNL | Office of University Communications | <a href="http://www1.unl.edu/wdn/wiki/About_Peoplefinder" onclick="window.open(this.href); return false;">About Peoplefinder</a>
                         <div id="disclaimer" style="display:none;">
