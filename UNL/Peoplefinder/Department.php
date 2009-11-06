@@ -33,8 +33,8 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
     {
         if (!isset($this->_results)) {
             $options = array(
-                'bind_dn'       => UNL_Peoplefinder::$bindDN,
-                'bind_password' => UNL_Peoplefinder::$bindPW,
+                'bind_dn'       => UNL_Peoplefinder_Driver_LDAP::$bindDN,
+                'bind_password' => UNL_Peoplefinder_Driver_LDAP::$bindPW,
                 );
             
             $this->_ldap = UNL_LDAP::getConnection($options);
