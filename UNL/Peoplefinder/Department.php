@@ -26,6 +26,8 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
                     $this->{$attribute['name']} = (string)$attribute['value'];
                 }
             }
+        } else {
+            throw new Exception('Invalid department name.');
         }
     }
     

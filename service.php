@@ -99,9 +99,13 @@ if (isset($_GET['q']) && !empty($_GET['q'])) {
 } elseif (isset($_GET['uid']) && !empty($_GET['uid'])) {
     $renderer->renderRecord($peepObj->getUID($_GET['uid']));
 } elseif (isset($_GET['d'])) {
-    $department = new UNL_Peoplefinder_Department($_GET['d']);
-    foreach ($department as $employee) {
-        $renderer->renderRecord($employee);
+    try {
+        $department = new UNL_Peoplefinder_Department($_GET['d']);
+        foreach ($department as $employee) {
+            $renderer->renderRecord($employee);
+        }
+    } catch(Exception $e) {
+        $renderer->renderError($e->getMessage());
     }
 } else {
     $renderer->renderError();
