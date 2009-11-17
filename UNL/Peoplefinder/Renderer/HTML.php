@@ -63,7 +63,7 @@ class UNL_Peoplefinder_Renderer_HTML
                 }
             }
         }
-        $this->displayLimit = UNL_PF_DISPLAY_LIMIT;
+        $this->displayLimit = UNL_Peoplefinder::$displayResultLimit;
         $this->uri          = $_SERVER['SCRIPT_NAME'];
         if (isset($options)) {
             $this->setOptions($options);
