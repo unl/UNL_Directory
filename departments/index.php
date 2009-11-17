@@ -54,7 +54,15 @@ if (isset($department)) {
                 $department->building = '<a href="'.$sd->getMapUrl($department->building).'">'.htmlentities($bldgs->codes[$department->building]).'</a>';
             }
         }
-        $page->maincontentarea .= "<p>{$department->room} <span class='location'>{$department->building}</span><br />{$department->city}, {$department->state} {$department->postal_code}</p>".'<ul class="department">';
+        $page->maincontentarea .= "<p>{$department->room} <span class='location'>{$department->building}</span><br />{$department->city}, {$department->state} {$department->postal_code}</p>";
+        if ($department->hasChildren()) {
+            $page->maincontentarea .= 'Sub-departments:<ul>';
+            foreach ($department->getChildren() as $child) {
+                $page->maincontentarea .= '<li><a href="'.UNL_PEOPLEFINDER_URI.'departments/?d='.urlencode($child).'">'.htmlentities($child).'</a></li>';
+            }
+            $page->maincontentarea .= '</ul>';
+        }
+        $page->maincontentarea .= '<ul class="department">';
         ob_start();
         foreach ($department as $employee) {
             echo '<li class="ppl_Sresult">';

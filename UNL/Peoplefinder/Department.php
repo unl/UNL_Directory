@@ -15,11 +15,13 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
 
     protected $_results;
     
+    protected $_xml;
+    
     function __construct($name)
     {
         $this->name = $name;
-        $this->xml = new SimpleXMLElement(file_get_contents(dirname(__FILE__).'/../../data/hr_tree.xml'));
-        $results = $this->xml->xpath('//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="name"][@value="'.$this->name.'"]/..');
+        $this->_xml = new SimpleXMLElement(file_get_contents(dirname(__FILE__).'/../../data/hr_tree.xml'));
+        $results = $this->_xml->xpath('//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="name"][@value="'.$this->name.'"]/..');
         if (isset($results[0])) {
             foreach ($results[0] as $attribute) {
                 if (isset($attribute['name'])) {
@@ -77,6 +79,29 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
     function valid()
     {
         return $this->getLDAPResults()->valid();
+    }
+    
+    function hasChildren()
+    {
+        $results = $this->_xml->xpath('//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="name"][@value="'.$this->name.'"]/../branch');
+        return count($results)?true:false;
+    }
+    
+    function getChildren()
+    {
+        $children = array();
+        $results = $this->_xml->xpath('//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="name"][@value="'.$this->name.'"]/../branch');
+        foreach ($results as $result) {
+            foreach ($result[0] as $attribute) {
+                if (isset($attribute['name'])
+                    && $attribute['name']=='name') {
+                    $children[] = (string)$attribute['value'];
+                    break;
+                }
+            }
+        }
+        asort($children);
+        return $children;
     }
 }
 ?>
