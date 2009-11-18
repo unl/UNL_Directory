@@ -1,14 +1,62 @@
 <?php
 require_once 'UNL/LDAP.php';
-
+/**
+ * Class which represents a department.
+ * 
+ * The departments are pulled from an xml file, generated from SAP data.
+ * hr_tree.xml using TreeML schema
+ * 
+ * The object also allows iterating over all the members of the department.
+ */
 class UNL_Peoplefinder_Department implements Countable, Iterator
 {
+    /**
+     * Name of the organization
+     *
+     * @var string
+     */
     public $name;
+    
+    /**
+     * The organizational unit number.
+     *
+     * @var number
+     */
     public $org_unit;
+    
+    /**
+     * Building the department main office is in.
+     *
+     * @var string
+     */
     public $building;
+    
+    /**
+     * Room
+     *
+     * @var string
+     */
     public $room;
+    
+    /**
+     * City
+     *
+     * @var string
+     */
     public $city;
+    
+    /**
+     * State
+     *
+     * @var string
+     */
     public $state;
+    
+    /**
+     * zip code
+     *
+     * @var string
+     */
     public $postal_code;
     
     protected $_ldap;
@@ -17,6 +65,11 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
     
     protected $_xml;
     
+    /**
+     * construct a department
+     *
+     * @param string $name Name of the department
+     */
     function __construct($name)
     {
         $this->name = $name;
@@ -33,6 +86,11 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
         }
     }
     
+    /**
+     * Retrieves people records from the LDAP directory
+     *
+     * @return resource
+     */
     function getLDAPResults()
     {
         if (!isset($this->_results)) {
@@ -51,6 +109,11 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
         return $this->_results;
     }
     
+    /**
+     * returns the count of employees
+     *
+     * @return int
+     */
     function count()
     {
         return count($this->getLDAPResults());
@@ -61,6 +124,11 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
         $this->getLDAPResults()->rewind();
     }
     
+    /**
+     * Get the current record in the iteration
+     *
+     * @return UNL_Peoplefinder_Record
+     */
     function current()
     {
         return UNL_Peoplefinder_Record::fromUNLLDAPEntry($this->getLDAPResults()->current());
@@ -104,4 +172,3 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
         return $children;
     }
 }
-?>
