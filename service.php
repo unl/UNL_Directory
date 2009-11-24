@@ -21,6 +21,9 @@ if (strtolower($_SERVER['REQUEST_METHOD']) == 'options') {
     exit();
 }
 
+// Set expires header for 24 hours to improve speed caching.
+header('Expires: '.date('r', strtotime('tomorrow')));
+
 $peepObj = new UNL_Peoplefinder();
 
 $format = 'html';
