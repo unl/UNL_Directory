@@ -16,13 +16,13 @@ header('Access-Control-Allow-Methods: GET, OPTIONS');
 // The X-Requested-With header allows jQuery requests to go through
 header('Access-Control-Allow-Headers: X-Requested-With');
 
+// Set expires header for 24 hours to improve speed caching.
+header('Expires: '.date('r', strtotime('tomorrow')));
+
 // Exit early so the page isn't fully loaded for options requests
 if (strtolower($_SERVER['REQUEST_METHOD']) == 'options') {
     exit();
 }
-
-// Set expires header for 24 hours to improve speed caching.
-header('Expires: '.date('r', strtotime('tomorrow')));
 
 $peepObj = new UNL_Peoplefinder();
 
