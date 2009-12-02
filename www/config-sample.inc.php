@@ -1,7 +1,7 @@
 <?php
 ini_set('display_errors', true);
 error_reporting(E_ALL|E_STRICT);
-set_include_path(dirname(__FILE__).PATH_SEPARATOR.get_include_path());
+set_include_path(dirname(__FILE__).'/../src/'.PATH_SEPARATOR.get_include_path());
 require_once 'UNL/Autoload.php';
 
 define('DOCUMENT_ROOT', $_SERVER['DOCUMENT_ROOT']);
