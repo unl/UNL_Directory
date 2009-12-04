@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package version="2.1" xmlns="http://pear.php.net/dtd/package-2.1" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.1     http://pear.php.net/dtd/package-2.1.xsd">
+ <name>UNL_Peoplefinder</name>
+ <channel>pear.unl.edu</channel>
+ <summary>The UNL faculty staff and student directory.
+</summary>
+ <description>
+The UNL_Peoplefinder package contains all the source code for the UNL directory.
+Additionally, this package provides an API which developers can use to retrieve
+directory information and perform searches.
+</description>
+ <lead>
+  <name>Brett Bieber</name>
+  <user>saltybeagle</user>
+  <email>brett.bieber@gmail.com</email>
+  <active>yes</active>
+ </lead>
+ <date>2009-12-04</date>
+ <time>11:30:00</time>
+ <version>
+  <release>0.1.0</release>
+  <api>0.1.0</api>
+ </version>
+ <stability>
+  <release>alpha</release>
+  <api>alpha</api>
+ </stability>
+ <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
+ <notes>Package UNL_Peoplefinder release notes for version 0.1.0.
+
+Basic functionality is available. The default driver uses the
+web service, and no LDAP connection info is required.
+
+
+Package UNL_Peoplefinder API release notes for version 0.1.0.</notes>
+ <contents>
+  <dir name="/">
+   <dir name="data" baseinstalldir="/">
+    <file role="data" name="hr_tree.xml"/>
+   </dir>
+   <dir name="src" baseinstalldir="pear2">
+    <dir name="UNL">
+     <dir name="Peoplefinder">
+      <dir name="Department">
+       <file role="php" name="Search.php"/>
+      </dir>
+      <dir name="Driver">
+       <dir name="LDAP">
+        <file role="php" name="AdvancedFilter.php"/>
+        <file role="php" name="OUFilter.php"/>
+        <file role="php" name="StandardFilter.php"/>
+        <file role="php" name="TelephoneFilter.php"/>
+        <file role="php" name="Util.php"/>
+       </dir>
+       <file role="php" name="LDAP.php"/>
+       <file role="php" name="WebService.php"/>
+      </dir>
+      <dir name="Renderer">
+       <file role="php" name="HTML.php"/>
+       <file role="php" name="JSON.php"/>
+       <file role="php" name="Serialized.php"/>
+       <file role="php" name="vCard.php"/>
+       <file role="php" name="XML.php"/>
+      </dir>
+      <file role="php" name="Department.php"/>
+      <file role="php" name="DriverInterface.php"/>
+      <file role="php" name="Record.php"/>
+      <file role="php" name="RendererInterface.php"/>
+     </dir>
+     <file role="php" name="Peoplefinder.php"/>
+    </dir>
+   </dir>
+   <dir name="tests" baseinstalldir="/">
+    <file role="test" name="BrowserTest.php"/>
+    <file role="test" name="OUTest.php"/>
+    <file role="test" name="PeoplefinderTest.php"/>
+    <file role="test" name="testStudentWithNoLocalAddress.html"/>
+   </dir>
+   <dir name="www" baseinstalldir="/">
+    <dir name="departments">
+     <file role="www" name="index.php"/>
+    </dir>
+    <dir name="images">
+     <file role="www" name="btn_back.gif"/>
+     <file role="www" name="home.gif"/>
+     <file role="www" name="icon_question.gif"/>
+     <file role="www" name="mobile.gif"/>
+     <file role="www" name="person.gif"/>
+    </dir>
+    <file role="www" name="advancedForm.php"/>
+    <file role="www" name="apple-touch-icon.png"/>
+    <file role="www" name="config-sample.inc.php"/>
+    <file role="www" name="config.inc.php"/>
+    <file role="www" name="index.php"/>
+    <file role="www" name="peoplefinder.js"/>
+    <file role="www" name="peoplefinder_default.css"/>
+    <file role="www" name="README"/>
+    <file role="www" name="service.php"/>
+    <file role="www" name="small_devices.css"/>
+    <file role="www" name="standardForm.php"/>
+   </dir>
+  </dir>
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>5.2.0</min>
+   </php>
+   <pearinstaller>
+    <min>2.0.0a1</min>
+   </pearinstaller>
+  </required>
+ </dependencies>
+ <phprelease/>
+</package>

@@ -1,0 +1,5 @@
+The UNL faculty staff and student directory.
+
+The UNL_Peoplefinder package contains all the source code for the UNL directory.
+Additionally, this package provides an API which developers can use to retrieve
+directory information and perform searches.
