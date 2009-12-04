@@ -16,7 +16,7 @@ directory information and perform searches.
   <active>yes</active>
  </lead>
  <date>2009-12-04</date>
- <time>11:30:00</time>
+ <time>11:45:23</time>
  <version>
   <release>0.1.0</release>
   <api>0.1.0</api>
@@ -56,24 +56,24 @@ Package UNL_Peoplefinder API release notes for version 0.1.0.</notes>
    <file role="test" name="test/UNL_Peoplefinder/pear.unl.edu/PeoplefinderTest.php"/>
    <file role="test" name="test/UNL_Peoplefinder/pear.unl.edu/OUTest.php"/>
    <file role="test" name="test/UNL_Peoplefinder/pear.unl.edu/BrowserTest.php"/>
-   <file role="php" name="php/pear2/UNL/Peoplefinder/RendererInterface.php"/>
-   <file role="php" name="php/pear2/UNL/Peoplefinder/Renderer/XML.php"/>
-   <file role="php" name="php/pear2/UNL/Peoplefinder/Renderer/vCard.php"/>
-   <file role="php" name="php/pear2/UNL/Peoplefinder/Renderer/Serialized.php"/>
-   <file role="php" name="php/pear2/UNL/Peoplefinder/Renderer/JSON.php"/>
-   <file role="php" name="php/pear2/UNL/Peoplefinder/Renderer/HTML.php"/>
-   <file role="php" name="php/pear2/UNL/Peoplefinder/Record.php"/>
-   <file role="php" name="php/pear2/UNL/Peoplefinder/DriverInterface.php"/>
-   <file role="php" name="php/pear2/UNL/Peoplefinder/Driver/WebService.php"/>
-   <file role="php" name="php/pear2/UNL/Peoplefinder/Driver/LDAP/Util.php"/>
-   <file role="php" name="php/pear2/UNL/Peoplefinder/Driver/LDAP/TelephoneFilter.php"/>
-   <file role="php" name="php/pear2/UNL/Peoplefinder/Driver/LDAP/StandardFilter.php"/>
-   <file role="php" name="php/pear2/UNL/Peoplefinder/Driver/LDAP/OUFilter.php"/>
-   <file role="php" name="php/pear2/UNL/Peoplefinder/Driver/LDAP/AdvancedFilter.php"/>
-   <file role="php" name="php/pear2/UNL/Peoplefinder/Driver/LDAP.php"/>
-   <file role="php" name="php/pear2/UNL/Peoplefinder/Department/Search.php"/>
-   <file role="php" name="php/pear2/UNL/Peoplefinder/Department.php"/>
-   <file role="php" name="php/pear2/UNL/Peoplefinder.php"/>
+   <file role="php" name="php/UNL/Peoplefinder/RendererInterface.php"/>
+   <file role="php" name="php/UNL/Peoplefinder/Renderer/XML.php"/>
+   <file role="php" name="php/UNL/Peoplefinder/Renderer/vCard.php"/>
+   <file role="php" name="php/UNL/Peoplefinder/Renderer/Serialized.php"/>
+   <file role="php" name="php/UNL/Peoplefinder/Renderer/JSON.php"/>
+   <file role="php" name="php/UNL/Peoplefinder/Renderer/HTML.php"/>
+   <file role="php" name="php/UNL/Peoplefinder/Record.php"/>
+   <file role="php" name="php/UNL/Peoplefinder/DriverInterface.php"/>
+   <file role="php" name="php/UNL/Peoplefinder/Driver/WebService.php"/>
+   <file role="php" name="php/UNL/Peoplefinder/Driver/LDAP/Util.php"/>
+   <file role="php" name="php/UNL/Peoplefinder/Driver/LDAP/TelephoneFilter.php"/>
+   <file role="php" name="php/UNL/Peoplefinder/Driver/LDAP/StandardFilter.php"/>
+   <file role="php" name="php/UNL/Peoplefinder/Driver/LDAP/OUFilter.php"/>
+   <file role="php" name="php/UNL/Peoplefinder/Driver/LDAP/AdvancedFilter.php"/>
+   <file role="php" name="php/UNL/Peoplefinder/Driver/LDAP.php"/>
+   <file role="php" name="php/UNL/Peoplefinder/Department/Search.php"/>
+   <file role="php" name="php/UNL/Peoplefinder/Department.php"/>
+   <file role="php" name="php/UNL/Peoplefinder.php"/>
    <file role="data" name="data/UNL_Peoplefinder/pear.unl.edu/hr_tree.xml"/>
   </dir>
  </contents>
@@ -90,24 +90,24 @@ Package UNL_Peoplefinder API release notes for version 0.1.0.</notes>
  <phprelease>
   <filelist>
    <install name="data/UNL_Peoplefinder/pear.unl.edu/hr_tree.xml" as="pear.unl.edu/hr_tree.xml"/>
-   <install name="php/pear2/UNL/Peoplefinder.php" as="pear2/UNL/Peoplefinder.php"/>
-   <install name="php/pear2/UNL/Peoplefinder/Department.php" as="pear2/UNL/Peoplefinder/Department.php"/>
-   <install name="php/pear2/UNL/Peoplefinder/Department/Search.php" as="pear2/UNL/Peoplefinder/Department/Search.php"/>
-   <install name="php/pear2/UNL/Peoplefinder/Driver/LDAP.php" as="pear2/UNL/Peoplefinder/Driver/LDAP.php"/>
-   <install name="php/pear2/UNL/Peoplefinder/Driver/LDAP/AdvancedFilter.php" as="pear2/UNL/Peoplefinder/Driver/LDAP/AdvancedFilter.php"/>
-   <install name="php/pear2/UNL/Peoplefinder/Driver/LDAP/OUFilter.php" as="pear2/UNL/Peoplefinder/Driver/LDAP/OUFilter.php"/>
-   <install name="php/pear2/UNL/Peoplefinder/Driver/LDAP/StandardFilter.php" as="pear2/UNL/Peoplefinder/Driver/LDAP/StandardFilter.php"/>
-   <install name="php/pear2/UNL/Peoplefinder/Driver/LDAP/TelephoneFilter.php" as="pear2/UNL/Peoplefinder/Driver/LDAP/TelephoneFilter.php"/>
-   <install name="php/pear2/UNL/Peoplefinder/Driver/LDAP/Util.php" as="pear2/UNL/Peoplefinder/Driver/LDAP/Util.php"/>
-   <install name="php/pear2/UNL/Peoplefinder/Driver/WebService.php" as="pear2/UNL/Peoplefinder/Driver/WebService.php"/>
-   <install name="php/pear2/UNL/Peoplefinder/DriverInterface.php" as="pear2/UNL/Peoplefinder/DriverInterface.php"/>
-   <install name="php/pear2/UNL/Peoplefinder/Record.php" as="pear2/UNL/Peoplefinder/Record.php"/>
-   <install name="php/pear2/UNL/Peoplefinder/Renderer/HTML.php" as="pear2/UNL/Peoplefinder/Renderer/HTML.php"/>
-   <install name="php/pear2/UNL/Peoplefinder/Renderer/JSON.php" as="pear2/UNL/Peoplefinder/Renderer/JSON.php"/>
-   <install name="php/pear2/UNL/Peoplefinder/Renderer/Serialized.php" as="pear2/UNL/Peoplefinder/Renderer/Serialized.php"/>
-   <install name="php/pear2/UNL/Peoplefinder/Renderer/vCard.php" as="pear2/UNL/Peoplefinder/Renderer/vCard.php"/>
-   <install name="php/pear2/UNL/Peoplefinder/Renderer/XML.php" as="pear2/UNL/Peoplefinder/Renderer/XML.php"/>
-   <install name="php/pear2/UNL/Peoplefinder/RendererInterface.php" as="pear2/UNL/Peoplefinder/RendererInterface.php"/>
+   <install name="php/UNL/Peoplefinder.php" as="pear2/UNL/Peoplefinder.php"/>
+   <install name="php/UNL/Peoplefinder/Department.php" as="pear2/UNL/Peoplefinder/Department.php"/>
+   <install name="php/UNL/Peoplefinder/Department/Search.php" as="pear2/UNL/Peoplefinder/Department/Search.php"/>
+   <install name="php/UNL/Peoplefinder/Driver/LDAP.php" as="pear2/UNL/Peoplefinder/Driver/LDAP.php"/>
+   <install name="php/UNL/Peoplefinder/Driver/LDAP/AdvancedFilter.php" as="pear2/UNL/Peoplefinder/Driver/LDAP/AdvancedFilter.php"/>
+   <install name="php/UNL/Peoplefinder/Driver/LDAP/OUFilter.php" as="pear2/UNL/Peoplefinder/Driver/LDAP/OUFilter.php"/>
+   <install name="php/UNL/Peoplefinder/Driver/LDAP/StandardFilter.php" as="pear2/UNL/Peoplefinder/Driver/LDAP/StandardFilter.php"/>
+   <install name="php/UNL/Peoplefinder/Driver/LDAP/TelephoneFilter.php" as="pear2/UNL/Peoplefinder/Driver/LDAP/TelephoneFilter.php"/>
+   <install name="php/UNL/Peoplefinder/Driver/LDAP/Util.php" as="pear2/UNL/Peoplefinder/Driver/LDAP/Util.php"/>
+   <install name="php/UNL/Peoplefinder/Driver/WebService.php" as="pear2/UNL/Peoplefinder/Driver/WebService.php"/>
+   <install name="php/UNL/Peoplefinder/DriverInterface.php" as="pear2/UNL/Peoplefinder/DriverInterface.php"/>
+   <install name="php/UNL/Peoplefinder/Record.php" as="pear2/UNL/Peoplefinder/Record.php"/>
+   <install name="php/UNL/Peoplefinder/Renderer/HTML.php" as="pear2/UNL/Peoplefinder/Renderer/HTML.php"/>
+   <install name="php/UNL/Peoplefinder/Renderer/JSON.php" as="pear2/UNL/Peoplefinder/Renderer/JSON.php"/>
+   <install name="php/UNL/Peoplefinder/Renderer/Serialized.php" as="pear2/UNL/Peoplefinder/Renderer/Serialized.php"/>
+   <install name="php/UNL/Peoplefinder/Renderer/vCard.php" as="pear2/UNL/Peoplefinder/Renderer/vCard.php"/>
+   <install name="php/UNL/Peoplefinder/Renderer/XML.php" as="pear2/UNL/Peoplefinder/Renderer/XML.php"/>
+   <install name="php/UNL/Peoplefinder/RendererInterface.php" as="pear2/UNL/Peoplefinder/RendererInterface.php"/>
    <install name="test/UNL_Peoplefinder/pear.unl.edu/BrowserTest.php" as="pear.unl.edu/BrowserTest.php"/>
    <install name="test/UNL_Peoplefinder/pear.unl.edu/OUTest.php" as="pear.unl.edu/OUTest.php"/>
    <install name="test/UNL_Peoplefinder/pear.unl.edu/PeoplefinderTest.php" as="pear.unl.edu/PeoplefinderTest.php"/>
@@ -115,7 +115,6 @@ Package UNL_Peoplefinder API release notes for version 0.1.0.</notes>
    <install name="www/UNL_Peoplefinder/pear.unl.edu/advancedForm.php" as="pear.unl.edu/advancedForm.php"/>
    <install name="www/UNL_Peoplefinder/pear.unl.edu/apple-touch-icon.png" as="pear.unl.edu/apple-touch-icon.png"/>
    <install name="www/UNL_Peoplefinder/pear.unl.edu/config-sample.inc.php" as="pear.unl.edu/config-sample.inc.php"/>
-   <install name="www/UNL_Peoplefinder/pear.unl.edu/config.inc.php" as="pear.unl.edu/config.inc.php"/>
    <install name="www/UNL_Peoplefinder/pear.unl.edu/departments/departments/index.php" as="pear.unl.edu/departments/departments/index.php"/>
    <install name="www/UNL_Peoplefinder/pear.unl.edu/images/images/btn_back.gif" as="pear.unl.edu/images/images/btn_back.gif"/>
    <install name="www/UNL_Peoplefinder/pear.unl.edu/images/images/home.gif" as="pear.unl.edu/images/images/home.gif"/>
