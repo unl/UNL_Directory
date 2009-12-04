@@ -16,6 +16,9 @@ header('Access-Control-Allow-Methods: GET, OPTIONS');
 // The X-Requested-With header allows jQuery requests to go through
 header('Access-Control-Allow-Headers: X-Requested-With');
 
+// Set the ages for the access-control header to 20 days to improve speed/caching.
+header('Access-Control-Max-Age: 1728000');
+
 // Set expires header for 24 hours to improve speed caching.
 header('Expires: '.date('r', strtotime('tomorrow')));
 
