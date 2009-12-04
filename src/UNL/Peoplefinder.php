@@ -44,7 +44,7 @@ class UNL_Peoplefinder
     function __construct(UNL_Peoplefinder_DriverInterface $driver = null)
     {
         if (!$driver) {
-            $driver = new UNL_Peoplefinder_Driver_LDAP();
+            $driver = new UNL_Peoplefinder_Driver_WebService();
         }
         $this->driver = $driver;
     }
