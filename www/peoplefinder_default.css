@@ -94,8 +94,10 @@
 /** Individual Record */
 #maincontent .vcard{
     border:1px solid #d3d3d3;
-    
     margin-top:8px;
+}
+#maincontent .vcard .photo{
+    float:right;
 }
 #maincontent .vcard .fn{
     color:#900;
