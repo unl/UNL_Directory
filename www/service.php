@@ -83,7 +83,7 @@ if (isset($_GET['q']) && !empty($_GET['q'])) {
             $renderer->renderSearchResults($records);
         } else {
             if ($method) {
-                $records = $peepObj->getExactMatches($_GET['q']);
+                $records = $peepObj->$method($_GET['q']);
                 if (count($records) > 0) {
                     $renderer->renderSearchResults($records);
                 } else {
