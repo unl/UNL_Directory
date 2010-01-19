@@ -93,7 +93,7 @@ class UNL_Peoplefinder_Renderer_HTML
      */
     public function renderRecord(UNL_Peoplefinder_Record $r)
     {
-        echo "<div class='vcard'>\n";
+        echo "<div class='vcard {$r->eduPersonPrimaryAffiliation}'>\n";
         if (isset($r->mail)
             && ($r->eduPersonPrimaryAffiliation != 'student' || $this->displayStudentEmail==true)) {
             $displayEmail = true;
@@ -363,6 +363,7 @@ class UNL_Peoplefinder_Renderer_HTML
             } else {
                 $class = 'ppl_Sresult';
             }
+            $class .= ' '.$records[$i]->eduPersonPrimaryAffiliation;
             echo '<li class="'.$class.' '.$even_odd.'">';
             $this->renderListRecord($records[$i]);
             echo '</li>'.PHP_EOL;
