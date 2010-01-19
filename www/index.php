@@ -40,6 +40,12 @@ if (isset($_GET['q'])
     $page->head .= '<meta name="robots" content="NOINDEX, NOFOLLOW" />';
 }
 
+$page->breadcrumbs = '
+<ul>
+    <li><a href="http://www.unl.edu/" title="University of NebraskaÐLincoln">UNL</a></li>
+    <li>Peoplefinder</li>
+</ul>';
+
 $page->titlegraphic = '<h1>UNL Peoplefinder</h1>';
 
 ob_start();
@@ -56,7 +62,7 @@ if (isset($_GET['uid'])) {
     (@$_GET['adv'] == 'y')?$renderer->displayAdvancedForm():$renderer->displayStandardForm();
     if (isset($_GET['p'])) {
         // Display the next page
-        if ($_SESSION['lastResultCount']>0) {
+        if ($_SESSION['lastResultCount'] > 0) {
             // Old results have been set.
             $renderer->renderSearchResults($_SESSION['lastResult'], $_GET['p']*$_SESSION['lastResultDisplayed']);
         } else {
@@ -66,12 +72,14 @@ if (isset($_GET['uid'])) {
         if (isset($_GET['q']) && !empty($_GET['q'])) {
             // Basic query, build filter and display results
             if (strlen($_GET['q']) > 3) {
-                if (is_numeric(str_replace("-","",str_replace("(","",str_replace(")","",$_GET['q']))))) {
+                if (is_numeric(str_replace(array('-', '(', ')'),
+                                           array('',  '',  ''),
+                                           $_GET['q']))) {
                     $records = $peepObj->getPhoneMatches($_GET['q']);
                     $renderer->renderSearchResults($records);
                 } else {
                     $records = $peepObj->getExactMatches($_GET['q']);
-                    if (count($records) > 0) {
+                    if (count($records)) {
                         echo '<div class="cMatch">Exact matches:';
                         if (count($records) >= UNL_Peoplefinder::$resultLimit) {
                             echo "<p>Your search could only return a subset of the results. ";
@@ -101,8 +109,9 @@ if (isset($_GET['uid'])) {
                         }
                     }
                 }
+            } else {
+                echo "<p>Please enter more information or <a href='".$_SERVER['PHP_SELF']."?adv=y' title='Click here to perform a detailed Peoplefinder search'>try a Detailed Search.</a></p>";
             }
-            else    echo "<p>Please enter more information or <a href='".$_SERVER['PHP_SELF']."?adv=y' title='Click here to perform a detailed Peoplefinder search'>try a Detailed Search.</a></p>";
         } elseif (isset($_GET['sn']) || isset($_GET['cn'])) {
             // Advanced search
             $records = $peepObj->getAdvancedSearchMatches($_GET['sn'],$_GET['cn'],$_GET['eppa']);
@@ -117,21 +126,18 @@ if (isset($_GET['uid'])) {
     }
 }
 
-if (isset($_GET['q']) || isset($_GET['uid']) || isset($_GET['cn']) || isset($_GET['p'])) { ?>
-<div id="backButton"><a class="imagelink" href="<?php echo $myself; ?>" onclick="history.go(-1); return false;" title="Go back to search results"><img src="images/btn_back.gif" alt="Back" /></a></div>
-<?php }
 if (!isset($_GET['uid'])) { ?>
-     <a href="<?php echo $myself; ?>" title="Click here to run a basic People Finder search">Basic</a>&nbsp;|&nbsp;<a href="<?php echo $myself; ?>?adv=y" title="Click here to perform a detailed Peoplefinder search">Detailed</a>
-<?php }
+     <a href="<?php echo $myself; ?>" title="Click here to run a basic Peoplefinder search">Basic</a>&nbsp;|&nbsp;<a href="<?php echo $myself; ?>?adv=y" title="Click here to perform a detailed Peoplefinder search">Detailed</a>
+<?php
+}
 //show instructions if no results are showing
 if (!isset($_GET['uid']) && !isset($records)) {
     $renderer->displayInstructions((@$_GET['adv'] == 'y')?true:false);
-} ?>
-<div style="padding-top:3.5em;"> <a href="#" class="imagelink" onclick="document.getElementById('disclaimer').style.display='block'; return false;" title="More information about Peoplefinder"><img src="images/icon_question.gif" alt="Question Mark" width="15" height="14" /></a> UNL | Office of University Communications | <a href="http://www1.unl.edu/wdn/wiki/About_Peoplefinder" onclick="window.open(this.href); return false;">About Peoplefinder</a>
-    <div id="disclaimer" style="display:none;">
-        <p><strong>Information obtained from this directory may not be used to provide addresses for mailings to students, faculty or staff. Any solicitation of business, information, contributions or other response from individuals listed in this publication by mail, telephone or other means is forbidden.</strong></p>
-    </div>
-</div>
-<?php
+}
+
 $page->maincontentarea = ob_get_clean();
+
+$page->footercontent = 'UNL | Office of University Communications | <a href="http://www1.unl.edu/wdn/wiki/About_Peoplefinder" onclick="window.open(this.href); return false;">About Peoplefinder</a><br /><br />';
+$page->footercontent .= 'Information obtained from this directory may not be used to provide addresses for mailings to students, faculty or staff.<br />Any solicitation of business, information, contributions or other response from individuals listed in this publication by mail, telephone or other means is forbidden.<br />';
+
 echo $page;
