@@ -2,7 +2,7 @@
 require_once '../config.inc.php';
 
 UNL_Templates::$options['version'] = 3;
-$page = UNL_Templates::factory('Popup');
+$page = UNL_Templates::factory('Document');
 $page->doctitle = '<title>UNL | Officefinder</title>';
 $page->titlegraphic = '<h1>Officefinder</h1>';
 $page->addStylesheet('../peoplefinder_default.css');
@@ -37,7 +37,6 @@ $page->maincontentarea = <<<FORM
     <input style="margin-bottom:-7px;" name="submitbutton" type="image" src="/ucomm/templatedependents/templatecss/images/go.gif" value="Submit" id="submitbutton" />
     </div> 
 </form>
-<div id="backButton"><a class="imagelink" href="#" onclick="history.go(-1); return false;" title="Go back to search results"><img src="../images/btn_back.gif" alt="Back" /></a></div>
 
 FORM;
 
