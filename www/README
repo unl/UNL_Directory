@@ -1,8 +1,9 @@
 This code runs the website at http://peoplefinder.unl.edu/
 
 REQUIREMENTS:
-PHP 5 with the LDAP extension
-Connection credentials for the LDAP directory - contact John Thiltges
+PHP 5
+To query the LDAP, you'll need connection credentials - contact John Thiltges.
+Otherwise, use the UNL_Peoplefinder_Driver_WebService
 
 SETUP:
 To use, copy the config-sample.inc.php to config.inc.php and provide your LDAP

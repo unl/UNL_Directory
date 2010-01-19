@@ -2,11 +2,11 @@
     margin-bottom:20px;
 }
 #maincontent form#form1 input#q{
-       background:#eee;
-       border:1px solid #ccc;
-       border-color:#c3c3c3 #eee #eee #c3c3c3;
-        color:#333;
-      padding:1px 2px;
+    background:#eee;
+    border:1px solid #ccc;
+    border-color:#c3c3c3 #eee #eee #c3c3c3;
+    color:#333;
+    padding:1px 2px;
 }
 #maincontent ul{
     list-style:none;
