@@ -1,17 +1,13 @@
-function goBack() {
-	if (document.referrer.indexOf('/index.php')!=-1) {
-		history.go(-1);
-		return false;
-	}
-	else
-		return true;
-}
 
-function showHide(eleId) {
-	if (document.getElementById(eleId).style.display=='none') {
-		document.getElementById(eleId).style.display='block';
-	} else {
-		document.getElementById(eleId).style.display='none';
-	}
-	return false;
-}
+
+WDN.jQuery(document).ready(function() {
+	self.focus();
+	document.getElementById("form1").elements[0].focus();
+	WDN.loadJS('wdn/templates_3.0/scripts/toobar_peoplefinder.js');
+	WDN.jQuery('#form1').submit(function(eventObject) {
+		WDN.toolbar_peoplefinder.queuePFRequest('bieber', 'results');
+		eventObject.preventDefault();
+		eventObject.stopPropagation();
+		return false;
+	});
+});

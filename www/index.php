@@ -22,12 +22,7 @@ $page->head .= '
 <meta name="viewport" content="width = 320" />
 <link rel="stylesheet" type="text/css" media="screen" href="peoplefinder_default.css" />
 <link media="only screen and (max-device-width: 480px)" href="small_devices.css" type="text/css" rel="stylesheet" />
-<script type="text/javascript">
-WDN.jQuery(document).ready(function() {
-    self.focus();
-    document.getElementById("form1").elements[0].focus();
-});
-</script>
+<script type="text/javascript" src="'.UNL_PEOPLEFINDER_URI.'peoplefinder.js"></script>
 ';
 
 if (isset($_GET['q']) 
@@ -123,13 +118,19 @@ if (isset($_GET['uid'])) {
     }
 }
 
-if (!isset($_GET['uid'])) { ?>
-     <a href="<?php echo $myself; ?>" title="Click here to run a basic Peoplefinder search">Basic</a>&nbsp;|&nbsp;<a href="<?php echo $myself; ?>?adv=y" title="Click here to perform a detailed Peoplefinder search">Detailed</a>
-<?php
-}
 //show instructions if no results are showing
 if (!isset($_GET['uid']) && !isset($records)) {
+    echo '<div class="two_col left" id="results">';
     $renderer->displayInstructions((@$_GET['adv'] == 'y')?true:false);
+    echo '</div>
+        <div class="two_col right" id="pfShowRecord"></div>';
+}
+
+if (!isset($_GET['uid'])) { ?>
+     <div class="clear">
+        <a href="<?php echo $myself; ?>" title="Click here to run a basic Peoplefinder search">Basic</a>&nbsp;|&nbsp;<a href="<?php echo $myself; ?>?adv=y" title="Click here to perform a detailed Peoplefinder search">Detailed</a>
+    </div>
+<?php
 }
 
 $page->maincontentarea = ob_get_clean();
