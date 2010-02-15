@@ -16,10 +16,7 @@ class UNL_Common
 
     static public function getDataDir()
     {
-        if ('/Users/bbieber/Documents/workspace/peoplefinder/lib/data' == '@@DATA'.'_DIR@@') {
-            return dirname(__FILE__) . '/data/';
-        }
-        return '/Users/bbieber/Documents/workspace/peoplefinder/lib/data/UNL_Common/data/';
+        return dirname(dirname(dirname(__FILE__))).'/data/UNL_Common/UNL/data/';
     }
     
     static protected function __connect()
