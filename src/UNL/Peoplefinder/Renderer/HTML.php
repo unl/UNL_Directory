@@ -338,7 +338,7 @@ class UNL_Peoplefinder_Renderer_HTML
         if (isset($r->telephoneNumber)) echo '<div class="tel">'.$this->formatPhone($r->telephoneNumber).'</div>'.PHP_EOL;
         
 		echo '</div>';
-        echo $this->getUIDLink($r->uid, 'contact info', $this->uid_onclick, 'cInfo');
+        echo $this->getUIDLink($r->uid, 'Contact '.$r->givenName, $this->uid_onclick, 'cInfo');
 		if ($this->choose_uid) {
 		    echo '<div class="pfchooser"><a href="#" onclick="return pfCatchUID(\''.$r->uid.'\');">Choose this person</a></div>'.PHP_EOL;
 		}
