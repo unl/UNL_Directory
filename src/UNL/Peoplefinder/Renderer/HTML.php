@@ -367,7 +367,9 @@ class UNL_Peoplefinder_Renderer_HTML
             }
             $class .= ' '.$records[$i]->eduPersonPrimaryAffiliation;
             echo '<li class="'.$class.' '.$even_odd.'">';
+            echo '<div class="overflow">';
             $this->renderListRecord($records[$i]);
+            echo '</div>';
             echo '</li>'.PHP_EOL;
         }
         echo '</ul>';

@@ -152,9 +152,17 @@
 	border-bottom: 1px solid #d0cece;
 	border-top: 1px solid #e6e6e6;
 	width:100%;
-	padding: 12px 0;
+	padding: 5px 0px;
 	display:block;
+	cursor:pointer;
+}
+#maincontent ul.pfResult li div.overflow {
+	margin-right:-16px;
 	min-height:45px;
+	padding: 7px 0px;
+}
+#maincontent ul.pfResult li:hover div.overflow {
+	background:url('images/selectedBG.png') no-repeat left;
 }
 #maincontent ul.pfResult li:first-child {
 	border-top:none;
@@ -170,11 +178,12 @@
 	font-weight:bold;
 	color:#464545 !important;	
 }
-.cInfo {float:right;}
+.cInfo {float:right;margin-right:16px;}
 
 /* For testing, these should now be found in your /wdn folder */
 img.profile_pic {
 	padding:3px 3px 6px 3px;
+	margin-left:12px;
 }
 img.profile_pic.small {
 	background:url('/wdn/templates_3.0/css/header/images/wdn_idmProfileSmall.png') no-repeat top left;
