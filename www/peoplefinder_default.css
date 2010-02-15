@@ -145,6 +145,8 @@
 	padding:0px;
 	list-style:none;
 	border-bottom: 1px solid #e6e6e6;
+	border-top: 2px dotted #e6e6e6;
+	margin-top:20px;
 }
 #maincontent ul.pfResult li {
 	border-bottom: 1px solid #d0cece;
