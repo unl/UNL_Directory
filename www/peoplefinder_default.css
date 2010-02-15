@@ -1,3 +1,4 @@
+/*
 #maincontent form#form1 {
     margin-bottom:20px;
 }
@@ -90,8 +91,9 @@
     font-size:0.75em;
     margin-top:0.2em;
 }
-
+*/
 /** Individual Record */
+/*
 #maincontent .vcard{
     border:1px solid #d3d3d3;
     margin-top:8px;
@@ -136,4 +138,42 @@
 #maincontent span.email {
     display:block;
     line-height:1.5em
+}
+*/
+#maincontent ul.pfResult {
+	width:460px;
+	padding:0px;
+	list-style:none;
+	border-bottom: 1px solid #e6e6e6;
+}
+#maincontent ul.pfResult li {
+	border-bottom: 1px solid #d0cece;
+	border-top: 1px solid #e6e6e6;
+	width:100%;
+	padding: 12px 0;
+	display:block;
+	min-height:45px;
+}
+#maincontent ul.pfResult li:first-child {
+	border-top:none;
+}
+.eppa, .organization-unit, .tel {display:none;} /* @todo hiding for now, perhaps these need to be pulled out of HTML? */
+
+.planetred_profile, .recordDetails {float:left;}
+.recordDetails {
+	margin-left:20px;
+}
+.fn a {
+	font-size:1.4em;
+	font-weight:bold;
+	color:#464545 !important;	
+}
+.cInfo {float:right;}
+
+/* For testing, these should now be found in your /wdn folder */
+img.profile_pic {
+	padding:3px 3px 6px 3px;
+}
+img.profile_pic.small {
+	background:url('/wdn/templates_3.0/css/header/images/wdn_idmProfileSmall.png') no-repeat top left;
 }

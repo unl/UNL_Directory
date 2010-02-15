@@ -329,13 +329,15 @@ class UNL_Peoplefinder_Renderer_HTML
                 $linktext .= ' "'.$r->eduPersonNickname.'"';
             }
         }
-        
+        echo '<a class="planetred_profile" href="http://planetred.unl.edu/pg/profile/unl_'.$r->uid.'" title="Planet Red Profile for '.$r->cn.'"><img class="profile_pic small" src="http://planetred.unl.edu/mod/profile/icondirect.php?username=unl_'.$r->uid.'&amp;size=small"  alt="Photo of '.$r->displayName.'" /></a>';
+        echo '<div class="recordDetails">';
         echo '<div class="fn">'.$this->getUIDLink($r->uid, $linktext, $this->uid_onclick).'</div>'.PHP_EOL;
         if (isset($r->eduPersonPrimaryAffiliation)) echo '<div class="eppa">('.$r->eduPersonPrimaryAffiliation.')</div>'.PHP_EOL;
         if (isset($r->unlHRPrimaryDepartment)) echo '<div class="organization-unit">'.$r->unlHRPrimaryDepartment.'</div>'.PHP_EOL;
         if (isset($r->title)) echo '<div class="title">'.$r->title.'</div>'.PHP_EOL;
         if (isset($r->telephoneNumber)) echo '<div class="tel">'.$this->formatPhone($r->telephoneNumber).'</div>'.PHP_EOL;
         
+		echo '</div>';
         echo $this->getUIDLink($r->uid, 'contact info', $this->uid_onclick, 'cInfo');
 		if ($this->choose_uid) {
 		    echo '<div class="pfchooser"><a href="#" onclick="return pfCatchUID(\''.$r->uid.'\');">Choose this person</a></div>'.PHP_EOL;
@@ -355,7 +357,7 @@ class UNL_Peoplefinder_Renderer_HTML
             $navlinks = '';
         }
         echo "<div class='result_head'>Results ".($start+1)." - $end out of ".count($records).':'.$navlinks.'</div>'.PHP_EOL;
-        echo '<ul>';
+        echo '<ul class="pfResult">'; //I need to put a class for CSS, however when we switch to chuncked results (student, staff, faculty) this @todo will need revisted
         for ($i = $start; $i<$end; $i++) {
             $even_odd = ($i % 2) ? '' : 'alt';
             if ($records[$i]->ou == 'org') {
