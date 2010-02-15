@@ -110,7 +110,7 @@ class UNL_Peoplefinder_Renderer_HTML
         if ($displayEmail && isset($r->unlEmailAlias)) echo "</a>\n";
         if (!empty($r->eduPersonPrimaryAffiliation)) echo '<span class="eppa">('.$r->eduPersonPrimaryAffiliation.')</span>'.PHP_EOL;
         echo '<div class="vcardInfo">'.PHP_EOL;
-        echo '<a class="planetred_profile" href="http://planetred.unl.edu/pg/profile/unl_'.$r->uid.'" title="Planet Red Profile for '.$r->cn.'"><img class="photo frame" src="http://planetred.unl.edu/mod/profile/icondirect.php?username=unl_'.$r->uid.'&amp;size=medium"  alt="Photo of '.$r->displayName.'" /></a>';
+        echo '<a class="planetred_profile" href="http://planetred.unl.edu/pg/profile/unl_'.str_replace("-", "_", $r->uid).'" title="Planet Red Profile for '.$r->cn.'"><img class="photo frame" src="http://planetred.unl.edu/mod/profile/icondirect.php?username=unl_'.str_replace("-", "_", $r->uid).'&amp;size=medium"  alt="Photo of '.$r->displayName.'" /></a>';
         if (isset($r->unlSISClassLevel)) {
             switch ($r->unlSISClassLevel) {
                 case 'FR':
@@ -329,7 +329,7 @@ class UNL_Peoplefinder_Renderer_HTML
                 $linktext .= ' "'.$r->eduPersonNickname.'"';
             }
         }
-        echo '<a class="planetred_profile" href="http://planetred.unl.edu/pg/profile/unl_'.$r->uid.'" title="Planet Red Profile for '.$r->cn.'"><img class="profile_pic small" src="http://planetred.unl.edu/mod/profile/icondirect.php?username=unl_'.$r->uid.'&amp;size=small"  alt="Photo of '.$r->displayName.'" /></a>';
+        echo '<a class="planetred_profile" href="http://planetred.unl.edu/pg/profile/unl_'.str_replace("-", "_", $r->uid).'" title="Planet Red Profile for '.$r->cn.'"><img class="profile_pic small" src="http://planetred.unl.edu/mod/profile/icondirect.php?username=unl_'.str_replace("-", "_", $r->uid).'&amp;size=small"  alt="Photo of '.$r->displayName.'" /></a>';
         echo '<div class="recordDetails">';
         echo '<div class="fn">'.$this->getUIDLink($r->uid, $linktext, $this->uid_onclick).'</div>'.PHP_EOL;
         if (isset($r->eduPersonPrimaryAffiliation)) echo '<div class="eppa">('.$r->eduPersonPrimaryAffiliation.')</div>'.PHP_EOL;
