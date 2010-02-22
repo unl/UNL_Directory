@@ -15,8 +15,8 @@ directory information and perform searches.
   <email>brett.bieber@gmail.com</email>
   <active>yes</active>
  </lead>
- <date>2009-12-04</date>
- <time>11:45:23</time>
+ <date>2010-01-27</date>
+ <time>10:10:24</time>
  <version>
   <release>0.1.0</release>
   <api>0.1.0</api>
@@ -37,6 +37,12 @@ Package UNL_Peoplefinder API release notes for version 0.1.0.</notes>
   <dir name="/">
    <dir name="data" baseinstalldir="/">
     <file role="data" name="hr_tree.xml"/>
+   </dir>
+   <dir name="examples">
+    <file role="doc" name="config.inc.php"/>
+    <file role="doc" name="getExactMatches.php"/>
+    <file role="doc" name="getLikeMatches.php"/>
+    <file role="doc" name="getUID.php"/>
    </dir>
    <dir name="src" baseinstalldir="/">
     <dir name="UNL">
@@ -81,7 +87,6 @@ Package UNL_Peoplefinder API release notes for version 0.1.0.</notes>
      <file role="www" name="index.php"/>
     </dir>
     <dir name="images">
-     <file role="www" name="btn_back.gif"/>
      <file role="www" name="home.gif"/>
      <file role="www" name="icon_question.gif"/>
      <file role="www" name="mobile.gif"/>
@@ -90,6 +95,7 @@ Package UNL_Peoplefinder API release notes for version 0.1.0.</notes>
     <file role="www" name="advancedForm.php"/>
     <file role="www" name="apple-touch-icon.png"/>
     <file role="www" name="config-sample.inc.php"/>
+    <file role="www" name="config.inc.php"/>
     <file role="www" name="index.php"/>
     <file role="www" name="peoplefinder.js"/>
     <file role="www" name="peoplefinder_default.css"/>

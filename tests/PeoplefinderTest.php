@@ -117,9 +117,9 @@ class PeoplefinderTest extends PHPUnit_Framework_TestCase {
         $p = new UNL_Peoplefinder();
         $r = $p->getLikeMatches('bieber');
         $this->assertEquals(7, sizeof($r));
-        $r = $p->getLikeMatches('bieber', array($r[0]), 'Testing exclusion of records did not work.');
+        $r = $p->getLikeMatches('bieber', null, array($r[0]), 'Testing exclusion of records did not work.');
         $this->assertEquals(5, sizeof($r));
-        $r = $p->getLikeMatches('bieber', $r, 'Testing exclusion of records did not work.');
+        $r = $p->getLikeMatches('bieber', null, $r, 'Testing exclusion of records did not work.');
         $this->assertEquals(1, sizeof($r));
     }
 

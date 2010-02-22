@@ -178,13 +178,14 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
     /**
      * Get records which match the query exactly.
      *
-     * @param string $q Search string.
+     * @param string $query       Search string.
+     * @param string $affiliation eduPersonAffiliation, eg staff/faculty/student
      * 
      * @return array(UNL_Peoplefinder_Record)
      */
-    public function getExactMatches($q)
+    public function getExactMatches($query, $affiliation = null)
     {
-        $filter = new UNL_Peoplefinder_Driver_LDAP_StandardFilter($q, '&', false);
+        $filter = new UNL_Peoplefinder_Driver_LDAP_StandardFilter($query, '&', false);
         $this->query($filter->__toString(), $this->detailAttributes);
         return $this->getRecordsFromResults();
     }
@@ -225,15 +226,16 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
     /**
      * Find matches similar to the query given
      *
-     * @param string $q                Search query
+     * @param string $query            Search query
+     * @param string $affiliation      eduPersonAffiliation, eg staff/faculty/student
      * @param array  $excluded_records Array of records to exclude.
      * 
      * @return array(UNL_Peoplefinder_Record)
      */
-    public function getLikeMatches($q, $excluded_records = array())
+    public function getLikeMatches($query, $affiliation = null, $excluded_records = array())
     {
         // Build filter excluding those displayed above
-        $filter = new UNL_Peoplefinder_Driver_LDAP_StandardFilter($q, '&', true);
+        $filter = new UNL_Peoplefinder_Driver_LDAP_StandardFilter($query, '&', true);
         $filter->excludeRecords($excluded_records);
         $this->query($filter->__toString(), $this->detailAttributes);
         return $this->getRecordsFromResults();
@@ -242,13 +244,14 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
     /**
      * Get an array of records which matche by the phone number.
      *
-     * @param string $q EG: 472-1598
+     * @param string $q           EG: 472-1598
+     * @param string $affiliation eduPersonAffiliation, eg staff/faculty/student
      * 
      * @return array(UNL_Peoplefinder_Record)
      */
-    public function getPhoneMatches($q)
+    public function getPhoneMatches($query, $affiliation = null)
     {
-        $filter = new UNL_Peoplefinder_Driver_LDAP_TelephoneFilter($q);
+        $filter = new UNL_Peoplefinder_Driver_LDAP_TelephoneFilter($query);
         $this->query($filter->__toString(), $this->detailAttributes);
         return $this->getRecordsFromResults();
     }

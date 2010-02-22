@@ -3,7 +3,7 @@ class UNL_Peoplefinder_Driver_WebService implements UNL_Peoplefinder_DriverInter
 {
     public $service_url = 'http://peoplefinder.unl.edu/service.php';
     
-    function getExactMatches($query)
+    function getExactMatches($query, $affiliation = null)
     {
         $results = file_get_contents($this->service_url.'?q='.urlencode($query).'&format=php&method=getExactMatches');
         if ($results) {
@@ -15,7 +15,7 @@ class UNL_Peoplefinder_Driver_WebService implements UNL_Peoplefinder_DriverInter
     {
         throw new Exception('Not implemented yet');
     }
-    function getLikeMatches($query)
+    function getLikeMatches($query, $affiliation = null)
     {
         $results = file_get_contents($this->service_url.'?q='.urlencode($query).'&format=php&method=getLikeMatches');
         if ($results) {
@@ -23,7 +23,7 @@ class UNL_Peoplefinder_Driver_WebService implements UNL_Peoplefinder_DriverInter
         }
         return $results;
     }
-    function getPhoneMatches($query)
+    function getPhoneMatches($query, $affiliation = null)
     {
         throw new Exception('Not implemented yet');
     }

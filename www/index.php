@@ -87,7 +87,7 @@ if (isset($_GET['uid'])) {
                     if (count($records) < UNL_Peoplefinder::$displayResultLimit) {
                         // More room to display LIKE results
                         UNL_Peoplefinder::$displayResultLimit = UNL_Peoplefinder::$displayResultLimit - count($records);
-                        $records = $peepObj->getLikeMatches($_GET['q'], $records);
+                        $records = $peepObj->getLikeMatches($_GET['q'], null, $records);
                         if (count($records) > 0) {
                             echo '<div class="cMatch">Possible matches:';
                             if (count($records) >= UNL_Peoplefinder::$resultLimit) {
