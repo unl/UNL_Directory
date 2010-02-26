@@ -110,7 +110,7 @@ class UNL_Peoplefinder_Renderer_HTML
         if ($displayEmail && isset($r->unlEmailAlias)) echo "</a>\n";
         if (!empty($r->eduPersonPrimaryAffiliation)) echo '<span class="eppa">('.$r->eduPersonPrimaryAffiliation.')</span>'.PHP_EOL;
         echo '<div class="vcardInfo">'.PHP_EOL;
-        echo '<a class="planetred_profile" href="http://planetred.unl.edu/pg/profile/unl_'.str_replace("-", "_", $r->uid).'" title="Planet Red Profile for '.$r->cn.'"><img class="photo frame" src="http://planetred.unl.edu/mod/profile/icondirect.php?username=unl_'.str_replace("-", "_", $r->uid).'&amp;size=medium"  alt="Photo of '.$r->displayName.'" /></a>';
+        echo '<a class="planetred_profile" href="http://planetred.unl.edu/pg/profile/unl_'.str_replace("-", "_", $r->uid).'" title="Planet Red Profile for '.$r->cn.'"><img class="photo frame" src="'.htmlspecialchars($r->getImageURL()).'"  alt="Photo of '.$r->displayName.'" /></a>';
         if (isset($r->unlSISClassLevel)) {
             switch ($r->unlSISClassLevel) {
                 case 'FR':
@@ -189,7 +189,7 @@ class UNL_Peoplefinder_Renderer_HTML
         if ($displayEmail) {
             echo "<span class='email'><a class='email' href='mailto:{$r->mail}'>{$r->mail}</a></span>\n";
         }
-        $linktext = '<img src="/ucomm/templatedependents/templatecss/images/mimetypes/text-vcard.gif" alt="vCard" /> <span class="caption">vCard</span>'.PHP_EOL;
+        $linktext = '<img src="/wdn/templates_3.0/css/content/images/mimetypes/text-vcard.png" alt="vCard" /> <span class="caption">vCard</span>'.PHP_EOL;
         echo $this->getVCardLink($r->uid, $linktext, null, 'Download V-Card for '.$r->givenName.' '.$r->sn);
         echo '</div>'.PHP_EOL.'</div>'.PHP_EOL;
     }
