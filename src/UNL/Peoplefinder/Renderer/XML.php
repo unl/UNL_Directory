@@ -33,8 +33,12 @@ class UNL_Peoplefinder_Renderer_XML
         $this->sendHeaders();
         echo '<person>';
         foreach (get_object_vars($r) as $key=>$val) {
-            $val = htmlspecialchars($val);
-            echo "<$key>{$val}</$key>\n";
+            if ($val) {
+                foreach ($val as $value) {
+                    $value = htmlspecialchars($value);
+                    echo "<$key>{$value}</$key>\n";
+                }
+            }
         }
         echo '</person>'.PHP_EOL;
     }

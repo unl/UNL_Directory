@@ -49,7 +49,7 @@ class UNL_Peoplefinder_Record
         $r = new self();
         foreach (get_object_vars($r) as $var=>$val) {
             if (isset($entry[strtolower($var)], $entry[strtolower($var)][0])) {
-                $r->$var = $entry[strtolower($var)][0];
+                $r->$var = new UNL_LDAP_Entry_Attribute($entry[strtolower($var)]);
             }
         }
         return $r;
