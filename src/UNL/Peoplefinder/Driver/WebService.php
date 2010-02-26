@@ -5,7 +5,7 @@ class UNL_Peoplefinder_Driver_WebService implements UNL_Peoplefinder_DriverInter
     
     function getExactMatches($query, $affiliation = null)
     {
-        $results = file_get_contents($this->service_url.'?q='.urlencode($query).'&format=php&method=getExactMatches');
+        $results = file_get_contents($this->service_url.'?q='.urlencode($query).'&format=php&affiliation='.urlencode($affiliation).'&method=getExactMatches');
         if ($results) {
             $results = unserialize($results);
         }
@@ -17,7 +17,7 @@ class UNL_Peoplefinder_Driver_WebService implements UNL_Peoplefinder_DriverInter
     }
     function getLikeMatches($query, $affiliation = null)
     {
-        $results = file_get_contents($this->service_url.'?q='.urlencode($query).'&format=php&method=getLikeMatches');
+        $results = file_get_contents($this->service_url.'?q='.urlencode($query).'&format=php&affiliation='.urlencode($affiliation).'&method=getLikeMatches');
         if ($results) {
             $results = unserialize($results);
         }
@@ -25,7 +25,11 @@ class UNL_Peoplefinder_Driver_WebService implements UNL_Peoplefinder_DriverInter
     }
     function getPhoneMatches($query, $affiliation = null)
     {
-        throw new Exception('Not implemented yet');
+        $results = file_get_contents($this->service_url.'?q='.urlencode($query).'&format=php&affiliation='.urlencode($affiliation).'&method=getPhoneMatches');
+        if ($results) {
+            $results = unserialize($results);
+        }
+        return $results;
     }
     
     function getUID($uid)

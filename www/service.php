@@ -73,24 +73,35 @@ if (isset($_GET['method'])) {
     }
 }
 
+$affiliation = null;
+if (isset($_GET['affiliation'])) {
+    switch($_GET['affiliation']) {
+        case 'faculty':
+        case 'staff':
+        case 'student':
+            $affiliation = $_GET['affiliation'];
+            break;
+    }
+}
+
 $renderer_class = 'UNL_Peoplefinder_Renderer_'.$renderer_class;
 $renderer = new $renderer_class($renderer_options);
 if (isset($_GET['q']) && !empty($_GET['q'])) {
     // Basic query, build filter and display results
     if (strlen($_GET['q']) > 3) {
         if (is_numeric(str_replace('-','',str_replace('(','',str_replace(')','',$_GET['q']))))) {
-            $records = $peepObj->getPhoneMatches($_GET['q']);
+            $records = $peepObj->getPhoneMatches($_GET['q'], $affiliation);
             $renderer->renderSearchResults($records);
         } else {
             if ($method) {
-                $records = $peepObj->$method($_GET['q']);
+                $records = $peepObj->$method($_GET['q'], $affiliation);
                 if (count($records) > 0) {
                     $renderer->renderSearchResults($records);
                 } else {
                     $renderer->renderError();
                 }
             } else {
-                $records = $peepObj->getExactMatches($_GET['q']);
+                $records = $peepObj->getExactMatches($_GET['q'], $affiliation);
                 if (count($records) > 0) {
                     if ($renderer instanceof UNL_Peoplefinder_Renderer_HTML) {
                         echo "<div class='cMatch'>Exact matches:</div>\n";
@@ -104,7 +115,7 @@ if (isset($_GET['q']) && !empty($_GET['q'])) {
                 if (count($records) < UNL_Peoplefinder::$displayResultLimit) {
                     // More room to display LIKE results
                     UNL_Peoplefinder::$displayResultLimit = UNL_Peoplefinder::$displayResultLimit - count($records);
-                    $records = $peepObj->getLikeMatches($_GET['q'], null, $records);
+                    $records = $peepObj->getLikeMatches($_GET['q'], $affiliation, $records);
                     if (count($records) > 0) {
                         if ($renderer instanceof UNL_Peoplefinder_Renderer_HTML) {
                            echo "<div class='cMatch'>Possible matches:</div>\n";
