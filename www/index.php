@@ -119,12 +119,17 @@ if (isset($_GET['uid'])) {
                     
                     foreach(array('records'=>'by_affiliation', 'like_records'=>'like_by_affiliation') as $records_var=>$affiliation_var) {
                         foreach ($$records_var as $record) {
-                            if ($record->ou == 'org') {
-                                ${$affiliation_var}['organizations'][] = $record;
-                                continue;
+                            foreach ($record->ou as $ou) {
+                                if ($ou == 'org') {
+                                    ${$affiliation_var}['organizations'][] = $record;
+                                    break;
+                                }
                             }
-                            foreach ($record->eduPersonAffiliation as $affiliation) {
-                                ${$affiliation_var}[$affiliation][] = $record;
+
+                            if (isset($record->eduPersonAffiliation)) {
+                                foreach ($record->eduPersonAffiliation as $affiliation) {
+                                    ${$affiliation_var}[$affiliation][] = $record;
+                                }
                             }
                         }
                     }
