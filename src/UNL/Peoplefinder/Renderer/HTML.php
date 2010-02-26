@@ -148,25 +148,20 @@ class UNL_Peoplefinder_Renderer_HTML
         }
         
         if (isset($r->postalAddress)) {
-            if (strpos($r->postalAddress,'UNL')!= -1 || strpos($r->postalAddress,'UNO')!= -1) {
-                $address = $r->formatPostalAddress();
+            $address = $r->formatPostalAddress();
 
-                if( strpos($address['postal-code'],'68588') == 0 )
-                {
-                    $address['street-address'] = $this->replaceBuildingCode($address['street-address']);
-                }
-
-                echo '<div class="adr workAdr">
-                     <span class="type">Work</span>
-                     <span class="street-address">'. $address['street-address'] . '</span>
-                     <span class="locality">' . $address['locality'] . '</span>
-                     <span class="region">' . $address['region'] . '</span>
-                     <span class="postal-code">' . $address['postal-code'] . '</span>
-                     <div class="country-name">USA</div>
-                    </div>'.PHP_EOL;
-            } else {
-                echo "<span class='adr'>{$r->postalAddress}</span>\n";
+            if (strpos($address['postal-code'], '68588') == 0) {
+                $address['street-address'] = $this->replaceBuildingCode($address['street-address']);
             }
+
+            echo '<div class="adr workAdr">
+                 <span class="type">Work</span>
+                 <span class="street-address">'. $address['street-address'] . '</span>
+                 <span class="locality">' . $address['locality'] . '</span>
+                 <span class="region">' . $address['region'] . '</span>
+                 <span class="postal-code">' . $address['postal-code'] . '</span>
+                 <div class="country-name">USA</div>
+                </div>'.PHP_EOL;
         }
         
         if (strpos($_SERVER['HTTP_USER_AGENT'], "iPhone") === false) {
