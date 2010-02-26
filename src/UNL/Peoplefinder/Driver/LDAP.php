@@ -6,7 +6,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
      * 
      * @param string
      */
-    static public $ldapServer = 'ldap.unl.edu ldap-backup.unl.edu';
+    static public $ldapServer = 'ldap-test.unl.edu';
     
     /**
      * LDAP Connection bind distinguised name
@@ -40,6 +40,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
     public $listAttributes = array(
         'cn',
         'eduPersonNickname',
+        'eduPersonAffiliation',
         'eduPersonPrimaryAffiliation',
         'givenName',
         'sn',
@@ -54,6 +55,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
     public $detailAttributes = array(
         'ou',
         'cn',
+    	'eduPersonAffiliation',
         'eduPersonNickname',
         'eduPersonPrimaryAffiliation',
         'givenName',

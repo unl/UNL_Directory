@@ -100,7 +100,7 @@ class UNL_Peoplefinder_Renderer_HTML
         } else {
             $displayEmail = false;
         }
-        if ($displayEmail && isset($r->unlEmailAlias)) echo "<a class='email' href='mailto:{$r->unlEmailAlias}@unl.edu'>";
+        if ($displayEmail && isset($r->mail)) echo "<a class='email' href='mailto:{$r->mail}'>";
         if ($r->ou == 'org') {
             echo '<span class="cn">'.$r->cn.'</span>'.PHP_EOL;
         } else {
@@ -134,16 +134,6 @@ class UNL_Peoplefinder_Renderer_HTML
             echo '<span class="title">'.$class." ".$this->formatMajor($r->unlSISMajor).'&ndash;'.$this->formatCollege($r->unlSISCollege).'</span>';
         }
         
-//        if (isset($r->unlSISLocalAddr1)) {
-//            $localaddr = array($r->unlSISLocalAddr1, $r->unlSISLocalAddr2, $r->unlSISLocalCity, $r->unlSISLocalState, $r->unlSISLocalZip);
-//            $this->renderAddress($localaddr, 'Local', 'workAdr');
-//        }
-//        
-//        if (isset($r->unlSISPermAddr1)) {
-//            $permaddr  = array($r->unlSISPermAddr1, $r->unlSISPermAddr2, $r->unlSISPermCity, $r->unlSISPermState, $r->unlSISPermZip);
-//            $this->renderAddress($permaddr, 'Home', 'homeAdr');
-//        }
-        
         if (isset($r->title)) {
             echo "<span class='title'>{$r->title}</span>\n";
         }
@@ -159,7 +149,7 @@ class UNL_Peoplefinder_Renderer_HTML
         
         if (isset($r->postalAddress)) {
             if (strpos($r->postalAddress,'UNL')!= -1 || strpos($r->postalAddress,'UNO')!= -1) {
-                $address = $r->formatpostalAddress();
+                $address = $r->formatPostalAddress();
 
                 if( strpos($address['postal-code'],'68588') == 0 )
                 {
@@ -202,36 +192,11 @@ class UNL_Peoplefinder_Renderer_HTML
         }
         
         if ($displayEmail) {
-            if ($r->unlEmailAlias != 'president') {
-                $email = $r->unlEmailAlias.'@unl.edu';
-            } else {
-                $email = $r->unlEmailAlias.'@nebraska.edu';
-            }
-            echo "<span class='email'><a class='email' href='mailto:$email'>$email</a></span>\n";
-            if ($this->trustedIP===true) echo "<span class='email delivery'>Delivery Address: {$r->mail}</span>\n";
+            echo "<span class='email'><a class='email' href='mailto:{$r->mail}'>{$r->mail}</a></span>\n";
         }
         $linktext = '<img src="/ucomm/templatedependents/templatecss/images/mimetypes/text-vcard.gif" alt="vCard" /> <span class="caption">vCard</span>'.PHP_EOL;
         echo $this->getVCardLink($r->uid, $linktext, null, 'Download V-Card for '.$r->givenName.' '.$r->sn);
         echo '</div>'.PHP_EOL.'</div>'.PHP_EOL;
-    }
-    
-    public function renderAddress($address, $type, $class = null)
-    {
-        if (!isset($class)) {
-            $class = '';
-        }
-        $addr = '
-        <div class="adr '.$class.'">
-         <span class="type">'.$type.'</span>
-         <span class="street-address">'.$address[0].'</span>
-         <span class="locality">'.$address[2].'</span>
-         <span class="region">'.$address[3].'</span>
-         <span class="postal-code">'.$address[4].'</span>';
-        if (isset($address[5])) {
-            $addr .= '<div class="country-name">'.$address[5].'</div>';
-        }
-        $addr .= '</div>';
-        echo $addr;
     }
     
     /**
@@ -277,34 +242,6 @@ class UNL_Peoplefinder_Renderer_HTML
         }
         $link .= '">'.$phone.'</a>';
         return $link;
-    }
-    
-    /**
-     * This function takes in an array of address information and formats it
-     *
-     * @param array $addressArray Address information
-     * <code>
-     * $addressArray[0] = Address line 1
-     * $addressArray[1] = Address line 2
-     * $addressArray[2] = City
-     * $addressArray[3] = State
-     * $addressArray[4] = Zip
-     * $addressArray[5] = Country
-     * </code>
-     *
-     * @return string
-     */
-    public function formatAddress($addressArray)
-    {
-        if (isset($addressArray[0])) {
-            $address = $addressArray[0]."<br />";
-            if (isset($addressArray[1])) $address .= $addressArray[1]."<br />";
-            $address .= $addressArray[2].", ".$addressArray[3]." ".$addressArray[4];
-            if (isset($addressArray[5])) $address .= "<br />".$addressArray[4];
-        } else {
-            $address = 'Unlisted';
-        }
-        return $address;
     }
     
     public function displayPageLinks($num_records, $start, $end)

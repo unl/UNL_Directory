@@ -14,6 +14,7 @@ class UNL_Peoplefinder_Record
 {
     public $cn;
     public $ou;
+    public $eduPersonAffiliation;
     public $eduPersonNickname;
     public $eduPersonPrimaryAffiliation;
     public $givenName;
@@ -73,41 +74,30 @@ class UNL_Peoplefinder_Record
      */
     function formatPostalAddress()
     {
-        /* this is a faculty postal address
-            Currently of the form:
-            ### ___ UNL 68588-####
-            Where ### is the room number, ___ = Building Abbreviation, #### zip extension
-        */
-        /**
-         * We assumed that the address format is: ### ___ UNL 68588-####.
-         * Some 'fortunate' people have addresses not in this format.
-         */
-        //RLIM
-        // treat UNL as the delimiter for the streetaddress and zip
-        if (strpos($this->postalAddress,'UNL')) {
-            $addressComponent = explode('UNL', $this->postalAddress);
-        } elseif (strpos($this->postalAddress,'UNO')) {
-            $addressComponent = explode('UNO', $this->postalAddress);
-        } elseif (strpos($this->postalAddress,'Omaha')) {
-            $addressComponent = explode('Omaha', $this->postalAddress);
-        } else {
-            $addressComponent = array($this->postalAddress);
-        }
+        $parts = explode(',', $this->postalAddress);
+
+        // Set up defaults:
+        $address = array();
+        $address['street-address'] = trim($parts[0]);
+        $address['locality']       = '';
         $address['region']         = 'NE';
-        $address['street-address'] = trim($addressComponent[0]);
-        if (isset($addressComponent[1])) {
-            $address['postal-code'] = trim($addressComponent[1]);
-        } else {
-            $address['postal-code'] = '';
+        $address['postal-code']    = '';
+
+        // Now lets find some important bits.
+        foreach ($parts as $part) {
+            if (preg_match('/([\d]{5})(\-[\d]{4})?/', $part)) {
+                // Found a zip-code
+                $address['postal-code'] = trim($part);
+            }
         }
-        switch (substr($address['postal-code'],0,3)) {
+        
+        switch (substr($address['postal-code'], 0, 3)) {
             case '681':
                 $address['locality'] = 'Omaha';
-            break;
+                break;
             case '685':
-            default:
                 $address['locality'] = 'Lincoln';
-            break;
+                break;
         }
         
         return $address;
