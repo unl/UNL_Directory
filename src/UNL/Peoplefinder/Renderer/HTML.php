@@ -131,7 +131,7 @@ class UNL_Peoplefinder_Renderer_HTML
                 default:
                     $class = $r->unlSISClassLevel;
             }
-            echo '<span class="title">'.$class." ".$this->formatMajor($r->unlSISMajor).'&ndash;'.$this->formatCollege($r->unlSISCollege).'</span>';
+            echo '<span class="title">'.$class." ".$this->formatMajor($r->unlSISMajor).'&ndash;'.$this->formatCollege((string) $r->unlSISCollege).'</span>';
         }
         
         if (isset($r->title)) {
