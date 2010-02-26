@@ -21,9 +21,9 @@
  */
 class UNL_Peoplefinder_Driver_LDAP_StandardFilter
 {
-    private $_filter;
+    protected $_filter;
     
-    private $_excludeRecords = array();
+    protected $_excludeRecords = array();
     
     /**
      * Construct a standard filter.
@@ -92,7 +92,7 @@ class UNL_Peoplefinder_Driver_LDAP_StandardFilter
         $this->_excludeRecords = array_merge($this->_excludeRecords, $records);
     }
     
-    function __toString()
+    protected function addExcludedRecords()
     {
         if (count($this->_excludeRecords)) {
             $excludeFilter = '';
@@ -101,6 +101,11 @@ class UNL_Peoplefinder_Driver_LDAP_StandardFilter
             }
             $this->_filter = '(&'.$this->_filter.'(!(|'.$excludeFilter.')))';
         }
+    }
+    
+    function __toString()
+    {
+        $this->addExcludedRecords();
         $this->_filter = '(&'.$this->_filter.'(!(eduPersonPrimaryAffiliation=guest)))';
         return $this->_filter;
     }

@@ -61,48 +61,53 @@ if (isset($_GET['uid'])) {
             echo 'Your session has expired, please search again.';
         }
     } else {
+
+
         if (isset($_GET['q']) && !empty($_GET['q'])) {
-            // Basic query, build filter and display results
-            if (strlen($_GET['q']) > 3) {
+            if (strlen($_GET['q']) <= 3) {
+                echo "<p>Please enter more information or <a href='".$_SERVER['PHP_SELF']."?adv=y' title='Click here to perform a detailed Peoplefinder search'>try a Detailed Search.</a></p>";
+            } else {
+                
+                // OK, let's get some results!
                 if (is_numeric(str_replace(array('-', '(', ')'),
                                            array('',  '',  ''),
                                            $_GET['q']))) {
-                    $records = $peepObj->getPhoneMatches($_GET['q']);
-                    $renderer->renderSearchResults($records);
-                } else {
-                    $records = $peepObj->getExactMatches($_GET['q']);
-                    if (count($records)) {
-                        echo '<div class="cMatch">Exact matches:';
-                        if (count($records) >= UNL_Peoplefinder::$resultLimit) {
-                            echo "<p>Your search could only return a subset of the results. ";
-                            if (@$_GET['adv'] != 'y')    echo "Would you like to <a href='".$renderer->uri."?adv=y' title='Click here to perform a detailed Peoplefinder search'>try a Detailed Search?</a>\n";
-                            else                         echo 'Try refining your search.';
-                            echo '</p>';
-                        }
-                        echo '</div>';
-                        $renderer->renderSearchResults($records);
-                    } else {
-                        echo '<p>Sorry, I couldn\'t find anyone matching '.htmlentities($_GET['q']).'.</p>';
-                    }
-                    if (count($records) < UNL_Peoplefinder::$displayResultLimit) {
-                        // More room to display LIKE results
-                        UNL_Peoplefinder::$displayResultLimit = UNL_Peoplefinder::$displayResultLimit - count($records);
-                        $records = $peepObj->getLikeMatches($_GET['q'], null, $records);
-                        if (count($records) > 0) {
-                            echo '<div class="cMatch">Possible matches:';
-                            if (count($records) >= UNL_Peoplefinder::$resultLimit) {
-                                echo "<p>Your search could only return a subset of the results. ";
-                                if (@$_GET['adv'] != 'y')    echo "Would you like to <a href='".$renderer->uri."?adv=y' title='Click here to perform a detailed Peoplefinder search'>try a Detailed Search?</a>\n";
-                                else                         echo 'Try refining your search.';
-                                echo '</p>';
-                            }
-                            echo '</div>';
+                    // Telephone number search
+                    foreach (array('faculty', 'staff', 'student') as $affiliation) {
+                       
+                        $records = $peepObj->getPhoneMatches($_GET['q'], $affiliation);
+                        if (count($records)) {
+                            UNL_Peoplefinder::$displayResultLimit -= count($records);
+                            echo '<h2>'.ucfirst($affiliation).'</h2>';
                             $renderer->renderSearchResults($records);
                         }
                     }
+                    
+                } else {
+                    // Standard text search
+                    foreach (array('faculty', 'staff', 'student') as $affiliation) {
+                        if (UNL_Peoplefinder::$displayResultLimit) {
+                            $records = $peepObj->getLikeMatches($_GET['q'], $affiliation);
+                            if (count($records)) {
+                                echo '<h2>'.ucfirst($affiliation).'</h2>';
+                                UNL_Peoplefinder::$displayResultLimit -= count($records);
+                                echo '<div class="affiliation '.$affiliation.'">';
+                                if (count($records) >= UNL_Peoplefinder::$resultLimit) {
+                                    echo "<p>Your search could only return a subset of the results. ";
+                                    if (@$_GET['adv'] != 'y') {
+                                        echo "Would you like to <a href='".$renderer->uri."?adv=y' title='Click here to perform a detailed Peoplefinder search'>try a Detailed Search?</a>\n";
+                                    } else {
+                                        echo 'Try refining your search.';
+                                    }
+                                    echo '</p>';
+                                }
+                                $renderer->renderSearchResults($records);
+                                echo '</div>';
+                            }
+                        }
+                    }
+                    
                 }
-            } else {
-                echo "<p>Please enter more information or <a href='".$_SERVER['PHP_SELF']."?adv=y' title='Click here to perform a detailed Peoplefinder search'>try a Detailed Search.</a></p>";
             }
         } elseif (isset($_GET['sn']) || isset($_GET['cn'])) {
             // Advanced search
