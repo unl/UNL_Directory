@@ -82,7 +82,12 @@ class UNL_Peoplefinder_Record
         $address['locality']       = '';
         $address['region']         = 'NE';
         $address['postal-code']    = '';
-
+        
+        if (count($parts) == 3) {
+            // Assume we have a street address, city, zip.
+            $address['locality'] = trim($parts[1]);
+        }
+        
         // Now lets find some important bits.
         foreach ($parts as $part) {
             if (preg_match('/([\d]{5})(\-[\d]{4})?/', $part)) {
