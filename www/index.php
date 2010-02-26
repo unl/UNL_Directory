@@ -73,11 +73,26 @@ if (isset($_GET['uid'])) {
                                            array('',  '',  ''),
                                            $_GET['q']))) {
                     // Telephone number search
-                    foreach (array('faculty', 'staff', 'student') as $affiliation) {
-                       
-                        $records = $peepObj->getPhoneMatches($_GET['q'], $affiliation);
+                    $by_affiliation = array();
+                    $by_affiliation['faculty']       = array();
+                    $by_affiliation['staff']         = array();
+                    $by_affiliation['student']       = array();
+                    $by_affiliation['organizations'] = array();
+                    
+                    $records = $peepObj->getPhoneMatches($_GET['q']);
+                    
+                    foreach ($records as $record) {
+                        if ($record->ou == 'org') {
+                            $by_affiliation['organizations'][] = $record;
+                            continue;
+                        }
+                        foreach ($record->eduPersonAffiliation as $affiliation) {
+                            $by_affiliation[$affiliation][] = $record;
+                        }
+                    }
+                    
+                    foreach ($by_affiliation as $affiliation=>$records) {
                         if (count($records)) {
-                            UNL_Peoplefinder::$displayResultLimit -= count($records);
                             echo '<h2>'.ucfirst($affiliation).'</h2>';
                             $renderer->renderSearchResults($records);
                         }
@@ -85,25 +100,58 @@ if (isset($_GET['uid'])) {
                     
                 } else {
                     // Standard text search
-                    foreach (array('faculty', 'staff', 'student') as $affiliation) {
-                        if (UNL_Peoplefinder::$displayResultLimit) {
-                            $records = $peepObj->getLikeMatches($_GET['q'], $affiliation);
-                            if (count($records)) {
-                                echo '<h2>'.ucfirst($affiliation).'</h2>';
-                                UNL_Peoplefinder::$displayResultLimit -= count($records);
-                                echo '<div class="affiliation '.$affiliation.'">';
-                                if (count($records) >= UNL_Peoplefinder::$resultLimit) {
-                                    echo "<p>Your search could only return a subset of the results. ";
-                                    if (@$_GET['adv'] != 'y') {
-                                        echo "Would you like to <a href='".$renderer->uri."?adv=y' title='Click here to perform a detailed Peoplefinder search'>try a Detailed Search?</a>\n";
-                                    } else {
-                                        echo 'Try refining your search.';
-                                    }
-                                    echo '</p>';
-                                }
-                                $renderer->renderSearchResults($records);
+                    $by_affiliation = array();
+                    $by_affiliation['faculty']       = array();
+                    $by_affiliation['staff']         = array();
+                    $by_affiliation['student']       = array();
+                    $by_affiliation['organizations'] = array();
+                    
+                    $like_by_affiliation = $by_affiliation;
+                    
+                    $records = $peepObj->getExactMatches($_GET['q']);
+                    
+                    UNL_Peoplefinder::$displayResultLimit -= count($records);
+                    
+                    $like_records = array();
+                    if (UNL_Peoplefinder::$displayResultLimit) {
+                        $like_records = $peepObj->getLikeMatches($_GET['q'], null, $records);
+                    }
+                    
+                    foreach(array('records'=>'by_affiliation', 'like_records'=>'like_by_affiliation') as $records_var=>$affiliation_var) {
+                        foreach ($$records_var as $record) {
+                            if ($record->ou == 'org') {
+                                ${$affiliation_var}['organizations'][] = $record;
+                                continue;
+                            }
+                            foreach ($record->eduPersonAffiliation as $affiliation) {
+                                ${$affiliation_var}[$affiliation][] = $record;
+                            }
+                        }
+                    }
+                    
+                    if (count($records) >= UNL_Peoplefinder::$resultLimit) {
+                        echo "<p>Your search could only return a subset of the results. ";
+                        if (@$_GET['adv'] != 'y') {
+                            echo "Would you like to <a href='".$renderer->uri."?adv=y' title='Click here to perform a detailed Peoplefinder search'>try a Detailed Search?</a>\n";
+                        } else {
+                            echo 'Try refining your search.';
+                        }
+                        echo '</p>';
+                    }
+                    
+                    foreach ($by_affiliation as $affiliation=>$records) {
+                        if (count($records)
+                            || count($like_by_affiliation[$affiliation])) {
+                            echo '<div class="affiliation '.$affiliation.'">';
+                            echo '<h2>'.ucfirst($affiliation).'</h2>';
+                            $renderer->renderSearchResults($records);
+                            if (count($like_by_affiliation[$affiliation])) {
+                                echo '<div class="likeResults">';
+                                echo '<h3>similar '.$affiliation.' results</h3>';
+                                $renderer->renderSearchResults($like_by_affiliation[$affiliation]);
                                 echo '</div>';
                             }
+                            echo '</div>';
                         }
                     }
                     
