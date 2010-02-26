@@ -44,7 +44,9 @@ class UNL_Peoplefinder_Driver_LDAP_StandardFilter
             //put the query into an array of words
             $query = preg_split('/\s+/', $inquery, 4);
 
-            if ($operator!='&') $operator = '|';
+            if ($operator != '&') {
+                $operator = '|';
+            }
 
             //create our filter
             //search for the string parts
