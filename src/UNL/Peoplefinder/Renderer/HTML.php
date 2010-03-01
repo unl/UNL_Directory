@@ -418,7 +418,7 @@ class UNL_Peoplefinder_Renderer_HTML
      */
     function displayInstructions($adv=false)
     {
-        echo '<div style="padding-top:10px;width:270px;" id="instructions">';
+        echo '<div style="padding-top:10px;" id="instructions">';
         if ($adv) {
             echo 'Enter in as much of the first and/or last name you know, ' .
                  'you can also select a primary affiliation to refine your search.';
