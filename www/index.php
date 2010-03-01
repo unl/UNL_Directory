@@ -34,7 +34,7 @@ if (isset($_GET['q'])
 
 $page->breadcrumbs = '
 <ul>
-    <li><a href="http://www.unl.edu/" title="University of NebraskaÐLincoln">UNL</a></li>
+    <li><a href="http://www.unl.edu/" title="University of Nebraska&ndash;Lincoln">UNL</a></li>
     <li>Peoplefinder</li>
 </ul>';
 
