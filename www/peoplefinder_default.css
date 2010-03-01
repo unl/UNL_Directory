@@ -180,11 +180,43 @@
 }
 .cInfo {float:right;margin-right:16px;}
 
-/* For testing, these should now be found in your /wdn folder */
-img.profile_pic {
-	padding:3px 3px 6px 3px;
-	margin-left:12px;
+/* Search form */
+#form1 {
+	width:940px;
+	background:url('images/formSearchBG.png') repeat-x top;
 }
-img.profile_pic.small {
-	background:url('/wdn/templates_3.0/css/header/images/wdn_idmProfileSmall.png') no-repeat top left;
+#form1 legend {display:none;}
+#form1 ol{
+	list-style:none;
+	display:block;
+	margin:0px;
+	background:url('images/formSearchEnds.png') no-repeat 0 -58px;
 }
+#form1 ol li:first-child{
+	background:url('images/formSearchEnds.png') no-repeat top right;
+	height:46px;
+	padding:11px 0px 0px;
+	margin-left:-13px;
+}
+#form1 ol li:first-child label[for=q] {
+	position:absolute;
+	top:20px;
+	left:32px;
+	font-size:1.5em;
+	color:#98999a;
+}
+#form1 ol li:first-child input[type=text] {
+	width:364px;
+	height:31px;
+	border:1px solid #dad09a;
+	font-size:1.5em;
+	color:#98999a;
+	padding:5px 0 0 8px;
+	
+}
+#form1 ol li:first-child input[type=image] {
+	margin-bottom:-10px;
+	padding-left:5px;
+}
+
+/*for the filters*/

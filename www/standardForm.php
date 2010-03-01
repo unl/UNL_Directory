@@ -1,6 +1,9 @@
 <form method="get" id="form1" action="<?php echo htmlentities(str_replace('index.php', '', $_SERVER['PHP_SELF']), ENT_QUOTES); ?>">
-	<div>
-	<label for="q">Search People:&nbsp;</label> 
+<fieldset>
+	<legend>Search for students, faculty, staff and departments.</legend>
+<ol>
+	<li>
+	<label for="q">Enter a name to begin your search.</label> 
     <?php if (isset($_GET['chooser'])) {
     	echo '<input type="hidden" name="chooser" value="true" />';
     }
@@ -10,7 +13,20 @@
         $default = '';
     }
     ?>
-	<input style="width:18ex;" type="text" value="<?php echo $default; ?>" id="q" name="q" /> 
-	<input style="margin-bottom:-7px;" name="submitbutton" type="image" src="/ucomm/templatedependents/templatecss/images/go.gif" value="Submit" id="submitbutton" />
-	</div> 
+	<input type="text" value="<?php echo $default; ?>" id="q" name="q" />
+	<input name="submitbutton" type="image" src="images/formSearch.png" value="Submit" id="submitbutton" />
+	</li>
+	<li>
+		<fieldset>
+		<legend>Filters:</legend>
+		<ol id="filters">
+			<li><input type="checkbox" selected="selected" id="fitlerStudents" name="fitlerStudents" value="1" /><label for="filterStudents">Students</label></li>
+			<li><input type="checkbox" selected="selected" id="fitlerFaculty" name="fitlerFaculty" value="1" /><label for="fitlerFaculty">Faculty</label></li>
+			<li><input type="checkbox" selected="selected" id="fitlerStaff" name="fitlerStaff" value="1" /><label for="fitlerStaff">Staff</label></li>
+			<li><input type="checkbox" selected="selected" id="fitlerDepartments" name="fitlerDepartments" value="1" /><label for="fitlerDepartments">Departments</label></li>
+		</ol>
+		</fieldset>
+	</li>
+</ol>
+</fieldset>
 </form>
