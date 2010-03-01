@@ -40,6 +40,8 @@ class UNL_Peoplefinder
 
     /**
      * Constructor for the object.
+     * 
+     * @param UNL_Peoplefinder_DriverInterface $driver A compatible driver
      */
     function __construct(UNL_Peoplefinder_DriverInterface $driver = null)
     {
@@ -49,6 +51,16 @@ class UNL_Peoplefinder
         $this->driver = $driver;
     }
 
+    /**
+     * Pass through calls to the driver.
+     * 
+     * @method UNL_Peoplefinder_Record getUID() getUID(string $uid) get a record
+     * 
+     * @param string $method The method to call
+     * @param mixed  $args   Arguments
+     * 
+     * @return mixed
+     */
     function __call($method, $args)
     {
         return call_user_func_array(array($this->driver, $method), $args);
