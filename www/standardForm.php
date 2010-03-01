@@ -20,10 +20,10 @@
 		<fieldset>
 		<span>Filters:</span>
 		<ol>
-			<li><input type="checkbox" selected="selected" id="filterStudents" name="filterStudents" value="1" /><label for="filterStudents">Students</label></li>
-			<li><input type="checkbox" selected="selected" id="fitlerFaculty" name="fitlerFaculty" value="1" /><label for="fitlerFaculty">Faculty</label></li>
-			<li><input type="checkbox" selected="selected" id="fitlerStaff" name="fitlerStaff" value="1" /><label for="fitlerStaff">Staff</label></li>
-			<li><input type="checkbox" selected="selected" id="fitlerDepartments" name="fitlerDepartments" value="1" /><label for="fitlerDepartments">Departments</label></li>
+			<li><input type="checkbox" checked="checked" id="filterStudents" name="filterStudents" value="1" /><label for="filterStudents">Students</label></li>
+			<li><input type="checkbox" checked="checked" id="fitlerFaculty" name="fitlerFaculty" value="1" /><label for="fitlerFaculty">Faculty</label></li>
+			<li><input type="checkbox" checked="checked" id="fitlerStaff" name="fitlerStaff" value="1" /><label for="fitlerStaff">Staff</label></li>
+			<li><input type="checkbox" checked="checked" id="fitlerDepartments" name="fitlerDepartments" value="1" /><label for="fitlerDepartments">Departments</label></li>
 		</ol>
 		</fieldset>
 	</li>
