@@ -3,7 +3,7 @@
 	<legend>Search for students, faculty, staff and departments.</legend>
 <ol>
 	<li>
-	<label for="q">Enter a name to begin your search.</label> 
+	<label for="q" id="queryString">Enter a name to begin your search.</label> 
     <?php if (isset($_GET['chooser'])) {
     	echo '<input type="hidden" name="chooser" value="true" />';
     }
