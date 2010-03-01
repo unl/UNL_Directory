@@ -16,10 +16,10 @@
 	<input type="text" value="<?php echo $default; ?>" id="q" name="q" />
 	<input name="submitbutton" type="image" src="images/formSearch.png" value="Submit" id="submitbutton" />
 	</li>
-	<li>
+	<li id="filters">
 		<fieldset>
-		<legend>Filters:</legend>
-		<ol id="filters">
+		<span>Filters:</span>
+		<ol>
 			<li><input type="checkbox" selected="selected" id="fitlerStudents" name="fitlerStudents" value="1" /><label for="filterStudents">Students</label></li>
 			<li><input type="checkbox" selected="selected" id="fitlerFaculty" name="fitlerFaculty" value="1" /><label for="fitlerFaculty">Faculty</label></li>
 			<li><input type="checkbox" selected="selected" id="fitlerStaff" name="fitlerStaff" value="1" /><label for="fitlerStaff">Staff</label></li>

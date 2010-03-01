@@ -220,3 +220,26 @@
 }
 
 /*for the filters*/
+li#filters {margin-left:-13px;padding:0;color:#7b6d1f;font-weight:bold;}
+li#filters fieldset {
+	background:#f5f1db url('images/formFilterBG.png') repeat-x;
+	border:1px solid #efebd4;
+	width:450px;
+	margin-left:-12px;
+	-moz-border-radius-bottomright:3px;
+	-webkit-border-bottom-right-radius:3px;
+	-moz-border-radius-bottomleft:3px;
+	-webkit-border-bottom-left-radius:3px;
+	padding-top:5px;
+}
+#form1 li#filters span {
+	float:left;
+	margin-left:12px;
+	}
+#form1 li#filters ol {
+	font-size:0.8em;
+	float:left;
+	background: none;
+	padding-bottom:5px;
+}
+#form1 li#filters ol li {background:none;display:inline;padding-right:15px;}
