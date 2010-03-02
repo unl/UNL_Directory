@@ -167,20 +167,67 @@
 #maincontent ul.pfResult li:first-child {
 	border-top:none;
 }
-.eppa, .organization-unit, .tel {display:none;} /* @todo hiding for now, perhaps these need to be pulled out of HTML? */
+.eppa, .organization-unit, .tel, .type {display:none;} /* @todo hiding for now, perhaps these need to be pulled out of HTML in lis? */
 
 .planetred_profile, .recordDetails {float:left;}
 .recordDetails {
 	margin-left:20px;
 }
-.fn a {
+.fn a, .fn {
 	font-size:1.4em;
 	font-weight:bold;
 	color:#464545 !important;	
 }
 .cInfo {float:right;margin-right:16px;}
 
-/* Search form */
+/*
+
+
+Individual Records
+
+
+*/
+.vcard {
+	background:#e7f4f9;
+	border:2px solid #eaeaea;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	padding:15px;
+}
+.vcard a.email {
+	
+}
+.vcard .eppa, .vcard .organization-unit, .vcard .tel {display:block;}
+.vcard a.planetred_profile {
+	float:left;
+	margin-right:15px;
+}
+.vcard .eppa {font-style:italic;font-size:0.8em;}
+.vcardInfo {margin-left:129px;}
+.vcard .adr {
+	border-left:2px solid #b7b7b7;
+	padding-left:5px;
+	margin:5px 0;	
+}
+.vcard .tel, .vcard span.email {
+	background:url('images/iconContactSprite.png') no-repeat;
+	padding-left:25px;
+	height:20px;
+}
+.vcard span.email {
+	background:url('images/iconContactSprite.png') no-repeat 0 -21px;
+	display:block;
+	margin-top:5px;
+}
+a.email {background:none;}
+
+/* 
+***************************************************
+
+		Search form 
+
+***************************************************
+*/
 #form1 {
 	width:940px;
 	background:url('images/formSearchBG.png') repeat-x top;
@@ -218,8 +265,6 @@
 	margin-bottom:-10px;
 	padding-left:5px;
 }
-
-/*for the filters*/
 li#filters {margin-left:-13px;padding:0;color:#7b6d1f;font-weight:bold;}
 li#filters fieldset {
 	background:#f5f1db url('images/formFilterBG.png') repeat-x;
