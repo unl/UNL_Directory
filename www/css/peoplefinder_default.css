@@ -161,7 +161,7 @@
 	min-height:45px;
 	padding: 7px 0px;
 }
-#maincontent ul.pfResult li:hover div.overflow {
+#maincontent ul.pfResult li:hover div.overflow, #maincontent ul.pfResult li.selected {
 	background:url('images/selectedBG.png') no-repeat left;
 }
 #maincontent ul.pfResult li:first-child {
@@ -201,6 +201,7 @@ Individual Records
 .vcard a.planetred_profile {
 	float:left;
 	margin-right:15px;
+	min-width:114px;
 }
 .vcard .eppa {font-style:italic;font-size:0.8em;}
 .vcardInfo {margin-left:129px;}
