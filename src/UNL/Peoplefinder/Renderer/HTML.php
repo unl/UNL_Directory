@@ -94,6 +94,7 @@ class UNL_Peoplefinder_Renderer_HTML
     public function renderRecord(UNL_Peoplefinder_Record $r)
     {
         echo "<div class='vcard {$r->eduPersonPrimaryAffiliation}'>\n";
+        echo '<a class="planetred_profile" href="http://planetred.unl.edu/pg/profile/unl_'.str_replace("-", "_", $r->uid).'" title="Planet Red Profile for '.$r->cn.'"><img class="profile_pic medium" src="'.htmlspecialchars($r->getImageURL()).'"  alt="Photo of '.$r->displayName.'" /></a>';
         if (isset($r->mail)
             && ($r->eduPersonPrimaryAffiliation != 'student' || $this->displayStudentEmail==true)) {
             $displayEmail = true;
@@ -110,7 +111,6 @@ class UNL_Peoplefinder_Renderer_HTML
         if ($displayEmail && isset($r->unlEmailAlias)) echo "</a>\n";
         if (!empty($r->eduPersonPrimaryAffiliation)) echo '<span class="eppa">('.$r->eduPersonPrimaryAffiliation.')</span>'.PHP_EOL;
         echo '<div class="vcardInfo">'.PHP_EOL;
-        echo '<a class="planetred_profile" href="http://planetred.unl.edu/pg/profile/unl_'.str_replace("-", "_", $r->uid).'" title="Planet Red Profile for '.$r->cn.'"><img class="photo frame" src="'.htmlspecialchars($r->getImageURL()).'"  alt="Photo of '.$r->displayName.'" /></a>';
         if (isset($r->unlSISClassLevel)) {
             switch ($r->unlSISClassLevel) {
                 case 'FR':
