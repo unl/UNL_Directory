@@ -8,6 +8,7 @@ WDN.jQuery(document).ready(function() {
 		WDN.toolbar_peoplefinder.queuePFRequest(WDN.jQuery('#q').val(), 'results');
 		eventObject.preventDefault();
 		eventObject.stopPropagation();
+		WDN.jQuery('li#filters').slideDown();
 		return false;
 	});
 	WDN.jQuery('#q').click(hideLabel);

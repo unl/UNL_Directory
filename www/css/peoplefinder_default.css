@@ -266,7 +266,7 @@ a.email {background:none;}
 	margin-bottom:-10px;
 	padding-left:5px;
 }
-li#filters {margin-left:-13px;padding:0;color:#7b6d1f;font-weight:bold;}
+li#filters {margin-left:-13px;padding:0;color:#7b6d1f;font-weight:bold;display:none;}
 li#filters fieldset {
 	background:#f5f1db url('images/formFilterBG.png') repeat-x;
 	border:1px solid #efebd4;
