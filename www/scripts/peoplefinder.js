@@ -21,8 +21,24 @@ WDN.jQuery(document).ready(function() {
 			showLabel();
 		}
 	});
+	WDN.jQuery('#filters input').click(function(){
+		if(WDN.jQuery(this).attr('id') === "filterAll") {
+			if (this.checked){
+				WDN.jQuery('#filters input').not('#filterAll').removeAttr('checked');
+				WDN.jQuery('div.affiliation').show();
+			} 
+		} else {
+				WDN.jQuery('#filterAll').removeAttr('checked');
+				WDN.jQuery('#filters input').not('#filterAll').each(function(){
+					if(this.checked){
+						WDN.jQuery('div.'+WDN.jQuery(this).attr('name')).show();
+					} else {
+						WDN.jQuery('div.'+WDN.jQuery(this).attr('name')).hide();
+					}
+				});
+		}
+	});
 });
-
 function hideLabel() {
 	WDN.jQuery('#queryString').hide();
 	WDN.jQuery('#q').focus();

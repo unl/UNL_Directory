@@ -270,7 +270,7 @@ li#filters {margin-left:-13px;padding:0;color:#7b6d1f;font-weight:bold;display:n
 li#filters fieldset {
 	background:#f5f1db url('images/formFilterBG.png') repeat-x;
 	border:1px solid #efebd4;
-	width:450px;
+	width:500px;
 	margin-left:-12px;
 	-moz-border-radius-bottomright:3px;
 	-webkit-border-bottom-right-radius:3px;
