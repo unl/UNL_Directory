@@ -20,7 +20,7 @@
 		<fieldset>
 		<span>Show:</span>
 		<ol>
-			<li><input type="checkbox" checked="checked" id="filterAll" name="all" value="1" /><label for="filterStudents">All records</label></li>
+			<li><input type="checkbox" checked="checked" id="filterAll" name="all" value="1" /><label for="filterAll">All records</label></li>
 			<li><input type="checkbox" id="filterStudents" name="student" value="1" /><label for="filterStudents">Students</label></li>
 			<li><input type="checkbox" id="fitlerFaculty" name="faculty" value="1" /><label for="fitlerFaculty">Faculty</label></li>
 			<li><input type="checkbox" id="fitlerStaff" name="staff" value="1" /><label for="fitlerStaff">Staff</label></li>
