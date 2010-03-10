@@ -5,6 +5,7 @@ WDN.jQuery(document).ready(function() {
 		WDN.toolbar_peoplefinder.serviceURL = '';
 	});
 	WDN.jQuery('#form1').submit(function(eventObject) {
+		WDN.jQuery('#pfShowRecord').empty();
 		WDN.toolbar_peoplefinder.queuePFRequest(WDN.jQuery('#q').val(), 'results');
 		eventObject.preventDefault();
 		eventObject.stopPropagation();
