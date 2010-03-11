@@ -48,3 +48,6 @@ function hideLabel() {
 function showLabel() {
 	WDN.jQuery('#queryString').show();
 }
+function pf_handleResults(e)  {
+	WDN.log(e);
+}

@@ -140,12 +140,19 @@
     line-height:1.5em
 }
 */
+/* 
+***************************************************
+
+		Result Listings
+
+***************************************************
+*/
 #maincontent ul.pfResult {
 	width:460px;
 	padding:0px;
 	list-style:none;
 	border-bottom: 1px solid #e6e6e6;
-	border-top: 2px dotted #e6e6e6;
+	border-top: 1px solid #d0cece;
 	margin-top:20px;
 }
 #maincontent ul.pfResult li {
@@ -164,9 +171,6 @@
 #maincontent ul.pfResult li:hover div.overflow, #maincontent ul.pfResult li.selected {
 	background:url('images/selectedBG.png') no-repeat left;
 }
-#maincontent ul.pfResult li:first-child {
-	border-top:none;
-}
 .eppa, .organization-unit, .tel, .type {display:none;} /* @todo hiding for now, perhaps these need to be pulled out of HTML in lis? */
 
 .planetred_profile, .recordDetails {float:left;}
@@ -180,12 +184,27 @@
 }
 .cInfo {float:right;margin-right:16px;}
 
-/*
+#maincontent .affiliation, #maincontent .likeResults {margin-top:15px;}
+
+#maincontent .result_head {color:#989898;font-size:10px;}
+/* Headings */
 
 
-Individual Records
+#maincontent .affiliation h2, #maincontent .likeResults h3 {
+	font-variant:small-caps;
+	font-weight:bold;
+}
+#maincontent .affiliation h2 {border-bottom:2px dotted #E6E6E6;padding-bottom:0;}
+#maincontent .likeResults h3 {
+	font-size:1em;	
+}
 
+/* 
+***************************************************
 
+		Individual Records
+
+***************************************************
 */
 .vcard {
 	background:#e7f4f9;
@@ -194,13 +213,13 @@ Individual Records
 	-webkit-border-radius:5px;
 	padding:15px;
 	min-height:120px;
-	position:fixed;
+	position:relative;
 	width:425px;
 }
 .vcard a.email {
 	
 }
-.vcard .eppa, .vcard .organization-unit, .vcard .tel, .vcf {display:block;}
+.vcard .eppa, .vcard .organization-unit, .vcard .tel, .vcf, .title {display:block;}
 .vcard a.planetred_profile {
 	float:left;
 	margin-right:15px;
