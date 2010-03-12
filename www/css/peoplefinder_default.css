@@ -285,7 +285,7 @@ a.email {background:none;}
 	
 }
 #form1 ol li:first-child input[type=image] {
-	margin-bottom:-10px;
+	margin-bottom:-7px;
 	padding-left:5px;
 }
 li#filters {margin-left:-13px;padding:0;color:#7b6d1f;font-weight:bold;display:none;}
