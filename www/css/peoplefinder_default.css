@@ -184,7 +184,8 @@
 }
 .cInfo {float:right;margin-right:16px;}
 
-#maincontent .affiliation, #maincontent .likeResults {margin-top:15px;}
+#maincontent .affiliation {margin-top:15px;}
+#maincontent .likeResults ul.pfResult {margin-top:0px;}
 
 #maincontent .result_head {color:#989898;font-size:10px;}
 /* Headings */
