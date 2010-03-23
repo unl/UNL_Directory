@@ -147,6 +147,7 @@
 
 ***************************************************
 */
+#maincontent #results {min-height: 300px;}
 #maincontent ul.pfResult {
 	width:460px;
 	padding:0px;
