@@ -11,7 +11,21 @@ $renderer = new UNL_Peoplefinder_Renderer_HTML($renderer_options);
 
 $myself = htmlentities(str_replace('index.php', '', $_SERVER['PHP_SELF']), ENT_QUOTES);
 UNL_Templates::$options['version'] = 3;
-$page = UNL_Templates::factory('Document');
+
+$template = 'Document';
+
+if (!isset($_GET['mobile'])
+    && (preg_match('/text\/vnd\.wap\.wml|application\/vnd\.wap\.xhtml\+xml/', $_SERVER['HTTP_USER_AGENT']))
+        || preg_match('/sony|symbian|nokia|samsung|mobile|windows ce|epoc|opera/', $_SERVER['HTTP_USER_AGENT'])
+        || preg_match('/mini|nitro|j2me|midp-|cldc-|netfront|mot|up\.browser|up\.link|audiovox/', $_SERVER['HTTP_USER_AGENT'])
+        || preg_match('/blackberry|ericsson,|panasonic|philips|sanyo|sharp|sie-/', $_SERVER['HTTP_USER_AGENT'])
+        || preg_match('/portalmmm|blazer|avantgo|danger|palm|series60|palmsource|pocketpc/', $_SERVER['HTTP_USER_AGENT'])
+        || preg_match('/smartphone|rover|ipaq|au-mic,|alcatel|ericy|vodafone\/|wap1\.|wap2\.|iPhone|android/', $_SERVER['HTTP_USER_AGENT'])
+        ) {
+    $template = 'Popup';
+}
+
+$page = UNL_Templates::factory($template);
 
 $page->doctitle = '<title>UNL | Peoplefinder</title>';
 
