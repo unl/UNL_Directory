@@ -15,8 +15,8 @@ directory information and perform searches.
   <email>brett.bieber@gmail.com</email>
   <active>yes</active>
  </lead>
- <date>2010-01-27</date>
- <time>10:10:24</time>
+ <date>2010-03-31</date>
+ <time>12:32:46</time>
  <version>
   <release>0.1.0</release>
   <api>0.1.0</api>
@@ -36,17 +36,24 @@ Package UNL_Peoplefinder API release notes for version 0.1.0.</notes>
  <contents>
   <dir name="/">
    <file role="www" name="www/UNL_Peoplefinder/pear.unl.edu/standardForm.php"/>
-   <file role="www" name="www/UNL_Peoplefinder/pear.unl.edu/small_devices.css"/>
    <file role="www" name="www/UNL_Peoplefinder/pear.unl.edu/service.php"/>
+   <file role="www" name="www/UNL_Peoplefinder/pear.unl.edu/scripts/scripts/peoplefinder.js"/>
    <file role="www" name="www/UNL_Peoplefinder/pear.unl.edu/README"/>
-   <file role="www" name="www/UNL_Peoplefinder/pear.unl.edu/peoplefinder_default.css"/>
-   <file role="www" name="www/UNL_Peoplefinder/pear.unl.edu/peoplefinder.js"/>
    <file role="www" name="www/UNL_Peoplefinder/pear.unl.edu/index.php"/>
    <file role="www" name="www/UNL_Peoplefinder/pear.unl.edu/images/images/person.gif"/>
+   <file role="www" name="www/UNL_Peoplefinder/pear.unl.edu/images/images/organization.png"/>
    <file role="www" name="www/UNL_Peoplefinder/pear.unl.edu/images/images/mobile.gif"/>
    <file role="www" name="www/UNL_Peoplefinder/pear.unl.edu/images/images/icon_question.gif"/>
    <file role="www" name="www/UNL_Peoplefinder/pear.unl.edu/images/images/home.gif"/>
+   <file role="www" name="www/UNL_Peoplefinder/pear.unl.edu/images/images/formSearch.png"/>
    <file role="www" name="www/UNL_Peoplefinder/pear.unl.edu/departments/departments/index.php"/>
+   <file role="www" name="www/UNL_Peoplefinder/pear.unl.edu/css/images/css/images/selectedBG.png"/>
+   <file role="www" name="www/UNL_Peoplefinder/pear.unl.edu/css/images/css/images/iconContactSprite.png"/>
+   <file role="www" name="www/UNL_Peoplefinder/pear.unl.edu/css/images/css/images/formSearchEnds.png"/>
+   <file role="www" name="www/UNL_Peoplefinder/pear.unl.edu/css/images/css/images/formSearchBG.png"/>
+   <file role="www" name="www/UNL_Peoplefinder/pear.unl.edu/css/images/css/images/formFilterBG.png"/>
+   <file role="www" name="www/UNL_Peoplefinder/pear.unl.edu/css/css/small_devices.css"/>
+   <file role="www" name="www/UNL_Peoplefinder/pear.unl.edu/css/css/peoplefinder_default.css"/>
    <file role="www" name="www/UNL_Peoplefinder/pear.unl.edu/config.inc.php"/>
    <file role="www" name="www/UNL_Peoplefinder/pear.unl.edu/config-sample.inc.php"/>
    <file role="www" name="www/UNL_Peoplefinder/pear.unl.edu/apple-touch-icon.png"/>
@@ -55,6 +62,7 @@ Package UNL_Peoplefinder API release notes for version 0.1.0.</notes>
    <file role="test" name="test/UNL_Peoplefinder/pear.unl.edu/PeoplefinderTest.php"/>
    <file role="test" name="test/UNL_Peoplefinder/pear.unl.edu/OUTest.php"/>
    <file role="test" name="test/UNL_Peoplefinder/pear.unl.edu/BrowserTest.php"/>
+   <file role="script" name="script/peoplefinder.php"/>
    <file role="php" name="php/UNL/Peoplefinder/RendererInterface.php"/>
    <file role="php" name="php/UNL/Peoplefinder/Renderer/XML.php"/>
    <file role="php" name="php/UNL/Peoplefinder/Renderer/vCard.php"/>
@@ -68,6 +76,7 @@ Package UNL_Peoplefinder API release notes for version 0.1.0.</notes>
    <file role="php" name="php/UNL/Peoplefinder/Driver/LDAP/TelephoneFilter.php"/>
    <file role="php" name="php/UNL/Peoplefinder/Driver/LDAP/StandardFilter.php"/>
    <file role="php" name="php/UNL/Peoplefinder/Driver/LDAP/OUFilter.php"/>
+   <file role="php" name="php/UNL/Peoplefinder/Driver/LDAP/AffiliationFilter.php"/>
    <file role="php" name="php/UNL/Peoplefinder/Driver/LDAP/AdvancedFilter.php"/>
    <file role="php" name="php/UNL/Peoplefinder/Driver/LDAP.php"/>
    <file role="php" name="php/UNL/Peoplefinder/Department/Search.php"/>
@@ -102,6 +111,7 @@ Package UNL_Peoplefinder API release notes for version 0.1.0.</notes>
    <install name="php/UNL/Peoplefinder/Department/Search.php" as="UNL/Peoplefinder/Department/Search.php"/>
    <install name="php/UNL/Peoplefinder/Driver/LDAP.php" as="UNL/Peoplefinder/Driver/LDAP.php"/>
    <install name="php/UNL/Peoplefinder/Driver/LDAP/AdvancedFilter.php" as="UNL/Peoplefinder/Driver/LDAP/AdvancedFilter.php"/>
+   <install name="php/UNL/Peoplefinder/Driver/LDAP/AffiliationFilter.php" as="UNL/Peoplefinder/Driver/LDAP/AffiliationFilter.php"/>
    <install name="php/UNL/Peoplefinder/Driver/LDAP/OUFilter.php" as="UNL/Peoplefinder/Driver/LDAP/OUFilter.php"/>
    <install name="php/UNL/Peoplefinder/Driver/LDAP/StandardFilter.php" as="UNL/Peoplefinder/Driver/LDAP/StandardFilter.php"/>
    <install name="php/UNL/Peoplefinder/Driver/LDAP/TelephoneFilter.php" as="UNL/Peoplefinder/Driver/LDAP/TelephoneFilter.php"/>
@@ -115,6 +125,7 @@ Package UNL_Peoplefinder API release notes for version 0.1.0.</notes>
    <install name="php/UNL/Peoplefinder/Renderer/vCard.php" as="UNL/Peoplefinder/Renderer/vCard.php"/>
    <install name="php/UNL/Peoplefinder/Renderer/XML.php" as="UNL/Peoplefinder/Renderer/XML.php"/>
    <install name="php/UNL/Peoplefinder/RendererInterface.php" as="UNL/Peoplefinder/RendererInterface.php"/>
+   <install name="script/peoplefinder.php" as="peoplefinder.php"/>
    <install name="test/UNL_Peoplefinder/pear.unl.edu/BrowserTest.php" as="pear.unl.edu/BrowserTest.php"/>
    <install name="test/UNL_Peoplefinder/pear.unl.edu/OUTest.php" as="pear.unl.edu/OUTest.php"/>
    <install name="test/UNL_Peoplefinder/pear.unl.edu/PeoplefinderTest.php" as="pear.unl.edu/PeoplefinderTest.php"/>
@@ -123,17 +134,24 @@ Package UNL_Peoplefinder API release notes for version 0.1.0.</notes>
    <install name="www/UNL_Peoplefinder/pear.unl.edu/apple-touch-icon.png" as="pear.unl.edu/apple-touch-icon.png"/>
    <install name="www/UNL_Peoplefinder/pear.unl.edu/config-sample.inc.php" as="pear.unl.edu/config-sample.inc.php"/>
    <install name="www/UNL_Peoplefinder/pear.unl.edu/config.inc.php" as="pear.unl.edu/config.inc.php"/>
+   <install name="www/UNL_Peoplefinder/pear.unl.edu/css/css/peoplefinder_default.css" as="pear.unl.edu/css/css/peoplefinder_default.css"/>
+   <install name="www/UNL_Peoplefinder/pear.unl.edu/css/css/small_devices.css" as="pear.unl.edu/css/css/small_devices.css"/>
+   <install name="www/UNL_Peoplefinder/pear.unl.edu/css/images/css/images/formFilterBG.png" as="pear.unl.edu/css/images/css/images/formFilterBG.png"/>
+   <install name="www/UNL_Peoplefinder/pear.unl.edu/css/images/css/images/formSearchBG.png" as="pear.unl.edu/css/images/css/images/formSearchBG.png"/>
+   <install name="www/UNL_Peoplefinder/pear.unl.edu/css/images/css/images/formSearchEnds.png" as="pear.unl.edu/css/images/css/images/formSearchEnds.png"/>
+   <install name="www/UNL_Peoplefinder/pear.unl.edu/css/images/css/images/iconContactSprite.png" as="pear.unl.edu/css/images/css/images/iconContactSprite.png"/>
+   <install name="www/UNL_Peoplefinder/pear.unl.edu/css/images/css/images/selectedBG.png" as="pear.unl.edu/css/images/css/images/selectedBG.png"/>
    <install name="www/UNL_Peoplefinder/pear.unl.edu/departments/departments/index.php" as="pear.unl.edu/departments/departments/index.php"/>
+   <install name="www/UNL_Peoplefinder/pear.unl.edu/images/images/formSearch.png" as="pear.unl.edu/images/images/formSearch.png"/>
    <install name="www/UNL_Peoplefinder/pear.unl.edu/images/images/home.gif" as="pear.unl.edu/images/images/home.gif"/>
    <install name="www/UNL_Peoplefinder/pear.unl.edu/images/images/icon_question.gif" as="pear.unl.edu/images/images/icon_question.gif"/>
    <install name="www/UNL_Peoplefinder/pear.unl.edu/images/images/mobile.gif" as="pear.unl.edu/images/images/mobile.gif"/>
+   <install name="www/UNL_Peoplefinder/pear.unl.edu/images/images/organization.png" as="pear.unl.edu/images/images/organization.png"/>
    <install name="www/UNL_Peoplefinder/pear.unl.edu/images/images/person.gif" as="pear.unl.edu/images/images/person.gif"/>
    <install name="www/UNL_Peoplefinder/pear.unl.edu/index.php" as="pear.unl.edu/index.php"/>
-   <install name="www/UNL_Peoplefinder/pear.unl.edu/peoplefinder.js" as="pear.unl.edu/peoplefinder.js"/>
-   <install name="www/UNL_Peoplefinder/pear.unl.edu/peoplefinder_default.css" as="pear.unl.edu/peoplefinder_default.css"/>
    <install name="www/UNL_Peoplefinder/pear.unl.edu/README" as="pear.unl.edu/README"/>
+   <install name="www/UNL_Peoplefinder/pear.unl.edu/scripts/scripts/peoplefinder.js" as="pear.unl.edu/scripts/scripts/peoplefinder.js"/>
    <install name="www/UNL_Peoplefinder/pear.unl.edu/service.php" as="pear.unl.edu/service.php"/>
-   <install name="www/UNL_Peoplefinder/pear.unl.edu/small_devices.css" as="pear.unl.edu/small_devices.css"/>
    <install name="www/UNL_Peoplefinder/pear.unl.edu/standardForm.php" as="pear.unl.edu/standardForm.php"/>
   </filelist>
  </phprelease>
