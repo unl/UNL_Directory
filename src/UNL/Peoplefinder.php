@@ -54,7 +54,7 @@ class UNL_Peoplefinder
     public $output;
 
     public $view_map = array('instructions' => 'UNL_Peoplefinder_Instructions',
-                             'search'       => 'UNL_Peoplefinder_SearchResults');
+                             'search'       => 'UNL_Peoplefinder_SearchController');
 
     /**
      * Constructor for the object.

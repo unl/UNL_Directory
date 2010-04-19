@@ -26,9 +26,9 @@ if (isset($context->title)) {
 if (isset($context->telephoneNumber)) {
     $link = '<a href="';
     if (strpos($_SERVER['HTTP_USER_AGENT'], "iPhone") === false) {
-        $link .= "wtai://wp/mc;".str_replace(array("(", ")", "-"), "", $phone);
+        $link .= "wtai://wp/mc;".str_replace(array("(", ")", "-"), "", $context->telephoneNumber);
     } else {
-        $link .= "tel:".$phone;
+        $link .= "tel:".$context->telephoneNumber;
     }
     $link .= '">'.$context->telephoneNumber.'</a>';
     echo '<div class="tel">'.$link.'</div>'.PHP_EOL;
@@ -36,6 +36,6 @@ if (isset($context->telephoneNumber)) {
 
 echo '</div>';
 echo '<a href="'.UNL_Peoplefinder::getURL().'?uid='.$context->uid.'" class="cInfo" '.$onclick.'>Contact '.$context->givenName.'</a>';
-if ($context->choose_uid) {
+if (isset($parent->context->options['chooser'])) {
     echo '<div class="pfchooser"><a href="#" onclick="return pfCatchUID(\''.$context->uid.'\');">Choose this person</a></div>'.PHP_EOL;
 }

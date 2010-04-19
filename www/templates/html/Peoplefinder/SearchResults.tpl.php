@@ -1,5 +1,6 @@
 <?php
 
+
 $start    = 0;
 $num_rows = UNL_PF_DISPLAY_LIMIT;
 
@@ -37,10 +38,22 @@ for ($i = $start; $i<$end; $i++) {
     $class .= ' '.$context[$i]->eduPersonPrimaryAffiliation;
     echo '<li class="'.$class.' '.$even_odd.'">';
     echo '<div class="overflow">';
-    $savvy->render($context[$i]);
+    echo $savvy->render($context[$i]);
     echo '</div>';
     echo '</li>'.PHP_EOL;
 }
 echo '</ul>';
 echo "<div class='result_head'>$navlinks</div>";
+
+if (count($context) >= UNL_Peoplefinder::$resultLimit) {
+    echo "<p>Your search could only return a subset of the results. ";
+    if (isset($context->options['adv'])
+        && $context->options['adv'] != 'y') {
+        echo "Would you like to <a href='".UNL_Peoplefinder::getURL()."?adv=y' title='Click here to perform a detailed Peoplefinder search'>try a Detailed Search?</a>\n";
+    } else {
+        echo 'Try refining your search.';
+    }
+    echo '</p>';
+}
+
 ?>
