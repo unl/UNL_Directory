@@ -1,7 +1,8 @@
 <?php
 class UNL_Peoplefinder_SearchResults extends ArrayIterator
 {
-    public $options = array('q' => '');
+    public $options = array('q'    => '',
+                            'eppa' => '');
 
     function __construct($options = array())
     {
@@ -18,8 +19,14 @@ class UNL_Peoplefinder_SearchResults extends ArrayIterator
                                    $this->options['q']))) {
             // Phone number search
             $search_method = 'getPhoneMatches';
+        } elseif (isset($this->options['sn']) || isset($this->options['cn'])) {
+            // Detailed search
+            $search_method = 'getAdvancedSearchMatches';
+            $this->options['q'] = array(
+                'sn'   => $this->options['sn'],
+                'cn'   => $this->options['cn']);
         }
 
-        parent::__construct($this->options['peoplefinder']->$search_method($this->options['q']));
+        parent::__construct($this->options['peoplefinder']->$search_method($this->options['q'], $this->options['eppa']));
     }
 }

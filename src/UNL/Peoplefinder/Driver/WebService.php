@@ -11,7 +11,7 @@ class UNL_Peoplefinder_Driver_WebService implements UNL_Peoplefinder_DriverInter
         }
         return $results;
     }
-    function getAdvancedSearchMatches($sn, $cn, $eppa)
+    function getAdvancedSearchMatches($query, $affliation = null)
     {
         throw new Exception('Not implemented yet');
     }

@@ -18,11 +18,10 @@ interface UNL_Peoplefinder_DriverInterface
     /**
      * perform a detailed search
      *
-     * @param string $sn   surname, eg bieber
-     * @param string $cn   common name, eg brett
-     * @param string $eppa eduPersonPrimaryAffiliation, eg staff/faculty/student
+     * @param array(cn,sn) Where cn = common name, sn   surname, eg bieber
+     * @param string $affiliation eduPersonAffiliation, eg staff/faculty/student
      */
-    function getAdvancedSearchMatches($sn, $cn, $eppa);
+    function getAdvancedSearchMatches($query, $affiliation = null);
     
     /**
      * Return an array of records somewhat matching the query
