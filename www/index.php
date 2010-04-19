@@ -1,7 +1,9 @@
 <?php
 require_once 'config.inc.php';
 
-$peoplefinder  = new UNL_Peoplefinder($driver);
+$options = $_GET;
+$options['driver'] = $driver;
+$peoplefinder  = new UNL_Peoplefinder($options);
 
 
 Savvy_ClassToTemplateMapper::$classname_replacement = 'UNL_';

@@ -6,7 +6,7 @@ UNL_Templates::$options['version'] = 3;
 
 $template = 'Document';
 
-if (!isset($_GET['mobile'])
+if (!isset($context->options['mobile'])
     && (preg_match('/text\/vnd\.wap\.wml|application\/vnd\.wap\.xhtml\+xml/', $_SERVER['HTTP_ACCEPT']))
         || preg_match('/sony|symbian|nokia|samsung|mobile|windows ce|epoc|opera/', $_SERVER['HTTP_USER_AGENT'])
         || preg_match('/mini|nitro|j2me|midp-|cldc-|netfront|mot|up\.browser|up\.link|audiovox/', $_SERVER['HTTP_USER_AGENT'])
@@ -31,10 +31,10 @@ $page->head .= '
 <script type="text/javascript" src="'.UNL_PEOPLEFINDER_URI.'scripts/peoplefinder.js"></script>
 ';
 
-if (isset($_GET['q']) 
-    || isset($_GET['uid'])
-    || isset($_GET['cn'])
-    || isset($_GET['sn'])) {
+if (isset($context->options['q']) 
+    || isset($context->options['uid'])
+    || isset($context->options['cn'])
+    || isset($context->options['sn'])) {
     $page->head .= '<meta name="robots" content="NOINDEX, NOFOLLOW" />';
 }
 
@@ -50,7 +50,7 @@ ob_start();
 
 if (isset($_GET['uid'])) {
     try {
-        $renderer->renderRecord($peoplefinder->getUID($_GET['uid']));
+        $renderer->renderRecord($context->getUID($_GET['uid']));
     } catch (Exception $e) {
         header('HTTP/1.0 404 Not Found');
         echo '<p><br />Sorry, no one with that name could be found!</p>';
@@ -68,7 +68,6 @@ if (isset($_GET['uid'])) {
         }
     } else {
 
-
         if (isset($_GET['q']) && !empty($_GET['q'])) {
             if (strlen($_GET['q']) <= 3) {
                 echo "<p>Please enter more information or <a href='".$_SERVER['PHP_SELF']."?adv=y' title='Click here to perform a detailed Peoplefinder search'>try a Detailed Search.</a></p>";
@@ -85,7 +84,7 @@ if (isset($_GET['uid'])) {
                     $by_affiliation['student']       = array();
                     $by_affiliation['organizations'] = array();
                     
-                    $records = $peoplefinder->getPhoneMatches($_GET['q']);
+                    $records = $context->getPhoneMatches($_GET['q']);
                     
                     foreach ($records as $record) {
                         if ($record->ou == 'org') {
@@ -114,13 +113,13 @@ if (isset($_GET['uid'])) {
                     
                     $like_by_affiliation = $by_affiliation;
                     
-                    $records = $peoplefinder->getExactMatches($_GET['q']);
+                    $records = $context->getExactMatches($_GET['q']);
                     
                     UNL_Peoplefinder::$displayResultLimit -= count($records);
                     
                     $like_records = array();
                     if (UNL_Peoplefinder::$displayResultLimit) {
-                        $like_records = $peoplefinder->getLikeMatches($_GET['q'], null, $records);
+                        $like_records = $context->getLikeMatches($_GET['q'], null, $records);
                     }
                     
                     foreach(array('records'=>'by_affiliation', 'like_records'=>'like_by_affiliation') as $records_var=>$affiliation_var) {
@@ -170,7 +169,7 @@ if (isset($_GET['uid'])) {
             }
         } elseif (isset($_GET['sn']) || isset($_GET['cn'])) {
             // Advanced search
-            $records = $peoplefinder->getAdvancedSearchMatches($_GET['sn'],$_GET['cn'],$_GET['eppa']);
+            $records = $context->getAdvancedSearchMatches($_GET['sn'],$_GET['cn'],$_GET['eppa']);
             $renderer->renderSearchResults($records);
         }
         if (isset($records)) {
@@ -190,7 +189,7 @@ if (!isset($_GET['uid']) && !isset($records)) {
         <div class="two_col right" id="pfShowRecord"></div>';
 }
 
-if (!isset($_GET['uid'])) { ?>
+if (!isset($context->options['uid'])) { ?>
      <div class="clear">
         <a href="<?php echo $myself; ?>" title="Click here to run a basic Peoplefinder search">Basic</a>&nbsp;|&nbsp;<a href="<?php echo $myself; ?>?adv=y" title="Click here to perform a detailed Peoplefinder search">Detailed</a>
     </div>
@@ -198,6 +197,8 @@ if (!isset($_GET['uid'])) { ?>
 }
 
 $page->maincontentarea = ob_get_clean();
+
+$page->maincontentarea .= $savvy->render($context->output);
 
 $page->footercontent = 'UNL | Office of University Communications | <a href="http://www1.unl.edu/wdn/wiki/About_Peoplefinder" onclick="window.open(this.href); return false;">About Peoplefinder</a><br /><br />';
 $page->footercontent .= 'Information obtained from this directory may not be used to provide addresses for mailings to students, faculty or staff.<br />Any solicitation of business, information, contributions or other response from individuals listed in this publication by mail, telephone or other means is forbidden.<br />';
