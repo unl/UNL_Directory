@@ -277,12 +277,30 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
     {
         $r = $this->query("(&(uid=$uid))", $this->detailAttributes, false);
         if (isset($r[0])) {
-            return UNL_Peoplefinder_Record::fromLDAPEntry($r[0]);
+            return self::recordFromLDAPEntry($r[0]);
         } else {
             header('HTTP/1.0 404 Not Found');
             throw new Exception('Cannot find that UID.');
         }
     }
     
+    public static function recordFromLDAPEntry(array $entry)
+    {
+        $r = new UNL_Peoplefinder_Record();
+        foreach (get_object_vars($r) as $var=>$val) {
+            if (isset($entry[strtolower($var)], $entry[strtolower($var)][0])) {
+                $r->$var = new UNL_LDAP_Entry_Attribute($entry[strtolower($var)]);
+            }
+        }
+        return $r;
+    }
     
+    public static function recordFromUNLLDAPEntry(UNL_LDAP_Entry $entry)
+    {
+        $r = new UNL_Peoplefinder_Record();
+        foreach (get_object_vars($r) as $var=>$val) {
+            $r->$var = $entry->$var;
+        }
+        return $r;
+    }
 }

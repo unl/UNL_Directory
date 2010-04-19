@@ -27,7 +27,10 @@ if (strtolower($_SERVER['REQUEST_METHOD']) == 'options') {
     exit();
 }
 
-$peepObj = new UNL_Peoplefinder($driver);
+$options = $_GET;
+$options['driver'] = $driver;
+
+$peepObj = new UNL_Peoplefinder($options);
 
 $format = 'html';
 

@@ -43,26 +43,15 @@ class UNL_Peoplefinder_Record
     public $unlSISMajor;
     public $unlEmailAlias;
     
-    
-    static function fromLDAPEntry(array $entry)
+    function __construct($options = array())
     {
-        $r = new self();
-        foreach (get_object_vars($r) as $var=>$val) {
-            if (isset($entry[strtolower($var)], $entry[strtolower($var)][0])) {
-                $r->$var = new UNL_LDAP_Entry_Attribute($entry[strtolower($var)]);
-            }
+        if (isset($options['uid'])
+            && $options['peoplefinder']) {
+            return $options['peoplefinder']->getUID($options['uid']);
         }
-        return $r;
     }
     
-    static function fromUNLLDAPEntry(UNL_LDAP_Entry $entry)
-    {
-        $r = new self();
-        foreach (get_object_vars($r) as $var=>$val) {
-            $r->$var = $entry->$var;
-        }
-        return $r;
-    }
+    
     
     /**
      * Takes in a string from the LDAP directory, usually formatted like:

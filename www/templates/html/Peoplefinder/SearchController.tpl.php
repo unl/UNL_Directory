@@ -1,7 +1,8 @@
-<div class="two_col left" id="results">
 <?php
 echo $savvy->render($context, 'StandardForm.tpl.php');
-
+?>
+<div class="two_col left" id="results">
+<?php
 // The web view is special.
 
 // First, we group results by affiliation
@@ -65,6 +66,3 @@ foreach ($by_affiliation as $affiliation=>$records) {
 ?>
 </div>
 <div class="two_col right" id="pfShowRecord"></div>
-<div class="clear">
-    <a href="<?php echo $myself; ?>" title="Click here to run a basic Peoplefinder search">Basic</a>&nbsp;|&nbsp;<a href="<?php echo $myself; ?>?adv=y" title="Click here to perform a detailed Peoplefinder search">Detailed</a>
-</div>

@@ -35,10 +35,12 @@ class UNL_Peoplefinder_Driver_WebService implements UNL_Peoplefinder_DriverInter
     function getUID($uid)
     {
         $record = file_get_contents($this->service_url.'?uid='.urlencode($uid).'&format=php');
-        if ($record) {
-            $record = unserialize($record);
+
+        if (false === $record) {
+            throw new Exception('Could not find that user!');
         }
-        return $record;
+
+        return unserialize($record);
     }
 }
 ?>

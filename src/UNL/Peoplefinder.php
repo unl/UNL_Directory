@@ -54,7 +54,8 @@ class UNL_Peoplefinder
     public $output;
 
     public $view_map = array('instructions' => 'UNL_Peoplefinder_Instructions',
-                             'search'       => 'UNL_Peoplefinder_SearchController');
+                             'search'       => 'UNL_Peoplefinder_SearchController',
+                             'record'       => 'UNL_Peoplefinder_Record');
 
     /**
      * Constructor for the object.
@@ -100,6 +101,10 @@ class UNL_Peoplefinder
     {
         $this->determineView();
         if (isset($this->view_map[$this->options['view']])) {
+            if ($this->view_map[$this->options['view']] == 'UNL_Peoplefinder_Record') {
+                $this->output[] = $this->getUID($this->options['uid']);
+                return;
+            }
             $this->options['peoplefinder'] =& $this;
             $this->output[] = new $this->view_map[$this->options['view']]($this->options);
         } else {

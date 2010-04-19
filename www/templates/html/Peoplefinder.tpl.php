@@ -47,22 +47,14 @@ $page->breadcrumbs = '
 
 $page->titlegraphic = '<h1>UNL Peoplefinder</h1>';
 
-ob_start();
-
-if (isset($_GET['uid'])) {
-    try {
-        $renderer->renderRecord($context->getUID($_GET['uid']));
-    } catch (Exception $e) {
-        header('HTTP/1.0 404 Not Found');
-        echo '<p><br />Sorry, no one with that name could be found!</p>';
-    }
-}
-
-
-
-$page->maincontentarea = ob_get_clean();
+$page->maincontentarea = '';
 
 $page->maincontentarea .= $savvy->render($context->output);
+
+$page->maincontentarea .= '
+<div class="clear">
+    <a href="'.UNL_Peoplefinder::getURL().'" title="Click here to run a basic Peoplefinder search">Basic</a>&nbsp;|&nbsp;<a href="'.UNL_Peoplefinder::getURL().'?adv=y" title="Click here to perform a detailed Peoplefinder search">Detailed</a>
+</div>';
 
 $page->footercontent = 'UNL | Office of University Communications | <a href="http://www1.unl.edu/wdn/wiki/About_Peoplefinder" onclick="window.open(this.href); return false;">About Peoplefinder</a><br /><br />';
 $page->footercontent .= 'Information obtained from this directory may not be used to provide addresses for mailings to students, faculty or staff.<br />Any solicitation of business, information, contributions or other response from individuals listed in this publication by mail, telephone or other means is forbidden.<br />';

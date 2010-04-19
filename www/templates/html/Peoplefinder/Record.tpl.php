@@ -1,41 +1,110 @@
 <?php
-if ($context->ou == 'org') {
-    $name = $context->cn;
+echo "<div class='vcard {$context->eduPersonPrimaryAffiliation}'>\n";
+echo '<a class="planetred_profile" href="http://planetred.unl.edu/pg/profile/unl_'.str_replace("-", "_", $context->uid).'" title="Planet Red Profile for '.$context->cn.'"><img class="profile_pic medium" src="'.htmlspecialchars($context->getImageURL()).'"  alt="Photo of '.$context->displayName.'" /></a>';
+if (isset($context->mail)
+    && ($context->eduPersonPrimaryAffiliation != 'student')) {
+    $displayEmail = true;
 } else {
-    $name = $context->sn . ',&nbsp;'. $context->givenName;
-    if (isset($context->eduPersonNickname)) {
-        $name .= ' "'.$context->eduPersonNickname.'"';
+    $displayEmail = false;
+}
+if ($displayEmail && isset($context->mail)) echo "<a class='email' href='mailto:{$context->mail}'>";
+if ($context->ou == 'org') {
+    echo '<span class="cn">'.$context->cn.'</span>'.PHP_EOL;
+} else {
+    echo '<span class="fn">'.$context->displayName.'</span>'.PHP_EOL;
+    if (isset($context->eduPersonNickname)) echo '<span class="nickname">'.$context->eduPersonNickname.'</span>'.PHP_EOL;
+}
+if ($displayEmail && isset($context->unlEmailAlias)) echo "</a>\n";
+if (!empty($context->eduPersonPrimaryAffiliation)) echo '<span class="eppa">('.$context->eduPersonPrimaryAffiliation.')</span>'.PHP_EOL;
+echo '<div class="vcardInfo">'.PHP_EOL;
+if (isset($context->unlSISClassLevel)) {
+    switch ($context->unlSISClassLevel) {
+        case 'FR':
+            $class = 'Freshman,';
+            break;
+        case 'SR':
+            $class = 'Senior,';
+            break;
+        case 'SO':
+            $class = 'Sophomore,';
+            break;
+        case 'JR':
+            $class = 'Junior,';
+            break;
+        case 'GR':
+            $class = 'Graduate Student,';
+            break;
+        default:
+            $class = $context->unlSISClassLevel;
     }
-}
-$onclick = '';
-if (isset($context->uid_onclick)) {
-    $onclick .= ' onclick="return '.$context->uid_onclick.'(\''.$uid.'\');"';
-}
-echo '<a class="planetred_profile" href="http://planetred.unl.edu/pg/profile/unl_'.str_replace("-", "_", $context->uid).'" title="Planet Red Profile for '.$context->cn.'"><img class="profile_pic small" src="http://planetred.unl.edu/mod/profile/icondirect.php?username=unl_'.str_replace("-", "_", $context->uid).'&amp;size=small"  alt="Photo of '.$context->displayName.'" /></a>';
-echo '<div class="recordDetails">';
-echo '<div class="fn"><a href="'.UNL_Peoplefinder::getURL().'?uid='.$context->uid.'" '.$onclick.'>'.$name.'</a></div>'.PHP_EOL;
-if (isset($context->eduPersonPrimaryAffiliation)) {
-    echo '<div class="eppa">('.$context->eduPersonPrimaryAffiliation.')</div>'.PHP_EOL;
-}
-if (isset($context->unlHRPrimaryDepartment)) {
-    echo '<div class="organization-unit">'.$context->unlHRPrimaryDepartment.'</div>'.PHP_EOL;
-}
-if (isset($context->title)) {
-    echo '<div class="title">'.$context->title.'</div>'.PHP_EOL;
-}
-if (isset($context->telephoneNumber)) {
-    $link = '<a href="';
-    if (strpos($_SERVER['HTTP_USER_AGENT'], "iPhone") === false) {
-        $link .= "wtai://wp/mc;".str_replace(array("(", ")", "-"), "", $context->telephoneNumber);
-    } else {
-        $link .= "tel:".$context->telephoneNumber;
-    }
-    $link .= '">'.$context->telephoneNumber.'</a>';
-    echo '<div class="tel">'.$link.'</div>'.PHP_EOL;
+    echo '<span class="title">'.$class." ".$this->formatMajor($context->unlSISMajor).'&ndash;'.$this->formatCollege((string) $context->unlSISCollege).'</span>';
 }
 
-echo '</div>';
-echo '<a href="'.UNL_Peoplefinder::getURL().'?uid='.$context->uid.'" class="cInfo" '.$onclick.'>Contact '.$context->givenName.'</a>';
-if (isset($parent->context->options['chooser'])) {
-    echo '<div class="pfchooser"><a href="#" onclick="return pfCatchUID(\''.$context->uid.'\');">Choose this person</a></div>'.PHP_EOL;
+if (isset($context->title)) {
+    echo "<span class='title'>{$context->title}</span>\n";
 }
+
+if (isset($context->unlHRPrimaryDepartment)) {
+    $org_name = 'University of Nebraska&ndash;Lincoln';
+    if ($context->unlHRPrimaryDepartment == 'Office of the President') {
+        $org_name = 'University of Nebraska';
+    }
+    $dept_url = UNL_PEOPLEFINDER_URI.'departments/?d='.urlencode($context->unlHRPrimaryDepartment);
+    echo "<span class='org'>\n\t<span class='organization-unit'><a href='{$dept_url}'>{$context->unlHRPrimaryDepartment}</a></span>\n\t<span class='organization-name'>$org_name</span></span>\n";
+}
+
+if (isset($context->postalAddress)) {
+    $address = $context->formatPostalAddress();
+
+    if (strpos($address['postal-code'], '68588') == 0) {
+        $regex = "/([A-Za-z0-9].) ([A-Z0-9\&]{2,4})/" ; //& is for M&N Building
+
+        if (preg_match($regex, $address['street-address'], $matches)) {
+            $bldgs = new UNL_Common_Building();
+
+            if ($bldgs->buildingExists($matches[2])) {
+
+                $replace = '${1} <a class="location mapurl" href="http://www1.unl.edu/tour/${2}">${2}</a>';
+                $address['street-address'] = preg_replace($regex, $replace, $address['street-address']);
+            }
+        }
+    }
+
+    echo '<div class="adr workAdr">
+         <span class="type">Work</span>
+         <span class="street-address">'. $address['street-address'] . '</span>
+         <span class="locality">' . $address['locality'] . '</span>
+         <span class="region">' . $address['region'] . '</span>
+         <span class="postal-code">' . $address['postal-code'] . '</span>
+         <div class="country-name">USA</div>
+        </div>'.PHP_EOL;
+}
+
+if (strpos($_SERVER['HTTP_USER_AGENT'], "iPhone") === false) {
+    $href = "wtai://wp/mc;";
+    $isIPhone = false;
+} else {
+    $href = "tel:";
+    $isIPhone = true;
+}
+if (isset($context->telephoneNumber)) {
+    
+    echo '<div class="tel workTel">
+             <span class="type">Work</span>
+             <span class="value">'.$savvy->render($context->telephoneNumber, 'Peoplefinder/Record/TelephoneNumber.tpl.php').'</span>
+            </div>'.PHP_EOL;
+}
+
+if (isset($context->unlSISLocalPhone)) {
+    echo '<div class="tel homeTel">
+             <span class="type">Phone</span>
+             <span class="value">'.$this->formatPhone($context->unlSISLocalPhone).'</span>
+            </div>'.PHP_EOL;
+}
+
+if ($displayEmail) {
+    echo "<span class='email'><a class='email' href='mailto:{$context->mail}'>{$context->mail}</a></span>\n";
+}
+
+echo '<a href="'.UNL_Peoplefinder::getURL().'vcards/'.$context->uid.'" title="Download V-Card for '.$context->givenName.' '.$context->sn.'"><img src="/wdn/templates_3.0/css/content/images/mimetypes/text-vcard.png" alt="vCard" /> <span class="caption">vCard</span></a>';
+echo '</div>'.PHP_EOL.'</div>'.PHP_EOL;

@@ -38,7 +38,7 @@ for ($i = $start; $i<$end; $i++) {
     $class .= ' '.$context[$i]->eduPersonPrimaryAffiliation;
     echo '<li class="'.$class.' '.$even_odd.'">';
     echo '<div class="overflow">';
-    echo $savvy->render($context[$i]);
+    echo $savvy->render($context[$i], 'Peoplefinder/RecordInList.tpl.php');
     echo '</div>';
     echo '</li>'.PHP_EOL;
 }

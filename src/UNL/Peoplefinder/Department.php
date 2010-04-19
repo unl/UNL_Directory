@@ -131,7 +131,7 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
      */
     function current()
     {
-        return UNL_Peoplefinder_Record::fromUNLLDAPEntry($this->getLDAPResults()->current());
+        return UNL_Peoplefinder_Driver_LDAP::recordFromUNLLDAPEntry($this->getLDAPResults()->current());
     }
     
     function key()
