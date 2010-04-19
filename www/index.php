@@ -14,6 +14,7 @@ $savvy->setTemplatePath(dirname(__FILE__).'/templates/html');
 if ($peoplefinder->options['format'] != 'html') {
     switch($peoplefinder->options['format']) {
         case 'json':
+        case 'php':
             $savvy->addTemplatePath(dirname(__FILE__).'/templates/'.$peoplefinder->options['format']);
             break;
         case 'hcard':
