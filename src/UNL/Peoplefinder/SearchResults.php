@@ -1,8 +1,8 @@
 <?php
 class UNL_Peoplefinder_SearchResults extends ArrayIterator
 {
-    public $options = array('q'    => '',
-                            'eppa' => '');
+    public $options = array('q'           => '',
+                            'affiliation' => '');
 
     function __construct($options = array())
     {
@@ -23,10 +23,10 @@ class UNL_Peoplefinder_SearchResults extends ArrayIterator
             // Detailed search
             $search_method = 'getAdvancedSearchMatches';
             $this->options['q'] = array(
-                'sn'   => $this->options['sn'],
-                'cn'   => $this->options['cn']);
+                'sn' => $this->options['sn'],
+                'cn' => $this->options['cn']);
         }
 
-        parent::__construct($this->options['peoplefinder']->$search_method($this->options['q'], $this->options['eppa']));
+        parent::__construct($this->options['peoplefinder']->$search_method($this->options['q'], $this->options['affiliation']));
     }
 }
