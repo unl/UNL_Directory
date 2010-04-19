@@ -47,9 +47,7 @@ $page->breadcrumbs = '
 
 $page->titlegraphic = '<h1>UNL Peoplefinder</h1>';
 
-$page->maincontentarea = '';
-
-$page->maincontentarea .= $savvy->render($context->output);
+$page->maincontentarea = $savvy->render($context->output);
 
 $page->maincontentarea .= '
 <div class="clear">

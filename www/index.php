@@ -11,14 +11,16 @@ $savvy = new Savvy();
 $savvy->setTemplatePath(dirname(__FILE__).'/templates/html');
 
 
-//if ($peoplefinder->options['format'] != 'html') {
-//    switch($enews->options['format']) {
-//        case 'json':
-//            $savvy->addTemplatePath(dirname(__FILE__).'/templates/'.$enews->options['format']);
-//            break;
-//        default:
-//    }
-//}
+if ($peoplefinder->options['format'] != 'html') {
+    switch($peoplefinder->options['format']) {
+        case 'json':
+            $savvy->addTemplatePath(dirname(__FILE__).'/templates/'.$peoplefinder->options['format']);
+            break;
+        case 'hcard':
+            Savvy_ClassToTemplateMapper::$output_template['UNL_Peoplefinder'] = 'Peoplefinder-partial';
+        default:
+    }
+}
 
 echo $savvy->render($peoplefinder);
 
