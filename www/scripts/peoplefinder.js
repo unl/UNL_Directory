@@ -12,8 +12,8 @@ WDN.jQuery(document).ready(function() {
 		WDN.jQuery('li#filters').slideDown();
 		return false;
 	});
-	WDN.jQuery('#q').click(hideLabel);
-	WDN.jQuery('#queryString').click(hideLabel);
+	WDN.jQuery('#q').focus(hideLabel);
+	WDN.jQuery('#queryString').focus(hideLabel);
 	if (WDN.jQuery('#q').val() !== "") {
 		hideLabel();
 	};
