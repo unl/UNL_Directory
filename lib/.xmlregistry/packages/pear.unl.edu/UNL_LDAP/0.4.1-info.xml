@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" packagerversion="1.8.2" version="2.0" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
+<package xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" packagerversion="1.9.0" version="2.0" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
  <name>UNL_LDAP</name>
  <channel>pear.unl.edu</channel>
  <summary>LDAP directory services for UNL</summary>
@@ -10,10 +10,10 @@
   <email>brett.bieber@gmail.com</email>
   <active>yes</active>
  </lead>
- <date>2010-02-26</date>
- <time>14:09:53</time>
+ <date>2010-04-23</date>
+ <time>09:37:47</time>
  <version>
-  <release>0.4.0</release>
+  <release>0.4.1</release>
   <api>0.4.0</api>
  </version>
  <stability>
@@ -22,17 +22,16 @@
  </stability>
  <license uri="http://www1.unl.edu/wdn/wiki/Software_License">BSD</license>
  <notes>
-Feature release:
-Add backup LDAP server.
-Increase PHP dependency to 5.1.6
+Bugfix Release:
+* Switch to protected attributes instead of private for easier serialization.
  </notes>
  <contents>
   <dir name="/">
    <file baseinstalldir="/" md5sum="58a0fd030a6b9cc8dd721d3feddb8240" name="UNL/LDAP/Result.php" role="php"/>
    <file baseinstalldir="/" md5sum="89f2d218e91e3fd2413c79df8758e455" name="UNL/LDAP/People.php" role="php"/>
    <file baseinstalldir="/" md5sum="3c3d370c93d9c8fa86039a7650872a2a" name="UNL/LDAP/Exception.php" role="php"/>
-   <file baseinstalldir="/" md5sum="12be1048ef9826552615402548fef1ff" name="UNL/LDAP/Entry/Attribute.php" role="php"/>
-   <file baseinstalldir="/" md5sum="3a0d37a47d72e40377991aa46fbe2839" name="UNL/LDAP/Entry.php" role="php"/>
+   <file baseinstalldir="/" md5sum="1cc41913a00c454955c9c138a652f204" name="UNL/LDAP/Entry/Attribute.php" role="php"/>
+   <file baseinstalldir="/" md5sum="d0fe31664523d1b6f3492db0435d7398" name="UNL/LDAP/Entry.php" role="php"/>
    <file baseinstalldir="/" md5sum="913f674a02c3e4c2c5fbeeaa61dd963f" name="UNL/LDAP.php" role="php"/>
    <file baseinstalldir="/" md5sum="1fa66e7b752de71d29bc1b34d891e139" name="tests/UNL_LDAPTest.php" role="test"/>
    <file baseinstalldir="/" md5sum="4ec63a962bbddbfd1d9b12eafe8148b1" name="docs/examples/twodirectories.php" role="doc"/>
@@ -118,6 +117,22 @@ Bump stability to beta.
 Feature release:
 Add backup LDAP server.
 Increase PHP dependency to 5.1.6
+   </notes>
+   </release>
+   <release>
+    <version>
+     <release>0.4.1</release>
+     <api>0.4.0</api>
+    </version>
+    <stability>
+     <release>beta</release>
+     <api>beta</api>
+    </stability>
+    <date>2010-04-23</date>
+    <license uri="http://www1.unl.edu/wdn/wiki/Software_License">BSD</license>
+    <notes>
+Bugfix Release:
+* Switch to protected attributes instead of private for easier serialization.
    </notes>
    </release>
   </changelog>

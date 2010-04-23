@@ -26,11 +26,11 @@
  */
 class UNL_LDAP_Entry_Attribute implements Countable, Iterator
 {
-    private $_attribute;
+    protected $_attribute;
     
-    private $_valid = false;
+    protected $_valid = false;
     
-    private $_currentEntry = false;
+    protected $_currentEntry = false;
     
     /**
      * construct an ldap attribute object

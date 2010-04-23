@@ -28,11 +28,8 @@ require_once 'UNL/LDAP/Entry/Attribute.php';
  */
 class UNL_LDAP_Entry
 {
-    private $_link;
     
-    private $_entry;
-    
-    private $_attributes;
+    protected $_attributes;
     
     /**
      * Construct an LDAP entry object
@@ -42,8 +39,6 @@ class UNL_LDAP_Entry
      */
     function __construct(&$link, $entry)
     {
-        $this->_link       = $link;
-        $this->_entry      = $entry;
         $this->_attributes = ldap_get_attributes($link, $entry);
     }
     
