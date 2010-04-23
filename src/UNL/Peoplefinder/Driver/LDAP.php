@@ -207,7 +207,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
         $r = array();
         if ($this->lastResultCount > 0) {
             for ($i = 0; $i < $this->lastResultCount; $i++) {
-                $r[] = UNL_Peoplefinder_Record::fromLDAPEntry($this->lastResult[$i]);
+                $r[] = self::recordFromLDAPEntry($this->lastResult[$i]);
             }
         }
         return $r;
