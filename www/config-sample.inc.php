@@ -25,4 +25,4 @@ set_time_limit(5);
 $driver = new UNL_Peoplefinder_Driver_LDAP();
 
 // Otherwise, use the webservice driver
-$driver = new UNL_Peoplefinder_Driver_WebService();
+$driver = new UNL_Peoplefinder_Driver_WebService(array('service_url'=>'http://ucommbieber.unl.edu/workspace/peoplefinder/www/service.php'));

@@ -3,6 +3,13 @@ class UNL_Peoplefinder_Driver_WebService implements UNL_Peoplefinder_DriverInter
 {
     public $service_url = 'http://peoplefinder.unl.edu/service.php';
     
+    function __construct($options = array())
+    {
+        if (isset($options['service_url'])) {
+            $this->service_url = $options['service_url'];
+        }
+    }
+    
     function getExactMatches($query, $affiliation = null)
     {
         $results = file_get_contents($this->service_url.'?q='.urlencode($query).'&format=php&affiliation='.urlencode($affiliation).'&method=getExactMatches');
