@@ -89,7 +89,11 @@ class UNL_Peoplefinder_Driver_LDAP_StandardFilter
      */
     function excludeRecords($records = array())
     {
-        $this->_excludeRecords = array_merge($this->_excludeRecords, $records);
+        if (count($this->_excludeRecords)) {
+            $this->_excludeRecords = array_merge($this->_excludeRecords, $records);
+        } else {
+            $this->_excludeRecords = $records;
+        }
     }
     
     protected function addExcludedRecords()
