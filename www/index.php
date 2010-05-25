@@ -20,6 +20,7 @@ if ($peoplefinder->options['format'] != 'html') {
             $savvy->addTemplatePath(dirname(__FILE__).'/templates/'.$peoplefinder->options['format']);
             break;
         case 'hcard':
+        case 'partial':
             Savvy_ClassToTemplateMapper::$output_template['UNL_Peoplefinder'] = 'Peoplefinder-partial';
         default:
     }
