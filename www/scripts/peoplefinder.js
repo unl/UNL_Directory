@@ -1,17 +1,21 @@
 service_peoplefinder = function() {
 	return {
-		updatePeopleFinderResults : function(){
-			alert('update results');
+		updatePeopleFinderResults : function(){ //function called when the list has been rendered
+			WDN.jQuery('ul.pfResult li').each(function(){
+				onClick = WDN.jQuery(this).find('.cInfo').attr('onclick');
+				WDN.jQuery(this).click(onClick);
+			});
 		},
-		updatePeopleFinderRecord : function(){
-			alert('update record');
+		updatePeopleFinderRecord : function(){ //function called when a record has been rendered
+			
 		}
-	}
+	};
 }();
 
 WDN.jQuery(document).ready(function() {
 	WDN.loadJS('wdn/templates_3.0/scripts/toolbar_peoplefinder.js', function(){
 		WDN.toolbar_peoplefinder.serviceURL = '';
+		WDN.toolbar_peoplefinder.configuedWebService = true;
 	});
 	WDN.jQuery('#form1').submit(function(eventObject) {
 		WDN.jQuery('#pfShowRecord').empty();
@@ -22,7 +26,9 @@ WDN.jQuery(document).ready(function() {
 		WDN.jQuery('li#filters').slideDown();
 		return false;
 	});
-	WDN.jQuery('#q').focus(hideLabel);
+	WDN.jQuery('#q').focus(function(){
+		WDN.jQuery('#queryString').hide();
+	});
 	WDN.jQuery('#queryString').focus(hideLabel);
 	if (WDN.jQuery('#q').val() !== "") {
 		hideLabel();
