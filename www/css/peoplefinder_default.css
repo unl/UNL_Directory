@@ -169,7 +169,7 @@
 	min-height:45px;
 	padding: 7px 0px;
 }
-#maincontent ul.pfResult li:hover div.overflow, #maincontent ul.pfResult li.selected {
+#maincontent ul.pfResult li:hover div.overflow, #maincontent ul.pfResult li.selected div.overflow {
 	background:url('images/selectedBG.png') no-repeat left;
 }
 .eppa, .organization-unit, .tel, .type {display:none;} /* @todo hiding for now, perhaps these need to be pulled out of HTML in lis? */
@@ -217,6 +217,7 @@
 	min-height:120px;
 	position:relative;
 	width:425px;
+	z-index:9;
 }
 .vcard a.email {
 	
@@ -276,6 +277,7 @@ a.email {background:none;}
 	left:32px;
 	font-size:1.5em;
 	color:#98999a;
+	cursor:text;
 }
 #form1 ol li:first-child input[type=text] {
 	width:364px;

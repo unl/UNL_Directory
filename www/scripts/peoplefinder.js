@@ -3,11 +3,20 @@ service_peoplefinder = function() {
 		updatePeopleFinderResults : function(){ //function called when the list has been rendered
 			WDN.jQuery('ul.pfResult li').each(function(){
 				onClick = WDN.jQuery(this).find('.cInfo').attr('onclick');
+				WDN.jQuery(this).find('.cInfo').removeAttr('onclick');
 				WDN.jQuery(this).click(onClick);
+			});
+			WDN.jQuery('ul.pfResult li').click(function() {
+				WDN.jQuery('li.selected').removeClass('selected');
+				WDN.jQuery(this).addClass('selected');
+				return false;
 			});
 		},
 		updatePeopleFinderRecord : function(){ //function called when a record has been rendered
-			
+			WDN.jQuery('#pfShowRecord').offset(function(index, coords) {
+				selectedLi = WDN.jQuery('li.selected').offset();
+				return {top : selectedLi.top - 40, left : coords.left};
+			});
 		}
 	};
 }();
