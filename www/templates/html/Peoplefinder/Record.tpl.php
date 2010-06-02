@@ -1,6 +1,6 @@
 <?php
 echo "<div class='vcard {$context->eduPersonPrimaryAffiliation}'>\n";
-echo '<a class="planetred_profile" href="http://planetred.unl.edu/pg/profile/unl_'.str_replace("-", "_", $context->uid).'" title="Planet Red Profile for '.$context->cn.'"><img class="profile_pic medium" src="'.htmlspecialchars($context->getImageURL()).'"  alt="Photo of '.$context->displayName.'" /></a>';
+echo '<a class="planetred_profile" href="http://planetred.unl.edu/pg/profile/unl_'.str_replace("-", "_", $context->uid).'" title="Planet Red Profile for '.$context->cn.'"><img class="profile_pic medium photo" src="'.htmlspecialchars($context->getImageURL()).'"  alt="Photo of '.$context->displayName.'" /></a>';
 if (isset($context->mail)
     && ($context->eduPersonPrimaryAffiliation != 'student')) {
     $displayEmail = true;
