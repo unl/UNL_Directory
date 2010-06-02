@@ -100,18 +100,21 @@ class UNL_Peoplefinder_Record
     function getImageURL($size = 'medium')
     {
 
+        if ($this->ou == 'org') {
+            return UNL_PEOPLEFINDER_URI.'images/organization.png';
+        }
+
         switch ($size) {
+            case 'large':
             case 'medium':
+            case 'tiny':
+            case 'topbar':
                 break;
             default:
                 $size = 'medium';
         }
 
-        if ($this->ou == 'org') {
-            return UNL_PEOPLEFINDER_URI.'images/organization.png';
-        }
-
-        return 'http://planetred.unl.edu/mod/profile/icondirect.php?username=unl_'.str_replace("-", "_", $this->uid).'&size='.$size;
+        return 'http://planetred.unl.edu/pg/icon/unl_'.str_replace('-', '_', $this->uid).'/'.$size.'/';
     }
     
     function __toString()
