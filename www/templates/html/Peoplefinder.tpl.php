@@ -49,11 +49,6 @@ $page->titlegraphic = '<h1>UNL Peoplefinder</h1>';
 
 $page->maincontentarea = $savvy->render($context->output);
 
-$page->maincontentarea .= '
-<div class="clear">
-    <a href="'.UNL_Peoplefinder::getURL().'" title="Click here to run a basic Peoplefinder search">Basic</a>&nbsp;|&nbsp;<a href="'.UNL_Peoplefinder::getURL().'?adv=y" title="Click here to perform a detailed Peoplefinder search">Detailed</a>
-</div>';
-
 $page->footercontent = 'UNL | Office of University Communications | <a href="http://www1.unl.edu/wdn/wiki/About_Peoplefinder" onclick="window.open(this.href); return false;">About Peoplefinder</a><br /><br />';
 $page->footercontent .= 'Information obtained from this directory may not be used to provide addresses for mailings to students, faculty or staff.<br />Any solicitation of business, information, contributions or other response from individuals listed in this publication by mail, telephone or other means is forbidden.<br />';
 
