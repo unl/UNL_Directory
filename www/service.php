@@ -26,7 +26,7 @@ header('Expires: '.date('r', strtotime('tomorrow')));
 if (strtolower($_SERVER['REQUEST_METHOD']) == 'options') {
     exit();
 }
-$options = array('format'=>'partial');
+$options = array('format'=>'partial', 'onclick'=>'pf_getUID');
 $options = $_GET + $options;
 $options['driver'] = $driver;
 $peoplefinder  = new UNL_Peoplefinder($options);

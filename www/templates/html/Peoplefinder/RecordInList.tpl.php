@@ -8,8 +8,8 @@ if ($context->ou == 'org') {
     }
 }
 $onclick = '';
-if (isset($context->uid_onclick)) {
-    $onclick .= ' onclick="return '.$context->uid_onclick.'(\''.$uid.'\');"';
+if (isset($parent->parent->context->options['onclick'])) {
+    $onclick .= ' onclick="return '.htmlentities($parent->parent->context->options['onclick'], ENT_QUOTES).'(\''.$context->uid.'\');"';
 }
 echo '<a class="planetred_profile" href="http://planetred.unl.edu/pg/profile/unl_'.str_replace("-", "_", $context->uid).'" title="Planet Red Profile for '.$context->cn.'"><img class="profile_pic small photo" src="http://planetred.unl.edu/mod/profile/icondirect.php?username=unl_'.str_replace("-", "_", $context->uid).'&amp;size=small"  alt="Photo of '.$context->displayName.'" /></a>';
 echo '<div class="recordDetails">';
