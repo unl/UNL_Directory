@@ -127,4 +127,8 @@ class UNL_Peoplefinder
         return call_user_func_array(array($this->driver, $method), $args);
     }
 
+    public static function getDataDir()
+    {
+        return dirname(__FILE__).'/../../data';
+    }
 }
