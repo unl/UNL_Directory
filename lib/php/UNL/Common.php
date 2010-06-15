@@ -6,6 +6,11 @@ class UNL_Common
     
     static private $db;
     
+    /**
+     * Get the database.
+     * 
+     * @return PDO
+     */
     static function getDB()
     {
         if (!isset(self::$db)) {
@@ -16,12 +21,19 @@ class UNL_Common
 
     static public function getDataDir()
     {
-        return dirname(dirname(dirname(__FILE__))).'/data/UNL_Common/UNL/data/';
+        if (file_exists(dirname(dirname(dirname(__FILE__))) . '/data/UNL_Common/pear.unl.edu')) {
+            return dirname(dirname(dirname(__FILE__))) . '/data/UNL_Common/pear.unl.edu/';
+        }
+        if (file_exists(dirname(dirname(dirname(__FILE__))) . '/data/UNL_Common')) {
+            return dirname(dirname(dirname(__FILE__))) . '/data/UNL_Common/data/';
+        }
+        return dirname(dirname(dirname(__FILE__))) . '/data/';
     }
     
     static protected function __connect()
     {
-        if (self::$db = new SQLiteDatabase(self::getDataDir().self::$db_file)) {
+        $dsn = 'sqlite:'.self::getDataDir().self::$db_file;
+        if (self::$db = new PDO($dsn)) {
             return self::$db;
         }
         throw new Exception('Cannot connect to database!');
@@ -31,7 +43,7 @@ class UNL_Common
     {
         $db = self::getDB();
         $result = $db->query("SELECT name FROM sqlite_master WHERE type='table' AND name='$table'");
-        return $result->numRows() > 0;
+        return $result->rowCount() > 0;
     }
     
     static function importCSV($table, $filename)
@@ -39,7 +51,7 @@ class UNL_Common
         $db = self::getDB();
         if ($h = fopen($filename,'r')) {
             while ($line = fgets($h)) {
-                $db->queryExec("INSERT INTO ".$table." VALUES ($line);");
+                $db->exec("INSERT INTO ".$table." VALUES ($line);");
             }
         }
     }
