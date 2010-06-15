@@ -1,5 +1,7 @@
 <?php
-echo $savvy->render($context, 'StandardForm.tpl.php');
+if ($context->options['format'] != 'partial') {
+    echo $savvy->render($context, 'StandardForm.tpl.php');
+}
 ?>
 <div class="two_col left" id="results">
 <?php
