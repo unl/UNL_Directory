@@ -171,7 +171,7 @@ if (isset($_GET['q']) && !empty($_GET['q'])) {
     $renderer->renderRecord($peepObj->getUID($_GET['uid']));
 } elseif (isset($_GET['d'])) {
     try {
-        $department = new UNL_Peoplefinder_Department($_GET['d']);
+        $department = new UNL_Peoplefinder_Department($_GET);
         foreach ($department as $employee) {
             $renderer->renderRecord($employee);
         }
