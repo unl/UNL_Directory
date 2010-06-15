@@ -24,13 +24,9 @@
  * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
  * @link      http://pear.unl.edu/package/UNL_LDAP
  */
-class UNL_LDAP_Entry_Attribute implements Countable, Iterator
+class UNL_LDAP_Entry_Attribute extends ArrayIterator
 {
-    protected $_attribute;
-    
-    protected $_valid = false;
-    
-    protected $_currentEntry = false;
+    public $count;
     
     /**
      * construct an ldap attribute object
@@ -39,67 +35,9 @@ class UNL_LDAP_Entry_Attribute implements Countable, Iterator
      */
     public function __construct(array $attribute)
     {
-        $this->_attribute    = $attribute;
-        $this->_valid        = true;
-        $this->_currentEntry = 0;
-    }
-    
-    /**
-     * returns the current attribute iterated over
-     *
-     * @return string
-     */
-    function current()
-    {
-        return $this->_attribute[$this->_currentEntry];
-    }
-    
-    /**
-     * advance to the next attribute
-     *
-     * @return string | false
-     */
-    function next()
-    {
-        if ($this->_currentEntry !== false 
-            && $this->_currentEntry < $this->count()-1) {
-            $this->_currentEntry ++;
-            return $this->current();
-        } else {
-            $this->_valid = false;
-            return false;
-        }
-    }
-    
-    /**
-     * Reset to the first attribute in the set.
-     *
-     * @return void
-     */
-    public function rewind()
-    {
-        $this->_currentEntry = 0;
-    }
-    
-    /**
-     * retrieve a unique key for this attribute, in this case it will
-     * be an int
-     *
-     * @return int
-     */
-    public function key()
-    {
-        return $this->_currentEntry; 
-    }
-    
-    /**
-     * whether the attributes can be iterated over or not.
-     *
-     * @return bool
-     */
-    public function valid()
-    {
-        return $this->_valid;
+        $this->count = $attribute['count'];
+        unset($attribute['count']);
+        parent::__construct($attribute);
     }
     
     /**
@@ -109,7 +47,7 @@ class UNL_LDAP_Entry_Attribute implements Countable, Iterator
      */
     public function count()
     {
-        return $this->_attribute['count'];
+        return $this->count;
     }
     
     /**
@@ -119,6 +57,6 @@ class UNL_LDAP_Entry_Attribute implements Countable, Iterator
      */
     public function __toString()
     {
-        return $this->current();
+        return (string)$this->current();
     }
 }
