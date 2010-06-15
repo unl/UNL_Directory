@@ -37,7 +37,7 @@ if (isset($context->unlSISClassLevel)) {
         default:
             $class = $context->unlSISClassLevel;
     }
-    echo '<span class="title">'.$class." ".$this->formatMajor($context->unlSISMajor).'&ndash;'.$this->formatCollege((string) $context->unlSISCollege).'</span>';
+    echo '<span class="title">'.$class." ".$context->formatMajor($context->unlSISMajor).'&ndash;'.$context->formatCollege((string) $context->unlSISCollege).'</span>';
 }
 
 if (isset($context->title)) {
@@ -98,7 +98,7 @@ if (isset($context->telephoneNumber)) {
 if (isset($context->unlSISLocalPhone)) {
     echo '<div class="tel homeTel">
              <span class="type">Phone</span>
-             <span class="value">'.$this->formatPhone($context->unlSISLocalPhone).'</span>
+             <span class="value">'.$savvy->render($context->unlSISLocalPhone, 'Peoplefinder/Record/TelephoneNumber.tpl.php').'</span>
             </div>'.PHP_EOL;
 }
 
