@@ -55,7 +55,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
     public $detailAttributes = array(
         'ou',
         'cn',
-    	'eduPersonAffiliation',
+        'eduPersonAffiliation',
         'eduPersonNickname',
         'eduPersonPrimaryAffiliation',
         'givenName',
