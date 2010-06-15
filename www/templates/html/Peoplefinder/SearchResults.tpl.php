@@ -14,12 +14,12 @@ if ($start > 0 || $end < count($context)) {
     $page = (isset($context->options['p']))?$context->options['p']:0;
     $next = $page + 1;
     if ($page>=1)  {
-        $prevLink = '<a class="previous" href="'.$this->uri.'?'.preg_replace('/[&]?p=\d/','',$_SERVER['QUERY_STRING']).'&amp;p='.($page-1).'">&lt;&lt;&nbsp;</a>';
+        $prevLink = '<a class="previous" href="'.UNL_Peoplefinder::getURL().'?'.preg_replace('/[&]?p=\d/','',$_SERVER['QUERY_STRING']).'&amp;p='.($page-1).'">&lt;&lt;&nbsp;</a>';
     } else {
         $prevLink = '&lt;&lt;&nbsp;';
     }
     if ($end < $num_records) {
-        $nextLink = "<a class='next' href='".$this->uri."?".preg_replace("/[&]?p=\d/","",$_SERVER['QUERY_STRING'])."&amp;p=$next'>&nbsp;&gt;&gt;</a>";
+        $nextLink = "<a class='next' href='".UNL_Peoplefinder::getURL()."?".preg_replace("/[&]?p=\d/","",$_SERVER['QUERY_STRING'])."&amp;p=$next'>&nbsp;&gt;&gt;</a>";
     }
     else $nextLink = '&nbsp;&gt;&gt;';
     $navlinks = '<div class="cNav">'.$prevLink.$nextLink.'</div>';
