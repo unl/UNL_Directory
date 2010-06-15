@@ -96,7 +96,64 @@ class UNL_Peoplefinder_Record
         
         return $address;
     }
+
+/**
+     * Formats a major subject code into a text description.
+     *
+     * @param string $subject Subject code for the major eg: MSYM
+     * 
+     * @return string
+     */
+    public function formatMajor($subject)
+    {
+
+        include_once 'Cache/Lite.php';
+        $c = new Cache_Lite();
+        if ($subject_xml = $c->get('catalog subjects')) {
+            
+        } else {
+            if ($subject_xml = file_get_contents('http://bulletin.unl.edu/?view=subjects&format=xml')) {
+                $c->save($subject_xml);
+            } else {
+                $c->extendLife();
+                $c->get('catalog subjects');
+            }
+        }
+        
+        $d = new DOMDocument();
+        $d->loadXML($subject_xml);
+        if ($subject_el = $d->getElementById($subject)) {
+            return $subject_el->textContent;
+        }
+        
+        switch ($subject) {
+            case 'UNDL':
+                return 'Undeclared';
+            case 'PBAC':
+                return 'Non-Degree Post-Baccalaureate';
+            default:
+                return $subject;
+        }
+    }
     
+    /**
+     * Format a three letter college abbreviation into the full college name.
+     *
+     * @param string $college College abbreviation = FPA
+     * 
+     * @return string College of Fine &amp; Performing Arts
+     */
+    public function formatCollege($college)
+    {
+        include_once 'UNL/Common/Colleges.php';
+        $colleges = new UNL_Common_Colleges();
+        if (isset($colleges->colleges[$college])) {
+            return htmlentities($colleges->colleges[$college]);
+        }
+        
+        return $college;
+    }
+
     function getImageURL($size = 'medium')
     {
 
