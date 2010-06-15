@@ -70,9 +70,12 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
      *
      * @param string $name Name of the department
      */
-    function __construct($name)
+    function __construct($options = array())
     {
-        $this->name = $name;
+        if (!isset($options['d'])) {
+            throw new Exception('No department name! Pass as the d array value');
+        }
+        $this->name = $options['d'];
         $this->_xml = new SimpleXMLElement(file_get_contents(UNL_Peoplefinder::getDataDir().'/hr_tree.xml'));
         $results = $this->_xml->xpath('//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="name"][@value="'.$this->name.'"]/..');
         if (isset($results[0])) {

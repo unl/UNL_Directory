@@ -1,6 +1,8 @@
 <?php
 class UNL_Peoplefinder_Department_Search implements Countable, Iterator
 {
+    public $options = array('q' => '');
+    
     public $q;
     
     /**
@@ -14,16 +16,17 @@ class UNL_Peoplefinder_Department_Search implements Countable, Iterator
     
     protected $current = 0;
     
-    function __construct($q)
+    function __construct($options = array())
     {
-        $q = strtolower(str_replace('"', '', $q));
+        $this->options = $options + $this->options;
+        $q = strtolower(str_replace('"', '', $this->options['q']));
         $this->xml = new SimpleXMLElement(file_get_contents(UNL_Peoplefinder::getDataDir().'/hr_tree.xml'));
         $this->results = $this->xml->xpath('//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="name"][contains(translate(@value,"ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz"),"'.$q.'")]');
     }
     
     function current()
     {
-        return new UNL_Peoplefinder_Department($this->results[$this->current]['value']);
+        return new UNL_Peoplefinder_Department(array('d'=>$this->results[$this->current]['value']));
     }
     
     function next()
