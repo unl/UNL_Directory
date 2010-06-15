@@ -1,6 +1,4 @@
 <?php
-$renderer_options = array('uri'=>UNL_PEOPLEFINDER_URI);
-$renderer = new UNL_Peoplefinder_Renderer_HTML($renderer_options);
 $myself = htmlentities(str_replace('index.php', '', $_SERVER['PHP_SELF']), ENT_QUOTES);
 UNL_Templates::$options['version'] = 3;
 
@@ -26,8 +24,8 @@ $page->head .= '
 <meta name="keywords" content="university of nebraska-lincoln student faculty staff directory vcard" />
 <meta name="author" content="Brett Bieber, UNL Office of University Communications" />
 <meta name="viewport" content="width = 320" />
-<link rel="stylesheet" type="text/css" media="screen" href="css/peoplefinder_default.css" />
-<link media="only screen and (max-device-width: 480px)" href="css/small_devices.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" media="screen" href="'.UNL_PEOPLEFINDER_URI.'css/peoplefinder_default.css" />
+<link media="only screen and (max-device-width: 480px)" href="'.UNL_PEOPLEFINDER_URI.'css/small_devices.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="'.UNL_PEOPLEFINDER_URI.'scripts/peoplefinder.js"></script>
 ';
 
