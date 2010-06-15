@@ -21,6 +21,7 @@ class UNL_Officefinder
     function __construct($options = array())
     {
         $this->options = $options + $this->options;
+        $this->run();
     }
     
     public function determineView()

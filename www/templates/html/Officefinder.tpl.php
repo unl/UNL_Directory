@@ -17,11 +17,8 @@ if (isset($context->options['q'])) {
 
 $q = '';
 if (!empty($context->options['q'])) {
-    $departments = new UNL_Peoplefinder_Department_Search($context->options);
     $q = htmlentities($context->options['q'], ENT_QUOTES);
-}
-if (!empty($context->options['d'])) {
-    $department = new UNL_Peoplefinder_Department($context->options);
+} elseif (!empty($context->options['d'])) {
     $q = htmlentities($context->options['d'], ENT_QUOTES);
 }
 $page->maincontentarea = <<<FORM
@@ -36,48 +33,6 @@ $page->maincontentarea = <<<FORM
 
 FORM;
 
-if (isset($department)) {
-    if (count($department)) {
-        $renderer_options = array('uri'=>UNL_PEOPLEFINDER_URI);
-        $renderer = new UNL_Peoplefinder_Renderer_HTML($renderer_options);
-        $page->maincontentarea .= count($department).' results.';
-        $page->maincontentarea .= '<h2>'.htmlentities($department->name).'</h2>';
-        if (isset($department->building)) {
-            $bldgs = new UNL_Common_Building();
-            if ($bldgs->buildingExists($department->building)) {
-                $sd = new UNL_Geography_SpatialData_Campus();
-                $department->building = '<a href="'.$sd->getMapUrl($department->building).'">'.htmlentities($bldgs->codes[$department->building]).'</a>';
-            }
-        }
-        $page->maincontentarea .= "<p>{$department->room} <span class='location'>{$department->building}</span><br />{$department->city}, {$department->state} {$department->postal_code}</p>";
-        if ($department->hasChildren()) {
-            $page->maincontentarea .= 'Sub-departments:<ul>';
-            foreach ($department->getChildren() as $child) {
-                $page->maincontentarea .= '<li><a href="'.UNL_PEOPLEFINDER_URI.'departments/?d='.urlencode($child).'">'.htmlentities($child).'</a></li>';
-            }
-            $page->maincontentarea .= '</ul>';
-        }
-        $page->maincontentarea .= '<ul class="department">';
-        foreach ($department as $employee) {
-            $page->maincontentarea .= '<li class="ppl_Sresult">';
-            $page->maincontentarea .= $savvy->render($employee);
-            $page->maincontentarea .= '</li>';
-        }
-        $page->maincontentarea .= '</ul>';
-    } else {
-        $page->maincontentarea .= 'No results could be found.';
-    }
-}
-if (isset($departments)) {
-    if (count($departments)) {
-        $page->maincontentarea .= '<h2>Search results for '.$q.'</h2><ul class="departments">';
-        foreach($departments as $department) {
-            $page->maincontentarea .= '<li class="ppl_Sresult"><a href="'.UNL_PEOPLEFINDER_URI.'departments/?d='.urlencode($department->name).'">'.$department->name.'</a></li>';
-        }
-        $page->maincontentarea .= '</ul>';
-    } else {
-        $page->maincontentarea .= 'No results could be found.';
-    }
-}
+$page->maincontentarea .= $savvy->render($context->output);
 
 echo $page;
