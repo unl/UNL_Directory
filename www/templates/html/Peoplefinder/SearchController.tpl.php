@@ -2,9 +2,7 @@
 if ($context->options['format'] != 'partial') {
     echo $savvy->render($context, 'StandardForm.tpl.php');
 }
-?>
-<div class="two_col left" id="results">
-<?php
+
 // The web view is special.
 
 // First, we group results by affiliation
@@ -66,5 +64,3 @@ foreach ($by_affiliation as $affiliation=>$records) {
     }
 }
 ?>
-</div>
-<div class="two_col right" id="pfShowRecord"></div>
