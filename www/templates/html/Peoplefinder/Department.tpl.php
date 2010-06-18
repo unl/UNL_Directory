@@ -17,11 +17,20 @@ if (count($context)) {
         }
         echo '</ul>';
     }
-    echo '<ul class="department">';
+    $i = 0;
+    echo '<ul class="department pfResult">';
     foreach ($context as $employee) {
-        echo '<li class="ppl_Sresult">';
-        echo $savvy->render($employee);
-        echo '</li>';
+        $even_odd = ($i % 2) ? '' : 'alt';
+        if ($employee->ou == 'org') {
+            $class = 'org_Sresult';
+        } else {
+            $class = 'ppl_Sresult';
+        }
+        $class .= ' '.$employee->eduPersonPrimaryAffiliation;
+        echo '<li class="'.$class.' '.$even_odd.'"><div class="overflow">';
+        echo $savvy->render($employee, 'Peoplefinder/RecordInList.tpl.php');
+        echo '</div></li>'.PHP_EOL;
+        $i++;
     }
     echo '</ul>';
 } else {
