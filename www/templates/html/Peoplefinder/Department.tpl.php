@@ -18,7 +18,7 @@ if (count($context)) {
         echo '</ul>';
     }
     $i = 0;
-    echo '<ul class="department pfResult">';
+    echo '<ul class="department pfResult">'.PHP_EOL;
     foreach ($context as $employee) {
         $even_odd = ($i % 2) ? '' : 'alt';
         if ($employee->ou == 'org') {
@@ -27,12 +27,12 @@ if (count($context)) {
             $class = 'ppl_Sresult';
         }
         $class .= ' '.$employee->eduPersonPrimaryAffiliation;
-        echo '<li class="'.$class.' '.$even_odd.'"><div class="overflow">';
+        echo '<li class="'.$class.' '.$even_odd.'"><div class="overflow">'.PHP_EOL;
         echo $savvy->render($employee, 'Peoplefinder/RecordInList.tpl.php');
         echo '</div></li>'.PHP_EOL;
         $i++;
     }
-    echo '</ul>';
+    echo '</ul>'.PHP_EOL;
 } else {
     echo 'No results could be found.';
 }

@@ -27,7 +27,7 @@ if ($start > 0 || $end < count($context)) {
     $navlinks = '';
 }
 echo "<div class='result_head'>Results ".($start+1)." - $end out of ".count($context).':'.$navlinks.'</div>'.PHP_EOL;
-echo '<ul class="pfResult">'; //I need to put a class for CSS, however when we switch to chuncked results (student, staff, faculty) this @todo will need revisted
+echo '<ul class="pfResult">'.PHP_EOL; //I need to put a class for CSS, however when we switch to chuncked results (student, staff, faculty) this @todo will need revisted
 for ($i = $start; $i<$end; $i++) {
     $even_odd = ($i % 2) ? '' : 'alt';
     if ($context[$i]->ou == 'org') {
@@ -36,13 +36,13 @@ for ($i = $start; $i<$end; $i++) {
         $class = 'ppl_Sresult';
     }
     $class .= ' '.$context[$i]->eduPersonPrimaryAffiliation;
-    echo '<li class="'.$class.' '.$even_odd.'">';
-    echo '<div class="overflow">';
+    echo '<li class="'.$class.' '.$even_odd.'">'.PHP_EOL;
+    echo '    <div class="overflow">'.PHP_EOL;
     echo $savvy->render($context[$i], 'Peoplefinder/RecordInList.tpl.php');
-    echo '</div>';
+    echo '    </div>'.PHP_EOL;
     echo '</li>'.PHP_EOL;
 }
-echo '</ul>';
+echo '</ul>'.PHP_EOL;
 echo "<div class='result_head'>$navlinks</div>";
 
 if (count($context) >= UNL_Peoplefinder::$resultLimit) {
