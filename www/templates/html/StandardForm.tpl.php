@@ -16,6 +16,9 @@
     <input type="text" value="<?php echo $default; ?>" id="q" name="q" />
     <input name="submitbutton" type="image" src="images/formSearch.png" value="Submit" id="submitbutton" />
     </li>
+    <?php
+    if (true !== $context->options['mobile']) {
+    ?>
     <li id="filters">
         <fieldset>
         <span>Show:</span>
@@ -28,6 +31,9 @@
         </ol>
         </fieldset>
     </li>
+    <?php
+    }
+    ?>
 </ol>
 </fieldset>
 </form>
