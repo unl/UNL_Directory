@@ -255,7 +255,7 @@ a.email {background:none;}
 ***************************************************
 */
 #form1 {
-	width:940px;
+	width:100%;
 	background:url('images/formSearchBG.png') repeat-x top;
 }
 #form1 legend {display:none;}
