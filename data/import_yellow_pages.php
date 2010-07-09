@@ -2,6 +2,7 @@
 $db = new mysqli('localhost', 'officefinder', 'officefinder', 'officefinder');
 
 $db->query('TRUNCATE departments');
+$db->query('TRUNCATE listings');
 
 if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND iSeqNbr=0;')) {
     printf("Select returned %d rows.\n", $result->num_rows);
@@ -12,6 +13,10 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
                              VALUES (?,  ?,    ?,        ?,        ?,    ?,     ?,      ?,          ?,         ?,  ?,   ?,      ?,          ?,      ?)';
 
     $dept_stmt = $db->prepare($sql);
+
+    $sql = 'INSERT INTO listings (department_id, name, phone, sort, address, email, uid)
+                          VALUES (?,              ?,     ?,      ?,  ?,      ?,      ?)';
+    $listing_stmt = $db->prepare($sql);
 
     while($obj = $result->fetch_object()){
 
@@ -30,6 +35,13 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
         $city        = '';
         $state       = '';
         $postal_code = '';
+        if (trim($obj->sZipCd5) != '' || trim($obj->sZipCd4) != '') {
+            if (trim($obj->sZipCd5) == '') {
+                // Assume 68588
+                $obj->sZipCd5 = '68588';
+            }
+            $postal_code = trim($obj->sZipCd5).'-'.trim($obj->sZipCd4);
+        }
 
         // Added fields
         $address  = '';
@@ -43,11 +55,23 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
         $dept_stmt->bind_param('issssssssssssss', $id, $name, $org_unit, $building, $room, $city, $state, $postal_code, $address, $phone, $fax, $email, $website, $acronym, $known_as);
         $dept_stmt->execute();
 
-        $listings = $db->query("SELECT * FROM telecom_departments WHERE lGroup_id={$obj->lGroup_id} AND sLstTyp !=1 AND iSeqNbr != 0 ORDER BY iSeqNbr;");
+        $sql = "SELECT * FROM telecom_departments WHERE lGroup_id={$obj->lGroup_id} AND iSeqNbr !=0 ORDER BY iSeqNbr;";
+        $listings = $db->query($sql);
 
         if ($listings->num_rows) {
+            $k = 0;
             while ($listing = $listings->fetch_object()) {
-                
+                $k++;
+                $l_name    = cleanField($obj->szDirLname.' '.$obj->szDirFname.' '.$obj->szDirAddText);
+                $l_phone   = '';
+                $l_sort    = $k;
+                $l_address = '';
+                $l_email   = '';
+                $l_uid     = '';
+
+                $listing_stmt->bind_param('ississs', $id, $l_name, $l_phone, $l_sort, $l_address, $l_email, $l_uid);
+                $listing_stmt->execute();
+
             }
         }
 
