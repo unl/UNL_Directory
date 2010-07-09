@@ -65,7 +65,7 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
             $k = 0;
             while ($listing = $listings->fetch_object()) {
                 $k++;
-                $l_name    = cleanField($obj->szDirLname.' '.$obj->szDirFname.' '.$obj->szDirAddText);
+                $l_name    = cleanField($listing->szDirLname.' '.$listing->szDirFname.' '.$listing->szDirAddText);
                 $l_phone   = '';
                 $l_sort    = $k;
                 $l_address = '';
@@ -93,9 +93,12 @@ function cleanField($text)
     $text = strtolower($text);
     $text = ucwords($text);
 
-    $text = preg_replace('/ Of([\s]|$)/', ' of$1', $text);
-    $text = str_replace(' And ', ' & ', $text);
-    $text = preg_replace('/ Unl([\s]|$)/', ' UNL$1', $text);
+    $text = preg_replace('/Of([\s]|$)/', ' of$1', $text);
+    $text = str_replace('And ', '& ', $text);
+    $text = preg_replace('/Unl([\s]|$)/', 'UNL$1', $text);
+    $text = preg_replace('/Uno([\s]|$)/', 'UNO$1', $text);
+    $text = preg_replace('/Unk([\s]|$)/', 'UNK$1', $text);
+    $text = preg_replace('/Unmc([\s]|$)/', 'UNMC$1', $text);
     if (preg_match('/"([a-z])"/', $text, $matches)) {
         $text = str_replace($matches[0], strtoupper($matches[0]), $text);
     }
@@ -108,6 +111,7 @@ function cleanField($text)
     }
 
     $text = preg_replace_callback('/\(([a-z])/', function($matches) {return '('.ucfirst($matches[1]);}, $text);
+    $text = preg_replace_callback('/\-([a-z])/', function($matches) {return '-'.ucfirst($matches[1]);}, $text);
     $text = preg_replace('/\(ec\)/i', '(EC)', $text);
     $text = str_replace('(Apc)', '(APC)', $text);
     echo $text.PHP_EOL;
