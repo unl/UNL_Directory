@@ -113,6 +113,7 @@ function cleanField($text)
     $text = preg_replace_callback('/\-([a-z])/', function($matches) {return '-'.ucfirst($matches[1]);}, $text);
     $text = preg_replace('/\(ec\)/i', '(EC)', $text);
     $text = str_replace('(Apc)', '(APC)', $text);
+    $text = str_replace('Ianr', 'IANR', $text);
     $text = str_replace('   ', ' ', trim($text));
     $text = str_replace('  ', ' ', trim($text));
     echo $text.PHP_EOL;
