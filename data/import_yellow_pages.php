@@ -29,12 +29,12 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
         $id++;
         // Existing SAP Fields
         $name        = cleanField($obj->szLname.' '.$obj->szFname.' '.$obj->szAddtText);
-        $org_unit    = '';
-        $building    = '';
-        $room        = '';
-        $city        = '';
-        $state       = '';
-        $postal_code = '';
+        $org_unit    = NULL;
+        $building    = NULL;
+        $room        = NULL;
+        $city        = NULL;
+        $state       = NULL;
+        $postal_code = NULL;
         if (trim($obj->sZipCd5) != '' || trim($obj->sZipCd4) != '') {
             if (trim($obj->sZipCd5) == '') {
                 // Assume 68588
@@ -49,11 +49,11 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
         if (trim($obj->sNPA1) !== '') {
             $phone = trim($obj->sNPA1).'-'.preg_replace('/([\d]{3})([\d]{4})/', '$1-$2', trim($obj->sPhoneNbr1));
         }
-        $fax      = '';
-        $email    = '';
-        $website  = '';
-        $acronym  = '';
-        $known_as = '';
+        $fax      = NULL;
+        $email    = NUll;
+        $website  = NULL;
+        $acronym  = NULL;
+        $known_as = NULL;
 
         $dept_stmt->bind_param('issssssssssssss', $id, $name, $org_unit, $building, $room, $city, $state, $postal_code, $address, $phone, $fax, $email, $website, $acronym, $known_as);
         $dept_stmt->execute();
@@ -66,11 +66,11 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
             while ($listing = $listings->fetch_object()) {
                 $k++;
                 $l_name    = cleanField($listing->szDirLname.' '.$listing->szDirFname.' '.$listing->szDirAddText);
-                $l_phone   = '';
+                $l_phone   = NULL;
                 $l_sort    = $k;
-                $l_address = '';
-                $l_email   = '';
-                $l_uid     = '';
+                $l_address = NULL;
+                $l_email   = NULL;
+                $l_uid     = NULL;
 
                 $listing_stmt->bind_param('ississs', $id, $l_name, $l_phone, $l_sort, $l_address, $l_email, $l_uid);
                 $listing_stmt->execute();
