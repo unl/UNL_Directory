@@ -44,8 +44,11 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
         }
 
         // Added fields
-        $address  = '';
+        $address  = trim($obj->szAddress);
         $phone    = '';
+        if (trim($obj->sNPA1) !== '') {
+            $phone = trim($obj->sNPA1).'-'.preg_replace('/([\d]{3})([\d]{4})/', '$1-$2', trim($obj->sPhoneNbr1));
+        }
         $fax      = '';
         $email    = '';
         $website  = '';
