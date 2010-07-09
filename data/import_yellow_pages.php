@@ -89,7 +89,6 @@ $db->close();
 
 function cleanField($text)
 {
-    $text = str_replace('  ', ' ', trim($text));
     $text = strtolower($text);
     $text = ucwords($text);
 
@@ -99,7 +98,7 @@ function cleanField($text)
     $text = preg_replace('/Uno([\s]|$)/', 'UNO$1', $text);
     $text = preg_replace('/Unk([\s]|$)/', 'UNK$1', $text);
     $text = preg_replace('/Unmc([\s]|$)/', 'UNMC$1', $text);
-    if (preg_match('/"([a-z])"/', $text, $matches)) {
+    while(preg_match('/"([a-z])"/', $text, $matches)) {
         $text = str_replace($matches[0], strtoupper($matches[0]), $text);
     }
 
@@ -114,7 +113,9 @@ function cleanField($text)
     $text = preg_replace_callback('/\-([a-z])/', function($matches) {return '-'.ucfirst($matches[1]);}, $text);
     $text = preg_replace('/\(ec\)/i', '(EC)', $text);
     $text = str_replace('(Apc)', '(APC)', $text);
+    $text = str_replace('   ', ' ', trim($text));
+    $text = str_replace('  ', ' ', trim($text));
     echo $text.PHP_EOL;
 
-    return $text;
+    return trim($text);
 }
