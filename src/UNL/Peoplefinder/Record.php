@@ -173,6 +173,15 @@ class UNL_Peoplefinder_Record
 
         return 'http://planetred.unl.edu/pg/icon/unl_'.str_replace('-', '_', $this->uid).'/'.$size.'/';
     }
+    
+    function __wakeup()
+    {
+        foreach ($this as $var=>$val) {
+            if ($val instanceof UNL_LDAP_Entry_Attribute) {
+                $this->$var->__wakeup();
+            }
+        }
+    }
 
     function __toString()
     {

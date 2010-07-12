@@ -49,7 +49,15 @@ class UNL_LDAP_Entry_Attribute extends ArrayIterator
     {
         return $this->count;
     }
-    
+
+    public function __wakeup()
+    {
+        if (isset($this->storage)) {
+            parent::__construct($this->storage);
+        }
+        $this->rewind();
+    }
+
     /**
      * Returns the first attribute entry
      *
