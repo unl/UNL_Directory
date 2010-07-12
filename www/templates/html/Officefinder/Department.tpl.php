@@ -5,9 +5,11 @@ foreach ($context as $var=>$value) {
 }
 echo '</ul>';
 
-?>
+$listings = $context->getListings();
+if (count($listings)) {
+    echo $savvy->render($listings);
+}
 
-<?php
 if ($department = $context->getHRDepartment()) {
     // This listing has an official HR department associated with IT
     // render all those HR department details.
