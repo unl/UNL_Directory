@@ -1,4 +1,5 @@
 <?php
+require_once '../www/config.inc.php';
 $db = new mysqli('localhost', 'officefinder', 'officefinder', 'officefinder');
 
 $db->query('TRUNCATE departments');
@@ -18,11 +19,14 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
                           VALUES (?,              ?,     ?,      ?,  ?,      ?,      ?)';
     $listing_stmt = $db->prepare($sql);
 
+    // Official department search
+    $dept_search = new SimpleXMLElement(file_get_contents(UNL_Peoplefinder::getDataDir().'/hr_tree.xml'));
+
     while($obj = $result->fetch_object()){
 
         if (preg_match('/\(see (.*)\)/', $obj->szLname.' '.$obj->szFname.' '.$obj->szAddtText)) {
             // known-as listing
-            echo 'known as listing!!'.$obj->szLname.' '.$obj->szFname.' '.$obj->szAddtText.PHP_EOL;
+            //echo 'known as listing!!'.$obj->szLname.' '.$obj->szFname.' '.$obj->szAddtText.PHP_EOL;
             continue;
         }
 
@@ -41,6 +45,31 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
                 $obj->sZipCd5 = '68588';
             }
             $postal_code = trim($obj->sZipCd5).'-'.trim($obj->sZipCd4);
+        }
+        $official_dept = false;
+        try {
+            $official_dept = new UNL_Peoplefinder_Department(array('d'=>$name));
+            // Found an official match
+            $org_unit = $official_dept->org_unit;
+        } catch (Exception $e) {
+            if (isset($postal_code)) {
+                $results = $dept_search->xpath('//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="postal_code"][@value="'.$postal_code.'"]/..');
+
+                if (count($results)) {
+                    // Found a match on the zip code
+                    $official_dept = new UNL_Peoplefinder_Department(array('d'=>(string)$results[0][0]->attribute['value']));
+                    
+                    echo $name.'=>'.$official_dept->name.PHP_EOL;
+                }
+            }
+        }
+        if ($official_dept) {
+            $org_unit    = $official_dept->org_unit;
+            $building    = $official_dept->building;
+            $room        = $official_dept->room;
+            $city        = $official_dept->city;
+            $state       = $official_dept->state;
+            $postal_code = $official_dept->postal_code;
         }
 
         // Added fields
@@ -94,6 +123,7 @@ function cleanField($text)
 
     $text = preg_replace('/Of([\s]|$)/', ' of$1', $text);
     $text = str_replace('And ', '& ', $text);
+    $text = str_replace('For ', 'for ', $text);
     $text = preg_replace('/Unl([\s]|$)/', 'UNL$1', $text);
     $text = preg_replace('/Uno([\s]|$)/', 'UNO$1', $text);
     $text = preg_replace('/Unk([\s]|$)/', 'UNK$1', $text);
@@ -116,7 +146,9 @@ function cleanField($text)
     $text = str_replace('Ianr', 'IANR', $text);
     $text = str_replace('   ', ' ', trim($text));
     $text = str_replace('  ', ' ', trim($text));
-    echo $text.PHP_EOL;
+
+    $text = preg_replace('/^Dept\.? of /', '', $text);
+    //echo $text.PHP_EOL;
 
     return trim($text);
 }
