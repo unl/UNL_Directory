@@ -14,7 +14,8 @@ echo $savvy->render($context, 'StandardForm.tpl.php');
         <ul>
             <li>First Name</li>
             <li>Last Name</li>
-            <li>Last 4 digits of telephone</li>
+            <li>Both first and last name</li>
+            <li>Last 3 or more digits of telephone</li>
         </ul>
     </div>
     </div>
