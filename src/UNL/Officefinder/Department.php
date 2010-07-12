@@ -44,7 +44,7 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record
      */
     public static function getByID($id)
     {
-        if ($record = UNL_Officefinder_Record::getRecordByID('listings', $id)) {
+        if ($record = UNL_Officefinder_Record::getRecordByID('departments', $id)) {
             $object = new self();
             UNL_Officefinder::setObjectFromArray($object, $record);
             return $object;

@@ -99,7 +99,7 @@ class UNL_Officefinder_Record
 
     protected function prepareAndExecute($sql, $values)
     {
-        $mysqli = UNL_ENews_Controller::getDB();
+        $mysqli = UNL_Officefinder::getDB();
 
         if (!$stmt = $mysqli->prepare($sql)) {
             echo $mysqli->error;
@@ -153,7 +153,7 @@ class UNL_Officefinder_Record
     
     public static function getRecordByID($table, $id, $field = 'id')
     {
-        $mysqli = UNL_ENews_Controller::getDB();
+        $mysqli = UNL_Officefinder::getDB();
         $sql = "SELECT * FROM $table WHERE $field = ".intval($id).' LIMIT 1;';
         if ($result = $mysqli->query($sql)) {
             return $result->fetch_assoc();
@@ -164,7 +164,7 @@ class UNL_Officefinder_Record
     
     function delete()
     {
-        $mysqli = UNL_ENews_Controller::getDB();
+        $mysqli = UNL_Officefinder::getDB();
         $sql = "DELETE FROM ".$this->getTable()." WHERE ";
         foreach ($this->keys() as $key) {
             if (empty($this->$key)) {

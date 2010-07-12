@@ -15,7 +15,8 @@ class UNL_Officefinder
     public $output;
 
     public $view_map = array('instructions' => 'UNL_Peoplefinder_Instructions',
-                             'search'       => 'UNL_Peoplefinder_Department_Search',
+                             //'search'       => 'UNL_Peoplefinder_Department_Search',
+                             'search'       => 'UNL_Officefinder_DepartmentList_NameSearch',
                              'record'       => 'UNL_Peoplefinder_Department');
     
     public static $db_user = 'officefinder';
@@ -65,5 +66,26 @@ class UNL_Officefinder
         }
         $db->set_charset('utf8');
         return $db;
+    }
+
+    /**
+     * Set the public properties for an object with the values in an associative array
+     * 
+     * @param mixed &$object The object to set, usually a UNL_ENews_Record
+     * @param array $values  Associtive array of key=>value
+     * @throws Exception
+     * 
+     * @return void
+     */
+    public static function setObjectFromArray(&$object, $values)
+    {
+        if (!isset($object)) {
+            throw new Exception('No object passed!');
+        }
+        foreach (get_object_vars($object) as $key=>$default_value) {
+            if (isset($values[$key]) && !empty($values[$key])) {
+                $object->$key = $values[$key]; 
+            }
+        }
     }
 }
