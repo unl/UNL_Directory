@@ -30,13 +30,13 @@ WDN.jQuery(function(){
 			hideLabel();
 			WDN.jQuery('#pfShowRecord').empty();
 			WDN.jQuery('li#filters').slideDown();
+			document.title = 'UNL | Peoplefinder | Search for ' + hash[1];
 		}
 		if(!hash){
 			WDN.jQuery('#maincontent').load('templates/html/Peoplefinder/Instructions.tpl.php');
-			//alert('no hash');
 		}
 	});
-
+	WDN.jQuery(window).trigger('hashchange');
 });
 
 WDN.jQuery(document).ready(function() {
@@ -50,6 +50,7 @@ WDN.jQuery(document).ready(function() {
 		WDN.jQuery('#pfShowRecord').empty();
 		WDN.toolbar_peoplefinder.queuePFRequest(WDN.jQuery('#q').val(), 'results');
 		window.location.hash = '#q=' + WDN.jQuery('#q').val();
+		document.title = 'UNL | Peoplefinder | Search for ' + WDN.jQuery('#q').val();
 		
 		eventObject.preventDefault();
 		eventObject.stopPropagation();
