@@ -11,7 +11,6 @@ username and password. Then browse to http://localhost/peoplefinder/ and try it 
 
 TODO:
 Move LDAP connection into a singleton class UNL_LDAP
-Change renderers to work like Savant/Zend_View
 Change UNL_Peoplefinder_Record to use overloading with __get/__set for all attributes
 
 LICENSE
