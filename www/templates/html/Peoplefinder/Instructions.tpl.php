@@ -2,8 +2,32 @@
 echo $savvy->render($context, 'StandardForm.tpl.php');
 ?>
 <div class="two_col left" id="results">
-Enter in as much of the name as you know, first and/or last name in any order.
-
-Reverse telephone number lookup: enter last three or more digits.
+    <div class="intro">
+    <img width="100" height ="100" class="profile_pic medium planetred_profile" src="images/peopleHerbie.png" style="float:left;" />
+    <h6 class="recordDetails">
+        Search <span class="search_context">People</span>
+    </h6>
+    <div class="clear"></div>
+    <div class="intro_support">
+        <p>Find contact information for faculty, staff and students.</p>
+        <p>Search by:</p>
+        <ul>
+            <li>First Name</li>
+            <li>Last Name</li>
+            <li>Last 4 digits of telephone</li>
+        </ul>
+    </div>
+    </div>
 </div>
-<div class="two_col right" id="pfShowRecord"></div>
+<div class="two_col right" id="pfShowRecord">
+    <div class="intro">
+    <img width="100" height ="100" class="profile_pic medium planetred_profile" src="images/organizationVC.png" />
+    <h6 class="recordDetails">
+        Search <span class="search_context">Departments</span>
+    </h6>
+    <div class="clear"></div>
+    <div class="intro_support">
+        
+    </div>
+    </div>
+</div>

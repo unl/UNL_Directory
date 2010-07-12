@@ -257,6 +257,7 @@ a.email {background:none;}
 #form1 {
 	width:100%;
 	background:url('images/formSearchBG.png') repeat-x top;
+	margin-top:15px;
 }
 #form1 legend {display:none;}
 #form1 ol{
@@ -273,7 +274,7 @@ a.email {background:none;}
 }
 #form1 ol li label#queryString {
 	position:absolute;
-	top:20px;
+	top:35px;
 	left:32px;
 	font-size:1.5em;
 	color:#98999a;
@@ -315,3 +316,45 @@ li#filters fieldset {
 	padding-bottom:5px;
 }
 #form1 li#filters ol li {background:none;display:inline;padding-right:15px;}
+
+/* 
+***************************************************
+
+        Begining Page 
+
+***************************************************
+*/
+#maincontent #results, #maincontent #pfShowRecord {
+    margin-top:15px;
+    padding-top:30px;
+    
+}
+#maincontent #results .intro, #maincontent #pfShowRecord .intro{
+    background-image:-webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0.10, rgba(255,255,255, 0.5)),
+    color-stop(1, rgba(146,190,150,0.5))
+);
+background-image:-moz-linear-gradient(
+    center top,
+    rgba(255,255,255, .3) 10%,
+    rgba(146,190,150, .3) 100%
+);
+padding:10px;
+}
+h6.recordDetails {margin-top:15px;}
+h6.recordDetails span {
+    font-size:3.6em;
+    font-weith:bold;
+    display:block;
+    margin-top:-6px;
+}
+.intro_support {
+    height:150px;
+    padding:25px 200px 0 0;	
+}
+#results .intro_support {
+	background:url('images/peopleSample.png') no-repeat center right;
+}
