@@ -106,5 +106,5 @@ if ($displayEmail) {
     echo "<span class='email'><a class='email' href='mailto:{$context->mail}'>{$context->mail}</a></span>\n";
 }
 
-echo '<a href="'.UNL_Peoplefinder::getURL().'vcards/'.$context->uid.'" title="Download V-Card for '.$context->givenName.' '.$context->sn.'"><img src="/wdn/templates_3.0/css/content/images/mimetypes/text-vcard.png" alt="vCard" /> <span class="caption">vCard</span></a>';
+echo '<a href="'.UNL_Peoplefinder::getURL().'vcards/'.$context->uid.'" title="Download V-Card for '.$context->givenName.' '.$context->sn.'" class="text-vcard">vCard</a>';
 echo '</div>'.PHP_EOL.'</div>'.PHP_EOL;
