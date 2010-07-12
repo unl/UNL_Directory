@@ -36,7 +36,9 @@ WDN.jQuery(function(){
 			WDN.jQuery('#maincontent').load('templates/html/Peoplefinder/Instructions.tpl.php');
 		}
 	});
-	WDN.jQuery(window).trigger('hashchange');
+	if (window.location.hash) {
+		WDN.jQuery(window).trigger('hashchange');
+	}
 });
 
 WDN.jQuery(document).ready(function() {
