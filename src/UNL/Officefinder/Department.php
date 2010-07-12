@@ -51,4 +51,12 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record
         }
         return false;
     }
+
+    function getHRDepartment()
+    {
+        if (!isset($this->org_unit)) {
+            return false;
+        }
+        return UNL_Peoplefinder_Department::getById($this->org_unit);
+    }
 }

@@ -174,4 +174,19 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
         asort($children);
         return $children;
     }
+
+    /**
+     * Retrieve an official SAP Org entry by ID
+     * 
+     * @param int $id ID, such as 5000XXXX
+     */
+    public static function getById($id)
+    {
+        $xml = new SimpleXMLElement(file_get_contents(UNL_Peoplefinder::getDataDir().'/hr_tree.xml'));
+        $results = $xml->xpath('//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="org_unit"][@value='.$id.']/..');
+        if (!$results) {
+            return false;
+        }
+        return new self(array('d'=>(string)$results[0][0]->attribute['value']));
+    }
 }
