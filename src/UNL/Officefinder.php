@@ -18,6 +18,10 @@ class UNL_Officefinder
                              'search'       => 'UNL_Peoplefinder_Department_Search',
                              'record'       => 'UNL_Peoplefinder_Department');
     
+    public static $db_user = 'officefinder';
+    
+    public static $db_pass = 'officefinder';
+    
     function __construct($options = array())
     {
         $this->options = $options + $this->options;
@@ -45,5 +49,21 @@ class UNL_Officefinder
         } else {
             throw new Exception('Un-registered view');
         }
+    }
+
+    /**
+     * Connect to the database and return it
+     * 
+     * @return mysqli
+     */
+    public static function getDB()
+    {
+        $db = new mysqli('localhost', self::$db_user, self::$db_pass, 'officefinder');
+        if (mysqli_connect_error()) {
+            throw new Exception('Database connection error (' . mysqli_connect_errno() . ') '
+                    . mysqli_connect_error());
+        }
+        $db->set_charset('utf8');
+        return $db;
     }
 }
