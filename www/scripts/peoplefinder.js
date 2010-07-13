@@ -21,24 +21,21 @@ service_peoplefinder = function() {
 	};
 }();
 WDN.jQuery(function(){
-	WDN.jQuery(window).bind('hashchange', function(){
+	WDN.jQuery(window).bind('hashchange', function(eventObject){
 		var hash = location.hash;
 		if (hash.match(/^#q=/)) {
 			hash = hash.split('=');
-			//WDN.toolbar_peoplefinder.queuePFRequest(hash[1], 'results');
 			WDN.jQuery('#q').val(hash[1]);
 			hideLabel();
-			WDN.jQuery('#pfShowRecord').empty();
-			WDN.jQuery('li#filters').slideDown();
-			document.title = 'UNL | Peoplefinder | Search for ' + hash[1];
+			presentResults(hash[1]);
+			eventObject.preventDefault();
+			eventObject.stopPropagation();
+			return false;
 		}
 		if(!hash){
 			WDN.jQuery('#maincontent').load('templates/html/Peoplefinder/Instructions.tpl.php');
 		}
 	});
-	if (window.location.hash) {
-		WDN.jQuery(window).trigger('hashchange');
-	}
 });
 
 WDN.jQuery(document).ready(function() {
@@ -46,33 +43,13 @@ WDN.jQuery(document).ready(function() {
 	WDN.loadJS('wdn/templates_3.0/scripts/toolbar_peoplefinder.js', function(){
 		WDN.toolbar_peoplefinder.serviceURL = '';
 		WDN.toolbar_peoplefinder.configuedWebService = true;
+		if (window.location.hash) {
+				WDN.jQuery(window).trigger('hashchange');
+		}
 	});
 	WDN.jQuery('#form1').submit(function(eventObject) { //on submit of the search form (people)
-		//animate the form (move it up)
-		//1. start animation
-		
-		WDN.jQuery(this).animate(
-			{
-				'top' : '0',
-				'width' : '960px',
-				'left' : '0'
-			},
-			500,
-			function() {
-				WDN.jQuery('li#filters').slideDown();
-			}
-		);
-		
-		//2. remove form from #results
-		WDN.jQuery(this).insertBefore('#results');
-		WDN.jQuery('#results').css({'margin-top' : '80px'});
-		
-		//3.
-		WDN.jQuery('#pfShowRecord').empty();
-		WDN.toolbar_peoplefinder.queuePFRequest(WDN.jQuery('#q').val(), 'results');
-		//window.location.hash = '#q=' + WDN.jQuery('#q').val();
-		document.title = 'UNL | Peoplefinder | Search for ' + WDN.jQuery('#q').val();
-		
+		window.location.hash = '#q=' + WDN.jQuery('#q').val(); //triggering a hash change will run through the searching function
+		//presentResults(WDN.jQuery('#q').val());
 		eventObject.preventDefault();
 		eventObject.stopPropagation();
 		return false;
@@ -122,5 +99,22 @@ function updateDisplay() {
 	alert('hell yeah');
 }
 function presentResults(hash){
+	WDN.jQuery('#form1').animate(
+		{
+			'top' : '0',
+			'width' : '960px',
+			'left' : '0'
+		},
+		500,
+		function() {
+			WDN.jQuery('li#filters').slideDown();
+		}
+	);
 	
+	WDN.jQuery('#form1').insertBefore('#results');
+	WDN.jQuery('#results').css({'margin-top' : '80px'});
+	
+	WDN.jQuery('#pfShowRecord').empty();
+	WDN.toolbar_peoplefinder.queuePFRequest(hash, 'results');
+	document.title = 'UNL | Peoplefinder | Search for ' + hash;
 }
