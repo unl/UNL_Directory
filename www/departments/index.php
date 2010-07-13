@@ -15,6 +15,7 @@ if ($peoplefinder->options['format'] != 'html') {
         case 'php':
         case 'vcard':
         case 'xml':
+        case 'editing':
             $savvy->addTemplatePath(dirname(dirname(__FILE__)).'/templates/'.$peoplefinder->options['format']);
             break;
         case 'hcard':

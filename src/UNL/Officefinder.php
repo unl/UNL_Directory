@@ -21,7 +21,16 @@ class UNL_Officefinder
                              'search'       => 'UNL_Officefinder_DepartmentList_NameSearch',
                              'department'   => 'UNL_Officefinder_Department',
                              'record'       => 'UNL_Peoplefinder_Department');
-    
+
+    protected static $auth;
+
+    /**
+     * The currently logged in user.
+     * 
+     * @var UNL_Peoplefinder_Record
+     */
+    protected static $user = false;
+
     public static $db_user = 'officefinder';
     
     public static $db_pass = 'officefinder';
@@ -29,9 +38,116 @@ class UNL_Officefinder
     function __construct($options = array())
     {
         $this->options = $options + $this->options;
-        $this->run();
+
+        $this->authenticate(true);
+        
+        try {
+            if (!empty($_POST)) {
+                $this->handlePost();
+            }
+            $this->run();
+        } catch(Exception $e) {
+            if (isset($this->options['ajaxupload'])) {
+                echo $e->getMessage();
+                exit();
+            }
+
+            if (false == headers_sent()
+                && $code = $e->getCode()) {
+                header('HTTP/1.1 '.$code.' '.$e->getMessage());
+                header('Status: '.$code.' '.$e->getMessage());
+            }
+
+            $this->actionable[] = $e;
+        }
     }
-    
+
+    /**
+     * Log in the current user
+     * 
+     * @return void
+     */
+    static function authenticate($logoutonly = false)
+    {
+        if (isset($_GET['logout'])) {
+            self::$auth = UNL_Auth::factory('SimpleCAS');
+            self::$auth->logout();
+        }
+        if ($logoutonly) {
+            return true;
+        }
+
+        self::$auth = UNL_Auth::factory('SimpleCAS');
+        self::$auth->login();
+
+        if (!self::$auth->isLoggedIn()) {
+            throw new Exception('You must log in to view this resource!');
+            exit();
+        }
+        self::$user = self::$auth->getUser();
+//        self::$user->last_login = date('Y-m-d H:i:s');
+//        self::$user->update();
+    }
+
+    /**
+     * get the currently logged in user
+     * 
+     * @return UNL_Peoplefinder_Record
+     */
+    public static function getUser($forceAuth = false)
+    {
+        if (self::$user) {
+            return self::$user;
+        }
+        
+        if ($forceAuth) {
+            self::authenticate();
+        }
+        
+        return self::$user;
+    }
+
+    /**
+     * Handle data that is POST'ed to the controller.
+     * 
+     * @return void
+     */
+    function handlePost()
+    {
+        if (!isset($_POST['_type'])) {
+            // Nothing to do here
+            return;
+        }
+        switch($_POST['_type']) {
+            case 'department':
+                if (!empty($_POST['id'])) {
+                    if (!($record = UNL_Officefinder_Department::getByID($_POST['id']))) {
+                        throw new Exception('The record could not be retrieved');
+                    }
+                    if (!$record->userCanEdit(self::getUser(true))) {
+                        throw new Exception('You cannot edit that record.');
+                    }
+                } else {
+                    $record = new UNL_Officefinder_Department;
+                }
+
+                $this->filterPostValues();
+
+                self::setObjectFromArray($record, $_POST);
+
+                if (!$record->save()) {
+                    throw new Exception('Could not save the record');
+                }
+
+                break;
+        }
+    }
+
+    function filterPostValues()
+    {
+        unset($_POST['id']);
+    }
+
     public function determineView()
     {
         switch(true) {
@@ -89,6 +205,14 @@ class UNL_Officefinder
             if (isset($values[$key]) && !empty($values[$key])) {
                 $object->$key = $values[$key]; 
             }
+        }
+    }
+
+    static function redirect($url, $exit = true)
+    {
+        header('Location: '.$url);
+        if (false !== $exit) {
+            exit($exit);
         }
     }
 }

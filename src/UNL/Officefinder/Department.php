@@ -74,4 +74,9 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record
         }
         return UNL_Peoplefinder_Department::getById($this->org_unit);
     }
+
+    function userCanEdit($user)
+    {
+        return true;
+    }
 }

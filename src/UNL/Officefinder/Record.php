@@ -64,7 +64,6 @@ class UNL_Officefinder_Record
                 $values[] =& $this->$key;
             }
         }
-        
         return $this->prepareAndExecute($sql, $values);
     }
     
