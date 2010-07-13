@@ -259,6 +259,8 @@ a.text-vcard{padding-left:24px;padding-right:0;background-position:left -2px;mar
 	width:100%;
 	background:url('images/formSearchBG.png') repeat-x top;
 	margin-top:15px;
+	position:absolute;
+	width:440px;
 }
 #form1 legend {display:none;}
 #form1 ol{
@@ -266,17 +268,18 @@ a.text-vcard{padding-left:24px;padding-right:0;background-position:left -2px;mar
 	display:block;
 	margin:0px;
 	background:url('images/formSearchEnds.png') no-repeat 0 -58px;
+	position:relative;
 }
 #form1 ol li:first-child{
 	background:url('images/formSearchEnds.png') no-repeat top right;
 	height:46px;
-	padding:11px 0px 0px;
+	padding:0px;
 	margin-left:-13px;
 }
 #form1 ol li label#queryString {
 	position:absolute;
-	top:35px;
-	left:32px;
+	top:22px;
+	left:23px;
 	font-size:1.5em;
 	color:#98999a;
 	cursor:text;
@@ -288,6 +291,7 @@ a.text-vcard{padding-left:24px;padding-right:0;background-position:left -2px;mar
 	font-size:1.5em;
 	color:#98999a;
 	padding:5px 0 0 8px;
+	margin-top:10px;
 	
 }
 #form1 ol li:first-child input[type=image] {
@@ -336,14 +340,15 @@ li#filters fieldset {
     left top,
     left bottom,
     color-stop(0.10, rgba(255,255,255, 0.5)),
-    color-stop(1, rgba(146,190,150,0.5))
+    color-stop(1, rgba(189,185,145,0.5))
 );
 background-image:-moz-linear-gradient(
-    center top,
+    center bottom,
     rgba(255,255,255, .3) 10%,
-    rgba(146,190,150, .3) 100%
+    rgba(227,224,189, .8) 100%
 );
 padding:10px;
+    -moz-border-radius:5px;
 }
 h6.recordDetails {margin-top:15px;}
 h6.recordDetails span {
@@ -358,4 +363,5 @@ h6.recordDetails span {
 }
 #results .intro_support {
 	background:url('images/samplePeople.png') no-repeat center right;
+	margin-top:75px;
 }

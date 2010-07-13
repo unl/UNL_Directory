@@ -33,10 +33,10 @@ if (isset($context->options['q'])
 $page->breadcrumbs = '
 <ul>
     <li><a href="http://www.unl.edu/" title="University of Nebraska&ndash;Lincoln">UNL</a></li>
-    <li>Peoplefinder</li>
+    <li>Directory</li>
 </ul>';
 
-$page->titlegraphic = '<h1>UNL Peoplefinder</h1>';
+$page->titlegraphic = '<h1>UNL Directory</h1>';
 
 $page->maincontentarea = $savvy->render($context->output);
 

@@ -1,6 +1,3 @@
-<?php
-echo $savvy->render($context, 'Peoplefinder/StandardForm.tpl.php');
-?>
 <div class="two_col left" id="results">
     <div class="intro">
     <img width="100" height ="100" class="profile_pic medium planetred_profile" src="images/peopleHerbie.png" style="float:left;" />
@@ -8,6 +5,9 @@ echo $savvy->render($context, 'Peoplefinder/StandardForm.tpl.php');
         Search <span class="search_context">People</span>
     </h6>
     <div class="clear"></div>
+    <?php
+	   echo $savvy->render($context, 'Peoplefinder/StandardForm.tpl.php');
+	?>
     <div class="intro_support">
         <p>Find contact information for faculty, staff and students.</p>
         <p>Search by:</p>
