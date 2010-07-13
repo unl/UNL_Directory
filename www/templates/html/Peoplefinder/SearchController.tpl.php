@@ -1,6 +1,6 @@
 <?php
 if ($context->options['format'] != 'partial') {
-    echo $savvy->render($context, 'StandardForm.tpl.php');
+    echo $savvy->render($context, 'Peoplfinder/StandardForm.tpl.php');
 }
 
 // The web view is special.
