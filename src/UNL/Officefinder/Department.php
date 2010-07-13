@@ -24,7 +24,7 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record
      */
     function __construct($options = array())
     {
-        if (isset($options['id'])) {
+        if (!empty($options['id'])) {
             $record = self::getByID($options['id']);
 
             if ($record === false) {
