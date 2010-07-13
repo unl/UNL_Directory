@@ -27,7 +27,6 @@
             <li><input type="checkbox" id="filterStudents" name="student" value="1" /><label for="filterStudents">Students</label></li>
             <li><input type="checkbox" id="fitlerFaculty" name="faculty" value="1" /><label for="fitlerFaculty">Faculty</label></li>
             <li><input type="checkbox" id="fitlerStaff" name="staff" value="1" /><label for="fitlerStaff">Staff</label></li>
-            <li><input type="checkbox" id="fitlerDepartments" name="departments" value="1" /><label for="fitlerDepartments">Departments</label></li>
         </ol>
         </fieldset>
     </li>
