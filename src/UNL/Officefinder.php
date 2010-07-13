@@ -6,7 +6,8 @@ class UNL_Officefinder
      */
     public $options = array('view'   => 'instructions',
                             'format' => 'html',
-                            'q'      => '');
+                            'q'      => '',
+                            'mobile' => false);
 
     /**
      * The results of the search
