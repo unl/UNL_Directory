@@ -56,6 +56,10 @@ WDN.jQuery(document).ready(function() {
 				'top' : '0',
 				'width' : '960px',
 				'left' : '0'
+			},
+			500,
+			function() {
+				WDN.jQuery('li#filters').slideDown();
 			}
 		);
 		
@@ -66,12 +70,11 @@ WDN.jQuery(document).ready(function() {
 		//3.
 		WDN.jQuery('#pfShowRecord').empty();
 		WDN.toolbar_peoplefinder.queuePFRequest(WDN.jQuery('#q').val(), 'results');
-		window.location.hash = '#q=' + WDN.jQuery('#q').val();
+		//window.location.hash = '#q=' + WDN.jQuery('#q').val();
 		document.title = 'UNL | Peoplefinder | Search for ' + WDN.jQuery('#q').val();
 		
 		eventObject.preventDefault();
 		eventObject.stopPropagation();
-		WDN.jQuery('li#filters').slideDown();
 		return false;
 	});
 	WDN.jQuery('#q').focus(function(){

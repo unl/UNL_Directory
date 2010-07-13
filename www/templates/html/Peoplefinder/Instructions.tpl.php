@@ -28,7 +28,7 @@
     </h6>
     <div class="clear"></div>
     <div class="intro_support">
-        
+        <h3>Coming soon!</h3>
     </div>
     </div>
 </div>
