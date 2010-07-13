@@ -1,5 +1,5 @@
 <?php
-require_once '../www/config.inc.php';
+require_once dirname(__FILE__).'/../www/config.inc.php';
 $db = new mysqli('localhost', 'officefinder', 'officefinder', 'officefinder');
 
 $db->query('TRUNCATE departments');
