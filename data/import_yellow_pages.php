@@ -52,16 +52,16 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
             // Found an official match
             $org_unit = $official_dept->org_unit;
         } catch (Exception $e) {
-            if (isset($postal_code)) {
-                $results = $dept_search->xpath('//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="postal_code"][@value="'.$postal_code.'"]/..');
-
-                if (count($results)) {
-                    // Found a match on the zip code
-                    $official_dept = new UNL_Peoplefinder_Department(array('d'=>(string)$results[0][0]->attribute['value']));
-                    
-                    echo $name.'=>'.$official_dept->name.PHP_EOL;
-                }
-            }
+//            if (isset($postal_code)) {
+//                $results = $dept_search->xpath('//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="postal_code"][@value="'.$postal_code.'"]/..');
+//
+//                if (count($results)) {
+//                    // Found a match on the zip code
+//                    $official_dept = new UNL_Peoplefinder_Department(array('d'=>(string)$results[0][0]->attribute['value']));
+//                    
+//                    echo $name.'=>'.$official_dept->name.PHP_EOL;
+//                }
+//            }
         }
         if ($official_dept) {
             $org_unit    = $official_dept->org_unit;
@@ -96,6 +96,9 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
                 $k++;
                 $l_name    = cleanField($listing->szDirLname.' '.$listing->szDirFname.' '.$listing->szDirAddText);
                 $l_phone   = NULL;
+                if (trim($listing->sNPA1) !== '') {
+                    $l_phone = trim($listing->sNPA1).'-'.preg_replace('/([\d]{3})([\d]{4})/', '$1-$2', trim($listing->sPhoneNbr1));
+                }
                 $l_sort    = $k;
                 $l_address = NULL;
                 $l_email   = NULL;
@@ -106,6 +109,7 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
 
             }
         }
+        $listings->close();
 
 //        echo PHP_EOL;
     }

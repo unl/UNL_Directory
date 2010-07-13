@@ -26,6 +26,11 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record
     {
         if (isset($options['id'])) {
             $record = self::getByID($options['id']);
+
+            if ($record === false) {
+                throw new Exception('No record with that ID exists');
+            }
+
             UNL_Officefinder::setObjectFromArray($this, $record->toArray());
         }
     }
