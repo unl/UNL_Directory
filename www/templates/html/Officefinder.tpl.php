@@ -21,17 +21,7 @@ if (!empty($context->options['q'])) {
 } elseif (!empty($context->options['d'])) {
     $q = htmlentities($context->options['d'], ENT_QUOTES);
 }
-$page->maincontentarea = <<<FORM
-<p>Search for UNL departments:</p>
-<form method="get" action="?">
-    <div>
-    <label for="q">Search:&nbsp;</label> 
-    <input style="width:18em;" type="text" value="$q" id="q" name="q" /> 
-    <input style="margin-bottom:-7px;" name="submitbutton" type="image" src="/ucomm/templatedependents/templatecss/images/go.gif" value="Submit" id="submitbutton" />
-    </div> 
-</form>
-
-FORM;
+$page->maincontentarea = $savvy->render($context, 'Officefinder/StandardForm.tpl.php');
 
 $page->maincontentarea .= $savvy->render($context->output);
 

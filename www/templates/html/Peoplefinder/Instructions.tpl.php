@@ -1,5 +1,5 @@
 <?php
-echo $savvy->render($context, 'StandardForm.tpl.php');
+echo $savvy->render($context, 'Peoplefinder/StandardForm.tpl.php');
 ?>
 <div class="two_col left" id="results">
     <div class="intro">

@@ -5,7 +5,8 @@ class UNL_Officefinder
      * Options for this use.
      */
     public $options = array('view'   => 'instructions',
-                            'format' => 'html');
+                            'format' => 'html',
+                            'q'      => '');
 
     /**
      * The results of the search
@@ -33,7 +34,7 @@ class UNL_Officefinder
     public function determineView()
     {
         switch(true) {
-            case isset($this->options['q']):
+            case !empty($this->options['q']):
                 $this->options['view'] = 'search';
                 return;
             case isset($this->options['d']):
