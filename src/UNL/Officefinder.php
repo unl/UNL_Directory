@@ -121,26 +121,33 @@ class UNL_Officefinder
         }
         switch($_POST['_type']) {
             case 'department':
-                if (!empty($_POST['id'])) {
-                    if (!($record = UNL_Officefinder_Department::getByID($_POST['id']))) {
-                        throw new Exception('The record could not be retrieved');
-                    }
-                    if (!$record->userCanEdit(self::getUser(true))) {
-                        throw new Exception('You cannot edit that record.');
-                    }
-                } else {
-                    $record = new UNL_Officefinder_Department;
-                }
-
-                $this->filterPostValues();
-
-                self::setObjectFromArray($record, $_POST);
-
-                if (!$record->save()) {
-                    throw new Exception('Could not save the record');
-                }
-
+                $this->handlePostDBRecord('UNL_Officefinder_Department');
                 break;
+            case 'listing':
+                $this->handlePostDBRecord('UNL_Officefinder_Department_Listing');
+                break;
+        }
+    }
+
+    function handlePostDBRecord($type)
+    {
+        if (!empty($_POST['id'])) {
+            if (!($record = $type::getByID($_POST['id']))) {
+                throw new Exception('The record could not be retrieved');
+            }
+            if (!$record->userCanEdit(self::getUser(true))) {
+                throw new Exception('You cannot edit that record.');
+            }
+        } else {
+            $record = new UNL_Officefinder_Department;
+        }
+
+        $this->filterPostValues();
+
+        self::setObjectFromArray($record, $_POST);
+
+        if (!$record->save()) {
+            throw new Exception('Could not save the record');
         }
     }
 
