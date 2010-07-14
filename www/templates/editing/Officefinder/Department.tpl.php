@@ -11,3 +11,9 @@ foreach ($context as $var=>$value) {
 ?>
     <input type="submit" />
 </form>
+<?php 
+$listings = $context->getListings();
+if (count($listings)) {
+    echo $savvy->render($listings);
+}
+?>
