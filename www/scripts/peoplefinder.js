@@ -17,6 +17,59 @@ service_peoplefinder = function() {
 				selectedLi = WDN.jQuery('li.selected').offset();
 				return {top : selectedLi.top - 40, left : coords.left};
 			});
+		},
+		presentPeopleFinderResults : function(hash){
+			WDN.jQuery('#peoplefinder').animate(
+				{
+					'top' : '0',
+					'width' : '960px',
+					'left' : '0'
+				},
+				500,
+				function() {
+					WDN.jQuery('li#filters').slideDown();
+				}
+			);
+			WDN.jQuery('#q').siblings('label').hide();
+			WDN.jQuery('#peoplefinder').insertBefore('#results');
+			WDN.jQuery('#results').css({'margin-top' : '80px'});
+			
+			WDN.jQuery('#pfShowRecord').empty();
+			WDN.toolbar_peoplefinder.queuePFRequest(hash, 'results');
+			document.title = 'UNL | Directory | People Search for ' + hash;
+		}
+	};
+}();
+
+service_officefinder = function() {
+	return {
+		getOfficeList : function(q) {
+			WDN.jQuery('#officefinder').animate(
+				{
+					'top' : '0',
+					'width' : '960px',
+					'left' : '0'
+				},
+				500,
+				function(){
+					WDN.jQuery('#results').html('<img alt="progress" id="pfprogress" src="/wdn/templates_3.0/css/header/images/colorbox/loading.gif" />');
+					WDN.get('departments/?q='+q+'&format=partial', '', function(data, textStatus){
+						if (textStatus == 'success') {
+							document.title = 'UNL | Directory | Department Search for ' + q;
+							service_officefinder.presentOfficeFinderResults(data);
+						}
+					})
+				}
+			);
+			WDN.jQuery('#q2').siblings('label').hide();
+			WDN.jQuery('#officefinder').insertBefore('#results');
+			WDN.jQuery('#results').css({'margin-top' : '80px'});
+			WDN.jQuery('#pfShowRecord, #results').empty();
+		},
+		
+		presentOfficeFinderResults : function(html) {
+			WDN.jQuery('#results').empty();
+			WDN.jQuery('#results').html(html);
 		}
 	};
 }();
@@ -24,10 +77,15 @@ WDN.jQuery(function(){
 	WDN.jQuery(window).bind('hashchange', function(eventObject){
 		var hash = location.hash;
 		if (hash.match(/^#q=/)) {
-			hash = hash.split('=');
-			WDN.jQuery('#q').val(hash[1]);
+			hash = hash.split('='); //hash[1] = term hash[2] = type
 			
-			presentResults(hash[1]);
+			if(hash[2] === 'people'){
+				WDN.jQuery('#q').val(hash[1]);
+				service_peoplefinder.presentPeopleFinderResults(hash[1]);
+			} else {
+				WDN.jQuery('#q2').val(hash[1]);
+				service_officefinder.getOfficeList(hash[1]);
+			}
 			eventObject.preventDefault();
 			eventObject.stopPropagation();
 			return false;
@@ -48,7 +106,13 @@ WDN.jQuery(document).ready(function() {
 		}
 	});
 	WDN.jQuery('#peoplefinder').submit(function(eventObject) { //on submit of the search form (people)
-		window.location.hash = '#q=' + WDN.jQuery('#q').val(); //triggering a hash change will run through the searching function
+		window.location.hash = '#q=' + WDN.jQuery('#q').val() +'=people'; //triggering a hash change will run through the searching function
+		eventObject.preventDefault();
+		eventObject.stopPropagation();
+		return false;
+	});
+	WDN.jQuery('#officefinder').submit(function(eventObject) { //on submit of the search form (office)
+		window.location.hash = '#q=' + WDN.jQuery('#q2').val() +'=office'; //triggering a hash change will run through the searching function
 		eventObject.preventDefault();
 		eventObject.stopPropagation();
 		return false;
@@ -95,22 +159,5 @@ function updateDisplay() {
 	alert('hell yeah');
 }
 function presentResults(hash){
-	WDN.jQuery('#peoplefinder').animate(
-		{
-			'top' : '0',
-			'width' : '960px',
-			'left' : '0'
-		},
-		500,
-		function() {
-			WDN.jQuery('li#filters').slideDown();
-		}
-	);
 	
-	WDN.jQuery('#peoplefinder').insertBefore('#results');
-	WDN.jQuery('#results').css({'margin-top' : '80px'});
-	
-	WDN.jQuery('#pfShowRecord').empty();
-	WDN.toolbar_peoplefinder.queuePFRequest(hash, 'results');
-	document.title = 'UNL | Peoplefinder | Search for ' + hash;
 }
