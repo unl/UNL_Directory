@@ -47,23 +47,27 @@ WDN.jQuery(document).ready(function() {
 				WDN.jQuery(window).trigger('hashchange');
 		}
 	});
-	WDN.jQuery('#form1').submit(function(eventObject) { //on submit of the search form (people)
+	WDN.jQuery('#peoplefinder').submit(function(eventObject) { //on submit of the search form (people)
 		window.location.hash = '#q=' + WDN.jQuery('#q').val(); //triggering a hash change will run through the searching function
-		//presentResults(WDN.jQuery('#q').val());
 		eventObject.preventDefault();
 		eventObject.stopPropagation();
 		return false;
 	});
-	WDN.jQuery('#q').focus(function(){
-		WDN.jQuery('#queryString').hide();
+	WDN.jQuery('#q, #q2').focus(function(){
+		WDN.jQuery(this).siblings('label').hide();
 	});
-	WDN.jQuery('#queryString').focus(hideLabel);
+	WDN.jQuery('form.directorySearch ol > li > label').focus(function(){
+			WDN.jQuery(this).hide().siblings('input[name=q]').focus();
+	});
 	if (WDN.jQuery('#q').val() !== "") {
-		hideLabel();
+		WDN.jQuery('#q').siblings('label').hide();
 	};
-	WDN.jQuery('#q').blur(function() {
-		if (WDN.jQuery('#q').val() === "") {
-			showLabel();
+	if (WDN.jQuery('#q2').val() !== "") {
+		WDN.jQuery('#q2').prev('label').hide();
+	};
+	WDN.jQuery('#q, #q2').blur(function() {
+		if (WDN.jQuery(this).val() === "") {
+			WDN.jQuery(this).siblings('label').show();
 		}
 	});
 	WDN.jQuery('#filters input').click(function(){
@@ -84,14 +88,6 @@ WDN.jQuery(document).ready(function() {
 		}
 	});
 });
-function hideLabel() {
-	WDN.jQuery('#queryString').hide();
-	WDN.jQuery('#q').focus();
-}
-
-function showLabel() {
-	WDN.jQuery('#queryString').show();
-}
 function pf_handleResults(e)  {
 	WDN.log(e);
 }
@@ -99,7 +95,7 @@ function updateDisplay() {
 	alert('hell yeah');
 }
 function presentResults(hash){
-	WDN.jQuery('#form1').animate(
+	WDN.jQuery('#peoplefinder').animate(
 		{
 			'top' : '0',
 			'width' : '960px',
@@ -111,7 +107,7 @@ function presentResults(hash){
 		}
 	);
 	
-	WDN.jQuery('#form1').insertBefore('#results');
+	WDN.jQuery('#peoplefinder').insertBefore('#results');
 	WDN.jQuery('#results').css({'margin-top' : '80px'});
 	
 	WDN.jQuery('#pfShowRecord').empty();

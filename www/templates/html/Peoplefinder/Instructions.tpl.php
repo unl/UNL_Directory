@@ -27,8 +27,11 @@
         Search <span class="search_context">Departments</span>
     </h6>
     <div class="clear"></div>
+     <?php
+       echo $savvy->render($context, 'Officefinder/StandardForm.tpl.php');
+    ?>
     <div class="intro_support">
-        <h3>Coming soon!</h3>
+        
     </div>
     </div>
 </div>

@@ -1,6 +1,6 @@
-<form method="get" id="form1" action="<?php echo htmlentities(str_replace('index.php', '', $_SERVER['PHP_SELF']), ENT_QUOTES); ?>">
+<form method="get" id="peoplefinder" action="<?php echo htmlentities(str_replace('index.php', '', $_SERVER['PHP_SELF']), ENT_QUOTES); ?>" class="directorySearch">
 <fieldset>
-    <legend>Search for students, faculty, staff and departments.</legend>
+    <legend>Search for faculty, staff and students.</legend>
 <ol>
     <li>
     <label for="q" id="queryString">Enter a name to begin your search.</label> 
@@ -14,7 +14,7 @@
     }
     ?>
     <input type="text" value="<?php echo $default; ?>" id="q" name="q" />
-    <input name="submitbutton" type="image" src="images/formSearch.png" value="Submit" id="submitbutton" />
+    <input name="submitbutton" type="image" src="images/formSearch.png" value="Submit" />
     </li>
     <?php
     if (true !== $context->options['mobile']) {
