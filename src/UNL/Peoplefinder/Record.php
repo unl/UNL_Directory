@@ -107,8 +107,7 @@ class UNL_Peoplefinder_Record
     public function formatMajor($subject)
     {
 
-        include_once 'Cache/Lite.php';
-        $c = new Cache_Lite();
+        $c = new UNL_Cache_Lite();
         if ($subject_xml = $c->get('catalog subjects')) {
             
         } else {
