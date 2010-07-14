@@ -14,13 +14,14 @@ class UNL_Officefinder_Record
     {
         $sql = 'UPDATE '.$this->getTable().' ';
         $fields = get_object_vars($this);
-     
+
         $sql .= 'SET `'.implode('`=?,`', array_keys($fields)).'`=? ';
-        
+
         $sql .= 'WHERE ';
         foreach ($this->keys() as $key) {
             $sql .= $key.'=? AND ';
         }
+
         $sql = substr($sql, 0, -4);
 
         return $fields;
