@@ -74,6 +74,7 @@ class UNL_Officefinder
             self::$auth = UNL_Auth::factory('SimpleCAS');
             self::$auth->logout();
         }
+
         if ($logoutonly) {
             return true;
         }
@@ -213,6 +214,11 @@ class UNL_Officefinder
             if (isset($values[$key]) && !empty($values[$key])) {
                 $object->$key = $values[$key]; 
             }
+            // Failed attempt at unsetting data which is empty.
+//             elseif (isset($object->$key)
+//                      && !empty($object->$key)) {
+//                $object->$key = null;
+//            }
         }
     }
 
