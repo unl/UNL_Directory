@@ -26,7 +26,7 @@ WDN.jQuery(function(){
 		if (hash.match(/^#q=/)) {
 			hash = hash.split('=');
 			WDN.jQuery('#q').val(hash[1]);
-			hideLabel();
+			
 			presentResults(hash[1]);
 			eventObject.preventDefault();
 			eventObject.stopPropagation();
