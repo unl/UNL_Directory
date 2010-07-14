@@ -1,4 +1,12 @@
 <h2><?php echo $context->name; ?></h2>
+<div class="adr">
+     <span class="street-address"><?php echo $context->address; ?></span>
+     <span class="room"><?php echo $context->room.' <a class="location mapurl" href="http://www1.unl.edu/tour/'.$context->building.'">'.$context->building.'</a>'; ?></span>
+     <span class="locality"><?php echo $context->city; ?></span>
+     <span class="region"><?php echo $context->state; ?></span>
+     <span class="postal-code"><?php echo $context->postal_code; ?></span>
+     <div class="country-name">USA</div>
+</div>
 <?php
 echo '<ul>';
 foreach ($context as $var=>$value) {
