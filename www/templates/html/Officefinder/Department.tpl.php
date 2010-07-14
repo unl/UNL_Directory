@@ -1,3 +1,4 @@
+<h2><?php echo $context->name; ?></h2>
 <?php
 echo '<ul>';
 foreach ($context as $var=>$value) {
