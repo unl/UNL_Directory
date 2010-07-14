@@ -134,10 +134,10 @@ class UNL_Officefinder
     {
         if (!empty($_POST['id'])) {
             if (!($record = $type::getByID($_POST['id']))) {
-                throw new Exception('The record could not be retrieved');
+                throw new Exception('The record could not be retrieved', 404);
             }
             if (!$record->userCanEdit(self::getUser(true))) {
-                throw new Exception('You cannot edit that record.');
+                throw new Exception('You cannot edit that record.', 401);
             }
         } else {
             $record = new UNL_Officefinder_Department;
