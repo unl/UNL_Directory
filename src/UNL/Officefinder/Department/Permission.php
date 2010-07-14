@@ -17,10 +17,10 @@ class UNL_Officefinder_Department_Permission extends UNL_Officefinder_Record
     /**
      * get a user in this department
      * 
-     * @param int $newsletter_id
-     * @param int $story_id
+     * @param int $department_id
+     * @param int $uid
      * 
-     * @return UNL_ENews_Newsletter_Story
+     * @return UNL_Officefinder_Department_Permission
      */
     static function getById($department_id, $uid)
     {
@@ -29,7 +29,7 @@ class UNL_Officefinder_Department_Permission extends UNL_Officefinder_Record
         if (($result = $mysqli->query($sql))
             && $result->num_rows > 0) {
             $object = new self();
-            UNL_ENews_Controller::setObjectFromArray($object, $result->fetch_assoc());
+            UNL_Officefinder::setObjectFromArray($object, $result->fetch_assoc());
             return $object;
         }
         return false;

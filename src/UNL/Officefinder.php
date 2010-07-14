@@ -199,7 +199,7 @@ class UNL_Officefinder
     /**
      * Set the public properties for an object with the values in an associative array
      * 
-     * @param mixed &$object The object to set, usually a UNL_ENews_Record
+     * @param mixed &$object The object to set, usually a UNL_Officefinder_Record
      * @param array $values  Associtive array of key=>value
      * @throws Exception
      * 
