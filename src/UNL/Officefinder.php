@@ -59,7 +59,7 @@ class UNL_Officefinder
                 header('Status: '.$code.' '.$e->getMessage());
             }
 
-            $this->actionable[] = $e;
+            $this->output[] = $e;
         }
     }
 
