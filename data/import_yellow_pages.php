@@ -94,13 +94,13 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
             $k = 0;
             while ($listing = $listings->fetch_object()) {
                 $k++;
-                $l_name    = cleanField($listing->szDirLname.' '.$listing->szDirFname.' '.$listing->szDirAddText);
+                $l_name    = cleanField($listing->szDirLname.' '.$listing->szDirFname.' '.$listing->szDirAddText, false);
                 $l_phone   = NULL;
                 if (trim($listing->sNPA1) !== '') {
                     $l_phone = trim($listing->sNPA1).'-'.preg_replace('/([\d]{3})([\d]{4})/', '$1-$2', trim($listing->sPhoneNbr1));
                 }
                 $l_sort    = $k;
-                $l_address = NULL;
+                $l_address = trim($listing->szAddress);
                 $l_email   = NULL;
                 $l_uid     = NULL;
 
@@ -120,10 +120,12 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
 
 $db->close();
 
-function cleanField($text)
+function cleanField($text, $correct_case = true)
 {
-    $text = strtolower($text);
-    $text = ucwords($text);
+    if ($correct_case) {
+        $text = strtolower($text);
+        $text = ucwords($text);
+    }
 
     $text = preg_replace('/Of([\s]|$)/', ' of$1', $text);
     $text = str_replace('And ', '& ', $text);
