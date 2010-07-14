@@ -65,7 +65,7 @@ class UNL_Peoplefinder_Driver_WebService implements UNL_Peoplefinder_DriverInter
         $record = file_get_contents($this->service_url.'?uid='.urlencode($uid).'&format=php');
 
         if (false === $record) {
-            throw new Exception('Could not find that user!');
+            throw new Exception('Could not find that user!', 404);
         }
 
         return unserialize($record);

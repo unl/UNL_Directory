@@ -121,7 +121,7 @@ class UNL_Peoplefinder
             $this->options['peoplefinder'] =& $this;
             $this->output[] = new $this->view_map[$this->options['view']]($this->options);
         } else {
-            throw new Exception('Un-registered view');
+            throw new Exception('Un-registered view', 404);
         }
     }
 

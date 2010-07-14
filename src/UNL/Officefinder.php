@@ -148,7 +148,7 @@ class UNL_Officefinder
         self::setObjectFromArray($record, $_POST);
 
         if (!$record->save()) {
-            throw new Exception('Could not save the record');
+            throw new Exception('Could not save the record', 500);
         }
     }
 
@@ -176,7 +176,7 @@ class UNL_Officefinder
         if (isset($this->view_map[$this->options['view']])) {
             $this->output[] = new $this->view_map[$this->options['view']]($this->options);
         } else {
-            throw new Exception('Un-registered view');
+            throw new Exception('Un-registered view', 404);
         }
     }
 
@@ -190,7 +190,7 @@ class UNL_Officefinder
         $db = new mysqli('localhost', self::$db_user, self::$db_pass, 'officefinder');
         if (mysqli_connect_error()) {
             throw new Exception('Database connection error (' . mysqli_connect_errno() . ') '
-                    . mysqli_connect_error());
+                    . mysqli_connect_error(), 500);
         }
         $db->set_charset('utf8');
         return $db;

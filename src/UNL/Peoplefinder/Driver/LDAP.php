@@ -114,7 +114,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
                 return $this->connected;
             }
         }
-        throw new Exception('Cound not connect to LDAP directory.');
+        throw new Exception('Cound not connect to LDAP directory.', 500);
     }
     
     /**
@@ -280,7 +280,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
             return self::recordFromLDAPEntry($r[0]);
         } else {
             header('HTTP/1.0 404 Not Found');
-            throw new Exception('Cannot find that UID.');
+            throw new Exception('Cannot find that UID.', 404);
         }
     }
     

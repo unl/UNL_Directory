@@ -85,7 +85,7 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
                 }
             }
         } else {
-            throw new Exception('Invalid department name.');
+            throw new Exception('Invalid department name.', 404);
         }
     }
     
