@@ -8,6 +8,7 @@
      <div class="country-name">USA</div>
 </div>
 <?php
+echo $savvy->render($context->phone, 'Peoplefinder/Record/TelephoneNumber.tpl.php');
 echo '<ul>';
 foreach ($context as $var=>$value) {
     echo '<li>'.$var.':'.$value.'</li>';

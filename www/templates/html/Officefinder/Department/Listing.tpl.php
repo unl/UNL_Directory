@@ -1,5 +1,5 @@
 <?php
-echo $context->name.' '.$context->phone;
+echo $context->name.' '.$savvy->render($context->phone, 'Peoplefinder/Record/TelephoneNumber.tpl.php');;
 
 if ($context->userCanEdit(UNL_Officefinder::getUser())) {
     echo ' <a href="?view=listing&amp;id='.$context->id.'&amp;format=editing">Edit</a>';
