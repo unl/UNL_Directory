@@ -80,13 +80,6 @@ if (isset($context->postalAddress)) {
         </div>'.PHP_EOL;
 }
 
-if (strpos($_SERVER['HTTP_USER_AGENT'], "iPhone") === false) {
-    $href = "wtai://wp/mc;";
-    $isIPhone = false;
-} else {
-    $href = "tel:";
-    $isIPhone = true;
-}
 if (isset($context->telephoneNumber)) {
     
     echo '<div class="tel workTel">
