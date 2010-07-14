@@ -80,13 +80,13 @@
 .vcard a.email {
 	
 }
-.vcard .eppa, .vcard .organization-unit, .vcard .tel, .vcf, .title {display:block;}
+.vcard .eppa, .vcard .epa, .vcard .organization-unit, .vcard .tel, .vcf, .title {display:block;}
 .vcard a.planetred_profile {
 	float:left;
 	margin-right:15px;
 	min-width:114px;
 }
-.vcard .eppa {font-style:italic;font-size:0.8em;}
+.vcard .eppa, .vcard .epa {font-style:italic;font-size:0.8em;}
 .vcardInfo {margin-left:129px;}
 .vcard .adr {
 	border-left:2px solid #b7b7b7;

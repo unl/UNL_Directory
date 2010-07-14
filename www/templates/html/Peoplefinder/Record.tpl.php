@@ -15,7 +15,11 @@ if ($context->ou == 'org') {
     if (isset($context->eduPersonNickname)) echo '<span class="nickname">'.$context->eduPersonNickname.'</span>'.PHP_EOL;
 }
 if ($displayEmail && isset($context->unlEmailAlias)) echo "</a>\n";
-if (!empty($context->eduPersonPrimaryAffiliation)) echo '<span class="eppa">('.$context->eduPersonPrimaryAffiliation.')</span>'.PHP_EOL;
+
+if (isset($context->eduPersonAffiliation)) {
+    echo '<span class="eppa">('.implode(', ', $context->eduPersonAffiliation->getArrayCopy()).')</span>';
+}
+
 echo '<div class="vcardInfo">'.PHP_EOL;
 if (isset($context->unlSISClassLevel)) {
     switch ($context->unlSISClassLevel) {
