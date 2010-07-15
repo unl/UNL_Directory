@@ -78,7 +78,7 @@ directory = function() {
 	return {
 		initializeSearchBoxes : function() {
 			WDN.jQuery('#peoplefinder, #officefinder').submit(function(eventObject) { //on submit of the search form (people)
-				window.location.hash = '#q=' + WDN.jQuery('#'+this.id+' input.q').val() +'='+this.id; //triggering a hash change will run through the searching function
+				window.location.hash = '#q/' +this.id +'/' + WDN.jQuery('#'+this.id+' input.q').val() ; //triggering a hash change will run through the searching function
 				eventObject.preventDefault();
 				eventObject.stopPropagation();
 				return false;
@@ -124,15 +124,15 @@ directory = function() {
 WDN.jQuery(function(){
 	WDN.jQuery(window).bind('hashchange', function(eventObject){
 		var hash = location.hash;
-		if (hash.match(/^#q=/)) {
-			hash = hash.split('='); //hash[1] = term hash[2] = type
+		if (hash.match(/^#q\/[peoplefinder|officefinder]/)) {
+			hash = hash.split('/'); //hash[1] = term hash[2] = type
 			
-			if (hash[2] === 'peoplefinder'){
-				WDN.jQuery('#q').val(hash[1]);
-				service_peoplefinder.presentPeopleFinderResults(hash[1]);
+			if (hash[1] === 'peoplefinder'){
+				WDN.jQuery('#q').val(hash[2]);
+				service_peoplefinder.presentPeopleFinderResults(hash[2]);
 			} else {
-				WDN.jQuery('#q2').val(hash[1]);
-				service_officefinder.getOfficeList(hash[1]);
+				WDN.jQuery('#q2').val(hash[2]);
+				service_officefinder.getOfficeList(hash[2]);
 			}
 			eventObject.preventDefault();
 			eventObject.stopPropagation();

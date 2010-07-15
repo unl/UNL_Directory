@@ -45,6 +45,7 @@
 	min-height:20px;
 	overflow:hidden;
 }
+.departments .fn, .departments .fn a {height:37px;max-height:37px;}
 .cInfo {float:right;margin-right:16px;}
 
 #maincontent .affiliation {margin-top:15px;}
