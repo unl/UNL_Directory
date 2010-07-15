@@ -40,6 +40,10 @@
 	font-size:18px;
 	font-weight:bold;
 	color:#464545 !important;	
+	max-width:315px;
+	max-height:35px;
+	min-height:20px;
+	overflow:hidden;
 }
 .cInfo {float:right;margin-right:16px;}
 
