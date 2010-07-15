@@ -13,7 +13,7 @@
         $default = '';
     }
     ?>
-    <input type="text" value="<?php echo $default; ?>" id="q" name="q" />
+    <input type="text" value="<?php echo $default; ?>" id="q" name="q" class="q" />
     <input name="submitbutton" type="image" src="images/formSearch.png" value="Submit" />
     </li>
     <?php
