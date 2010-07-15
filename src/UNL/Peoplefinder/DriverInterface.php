@@ -38,7 +38,15 @@ interface UNL_Peoplefinder_DriverInterface
      * @param string $affiliation eduPersonAffiliation, eg staff/faculty/student
      */
     function getPhoneMatches($query, $affiliation = null);
-    
+
+    /**
+     * Get results by organization
+     * 
+     * @param string $query The organization name, eg: University Communications
+     * @param $affiliation
+     */
+    function getHRPrimaryDepartmentMatches($query, $affiliation = null);
+
     /**
      * get a UNL_Peoplefinder_Record for the user
      *

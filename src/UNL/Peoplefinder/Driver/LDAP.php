@@ -305,4 +305,9 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
         $r->imageURL = $r->getImageURL();
         return $r;
     }
+
+    public function getHRPrimaryDepartmentMatches($query, $affiliation = null)
+    {
+        throw new Exception('not implemented yet');
+    }
 }

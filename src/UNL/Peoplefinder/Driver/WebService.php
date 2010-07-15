@@ -70,5 +70,10 @@ class UNL_Peoplefinder_Driver_WebService implements UNL_Peoplefinder_DriverInter
 
         return unserialize($record);
     }
+
+    function getHRPrimaryDepartmentMatches($query, $affiliation = null)
+    {
+        throw new Exception('not implemented yet');
+    }
 }
 ?>
