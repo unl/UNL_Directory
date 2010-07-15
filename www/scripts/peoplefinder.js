@@ -18,7 +18,7 @@ service_peoplefinder = function() {
 				return {top : selectedLi.top - 40, left : coords.left};
 			});
 		},
-		presentPeopleFinderResults : function(hash){
+		presentPeopleFinderResults : function(query){
 			WDN.jQuery('#peoplefinder').animate(
 				{
 					'top' : '0',
@@ -35,8 +35,8 @@ service_peoplefinder = function() {
 			WDN.jQuery('#results').css({'margin-top' : '80px'});
 			
 			WDN.jQuery('#pfShowRecord').empty();
-			WDN.toolbar_peoplefinder.queuePFRequest(hash, 'results');
-			document.title = 'UNL | Directory | People Search for ' + hash;
+			WDN.toolbar_peoplefinder.queuePFRequest(query, 'results');
+			document.title = 'UNL | Directory | People Search for ' + query;
 		}
 	};
 }();
