@@ -18,10 +18,16 @@ echo '</ul>';
 if ($context->userCanEdit(UNL_Officefinder::getUser())) {
     echo '<a href="?view=department&amp;id='.$context->id.'&amp;format=editing">Edit</a><br />';
 }
+
+// Get the official org unit if possible
+$department = $context->getHRDepartment();
+
 ?>
 <ul class="wdn_tabs">
     <li><a href="#listings">Listings</a></li>
+    <?php if ($department): ?>
     <li><a href="#employees">Employees</a></li>
+    <?php endif; ?>
 </ul>
 <div class="wdn_tabs_content">
     <div id="listings">
@@ -34,7 +40,7 @@ if ($context->userCanEdit(UNL_Officefinder::getUser())) {
     </div>
     <div id="employees">
     <?php
-    if ($department = $context->getHRDepartment()) {
+    if ($department) {
         // This listing has an official HR department associated with IT
         // render all those HR department details.
         echo $savvy->render($department);
