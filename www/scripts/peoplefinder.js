@@ -90,7 +90,8 @@ WDN.jQuery(function(){
 			eventObject.stopPropagation();
 			return false;
 		}
-		if(!hash){
+		if (!hash) {
+			// Load the default instructions
 			WDN.jQuery('#maincontent').load('?format=partial');
 		}
 	});
@@ -106,7 +107,7 @@ WDN.jQuery(document).ready(function() {
 		}
 	});
 	WDN.jQuery('#peoplefinder, #officefinder').submit(function(eventObject) { //on submit of the search form (people)
-		window.location.hash = '#q=' + WDN.jQuery('#q').val() +'='+this.id; //triggering a hash change will run through the searching function
+		window.location.hash = '#q=' + WDN.jQuery('#'+this.id+' input.q').val() +'='+this.id; //triggering a hash change will run through the searching function
 		eventObject.preventDefault();
 		eventObject.stopPropagation();
 		return false;
@@ -123,7 +124,7 @@ WDN.jQuery(document).ready(function() {
 	if (WDN.jQuery('#q2').val() !== "") {
 		WDN.jQuery('#q2').prev('label').hide();
 	};
-	WDN.jQuery('#q, #q2').blur(function() {
+	WDN.jQuery('input.q').blur(function() {
 		if (WDN.jQuery(this).val() === "") {
 			WDN.jQuery(this).siblings('label').show();
 		}
