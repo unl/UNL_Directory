@@ -18,6 +18,7 @@ if (count($context)) {
                     <a class="cInfo"" href="'.UNL_Peoplefinder::getURL().'departments/?view=department&amp;id='.$department->id.'">More Details</a>
                 </div>
              </li>';
+    }
     echo '</ul>';
 }
 ?>
