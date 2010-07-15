@@ -308,6 +308,8 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
 
     public function getHRPrimaryDepartmentMatches($query, $affiliation = null)
     {
-        throw new Exception('not implemented yet');
+        $filter = new UNL_Peoplefinder_Driver_LDAP_HRPrimaryDepartmentFilter($query);
+        $this->query($filter->__toString(), $this->detailAttributes);
+        return $this->getRecordsFromResults();
     }
 }

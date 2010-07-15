@@ -14,7 +14,7 @@
 class UNL_Peoplefinder_Driver_LDAP_HRPrimaryDepartmentFilter
 {
     private $_filter;
-    
+
     /**
      * Create a filter for HR primary department filtering.
      *
@@ -26,9 +26,9 @@ class UNL_Peoplefinder_Driver_LDAP_HRPrimaryDepartmentFilter
             throw new Exception('Must set primary department.');
         }
 
-        $this->_filter = '(&(unlHRPrimaryDepartment='.$hrPrimaryDepartment.'))';
+        $this->_filter = '(unlHRPrimaryDepartment='.$hrPrimaryDepartment.')';
     }
-    
+
     function __toString()
     {
         return $this->_filter;
