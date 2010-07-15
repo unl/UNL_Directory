@@ -6,8 +6,8 @@
     </h6>
     <div class="clear"></div>
     <?php
-	   echo $savvy->render($context, 'Peoplefinder/StandardForm.tpl.php');
-	?>
+       echo $savvy->render($context, 'Peoplefinder/StandardForm.tpl.php');
+    ?>
     <div class="intro_support">
         <p>Find contact information for faculty, staff and students.</p>
         <p>Search by:</p>
