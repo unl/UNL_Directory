@@ -73,6 +73,54 @@ service_officefinder = function() {
 		}
 	};
 }();
+
+directory = function() {
+	return {
+		initializeSearchBoxes : function() {
+			WDN.jQuery('#peoplefinder, #officefinder').submit(function(eventObject) { //on submit of the search form (people)
+				window.location.hash = '#q=' + WDN.jQuery('#'+this.id+' input.q').val() +'='+this.id; //triggering a hash change will run through the searching function
+				eventObject.preventDefault();
+				eventObject.stopPropagation();
+				return false;
+			});
+			WDN.jQuery('#q, #q2').focus(function(){
+				WDN.jQuery(this).siblings('label').hide();
+			});
+			WDN.jQuery('form.directorySearch ol > li > label').focus(function(){
+					WDN.jQuery(this).hide().siblings('input[name=q]').focus();
+			});
+			if (WDN.jQuery('#q').val() !== "") {
+				WDN.jQuery('#q').siblings('label').hide();
+			};
+			if (WDN.jQuery('#q2').val() !== "") {
+				WDN.jQuery('#q2').prev('label').hide();
+			};
+			WDN.jQuery('input.q').blur(function() {
+				if (WDN.jQuery(this).val() === "") {
+					WDN.jQuery(this).siblings('label').show();
+				}
+			});
+			WDN.jQuery('#filters input').click(function(){
+				if(WDN.jQuery(this).attr('id') === "filterAll") {
+					if (this.checked){
+						WDN.jQuery('#filters input').not('#filterAll').removeAttr('checked');
+						WDN.jQuery('div.affiliation').show();
+					} 
+				} else {
+						WDN.jQuery('#filterAll').removeAttr('checked');
+						WDN.jQuery('#filters input').not('#filterAll').each(function(){
+							if(this.checked){
+								WDN.jQuery('div.'+WDN.jQuery(this).attr('name')).show();
+							} else {
+								WDN.jQuery('div.'+WDN.jQuery(this).attr('name')).hide();
+							}
+						});
+				}
+			});
+		}
+	}
+}();
+
 WDN.jQuery(function(){
 	WDN.jQuery(window).bind('hashchange', function(eventObject){
 		var hash = location.hash;
@@ -92,7 +140,9 @@ WDN.jQuery(function(){
 		}
 		if (!hash) {
 			// Load the default instructions
-			WDN.jQuery('#maincontent').load('?format=partial');
+			WDN.jQuery('#maincontent').load('?format=partial', function(){
+				directory.initializeSearchBoxes();
+			});
 		}
 	});
 });
@@ -106,46 +156,7 @@ WDN.jQuery(document).ready(function() {
 			WDN.jQuery(window).trigger('hashchange');
 		}
 	});
-	WDN.jQuery('#peoplefinder, #officefinder').submit(function(eventObject) { //on submit of the search form (people)
-		window.location.hash = '#q=' + WDN.jQuery('#'+this.id+' input.q').val() +'='+this.id; //triggering a hash change will run through the searching function
-		eventObject.preventDefault();
-		eventObject.stopPropagation();
-		return false;
-	});
-	WDN.jQuery('#q, #q2').focus(function(){
-		WDN.jQuery(this).siblings('label').hide();
-	});
-	WDN.jQuery('form.directorySearch ol > li > label').focus(function(){
-			WDN.jQuery(this).hide().siblings('input[name=q]').focus();
-	});
-	if (WDN.jQuery('#q').val() !== "") {
-		WDN.jQuery('#q').siblings('label').hide();
-	};
-	if (WDN.jQuery('#q2').val() !== "") {
-		WDN.jQuery('#q2').prev('label').hide();
-	};
-	WDN.jQuery('input.q').blur(function() {
-		if (WDN.jQuery(this).val() === "") {
-			WDN.jQuery(this).siblings('label').show();
-		}
-	});
-	WDN.jQuery('#filters input').click(function(){
-		if(WDN.jQuery(this).attr('id') === "filterAll") {
-			if (this.checked){
-				WDN.jQuery('#filters input').not('#filterAll').removeAttr('checked');
-				WDN.jQuery('div.affiliation').show();
-			} 
-		} else {
-				WDN.jQuery('#filterAll').removeAttr('checked');
-				WDN.jQuery('#filters input').not('#filterAll').each(function(){
-					if(this.checked){
-						WDN.jQuery('div.'+WDN.jQuery(this).attr('name')).show();
-					} else {
-						WDN.jQuery('div.'+WDN.jQuery(this).attr('name')).hide();
-					}
-				});
-		}
-	});
+	directory.initializeSearchBoxes();
 });
 function pf_handleResults(e)  {
 	WDN.log(e);
