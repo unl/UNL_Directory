@@ -42,8 +42,8 @@ interface UNL_Peoplefinder_DriverInterface
     /**
      * Get results by organization
      * 
-     * @param string $query The organization name, eg: University Communications
-     * @param $affiliation
+     * @param string $query       The organization name, eg: University Communications
+     * @param string $affiliation eduPersonAffiliation, eg staff/faculty/student
      */
     function getHRPrimaryDepartmentMatches($query, $affiliation = null);
 
