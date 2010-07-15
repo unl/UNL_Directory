@@ -79,7 +79,7 @@ WDN.jQuery(function(){
 		if (hash.match(/^#q=/)) {
 			hash = hash.split('='); //hash[1] = term hash[2] = type
 			
-			if(hash[2] === 'people'){
+			if (hash[2] === 'peoplefinder'){
 				WDN.jQuery('#q').val(hash[1]);
 				service_peoplefinder.presentPeopleFinderResults(hash[1]);
 			} else {
@@ -91,28 +91,22 @@ WDN.jQuery(function(){
 			return false;
 		}
 		if(!hash){
-			WDN.jQuery('#maincontent').load('templates/html/Peoplefinder/Instructions.tpl.php');
+			WDN.jQuery('#maincontent').load('?format=partial');
 		}
 	});
 });
 
 WDN.jQuery(document).ready(function() {
-	WDN.loadJS('/wdn/templates_3.0/scripts/plugins/hashchange/jQuery.hashchange.1-2.min.js');
+	WDN.loadJS('wdn/templates_3.0/scripts/plugins/hashchange/jQuery.hashchange.1-2.min.js');
 	WDN.loadJS('wdn/templates_3.0/scripts/toolbar_peoplefinder.js', function(){
 		WDN.toolbar_peoplefinder.serviceURL = '';
 		WDN.toolbar_peoplefinder.configuedWebService = true;
 		if (window.location.hash) {
-				WDN.jQuery(window).trigger('hashchange');
+			WDN.jQuery(window).trigger('hashchange');
 		}
 	});
-	WDN.jQuery('#peoplefinder').submit(function(eventObject) { //on submit of the search form (people)
-		window.location.hash = '#q=' + WDN.jQuery('#q').val() +'=people'; //triggering a hash change will run through the searching function
-		eventObject.preventDefault();
-		eventObject.stopPropagation();
-		return false;
-	});
-	WDN.jQuery('#officefinder').submit(function(eventObject) { //on submit of the search form (office)
-		window.location.hash = '#q=' + WDN.jQuery('#q2').val() +'=office'; //triggering a hash change will run through the searching function
+	WDN.jQuery('#peoplefinder, #officefinder').submit(function(eventObject) { //on submit of the search form (people)
+		window.location.hash = '#q=' + WDN.jQuery('#q').val() +'='+this.id; //triggering a hash change will run through the searching function
 		eventObject.preventDefault();
 		eventObject.stopPropagation();
 		return false;
