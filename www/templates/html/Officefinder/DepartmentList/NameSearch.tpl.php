@@ -20,6 +20,8 @@ if (count($context)) {
              </li>';
     }
     echo '</ul>';
+} else {
+    echo "No results could be found";
 }
 ?>
 </div>
