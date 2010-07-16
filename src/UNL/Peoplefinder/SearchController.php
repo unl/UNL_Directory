@@ -17,7 +17,7 @@ class UNL_Peoplefinder_SearchController
         $search_method = 'getExactMatches';
 
         if (is_numeric(str_replace(array('-', '(', ')'),
-                                   array('',  '',  ''),
+                                   '',
                                    $this->options['q']))) {
             // Phone number search
             $search_method = 'getPhoneMatches';
@@ -27,6 +27,9 @@ class UNL_Peoplefinder_SearchController
             $this->options['q'] = array(
                 'sn' => $this->options['sn'],
                 'cn' => $this->options['cn']);
+        } elseif (strpos($this->options['q'], 'd:') === 0) {
+            $search_method = 'getHRPrimaryDepartmentMatches';
+            $this->options['q'] = substr($this->options['q'], 2);
         } else {
             // Standard text search, run exact matches first.
         }
