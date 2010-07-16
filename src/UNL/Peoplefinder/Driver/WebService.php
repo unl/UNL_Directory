@@ -73,7 +73,11 @@ class UNL_Peoplefinder_Driver_WebService implements UNL_Peoplefinder_DriverInter
 
     function getHRPrimaryDepartmentMatches($query, $affiliation = null)
     {
-        throw new Exception('not implemented yet');
+        $results = file_get_contents($this->service_url.'?q=d:'.urlencode($query).'&format=php&affiliation='.urlencode($affiliation).'&method=getHRPrimaryDepartmentMatches');
+        if ($results) {
+            $results = unserialize($results);
+        }
+        return $results;
     }
 }
 ?>
