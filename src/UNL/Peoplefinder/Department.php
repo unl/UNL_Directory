@@ -65,6 +65,8 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
     
     protected $_xml;
     
+    public $options = array();
+    
     /**
      * construct a department
      *
@@ -75,6 +77,7 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
         if (!isset($options['d'])) {
             throw new Exception('No department name! Pass as the d array value');
         }
+        $this->options = $options + $this->options;
         $this->name = $options['d'];
         $this->_xml = new SimpleXMLElement(file_get_contents(UNL_Peoplefinder::getDataDir().'/hr_tree.xml'));
         $results = $this->_xml->xpath('//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="name"][@value="'.$this->name.'"]/..');
@@ -97,17 +100,8 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
     function getLDAPResults()
     {
         if (!isset($this->_results)) {
-            $options = array(
-                'bind_dn'       => UNL_Peoplefinder_Driver_LDAP::$bindDN,
-                'bind_password' => UNL_Peoplefinder_Driver_LDAP::$bindPW,
-                );
-            
-            $this->_ldap = UNL_LDAP::getConnection($options);
-            $name = str_replace(array('(',')','*','\'','"'), '', $this->name);
-            $this->_results =  $this->_ldap->search('dc=unl,dc=edu',
-                                                    '(unlHRPrimaryDepartment='.$name.')');
-            $this->_results->sort('cn');
-            $this->_results->sort('sn');
+            $pf = new UNL_Peoplefinder($this->options);
+            $this->_results = new ArrayIterator($pf->getHRPrimaryDepartmentMatches($this->name));
         }
         return $this->_results;
     }
@@ -134,7 +128,7 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
      */
     function current()
     {
-        return UNL_Peoplefinder_Driver_LDAP::recordFromUNLLDAPEntry($this->getLDAPResults()->current());
+        return $this->getLDAPResults()->current();
     }
     
     function key()

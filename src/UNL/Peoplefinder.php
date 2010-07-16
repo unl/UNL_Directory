@@ -61,7 +61,7 @@ class UNL_Peoplefinder
     /**
      * Constructor for the object.
      * 
-     * @param UNL_Peoplefinder_DriverInterface $driver A compatible driver
+     * @param array $options Options, format, driver, mobile etc.
      */
     function __construct($options = array())
     {

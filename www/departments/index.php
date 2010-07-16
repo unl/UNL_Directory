@@ -1,7 +1,9 @@
 <?php
 require_once dirname(__FILE__).'/../config.inc.php';
 
-$peoplefinder  = new UNL_Officefinder($_GET);
+$options = $_GET;
+$options['driver'] = $driver;
+$peoplefinder  = new UNL_Officefinder($options);
 
 
 Savvy_ClassToTemplateMapper::$classname_replacement = 'UNL_';
