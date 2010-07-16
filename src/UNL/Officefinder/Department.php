@@ -24,6 +24,7 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record
      */
     function __construct($options = array())
     {
+        $this->options = $options;
         if (!empty($options['id'])) {
             $record = self::getByID($options['id']);
 
@@ -72,7 +73,7 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record
         if (!isset($this->org_unit)) {
             return false;
         }
-        return UNL_Peoplefinder_Department::getById($this->org_unit);
+        return UNL_Peoplefinder_Department::getById($this->org_unit, $this->options);
     }
 
     function userCanEdit($user)
