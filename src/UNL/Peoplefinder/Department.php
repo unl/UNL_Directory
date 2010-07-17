@@ -81,14 +81,15 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
         $this->name = $options['d'];
         $this->_xml = new SimpleXMLElement(file_get_contents(UNL_Peoplefinder::getDataDir().'/hr_tree.xml'));
         $results = $this->_xml->xpath('//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="name"][@value="'.$this->name.'"]/..');
-        if (isset($results[0])) {
-            foreach ($results[0] as $attribute) {
-                if (isset($attribute['name'])) {
-                    $this->{$attribute['name']} = (string)$attribute['value'];
-                }
-            }
-        } else {
+
+        if (!isset($results[0])) {
             throw new Exception('Invalid department name.', 404);
+        }
+
+        foreach ($results[0] as $attribute) {
+            if (isset($attribute['name'])) {
+                $this->{$attribute['name']} = (string)$attribute['value'];
+            }
         }
     }
     
