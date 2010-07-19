@@ -184,6 +184,28 @@ class UNL_Officefinder_Record
         return false;
     }
 
+    public static function __callStatic($method, $args)
+    {
+        switch (true) {
+            case preg_match('/getBy([\w]+)/', $method, $matches):
+                $mysqli = self::getDB();
+                $class  = get_called_class();
+                $record = new $class;
+                $field  = strtolower($matches[1]);
+                $sql    = 'SELECT * FROM '.$record->getTable(). ' WHERE '.$field.' = "'.$mysqli->escape_string($args[0]).'"';
+                $result = $mysqli->query($sql);
+
+                if ($result === false
+                    || $result->num_rows == 0) {
+                    return false;
+                }
+
+                UNL_ENews_Controller::setObjectFromArray($record, $result->fetch_assoc());
+                return $record;
+        }
+        throw new Exception('Invalid static method called.');
+    }
+
     /**
      * Get the DB
      * 
