@@ -15,7 +15,14 @@ service_peoplefinder = function() {
 		updatePeopleFinderRecord : function(){ //function called when a record has been rendered
 			WDN.jQuery('#pfShowRecord').offset(function(index, coords) {
 				selectedLi = WDN.jQuery('li.selected').offset();
-				return {top : selectedLi.top - 40, left : coords.left};
+				footerLoc = WDN.jQuery("#footer").offset();
+				//alert(WDN.jQuery(this).height());
+				if ((selectedLi.top - 40 + WDN.jQuery(this).height()) > footerLoc.top) {
+					placementTop = (footerLoc.top - WDN.jQuery(this).height() - 40);
+				} else {
+					placementTop = selectedLi.top - 40;
+				}
+				return {top : placementTop, left : coords.left};
 			});
 		},
 		presentPeopleFinderResults : function(query){
@@ -58,7 +65,7 @@ service_officefinder = function() {
 							document.title = 'UNL | Directory | Department Search for ' + q;
 							service_officefinder.presentOfficeFinderResults(data);
 						}
-					})
+					});
 				}
 			);
 			WDN.jQuery('#q2').siblings('label').hide();
@@ -70,6 +77,31 @@ service_officefinder = function() {
 		presentOfficeFinderResults : function(html) {
 			WDN.jQuery('#results').empty();
 			WDN.jQuery('#results').html(html);
+			WDN.jQuery('ul.pfResult li').each(function(){
+				onClick = WDN.jQuery(this).find('.cInfo').attr('onclick');
+				WDN.jQuery(this).find('.cInfo').removeAttr('onclick');
+				WDN.jQuery(this).click(onClick);
+			});
+			WDN.jQuery('ul.pfResult li').click(function() {
+				WDN.jQuery('li.selected').removeClass('selected');
+				WDN.jQuery(this).addClass('selected');
+				return false;
+			});
+		},
+		
+		of_getUID : function(uid) {
+			var url = 'departments/?view=department&format=partial&id=' + uid;
+            WDN.get(url, null, service_officefinder.updateOfficeFinderRecord);
+            return false;
+		},
+		
+		updateOfficeFinderRecord : function(data, textStatus) {
+			if (textStatus == 'success') {
+            	document.getElementById('pfShowRecord').innerHTML = "<div class=\"vcard office\">"+data+"</div>";
+            	service_peoplefinder.updatePeopleFinderRecord();
+            } else {
+                document.getElementById('pfShowRecord').innerHTML = 'Aw snap, something went wrong!';
+            }
 		}
 	};
 }();
@@ -160,10 +192,4 @@ WDN.jQuery(document).ready(function() {
 });
 function pf_handleResults(e)  {
 	WDN.log(e);
-}
-function updateDisplay() {
-	alert('hell yeah');
-}
-function presentResults(hash){
-	
 }

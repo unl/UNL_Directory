@@ -15,7 +15,7 @@ if (count($context)) {
                             <a href="'.UNL_Peoplefinder::getURL().'departments/?view=department&amp;id='.$department->id.'">'.$department->name.'</a>
                         </div>
                     </div>
-                    <a class="cInfo"" href="'.UNL_Peoplefinder::getURL().'departments/?view=department&amp;id='.$department->id.'">More Details</a>
+                    <a class="cInfo"" href="'.UNL_Peoplefinder::getURL().'departments/?view=department&amp;id='.$department->id.'" onclick="return service_officefinder.of_getUID(\''.$department->id.'\');">More Details</a>
                 </div>
              </li>';
     }
