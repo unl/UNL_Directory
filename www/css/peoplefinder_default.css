@@ -215,7 +215,10 @@ li#filters fieldset {
 #maincontent #results, #maincontent #pfShowRecord {
     margin-top:15px;
     padding-top:30px;
-    
+}
+#maincontent #pfShowRecord {   
+    top:108px;
+    position:relative;
 }
 #maincontent #results .intro, #maincontent #pfShowRecord .intro{
     background-image:-webkit-gradient(

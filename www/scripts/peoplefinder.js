@@ -90,6 +90,7 @@ service_officefinder = function() {
 		},
 		
 		of_getUID : function(uid) {
+			WDN.jQuery('#pfShowRecord').html('<img alt="progress" id="pfprogress" src="/wdn/templates_3.0/css/header/images/colorbox/loading.gif" />');
 			var url = 'departments/?view=department&format=partial&id=' + uid;
             WDN.get(url, null, service_officefinder.updateOfficeFinderRecord);
             return false;
