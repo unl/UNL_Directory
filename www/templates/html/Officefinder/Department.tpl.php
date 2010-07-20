@@ -32,7 +32,7 @@ foreach ($context as $var=>$value) {
 echo '</ul>';
 
 if ($context->userCanEdit(UNL_Officefinder::getUser())) {
-    echo '<a href="'.UNL_Peoplefinder::getURL().'departments/?view=department&amp;id='.$context->id.'&amp;format=editing">Edit</a><br />';
+    echo '<a href="'.UNL_Officefinder::getURL().'?view=department&amp;id='.$context->id.'&amp;format=editing">Edit</a><br />';
 }
 
 // Get the official org unit if possible
