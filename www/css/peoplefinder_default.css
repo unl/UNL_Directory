@@ -127,7 +127,7 @@ a.text-vcard{padding-left:24px;padding-right:0;background-position:left -2px;mar
 	border-color:#dcdbc7;
 }
 .vcard.office .frame{float:left;max-width:100px;}
-#maincontent h2.name {
+#maincontent h2.fn {
     font-size:18px;
     font-weight:bold;
     color:#464545 !important; 

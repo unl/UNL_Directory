@@ -1,5 +1,5 @@
-<h2 class="name"><?php echo $context->name; ?></h2>
-<img alt="Generic Icon" src="http://www1.unl.edu/tour/BuildingImages/<?php echo $context->building;?>_01_sm.jpg" width="100" height="100" class="frame medium photo">
+<h2 class="fn"><?php echo $context->name; ?></h2>
+<img alt="Generic Icon" src="http://www1.unl.edu/tour/BuildingImages/<?php echo $context->building;?>_01_sm.jpg" width="100" height="100" class="frame photo">
 <div class="vcardInfo">
 	<div class="adr">
 	     <span class="street-address"><?php echo $context->address; ?></span>
