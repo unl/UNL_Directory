@@ -122,7 +122,7 @@ a.text-vcard{padding-left:24px;padding-right:0;background-position:left -2px;mar
 .vcard.office{
 	background:#f9f8e7;
 }
-.vcard.office .profile_pic {float:left;}
+.vcard.office .frame{float:left;max-width:100px;}
 #maincontent h2.name {
     font-size:18px;
     font-weight:bold;
