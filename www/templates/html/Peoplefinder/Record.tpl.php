@@ -53,7 +53,7 @@ if (isset($context->unlHRPrimaryDepartment)) {
     if ($context->unlHRPrimaryDepartment == 'Office of the President') {
         $org_name = 'University of Nebraska';
     }
-    $dept_url = UNL_PEOPLEFINDER_URI.'departments/?d='.urlencode($context->unlHRPrimaryDepartment);
+    $dept_url = UNL_Peoplefinder::getURL().'departments/?d='.urlencode($context->unlHRPrimaryDepartment);
     echo "<span class='org'>\n\t<span class='organization-unit'><a href='{$dept_url}'>{$context->unlHRPrimaryDepartment}</a></span>\n\t<span class='organization-name'>$org_name</span></span>\n";
 }
 

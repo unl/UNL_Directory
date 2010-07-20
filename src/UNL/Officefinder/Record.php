@@ -13,7 +13,7 @@ class UNL_Officefinder_Record
     function prepareUpdateSQL(&$sql)
     {
         $sql = 'UPDATE '.$this->getTable().' ';
-        $fields = get_object_vars($this);
+        $fields = get_class_vars(get_class($this));
 
         $sql .= 'SET `'.implode('`=?,`', array_keys($fields)).'`=? ';
 
@@ -24,6 +24,7 @@ class UNL_Officefinder_Record
 
         $sql = substr($sql, 0, -4);
 
+        $fields = array_intersect($fields, get_object_vars($this));
         return $fields;
     }
     

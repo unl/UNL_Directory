@@ -17,9 +17,9 @@ $page->head .= '
 <meta name="keywords" content="university of nebraska-lincoln student faculty staff directory vcard" />
 <meta name="author" content="Brett Bieber, UNL Office of University Communications" />
 <meta name="viewport" content="width = 320" />
-<link rel="stylesheet" type="text/css" media="screen" href="'.UNL_PEOPLEFINDER_URI.'css/peoplefinder_default.css" />
-<link media="only screen and (max-device-width: 480px)" href="'.UNL_PEOPLEFINDER_URI.'css/small_devices.css" type="text/css" rel="stylesheet" />
-<script type="text/javascript" src="'.UNL_PEOPLEFINDER_URI.'scripts/peoplefinder.js"></script>
+<link rel="stylesheet" type="text/css" media="screen" href="'.UNL_Peoplefinder::getURL().'css/peoplefinder_default.css" />
+<link media="only screen and (max-device-width: 480px)" href="'.UNL_Peoplefinder::getURL().'css/small_devices.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="'.UNL_Peoplefinder::getURL().'scripts/peoplefinder.js"></script>
 ';
 
 if (isset($context->options['q']) 

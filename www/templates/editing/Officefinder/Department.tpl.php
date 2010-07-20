@@ -1,7 +1,10 @@
-<form method="post" action="?view=department&amp;id=<?php echo $context->id; ?>">
+<form method="post" action="<?php echo UNL_Peoplefinder::getURL(); ?>departments/?view=department&amp;id=<?php echo $context->id; ?>">
 <input type="hidden" name="_type" value="department" />
 <?php
 foreach ($context as $var=>$value) {
+    if ($var == 'options') {
+        continue;
+    }
     $type = 'text';
     if ($var == 'id') {
         $type = 'hidden';

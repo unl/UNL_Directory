@@ -133,7 +133,7 @@ class UNL_Officefinder
     function handlePostDBRecord($type)
     {
         if (!empty($_POST['id'])) {
-            if (!($record = $type::getByID($_POST['id']))) {
+            if (!($record = call_user_func(array($type, 'getByID'), $_POST['id']))) {
                 throw new Exception('The record could not be retrieved', 404);
             }
             if (!$record->userCanEdit(self::getUser(true))) {

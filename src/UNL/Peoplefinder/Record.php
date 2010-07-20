@@ -157,7 +157,7 @@ class UNL_Peoplefinder_Record
     {
 
         if ($this->ou == 'org') {
-            return UNL_PEOPLEFINDER_URI.'images/organization.png';
+            return UNL_Peoplefinder::getURL().'images/organization.png';
         }
 
         switch ($size) {

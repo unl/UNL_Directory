@@ -94,6 +94,9 @@ class UNL_Peoplefinder
 
     public static function getURL()
     {
+        if (defined('UNL_PEOPLEFINDER_URI')) {
+            return UNL_PEOPLEFINDER_URI;
+        }
         return self::$url;
     }
 
