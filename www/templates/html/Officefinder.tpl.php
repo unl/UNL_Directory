@@ -15,6 +15,14 @@ if (isset($context->options['q'])) {
     $page->head .= '<meta name="robots" content="NOINDEX, NOFOLLOW" />';
 }
 
+if (UNL_Officefinder::getUser(true)) {
+    $page->head .= '
+    <script type="text/javascript">
+    WDN.loadJS("wdn/templates_3.0/scripts/plugins/ui/jQuery.ui.js");
+    WDN.loadJS("'.UNL_Peoplefinder::getURL().'scripts/edit_functions.js");
+    </script>';
+}
+
 $page->maincontentarea = $savvy->render($context->output);
 
 echo $page;
