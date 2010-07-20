@@ -21,8 +21,7 @@ if (!empty($context->options['q'])) {
 } elseif (!empty($context->options['d'])) {
     $q = htmlentities($context->options['d'], ENT_QUOTES);
 }
-$page->maincontentarea = $savvy->render($context, 'Officefinder/StandardForm.tpl.php');
 
-$page->maincontentarea .= $savvy->render($context->output);
+$page->maincontentarea = $savvy->render($context->output);
 
 echo $page;
