@@ -24,7 +24,9 @@ function saveSortOrder(list) {//this function determines the order of the list a
 	var results = WDN.jQuery(list).sortable('toArray');
 
 	for (i = 0; i<results.length; i++) {
-		WDN.jQuery('#'+results[i]+' form input[name=sort]').attr('value', i);
-		WDN.jQuery.post(WDN.jQuery('#'+results[i]+' form').attr('action'), WDN.jQuery('#'+results[i]+' form').serialize());
+		if (WDN.jQuery('#'+results[i]+' form input[name=sort]').attr('value') != i+1) {
+			WDN.jQuery('#'+results[i]+' form input[name=sort]').attr('value', i+1);
+			WDN.jQuery.post(WDN.jQuery('#'+results[i]+' form').attr('action'), WDN.jQuery('#'+results[i]+' form').serialize());
+		}
 	}
 }
