@@ -19,10 +19,13 @@
 	<span class="email">
 	   <a class="email" href="mailto:<?php echo $context->email; ?>"><?php echo $context->email; ?></a>
 	</span>
+	<span class="url">
+	   <a class="url" href="<?php echo $context->website; ?>"><?php echo $context->website; ?></a>
+	</span>
 </div>
 <div class="clear"></div>
 <?php 
-echo '<ul>';
+echo '<ul style="display:none;">';
 foreach ($context as $var=>$value) {
     echo '<li>'.$var.':'.$value.'</li>';
 }
