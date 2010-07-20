@@ -45,7 +45,7 @@
 	min-height:20px;
 	overflow:hidden;
 }
-.departments .fn, .departments .fn a {height:37px;max-height:37px;}
+.departments .fn, .departments .fn a {height:42px;max-height:42px;line-height:20px;}
 .cInfo {float:right;margin-right:16px;}
 
 #maincontent .affiliation {margin-top:15px;}
@@ -98,16 +98,19 @@
 	padding-left:5px;
 	margin:5px 0;	
 }
-.vcard .tel, .vcard span.email {
+.vcard .tel, .vcard span.email, .vcard span.url {
 	background:url('images/iconContactSprite.png') no-repeat;
 	padding-left:25px;
 	height:20px;
 }
-.vcard span.email {
-	background:url('images/iconContactSprite.png') no-repeat 0 -21px;
+.vcard span.email, .vcard span.url {
+	background-position:0 -21px;
 	display:block;
 	margin-top:5px;
 	margin-bottom:3px;
+}
+.vcard span.url {
+    background-position:0 -42px;
 }
 a.email {background:none;}
 a.text-vcard{padding-left:24px;padding-right:0;background-position:left -2px;margin-left:2px;}
@@ -121,6 +124,7 @@ a.text-vcard{padding-left:24px;padding-right:0;background-position:left -2px;mar
 #maincontent #pfShowRecord .wdn_tabs, #maincontent #pfShowRecord .wdn_tabs_content {display:none;}
 .vcard.office{
 	background:#f9f8e7;
+	border-color:#dcdbc7;
 }
 .vcard.office .frame{float:left;max-width:100px;}
 #maincontent h2.name {
