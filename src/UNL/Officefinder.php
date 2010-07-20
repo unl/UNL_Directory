@@ -122,12 +122,19 @@ class UNL_Officefinder
         }
         switch($_POST['_type']) {
             case 'department':
-                $this->handlePostDBRecord('UNL_Officefinder_Department');
+                $record = $this->handlePostDBRecord('UNL_Officefinder_Department');
+                $this->redirect(self::getURL().'?view=department&id='.$record->id);
                 break;
             case 'listing':
-                $this->handlePostDBRecord('UNL_Officefinder_Department_Listing');
+                $record = $this->handlePostDBRecord('UNL_Officefinder_Department_Listing');
+                $this->redirect(self::getURL().'?view=department&id='.$record->department_id);
                 break;
         }
+    }
+    
+    public static function getURL()
+    {
+        return UNL_Peoplefinder::getURL().'departments/';
     }
 
     function handlePostDBRecord($type)
@@ -150,6 +157,8 @@ class UNL_Officefinder
         if (!$record->save()) {
             throw new Exception('Could not save the record', 500);
         }
+
+        return $record;
     }
 
     function filterPostValues()
@@ -222,6 +231,13 @@ class UNL_Officefinder
         }
     }
 
+    /**
+     * 
+     * Redirect user to the specified url
+     * 
+     * @param string $url  Where to redirect
+     * @param bool   $exit To exit or not
+     */
     static function redirect($url, $exit = true)
     {
         header('Location: '.$url);
