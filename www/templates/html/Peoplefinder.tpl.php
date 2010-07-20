@@ -1,6 +1,4 @@
 <?php
-$myself = htmlentities(str_replace('index.php', '', $_SERVER['PHP_SELF']), ENT_QUOTES);
-UNL_Templates::$options['version'] = 3;
 
 $template = 'Document';
 
