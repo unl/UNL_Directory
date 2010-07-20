@@ -15,13 +15,6 @@ if (isset($context->options['q'])) {
     $page->head .= '<meta name="robots" content="NOINDEX, NOFOLLOW" />';
 }
 
-$q = '';
-if (!empty($context->options['q'])) {
-    $q = htmlentities($context->options['q'], ENT_QUOTES);
-} elseif (!empty($context->options['d'])) {
-    $q = htmlentities($context->options['d'], ENT_QUOTES);
-}
-
 $page->maincontentarea = $savvy->render($context->output);
 
 echo $page;
