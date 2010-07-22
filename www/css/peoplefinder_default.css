@@ -30,7 +30,8 @@
 #maincontent ul.pfResult li:hover div.overflow, #maincontent ul.pfResult li.selected div.overflow {
 	background:url('images/selectedBG.png') no-repeat left;
 }
-.eppa, .organization-unit, .tel, .type {display:none;} /* @todo hiding for now, perhaps these need to be pulled out of HTML in lis? */
+.eppa, .organization-unit, .tel, .type {display:none;}
+
 
 .planetred_profile, .recordDetails {float:left;}
 .recordDetails {
@@ -64,6 +65,18 @@
 	font-size:1em;	
 }
 #maincontent #pfShowRecord .wdn_tabs, #maincontent #pfShowRecord .wdn_tabs_content {display:none;}
+
+/*
+OfficeFinder listings
+*/
+#maincontent ul.listings {padding:0;list-style:none;}
+ul.listings li {
+    margin-bottom:7px;
+    clear:both;
+    padding-bottom:5px;
+}
+ul.listings li .listingDetails {}
+.listing .tel{display:block;}
 /* 
 ***************************************************
 
@@ -229,8 +242,8 @@ li#filters fieldset {
     linear,
     left top,
     left bottom,
-    color-stop(0.10, rgba(255,255,255, 0.5)),
-    color-stop(1, rgba(189,185,145,0.5))
+    color-stop(0.10, rgba(255,255,255, .3)),
+    color-stop(1, rgba(227,224,189, .8))
 );
 background-image:-moz-linear-gradient(
     center bottom,

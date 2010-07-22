@@ -20,6 +20,7 @@ if (UNL_Officefinder::getUser(true)) {
     <script type="text/javascript">
     WDN.loadJS("wdn/templates_3.0/scripts/plugins/ui/jQuery.ui.js");
     WDN.loadJS("'.UNL_Peoplefinder::getURL().'scripts/edit_functions.js");
+    WDN.loadCSS("'.UNL_Peoplefinder::getURL().'css/editting.css");
     </script>';
 }
 

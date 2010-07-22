@@ -39,29 +39,31 @@ if ($context->userCanEdit(UNL_Officefinder::getUser())) {
 $department = $context->getHRDepartment();
 
 ?>
-<ul class="wdn_tabs">
-    <li><a href="#listings">Listings</a></li>
-    <?php if ($department): ?>
-    <li><a href="#employees">Employees</a></li>
-    <?php endif; ?>
-</ul>
-<div class="wdn_tabs_content">
-    <div id="listings">
-    <?php
-    $listings = $context->getListings();
-    if (count($listings)) {
-        echo $savvy->render($listings);
-    }
-    ?>
-    </div>
-    <div id="employees">
-    <?php
-    if ($department) {
-        // This listing has an official HR department associated with IT
-        // render all those HR department details.
-        echo $savvy->render($department);
-    }
-    
-    ?>
-    </div>
+<div class="two_col left">
+	<ul class="wdn_tabs">
+	    <li><a href="#listings">Listings</a></li>
+	    <?php if ($department): ?>
+	    <li><a href="#employees">Employees</a></li>
+	    <?php endif; ?>
+	</ul>
+	<div class="wdn_tabs_content">
+	    <div id="listings">
+	    <?php
+	    $listings = $context->getListings();
+	    if (count($listings)) {
+	        echo $savvy->render($listings);
+	    }
+	    ?>
+	    </div>
+	    <div id="employees">
+	    <?php
+	    if ($department) {
+	        // This listing has an official HR department associated with IT
+	        // render all those HR department details.
+	        echo $savvy->render($department);
+	    }
+	    
+	    ?>
+	    </div>
+	</div>
 </div>
