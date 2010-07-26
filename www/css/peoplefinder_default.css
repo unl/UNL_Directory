@@ -136,10 +136,19 @@ a.text-vcard{padding-left:24px;padding-right:0;background-position:left -2px;mar
 */
 #maincontent #pfShowRecord .wdn_tabs, #maincontent #pfShowRecord .wdn_tabs_content {display:none;}
 .vcard.office{
-	background:#f9f8e7;
-	border-color:#dcdbc7;
+	background:#fbeda5;
+	border-color:#e6d793;
 }
+.vcard.office .departmentInfo {
+	background:none;
+	padding:0;
+	max-width:430px;
+	margin-bottom:0;
+}
+	
+
 .vcard.office .frame{float:left;max-width:100px;}
+
 #maincontent h2.fn {
     font-size:18px;
     font-weight:bold;
