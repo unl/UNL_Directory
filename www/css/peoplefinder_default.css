@@ -1,7 +1,7 @@
 /* 
 ***************************************************
 
-		Result Listings
+		Result List Listings
 
 ***************************************************
 */
@@ -106,23 +106,23 @@ ul.listings li .listingDetails {}
 }
 .vcard .eppa, .vcard .epa {font-style:italic;font-size:0.8em;}
 .vcardInfo {margin-left:129px;}
-.vcard .adr {
+.vcard .adr, .departmentInfo .adr {
 	border-left:2px solid #b7b7b7;
 	padding-left:5px;
 	margin:5px 0;	
 }
-.vcard .tel, .vcard span.email, .vcard span.url {
+.vcard .tel, .vcard span.email, .vcard span.url, .departmentInfo .tel, .departmentInfo span.email, .departmentInfo span.url {
 	background:url('images/iconContactSprite.png') no-repeat;
 	padding-left:25px;
 	height:20px;
 }
-.vcard span.email, .vcard span.url {
+.vcard span.email, .vcard span.url, .departmentInfo span.email, .departmentInfo span.url {
 	background-position:0 -21px;
 	display:block;
 	margin-top:5px;
 	margin-bottom:3px;
 }
-.vcard span.url {
+.vcard span.url, .departmentInfo span.url {
     background-position:0 -42px;
 }
 a.email {background:none;}
@@ -145,7 +145,25 @@ a.text-vcard{padding-left:24px;padding-right:0;background-position:left -2px;mar
     font-weight:bold;
     color:#464545 !important; 
 }
-
+.departmentInfo {
+    border-radius:10px;
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
+    background:#fbeca5;
+    background-image: url('images/tornSpiral.png'), -moz-linear-gradient(    right center,    rgb(251,237,165) 83%,    rgb(230,215,147) 96%);
+    background-image: url('images/tornSpiral.png'), -webkit-gradient(    linear,    right top,    left top,    color-stop(0.83, rgb(251,237,165)),    color-stop(0.96, rgb(230,215,147)));   	
+    background-repeat:no-repeat;
+    padding:20px 20px 20px 45px;
+    width:875px;
+}
+.departmentInfo .fn a, .departmentInfo .fn{max-width:none;}
+.departmentInfo .tel {display:block;}
+#maincontent .departmentInfo .photo {
+	float:left;
+	margin-right:20px;
+}
+.departmentInfo .adr {margin:0 0 15px 0;}
+.departmentInfo .edit {float:right;}
 
 /* 
 ***************************************************

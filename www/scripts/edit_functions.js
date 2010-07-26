@@ -1,11 +1,11 @@
-
-
 WDN.jQuery(document).ready(function(){
-	
+	WDN.loadJS('/wdn/templates_3.0/scripts/plugins/jeditable/jquery.jeditable.js', function(){
+		
+	});
 	WDN.jQuery('ul.sortable').sortable({ //make all the lists on the edit interface sortable
 		revert: false,
 		scroll: true,
-		delay: 250,
+		delay: 100,
 		opacity: 0.45,
 		tolerance: 'pointer',
 		helper: 'clone',
@@ -14,7 +14,8 @@ WDN.jQuery(document).ready(function(){
 		},
 		stop: function(event, ui){
 			saveSortOrder(this);
-		}
+		},
+		items : 'li'
 	});
 
 });
