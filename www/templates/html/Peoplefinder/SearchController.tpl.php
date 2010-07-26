@@ -63,4 +63,6 @@ foreach ($by_affiliation as $affiliation=>$records) {
         echo '</div>';
     }
 }
+
+echo $savvy->render($context->dept_results);
 ?>

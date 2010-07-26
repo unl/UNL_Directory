@@ -10,6 +10,8 @@ class UNL_Peoplefinder_SearchController
      */
     public $results;
 
+    public $dept_results;
+
     public function __construct($options = array())
     {
         $this->options = $options + $this->options;
@@ -42,5 +44,7 @@ class UNL_Peoplefinder_SearchController
         $this->results = new UNL_Peoplefinder_SearchResults(
             $this->options + array('results'=>
             $this->options['peoplefinder']->$search_method($this->options['q'], $this->options['affiliation'])));
+
+        $this->dept_results = new UNL_Officefinder_DepartmentList_NameSearch($this->options);
     }
 }

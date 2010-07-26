@@ -13,18 +13,11 @@ if (($start+$num_rows)>count($context)) {
 echo "<div class='result_head'>Results ".($start+1)." - $end out of ".count($context).'</div>'.PHP_EOL;
 echo '<ul class="pfResult">'.PHP_EOL; //I need to put a class for CSS, however when we switch to chuncked results (student, staff, faculty) this @todo will need revisted
 for ($i = $start; $i<$end; $i++) {
-    $even_odd = ($i % 2) ? '' : 'alt';
-    if ($context[$i]->ou == 'org') {
-        $class = 'org_Sresult';
+    if ($context[$i] instanceof UNL_Peoplefinder_Record) {
+        echo $savvy->render($context[$i], 'Peoplefinder/RecordInList.tpl.php');
     } else {
-        $class = 'ppl_Sresult';
+        echo $savvy->render($context[$i]);
     }
-    $class .= ' '.$context[$i]->eduPersonPrimaryAffiliation;
-    echo '<li class="'.$class.' '.$even_odd.'">'.PHP_EOL;
-    echo '    <div class="overflow">'.PHP_EOL;
-    echo $savvy->render($context[$i], 'Peoplefinder/RecordInList.tpl.php');
-    echo '    </div>'.PHP_EOL;
-    echo '</li>'.PHP_EOL;
 }
 echo '</ul>'.PHP_EOL;
 

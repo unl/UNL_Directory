@@ -1,12 +1,17 @@
 <?php
 if ($context->ou == 'org') {
+    $class = 'org_Sresult';
     $name = $context->cn;
 } else {
+    $class = 'ppl_Sresult';
     $name = $context->sn . ',&nbsp;'. $context->givenName;
     if (isset($context->eduPersonNickname)) {
         $name .= ' "'.$context->eduPersonNickname.'"';
     }
 }
+$class .= ' '.$context->eduPersonPrimaryAffiliation;
+echo '<li class="'.$class.'">'.PHP_EOL;
+echo '    <div class="overflow">'.PHP_EOL;
 $onclick = '';
 if (isset($parent->parent->context->options['onclick'])) {
     $onclick .= ' onclick="return '.htmlentities($parent->parent->context->options['onclick'], ENT_QUOTES).'(\''.$context->uid.'\');"';
@@ -32,3 +37,4 @@ echo '    <a href="'.UNL_Peoplefinder::getURL().'?uid='.$context->uid.'" class="
 if (isset($parent->context->options['chooser'])) {
     echo '    <div class="pfchooser"><a href="#" onclick="return pfCatchUID(\''.$context->uid.'\');">Choose this person</a></div>'.PHP_EOL;
 }
+echo '</div></li>';
