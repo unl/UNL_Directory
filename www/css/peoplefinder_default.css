@@ -155,6 +155,7 @@ a.text-vcard{padding-left:24px;padding-right:0;background-position:left -2px;mar
     background-repeat:no-repeat;
     padding:20px 20px 20px 45px;
     width:875px;
+    margin-bottom:25px;
 }
 .departmentInfo .fn a, .departmentInfo .fn{max-width:none;}
 .departmentInfo .tel {display:block;}
@@ -164,6 +165,8 @@ a.text-vcard{padding-left:24px;padding-right:0;background-position:left -2px;mar
 }
 .departmentInfo .adr {margin:0 0 15px 0;}
 .departmentInfo .edit {float:right;}
+
+#employees > h2, #employees > p{display:none;}
 
 /* 
 ***************************************************
