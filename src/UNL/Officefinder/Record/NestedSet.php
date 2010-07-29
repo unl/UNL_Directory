@@ -24,19 +24,20 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
         // http://research.calacademy.org/taf/proceedings/ballew/sld034.htm
         $prevVisited = $prevId ? $this->rgt : $this->lft;
 
-        // FIXXME start transaction here
-        if ($err = $this->_add($prevVisited, 1)) {
-            throw new Exception();
-        }
+        // Make room for one more
+        $this->_add($prevVisited, 1);
 
         // set the proper right and left values
         $newChild->lft = $prevVisited + 1;
         $newChild->rgt = $prevVisited + 2;
 
-        if (!$newchild->update()) {
+        if (!$newChild->update()) {
             // rollback
             throw new Exception('Couldn\'t do it');
         }
+
+        // Set the rgt value to what it is in the database
+        $this->rgt = $this->rgt + 2;
 
         return $this;
     }
@@ -369,47 +370,6 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
 
         return true;
     }
-
-    // }}}
-    // {{{ update()
-
-    /**
-     * update the tree element given by $id with the values in $newValues
-     *
-     * @access     public
-     * @param      int     the id of the element to update
-     * @param      array   the new values, the index is the col name
-     * @return     mixed   either true or an Tree_Error
-     */
-    function update($id, $newValues)
-    {
-        // just to be sure nothing gets screwed up :-)
-        unset($newValues['lft']);
-        unset($newValues['rgt']);
-        unset($newValues['id']);
-
-        // updating _one_ element in the tree
-        $values = array();
-        foreach ($newValues as $key => $value) {
-            $type = $this->conf['fields'][$key]['type'];
-            $values[] = $key . ' = ' . $this->_storage->quote($value, $type);
-        }
-        $query = sprintf('UPDATE %s SET %s WHERE%s %s = %s',
-                            $this->getTable(),
-                            implode(',', $values),
-                            $this->_getWhereAddOn(),
-                            'id',
-                            $id);
-        $res = $this->_storage->query($query);
-        if (PEAR::isError($res)) {
-            return Tree::raiseError(TREE_ERROR_DB_ERROR, null, null, $res->getMessage());
-        }
-
-        return true;
-    }
-
-    // }}}
-    // {{{ update()
 
     // }}}
     // {{{ getRoot()
@@ -768,15 +728,10 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
      * @param      int     id of the element
      * @return     boolean true if it is a child
      */
-    function isChildOf($parentId)
+    function isChildOf(UNL_Officefinder_Record_NestedSet $parent)
     {
         // check simply if the left and right of the child are within the
         // left and right of the parent, if so it definitly is a child :-)
-        $parent = self::getById($parentId);
-        if (false === $parent) {
-            /// FIXME return real tree error
-            return false;
-        }
 
         if ($parent->lft < $this->lft
             && $parent->rgt > $this->rgt)

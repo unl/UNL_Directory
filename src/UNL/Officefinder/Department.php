@@ -1,21 +1,47 @@
 <?php
-class UNL_Officefinder_Department extends UNL_Officefinder_Record
+/**
+ * @Entity
+ * @Table(name="departments")
+ */
+class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSet
 {
+    /** 
+     * @Id @Column(type="integer")
+     * @GeneratedValue
+     */
     public $id;
+    /** @Column(length=50) */
     public $name;
+    /** @Column(length=50) */
     public $org_unit;
+    /** @Column(length=50) */
     public $building;
+    /** @Column(length=50) */
     public $room;
+    /** @Column(length=50) */
     public $city;
+    /** @Column(length=50) */
     public $state;
+    /** @Column(length=50) */
     public $postal_code;
+    /** @Column(length=50) */
     public $address;
+    /** @Column(length=50) */
     public $phone;
+    /** @Column(length=50) */
     public $fax;
+    /** @Column(length=50) */
     public $email;
+    /** @Column(length=50) */
     public $website;
+    /** @Column(length=50) */
     public $acronym;
+    /** @Column(length=50) */
     public $alternate;
+
+    public $lft;
+    public $rgt;
+    public $level;
 
     /**
      * Construct a new listing
