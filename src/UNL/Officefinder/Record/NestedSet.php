@@ -12,113 +12,33 @@
 class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
 {
 
-    // }}}
-    // {{{ add()
 
-    /**
-     * add a new element to the tree
-     * there are three ways to use this method
-     * Method 1:
-     * Give only the $parent_id and the $newValues will be inserted
-     * as the first child of this parent
-     * <code>
-     * // insert a new element under the parent with the ID=7
-     * $tree->add(array('name'=>'new element name'), 7);
-     * </code>
-     *
-     * Method 2:
-     * Give the $prevId ($parent_id will be dismissed) and the new element
-     * will be inserted in the tree after the element with the ID=$prevId
-     * the parent_id is not necessary because the prevId defines exactly where
-     * the new element has to be place in the tree, and the parent is
-     * the same as for the element with the ID=$prevId
-     * <code>
-     * // insert a new element after the element with the ID=5
-     * $tree->add(array('name'=>'new'), 0, 5);
-     * </code>
-     *
-     * Method 3:
-     * neither $parent_id nor prevId is given, then the root element will be
-     * inserted. This requires that programmer is responsible to confirm this.
-     * This method does not yet check if there is already a root element saved!
-     *
-     * @access     public
-     * @param   array   $newValues  this array contains the values that shall
-     *                              be inserted in the db-table
-     * @param   integer $parent_id   the id of the element which shall be
-     *                              the parent of the new element
-     * @param   integer $prevId     the id of the element which shall preceed
-     *                              the one to be inserted use either
-     *                              'parent_id' or 'prevId'.
-     * @return   integer the ID of the element that had been inserted
-     */
-    function add($newValues, $parent_id = 0, $prevId = 0)
+    function addChild(UNL_Officefinder_Record_NestedSet $newChild, $prevId = 0)
     {
-        $prevVisited = 0;
 
-        // check the DB-table if the columns which are given as keys
-        // in the array $newValues do really exist, if not remove them
-        // from the array
-        // FIXXME do the above described
-        // if no parent and no prevId is given the root shall be added
-        if ($parent_id || $prevId) {
-            if ($prevId) {
-                $element = self::getById($prevId);
-                if (!$element) {
-                    throw new Exception('Could not get the previous');
-                }
-                // we also need the parent id of the element to write it in the db
-                $parent_id = $element->id;
-            } else {
-                $element = self::getById($parent_id);
-            }
-            $newValues['id'] = $parent_id;
+        // get the "visited"-value where to add the new element behind
+        // if $prevId is given, we need to use the right-value
+        // if only the $parent_id is given we need to use the left-value
+        // look at it graphically, that made me understand it :-)
+        // See:
+        // http://research.calacademy.org/taf/proceedings/ballew/sld034.htm
+        $prevVisited = $prevId ? $this->rgt : $this->lft;
 
-            // get the "visited"-value where to add the new element behind
-            // if $prevId is given, we need to use the right-value
-            // if only the $parent_id is given we need to use the left-value
-            // look at it graphically, that made me understand it :-)
-            // See:
-            // http://research.calacademy.org/taf/proceedings/ballew/sld034.htm
-            $prevVisited = $prevId ? $this->rgt : $this->lft;
-
-            // FIXXME start transaction here
-            if (Tree::isError($err = $this->_add($prevVisited, 1))) {
-                // FIXXME rollback
-                //$this->_storage->rollback();
-                return $err;
-            }
-        }
-
-        // inserting _one_ new element in the tree
-        $newData = array();
-        // quote the values, as needed for the insert
-        foreach ($newValues as $key => $value) {
-            $type = $this->conf['fields'][$key]['type'];
-            $newData[$key] = $this->_storage->quote($value, $type);
+        // FIXXME start transaction here
+        if ($err = $this->_add($prevVisited, 1)) {
+            throw new Exception();
         }
 
         // set the proper right and left values
-        $newData['lft'] = $prevVisited + 1;
-        $newData['rgt'] = $prevVisited + 2;
+        $newChild->lft = $prevVisited + 1;
+        $newChild->rgt = $prevVisited + 2;
 
-        // use sequences to create a new id in the db-table
-        $nextId = $this->_storage->nextId($this->getTable());
-        $query = sprintf('INSERT INTO %s (%s, %s) VALUES (%s, %s)',
-                            $this->getTable(),
-                            'id',
-                            implode(',', array_keys($newData)) ,
-                            $this->_storage->quote($nextId, 'integer'),
-                            implode(',', $newData)
-                        );
-        $res = $this->_storage->query($query);
-        if (PEAR::isError($res)) {
+        if (!$newchild->update()) {
             // rollback
-            return Tree::raiseError(TREE_ERROR_DB_ERROR, null, null, $res->getMessage());
+            throw new Exception('Couldn\'t do it');
         }
-        // commit here
 
-        return $nextId;
+        return $this;
     }
 
     // }}}
