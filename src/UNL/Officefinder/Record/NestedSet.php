@@ -150,10 +150,7 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
                             $this->_getWhereAddOn(),
                             'lft',
                             $prevVisited);
-        if (PEAR::isError($res = $this->_storage->query($query))) {
-            // FIXXME rollback
-            return Tree::raiseError(TREE_ERROR_DB_ERROR, null, null, $res->getMessage());
-        }
+        self::getDB()->query($query);
 
         $query = sprintf('UPDATE %s SET %s = %s + %s WHERE%s %s > %s',
                             $this->getTable(),
@@ -162,11 +159,7 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
                             $this->_getWhereAddOn(),
                             'rgt',
                             $prevVisited);
-        $res = $this->_storage->query($query);
-        if (PEAR::isError($res)) {
-            // FIXXME rollback
-            return Tree::raiseError(TREE_ERROR_DB_ERROR, null, null, $res->getMessage());
-        }
+        self::getDB()->query($query);
         return true;
     }
 
@@ -182,7 +175,7 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
      * @param      integer $id the id of the element to be removed
      * @return     boolean returns either true or throws an error
      */
-    function delete($id)
+    function delete()
     {
 
         // FIXXME start transaction
@@ -443,11 +436,7 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
                             $this->_getWhereAddOn(),
                             $left, $this->lft - 1,
                             $right, $this->rgt + 1);
-        if (PEAR::isError($res = $this->_storage->query($query))) {
-            // FIXXME rollback
-            //$this->_storage->rollback();
-            return Tree::raiseError(TREE_ERROR_DB_ERROR, null, null, $res->getMessage());
-        }
+        $res = self::getDB()->query($query);
 
         // remove the part of the tree where the element(s) was/were before
         if (Tree::isError($err = $this->_remove($element))) {
@@ -502,24 +491,6 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
     // }}}
     // {{{ update()
 
-    /**
-     * copy a subtree/node/... under a new parent or/and behind a given element
-     *
-     *
-     * @access     public
-     * @param      integer the ID of the node that shall be copied
-     * @param      integer the new parent ID
-     * @param      integer the new previous ID, if given parent ID will be omitted
-     * @return     boolean true on success
-     */
-    function copy($id, $parent_id = 0, $prevId = 0)
-    {
-        return Tree::raiseError(TREE_ERROR_NOT_IMPLEMENTED, null, null,
-                                'copy-method is not implemented yet!');
-        // get element tree
-        // $this->addTree
-    }
-
     // }}}
     // {{{ getRoot()
 
@@ -533,49 +504,14 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
      */
     function getRoot()
     {
-        $query = sprintf('SELECT * FROM %s WHERE%s %s = 1',
+        $query = sprintf('SELECT * FROM %s WHERE %s = 1',
                             $this->getTable(),
-                            $this->_getWhereAddOn(),
                             'lft');
-        $res = $this->_storage->queryRow($query, array());
-        if (PEAR::isError($res)) {
-            return Tree::raiseError(TREE_ERROR_DB_ERROR, null, null, $res->getMessage());
-        }
+        $res = self::getDB()->query($query);
 
-        return !$res ? false : $this->_prepareResult($res);
-    }
-
-    // }}}
-    // {{{ getElement()
-
-    /**
-     *
-     *
-     * @access     public
-     * @version    2002/03/02
-     * @author     Wolfram Kriesing <wolfram@kriesing.de>
-     * @param      integer  the ID of the element to return
-     *
-     * @return  mixed    either the data of the requested element
-     *                      or an Tree_Error
-     */
-    function getElement($id)
-    {
-        $query = sprintf('SELECT * FROM %s WHERE %s %s = %s',
-                            $this->getTable(),
-                            $this->_getWhereAddOn(),
-                            'id',
-                            $id);
-        $res = $this->_storage->queryRow($query, array());
-        if (PEAR::isError($res)) {
-            return Tree::raiseError(TREE_ERROR_DB_ERROR, null, null, $res->getMessage());
-        }
-
-        if (!$res) {
-            return Tree::raiseError(TREE_ERROR_UNKOWN_ERROR, null, null, "Element with id $id does not exist!");
-        }
-
-        return $this->_prepareResult($res);
+        $obj = new self();
+        self::setObjectFromArray($obj, $res);
+        return $obj;
     }
 
     // }}}
@@ -689,22 +625,13 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
      * @return     mixed    either the data of the requested element
      *                      or an Tree_Error
      */
-    function getRight($id)
+    function getRight()
     {
-        $element = $this->getElement($id);
-        if (Tree::isError($element)) {
-            return $element;
-        }
-
-        $query = sprintf('SELECT * FROM %s WHERE%s (%s = %s OR %s = %s)',
+        $query = sprintf('SELECT * FROM %s WHERE (%s = %s OR %s = %s)',
                             $this->getTable(),
-                            $this->_getWhereAddOn(),
                             'lft',  $this->rgt + 1,
                             'rgt', $this->rgt + 1);
-        $res = $this->_storage->queryRow($query, array());
-        if (PEAR::isError($res)) {
-            return Tree::raiseError(TREE_ERROR_DB_ERROR, null, null, $res->getMessage());
-        }
+        $res = self::getDB()->query($query);
 
         return $this->_prepareResult($res);
     }
@@ -723,7 +650,7 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
      *                      or false, if there is no parent, if the element is
      *                      the root or an Tree_Error
      */
-    function getParent($id)
+    function getParent()
     {
         $idName = 'id';
         $query = sprintf('SELECT
@@ -739,11 +666,8 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
                             'id',
                             $idName,
                             $idName,
-                            $id);
-        $res = $this->_storage->queryRow($query, array());
-        if (PEAR::isError($res)) {
-            return Tree::raiseError(TREE_ERROR_DB_ERROR, null, null, $res->getMessage());
-        }
+                            $this->id);
+        $res = self::getDB()->query($query);
 
         return $this->_prepareResult($res);
     }
@@ -762,21 +686,12 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
      */
     function _getChild($id)
     {
-        // subqueries would be cool :-)
-        $curElement = $this->getElement($id);
-        if (Tree::isError($curElement)) {
-            return $curElement;
-        }
 
-        $query = sprintf('SELECT * FROM %s WHERE%s %s = %s',
+        $query = sprintf('SELECT * FROM %s WHERE %s = %s',
                             $this->getTable(),
-                            $this->_getWhereAddOn(),
                             'lft',
-                            $curElement['lft'] + 1);
-        $res = $this->_storage->queryRow($query, array());
-        if (PEAR::isError($res)) {
-            return Tree::raiseError(TREE_ERROR_DB_ERROR, null, null, $res->getMessage());
-        }
+                            $this->lft + 1);
+        $res = self::getDB()->query($query);
         return $this->_prepareResult($res);
     }
 
@@ -888,9 +803,8 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
      *                     or false, if there is no next
      *                     or Tree_Error
      */
-    function nextSibling($id)
+    function nextSibling()
     {
-        $parent = 'id';
         $query = sprintf('SELECT
                                 n.*
                             FROM
@@ -905,14 +819,11 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
                             $this->_getWhereAddOn(' AND ', 'n'),
                             'rgt',
                             'lft',
-                            $parent,
-                            $parent,
                             'id',
-                            $id);
-        $res = $this->_storage->queryRow($query, array());
-        if (PEAR::isError($res)) {
-            return Tree::raiseError(TREE_ERROR_DB_ERROR, null, null, $res->getMessage());
-        }
+                            'id',
+                            'id',
+                            $this->id);
+        $res = self::getDB()->query($query);
 
         return !$res ? false : $this->_prepareResult($res);
     }
@@ -932,9 +843,8 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
      *                     or false, if there is no previous
      *                     or a Tree_Error
      */
-    function previousSibling($id)
+    function previousSibling()
     {
-        $parent = 'id';
         $query = sprintf('SELECT
                                 p.*
                             FROM
@@ -949,14 +859,11 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
                             $this->_getWhereAddOn(' AND ', 'p'),
                             'lft',
                             'rgt',
-                            $parent,
-                            $parent,
                             'id',
-                            $id);
-        $res = $this->_storage->queryRow($query, array());
-        if (PEAR::isError($res)) {
-            return Tree::raiseError(TREE_ERROR_DB_ERROR, null, null, $res->getMessage());
-        }
+                            'id',
+                            'id',
+                            $this->id);
+        $res = self::getDB()->query($query);
 
         return !$res ? false : $this->_prepareResult($res);
     }
@@ -972,27 +879,20 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
      * @access     public
      * @author     Wolfram Kriesing <wolfram@kriesing.de>
      * @param      int     id of the element
-     * @param      int     id of the element to check if it is a child
      * @return     boolean true if it is a child
      */
-    function isChildOf($id, $childId)
+    function isChildOf($parentId)
     {
         // check simply if the left and right of the child are within the
         // left and right of the parent, if so it definitly is a child :-)
-        $parent = $this->getElement($id);
-        if (PEAR::isError($parent)) {
+        $parent = self::getById($parentId);
+        if (false === $parent) {
             /// FIXME return real tree error
             return false;
         }
 
-        $child  = $this->getElement($childId);
-        if (PEAR::isError($child)) {
-            /// FIXME return real tree error
-            return false;
-        }
-
-        if ($parent['left'] < $child['left']
-            && $parent['right'] > $child['right'])
+        if ($parent->lft < $this->lft
+            && $parent->rgt > $this->rgt)
         {
             return true;
         }
@@ -1175,15 +1075,6 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
             return ' ' . ($tableName ? $tableName . '.' : '') . $this->conf['whereAddOn'] . $addAfter;
         }
         return '';
-    }
-
-    // }}}
-    // {{{ getFirstRoot()
-
-    // for compatibility to Memory methods
-    function getFirstRoot()
-    {
-        return $this->getRoot();
     }
 
     // }}}
