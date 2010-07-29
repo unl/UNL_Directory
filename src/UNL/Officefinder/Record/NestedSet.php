@@ -298,14 +298,14 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
         $errors = array();
         foreach ($idsToMove as $idToMove) {
             $ret = $this->_move($idToMove, $newparent_id, $newPrevId);
-            if (Tree::isError($ret)) {
+            if (!$ret) {
                 $errors[] = $ret;
             }
         }
         // FIXXME the error in a nicer way, or even better
         // let the throwError method do it!!!
         if (count($errors)) {
-            return Tree::raiseError(TREE_ERROR_UNKOWN_ERROR, null, null, serialize($errors));
+            throw new Exception('Error moving nodes in the tree');
         }
         return true;
     }
@@ -714,12 +714,8 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
      * @return     mixed   the array with the data of all children
      *                     or false, if there are none
      */
-    function getChildren($ids, $oneChild = false, $levels = 1)
+    function getChildren($levels = 1)
     {
-        if ($oneChild) {
-            $res = $this->_getChild($ids);
-            return $res;
-        }
 
         $id      = 'id';
         $parent  = 'id';
@@ -753,36 +749,7 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
                                 // is given
                                 $orderBy
                        );
-            $_res = $this->_storage->queryAll($query, array(), false, false);
-            if (PEAR::isError($_res)) {
-                return Tree::raiseError(TREE_ERROR_DB_ERROR, null, null, $_res->getMessage());
-            }
-
-            // Column names are now unmapped
-            $_res = $this->_prepareResults($_res);
-
-            if ($levels > 1) {
-                $ids = array();
-            }
-
-            // we use the id as the index, to make the use easier esp.
-            // for multiple return-values
-            $tempRes = array();
-            foreach ($_res as $aRes) {
-                ///FIXME This part might be replace'able with key'ed array return
-                $tempRes[$aRes['id']] = $aRes;
-                // If there are more levels requested then get the id for the next level
-                if ($levels > 1) {
-                    $ids[] = $aRes[$id];
-                }
-            }
-
-            $res = array_merge($res, $tempRes);
-
-            // quit the for-loop if there are no children in the current level
-            if (!count($ids)) {
-                break;
-            }
+            $res[] = self::getDB()->query($query);
         }
 
         return $res;
@@ -926,14 +893,7 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
                             // second where line
                             $right, $left, $right
                             );
-        $res = $this->_storage->queryOne($query, 'integer');
-        if (PEAR::isError($res)) {
-            return Tree::raiseError(TREE_ERROR_DB_ERROR, null, null, $res->getMessage());
-        }
-
-        if (!$res) {
-            return false;
-        }
+        $res = self::getDB()->query($query);
 
         return $this->_prepareResult($res);
     }
