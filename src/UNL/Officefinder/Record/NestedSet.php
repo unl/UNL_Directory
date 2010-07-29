@@ -59,7 +59,7 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
      * @param  int     the number of elements you plan to insert
      * @return mixed   either true on success or a Tree_Error on failure
      */
-    function _add($prevVisited, $numberOfElements = 1)
+    protected function _add($prevVisited, $numberOfElements = 1)
     {
 
         // update the elements which will be affected by the new insert
@@ -130,7 +130,7 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
      * @param      array   the entire element returned by "getElement"
      * @return     boolean returns either true or throws an error
      */
-    function _remove($element)
+    protected function _remove($element)
     {
         $delta = $this->rgt - $this->lft + 1;
         $left  = 'lft';
@@ -403,24 +403,20 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
      * for simply walking through and retreiving the path
      *
      * @access public
-     * @param integer the ID of the element for which the path shall be returned
      * @return mixed  either the data of the requested elements
      *                      or an Tree_Error
      */
-    function getPath($id)
+    function getPath()
     {
-        $query = $this->_getPathQuery($id);
-        if (PEAR::isError($query)) {
-            /// FIXME return real tree error
-            return false;
+        $query = $this->_getPathQuery();
+
+        $res = self::getDB()->query($query);
+
+        if ($res->num_rows == 0) {
+            throw new Exception('Should never happen!');
         }
 
-        $res = $this->_storage->queryAll($query, array(), false, false);
-        if (PEAR::isError($res)) {
-            return Tree::raiseError(TREE_ERROR_DB_ERROR, null, null, $res->getMessage());
-        }
-
-        return $this->_prepareResults($res);
+        return $this->_prepareResult($res);
     }
 
     // }}}
@@ -429,7 +425,7 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
     function _getPathQuery()
     {
 
-        $query = sprintf('SELECT * FROM %s '.
+        $query = sprintf('SELECT id FROM %s '.
                             'WHERE %s %s <= %s AND %s >= %s '.
                             'ORDER BY %s',
                             // set the FROM %s
@@ -587,6 +583,10 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
     function getChildren()
     {
 
+        if (!$this->hasChildren()) {
+            return false;
+        }
+
         $id      = 'id';
         $left    = 'lft';
         $where   = $this->_getWhereAddOn(' AND ', 'c');
@@ -611,14 +611,10 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
 
         $res = self::getDB()->query($query);
         if ($res->num_rows == 0) {
-            return false;
+            throw new Exception('No children found');
         }
 
-        $ids = array();
-        while($row = $res->fetch_row()) {
-            $ids[] = $row[0];
-        }
-        return new UNL_Officefinder_DepartmentList($ids);
+        return $this->_prepareResult($res);
     }
 
     // }}}
@@ -927,6 +923,15 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
 
         } else {
         }
+    }
+
+    protected function _prepareResult($res)
+    {
+        $ids = array();
+        while($row = $res->fetch_row()) {
+            $ids[] = $row[0];
+        }
+        return new UNL_Officefinder_DepartmentList($ids);
     }
 }
 
