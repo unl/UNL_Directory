@@ -580,59 +580,45 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
 
     /**
      * get the children of the given element or if the parameter is an array.
-     * It gets the children of all the elements given by their ids
-     * in the array.
-     *
-     * @access     public
-     * @version    2002/04/15
-     * @author     Wolfram Kriesing <wolfram@kriesing.de>
-     * @param      mixed   (1) int     the id of one element
-     *                     (2) array   an array of ids for which
-     *                                 the children will be returned
-     * @param      boolean if only the first child should be returned (only used when one id is passed)
-     * @param      integer the children of how many levels shall be returned
+     * 
      * @return     mixed   the array with the data of all children
      *                     or false, if there are none
      */
-    function getChildren($levels = 1)
+    function getChildren()
     {
 
         $id      = 'id';
-        $parent  = 'id';
         $left    = 'lft';
         $where   = $this->_getWhereAddOn(' AND ', 'c');
-        $orderBy = $this->getOption('order') ? $this->getOption('order') : $left;
+        $orderBy = 'lft';
 
-        $res = array();
-        for ($i = 1; $i < $levels + 1; $i++) {
-            // if $ids is an array implode the values
-            $getIds = is_array($ids) ? implode(',', $ids) : $ids;
+        $query = sprintf('SELECT DISTINCT
+                                id
+                            FROM
+                                %s
+                            WHERE
+                                lft > %s AND rgt < %s '.
+                            'ORDER BY
+                                %s',
+                            $this->getTable(),
+                            $this->lft,
+                            $this->rgt,
+                            // order by left, so we have it in the order
+                            // as it is in the tree if no 'order'-option
+                            // is given
+                            $orderBy
+                   );
 
-            $query = sprintf('SELECT
-                                    c.*
-                                FROM
-                                    %s c,%s e
-                                WHERE
-                                    %s e.%s = c.%s
-                                  AND
-                                    e.%s IN (%s) '.
-                                'ORDER BY
-                                    c.%s',
-                                $this->getTable(), $this->getTable(),
-                                $where,
-                                $id,
-                                $parent,
-                                $id,
-                                $getIds,
-                                // order by left, so we have it in the order
-                                // as it is in the tree if no 'order'-option
-                                // is given
-                                $orderBy
-                       );
-            $res[] = self::getDB()->query($query);
+        $res = self::getDB()->query($query);
+        if ($res->num_rows == 0) {
+            return false;
         }
 
-        return $res;
+        $ids = array();
+        while($row = $res->fetch_row()) {
+            $ids[] = $row[0];
+        }
+        return new UNL_Officefinder_DepartmentList($ids);
     }
 
     // }}}
