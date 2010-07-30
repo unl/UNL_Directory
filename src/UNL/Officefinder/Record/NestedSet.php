@@ -900,37 +900,11 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
         return '';
     }
 
-    // }}}
-    // {{{ getBranch()
-
     /**
-     * gets the tree under the given element in one array, sorted
-     * so you can go through the elements from begin to end and list them
-     * as they are in the tree, where every child (until the deepest) is retreived
+     * Prepare a mysqli_result object and return an iterator of the NestedSet objects
      *
-     * @see        &_getBranch()
-     * @access     public
-     * @version    2001/12/17
-     * @author     Wolfram Kriesing <wolfram@kriesing.de>
-     * @param      integer  $startId    the id where to start walking
-     * @param      integer  $depth      this number says how deep into
-     *                                  the structure the elements shall
-     *                                  be retreived
-     * @return     array    sorted as listed in the tree
+     * @param mysqli_result $res The result containing ids of records
      */
-    function &getBranch($startId = 0, $depth = 0)
-    {
-//FIXXXME use getChildren()
-        if ($startId) {
-            $startNode = $this->getElement($startId);
-            if (Tree::isError($startNode)) {
-                return $startNode;
-            }
-
-        } else {
-        }
-    }
-
     protected function _prepareResult($res)
     {
         $ids = array();
