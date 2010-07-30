@@ -401,7 +401,7 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
     // {{{ getPath()
 
     /**
-     * gets the path from the element with the given id down
+     * gets the path from the current element down
      * to the root. The returned array is sorted to start at root
      * for simply walking through and retreiving the path
      *
@@ -411,23 +411,6 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
      */
     function getPath()
     {
-        $query = $this->_getPathQuery();
-
-        $res = self::getDB()->query($query);
-
-        if ($res->num_rows == 0) {
-            throw new Exception('Should never happen!');
-        }
-
-        return $this->_prepareResult($res);
-    }
-
-    // }}}
-    // {{{ _getPathQuery()
-
-    function _getPathQuery()
-    {
-
         $query = sprintf('SELECT id FROM %s '.
                             'WHERE %s %s <= %s AND %s >= %s '.
                             'ORDER BY %s',
@@ -441,7 +424,14 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
                             'rgt', $this->rgt,
                             // set the order column
                             'lft');
-        return $query;
+
+        $res = self::getDB()->query($query);
+
+        if ($res->num_rows == 0) {
+            throw new Exception('Should never happen!');
+        }
+
+        return $this->_prepareResult($res);
     }
 
     // }}}
