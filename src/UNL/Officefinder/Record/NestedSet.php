@@ -444,19 +444,25 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
     // }}}
     // {{{ getLevel()
 
-    function getLevel($id)
+    function getLevel()
     {
-        $query = $this->_getPathQuery();
-        // i know this is not really beautiful ...
-        $id = 'id';
-        $replace = "SELECT COUNT($id) ";
-        $query = preg_replace('/^select \* /i', $replace, $query);
-        $res = $this->_storage->queryOne($query, 'integer');
-        if (PEAR::isError($res)) {
-            return Tree::raiseError(TREE_ERROR_DB_ERROR, null, null, $res->getMessage());
+        $query = sprintf('SELECT (COUNT(parent.id) - 1) AS depth
+                            FROM %s AS node, %s AS parent
+                            WHERE 
+                                node.lft BETWEEN parent.lft AND parent.rgt
+                                AND node.id = %s
+                            GROUP BY node.id
+                            ORDER BY node.lft;',
+                            $this->getTable(), $this->getTable(),
+                            $this->id);
+        $res = self::getDB()->query($query);
+
+        if ($res->num_rows < 1) {
+            throw new Exception('Error depetermining the level');
         }
 
-        return $res - 1;
+        $row = $res->fetch_row();
+        return (int)$row[0];
     }
 
     // }}}
