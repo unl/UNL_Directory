@@ -217,6 +217,13 @@ class UNL_Officefinder_Record
         return UNL_Officefinder::getDB();
     }
 
+    function synchronizeWithArray($data)
+    {
+        foreach ($data as $key=>$value) {
+            $this->$key = $value;
+        }
+    }
+
     function toArray()
     {
         return get_object_vars($this);

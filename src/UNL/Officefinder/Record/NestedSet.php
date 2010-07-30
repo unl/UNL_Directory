@@ -389,8 +389,11 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
                             'lft');
         $res = self::getDB()->query($query);
 
+        if ($res->num_rows == 0) {
+            throw new Exception('Could not find the root of this tree!');
+        }
         $obj = new self();
-        self::setObjectFromArray($obj, $res);
+        $obj->synchronizeWithArray($res->fetch_assoc());
         return $obj;
     }
 
@@ -522,36 +525,29 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
     // {{{ getParent()
 
     /**
-     * get the parent of the element with the given id
-     *
-     * @access     public
-     * @version    2002/04/15
-     * @author     Wolfram Kriesing <wolfram@kriesing.de>
-     * @param      integer the ID of the element
-     * @return     mixed    the array with the data of the parent element
-     *                      or false, if there is no parent, if the element is
-     *                      the root or an Tree_Error
+     * get the parent of the current element
      */
     function getParent()
     {
-        $idName = 'id';
         $query = sprintf('SELECT
                                 p.*
                             FROM
-                                %s p,%s e
+                                %s p
                             WHERE
-                                %s e.%s = p.%s
-                              AND
-                                e.%s = %s',
-                            $this->getTable(), $this->getTable(),
+                                %s p.lft < %s AND p.rgt > %s',
+                            $this->getTable(),
                             $this->_getWhereAddOn(' AND ', 'p'),
-                            'id',
-                            $idName,
-                            $idName,
-                            $this->id);
+                            $this->lft,
+                            $this->rgt);
         $res = self::getDB()->query($query);
 
-        return $this->_prepareResult($res);
+        if ($res->num_rows == 0) {
+            throw new Exception('No parent was found!');
+        }
+
+        $obj = new self();
+        $obj->synchronizeWithArray($res->fetch_assoc());
+        return $obj;
     }
 
     // }}}
