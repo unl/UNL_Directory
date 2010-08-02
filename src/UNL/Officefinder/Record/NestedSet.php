@@ -31,12 +31,13 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
                                 WHERE lft IS NOT NULL AND rgt IS NOT NULL AND level IS NOT NULL',
                              $this->getTable()
                                 );
+            self::getDB()->query($query);
         }
 
         $this->lft   = 1;
         $this->rgt   = 2;
         $this->level = 0;
-        $this->update();
+        return $this->update();
     }
 
     function addChild(UNL_Officefinder_Record_NestedSet $newChild, $prevId = 0)
