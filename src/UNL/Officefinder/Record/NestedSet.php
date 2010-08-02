@@ -12,6 +12,32 @@
 class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
 {
 
+    public $lft;
+    public $rgt;
+    public $level;
+
+    /**
+     * Set the current node as the root of the tree.
+     *
+     * @param bool $moveTreeUnder Whether to move the current tree underneath the new root.
+     */
+    public function setAsRoot($moveTreeUnder = true)
+    {
+        $this->_remove();
+
+        if ($moveTreeUnder) {
+            $query = sprintf('UPDATE %s 
+                                SET lft = lft+1, rgt = rgt+1, level = level+1
+                                WHERE lft IS NOT NULL AND rgt IS NOT NULL AND level IS NOT NULL',
+                             $this->getTable()
+                                );
+        }
+
+        $this->lft   = 1;
+        $this->rgt   = 2;
+        $this->level = 0;
+        $this->update();
+    }
 
     function addChild(UNL_Officefinder_Record_NestedSet $newChild, $prevId = 0)
     {
@@ -131,7 +157,7 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
      * @param      array   the entire element returned by "getElement"
      * @return     boolean returns either true or throws an error
      */
-    protected function _remove($element)
+    protected function _remove()
     {
         $delta = $this->rgt - $this->lft + 1;
         $left  = 'lft';
@@ -149,12 +175,7 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
                             $right, $right,
                             $this->_getWhereAddOn(),
                             $left, $this->lft);
-        $res = $this->_storage->query($query);
-        if (PEAR::isError($res)) {
-            // the rollback shall be done by the method calling this one
-            // since it is only private we can do that
-            return Tree::raiseError(TREE_ERROR_DB_ERROR, null, null, $res->getMessage());
-        }
+        $res = self::getDB()->query($query);
 
         $query = sprintf("UPDATE
                                 %s
@@ -168,16 +189,8 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
                             $this->_getWhereAddOn(),
                             $left, $this->lft,
                             $right, $this->rgt);
-        $res = $this->_storage->query($query);
-        if (PEAR::isError($res)) {
-            // the rollback shall be done by the method calling this one
-            // since it is only private
-            return Tree::raiseError(TREE_ERROR_DB_ERROR, null, null, $res->getMessage());
-        }
-        // FIXXME commit:
-        // should that not also be done in the method calling this one?
-        // like when an error occurs?
-        //$this->_storage->commit();
+        $res = self::getDB()->query($query);
+
         return true;
     }
 
@@ -331,11 +344,6 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
             $calcWith = $temp['left'];
         }
 
-        // get the element that shall be moved again, since the left and
-        // right might have changed by the add-call
-        if (Tree::isError($element = $this->getElement($idToMove))) {
-            return $element;
-        }
         // calc the offset that the element to move has
         // to the spot where it should go
         // correct the offset by one, since it needs to go inbetween!
@@ -361,7 +369,7 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
         $res = self::getDB()->query($query);
 
         // remove the part of the tree where the element(s) was/were before
-        if (Tree::isError($err = $this->_remove($element))) {
+        if (Tree::isError($err = $this->_remove())) {
             // FIXXME rollback
             //$this->_storage->rollback();
             return $err;
