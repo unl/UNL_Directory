@@ -28,8 +28,9 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
         $this->_add($prevVisited, 1);
 
         // set the proper right and left values
-        $newChild->lft = $prevVisited + 1;
-        $newChild->rgt = $prevVisited + 2;
+        $newChild->lft   = $prevVisited + 1;
+        $newChild->rgt   = $prevVisited + 2;
+        $newChild->level = $this->level + 1;
 
         if (!$newChild->update()) {
             // rollback
