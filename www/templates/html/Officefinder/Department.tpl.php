@@ -34,9 +34,10 @@
     if ($context->userCanEdit(UNL_Officefinder::getUser())) {
         echo '<a href="'.UNL_Officefinder::getURL().'?view=department&amp;id='.$context->id.'&amp;format=editing" class="action edit">Edit</a><br />';
     }
+
     // Get the official org unit if possible
     $department = $context->getHRDepartment();
-    
+
     ?>
 </div>
 <div class="clear"></div>
@@ -67,4 +68,31 @@
         ?>
         </div>
     </div>
+</div>
+<div class="two_col right">
+<?php
+if (!$context->isRoot()) {
+    $parent = $context->getParent();
+    echo '<ul>
+            <li><a href="?view=department&amp;id='.$parent->id.'">'.$parent->name.'</a>';
+}
+?>
+
+            <ul>
+                <li><?php echo $context->name; ?>
+                    <?php if ($context->hasChildren()): ?>
+                    <ul>
+                        <?php foreach ($context->getChildren() as $child): ?>
+                        <li><a href="?view=department&amp;id=<?php echo $child->id; ?>"><?php echo $child->name; ?></a></li>
+                        <?php endforeach; ?>
+                    </ul>
+                    <?php endif; ?>
+                </li>
+            </ul>
+<?php
+if (!$context->isRoot()) {
+        echo '</li>
+    </ul>';
+}
+?>
 </div>

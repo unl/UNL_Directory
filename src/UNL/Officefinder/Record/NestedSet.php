@@ -527,9 +527,15 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
 
     /**
      * get the parent of the current element
+     * 
+     * @return UNL_Officefinder_Record_NestedSet
      */
     function getParent()
     {
+        if ($this->isRoot()) {
+            throw new Exception('This is the root.');
+        }
+
         $query = sprintf('SELECT
                                 p.*
                             FROM
@@ -549,6 +555,11 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
         $obj = new self();
         $obj->synchronizeWithArray($res->fetch_assoc());
         return $obj;
+    }
+
+    function isRoot()
+    {
+        return ($this->lft == 1);
     }
 
     // }}}
@@ -600,10 +611,11 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
                             FROM
                                 %s
                             WHERE
-                                lft > %s AND rgt < %s '.
+                                level = %s+1 AND lft BETWEEN %s AND %s '.
                             'ORDER BY
                                 %s',
                             $this->getTable(),
+                            $this->level,
                             $this->lft,
                             $this->rgt,
                             // order by left, so we have it in the order

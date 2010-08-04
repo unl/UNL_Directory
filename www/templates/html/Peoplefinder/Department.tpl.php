@@ -13,7 +13,7 @@ if (count($context)) {
     if ($context->hasChildren()) {
         echo 'Sub-departments:<ul>';
         foreach ($context->getChildren() as $child) {
-            echo '<li><a href="'.UNL_Officefinder::getURL().'?d='.urlencode($child).'">'.htmlentities($child).'</a></li>';
+            echo '<li><a href="'.UNL_Officefinder::getURL().'?d='.urlencode($child->name).'">'.htmlentities($child->name).'</a></li>';
         }
         echo '</ul>';
     }
