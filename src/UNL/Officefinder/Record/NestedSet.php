@@ -34,6 +34,7 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
             self::getDB()->query($query);
         }
 
+        // Set the root node attributes
         $this->lft   = 1;
         $this->rgt   = 2;
         $this->level = 0;

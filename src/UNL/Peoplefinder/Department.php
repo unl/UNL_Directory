@@ -74,13 +74,22 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
      */
     function __construct($options = array())
     {
-        if (!isset($options['d'])) {
-            throw new Exception('No department name! Pass as the d array value');
+        if (!(isset($options['d']) || isset($options['org_unit']))) {
+            throw new Exception('No department name or org_unit! Pass as the d or org_unit value.');
         }
         $this->options = $options + $this->options;
-        $this->name = $options['d'];
+
         $this->_xml = new SimpleXMLElement(file_get_contents(UNL_Peoplefinder::getDataDir().'/hr_tree.xml'));
-        $results = $this->_xml->xpath('//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="name"][@value="'.$this->name.'"]/..');
+
+        if (isset($options['org_unit'])) {
+            $this->org_unit = $options['org_unit'];
+            $xpath = '//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="org_unit"][@value="'.$this->org_unit.'"]/..';
+        } else {
+            $this->name = $options['d'];
+            $xpath = '//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="name"][@value="'.$this->name.'"]/..';
+        }
+
+        $results = $this->_xml->xpath($xpath);
 
         if (!isset($results[0])) {
             throw new Exception('Invalid department name.', 404);
@@ -149,24 +158,24 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
     
     function hasChildren()
     {
-        $results = $this->_xml->xpath('//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="name"][@value="'.$this->name.'"]/../branch');
+        $results = $this->_xml->xpath('//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="org_unit"][@value="'.$this->org_unit.'"]/../branch');
         return count($results)?true:false;
     }
     
     function getChildren()
     {
         $children = array();
-        $results = $this->_xml->xpath('//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="name"][@value="'.$this->name.'"]/../branch');
+        $results = $this->_xml->xpath('//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="org_unit"][@value="'.$this->org_unit.'"]/../branch');
         foreach ($results as $result) {
             foreach ($result[0] as $attribute) {
                 if (isset($attribute['name'])
-                    && $attribute['name']=='name') {
-                    $children[] = (string)$attribute['value'];
+                    && $attribute['name']=='org_unit') {
+                    $children[] = self::getById((string)$attribute['value']);
                     break;
                 }
             }
         }
-        asort($children);
+
         return $children;
     }
 
@@ -182,7 +191,7 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
         if (!$results) {
             return false;
         }
-        $options['d'] = (string)$results[0][0]->attribute['value'];
+        $options['org_unit'] = $id;
         return new self($options);
     }
 }

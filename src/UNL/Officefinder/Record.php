@@ -5,6 +5,9 @@ class UNL_Officefinder_Record
     {
         $sql = 'INSERT INTO '.$this->getTable();
         $fields = get_object_vars($this);
+        if (isset($fields['options'])) {
+            unset($fields['options']);
+        }
         $sql .= '(`'.implode('`,`', array_keys($fields)).'`)';
         $sql .= ' VALUES ('.str_repeat('?,',count($fields)-1).'?)';
         return $fields;
@@ -201,7 +204,7 @@ class UNL_Officefinder_Record
                     return false;
                 }
 
-                UNL_ENews_Controller::setObjectFromArray($record, $result->fetch_assoc());
+                $record->synchronizeWithArray($result->fetch_assoc());
                 return $record;
         }
         throw new Exception('Invalid static method called.');

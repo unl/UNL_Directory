@@ -1,9 +1,72 @@
 <?php
 require_once dirname(__FILE__).'/../www/config.inc.php';
+
+// OK Wipe the DB
 $db = new mysqli('localhost', 'officefinder', 'officefinder', 'officefinder');
 
 $db->query('TRUNCATE departments');
 $db->query('TRUNCATE listings');
+
+// Import OFFICIAL departments into the database
+$sap_dept = new UNL_Peoplefinder_Department(array('d'=>'University of Nebraska - Lincoln'));
+
+// Add a new root entry
+$root = new UNL_Officefinder_Department();
+updateFields($root, $sap_dept);
+$root->setAsRoot();
+
+// Now crawl through all the official departments and update the data.
+updateOfficialDepartment($sap_dept);
+
+echo 'Done';
+
+exit();
+
+function updateOfficialDepartment(UNL_Peoplefinder_Department $sap_dept, UNL_Officefinder_Department $parent = null)
+{
+
+    if (!($dept = UNL_Officefinder_Department::getByorg_unit($sap_dept->org_unit))) {
+        $dept = new UNL_Officefinder_Department();
+    }
+
+    // Now update all fields with the official data from SAP
+    updateFields($dept, $sap_dept);
+    echo '.';
+    flush();
+
+    if ($parent) {
+        if ($dept->isChildOf($parent)) {
+            // All OK!
+        } else {
+            if ($dept->hasChildren()) {
+                throw new Exception('Err, hmm. This is an existing department with children has moved, I can\'t handle that yet! The department name is '.$dept->name.' with org_unit id = '.$dept->org_unit);
+            } else {
+                $parent->addChild($dept);
+            }
+        }
+    }
+
+    if ($sap_dept->hasChildren()) {
+        foreach ($sap_dept->getChildren() as $sap_sub_dept) {
+
+            updateOfficialDepartment($sap_sub_dept, $dept);
+
+        }
+    }
+}
+
+function updateFields(&$old, &$new) {
+    foreach ($old as $key=>$val) {
+        if (isset($new->$key)
+            && $key != 'options') {
+            $old->$key = $new->$key;
+        }
+        // Save it
+        $old->save();
+    }
+}
+
+
 
 if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND iSeqNbr=0;')) {
     printf("Select returned %d rows.\n", $result->num_rows);
@@ -87,7 +150,7 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
         $dept_stmt->bind_param('issssssssssssss', $id, $name, $org_unit, $building, $room, $city, $state, $postal_code, $address, $phone, $fax, $email, $website, $acronym, $known_as);
         $dept_stmt->execute();
 
-        $sql = "SELECT * FROM telecom_departments WHERE lGroup_id={$obj->lGroup_id} AND iSeqNbr !=0 ORDER BY iSeqNbr;";
+        $sql = "SELECT * FROM telecom_departments WHERE lGroup_id={$obj->lGroup_id} AND iSeqNbr !=0 ORDER BY iSeqNbr DESC;";
         $listings = $db->query($sql);
 
         if ($listings->num_rows) {
