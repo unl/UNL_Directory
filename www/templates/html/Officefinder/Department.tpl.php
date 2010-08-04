@@ -45,7 +45,7 @@
     <ul class="wdn_tabs">
         <li><a href="#listings">Listings</a></li>
         <?php if ($department): ?>
-        <li><a href="#employees">Employees</a></li>
+        <li><a href="#employees">All Employees</a></li>
         <?php endif; ?>
     </ul>
     <div class="wdn_tabs_content">
