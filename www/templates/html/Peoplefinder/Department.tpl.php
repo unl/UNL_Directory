@@ -10,13 +10,13 @@ if (count($context)) {
         }
     }
     echo "<p>{$context->room} <span class='location'>{$context->building}</span><br />{$context->city}, {$context->state} {$context->postal_code}</p>";
-    if ($context->hasChildren()) {
-        echo 'Sub-departments:<ul>';
-        foreach ($context->getChildren() as $child) {
-            echo '<li><a href="'.UNL_Officefinder::getURL().'?d='.urlencode($child->name).'">'.htmlentities($child->name).'</a></li>';
-        }
-        echo '</ul>';
-    }
+//    if ($context->hasChildren()) {
+//        echo 'Sub-departments:<ul>';
+//        foreach ($context->getChildren() as $child) {
+//            echo '<li><a href="'.UNL_Officefinder::getURL().'?d='.urlencode($child->name).'">'.htmlentities($child->name).'</a></li>';
+//        }
+//        echo '</ul>';
+//    }
     $i = 0;
     echo '<ul class="department pfResult">'.PHP_EOL;
     foreach ($context as $employee) {
