@@ -574,24 +574,41 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
      */
     function getChildren($orderBy = 'lft')
     {
+        return $this->_getChildren(NULL, $orderBy);
+    }
 
+    function getChildLeafNodes($orderBy = 'lft')
+    {
+        return $this->_getChildren('rgt = lft + 1', $orderBy);
+    }
+
+    function getChildrenWithChildren($orderBy = 'lft')
+    {
+        return $this->_getChildren('rgt != lft + 1', $orderBy);
+    }
+
+    protected function _getChildren($whereAdd = '', $orderBy = 'lft')
+    {
         if (!$this->hasChildren()) {
             return false;
         }
 
         $id      = 'id';
         $left    = 'lft';
-        $where   = $this->_getWhereAddOn(' AND ', 'c');
+        if (!empty($whereAdd)) {
+            $whereAdd .= ' AND ';
+        }
 
         $query = sprintf('SELECT DISTINCT
                                 id
                             FROM
                                 %s
                             WHERE
-                                level = %s+1 AND lft BETWEEN %s AND %s '.
+                                %s level = %s+1 AND lft BETWEEN %s AND %s '.
                             'ORDER BY
                                 %s',
                             $this->getTable(),
+                            $whereAdd,
                             $this->level,
                             $this->lft,
                             $this->rgt,
