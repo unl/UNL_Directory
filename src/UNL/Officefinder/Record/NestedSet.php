@@ -564,29 +564,6 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
     }
 
     // }}}
-    // {{{ getChild()
-
-    /**
-     *
-     *
-     * @access     public
-     * @version    2002/03/02
-     * @param      integer  the ID of the element for which the children
-     *                      shall be returned
-     * @return     mixed   either the data of the requested element or an Tree_Error
-     */
-    function _getChild($id)
-    {
-
-        $query = sprintf('SELECT * FROM %s WHERE %s = %s',
-                            $this->getTable(),
-                            'lft',
-                            $this->lft + 1);
-        $res = self::getDB()->query($query);
-        return $this->_prepareResult($res);
-    }
-
-    // }}}
     // {{{ getChildren()
 
     /**
