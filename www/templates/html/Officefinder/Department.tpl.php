@@ -51,9 +51,9 @@
     <div class="wdn_tabs_content">
         <div id="listings">
         <?php
-        $listings = $context->getListings();
+        $listings = $context->getChildLeafNodes();
         if (count($listings)) {
-            echo $savvy->render($listings);
+            echo $savvy->render($listings, 'Officefinder/Department/Listings.tpl.php');
         }
         ?>
         </div>
@@ -82,7 +82,7 @@ if (!$context->isRoot()) {
                 <li><?php echo $context->name; ?>
                     <?php if ($context->hasChildren()): ?>
                     <ul>
-                        <?php foreach ($context->getChildren('name ASC') as $child): ?>
+                        <?php foreach ($context->getChildrenWithChildren('name ASC') as $child): ?>
                         <li><a href="?view=department&amp;id=<?php echo $child->id; ?>"><?php echo $child->name; ?></a></li>
                         <?php endforeach; ?>
                     </ul>

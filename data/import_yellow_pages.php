@@ -1,26 +1,24 @@
 <?php
 require_once dirname(__FILE__).'/../www/config.inc.php';
 
-// OK Wipe the DB
 $db = new mysqli('localhost', 'officefinder', 'officefinder', 'officefinder');
 
-$db->query('TRUNCATE departments');
-$db->query('TRUNCATE listings');
+// OK Wipe the DB
+//$db->query('TRUNCATE departments');
+//$db->query('TRUNCATE listings');
 
-// Import OFFICIAL departments into the database
-$sap_dept = new UNL_Peoplefinder_Department(array('d'=>'University of Nebraska - Lincoln'));
+//// Import OFFICIAL departments into the database
+//$sap_dept = new UNL_Peoplefinder_Department(array('d'=>'University of Nebraska - Lincoln'));
+//
+//// Add a new root entry
+//$root = new UNL_Officefinder_Department();
+//updateFields($root, $sap_dept);
+//$root->setAsRoot();
+//
+//// Now crawl through all the official departments and update the data.
+//updateOfficialDepartment($sap_dept);
 
-// Add a new root entry
-$root = new UNL_Officefinder_Department();
-updateFields($root, $sap_dept);
-$root->setAsRoot();
 
-// Now crawl through all the official departments and update the data.
-updateOfficialDepartment($sap_dept);
-
-echo 'Done';
-
-exit();
 
 function updateOfficialDepartment(UNL_Peoplefinder_Department $sap_dept, UNL_Officefinder_Department $parent = null)
 {
@@ -70,17 +68,6 @@ function updateFields(&$old, &$new) {
 
 if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND iSeqNbr=0;')) {
     printf("Select returned %d rows.\n", $result->num_rows);
-    $id = 0;
-
-    // Insert the department
-    $sql = 'INSERT INTO departments (id, name, org_unit, building, room, city, state, postal_code, address, phone, fax, email, website, acronym, alternate) 
-                             VALUES (?,  ?,    ?,        ?,        ?,    ?,     ?,      ?,          ?,         ?,  ?,   ?,      ?,          ?,      ?)';
-
-    $dept_stmt = $db->prepare($sql);
-
-    $sql = 'INSERT INTO listings (department_id, name, phone, sort, address, email, uid)
-                          VALUES (?,              ?,     ?,      ?,  ?,      ?,      ?)';
-    $listing_stmt = $db->prepare($sql);
 
     // Official department search
     $dept_search = new SimpleXMLElement(file_get_contents(UNL_Peoplefinder::getDataDir().'/hr_tree.xml'));
@@ -93,25 +80,11 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
             continue;
         }
 
-        $id++;
-        // Existing SAP Fields
-        $name        = cleanField($obj->szLname.' '.$obj->szFname.' '.$obj->szAddtText);
-        $org_unit    = NULL;
-        $building    = NULL;
-        $room        = NULL;
-        $city        = NULL;
-        $state       = NULL;
-        $postal_code = NULL;
-        if (trim($obj->sZipCd5) != '' || trim($obj->sZipCd4) != '') {
-            if (trim($obj->sZipCd5) == '') {
-                // Assume 68588
-                $obj->sZipCd5 = '68588';
-            }
-            $postal_code = trim($obj->sZipCd5).'-'.trim($obj->sZipCd4);
-        }
+        $clean_name = cleanField($obj->szLname.' '.$obj->szFname.' '.$obj->szAddtText);
+
         $official_dept = false;
         try {
-            $official_dept = new UNL_Peoplefinder_Department(array('d'=>$name));
+            $official_dept = new UNL_Peoplefinder_Department(array('d'=>$clean_name));
             // Found an official match
             $org_unit = $official_dept->org_unit;
         } catch (Exception $e) {
@@ -127,28 +100,40 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
 //            }
         }
         if ($official_dept) {
-            $org_unit    = $official_dept->org_unit;
-            $building    = $official_dept->building;
-            $room        = $official_dept->room;
-            $city        = $official_dept->city;
-            $state       = $official_dept->state;
-            $postal_code = $official_dept->postal_code;
+            $dept = UNL_Officefinder_Department::getByorg_unit($official_dept->org_unit);
+        } else {
+            $dept = new UNL_Officefinder_Department();
+        }
+        
+        // Existing SAP Fields
+        $dept->name        = $clean_name;
+//        $dept->org_unit    = NULL;
+//        $dept->building    = NULL;
+//        $dept->room        = NULL;
+//        $dept->city        = NULL;
+//        $dept->state       = NULL;
+//        $dept->postal_code = NULL;
+        if (trim($obj->sZipCd5) != '' || trim($obj->sZipCd4) != '') {
+            if (trim($obj->sZipCd5) == '') {
+                // Assume 68588
+                $obj->sZipCd5 = '68588';
+            }
+            $dept->postal_code = trim($obj->sZipCd5).'-'.trim($obj->sZipCd4);
         }
 
         // Added fields
-        $address  = trim($obj->szAddress);
-        $phone    = '';
+        $dept->address  = trim($obj->szAddress);
+        $dept->phone    = '';
         if (trim($obj->sNPA1) !== '') {
-            $phone = trim($obj->sNPA1).'-'.preg_replace('/([\d]{3})([\d]{4})/', '$1-$2', trim($obj->sPhoneNbr1));
+            $dept->phone = trim($obj->sNPA1).'-'.preg_replace('/([\d]{3})([\d]{4})/', '$1-$2', trim($obj->sPhoneNbr1));
         }
-        $fax      = NULL;
-        $email    = NUll;
-        $website  = NULL;
-        $acronym  = NULL;
-        $known_as = NULL;
+//        $dept->fax      = NULL;
+//        $dept->email    = NUll;
+//        $dept->website  = NULL;
+//        $dept->acronym  = NULL;
+//        $dept->known_as = NULL;
 
-        $dept_stmt->bind_param('issssssssssssss', $id, $name, $org_unit, $building, $room, $city, $state, $postal_code, $address, $phone, $fax, $email, $website, $acronym, $known_as);
-        $dept_stmt->execute();
+        $dept->save();
 
         $sql = "SELECT * FROM telecom_departments WHERE lGroup_id={$obj->lGroup_id} AND iSeqNbr !=0 ORDER BY iSeqNbr DESC;";
         $listings = $db->query($sql);
@@ -156,20 +141,18 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
         if ($listings->num_rows) {
             $k = 0;
             while ($listing = $listings->fetch_object()) {
-                $k++;
-                $l_name    = cleanField($listing->szDirLname.' '.$listing->szDirFname.' '.$listing->szDirAddText, false);
-                $l_phone   = NULL;
+                $child = new UNL_Officefinder_Department();
+                $child->name    = cleanField($listing->szDirLname.' '.$listing->szDirFname.' '.$listing->szDirAddText, false);
+//                $child->phone   = NULL;
                 if (trim($listing->sNPA1) !== '') {
-                    $l_phone = trim($listing->sNPA1).'-'.preg_replace('/([\d]{3})([\d]{4})/', '$1-$2', trim($listing->sPhoneNbr1));
+                    $child->phone = trim($listing->sNPA1).'-'.preg_replace('/([\d]{3})([\d]{4})/', '$1-$2', trim($listing->sPhoneNbr1));
                 }
-                $l_sort    = $k;
-                $l_address = trim($listing->szAddress);
-                $l_email   = NULL;
-                $l_uid     = NULL;
+                $child->address = trim($listing->szAddress);
+//                $child->email   = NULL;
+//                $child->uid     = NULL;
 
-                $listing_stmt->bind_param('ississs', $id, $l_name, $l_phone, $l_sort, $l_address, $l_email, $l_uid);
-                $listing_stmt->execute();
-
+                $child->save();
+                $dept->addChild($child);
             }
         }
         $listings->close();
