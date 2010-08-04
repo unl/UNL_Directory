@@ -595,7 +595,7 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
      * @return     mixed   the array with the data of all children
      *                     or false, if there are none
      */
-    function getChildren()
+    function getChildren($orderBy = 'lft')
     {
 
         if (!$this->hasChildren()) {
@@ -605,7 +605,6 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
         $id      = 'id';
         $left    = 'lft';
         $where   = $this->_getWhereAddOn(' AND ', 'c');
-        $orderBy = 'lft';
 
         $query = sprintf('SELECT DISTINCT
                                 id
