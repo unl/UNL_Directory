@@ -12,6 +12,7 @@ ul.listings li {
     -webkit-border-radius:5px;
     background:#E6E9DC;
     cursor:move;	
+    min-height:35px;
 }
 ul.listings li:hover {
     background:#d2cfc3 url('images/sortable.png') repeat-y top left;

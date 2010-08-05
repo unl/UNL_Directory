@@ -56,11 +56,12 @@
 /* Headings */
 
 
-#maincontent .affiliation h2, #maincontent .likeResults h3 {
+#maincontent .affiliation h2, #maincontent .likeResults h3, #maincontent #orgChart h2 {
 	font-variant:small-caps;
 	font-weight:bold;
 }
-#maincontent .affiliation h2 {border-bottom:2px dotted #E6E6E6;padding-bottom:0;}
+#maincontent .affiliation h2, #maincontent #orgChart h2 {border-bottom:2px dotted #E6E6E6;padding-bottom:0;}
+
 #maincontent .likeResults h3 {
 	font-size:1em;	
 }
@@ -177,6 +178,30 @@ a.text-vcard{padding-left:24px;padding-right:0;background-position:left -2px;mar
 
 #employees > h2, #employees > p{display:none;}
 
+
+#maincontent #orgChart h2 {background:url('images/iconOrg.png') no-repeat 0 7px; padding-left:22px;margin-bottom:36px;}
+
+#maincontent #orgChart ul {
+	list-style:none;
+	padding:0;
+	margin:0;
+	font-size:1.2em;
+	text-align:center;
+	font-weight:bold;
+}
+#maincontent #orgChart ul {
+    margin-top:9px;	
+}
+#maincontent #orgChart > ul  li > ul {
+    padding-top:36px;
+    background:url('images/iconDown.png') no-repeat top center;
+}
+#maincontent #orgChart > ul > li > ul {
+    font-size:155%;
+}
+#maincontent #orgChart  ul li ul li ul {
+    font-size:55%;	
+}
 /* 
 ***************************************************
 

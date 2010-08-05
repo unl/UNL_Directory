@@ -69,7 +69,8 @@
         </div>
     </div>
 </div>
-<div class="two_col right">
+<div class="two_col right" id="orgChart">
+<h2>HR Organization Chart Position</h2>
 <?php
 if (!$context->isRoot()) {
     $parent = $context->getParent();
