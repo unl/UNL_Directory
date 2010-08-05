@@ -782,6 +782,15 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
         return ($this->rgt - $this->lft) > 1;
     }
 
+    function hasChildrenWithChildren()
+    {
+        $children = $this->_getChildren('rgt != lft + 1');
+        if ($children && count($children) > 0) {
+            return true;
+        }
+        return false;
+    }
+
     // }}}
     // {{{ getIdByPath()
 

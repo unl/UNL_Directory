@@ -80,7 +80,7 @@ if (!$context->isRoot()) {
 
             <ul>
                 <li><?php echo $context->name; ?>
-                    <?php if ($context->hasChildren()): ?>
+                    <?php if ($context->hasChildrenWithChildren()): ?>
                     <ul>
                         <?php foreach ($context->getChildrenWithChildren('name ASC') as $child): ?>
                         <li><a href="?view=department&amp;id=<?php echo $child->id; ?>"><?php echo $child->name; ?></a></li>
