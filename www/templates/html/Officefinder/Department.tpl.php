@@ -44,7 +44,7 @@
 <div class="two_col left">
     <ul class="wdn_tabs">
         <li><a href="#listings">Listings</a></li>
-        <?php if ($department): ?>
+        <?php if ($department && count($department) > 0): ?>
         <li><a href="#employees">All Employees <sup><?php echo count($department); ?></sup></a></li>
         <?php endif; ?>
     </ul>
@@ -59,7 +59,7 @@
         </div>
         <div id="employees">
         <?php
-        if ($department) {
+        if ($department && count($department) > 0) {
             // This listing has an official HR department associated with IT
             // render all those HR department details.
             echo $savvy->render($department);
