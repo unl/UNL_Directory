@@ -198,6 +198,7 @@ a.text-vcard{padding-left:24px;padding-right:0;background-position:left -2px;mar
 }
 #maincontent #orgChart > ul > li > ul {
     font-size:155%;
+    line-height:110%;
 }
 #maincontent #orgChart  ul li ul li ul {
     font-size:55%;	
