@@ -4,19 +4,23 @@ require_once dirname(__FILE__).'/../www/config.inc.php';
 $db = new mysqli('localhost', 'officefinder', 'officefinder', 'officefinder');
 
 // OK Wipe the DB
-//$db->query('TRUNCATE departments');
-//$db->query('TRUNCATE listings');
+$db->query('TRUNCATE departments');
+$db->query('TRUNCATE listings');
 
-//// Import OFFICIAL departments into the database
-//$sap_dept = new UNL_Peoplefinder_Department(array('d'=>'University of Nebraska - Lincoln'));
-//
-//// Add a new root entry
-//$root = new UNL_Officefinder_Department();
-//updateFields($root, $sap_dept);
-//$root->setAsRoot();
-//
+$sap_dept = new UNL_Peoplefinder_Department(array('d'=>'University of Nebraska - Lincoln'));
+
+if ($root = UNL_Officefinder_Department::getBylft(1)) {
+    // Found an existing root
+} else {
+    // Add a new root entry
+    // Import OFFICIAL departments into the database
+    $root = new UNL_Officefinder_Department();
+    updateFields($root, $sap_dept);
+    $root->setAsRoot();
+}
+
 //// Now crawl through all the official departments and update the data.
-//updateOfficialDepartment($sap_dept);
+updateOfficialDepartment($sap_dept);
 
 
 
@@ -88,20 +92,21 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
             // Found an official match
             $org_unit = $official_dept->org_unit;
         } catch (Exception $e) {
-//            if (isset($postal_code)) {
-//                $results = $dept_search->xpath('//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="postal_code"][@value="'.$postal_code.'"]/..');
-//
-//                if (count($results)) {
-//                    // Found a match on the zip code
-//                    $official_dept = new UNL_Peoplefinder_Department(array('d'=>(string)$results[0][0]->attribute['value']));
-//                    
-//                    echo $name.'=>'.$official_dept->name.PHP_EOL;
-//                }
-//            }
+            if (isset($postal_code)) {
+                $results = $dept_search->xpath('//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="postal_code"][@value="'.$postal_code.'"]/..');
+
+                if (count($results)) {
+                    // Found a match on the zip code
+                    $official_dept = new UNL_Peoplefinder_Department(array('d'=>(string)$results[0][0]->attribute['value']));
+                    
+                    echo $name.'=>'.$official_dept->name.PHP_EOL;
+                }
+            }
         }
         if ($official_dept) {
             $dept = UNL_Officefinder_Department::getByorg_unit($official_dept->org_unit);
         } else {
+            // New department, no clue where this goes
             $dept = new UNL_Officefinder_Department();
         }
         
@@ -134,6 +139,10 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
 //        $dept->known_as = NULL;
 
         $dept->save();
+        if (!$official_dept) {
+            // Not an official department, no clue where this goes, add it just under the root
+            $root->addChild($dept);
+        }
 
         $sql = "SELECT * FROM telecom_departments WHERE lGroup_id={$obj->lGroup_id} AND iSeqNbr !=0 ORDER BY iSeqNbr DESC;";
         $listings = $db->query($sql);
@@ -143,7 +152,6 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
             while ($listing = $listings->fetch_object()) {
                 $child = new UNL_Officefinder_Department();
                 $child->name    = cleanField($listing->szDirLname.' '.$listing->szDirFname.' '.$listing->szDirAddText, false);
-//                $child->phone   = NULL;
                 if (trim($listing->sNPA1) !== '') {
                     $child->phone = trim($listing->sNPA1).'-'.preg_replace('/([\d]{3})([\d]{4})/', '$1-$2', trim($listing->sPhoneNbr1));
                 }

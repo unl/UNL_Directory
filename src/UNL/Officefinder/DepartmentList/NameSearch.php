@@ -10,7 +10,7 @@ class UNL_Officefinder_DepartmentList_NameSearch extends UNL_Officefinder_Depart
         $mysqli = UNL_Officefinder::getDB();
         $sql = 'SELECT id FROM departments ';
         $sql .= 'WHERE name LIKE "%'.$mysqli->escape_string($this->options['q']).'%"'
-             . ' ORDER BY name';
+             . ' AND rgt != lft+1 ORDER BY name';
         if ($result = $mysqli->query($sql)) {
             while($row = $result->fetch_array(MYSQLI_NUM)) {
                 $records[] = $row[0];
