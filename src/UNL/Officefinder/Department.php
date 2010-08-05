@@ -26,15 +26,15 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSet
     public $postal_code;
     /** @Column(length=50) */
     public $address;
-    /** @Column(length=50) */
+    /** @Column(length=250) */
     public $phone;
     /** @Column(length=50) */
     public $fax;
     /** @Column(length=50) */
     public $email;
-    /** @Column(length=50) */
+    /** @Column(length=45) */
     public $website;
-    /** @Column(length=50) */
+    /** @Column(length=45) */
     public $acronym;
     /** @Column(length=50) */
     public $alternate;
@@ -42,6 +42,11 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSet
     public $lft;
     public $rgt;
     public $level;
+
+    /** @Column(length=45) */
+    public $uid;
+    /** @Column(length=255) */
+    public $uidlastupdated;
 
     /**
      * Construct a new listing
