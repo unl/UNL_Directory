@@ -27,7 +27,7 @@ service_peoplefinder = function() {
 		},
 		presentPeopleFinderResults : function(query){
 			WDN.jQuery('#q').siblings('label').hide();
-			WDN.jQuery('#maincontent .two_col').remove();
+			WDN.jQuery('#maincontent div').not('.clear').remove();
 			WDN.jQuery('#peoplefinder').after('<div id="filters" class="one_col left"></div><div id="results" class="three_col right"></div>');
 			WDN.toolbar_peoplefinder.queuePFRequest(query, 'results');
 			document.title = 'UNL | Directory | Search for ' + query;
