@@ -192,6 +192,9 @@ a.text-vcard{padding-left:24px;padding-right:0;background-position:left -2px;mar
 #maincontent #orgChart ul {
     margin-top:9px;	
 }
+#maincontent #orgChart > ul > li > ul > li > a{
+	font-size:55%;
+}
 #maincontent #orgChart > ul  li > ul {
     padding-top:36px;
     background:url('images/iconDown.png') no-repeat top center;
