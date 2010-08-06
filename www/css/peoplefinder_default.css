@@ -137,7 +137,7 @@ a.text-vcard{padding-left:24px;padding-right:0;background-position:left -2px;mar
 */
 #maincontent #pfShowRecord .wdn_tabs, #maincontent #pfShowRecord .wdn_tabs_content {display:none;}
 .vcard.office{
-	background:#fbeda5;
+	background:#ede8b2;
 	border-color:#e6d793;
 }
 .vcard.office .departmentInfo {
@@ -160,8 +160,8 @@ a.text-vcard{padding-left:24px;padding-right:0;background-position:left -2px;mar
     -moz-border-radius:10px;
     -webkit-border-radius:10px;
     background:#fbeca5;
-    background-image: url('images/tornSpiral.png'), -moz-linear-gradient(    right center,    rgb(251,237,165) 83%,    rgb(230,215,147) 96%);
-    background-image: url('images/tornSpiral.png'), -webkit-gradient(    linear,    right top,    left top,    color-stop(0.83, rgb(251,237,165)),    color-stop(0.96, rgb(230,215,147)));   	
+    background-image: url('images/tornSpiral.png'), -moz-linear-gradient(    right center,    rgb(237,232,178) 83%,    rgb(230,215,147) 96%);
+    background-image: url('images/tornSpiral.png'), -webkit-gradient(    linear,    right top,    left top,    color-stop(0.83, rgb(237,232,178)),    color-stop(0.96, rgb(230,215,147)));   	
     background-repeat:no-repeat;
     padding:20px 20px 20px 45px;
     width:875px;
@@ -216,9 +216,7 @@ a.text-vcard{padding-left:24px;padding-right:0;background-position:left -2px;mar
 .directorySearch {
 	width:100%;
 	background:url('images/formSearchBG.png') repeat-x top;
-	margin-top:15px;
-	position:absolute;
-	width:440px;
+	margin:15px 0 10px 0;
 }
 .directorySearch legend {display:none;}
 #maincontent form.directorySearch ol{
@@ -244,7 +242,7 @@ a.text-vcard{padding-left:24px;padding-right:0;background-position:left -2px;mar
 	cursor:text;
 }
 .directorySearch ol li:first-child input[type=text] {
-	width:364px;
+	width:440px;
 	height:31px;
 	border:1px solid #dad09a;
 	font-size:1.5em;
@@ -288,26 +286,18 @@ li#filters fieldset {
 
 ***************************************************
 */
-#maincontent #results, #maincontent #pfShowRecord {
-    margin-top:15px;
-    padding-top:30px;
-}
-#maincontent #pfShowRecord {   
-    top:108px;
-    position:relative;
-}
-#maincontent #results .intro, #maincontent #pfShowRecord .intro{
+#maincontent .intro, #maincontent .intro{
     background-image:-webkit-gradient(
     linear,
     left top,
     left bottom,
     color-stop(0.10, rgba(255,255,255, .3)),
-    color-stop(1, rgba(227,224,189, .8))
+    color-stop(1, rgba(237,237,237, .8))
 );
 background-image:-moz-linear-gradient(
     center bottom,
     rgba(255,255,255, .3) 10%,
-    rgba(227,224,189, .8) 100%
+    rgba(237,237,237, .8) 100%
 );
 padding:10px;
     -moz-border-radius:5px;
@@ -323,7 +313,7 @@ h6.recordDetails span {
     height:150px;
     padding:25px 200px 0 0;	
 }
-#results .intro_support {
-	background:url('images/samplePeople.png') no-repeat center right;
-	margin-top:75px;
+#maincontent .intro_support {
+	background:url('images/samplePeople.png') no-repeat bottom right;
+	padding-top:10px;
 }

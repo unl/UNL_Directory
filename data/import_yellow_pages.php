@@ -1,7 +1,7 @@
 <?php
 require_once dirname(__FILE__).'/../www/config.inc.php';
 
-$db = new mysqli('localhost', 'officefinder', 'officefinder', 'officefinder');
+$db = new mysqli('localhost', 'smeranda', '12345', 'officefinder');
 
 // OK Wipe the DB
 $db->query('TRUNCATE departments');

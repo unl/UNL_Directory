@@ -1,14 +1,13 @@
-<div class="two_col left" id="results">
+<?php
+    echo $savvy->render($context, 'Peoplefinder/StandardForm.tpl.php');
+?>
+<div class="two_col left">
     <div class="intro">
     <img width="100" height ="100" class="profile_pic medium planetred_profile" src="images/peopleHerbie.png" style="float:left;" />
     <h6 class="recordDetails">
         Search <span class="search_context">People</span>
     </h6>
-    <div class="clear"></div>
-    <?php
-       echo $savvy->render($context, 'Peoplefinder/StandardForm.tpl.php');
-    ?>
-    <div class="intro_support">
+    <div class="intro_support clear">
         <p>Find contact information for faculty, staff and students.</p>
         <p>Search by:</p>
         <ul>
@@ -20,17 +19,13 @@
     </div>
     </div>
 </div>
-<div class="two_col right" id="pfShowRecord">
+<div class="two_col right">
     <div class="intro">
     <img width="100" height ="100" class="profile_pic medium planetred_profile" src="images/organizationVC.png" />
     <h6 class="recordDetails">
         Search <span class="search_context">Departments</span>
     </h6>
-    <div class="clear"></div>
-     <?php
-       echo $savvy->render($context, 'Officefinder/StandardForm.tpl.php');
-    ?>
-    <div class="intro_support">
+    <div class="intro_support clear">
         
     </div>
     </div>
