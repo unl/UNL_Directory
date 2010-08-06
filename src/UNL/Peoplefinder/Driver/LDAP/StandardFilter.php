@@ -110,7 +110,7 @@ class UNL_Peoplefinder_Driver_LDAP_StandardFilter
     function __toString()
     {
         $this->addExcludedRecords();
-        $this->_filter = '(&'.$this->_filter.'(!(eduPersonPrimaryAffiliation=guest)))';
+        $this->_filter = '(&'.$this->_filter.'(!(|(ou=org)(eduPersonPrimaryAffiliation=guest))))';
         return $this->_filter;
     }
 }
