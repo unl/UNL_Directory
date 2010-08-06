@@ -23,6 +23,10 @@ ul.listings li .listingDetails {
 ul.listings li div.edit {
 	float:right;
 	margin-top:2px;
+	display:none;
+}
+ul.listings li:hover div.edit {
+    display:block;	
 }
 
 /*Setup the main UI for buttons*/
