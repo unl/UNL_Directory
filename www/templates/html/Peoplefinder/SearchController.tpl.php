@@ -10,6 +10,8 @@ if ($context->options['format'] != 'partial') {
 
 UNL_Peoplefinder::$displayResultLimit -= count($context->results);
 
+echo $savvy->render($context->dept_results);
+
 $like_records = array();
 if (!is_array($context->options['q'])
     && UNL_Peoplefinder::$displayResultLimit) {
@@ -64,5 +66,5 @@ foreach ($by_affiliation as $affiliation=>$records) {
     }
 }
 
-echo $savvy->render($context->dept_results);
+
 ?>

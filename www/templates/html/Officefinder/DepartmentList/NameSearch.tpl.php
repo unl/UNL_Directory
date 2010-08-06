@@ -1,4 +1,4 @@
-<div class="affiliation">
+<div class="affiliation departments" >
 <h2>Departments</h2>
 <?php
 if (count($context)) {
