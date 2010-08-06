@@ -20,7 +20,6 @@ class UNL_Officefinder
                              //'search'       => 'UNL_Peoplefinder_Department_Search',
                              'search'       => 'UNL_Officefinder_DepartmentList_NameSearch',
                              'department'   => 'UNL_Officefinder_Department',
-                             'listing'      => 'UNL_Officefinder_Department_Listing',
                              'record'       => 'UNL_Peoplefinder_Department');
 
     protected static $auth;
