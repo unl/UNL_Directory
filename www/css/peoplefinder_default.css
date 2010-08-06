@@ -179,7 +179,7 @@ a.text-vcard{padding-left:24px;padding-right:0;background-position:left -2px;mar
 #employees > h2, #employees > p{display:none;}
 
 
-#maincontent #orgChart h2 {background:url('images/iconOrg.png') no-repeat 0 7px; padding-left:22px;margin-bottom:36px;}
+#maincontent #orgChart h2 {font-variant:normal;background:url('images/iconOrg.png') no-repeat 0 7px; padding-left:22px;margin-bottom:36px;}
 
 #maincontent #orgChart ul {
 	list-style:none;
