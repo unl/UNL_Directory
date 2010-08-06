@@ -7,7 +7,6 @@
 */
 #maincontent #results {min-height: 300px;}
 #maincontent ul.pfResult {
-	width:460px;
 	padding:0px;
 	list-style:none;
 	border-bottom: 1px solid #e6e6e6;
@@ -28,7 +27,7 @@
 	padding: 7px 0px;
 }
 #maincontent ul.pfResult li:hover div.overflow, #maincontent ul.pfResult li.selected div.overflow {
-	background:url('images/selectedBG.png') no-repeat left;
+	/*background:url('images/selectedBG.png') no-repeat left;*/
 }
 .eppa, .organization-unit, .tel, .type {display:none;}
 
@@ -41,7 +40,7 @@
 	font-size:18px;
 	font-weight:bold;
 	color:#464545 !important;	
-	max-width:315px;
+	max-width:530px;
 	max-height:35px;
 	min-height:20px;
 	overflow:hidden;
@@ -289,8 +288,8 @@ li#filters fieldset {
 #maincontent .intro, #maincontent .intro{
     background-image:-webkit-gradient(
     linear,
-    left top,
     left bottom,
+    left top,
     color-stop(0.10, rgba(255,255,255, .3)),
     color-stop(1, rgba(237,237,237, .8))
 );
