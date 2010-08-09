@@ -300,6 +300,8 @@ background-image:-moz-linear-gradient(
 );
 padding:10px;
     -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px;
 }
 h6.recordDetails {margin-top:15px;}
 h6.recordDetails span {
