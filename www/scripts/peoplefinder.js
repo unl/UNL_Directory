@@ -2,28 +2,28 @@ service_peoplefinder = function() {
 	return {
 		updatePeopleFinderResults : function(){ //function called when the list has been rendered
 			WDN.jQuery('ul.pfResult li').each(function(){
-				onClick = WDN.jQuery(this).find('.cInfo').attr('onclick');
-				WDN.jQuery(this).find('.cInfo').removeAttr('onclick');
-				WDN.jQuery(this).click(onClick);
+				//onClick = WDN.jQuery(this).find('.cInfo').attr('onclick');
+				//WDN.jQuery(this).find('.cInfo, .fn a').removeAttr('onclick');
 			});
-			WDN.jQuery('ul.pfResult li').click(function() {
+			WDN.jQuery('ul.pfResult li .overflow').click(function() {
+				WDN.jQuery(this).css({'opacity' : '0.4'});
 				WDN.jQuery('li.selected').removeClass('selected');
-				WDN.jQuery(this).addClass('selected');
+				WDN.jQuery(this).parent('li').addClass('selected');
+				var href = WDN.jQuery(this).find('a.cInfo').attr('href');
+				href = href.split('?uid=');
+				var url = WDN.toolbar_peoplefinder.serviceURL + 'service.php?view=hcard&uid=' + href[1];
+				WDN.get(url, null, service_peoplefinder.updatePeopleFinderRecord);
 				return false;
 			});
 		},
-		updatePeopleFinderRecord : function(){ //function called when a record has been rendered
-			WDN.jQuery('#pfShowRecord').offset(function(index, coords) {
-				selectedLi = WDN.jQuery('li.selected').offset();
-				footerLoc = WDN.jQuery("#footer").offset();
-				//alert(WDN.jQuery(this).height());
-				if ((selectedLi.top - 40 + WDN.jQuery(this).height()) > footerLoc.top) {
-					placementTop = (footerLoc.top - WDN.jQuery(this).height() - 40);
-				} else {
-					placementTop = selectedLi.top - 40;
-				}
-				return {top : placementTop, left : coords.left};
-			});
+		updatePeopleFinderRecord : function(data, textStatus){ //function called when a record has been rendered
+			if (textStatus == 'success') {
+            	//WDN.jQuery('li.selected .overflow').hide();
+				WDN.jQuery('li.selected').append(data);
+				WDN.jQuery('li.selected .vcard').slideDown();
+            } else {
+                
+            }
 		},
 		presentPeopleFinderResults : function(query){
 			WDN.jQuery('#q').siblings('label').hide();
