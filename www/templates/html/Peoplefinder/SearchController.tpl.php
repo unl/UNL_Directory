@@ -10,7 +10,9 @@ if ($context->options['format'] != 'partial') {
 
 UNL_Peoplefinder::$displayResultLimit -= count($context->results);
 
-echo $savvy->render($context->dept_results);
+if (count($context->dept_results)) {
+    echo $savvy->render($context->dept_results);
+}
 
 $like_records = array();
 if (!is_array($context->options['q'])
@@ -30,9 +32,11 @@ $by_affiliation['organizations'] = array();
 $like_by_affiliation = $by_affiliation;
 
 $records =& $context->results;
+$showing = 0;
 
 foreach(array('records'=>'by_affiliation', 'like_records'=>'like_by_affiliation') as $records_var=>$affiliation_var) {
     foreach ($$records_var as $record) {
+        $showing++;
         foreach ($record->ou as $ou) {
             if ($ou == 'org') {
                 ${$affiliation_var}['organizations'][] = $record;
@@ -66,5 +70,9 @@ foreach ($by_affiliation as $affiliation=>$records) {
     }
 }
 
+if (count($context->dept_results) == 0
+    && $showing == 0) {
+    echo 'Sorry, no results could be found.';
+}
 
 ?>
