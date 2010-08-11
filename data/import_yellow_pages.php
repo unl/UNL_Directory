@@ -22,6 +22,8 @@ if ($root = UNL_Officefinder_Department::getBylft(1)) {
 //// Now crawl through all the official departments and update the data.
 updateOfficialDepartment($sap_dept);
 
+$cleanup_file = new SplFileObject(dirname(__FILE__).'/Centrex Cleanup.csv');
+$cleanup_file->setFlags(SplFileObject::READ_CSV);
 
 
 function updateOfficialDepartment(UNL_Peoplefinder_Department $sap_dept, UNL_Officefinder_Department $parent = null)
@@ -102,6 +104,28 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
                     echo $name.'=>'.$official_dept->name.PHP_EOL;
                 }
             }
+            // Both those failed, check the cleanup file
+            // Not an official department, no clue where this goes, check the cleanup file
+            foreach ($cleanup_file as $row) {
+                if ($dept->name == $row[0]) {
+                    // Found an entry in the cleanup file
+                    if (!empty($row[1])) {
+                        // THis maps to an official entry
+                        if (is_int($row[1])) {
+                            $official_dept = UNL_Peoplefinder_Department::getById($row[1]);
+                        }
+                    }
+                    if (!empty($row[2])) {
+                        // Found a parent
+                        if (is_int($row[2])) {
+                            $parent_dept = UNL_Officefinder_Department::getByorg_unit($row[2]);
+                        } else {
+                            $parent_dept = UNL_Officefinder_Department::getByname($row[2]);
+                        }
+                    }
+                    break;
+                }
+            }
         }
         if ($official_dept) {
             $dept = UNL_Officefinder_Department::getByorg_unit($official_dept->org_unit);
@@ -140,8 +164,12 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
 
         $dept->save();
         if (!$official_dept) {
-            // Not an official department, no clue where this goes, add it just under the root
-            $root->addChild($dept);
+            // Find where the parent is
+            if (isset($parent_dept)) {
+                $parent_dept->addChild($dept);
+            } else {
+                $root->addChild($dept);
+            }
         }
 
         $sql = "SELECT * FROM telecom_departments WHERE lGroup_id={$obj->lGroup_id} AND iSeqNbr !=0 ORDER BY iSeqNbr DESC;";
@@ -173,6 +201,8 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
 }
 
 $db->close();
+
+
 
 function cleanField($text, $correct_case = true)
 {
