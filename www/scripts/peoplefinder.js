@@ -5,7 +5,7 @@ service_peoplefinder = function() {
 				//onClick = WDN.jQuery(this).find('.cInfo').attr('onclick');
 				//WDN.jQuery(this).find('.cInfo, .fn a').removeAttr('onclick');
 			});
-			WDN.jQuery('ul.pfResult li .overflow').click(function() {
+			WDN.jQuery('ul.pfResult:not(.departments) li .overflow').click(function() {
 				WDN.jQuery(this).css({'opacity' : '0.4'});
 				WDN.jQuery('li.selected').removeClass('selected');
 				WDN.jQuery(this).parent('li').addClass('selected');
