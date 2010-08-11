@@ -101,6 +101,7 @@ directory = function() {
 				window.location.hash = '#q/' + WDN.jQuery('#'+this.id+' input.q').val() ; //triggering a hash change will run through the searching function
 				eventObject.preventDefault();
 				eventObject.stopPropagation();
+				WDN.jQuery('#q').focus().select();
 				return false;
 			});
 			WDN.jQuery('#q').focus(function(){
@@ -117,6 +118,7 @@ directory = function() {
 					WDN.jQuery(this).siblings('label').show();
 				}
 			});
+			WDN.jQuery('#q').focus().select();
 		}
 	};
 }();
