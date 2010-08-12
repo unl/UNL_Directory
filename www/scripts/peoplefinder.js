@@ -5,32 +5,59 @@ service_peoplefinder = function() {
 				//onClick = WDN.jQuery(this).find('.cInfo').attr('onclick');
 				//WDN.jQuery(this).find('.cInfo, .fn a').removeAttr('onclick');
 			});
-			WDN.jQuery('ul.pfResult:not(.departments) li .overflow').click(function() {
-				WDN.jQuery(this).css({'opacity' : '0.4'});
-				WDN.jQuery('li.selected').removeClass('selected');
-				WDN.jQuery(this).parent('li').addClass('selected');
-				var href = WDN.jQuery(this).find('a.cInfo').attr('href');
-				href = href.split('?uid=');
-				var url = WDN.toolbar_peoplefinder.serviceURL + 'service.php?view=hcard&uid=' + href[1];
-				WDN.get(url, null, service_peoplefinder.updatePeopleFinderRecord);
-				return false;
-			});
+			WDN.jQuery('ul.pfResult:not(.departments) li .overflow').click(function(){
+				service_peoplefinder.showIndividualPeopleFinderRecord(WDN.jQuery(this));
+				}
+			);
+//			WDN.jQuery('ul.pfResult:not(.departments) li .overflow').click(function() {
+//				WDN.jQuery(this).css({'opacity' : '0.4'});
+//				WDN.jQuery('li.current').removeClass('current');
+//				WDN.jQuery(this).parent('li').addClass('selected current');
+//				var href = WDN.jQuery(this).find('a.cInfo').attr('href');
+//				href = href.split('?uid=');
+//				var url = WDN.toolbar_peoplefinder.serviceURL + 'service.php?view=hcard&uid=' + href[1];
+//				WDN.get(url, null, service_peoplefinder.updatePeopleFinderRecord);
+//				return false;
+//			});
 		},
+		
 		updatePeopleFinderRecord : function(data, textStatus){ //function called when a record has been rendered
 			if (textStatus == 'success') {
-            	//WDN.jQuery('li.selected .overflow').hide();
-				WDN.jQuery('li.selected').append(data);
-				WDN.jQuery('li.selected .vcard').slideDown();
+				WDN.jQuery('li.current').append(data);
+				WDN.jQuery('li.current .vcard a.planetred_profile').fadeIn(400);
+				WDN.jQuery('li.current .vcard').slideDown();
+            	WDN.jQuery('li.selected .loading').hide();
             } else {
                 
             }
 		},
+		
 		presentPeopleFinderResults : function(query){
 			WDN.jQuery('#q').siblings('label').hide();
 			WDN.jQuery('#maincontent div').not('.clear').remove();
 			WDN.jQuery('#peoplefinder').after('<div id="filters" class="one_col left"></div><div id="results" class="three_col right"></div>');
 			WDN.toolbar_peoplefinder.queuePFRequest(query, 'results');
 			document.title = 'UNL | Directory | Search for ' + query;
+		},
+		
+		showIndividualPeopleFinderRecord : function(liRecord) {
+			if (liRecord.parent().hasClass('selected')) {
+				liRecord.siblings('.vcard').children('a.planetred_profile').fadeOut(400);
+				liRecord.siblings('.vcard').slideUp(function(){
+					WDN.jQuery(this).remove();
+					
+				});
+				liRecord.parent().removeClass('selected');
+			} else {
+				liRecord.children('.loading').show();
+				WDN.jQuery('li.current').removeClass('current');
+				liRecord.parent('li').addClass('selected current');
+				var href = liRecord.find('a.cInfo').attr('href');
+				href = href.split('?uid=');
+				var url = WDN.toolbar_peoplefinder.serviceURL + 'service.php?view=hcard&uid=' + href[1];
+				WDN.get(url, null, service_peoplefinder.updatePeopleFinderRecord);
+			}
+			return false;
 		}
 	};
 }();

@@ -33,7 +33,7 @@ if (isset($context->telephoneNumber)) {
 }
 
 echo '    </div>'.PHP_EOL;
-echo '    <a href="'.UNL_Peoplefinder::getURL().'?uid='.$context->uid.'" class="cInfo" '.$onclick.'>Contact '.$context->givenName.'</a>'.PHP_EOL;
+echo '    <a href="'.UNL_Peoplefinder::getURL().'?uid='.$context->uid.'" class="cInfo" '.$onclick.'>Contact '.$context->givenName.'</a><div class="loading"></div>'.PHP_EOL;
 if (isset($parent->context->options['chooser'])) {
     echo '    <div class="pfchooser"><a href="#" onclick="return pfCatchUID(\''.$context->uid.'\');">Choose this person</a></div>'.PHP_EOL;
 }
