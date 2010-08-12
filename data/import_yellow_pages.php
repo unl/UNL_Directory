@@ -116,42 +116,45 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
                     echo $name.'=>'.$official_dept->name.PHP_EOL;
                 }
             }
-            break;
-            // Both those failed, check the cleanup file
-            // Not an official department, no clue where this goes, check the cleanup file
-            foreach ($cleanup_file as $row) {
-                if ($clean_name == $row[0]) {
-                    // Found an entry in the cleanup file
-                    if (!empty($row[1])) {
-                        // THis maps to an official entry
-                        if (substr($row[1], 0, 1) == '5') {
-                            $dept = UNL_Officefinder_Department::getByorg_unit($row[1]);
-                        } else {
-                            $official_dept = new UNL_Peoplefinder_Department(array('d'=>$row[1]));
-                            $dept = UNL_Officefinder_Department::getByorg_unit($official_dept->org_unit);
-                        }
-                    } elseif (!empty($row[2])) {
-                        // Found a parent
-                        if (substr($row[2], 0, 1) == '5') {
-                            $parent_dept = UNL_Officefinder_Department::getByorg_unit($row[2]);
-                        } else {
-                            $parent_dept = UNL_Officefinder_Department::getByname($row[2]);
-                            if (!$parent_dept) {
-                                // Don't know about this department yet, let's add it
-                                $parent_dept = new UNL_Officefinder_Department();
-                                $parent_dept->name = $row[2];
-                                $parent_dept->save();
-                                $root->addChild($parent_dept);
+            if (!$dept) {
+                // Both those failed, check the cleanup file
+                // Not an official department, no clue where this goes, check the cleanup file
+                foreach ($cleanup_file as $row) {
+                    if ($clean_name == $row[0]) {
+                        // Found an entry in the cleanup file
+                        if (!empty($row[1])) {
+                            // THis maps to an official entry
+                            if (substr($row[1], 0, 1) == '5') {
+                                $dept = UNL_Officefinder_Department::getByorg_unit($row[1]);
+                            } else {
+                                try {
+                                    $official_dept = new UNL_Peoplefinder_Department(array('d'=>$row[1]));
+                                    $dept = UNL_Officefinder_Department::getByorg_unit($official_dept->org_unit);
+                                } catch(Exception $e) {
+                                    $dept = UNL_Officefinder_Department::getByname($row[1]);
+                                }
+                            }
+                        } elseif (!empty($row[2])) {
+                            // Found a parent
+                            if (substr($row[2], 0, 1) == '5') {
+                                $parent_dept = UNL_Officefinder_Department::getByorg_unit($row[2]);
+                            } else {
+                                $parent_dept = UNL_Officefinder_Department::getByname($row[2]);
+                                if (!$parent_dept) {
+                                    // Don't know about this department yet, let's add it
+                                    $parent_dept = new UNL_Officefinder_Department();
+                                    $parent_dept->name = $row[2];
+                                    $parent_dept->save();
+                                    $root->addChild($parent_dept);
+                                }
                             }
                         }
+                        break;
                     }
-                    break;
                 }
             }
         }
         if (!$dept) {
-            $dept = UNL_Officefinder_Department::getByorg_unit($official_dept->org_unit);
-        } else {
             // New department, no clue where this goes
             $dept = new UNL_Officefinder_Department();
         }
