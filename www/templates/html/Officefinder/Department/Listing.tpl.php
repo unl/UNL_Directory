@@ -1,8 +1,9 @@
 <?php
 echo '<div class="edit">';
 if ($context->userCanEdit(UNL_Officefinder::getUser())) {
-    echo ' <a href="'.UNL_Officefinder::getURL().'?view=listing&amp;id='.$context->id.'&amp;format=editing" class="action edit">Edit</a>';
+    echo ' <a href="'.UNL_Officefinder::getURL().'?view=department&amp;id='.$context->id.'&amp;format=editing" class="action edit">Edit</a>';
     echo $savvy->render($context, 'Officefinder/Department/Listing/SortForm.tpl.php');
+    include dirname(__FILE__).'/../../../editing/Officefinder/Department/DeleteForm.tpl.php';
 }
 echo '</div>';
 
