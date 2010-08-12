@@ -128,19 +128,17 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
     function delete()
     {
 
-        // FIXXME start transaction
-        //$this->_storage->autoCommit(false);
         $query = sprintf('DELETE FROM %s WHERE%s %s BETWEEN %s AND %s',
                             $this->getTable(),
                             $this->_getWhereAddOn(),
                             'lft',
                             $this->lft, $this->rgt);
-        $res = $this->_storage->query($query);
+        $res = self::getDB()->query($query);
         if (!$res) {
             throw new Exception('Error removing children');
         }
 
-        if (!($err = $this->_remove($element))) {
+        if (!($err = $this->_remove())) {
             throw new Exception('Error removing the element');
         }
         parent::delete();

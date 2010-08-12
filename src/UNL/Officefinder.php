@@ -124,9 +124,17 @@ class UNL_Officefinder
                 $record = $this->handlePostDBRecord('UNL_Officefinder_Department');
                 $this->redirect(self::getURL().'?view=department&id='.$record->id);
                 break;
-            case 'listing':
-                $record = $this->handlePostDBRecord('UNL_Officefinder_Department_Listing');
-                $this->redirect(self::getURL().'?view=department&id='.$record->department_id);
+            case 'delete_department':
+                $record = UNL_Officefinder_Department::getByID($_POST['department_id']);
+                if (!$record) {
+                    throw new Exception('No deparmtne with that ID was found');
+                }
+                if (!$record->userCanEdit(self::getUser(true))) {
+                    throw new Exception('You have no edit permissions for that record');
+                }
+                $parent = $record->getParent();
+                $record->delete();
+                $this->redirect(self::getURL().'?view=department&id='.$parent->id);
                 break;
         }
     }

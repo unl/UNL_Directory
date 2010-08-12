@@ -2,12 +2,18 @@
 <input type="hidden" name="_type" value="department" />
 <?php
 foreach ($context as $var=>$value) {
-    if ($var == 'options') {
-        continue;
-    }
-    $type = 'text';
-    if ($var == 'id') {
-        $type = 'hidden';
+    switch($var) {
+        case 'id':
+            $type = 'hidden';
+            break;
+        case 'uidlastupdated':
+        case 'options':
+        case 'lft':
+        case 'rgt':
+        case 'level':
+            continue 2;
+        default:
+            $type = 'text';
     }
     echo $var . ': <input type="'.$type.'" name="'.$var.'" value="'.$value.'" /><br />';
 }
@@ -15,7 +21,7 @@ foreach ($context as $var=>$value) {
     <input type="submit" />
 </form>
 <?php 
-$listings = $context->getListings();
+$listings = $context->getChildLeafNodes();
 if (count($listings)) {
     echo $savvy->render($listings);
 }
