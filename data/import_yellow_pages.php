@@ -122,6 +122,18 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
                 foreach ($cleanup_file as $row) {
                     if ($clean_name == $row[0]) {
                         // Found an entry in the cleanup file
+                        if (isset($row[3])) {
+                            switch(strtolower($row[3])) {
+                                case 'delete':
+                                case 'delete?':
+                                case 'remove?':
+                                case 'remove':
+                                    continue 2;
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
                         if (!empty($row[1])) {
                             // THis maps to an official entry
                             if (substr($row[1], 0, 1) == '5') {

@@ -143,6 +143,7 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
         if (!($err = $this->_remove($element))) {
             throw new Exception('Error removing the element');
         }
+        parent::delete();
         return true;
     }
 
@@ -263,7 +264,7 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
      *                  if it is 0 it will be put at the beginning
      * @return  mixed    true for success, Tree_Error on failure
      */
-    function _move($idToMove, $newparent_id, $newPrevId = 0)
+    protected function _move($idToMove, $newparent_id, $newPrevId = 0)
     {
         // do some integrity checks first
         if ($newPrevId) {
@@ -332,15 +333,11 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
         // We have to do that anyway, to have the proper new left/right values
         if ($newPrevId) {
             if (Tree::isError($temp = $this->getElement($newPrevId))) {
-                // FIXXME rollback
-                //$this->_storage->rollback();
                 return $temp;
             }
             $calcWith = $temp['right'];
         } else {
             if (Tree::isError($temp = $this->getElement($newparent_id))) {
-                // FIXXME rollback
-                //$this->_storage->rollback();
                 return $temp;
             }
             $calcWith = $temp['left'];
@@ -371,13 +368,7 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
         $res = self::getDB()->query($query);
 
         // remove the part of the tree where the element(s) was/were before
-        if (Tree::isError($err = $this->_remove())) {
-            // FIXXME rollback
-            //$this->_storage->rollback();
-            return $err;
-        }
-        // FIXXME commit all changes
-        //$this->_storage->commit();
+        $this->_remove();
 
         return true;
     }
