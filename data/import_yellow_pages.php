@@ -1,11 +1,10 @@
 <?php
 require_once dirname(__FILE__).'/../www/config.inc.php';
 
-$db = new mysqli('localhost', 'smeranda', '12345', 'officefinder');
+$db = new mysqli('localhost', UNL_Officefinder::$db_user, UNL_Officefinder::$db_pass, 'officefinder');
 
 // OK Wipe the DB
 $db->query('TRUNCATE departments');
-$db->query('TRUNCATE listings');
 
 $sap_dept = new UNL_Peoplefinder_Department(array('d'=>'University of Nebraska - Lincoln'));
 
@@ -19,14 +18,25 @@ if ($root = UNL_Officefinder_Department::getBylft(1)) {
     $root->setAsRoot();
 }
 
-//// Now crawl through all the official departments and update the data.
+// Now crawl through all the official departments and update the data.
 updateOfficialDepartment($sap_dept);
+
+foreach (array('Buildings', 'Copy Centers', 'Religious Groups', 'Fax Numbers') as $semi_official_dept_name) {
+    if (!($semi_official = UNL_Officefinder_Department::getByname($semi_official_dept_name))) {
+        $semi_official       = new UNL_Officefinder_Department();
+        $semi_official->name = $semi_official_dept_name;
+        $semi_official->save();
+        $root->addChild($semi_official);
+    }
+}
 
 $cleanup_file = new SplFileObject(dirname(__FILE__).'/Centrex Cleanup.csv');
 $cleanup_file->setFlags(SplFileObject::READ_CSV);
+checkCleanupFile($cleanup_file);
+exit();
 
 
-function updateOfficialDepartment(UNL_Peoplefinder_Department $sap_dept, UNL_Officefinder_Department $parent = null)
+function updateOfficialDepartment(UNL_Peoplefinder_Department &$sap_dept, UNL_Officefinder_Department &$parent = null)
 {
 
     if (!($dept = UNL_Officefinder_Department::getByorg_unit($sap_dept->org_unit))) {
@@ -45,7 +55,7 @@ function updateOfficialDepartment(UNL_Peoplefinder_Department $sap_dept, UNL_Off
             if ($dept->hasChildren()) {
                 throw new Exception('Err, hmm. This is an existing department with children has moved, I can\'t handle that yet! The department name is '.$dept->name.' with org_unit id = '.$dept->org_unit);
             } else {
-                $parent->addChild($dept);
+                //$parent->addChild($dept);
             }
         }
     }
@@ -89,6 +99,7 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
         $clean_name = cleanField($obj->szLname.' '.$obj->szFname.' '.$obj->szAddtText);
 
         $official_dept = false;
+        $parent_dept   = false;
         try {
             $official_dept = new UNL_Peoplefinder_Department(array('d'=>$clean_name));
             // Found an official match
@@ -107,12 +118,14 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
             // Both those failed, check the cleanup file
             // Not an official department, no clue where this goes, check the cleanup file
             foreach ($cleanup_file as $row) {
-                if ($dept->name == $row[0]) {
+                if ($clean_name == $row[0]) {
                     // Found an entry in the cleanup file
                     if (!empty($row[1])) {
                         // THis maps to an official entry
                         if (is_int($row[1])) {
                             $official_dept = UNL_Peoplefinder_Department::getById($row[1]);
+                        } else {
+                            $official_dept = new UNL_Peoplefinder_Department(array('d'=>$row[1]));
                         }
                     }
                     if (!empty($row[2])) {
@@ -121,6 +134,13 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
                             $parent_dept = UNL_Officefinder_Department::getByorg_unit($row[2]);
                         } else {
                             $parent_dept = UNL_Officefinder_Department::getByname($row[2]);
+                            if (!$parent_dept) {
+                                // Don't know about this department yet, let's add it
+                                $parent_dept = new UNL_Officefinder_Department();
+                                $parent_dept->name = $row[2];
+                                $parent_dept->save();
+                                $root->addChild($parent_dept);
+                            }
                         }
                     }
                     break;
@@ -165,7 +185,7 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
         $dept->save();
         if (!$official_dept) {
             // Find where the parent is
-            if (isset($parent_dept)) {
+            if ($parent_dept) {
                 $parent_dept->addChild($dept);
             } else {
                 $root->addChild($dept);
@@ -241,4 +261,45 @@ function cleanField($text, $correct_case = true)
     //echo $text.PHP_EOL;
 
     return trim($text);
+}
+
+function checkCleanupFile($cleanup_file)
+{
+    foreach ($cleanup_file as $row) {
+        // Found an entry in the cleanup file
+        if (!empty($row[1])) {
+            if ($row[1] == 'Official SAP #/Name') {
+                continue;
+            }
+            // THis maps to an official entry
+            if (substr($row[1], 0, 1) == '5') {
+                $official_dept = UNL_Officefinder_Department::getByorg_unit($row[1]);
+            } else {
+                $official_dept = UNL_Officefinder_Department::getByname($row[1]);
+            }
+            if (!$official_dept) {
+                echo 'I Dunno who this OFFICIAL dept is '.$row[0].'=>'.$row[1].'<br />';
+            }
+            continue;
+        }
+        if (!empty($row[2])) {
+            // Found a parent
+            if (substr($row[2], 0, 1) == '5') {
+                $parent_dept = UNL_Officefinder_Department::getByorg_unit($row[2]);
+            } else {
+                $parent_dept = UNL_Officefinder_Department::getByname($row[2]);
+                if (!$parent_dept) {
+                    // Don't know about this department yet, let's add it
+//                    $parent_dept = new UNL_Officefinder_Department();
+//                    $parent_dept->name = $row[2];
+//                    $parent_dept->save();
+                    //$root->addChild($parent_dept);
+                }
+            }
+            if (!$parent_dept) {
+                echo 'I Dunno who this PARENT dept is '.$row[0].'=>'.$row[2].'<br />';
+            }
+            continue;
+        }
+    }
 }
