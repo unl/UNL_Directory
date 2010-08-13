@@ -95,15 +95,26 @@ ul.listings li .listingDetails {}
 ***************************************************
 */
 .vcard {
-	background:#e7f4f9;
-	border:2px solid #eaeaea;
-	-moz-border-radius:5px;
-	-webkit-border-radius:5px;
+	background:#fff;
+	background-image:-webkit-gradient(
+	    linear,
+	    left top,
+	    left bottom,
+	    color-stop(0, rgb(244,244,244)),
+	    color-stop(1, rgb(255,255,255))
+	);
+	-webkit-box-shadow: 1px 1px 2px #919191;
+	box-shadow: 1px 1px 2px #919191;
+	border:3px solid #ccd2d5;
+	border-radius:10px;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
 	padding:15px;
 	min-height:120px;
 	position:relative;
 	width:425px;
 	z-index:9;
+	margin:0 auto;
 }
 .vcard > a.email {
 	
@@ -136,7 +147,7 @@ ul.listings li .listingDetails {}
     background-position:0 -42px;
 }
 a.email {background:none;}
-a.text-vcard{padding-left:24px;padding-right:0;background-position:left -2px;margin-left:2px;}
+a.text-vcard{padding-left:24px;padding-right:0;background-position:left -2px;margin:121px 0 0 -122px;float:left;}
 /* 
 ***************************************************
 

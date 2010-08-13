@@ -1,6 +1,11 @@
 <?php
 echo "<div class='vcard {$context->eduPersonPrimaryAffiliation}'>\n";
 echo '<a class="planetred_profile" href="http://planetred.unl.edu/pg/profile/unl_'.str_replace("-", "_", $context->uid).'" title="Planet Red Profile for '.$context->cn.'"><img class="profile_pic medium photo" src="'.htmlspecialchars($context->getImageURL()).'"  alt="Photo of '.$context->displayName.'" /></a>';
+
+echo '<a href="'.UNL_Peoplefinder::getURL().'vcards/'.$context->uid.'" title="Download V-Card for '.$context->givenName.' '.$context->sn.'" class="text-vcard">vCard</a>';
+
+echo '<div class="vcardInfo">'.PHP_EOL;
+
 if (isset($context->mail)
     && ($context->eduPersonPrimaryAffiliation != 'student')) {
     $displayEmail = true;
@@ -20,7 +25,6 @@ if (isset($context->eduPersonAffiliation)) {
     echo '<span class="eppa">('.implode(', ', $context->eduPersonAffiliation->getArrayCopy()).')</span>';
 }
 
-echo '<div class="vcardInfo">'.PHP_EOL;
 if (isset($context->unlSISClassLevel)) {
     switch ($context->unlSISClassLevel) {
         case 'FR':
@@ -103,5 +107,5 @@ if ($displayEmail) {
     echo "<span class='email'><a class='email' href='mailto:{$context->mail}'>{$context->mail}</a></span>\n";
 }
 
-echo '<a href="'.UNL_Peoplefinder::getURL().'vcards/'.$context->uid.'" title="Download V-Card for '.$context->givenName.' '.$context->sn.'" class="text-vcard">vCard</a>';
+echo '';
 echo '</div>'.PHP_EOL.'</div>'.PHP_EOL;
