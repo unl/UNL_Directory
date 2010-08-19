@@ -32,29 +32,33 @@
 </div>
 <div id="filters" class="one_col left">
 <div class="zenbox energetic wdn_filterset">
-    <h3>Filter these Areas of Study</h3>
-    <form method="post" action="#" class="filters majorFilters">
+    <h3>Filter these Results</h3>
+    <form method="post" action="#" class="filters">
 
-    <fieldset class="formats">
-        <legend><span>College</span></legend>
+    <fieldset class="affiliation">
+        <legend><span>Affiliation</span></legend>
         <ol>
            <li>
-               <input type="checkbox" checked="checked" id="filterAllCollege" class="filterAll" name="all" value="all" />
-               <label for="filterAllCollege">All colleges</label>
+               <input type="checkbox" checked="checked" id="filterAllDirectory" class="filterAll" name="all" value="all" />
+               <label for="filterAllDirectory">All affiliations</label>
            </li>
            <li>
-               <input type="checkbox" id="filterCASNR" name="CASNR" value="CASNR" />
-               <label for="filterCASNR">Agricultural Sciences &amp; Natural Resources</label>
+               <input type="checkbox" id="filterFaculty" name="faculty" value="faculty" />
+               <label for="filterFaculty">Faculty</label>
+            </li>
+           <li>
+               <input type="checkbox" id="filterStaff" name="staff" value="staff" />
+               <label for="filterStaff">Staff</label>
+            </li>
+           <li>
+               <input type="checkbox" id="filterStudent" name="student" value="student" />
+               <label for="filterStudent">Students</label>
             </li>
         </ol>
     </fieldset>
-    <fieldset class="minor">
-        <legend><span>Minor Available</span></legend>
+    <fieldset class="department">
+        <legend><span>Departments</span></legend>
         <ol>
-           <li><input type="checkbox" checked="checked" id="filterAllMinor" class="filterAll" name="all" value="all" /><label for="filterAllMinor">All</label></li>
-           <li><input type="checkbox" id="filterMinorAvailable" name="minorAvailable" value="minorAvailable" /><label for="filterMinorAvailable">Yes</label></li>
-
-           <li><input type="checkbox" id="filterMinorOnly" name="minorOnly" value="minorOnly" /><label for="filterMinorOnly">Minor Only</label></li>
         </ol>
     </fieldset>
     </form>

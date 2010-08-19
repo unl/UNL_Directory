@@ -1,4 +1,5 @@
 /*filter box*/
+#filters {margin-top:20px;}
 form.filters {color:#a15901;margin-top:15px;}
 form.filters legend span {display:block; width:208px; border-bottom:1px solid #c39863;font-weight:bold;margin-bottom:10px;font-size:1.1em;}
 form.filters div.element {display:inline;}
