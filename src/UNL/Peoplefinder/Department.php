@@ -92,7 +92,7 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
         $results = $this->_xml->xpath($xpath);
 
         if (!isset($results[0])) {
-            throw new Exception('Invalid department name.', 404);
+            throw new Exception('Invalid department name "'.$this->name.'"', 404);
         }
 
         foreach ($results[0] as $attribute) {
