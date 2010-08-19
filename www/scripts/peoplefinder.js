@@ -3,10 +3,11 @@ service_peoplefinder = function() {
 		updatePeopleFinderResults : function(){ //function called when the list has been rendered
 			WDN.jQuery('ul.pfResult li').each(function(){
 				//onClick = WDN.jQuery(this).find('.cInfo').attr('onclick');
-				//WDN.jQuery(this).find('.cInfo, .fn a').removeAttr('onclick');
+				WDN.jQuery(this).find('.cInfo, .fn a').removeAttr('onclick');
 			});
 			WDN.jQuery('ul.pfResult:not(.departments) li .overflow').click(function(){
 				service_peoplefinder.showIndividualPeopleFinderRecord(WDN.jQuery(this));
+				return false;
 				}
 			);
 //			WDN.jQuery('ul.pfResult:not(.departments) li .overflow').click(function() {
@@ -41,6 +42,7 @@ service_peoplefinder = function() {
 		},
 		
 		showIndividualPeopleFinderRecord : function(liRecord) {
+			WDN.log(liRecord);
 			if (liRecord.parent().hasClass('selected')) {
 				liRecord.siblings('.vcard').children('a.planetred_profile').fadeOut(400);
 				liRecord.siblings('.vcard').slideUp(function(){
