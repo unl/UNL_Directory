@@ -21,6 +21,9 @@ if ($root = UNL_Officefinder_Department::getBylft(1)) {
 // Now crawl through all the official departments and update the data.
 updateOfficialDepartment($sap_dept);
 
+// Get root again, because the left and right values have changed!
+$root = UNL_Officefinder_Department::getBylft(1);
+
 foreach (array('Buildings', 'Copy Centers', 'Religious Groups', 'Fax Numbers') as $semi_official_dept_name) {
     if (!($semi_official = UNL_Officefinder_Department::getByname($semi_official_dept_name))) {
         $semi_official       = new UNL_Officefinder_Department();
@@ -36,7 +39,7 @@ $cleanup_file->setFlags(SplFileObject::READ_CSV);
 //exit();
 
 
-function updateOfficialDepartment(UNL_Peoplefinder_Department &$sap_dept, UNL_Officefinder_Department &$parent = null)
+function updateOfficialDepartment(UNL_Peoplefinder_Department $sap_dept, UNL_Officefinder_Department &$parent = null)
 {
 
     if (!($dept = UNL_Officefinder_Department::getByorg_unit($sap_dept->org_unit))) {
@@ -69,7 +72,7 @@ function updateOfficialDepartment(UNL_Peoplefinder_Department &$sap_dept, UNL_Of
     }
 }
 
-function updateFields(&$old, &$new) {
+function updateFields($old, $new) {
     foreach ($old as $key=>$val) {
         if (isset($new->$key)
             && $key != 'options') {
@@ -149,7 +152,9 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
                         } elseif (!empty($row[2])) {
                             // Found a parent
                             if (substr($row[2], 0, 1) == '5') {
-                                $parent_dept = UNL_Officefinder_Department::getByorg_unit($row[2]);
+                                if (!($parent_dept = UNL_Officefinder_Department::getByorg_unit($row[2]))) {
+                                    throw new Exception("Should have found this one!");
+                                }
                             } else {
                                 $parent_dept = UNL_Officefinder_Department::getByname($row[2]);
                                 if (!$parent_dept) {
@@ -157,7 +162,7 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
                                     $parent_dept = new UNL_Officefinder_Department();
                                     $parent_dept->name = $row[2];
                                     $parent_dept->save();
-                                    $root->addChild($parent_dept);
+                                    UNL_Officefinder_Department::getBylft(1)->addChild($parent_dept);
                                 }
                             }
                         }
@@ -166,7 +171,7 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
                 }
             }
         }
-        if (!$dept) {
+        if (false === $dept) {
             // New department, no clue where this goes
             $dept = new UNL_Officefinder_Department();
         }
@@ -205,7 +210,7 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
             if ($parent_dept) {
                 $parent_dept->addChild($dept);
             } else {
-                $root->addChild($dept);
+                UNL_Officefinder_Department::getBylft(1)->addChild($dept);
             }
         }
 
