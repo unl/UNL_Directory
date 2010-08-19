@@ -19,11 +19,11 @@
 	width:100%;
 	padding: 5px 0px;
 	display:block;
-	cursor:pointer;
 }
 #maincontent ul.pfResult li div.overflow {
 	min-height:45px;
 	padding: 7px 5px;
+    cursor:pointer;
 }
 #maincontent ul.pfResult li.selected div.overflow {opacity:0.4}
 #maincontent ul.pfResult li:hover, #maincontent ul.pfResult li.selected {
@@ -96,21 +96,12 @@ ul.listings li .listingDetails {}
 */
 .vcard {
 	background:#fff;
-	background-image:-webkit-gradient(
-	    linear,
-	    left top,
-	    left bottom,
-	    color-stop(0, rgb(244,244,244)),
-	    color-stop(1, rgb(255,255,255))
-	);
-	-webkit-box-shadow: 1px 1px 2px #919191;
-	box-shadow: 1px 1px 2px #919191;
-	border:3px solid #ccd2d5;
-	border-radius:10px;
-	-moz-border-radius:10px;
-	-webkit-border-radius:10px;
+	border:1px solid #ccd2d5;
+	border-radius:5px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
 	padding:15px;
-	min-height:120px;
+	min-height:130px;
 	position:relative;
 	width:425px;
 	z-index:9;

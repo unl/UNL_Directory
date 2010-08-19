@@ -1,0 +1,33 @@
+/*filter box*/
+form.filters {color:#a15901;margin-top:15px;}
+form.filters legend span {display:block; width:208px; border-bottom:1px solid #c39863;font-weight:bold;margin-bottom:10px;font-size:1.1em;}
+form.filters div.element {display:inline;}
+form.filters input[type="checkbox"] {width:20px;float:left;margin-left:-4px;}
+form.filters label {display:inline;margin-left:0px;font-size:.9em;}
+form.filters ol li {clear:both;}
+#maincontent form.filters ol {list-style:none;padding-left:0px;}
+form.filters ol li.disabled {opacity: 0.5;}
+form.filters ol li.disabled label {text-decoration: line-through;}
+
+#filterSummary {
+    font-size:0.8em;
+    line-height:2em;
+}
+#filterSummary a {
+    background:#efefef;
+    padding:0 3px;
+    font-size:0.9em;
+    color:#6e6e6e;
+    border-radius:3px;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    display:inline-block;
+    margin:1px;
+}
+#filterSummary .group {
+    font-weight:bold;
+    background-color:#efefef;
+    color:#4e4e4e;
+    font-size: 1.1em;
+    font-style:italic;
+}
