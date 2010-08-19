@@ -283,6 +283,11 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
             $calcWith = $newParent->lft;
         }
 
+        // get the element that shall be moved again, since the left and
+        // right might have changed by the add-call 
+        $element = self::getById($this->id);
+        $this->synchronizeWithArray($element->toArray());
+
         // calc the offset that the element to move has
         // to the spot where it should go
         // correct the offset by one, since it needs to go inbetween!
@@ -305,7 +310,7 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
                             $this->_getWhereAddOn(),
                             $left, $this->lft - 1,
                             $right, $this->rgt + 1);
-        $res = self::getDB()->query($query);
+        self::getDB()->query($query);
 
         // remove the part of the tree where the element(s) was/were before
         $this->_remove();
