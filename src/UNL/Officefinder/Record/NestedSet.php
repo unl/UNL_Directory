@@ -90,6 +90,8 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
      */
     protected function _add($prevVisited, $numberOfElements = 1)
     {
+        $db = self::getDB();
+        $db->query('LOCK TABLES '.$this->getTable().' READ');
 
         // update the elements which will be affected by the new insert
         $query = sprintf('UPDATE %s SET %s = %s + %s WHERE%s %s > %s',
@@ -100,7 +102,7 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
                             $this->_getWhereAddOn(),
                             'lft',
                             $prevVisited);
-        self::getDB()->query($query);
+        $db->query($query);
 
         $query = sprintf('UPDATE %s SET %s = %s + %s WHERE%s %s > %s',
                             $this->getTable(),
@@ -109,7 +111,9 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
                             $this->_getWhereAddOn(),
                             'rgt',
                             $prevVisited);
-        self::getDB()->query($query);
+        $db->query($query);
+
+        $db->query('UNLOCK TABLES');
         return true;
     }
 
@@ -164,6 +168,9 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
         $left  = 'lft';
         $right = 'rgt';
 
+        $db = self::getDB();
+        $db->query('LOCK TABLES '.$this->getTable().' READ');
+
         // update the elements which will be affected by the remove
         $query = sprintf("UPDATE
                                 %s
@@ -176,7 +183,7 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
                             $right, $right,
                             $this->_getWhereAddOn(),
                             $left, $this->lft);
-        $res = self::getDB()->query($query);
+        $db->query($query);
 
         $query = sprintf("UPDATE
                                 %s
@@ -190,7 +197,9 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
                             $this->_getWhereAddOn(),
                             $left, $this->lft,
                             $right, $this->rgt);
-        $res = self::getDB()->query($query);
+        $db->query($query);
+
+        $db->query('UNLOCK TABLES');
 
         return true;
     }
