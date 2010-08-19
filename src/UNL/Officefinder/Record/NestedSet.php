@@ -91,7 +91,6 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
     protected function _add($prevVisited, $numberOfElements = 1)
     {
         $db = self::getDB();
-        $db->query('LOCK TABLES '.$this->getTable().' READ');
 
         // update the elements which will be affected by the new insert
         $query = sprintf('UPDATE %s SET %s = %s + %s WHERE%s %s > %s',
@@ -113,7 +112,6 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
                             $prevVisited);
         $db->query($query);
 
-        $db->query('UNLOCK TABLES');
         return true;
     }
 
@@ -169,7 +167,6 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
         $right = 'rgt';
 
         $db = self::getDB();
-        $db->query('LOCK TABLES '.$this->getTable().' READ');
 
         // update the elements which will be affected by the remove
         $query = sprintf("UPDATE
@@ -198,8 +195,6 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
                             $left, $this->lft,
                             $right, $this->rgt);
         $db->query($query);
-
-        $db->query('UNLOCK TABLES');
 
         return true;
     }
