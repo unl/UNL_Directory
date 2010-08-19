@@ -18,6 +18,7 @@ class UNL_Officefinder
 
     public $view_map = array('instructions' => 'UNL_Peoplefinder_Instructions',
                              //'search'       => 'UNL_Peoplefinder_Department_Search',
+                             'tree'         => 'UNL_Officefinder_TreeView',
                              'search'       => 'UNL_Officefinder_DepartmentList_NameSearch',
                              'department'   => 'UNL_Officefinder_Department',
                              'record'       => 'UNL_Peoplefinder_Department');
