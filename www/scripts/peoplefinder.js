@@ -10,16 +10,6 @@ service_peoplefinder = function() {
 				return false;
 				}
 			);
-//			WDN.jQuery('ul.pfResult:not(.departments) li .overflow').click(function() {
-//				WDN.jQuery(this).css({'opacity' : '0.4'});
-//				WDN.jQuery('li.current').removeClass('current');
-//				WDN.jQuery(this).parent('li').addClass('selected current');
-//				var href = WDN.jQuery(this).find('a.cInfo').attr('href');
-//				href = href.split('?uid=');
-//				var url = WDN.toolbar_peoplefinder.serviceURL + 'service.php?view=hcard&uid=' + href[1];
-//				WDN.get(url, null, service_peoplefinder.updatePeopleFinderRecord);
-//				return false;
-//			});
 		},
 		
 		updatePeopleFinderRecord : function(data, textStatus){ //function called when a record has been rendered
@@ -184,6 +174,10 @@ WDN.jQuery(document).ready(function() {
 	});
 	directory.initializeSearchBoxes();
 });
-function pf_handleResults(e)  {
-	WDN.log(e);
-}
+WDN.jQuery(window).keydown(function(event) {
+	if (event.which == '191') {
+		WDN.jQuery('#q').focus().select();
+		event.preventDefault();
+		event.stopPropagation();
+	}
+});
