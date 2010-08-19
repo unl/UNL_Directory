@@ -237,99 +237,38 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
      *                      if it is 0 it will be put at the beginning
      * @return     mixed    true for success, Tree_Error on failure
      */
-    function move($idsToMove, $newparent_id, $newPrevId = 0)
-    {
-        settype($idsToMove, 'array');
-        $errors = array();
-        foreach ($idsToMove as $idToMove) {
-            $ret = $this->_move($idToMove, $newparent_id, $newPrevId);
-            if (!$ret) {
-                $errors[] = $ret;
-            }
-        }
-        // FIXXME the error in a nicer way, or even better
-        // let the throwError method do it!!!
-        if (count($errors)) {
-            throw new Exception('Error moving nodes in the tree');
-        }
-        return true;
-    }
-
-    // }}}
-    // {{{ _move()
-
-    /**
-     * this method moves one tree element
-     *
-     * @see     move()
-     * @version 2002/04/29
-     * @access  public
-     * @param   integer the id of the element that shall be moved
-     * @param   integer the id of the element which will be the new parent
-     * @param   integer if prevId is given the element with the id idToMove
-     *                  shall be moved _behind_ the element with id=prevId
-     *                  if it is 0 it will be put at the beginning
-     * @return  mixed    true for success, Tree_Error on failure
-     */
-    protected function _move($idToMove, $newparent_id, $newPrevId = 0)
+    function move(UNL_Officefinder_Record_NestedSet $newParent, UNL_Officefinder_Record_NestedSet $newPrevious = null)
     {
         // do some integrity checks first
-        if ($newPrevId) {
+        if ($newPrevious) {
             // dont let people move an element behind itself, tell it
             // succeeded, since it already is there :-)
-            if ($newPrevId == $idToMove) {
+            if ($newPrevious->id == $this->id) {
                 return true;
             }
-            if (Tree::isError($newPrevious = $this->getElement($newPrevId))) {
-                return $newPrevious;
-            }
-            $newparent_id = $newPrevious['parent_id'];
         } else {
-            if ($newparent_id == 0) {
-                return Tree::raiseError(TREE_ERROR_UNKOWN_ERROR, null, null, 'no parent id given');
-            }
             // if the element shall be moved under one of its children
             // return false
-            if ($this->isChildOf($idToMove, $newparent_id)) {
-                return Tree::raiseError(TREE_ERROR_UNKOWN_ERROR, null, null,
-                            'can not move an element under one of its children');
+            if ($this->isChildOf($newParent)) {
+                throw new Exception('can not move an element under one of its children');
             }
             // dont do anything to let an element be moved under itself
-            // which is bullshit
-            if ($newparent_id == $idToMove) {
+            if ($newParent->id == $this->id) {
                 return true;
             }
-            // try to retreive the data of the parent element
-            if (Tree::isError($newParent = $this->getElement($newparent_id))) {
-                return $newParent;
-            }
-        }
-        // get the data of the element itself
-        if (Tree::isError($element = $this->getElement($idToMove))) {
-            return $element;
         }
 
         $numberOfElements = ($this->rgt - $this->lft + 1) / 2;
-        $prevVisited = $newPrevId ? $newPrevious['right'] : $newParent['left'];
+        $prevVisited = $newPrevious ? $newPrevious->rgt : $newParent->lft;
 
         // FIXXME start transaction
 
         // add the left/right values in the new parent, to have the space
         // to move the new values in
-        $err = $this->_add($prevVisited, $numberOfElements);
-        if (Tree::isError($err)) {
-            // FIXXME rollback
-            //$this->_storage->rollback();
-            return $err;
-        }
+        $this->_add($prevVisited, $numberOfElements);
 
         // update the parent_id of the element with $idToMove
-        $err = $this->update($idToMove, array('parent_id' => $newparent_id));
-        if (Tree::isError($err)) {
-            // FIXXME rollback
-            //$this->_storage->rollback();
-            return $err;
-        }
+        //$this->update($idToMove, array('parent_id' => $newParent->id));
 
         // update the lefts and rights of those elements that shall be moved
 
@@ -338,16 +277,10 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
         // otherwise the left since the left/right has changed
         // because we already updated it up there. We need to get them again.
         // We have to do that anyway, to have the proper new left/right values
-        if ($newPrevId) {
-            if (Tree::isError($temp = $this->getElement($newPrevId))) {
-                return $temp;
-            }
-            $calcWith = $temp['right'];
+        if ($newPrevious) {
+            $calcWith = $newPrevious->rgt;
         } else {
-            if (Tree::isError($temp = $this->getElement($newparent_id))) {
-                return $temp;
-            }
-            $calcWith = $temp['left'];
+            $calcWith = $newParent->lft;
         }
 
         // calc the offset that the element to move has
