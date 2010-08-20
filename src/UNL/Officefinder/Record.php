@@ -196,7 +196,11 @@ class UNL_Officefinder_Record
                 $class  = get_called_class();
                 $record = new $class;
                 $field  = strtolower($matches[1]);
-                $sql    = 'SELECT * FROM '.$record->getTable(). ' WHERE '.$field.' = "'.$mysqli->escape_string($args[0]).'"';
+                $whereAdd = '';
+                if (isset($args[1])) {
+                    $whereAdd = $args[1] . ' AND ';
+                }
+                $sql    = 'SELECT * FROM '.$record->getTable(). ' WHERE '.$whereAdd.$field.' = "'.$mysqli->escape_string($args[0]).'"';
                 $result = $mysqli->query($sql);
 
                 if ($result === false
