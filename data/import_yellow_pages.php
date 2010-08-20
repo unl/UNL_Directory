@@ -2,9 +2,10 @@
 require_once dirname(__FILE__).'/../www/config.inc.php';
 error_reporting(E_ALL | E_STRICT);
 $db = new mysqli('localhost', UNL_Officefinder::$db_user, UNL_Officefinder::$db_pass, 'officefinder');
-
+echo '<pre>';
 // OK Wipe the DB
 $db->query('TRUNCATE departments');
+$db->query('TRUNCATE department_aliases');
 
 $sap_dept = new UNL_Peoplefinder_Department(array('d'=>'University of Nebraska - Lincoln'));
 
@@ -95,9 +96,15 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
 
         sanityCheck();
 
-        if (preg_match('/\(see (.*)\)/', $obj->szLname.' '.$obj->szFname.' '.$obj->szAddtText)) {
+        if (preg_match('/(.*)\(see (.*)\)/', $obj->szLname.' '.$obj->szFname.' '.$obj->szAddtText, $matches)) {
             // known-as listing
-            //echo 'known as listing!!'.$obj->szLname.' '.$obj->szFname.' '.$obj->szAddtText.PHP_EOL;
+            echo 'known as listing!!'.$obj->szLname.' '.$obj->szFname.' '.$obj->szAddtText.PHP_EOL;
+            $parent_dept = UNL_Officefinder_Department::getByname($matches[2], 'org_unit IS NOT NULL');
+            if (!$parent_dept) {
+                echo 'Could not find the alias!'.$matches[2].'<br>'.PHP_EOL;
+            } else {
+                $parent_dept->addAlias($matches[1]);
+            }
             continue;
         }
 
@@ -153,7 +160,7 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
                                     $official_dept = new UNL_Peoplefinder_Department(array('d'=>$row[1]));
                                     $dept = UNL_Officefinder_Department::getByorg_unit($official_dept->org_unit);
                                 } catch(Exception $e) {
-                                    $dept = UNL_Officefinder_Department::getByname($row[1]);
+                                    $dept = UNL_Officefinder_Department::getByname($row[1], 'org_unit IS NOT NULL');
                                 }
                             }
                         } elseif (!empty($row[2])) {
@@ -164,7 +171,7 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
                                     throw new Exception($row[2].' is an invalid offical org number');
                                 }
                             } else {
-                                $parent_dept = UNL_Officefinder_Department::getByname($row[2]);
+                                $parent_dept = UNL_Officefinder_Department::getByname($row[2], 'org_unit IS NOT NULL');
                             }
                             if (!$parent_dept) {
                                 // Don't know about this department yet, let's add it
@@ -218,10 +225,13 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
         if (false === $official_dept
             && !isset($dept->org_unit)) {
             // Find where the parent is
-            if ($parent_dept) {
+            if ($parent_dept
+                && !$dept->isChildOf($parent_dept)) {
                 $parent_dept->addChild($dept);
             } else {
-                UNL_Officefinder_Department::getBylft(1)->addChild($dept);
+                if (!$dept->isChildOf(UNL_Officefinder_Department::getBylft(1))) {
+                    UNL_Officefinder_Department::getBylft(1)->addChild($dept);
+                }
             }
         }
         sanityCheck();
@@ -231,9 +241,17 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
 
         if ($listings->num_rows) {
             $k = 0;
+            $indentation_levels = array();
+            $indentation_levels[0] =& $dept;
             while ($listing = $listings->fetch_object()) {
+                $child_clean_name = cleanField($listing->szDirLname.' '.$listing->szDirFname.' '.$listing->szDirAddText, false);
+                $child = UNL_Officefinder_Department::getByname($child_clean_name, 'org_unit IS NULL AND lft > '.$dept->lft.' AND rgt < '.$dept->rgt);
+                if ($child instanceof UNL_Officefinder_Department) {
+                    continue;
+                }
+                echo str_repeat('-', $listing->tiIndDrg).$child_clean_name.PHP_EOL;
                 $child = new UNL_Officefinder_Department();
-                $child->name    = cleanField($listing->szDirLname.' '.$listing->szDirFname.' '.$listing->szDirAddText, false);
+                $child->name = $child_clean_name;
                 if (trim($listing->sNPA1) !== '') {
                     $child->phone = trim($listing->sNPA1).'-'.preg_replace('/([\d]{3})([\d]{4})/', '$1-$2', trim($listing->sPhoneNbr1));
                 }
@@ -242,7 +260,17 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
 //                $child->uid     = NULL;
 
                 $child->save();
-                $dept->addChild($child);
+
+                $i = $listing->tiIndDrg-1;
+                
+                while ($i > 0 && !isset($indentation_levels[$i])) {
+                    $i--;
+                }
+
+                $indentation_levels[$i]->reload();
+                $indentation_levels[$i]->addChild($child);
+                // Store the last child at this level
+                $indentation_levels[$listing->tiIndDrg] = $child;
                 sanityCheck();
             }
         }
@@ -310,7 +338,7 @@ function checkCleanupFile($cleanup_file)
             if (substr($row[1], 0, 1) == '5') {
                 $official_dept = UNL_Officefinder_Department::getByorg_unit($row[1]);
             } else {
-                $official_dept = UNL_Officefinder_Department::getByname($row[1]);
+                $official_dept = UNL_Officefinder_Department::getByname($row[1], 'org_unit IS NOT NULL');
             }
             if (!$official_dept) {
                 echo 'I Dunno who this OFFICIAL dept is '.$row[0].'=>'.$row[1].'<br />';
