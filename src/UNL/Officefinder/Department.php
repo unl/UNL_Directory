@@ -121,6 +121,20 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSet
         return $this->_getChildren('org_unit IS NOT NULL', $orderBy);
     }
 
+    function hasUnofficialChildDepartments()
+    {
+        $children = $this->_getChildren('org_unit IS NULL');
+        if ($children && count($children) > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    function getUnofficialChildDepartments($orderBy = 'lft')
+    {
+        return $this->_getChildren('org_unit IS NULL', $orderBy);
+    }
+
     function addAlias($name)
     {
         if (!UNL_Officefinder_Department_Alias::getById($this->id, $name)) {
