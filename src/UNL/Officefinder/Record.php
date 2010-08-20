@@ -227,6 +227,15 @@ class UNL_Officefinder_Record
         }
     }
 
+    /**
+     * Reload data from the database
+     */
+    function reload()
+    {
+        $record = self::getById($this->id);
+        $this->synchronizeWithArray($record->toArray());
+    }
+
     function toArray()
     {
         return get_object_vars($this);
