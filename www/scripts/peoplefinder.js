@@ -1,6 +1,9 @@
 service_peoplefinder = function() {
 	return {
 		updatePeopleFinderResults : function(){ //function called when the list has been rendered
+			WDN.loadJS('scripts/filters.js', function(){
+				filters.buildFilters();
+			});
 			WDN.jQuery('ul.pfResult li').each(function(){
 				//onClick = WDN.jQuery(this).find('.cInfo').attr('onclick');
 				WDN.jQuery(this).find('.cInfo, .fn a').removeAttr('onclick');
@@ -24,6 +27,7 @@ service_peoplefinder = function() {
 		},
 		
 		presentPeopleFinderResults : function(query){
+			WDN.jQuery('#filters').css({'opacity' : '0.4'});
 			WDN.jQuery('#q').siblings('label').hide();
 			WDN.jQuery('#maincontent div.two_col').remove();
 			WDN.toolbar_peoplefinder.queuePFRequest(query, 'results');

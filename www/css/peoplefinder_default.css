@@ -58,18 +58,18 @@
 .departments .fn, .departments .fn a {height:42px;max-height:42px;line-height:20px;}
 .cInfo {float:right;}
 
-#maincontent .affiliation {margin-top:15px;}
+#maincontent .results {margin-top:15px;}
 #maincontent .likeResults ul.pfResult {margin-top:0px;}
 
 #maincontent .result_head {color:#989898;font-size:10px;}
 /* Headings */
 
 
-#maincontent .affiliation h2, #maincontent .likeResults h3, #maincontent #orgChart h2 {
+#maincontent .results h2, #maincontent .likeResults h3, #maincontent #orgChart h2 {
 	font-variant:small-caps;
 	font-weight:bold;
 }
-#maincontent .affiliation h2, #maincontent #orgChart h2 {border-bottom:2px dotted #E6E6E6;padding-bottom:0;}
+#maincontent .results h2, #maincontent #orgChart h2 {border-bottom:2px dotted #E6E6E6;padding-bottom:0;}
 
 #maincontent .likeResults h3 {
 	font-size:1em;	

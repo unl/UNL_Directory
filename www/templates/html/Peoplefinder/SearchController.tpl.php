@@ -57,7 +57,7 @@ foreach(array('records'=>'by_affiliation', 'like_records'=>'like_by_affiliation'
 foreach ($by_affiliation as $affiliation=>$records) {
     if (count($records)
         || count($like_by_affiliation[$affiliation])) {
-        echo '<div class="affiliation '.$affiliation.'">';
+        echo '<div class="results affiliation '.$affiliation.'">';
         echo '<h2>'.ucfirst($affiliation).'</h2>';
         echo $savvy->render(new UNL_Peoplefinder_SearchResults(array('results'=>$records)));
         if (count($like_by_affiliation[$affiliation])) {

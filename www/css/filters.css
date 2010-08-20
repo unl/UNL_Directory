@@ -1,5 +1,9 @@
 /*filter box*/
-#filters {margin-top:20px;}
+#filters {margin-top:20px;display:none;}
+#filters h3 {
+	text-shadow: 1px 1px 1px #665d53;
+    filter: dropshadow(color=#665d53, offx=1, offy=1);
+}
 form.filters {color:#a15901;margin-top:15px;}
 form.filters legend span {display:block; width:208px; border-bottom:1px solid #c39863;font-weight:bold;margin-bottom:10px;font-size:1.1em;}
 form.filters div.element {display:inline;}
@@ -31,4 +35,12 @@ form.filters ol li.disabled label {text-decoration: line-through;}
     color:#4e4e4e;
     font-size: 1.1em;
     font-style:italic;
+}
+form.filters.loading {
+    display:block;	
+    left:80px;
+    top:40px;
+}
+form.filters.loading fieldset {
+    display:none;
 }
