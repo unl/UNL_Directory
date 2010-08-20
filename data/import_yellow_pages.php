@@ -242,7 +242,7 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
         if ($listings->num_rows) {
             $k = 0;
             $indentation_levels = array();
-            $indentation_levels[0] =& $dept;
+            $indentation_levels[0] = $dept;
             while ($listing = $listings->fetch_object()) {
                 $child_clean_name = cleanField($listing->szDirLname.' '.$listing->szDirFname.' '.$listing->szDirAddText, false);
                 $child = UNL_Officefinder_Department::getByname($child_clean_name, 'org_unit IS NULL AND lft > '.$dept->lft.' AND rgt < '.$dept->rgt);
@@ -262,7 +262,7 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
                 $child->save();
 
                 $i = $listing->tiIndDrg-1;
-                
+
                 while ($i > 0 && !isset($indentation_levels[$i])) {
                     $i--;
                 }
