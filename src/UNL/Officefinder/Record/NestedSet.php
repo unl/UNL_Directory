@@ -48,8 +48,6 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
         // if $prevId is given, we need to use the right-value
         // if only the $parent_id is given we need to use the left-value
         // look at it graphically, that made me understand it :-)
-        // See:
-        // http://research.calacademy.org/taf/proceedings/ballew/sld034.htm
         $prevVisited = $prevId ? $this->rgt : $this->lft;
 
         // Make room for one more
@@ -60,7 +58,7 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
         $newChild->rgt   = $prevVisited + 2;
         $newChild->level = (int)$this->level + 1;
 
-        if (!$newChild->update()) {
+        if (!$newChild->save()) {
             // rollback
             throw new Exception('Couldn\'t do it');
         }
@@ -92,6 +90,8 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
     {
         $db = self::getDB();
 
+        $db->autocommit(false);
+
         // update the elements which will be affected by the new insert
         $query = sprintf('UPDATE %s SET %s = %s + %s WHERE%s %s > %s',
                             $this->getTable(),
@@ -111,6 +111,9 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
                             'rgt',
                             $prevVisited);
         $db->query($query);
+
+        $db->commit();
+        $db->autocommit(true);
 
         return true;
     }
