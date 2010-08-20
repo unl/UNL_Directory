@@ -472,11 +472,10 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
                             FROM
                                 %s p
                             WHERE
-                                %s p.lft < %s AND p.rgt > %s
-                            ORDER BY (rgt-lft)
+                                p.lft < %s AND p.rgt > %s
+                            ORDER BY (p.rgt-p.lft)
                             LIMIT 1',
                             $this->getTable(),
-                            $this->_getWhereAddOn(' AND ', 'p'),
                             $this->lft,
                             $this->rgt);
         $res = self::getDB()->query($query);
