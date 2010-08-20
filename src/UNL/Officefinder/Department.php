@@ -107,6 +107,17 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSet
         return UNL_Peoplefinder_Department::getById($this->org_unit, $this->options);
     }
 
+    function addAlias($name)
+    {
+        if (!UNL_Officefinder_Department_Alias::getById($this->id, $name)) {
+            $alias = new UNL_Officefinder_Department_Alias();
+            $alias->department_id = $this->id;
+            $alias->name = $name;
+            return $alias->insert();
+        }
+        return true;
+    }
+
     function userCanEdit($user)
     {
         return true;
