@@ -73,7 +73,8 @@ class UNL_Peoplefinder
 
         $this->options = $options + $this->options;
 
-        if ($this->options['format'] == 'html' && (
+        if (isset($_SERVER['HTTP_ACCEPT'])
+            && $this->options['format'] == 'html' && (
                 ($this->options['mobile'] !== false && $this->options['mobile'] != 'no')
                 || (preg_match('/text\/vnd\.wap\.wml|application\/vnd\.wap\.xhtml\+xml/', $_SERVER['HTTP_ACCEPT']))
                     || preg_match('/sony|symbian|nokia|samsung|mobile|windows ce|epoc|opera/', $_SERVER['HTTP_USER_AGENT'])
