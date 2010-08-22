@@ -2,7 +2,7 @@ service_peoplefinder = function() {
 	return {
 		updatePeopleFinderResults : function(){ //function called when the list has been rendered
 			WDN.loadJS('scripts/filters.js', function(){
-				filters.buildFilters();
+				filters.initialize();
 			});
 			WDN.jQuery('ul.pfResult li').each(function(){
 				//onClick = WDN.jQuery(this).find('.cInfo').attr('onclick');
