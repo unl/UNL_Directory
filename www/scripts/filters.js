@@ -1,5 +1,6 @@
 filters = function() {
 	var departments = [];
+	var affiliations = [];
 	return {
 		initialize : function() {
 			WDN.jQuery('form.filters fieldset ol').empty().parents('form').addClass('loading');
@@ -17,6 +18,8 @@ filters = function() {
 					WDN.jQuery(WDN.jQuery(this).find('.organization-unit')).each(function() { //find the people records with departments
 						filters.departmentArray(WDN.jQuery(this).text());
 					});
+					affiliations.push(WDN.jQuery(this).children('h2').eq(0).text());
+					filters.buildAffiliationFilters();
 				}
 			});
 			departments.sort();	
@@ -38,6 +41,13 @@ filters = function() {
 			});
 			departments = [];	
 			WDN.jQuery('form.filters').removeClass('loading');
+		},
+		
+		buildAffiliationFilters : function(){
+			WDN.jQuery.each(affiliations, function(key, value) {
+				WDN.jQuery('fieldset.affiliation ol').append('<li><input type="checkbox" id="filter'+value+'" name="'+value+'" value="'+value+'" /><label for="filter'+value+'" >'+value+'</label></li>');
+			});
+			affiliations = [];
 		}
 		
 	};
