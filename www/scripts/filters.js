@@ -81,10 +81,10 @@ filters = function() {
 		
 		updateSummary: function(ids) { //this function recives an array of all checked filters
 			if (ids.length < 1) { //nothing in the array, therefore it's ALL
-				WDN.jQuery('#filterSummary a').remove();
+				WDN.jQuery('#filterSummary a, span.operator').remove();
 				WDN.jQuery('#filterSummary').append('<a href="#" class="all">All Options</a>');
 			} else { //at least one id exists in the array
-				WDN.jQuery('#filterSummary a').remove();
+				WDN.jQuery('#filterSummary a, span.operator').remove();
 				WDN.jQuery.each(ids, function(key, value){
 					WDN.jQuery('#filterSummary').append(' <a href="#" class="'+WDN.jQuery('#'+value).attr('value')+'"><span class="group">'+WDN.jQuery('#'+value).closest('fieldset').children('legend').text()+':</span> '+WDN.jQuery('#'+value).siblings('label').text()+'</a><span class="operator"> OR </span>');
 				});
