@@ -6,6 +6,7 @@ echo '<pre>';
 // OK Wipe the DB
 $db->query('TRUNCATE departments');
 $db->query('TRUNCATE department_aliases');
+$db->query('TRUNCATE telecom_unidaslt_to_departments');
 
 $sap_dept = new UNL_Peoplefinder_Department(array('d'=>'University of Nebraska - Lincoln'));
 
