@@ -45,3 +45,4 @@ form.filters.loading {
 form.filters.loading fieldset {
     display:none;
 }
+span.operator:last-child{display:none;}
