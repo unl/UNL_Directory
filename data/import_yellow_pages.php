@@ -59,7 +59,7 @@ function updateOfficialDepartment(UNL_Peoplefinder_Department $sap_dept, UNL_Off
             if ($dept->hasChildren()) {
                 throw new Exception('Err, hmm. This is an existing department with children has moved, I can\'t handle that yet! The department name is '.$dept->name.' with org_unit id = '.$dept->org_unit);
             } else {
-                $parent->addChild($dept);
+                $parent->addChild($dept, true);
             }
         }
     }
@@ -94,7 +94,7 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
 
     while($obj = $result->fetch_object()){
 
-        sanityCheck();
+//        sanityCheck();
 
         if (preg_match('/(.*)\(see (.*)\)/', $obj->szLname.' '.$obj->szFname.' '.$obj->szAddtText, $matches)) {
             // known-as listing
@@ -178,7 +178,7 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
                                 $parent_dept = new UNL_Officefinder_Department();
                                 $parent_dept->name = $row[2];
                                 $parent_dept->save();
-                                UNL_Officefinder_Department::getBylft(1)->addChild($parent_dept);
+                                UNL_Officefinder_Department::getBylft(1)->addChild($parent_dept, true);
                             }
                         }
                         break;
@@ -186,7 +186,7 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
                 }
             }
         }
-        sanityCheck();
+//        sanityCheck();
         if (false === $dept) {
             // New department, no clue where this goes
             $dept = new UNL_Officefinder_Department();
@@ -219,30 +219,31 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
 //        $dept->website  = NULL;
 //        $dept->acronym  = NULL;
 //        $dept->known_as = NULL;
-        sanityCheck();
+//        sanityCheck();
         $dept->save();
-        sanityCheck();
+//        sanityCheck();
         if (false === $official_dept
             && !isset($dept->org_unit)) {
             // Find where the parent is
             if ($parent_dept
                 && !$dept->isChildOf($parent_dept)) {
-                $parent_dept->addChild($dept);
+                $parent_dept->addChild($dept, true);
             } else {
                 if (!$dept->isChildOf(UNL_Officefinder_Department::getBylft(1))) {
-                    UNL_Officefinder_Department::getBylft(1)->addChild($dept);
+                    UNL_Officefinder_Department::getBylft(1)->addChild($dept, true);
                 }
             }
         }
-        sanityCheck();
+//        sanityCheck();
 
-        $sql = "SELECT * FROM telecom_departments WHERE lGroup_id={$obj->lGroup_id} AND iSeqNbr !=0 ORDER BY iSeqNbr DESC;";
+        $sql = "SELECT * FROM telecom_departments WHERE lGroup_id={$obj->lGroup_id} AND iSeqNbr !=0 ORDER BY iSeqNbr ASC;";
         $listings = $db->query($sql);
 
         if ($listings->num_rows) {
             $k = 0;
             $indentation_levels = array();
             $indentation_levels[0] = $dept;
+            $last_added            = $dept;
             while ($listing = $listings->fetch_object()) {
                 $child_clean_name = cleanField($listing->szDirLname.' '.$listing->szDirFname.' '.$listing->szDirAddText, false);
                 $child = UNL_Officefinder_Department::getByname($child_clean_name, 'org_unit IS NULL AND lft > '.$dept->lft.' AND rgt < '.$dept->rgt);
@@ -263,15 +264,17 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
 
                 $i = $listing->tiIndDrg-1;
 
-                while ($i > 0 && !isset($indentation_levels[$i])) {
-                    $i--;
+                if (!isset($indentation_levels[$i])) {
+                    $last_added->reload();
+                    $last_added->addChild($child, true);
+                } else {
+                    $indentation_levels[$i]->reload();
+                    $indentation_levels[$i]->addChild($child, true);
                 }
-
-                $indentation_levels[$i]->reload();
-                $indentation_levels[$i]->addChild($child);
                 // Store the last child at this level
                 $indentation_levels[$listing->tiIndDrg] = $child;
-                sanityCheck();
+                $last_added = $child;
+//                sanityCheck();
             }
         }
         $listings->close();

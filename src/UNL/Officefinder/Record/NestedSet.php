@@ -41,14 +41,14 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
         return $this->update();
     }
 
-    function addChild(UNL_Officefinder_Record_NestedSet $newChild, $prevId = 0)
+    function addChild(UNL_Officefinder_Record_NestedSet $newChild, $insertAsLastChild = true)
     {
 
         // get the "visited"-value where to add the new element behind
         // if $prevId is given, we need to use the right-value
         // if only the $parent_id is given we need to use the left-value
         // look at it graphically, that made me understand it :-)
-        $prevVisited = $prevId ? $this->rgt : $this->lft;
+        $prevVisited = $insertAsLastChild ? $this->rgt - 1 : $this->lft;
 
         // Make room for one more
         $this->_add($prevVisited, 1);
