@@ -28,24 +28,24 @@ if (isset($context->eduPersonAffiliation)) {
 if (isset($context->unlSISClassLevel)) {
     switch ($context->unlSISClassLevel) {
         case 'FR':
-            $class = 'Freshman,';
+            $class = 'Freshman';
             break;
         case 'SR':
-            $class = 'Senior,';
+            $class = 'Senior';
             break;
         case 'SO':
-            $class = 'Sophomore,';
+            $class = 'Sophomore';
             break;
         case 'JR':
-            $class = 'Junior,';
+            $class = 'Junior';
             break;
         case 'GR':
-            $class = 'Graduate Student,';
+            $class = 'Graduate Student';
             break;
         default:
             $class = $context->unlSISClassLevel;
     }
-    echo '<span class="title">'.$class." ".$context->formatMajor($context->unlSISMajor).'&ndash;'.$context->formatCollege((string) $context->unlSISCollege).'</span>';
+    echo '<span class="title"><span class="grade">'.$class.'</span>, <span class="major">'.$context->formatMajor($context->unlSISMajor).'</span> &ndash; <span class="college">'.$context->formatCollege((string) $context->unlSISCollege).'</span></span>';
 }
 
 if (isset($context->title)) {
