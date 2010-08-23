@@ -25,14 +25,15 @@ updateOfficialDepartment($sap_dept);
 // Get root again, because the left and right values have changed!
 $root = UNL_Officefinder_Department::getBylft(1);
 
-//foreach (array('Buildings', 'Copy Centers', 'Religious Groups', 'Fax Numbers') as $semi_official_dept_name) {
-//    if (!($semi_official = UNL_Officefinder_Department::getByname($semi_official_dept_name))) {
-//        $semi_official       = new UNL_Officefinder_Department();
-//        $semi_official->name = $semi_official_dept_name;
-//        $semi_official->save();
-//        $root->addChild($semi_official);
-//    }
-//}
+foreach (array('Buildings', 'Copy Centers', 'Religious Groups', 'Fax Numbers') as $semi_official_dept_name) {
+    if (!($semi_official = UNL_Officefinder_Department::getByname($semi_official_dept_name))) {
+        $semi_official       = new UNL_Officefinder_Department();
+        $semi_official->name = $semi_official_dept_name;
+        $semi_official->org_unit = '_'.md5($semi_official_dept_name);
+        $semi_official->save();
+        $root->addChild($semi_official);
+    }
+}
 
 $cleanup_file = new SplFileObject(dirname(__FILE__).'/Centrex Cleanup.csv');
 $cleanup_file->setFlags(SplFileObject::READ_CSV);
@@ -221,6 +222,7 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
 //        $dept->known_as = NULL;
 //        sanityCheck();
         $dept->save();
+        $db->query('INSERT INTO telecom_unidaslt_to_departments VALUES ('.$obj->lMaster_id.','.$dept->id.');');
 //        sanityCheck();
         if (false === $official_dept
             && !isset($dept->org_unit)) {
@@ -261,6 +263,7 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
 //                $child->uid     = NULL;
 
                 $child->save();
+                $db->query('INSERT INTO telecom_unidaslt_to_departments VALUES ('.$listing->lMaster_id.','.$child->id.');');
 
                 $i = $listing->tiIndDrg-1;
 
