@@ -1,5 +1,53 @@
 @CHARSET "UTF-8";
-#maincontent {font-size:120%;}
-input {font-size:1.5em;}
-#submitbutton {width:42px;height:27px;}
-#footer {display:none;}
+/* 
+***************************************************
+
+        Search form 
+
+***************************************************
+*/
+.directorySearch {
+    width:100%;
+    margin:0px 0 10px 0;
+}
+.directorySearch legend {display:none;}
+#maincontent form.directorySearch ol{
+    list-style:none;
+    display:block;
+    margin:0px;
+    position:relative;
+}
+.directorySearch ol li:first-child{
+    height:46px;
+    padding:0px;
+    margin-left:-13px;
+    margin-bottom:11px;
+}
+.directorySearch label {
+    display:block;	
+}
+.directorySearch input[type=text]{
+    width:80%;	
+}
+.directorySearch input[type=image]{
+    width:20px;  
+}
+/* 
+***************************************************
+
+        Intro Page
+
+***************************************************
+*/
+#filters{display:none;}
+#maincontent .two_col {width:46%;}
+#maincontent .three_col{width:72%;}
+
+/* 
+***************************************************
+
+        Results List
+
+***************************************************
+*/
+#results{width:320px;}

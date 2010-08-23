@@ -4,21 +4,25 @@ $template = 'Document';
 
 if ($context->options['mobile'] === true) {
     $template = 'Popup';
-}
+} 
 
 $page = UNL_Templates::factory($template);
 
-$page->doctitle = '<title>UNL | Peoplefinder</title>';
+$page->doctitle = '<title>UNL | Directory</title>';
 
 $page->head .= '
 <meta name="description" content="UNL Peoplefinder is the Faculty, Staff and Student online directory for the University. Information obtained from this directory may not be used to provide addresses for mailings to students, faculty or staff. Any solicitation of business, information, contributions or other response from individuals listed in this publication by mail, telephone or other means is forbidden." />
 <meta name="keywords" content="university of nebraska-lincoln student faculty staff directory vcard" />
 <meta name="author" content="Brett Bieber, UNL Office of University Communications" />
 <meta name="viewport" content="width = 320" />
-<link rel="stylesheet" type="text/css" media="screen" href="'.UNL_Peoplefinder::getURL().'css/all_peoplefinder.css" />
-<link media="only screen and (max-device-width: 480px)" href="'.UNL_Peoplefinder::getURL().'css/small_devices.css" type="text/css" rel="stylesheet" />
-<script type="text/javascript" src="'.UNL_Peoplefinder::getURL().'scripts/peoplefinder.js"></script>
 ';
+
+if ($context->options['mobile'] === true) {
+    $page->head .='<link href="'.UNL_Peoplefinder::getURL().'css/small_devices.css" type="text/css" rel="stylesheet" />';
+} else {
+    $page->head .='<link href="'.UNL_Peoplefinder::getURL().'css/all_peoplefinder.css" type="text/css" rel="stylesheet" />
+                <script type="text/javascript" src="'.UNL_Peoplefinder::getURL().'scripts/peoplefinder.js"></script>';
+}
 
 if (isset($context->options['q']) 
     || isset($context->options['uid'])
