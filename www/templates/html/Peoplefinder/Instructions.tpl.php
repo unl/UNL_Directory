@@ -3,7 +3,7 @@
 ?>
 <div class="two_col left">
     <div class="intro">
-    <img width="100" height ="100" class="profile_pic medium planetred_profile" src="images/peopleHerbie.png" style="float:left;" />
+    <img width="100" height ="100" class="profile_pic medium planetred_profile" src="images/peopleHerbie.png" />
     <h6 class="recordDetails">
         Search <span class="search_context">People</span>
     </h6>
@@ -39,21 +39,7 @@
         <legend><span>By Affiliation</span></legend>
         <ol>
            <li>
-               <input type="checkbox" checked="checked" id="filterAllDirectory" class="filterAll" name="all" value="all" />
-               <label for="filterAllDirectory">All affiliations</label>
            </li>
-           <li>
-               <input type="checkbox" id="filterFaculty" name="faculty" value="faculty" />
-               <label for="filterFaculty">Faculty</label>
-            </li>
-           <li>
-               <input type="checkbox" id="filterStaff" name="staff" value="staff" />
-               <label for="filterStaff">Staff</label>
-            </li>
-           <li>
-               <input type="checkbox" id="filterStudent" name="student" value="student" />
-               <label for="filterStudent">Students</label>
-            </li>
         </ol>
     </fieldset>
     <fieldset class="department">

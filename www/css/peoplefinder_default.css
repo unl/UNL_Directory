@@ -293,7 +293,7 @@ li#filters fieldset {
 /* 
 ***************************************************
 
-        Begining Page 
+       Intro Page 
 
 ***************************************************
 */
@@ -315,6 +315,7 @@ padding:10px;
     -webkit-border-radius:5px;
     border-radius:5px;
 }
+.intro img.profile_pic{float:left;}
 h6.recordDetails {margin-top:15px;}
 h6.recordDetails span {
     font-size:3.6em;
