@@ -76,7 +76,7 @@ filters = function() {
 		},
 		
 		buildSummary: function() {
-			WDN.jQuery('#results').prepend('<p id="filterSummary">Displaying: <a class="all" href="#">All Options</a>');
+			WDN.jQuery('#results').prepend('<p id="filterSummary">Displaying People: <a class="all" href="#">All Options</a>');
 		},
 		
 		updateSummary: function(ids) { //this function recives an array of all checked filters
