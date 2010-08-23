@@ -225,7 +225,7 @@ a.text-vcard{padding-left:24px;padding-right:0;background-position:left -2px;mar
 ***************************************************
 */
 .directorySearch {
-	width:100%;
+	width:940px;
 	background:url('images/formSearchBG.png') repeat-x top;
 	margin:15px 0 10px 0;
 }
