@@ -30,7 +30,7 @@ filters = function() {
 		},
 		
 		departmentArray : function(refDepartment) {
-			WDN.log(refDepartment+': '+WDN.jQuery.inArray(refDepartment, departments));
+			//WDN.log(refDepartment+': '+WDN.jQuery.inArray(refDepartment, departments));
 			if (WDN.jQuery.inArray(refDepartment, departments) < 0) {
 				departments.push(refDepartment);
 			}
@@ -40,7 +40,7 @@ filters = function() {
 		buildFilters : function(array, type) {
 			WDN.jQuery('fieldset.'+type+' ol').append('<li><input type="checkbox" id="filterAll'+type+'" name="all" value="all" class="filterAll" checked="checked" /><label for="filterAll'+type+'" >All</label></li>');
 			WDN.jQuery.each(array, function(key, value){
-				WDN.jQuery('fieldset.'+type+' ol').append('<li><input type="checkbox" id="filter'+value+'" name="'+value.toLowerCase()+'" value="'+filters.scrubDept(value.toLowerCase())+'" /><label for="filter'+value+'" >'+value+'</label></li>');
+				WDN.jQuery('fieldset.'+type+' ol').append('<li><input type="checkbox" id="filter'+filters.scrubDept(value.toLowerCase())+'" name="'+filters.scrubDept(value.toLowerCase())+'" value="'+filters.scrubDept(value.toLowerCase())+'" /><label for="filter'+filters.scrubDept(value.toLowerCase())+'" >'+value+'</label></li>');
 			});
 		},
 		
@@ -49,11 +49,13 @@ filters = function() {
 			WDN.jQuery('form.filters input').bind('click', function(){
 				filters.action(WDN.jQuery(this));
 			});
+			filters.buildSummary();
 			departments = [];
 			affiliations = [];
 		},
 		
 		action : function(checkbox) {
+			checked = [];
 			if(checkbox.hasClass('filterAll')){
 				if (checkbox[0].checked){
 					WDN.jQuery('form.filters input').not('.filterAll').removeAttr('checked');
@@ -63,15 +65,31 @@ filters = function() {
 			} else {
 				WDN.jQuery('.filterAll').removeAttr('checked');
 				WDN.jQuery('li.ppl_Sresult').hide();
-				var one_checked = false;
 				WDN.jQuery('form.filters input').not('.filterAll').each(function(){ //loop through all the checkboxes
 					if (this.checked) {
-					    one_checked = true;
 						WDN.jQuery('li.'+WDN.jQuery(this).attr('value')).show(); //if a checkbox is checked, make sure the corresponding content is shown.
-						
+						checked.push(WDN.jQuery(this).attr('id'));
 					}
 				});
 			}
+			filters.updateSummary(checked);
+		},
+		
+		buildSummary: function() {
+			WDN.jQuery('#results').prepend('<p id="filterSummary">Displaying: <a class="all" href="#">All Options</a>');
+		},
+		
+		updateSummary: function(ids) { //this function recives an array of all checked filters
+			if (ids.length < 1) { //nothing in the array, therefore it's ALL
+				WDN.jQuery('#filterSummary a').remove();
+				WDN.jQuery('#filterSummary').append('<a href="#" class="all">All Options</a>');
+			} else { //at least one id exists in the array
+				WDN.jQuery('#filterSummary a').remove();
+				WDN.jQuery.each(ids, function(key, value){
+					WDN.jQuery('#filterSummary').append(' <a href="#" class="'+WDN.jQuery('#'+value).attr('value')+'"><span class="group">'+WDN.jQuery('#'+value).closest('fieldset').children('legend').text()+':</span> '+WDN.jQuery('#'+value).siblings('label').text()+'</a>');
+				});
+			}
+			
 		},
 		
 		scrubDept : function(string) {

@@ -14,9 +14,10 @@ form.filters ol li {clear:both;}
 form.filters ol li.disabled {opacity: 0.5;}
 form.filters ol li.disabled label {text-decoration: line-through;}
 
-#filterSummary {
+#maincontent #filterSummary {
     font-size:0.8em;
     line-height:2em;
+    margin-top:15px;
 }
 #filterSummary a {
     background:#efefef;
