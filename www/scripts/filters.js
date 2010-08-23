@@ -15,6 +15,7 @@ filters = function() {
 				} else {
 					WDN.jQuery(WDN.jQuery(this).find('.organization-unit')).each(function() { //find the departments from the people records
 						filters.departmentArray(WDN.jQuery(this).text());
+						WDN.jQuery(this).parents('li.ppl_Sresult').addClass(filters.scrubDept(WDN.jQuery(this).text().toLowerCase()));
 					});
 					affiliations.push(WDN.jQuery(this).children('h2').eq(0).text());
 				}
@@ -37,15 +38,45 @@ filters = function() {
 		},
 		
 		buildFilters : function(array, type) {
+			WDN.jQuery('fieldset.'+type+' ol').append('<li><input type="checkbox" id="filterAll'+type+'" name="all" value="all" class="filterAll" checked="checked" /><label for="filterAll'+type+'" >All</label></li>');
 			WDN.jQuery.each(array, function(key, value){
-				WDN.jQuery('fieldset.'+type+' ol').append('<li><input type="checkbox" id="filter'+value+'" name="'+value+'" value="'+value+'" /><label for="filter'+value+'" >'+value+'</label></li>');
+				WDN.jQuery('fieldset.'+type+' ol').append('<li><input type="checkbox" id="filter'+value+'" name="'+value.toLowerCase()+'" value="'+filters.scrubDept(value.toLowerCase())+'" /><label for="filter'+value+'" >'+value+'</label></li>');
 			});
 		},
 		
 		cleanUp: function() {
 			WDN.jQuery('form.filters').removeClass('loading').parents('#filters').css({'opacity' : 1});
+			WDN.jQuery('form.filters input').bind('click', function(){
+				filters.action(WDN.jQuery(this));
+			});
 			departments = [];
 			affiliations = [];
+		},
+		
+		action : function(checkbox) {
+			if(checkbox.hasClass('filterAll')){
+				if (checkbox[0].checked){
+					WDN.jQuery('form.filters input').not('.filterAll').removeAttr('checked');
+					WDN.jQuery('.filterAll').attr('checked', 'checked');
+					WDN.jQuery('li.ppl_Sresult').show();
+				} 
+			} else {
+				WDN.jQuery('.filterAll').removeAttr('checked');
+				WDN.jQuery('li.ppl_Sresult').hide();
+				var one_checked = false;
+				WDN.jQuery('form.filters input').not('.filterAll').each(function(){ //loop through all the checkboxes
+					if (this.checked) {
+					    one_checked = true;
+						WDN.jQuery('li.'+WDN.jQuery(this).attr('value')).show(); //if a checkbox is checked, make sure the corresponding content is shown.
+						
+					}
+				});
+			}
+		},
+		
+		scrubDept : function(string) {
+			return string.split(' ').join('').replace(/&|,/gi, '');
+			
 		}
 		
 	};

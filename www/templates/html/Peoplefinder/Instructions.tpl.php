@@ -32,11 +32,11 @@
 </div>
 <div id="filters" class="one_col left">
 <div class="zenbox energetic wdn_filterset">
-    <h3>Filter these Results</h3>
+    <h3>Filter People Results</h3>
     <form method="post" action="#" class="filters">
 
     <fieldset class="affiliation">
-        <legend><span>Affiliation</span></legend>
+        <legend><span>By Affiliation</span></legend>
         <ol>
            <li>
                <input type="checkbox" checked="checked" id="filterAllDirectory" class="filterAll" name="all" value="all" />
@@ -57,7 +57,7 @@
         </ol>
     </fieldset>
     <fieldset class="department">
-        <legend><span>Departments</span></legend>
+        <legend><span>By Department</span></legend>
         <ol>
         </ol>
     </fieldset>
