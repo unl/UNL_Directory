@@ -20,9 +20,10 @@ foreach ($context as $var=>$value) {
 ?>
     <input type="submit" />
 </form>
-<?php 
-$listings = $context->getChildLeafNodes();
-if (count($listings)) {
-    echo $savvy->render($listings);
-}
+<?php
+// Disable editing sublistings for now.
+//$listings = $context->getChildLeafNodes();
+//if (count($listings)) {
+//    echo $savvy->render($listings);
+//}
 ?>
