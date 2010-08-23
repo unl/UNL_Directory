@@ -10,43 +10,41 @@ filters = function() {
 		
 		findClasses : function() {
 			WDN.jQuery('.results').each(function() {
-				if (WDN.jQuery(this).hasClass('departments')) { //get the departments listings
-					WDN.jQuery(WDN.jQuery(this).find('.fn a')).each(function() {
-						filters.departmentArray(WDN.jQuery(this).text());
-					});
+				if (WDN.jQuery(this).hasClass('departments')) { //for department filters
+					
 				} else {
-					WDN.jQuery(WDN.jQuery(this).find('.organization-unit')).each(function() { //find the people records with departments
+					WDN.jQuery(WDN.jQuery(this).find('.organization-unit')).each(function() { //find the departments from the people records
 						filters.departmentArray(WDN.jQuery(this).text());
 					});
 					affiliations.push(WDN.jQuery(this).children('h2').eq(0).text());
-					filters.buildAffiliationFilters();
 				}
 			});
 			departments.sort();	
-			filters.buildDepartmentFilters();
+			affiliations.sort();
+			
+			filters.buildFilters(departments, 'department');
+			filters.buildFilters(affiliations, 'affiliation');
+			
+			filters.cleanUp();
 		},
 		
 		departmentArray : function(refDepartment) {
-			WDN.log(WDN.jQuery.inArray(refDepartment, departments));
-			if (WDN.jQuery.inArray(refDepartment, departments) <= 0) {
-				WDN.log('not in array: '+refDepartment);
+			WDN.log(refDepartment+': '+WDN.jQuery.inArray(refDepartment, departments));
+			if (WDN.jQuery.inArray(refDepartment, departments) < 0) {
 				departments.push(refDepartment);
 			}
 			
 		},
 		
-		buildDepartmentFilters : function() {
-			WDN.jQuery.each(departments, function(key, value) {
-				WDN.jQuery('fieldset.department ol').append('<li><input type="checkbox" id="filter'+value+'" name="'+value+'" value="'+value+'" /><label for="filter'+value+'" >'+value+'</label></li>');
+		buildFilters : function(array, type) {
+			WDN.jQuery.each(array, function(key, value){
+				WDN.jQuery('fieldset.'+type+' ol').append('<li><input type="checkbox" id="filter'+value+'" name="'+value+'" value="'+value+'" /><label for="filter'+value+'" >'+value+'</label></li>');
 			});
-			departments = [];	
-			WDN.jQuery('form.filters').removeClass('loading');
 		},
 		
-		buildAffiliationFilters : function(){
-			WDN.jQuery.each(affiliations, function(key, value) {
-				WDN.jQuery('fieldset.affiliation ol').append('<li><input type="checkbox" id="filter'+value+'" name="'+value+'" value="'+value+'" /><label for="filter'+value+'" >'+value+'</label></li>');
-			});
+		cleanUp: function() {
+			WDN.jQuery('form.filters').removeClass('loading').parents('#filters').css({'opacity' : 1});
+			departments = [];
 			affiliations = [];
 		}
 		
