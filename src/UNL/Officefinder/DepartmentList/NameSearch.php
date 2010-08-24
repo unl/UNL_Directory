@@ -8,10 +8,11 @@ class UNL_Officefinder_DepartmentList_NameSearch extends UNL_Officefinder_Depart
         $this->options = $options + $this->options;
         $records = array();
         $mysqli = UNL_Officefinder::getDB();
-        $sql = 'SELECT id FROM departments ';
-        $sql .= 'WHERE name LIKE "%'.$mysqli->escape_string($this->options['q']).'%"'
-             . ' AND (rgt != lft+1 OR org_unit IS NOT NULL) '
-             . ' ORDER BY name';
+        $sql = 'SELECT DISTINCT departments.id FROM departments, department_aliases ';
+        $sql .= 'WHERE (departments.name LIKE "%'.$mysqli->escape_string($this->options['q']).'%" OR
+                    (department_aliases.name LIKE "%'.$mysqli->escape_string($this->options['q']).'%" AND department_aliases.department_id = departments.id))'
+             . ' AND (departments.rgt != departments.lft+1 OR departments.org_unit IS NOT NULL) '
+             . ' ORDER BY departments.name';
         if ($result = $mysqli->query($sql)) {
             while($row = $result->fetch_array(MYSQLI_NUM)) {
                 $records[] = $row[0];
