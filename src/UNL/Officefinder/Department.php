@@ -148,7 +148,7 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSet
 
     function userCanEdit($user)
     {
-        return true;
+        return (bool)UNL_Officefinder_Department_Permission::getById($this->id, $user);
     }
 
     /**
