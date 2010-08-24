@@ -33,6 +33,7 @@ service_peoplefinder = function() {
 			WDN.jQuery('#maincontent div.two_col').remove();
 			WDN.toolbar_peoplefinder.queuePFRequest(query, 'results');
 			document.title = 'UNL | Directory | Search for ' + query;
+			WDN.jQuery('#breadcrumbs ul').append('<li>Search for '+query);
 		},
 		
 		showIndividualPeopleFinderRecord : function(liRecord) {
