@@ -138,9 +138,9 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSet
     function addAlias($name)
     {
         if (!UNL_Officefinder_Department_Alias::getById($this->id, $name)) {
-            $alias = new UNL_Officefinder_Department_Alias();
+            $alias                = new UNL_Officefinder_Department_Alias();
             $alias->department_id = $this->id;
-            $alias->name = $name;
+            $alias->name          = $name;
             return $alias->insert();
         }
         return true;
@@ -160,7 +160,7 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSet
     function addUser($user)
     {
         if (false === UNL_Officefinder_Department_Permission::getById($this->id, $user)) {
-            $permission = new UNL_Officefinder_Department_Permission();
+            $permission                = new UNL_Officefinder_Department_Permission();
             $permission->department_id = $this->id;
             $permission->uid           = $user;
             return $permission->insert();
