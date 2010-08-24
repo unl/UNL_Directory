@@ -1,5 +1,5 @@
 <div class="departmentInfo">
-    <img alt="Generic Icon" src="http://www1.unl.edu/tour/BuildingImages/<?php echo $context->building;?>_01_sm.jpg" width="100" height="100" class="frame photo">
+    <img alt="Building Image" src="http://maps.unl.edu/<?php echo $context->building;?>/image" width="100" height="100" class="frame photo">
     <h2 class="fn org"><?php echo $context->name; ?></h2>
     <div class="vcardInfo">
         <div class="adr label">
