@@ -167,4 +167,37 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSet
         }
         return true;
     }
+
+    function isOfficialDepartment()
+    {
+        return !empty($this->org_unit);
+    }
+
+    function getOfficialParent()
+    {
+        $query = sprintf('SELECT * FROM %s '.
+                            'WHERE %s %s <= %s AND %s >= %s '.
+                            ' AND org_unit IS NOT NULL '.
+                            'ORDER BY %s DESC LIMIT 1',
+                            // set the FROM %s
+                            $this->getTable(),
+                            // set the additional where add on
+                            $this->_getWhereAddOn(),
+                            // render 'left<=curLeft'
+                            'lft',  $this->lft,
+                            // render right>=curRight'
+                            'rgt', $this->rgt,
+                            // set the order column
+                            'lft');
+
+        $res = self::getDB()->query($query);
+
+        if ($res->num_rows == 0) {
+            throw new Exception('Should never happen!');
+        }
+
+        $obj = new self();
+        $obj->synchronizeWithArray($res->fetch_assoc());
+        return $obj;
+    }
 }
