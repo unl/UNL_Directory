@@ -352,7 +352,6 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
      *
      * @access public
      * @return mixed  either the data of the requested elements
-     *                      or an Tree_Error
      */
     function getPath()
     {
