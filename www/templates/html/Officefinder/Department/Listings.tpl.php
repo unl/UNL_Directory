@@ -1,4 +1,12 @@
-<ul class="listings sortable">
+<?php
+$class = 'listings';
+if ($parent->context instanceof UNL_Officefinder_Department
+    && $parent->context->userCanEdit(UNL_Officefinder::getUser())) {
+    $class .= ' sortable';
+}
+?>
+
+<ul class="<?php echo $class; ?>">
 <?php
 foreach ($context as $listing) {
     if (isset($listing->org_unit)) {
