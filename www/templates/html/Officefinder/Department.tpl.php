@@ -24,13 +24,7 @@
            <a class="url" href="<?php echo $context->website; ?>"><?php echo $context->website; ?></a>
         </span>
     </div>
-    <?php 
-    echo '<ul style="display:none;">';
-    foreach ($context as $var=>$value) {
-        echo '<li>'.$var.':'.$value.'</li>';
-    }
-    echo '</ul>';
-    
+    <?php
     if ($context->userCanEdit(UNL_Officefinder::getUser())) {
         echo '<a href="'.UNL_Officefinder::getURL().'?view=department&amp;id='.$context->id.'&amp;format=editing" class="action edit">Edit</a><br />';
         include dirname(__FILE__).'/../../editing/Officefinder/Department/DeleteForm.tpl.php';
