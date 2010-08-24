@@ -1,5 +1,11 @@
 <div class="departmentInfo">
-    <img alt="Building Image" src="http://maps.unl.edu/<?php echo $context->building;?>/image" width="100" height="100" class="frame photo">
+    <?php
+    $image_url = 'http://maps.unl.edu/BuildingImages/icon_md.png';
+    if (!empty($context->building)) {
+        $image_url = 'http://maps.unl.edu/'.$context->building.'/image';
+    }
+    ?>
+    <img alt="Building Image" src="<?php echo $image_url; ?>" width="100" height="100" class="frame photo">
     <h2 class="fn org"><?php echo $context->name; ?></h2>
     <div class="vcardInfo">
         <div class="adr label">
