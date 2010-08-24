@@ -72,7 +72,7 @@ if (isset($context->postalAddress)) {
 
             if ($bldgs->buildingExists($matches[2])) {
 
-                $replace = '${1} <a class="location mapurl" href="http://www1.unl.edu/tour/${2}">${2}</a>';
+                $replace = '${1} <a class="location mapurl" href="http://maps.unl.edu/${2}">${2}</a>';
                 $address['street-address'] = preg_replace($regex, $replace, $address['street-address']);
             }
         }
