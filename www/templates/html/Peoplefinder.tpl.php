@@ -35,7 +35,7 @@ if (isset($context->options['q'])
 $page->breadcrumbs = '
 <ul>
     <li><a href="http://www.unl.edu/" title="University of Nebraska&ndash;Lincoln">UNL</a></li>
-    <li>Directory</li>
+    <li><a href="'.UNL_Peoplefinder::getURL().'">Directory</a></li>
 </ul>';
 
 $page->titlegraphic = '<h1>Directory</h1>';
