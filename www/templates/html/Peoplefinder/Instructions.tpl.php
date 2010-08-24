@@ -19,6 +19,7 @@
     </div>
     </div>
 </div>
+<!--  
 <div class="two_col right">
     <div class="intro">
     <img width="100" height ="100" class="profile_pic medium planetred_profile" src="images/organizationVC.png" />
@@ -30,6 +31,7 @@
     </div>
     </div>
 </div>
+-->
 <div id="filters" class="one_col left">
 <div class="zenbox energetic wdn_filterset">
     <h3>Filter People Results</h3>

@@ -3,7 +3,7 @@
     <legend>Search for faculty, staff and students.</legend>
 <ol>
     <li>
-	    <label for="q" id="queryString">Enter a name to begin your search.</label> 
+	    <label for="q" id="queryString">Enter a name to begin your search</label> 
 	    <?php if (isset($context->options['chooser'])) {
 	        echo '<input type="hidden" name="chooser" value="true" />';
 	    }

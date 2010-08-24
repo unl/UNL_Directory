@@ -9,6 +9,16 @@
 .directorySearch {
     width:100%;
     margin:0px 0 10px 0;
+    background:#d7c47f;
+    background-image:-webkit-gradient(
+	    linear,
+	    left top,
+	    left bottom,
+	    color-stop(0.53, rgb(235,222,170)),
+	    color-stop(0.88, rgb(215,196,127))
+	);
+	-webkit-border-radius:3px;
+    
 }
 .directorySearch legend {display:none;}
 #maincontent form.directorySearch ol{
@@ -21,16 +31,21 @@
     height:46px;
     padding:0px;
     margin-left:-13px;
-    margin-bottom:11px;
+    margin-bottom:0px;
 }
 .directorySearch label {
-    display:block;	
+    display:block;
+    padding-top:5px;
+    color:#78651e;
+    font-weight:bold;
+    font-size:1.0em;
 }
 .directorySearch input[type=text]{
-    width:80%;	
+    width:80%;
+    border:1px solid #d7c47f;	
 }
 .directorySearch input[type=image]{
-    width:20px;  
+    width:20px; 
 }
 /* 
 ***************************************************
@@ -42,6 +57,9 @@
 #filters{display:none;}
 #maincontent .two_col {width:46%;}
 #maincontent .three_col{width:72%;}
+#maincontent h6.recordDetails {
+    font-size:1.6em;	
+}
 
 /* 
 ***************************************************
@@ -51,3 +69,126 @@
 ***************************************************
 */
 #results{width:320px;}
+/* 
+***************************************************
+
+        Result List Listings
+
+***************************************************
+*/
+#maincontent #results {min-height: 300px;}
+#maincontent ul.pfResult {
+    padding:0px;
+    list-style:none;
+    border-bottom: 1px solid #e6e6e6;
+    border-top: 1px solid #d0cece;
+    margin-top:20px;
+}
+#maincontent ul.pfResult li {
+    border-bottom: 1px solid #d0cece;
+    border-top: 1px solid #e6e6e6;
+    width:100%;
+    padding: 5px 0px;
+    display:block;
+}
+#maincontent ul.pfResult li div.overflow {
+    min-height:45px;
+    padding: 7px 5px;
+    cursor:pointer;
+}
+#maincontent ul.pfResult li.selected div.overflow {opacity:0.4}
+#maincontent ul.pfResult li:hover, #maincontent ul.pfResult li.selected {
+    background:#ecf4f9;
+}
+#maincontent ul.pfResult li.selected .vcard {display:none;}
+.eppa, .organization-unit, .tel, .type {display:none;}
+
+
+.planetred_profile, .recordDetails {float:left;}
+.loading {
+    background:url('images/loading.gif') no-repeat top left;
+    height:40px;
+    width:40px;
+    float:left;
+    position:absolute;
+    right:250px;
+    display:none;   
+}
+.recordDetails {
+    margin-left:20px;
+}
+.fn a, .fn {
+    font-size:18px;
+    font-weight:bold;
+    color:#464545 !important;   
+    max-width:530px;
+    max-height:35px;
+    min-height:20px;
+    overflow:hidden;
+}
+.departments .fn, .departments .fn a {height:42px;max-height:42px;line-height:20px;}
+.cInfo {float:right;}
+
+#maincontent .results {margin-top:15px;}
+#maincontent .likeResults ul.pfResult {margin-top:0px;}
+
+#maincontent .result_head {color:#989898;font-size:10px;}
+/* Headings */
+
+
+#maincontent .results h2, #maincontent .likeResults h3, #maincontent #orgChart h2 {
+    font-variant:small-caps;
+    font-weight:bold;
+}
+#maincontent .results h2, #maincontent #orgChart h2 {border-bottom:2px dotted #E6E6E6;padding-bottom:0;}
+
+#maincontent .likeResults h3 {
+    font-size:1em;  
+}
+#maincontent #pfShowRecord .wdn_tabs, #maincontent #pfShowRecord .wdn_tabs_content {display:none;}
+/* 
+***************************************************
+
+        Individual Peoplefinder Records
+
+***************************************************
+*/
+.vcard {
+    padding:15px;
+    min-height:130px;
+    position:relative;
+    z-index:9;
+    margin:0 auto;
+}
+.vcard > a.email {
+    
+}
+.vcard .eppa, .vcard .epa, .vcard .organization-unit, .vcard .tel, .vcf, .title {display:block;}
+.vcard a.planetred_profile {
+    margin-right:15px;
+    min-width:114px;
+    display:block;
+    float:none;
+}
+.vcard .eppa, .vcard .epa {font-style:italic;font-size:0.8em;}
+.vcard .adr, .departmentInfo .adr {
+    border-left:2px solid #b7b7b7;
+    padding-left:5px;
+    margin:5px 0;   
+}
+.vcard .tel, .vcard span.email, .vcard span.url, .departmentInfo .tel, .departmentInfo span.email, .departmentInfo span.url {
+    background:url('images/iconContactSprite.png') no-repeat;
+    padding-left:25px;
+    height:20px;
+}
+.vcard span.email, .vcard span.url, .departmentInfo span.email, .departmentInfo span.url {
+    background-position:0 -21px;
+    display:block;
+    margin-top:5px;
+    margin-bottom:3px;
+}
+.vcard span.url, .departmentInfo span.url {
+    background-position:0 -42px;
+}
+a.email {background:none;}
+a.text-vcard{padding-left:24px;padding-right:0;background-position:left -2px;margin:0;display:block;}
