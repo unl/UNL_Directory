@@ -161,8 +161,8 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSet
     {
         if (false === UNL_Officefinder_Department_Permission::getById($this->id, $user)) {
             $permission = new UNL_Officefinder_Department_Permission();
-            $permission->derpartment_id = $this->id;
-            $permission->uid            = $uid;
+            $permission->department_id = $this->id;
+            $permission->uid           = $user;
             return $permission->insert();
         }
         return true;
