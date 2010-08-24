@@ -38,7 +38,7 @@ $page->breadcrumbs = '
     <li>Directory</li>
 </ul>';
 
-$page->titlegraphic = '<h1>UNL Directory</h1>';
+$page->titlegraphic = '<h1>Directory</h1>';
 
 $page->maincontentarea = $savvy->render($context->output);
 
