@@ -146,30 +146,28 @@ directory = function() {
 	};
 }();
 
-WDN.jQuery(function(){
-	WDN.jQuery(window).bind('hashchange', function(eventObject){
-		var hash = location.hash;
-		if (hash.match(/[^#q\/]/)) {
-			WDN.log('We have a hash match: '+ hash);
-			hash = hash.split('/'); //hash[1]
-			WDN.jQuery('#q').val(hash[1]);
-			service_peoplefinder.presentPeopleFinderResults(hash[1]);
-			
-			eventObject.preventDefault();
-			eventObject.stopPropagation();
-			return false;
-		}
-		if (!hash) {
-			// Load the default instructions
-			WDN.jQuery('#maincontent').load('?format=partial', function(){
-				directory.initializeSearchBoxes();
-			});
-		}
-	});
-});
-
 WDN.jQuery(document).ready(function() {
-	WDN.loadJS('wdn/templates_3.0/scripts/plugins/hashchange/jQuery.hashchange.1-3.min.js');
+	WDN.loadJS('wdn/templates_3.0/scripts/plugins/hashchange/jQuery.hashchange.1-3.min.js', function() {
+		WDN.jQuery(window).bind('hashchange', function(eventObject){
+			var hash = location.hash;
+			if (hash.match(/[^#q\/]/)) {
+				WDN.log('We have a hash match: '+ hash);
+				hash = hash.split('/'); //hash[1]
+				WDN.jQuery('#q').val(hash[1]);
+				service_peoplefinder.presentPeopleFinderResults(hash[1]);
+				
+				eventObject.preventDefault();
+				eventObject.stopPropagation();
+				return false;
+			}
+			if (!hash) {
+				// Load the default instructions
+				WDN.jQuery('#maincontent').load('?format=partial', function(){
+					directory.initializeSearchBoxes();
+				});
+			}
+		});
+	});
 	WDN.loadJS('wdn/templates_3.0/scripts/toolbar_peoplefinder.js', function(){
 		WDN.toolbar_peoplefinder.serviceURL = '';
 		WDN.toolbar_peoplefinder.configuedWebService = true;
