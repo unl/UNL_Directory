@@ -96,7 +96,7 @@
     padding: 7px 5px;
     cursor:pointer;
 }
-#maincontent ul.pfResult li.selected div.overflow {opacity:0.4}
+#maincontent ul.pfResult li.selected div.overflow {opacity:0.4;filter:alpha(opacity=40);}
 #maincontent ul.pfResult li:hover, #maincontent ul.pfResult li.selected {
     background:#ecf4f9;
 }

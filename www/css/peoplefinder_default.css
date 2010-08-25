@@ -1,3 +1,4 @@
+@import url('departments.css');
 /* 
 ***************************************************
 
@@ -25,7 +26,7 @@
 	padding: 7px 5px;
     cursor:pointer;
 }
-#maincontent ul.pfResult li.selected div.overflow {opacity:0.4}
+#maincontent ul.pfResult li.selected div.overflow {opacity:0.4;filter:alpha(opacity=40);}
 #maincontent ul.pfResult li:hover, #maincontent ul.pfResult li.selected {
 	background:#ecf4f9;
 }
@@ -76,17 +77,6 @@
 }
 #maincontent #pfShowRecord .wdn_tabs, #maincontent #pfShowRecord .wdn_tabs_content {display:none;}
 
-/*
-OfficeFinder listings
-*/
-#maincontent ul.listings {padding:0;list-style:none;}
-ul.listings li {
-    margin-bottom:7px;
-    clear:both;
-    padding-bottom:5px;
-}
-ul.listings li .listingDetails {}
-.listing .tel{display:block;}
 /* 
 ***************************************************
 
@@ -139,84 +129,7 @@ ul.listings li .listingDetails {}
 }
 a.email {background:none;}
 a.text-vcard{padding-left:24px;padding-right:0;background-position:left -2px;margin:121px 0 0 -122px;float:left;}
-/* 
-***************************************************
 
-        Individual Officefinder Records
-
-***************************************************
-*/
-#maincontent #pfShowRecord .wdn_tabs, #maincontent #pfShowRecord .wdn_tabs_content {display:none;}
-.vcard.office{
-	background:#ede8b2;
-	border-color:#e6d793;
-}
-.vcard.office .departmentInfo {
-	background:none;
-	padding:0;
-	max-width:430px;
-	margin-bottom:0;
-}
-	
-
-.vcard.office .frame{float:left;max-width:100px;}
-
-#maincontent h2.fn {
-    font-size:18px;
-    font-weight:bold;
-    color:#464545 !important; 
-}
-.departmentInfo {
-    border-radius:10px;
-    -moz-border-radius:10px;
-    -webkit-border-radius:10px;
-    background:#fbeca5;
-    background-image: url('images/tornSpiral.png'), -moz-linear-gradient(    right center,    rgb(237,232,178) 83%,    rgb(230,215,147) 96%);
-    background-image: url('images/tornSpiral.png'), -webkit-gradient(    linear,    right top,    left top,    color-stop(0.83, rgb(237,232,178)),    color-stop(0.96, rgb(230,215,147)));   	
-    background-repeat:no-repeat;
-    padding:20px 20px 20px 45px;
-    width:875px;
-    margin-bottom:25px;
-}
-.departmentInfo .fn a, .departmentInfo .fn{max-width:none;}
-.departmentInfo .tel {display:block;}
-#maincontent .departmentInfo .photo {
-	float:left;
-	margin-right:20px;
-}
-.departmentInfo .adr {margin:0 0 15px 0;}
-.departmentInfo .edit {float:right;}
-
-#employees > h2, #employees > p{display:none;}
-
-
-#maincontent #orgChart h2 {font-variant:normal;background:url('images/iconOrg.png') no-repeat 0 7px; padding-left:22px;margin-bottom:36px;}
-
-#maincontent #orgChart ul {
-	list-style:none;
-	padding:0;
-	margin:0;
-	font-size:1.2em;
-	text-align:center;
-	font-weight:bold;
-}
-#maincontent #orgChart ul {
-    margin-top:9px;	
-}
-#maincontent #orgChart > ul > li > ul > li > a{
-	font-size:55%;
-}
-#maincontent #orgChart > ul  li > ul {
-    padding-top:36px;
-    background:url('images/iconDown.png') no-repeat top center;
-}
-#maincontent #orgChart > ul > li > ul {
-    font-size:155%;
-    line-height:110%;
-}
-#maincontent #orgChart  ul li ul li ul {
-    font-size:55%;	
-}
 /* 
 ***************************************************
 
@@ -315,7 +228,7 @@ padding:10px;
     -webkit-border-radius:5px;
     border-radius:5px;
 }
-#maincontent .right .intro {opacity:0.3;}
+#maincontent .right .intro {opacity:0.3;filter:alpha(opacity=30);}
 .intro img.profile_pic{float:left;}
 h6.recordDetails {margin-top:15px;}
 h6.recordDetails span {
@@ -343,4 +256,5 @@ h6.recordDetails span {
     width:243px;
     height:124px;
     opacity:0.8;
+    filter:alpha(opacity=80);
 }
