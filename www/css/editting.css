@@ -5,21 +5,6 @@
 
 ************************************
 */
-ul.listings li {
-    padding:5px 5px 5px 20px;
-    border-radius:5px;
-    -moz-border-radius:5px;
-    -webkit-border-radius:5px;
-    background:#E6E9DC;
-    cursor:move;	
-    min-height:35px;
-}
-ul.listings li:hover {
-    background:#d2cfc3 url('images/sortable.png') repeat-y top left;
-}
-ul.listings li .listingDetails {
-    margin-right:70px;	
-}
 ul.listings li div.edit {
 	float:right;
 	margin-top:2px;
@@ -27,6 +12,10 @@ ul.listings li div.edit {
 }
 ul.listings li:hover div.edit {
     display:block;	
+}
+#maincontent ul.listings li:hover ul {
+    border-top:1px dotted #c4c2c2;
+    padding-top:0px;
 }
 
 /*Setup the main UI for buttons*/

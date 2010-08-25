@@ -1,0 +1,113 @@
+/* 
+***************************************************
+
+        Individual Officefinder Records
+
+***************************************************
+*/
+#maincontent #pfShowRecord .wdn_tabs, #maincontent #pfShowRecord .wdn_tabs_content {display:none;}
+.vcard.office{
+    background:#ede8b2;
+    border-color:#e6d793;
+}
+.vcard.office .departmentInfo {
+    background:none;
+    padding:0;
+    max-width:430px;
+    margin-bottom:0;
+}
+    
+
+.vcard.office .frame{float:left;max-width:100px;}
+
+#maincontent h2.fn {
+    font-size:18px;
+    font-weight:bold;
+    color:#464545 !important; 
+}
+.departmentInfo {
+    border-radius:10px;
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
+    background:#fbeca5;
+    background-image: url('images/tornSpiral.png'), -moz-linear-gradient(    right center,    rgb(237,232,178) 83%,    rgb(230,215,147) 96%);
+    background-image: url('images/tornSpiral.png'), -webkit-gradient(    linear,    right top,    left top,    color-stop(0.83, rgb(237,232,178)),    color-stop(0.96, rgb(230,215,147)));      
+    background-repeat:no-repeat;
+    padding:20px 20px 20px 45px;
+    width:875px;
+    margin-bottom:25px;
+}
+.departmentInfo .fn a, .departmentInfo .fn{max-width:none;}
+.departmentInfo .tel {display:block;}
+#maincontent .departmentInfo .photo {
+    float:left;
+    margin-right:20px;
+}
+.departmentInfo .adr {margin:0 0 15px 0;}
+.departmentInfo .edit {float:right;}
+
+#employees > h2, #employees > p{display:none;}
+
+
+#maincontent #orgChart h2 {font-variant:normal;background:url('images/iconOrg.png') no-repeat 0 7px; padding-left:22px;margin-bottom:36px;}
+
+#maincontent #orgChart ul {
+    list-style:none;
+    padding:0;
+    margin:0;
+    font-size:1.2em;
+    text-align:center;
+    font-weight:bold;
+}
+#maincontent #orgChart ul {
+    margin-top:9px; 
+}
+#maincontent #orgChart > ul > li > ul > li > a{
+    font-size:55%;
+}
+#maincontent #orgChart > ul  li > ul {
+    padding-top:36px;
+    background-image:url('images/iconDown.png');
+    background-repeat:no-repeat;
+    background-position:top center;
+}
+#maincontent #orgChart > ul > li > ul {
+    font-size:155%;
+    line-height:110%;
+}
+#maincontent #orgChart  ul li ul li ul {
+    font-size:55%;  
+}
+/*
+************************************
+
+    For the listings
+
+************************************
+*/
+#listings > ul.listings > li {
+    padding:5px 5px 0px 0px;
+    border-bottom: 1px dotted #d0cece;
+    list-style:none;
+}
+#maincontent ul.listings li ul {
+    padding:0px 5px;
+    padding-top:1px;
+    margin:3px 0px;	
+    padding-left:20px;
+    list-style:none; 
+}
+#maincontent ul.listings li ul li {
+	border-bottom:1px dotted #c4c2c2;
+    border-left:2px dotted #e6e6e6;
+    padding:3px;
+}
+#maincontent ul.listings li ul li:last-child {
+    border-bottom:none;	
+}
+ul.listings li:hover {
+}
+ul.listings li .listingDetails {
+    margin-right:70px;  
+}
+.listing .tel{display:block;}
