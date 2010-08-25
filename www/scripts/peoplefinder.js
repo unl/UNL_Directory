@@ -112,7 +112,7 @@ WDN.jQuery(document).ready(function() {
 		});
 	});
 	WDN.loadJS('wdn/templates_3.0/scripts/toolbar_peoplefinder.js', function(){
-		WDN.toolbar_peoplefinder.serviceURL = 'http://peoplefinder.unl.edu/';
+		WDN.toolbar_peoplefinder.serviceURL = window.location.protocol + '//' + window.location.host + window.location.pathname;
 		WDN.toolbar_peoplefinder.configuedWebService = true;
 		if (window.location.hash) {
 			WDN.jQuery(window).trigger('hashchange');

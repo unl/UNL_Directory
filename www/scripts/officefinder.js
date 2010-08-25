@@ -1,4 +1,4 @@
-service_peoplefinder = function() {
+var service_peoplefinder = function() {
 	return {
 		updatePeopleFinderResults : function(){ //function called when the list has been rendered
 			WDN.loadJS('scripts/filters.js', function(){
@@ -60,6 +60,7 @@ service_peoplefinder = function() {
 
 WDN.jQuery(document).ready(function() {
 	WDN.loadJS('wdn/templates_3.0/scripts/toolbar_peoplefinder.js', function(){
+		WDN.toolbar_peoplefinder.serviceURL = WDN.toAbs('../', window.location.protocol + '//' + window.location.host + window.location.pathname);
 		WDN.toolbar_peoplefinder.configuedWebService = true;
 	});
 	WDN.jQuery('ul.pfResult:not(.departments) li .overflow').click(function(){
@@ -67,4 +68,8 @@ WDN.jQuery(document).ready(function() {
 		return false;
 		}
 	);
+	WDN.jQuery('a.img-qrcode').live('click', function() {
+		WDN.jQuery(this).colorbox({open:true});
+		return false;
+	});
 });
