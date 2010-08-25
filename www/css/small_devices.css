@@ -58,7 +58,8 @@
 #maincontent .two_col {width:46%;}
 #maincontent .three_col{width:72%;}
 #maincontent h6.recordDetails {
-    font-size:1.6em;	
+    font-size:1.6em;
+    margin-left:0 !important;	
 }
 
 /* 
