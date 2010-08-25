@@ -21,7 +21,7 @@
 	display:block;
 }
 #maincontent ul.pfResult li div.overflow {
-	min-height:45px;
+	min-height:47px;
 	padding: 7px 5px;
     cursor:pointer;
 }
@@ -31,7 +31,7 @@
 }
 #maincontent ul.pfResult li.selected .vcard {display:none;}
 .eppa, .organization-unit, .tel, .type {display:none;}
-
+#maincontent ul.pfResult .tel {display:inline;}
 
 .planetred_profile, .recordDetails {float:left;}
 .loading {
@@ -52,7 +52,7 @@
 	color:#464545 !important;	
 	max-width:530px;
 	max-height:35px;
-	min-height:20px;
+	min-height:18px;
 	overflow:hidden;
 }
 .departments .fn, .departments .fn a {height:42px;max-height:42px;line-height:20px;}
