@@ -8,7 +8,7 @@
 	        echo '<input type="hidden" name="chooser" value="true" />';
 	    }
 	    if (isset($context->options['q'])) {
-	        $default = htmlentities($context->options['q'], ENT_QUOTES);
+	        $default = htmlentities((string)$context->options['q'], ENT_QUOTES);
 	    } else {
 	        $default = '';
 	    }

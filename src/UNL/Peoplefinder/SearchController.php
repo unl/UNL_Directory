@@ -26,9 +26,13 @@ class UNL_Peoplefinder_SearchController
         } elseif (isset($this->options['sn']) || isset($this->options['cn'])) {
             // Detailed search
             $search_method = 'getAdvancedSearchMatches';
-            $this->options['q'] = array(
-                'sn' => $this->options['sn'],
-                'cn' => $this->options['cn']);
+            $this->options['q'] = array('cn'=>'', 'sn'=>'');
+            if (isset($this->options['sn'])) {
+                $this->options['q']['sn'] = $this->options['sn'];
+            }
+            if (isset($this->options['cn'])) {
+                $this->options['q']['cn'] = $this->options['cn'];
+            }
         } elseif (strpos($this->options['q'], 'd:') === 0) {
             $search_method = 'getHRPrimaryDepartmentMatches';
             $this->options['q'] = substr($this->options['q'], 2);

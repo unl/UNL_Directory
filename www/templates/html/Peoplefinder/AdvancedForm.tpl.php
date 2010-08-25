@@ -1,4 +1,4 @@
-<form method="get" id="peoplefinder" action="<?php echo htmlentities(str_replace('index.php', '', $_SERVER['PHP_SELF']), ENT_QUOTES); ?>" class="directorySearch">
+<form method="get" id="peoplefinder" action="<?php echo UNL_Peoplefinder::getURL();?>" class="directorySearch">
 <fieldset>
     <legend>Search for faculty, staff and students.</legend>
 <ol>
@@ -25,6 +25,7 @@
         }
         ?>
         <input type="text" value="<?php echo $default; ?>" id="cn" name="cn" class="cn" />
+        <input type="hidden" name="adv" value="1" />
         <input name="submitbutton" type="image" src="images/formSearch.png" value="Submit" />
     </li>
 </ol>
