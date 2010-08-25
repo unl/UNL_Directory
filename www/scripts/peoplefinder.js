@@ -62,10 +62,12 @@ var directory = function() {
 	return {
 		initializeSearchBoxes : function() {
 			WDN.jQuery('#peoplefinder').submit(function(eventObject) { //on submit of the search form
-				window.location.hash = '#q/' + WDN.jQuery('#'+this.id+' input.q').val() ; //triggering a hash change will run through the searching function
+				if (WDN.jQuery('#'+this.id+' input.q').val().length) {
+					window.location.hash = '#q/' + WDN.jQuery('#'+this.id+' input.q').val(); //triggering a hash change will run through the searching function
+					WDN.jQuery('#q').focus().select();
+				}
 				eventObject.preventDefault();
 				eventObject.stopPropagation();
-				WDN.jQuery('#q').focus().select();
 				return false;
 			});
 			WDN.jQuery('#q').focus(function(){
