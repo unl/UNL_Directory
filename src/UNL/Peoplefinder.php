@@ -105,6 +105,8 @@ class UNL_Peoplefinder
     {
         switch(true) {
             case isset($this->options['q']):
+            case isset($this->options['sn']):
+            case isset($this->options['cn']):
                 $this->options['view'] = 'search';
                 return;
             case isset($this->options['uid']):

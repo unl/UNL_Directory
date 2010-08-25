@@ -45,6 +45,8 @@ class UNL_Peoplefinder_SearchController
             $this->options + array('results'=>
             $this->options['peoplefinder']->$search_method($this->options['q'], $this->options['affiliation'])));
 
-        $this->dept_results = new UNL_Officefinder_DepartmentList_NameSearch($this->options);
+        if ($search_method != 'getAdvancedSearchMatches') {
+            $this->dept_results = new UNL_Officefinder_DepartmentList_NameSearch($this->options);
+        }
     }
 }
