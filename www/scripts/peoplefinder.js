@@ -1,9 +1,8 @@
-service_peoplefinder = function() {
+var service_peoplefinder = function() {
 	return {
 		updatePeopleFinderResults : function(){ //function called when the list has been rendered
 			WDN.loadJS('scripts/filters.js', function(){
 				filters.initialize();
-				
 			});
 			WDN.jQuery('ul.pfResult li').each(function(){
 				//onClick = WDN.jQuery(this).find('.cInfo').attr('onclick');
@@ -59,7 +58,7 @@ service_peoplefinder = function() {
 	};
 }();
 
-directory = function() {
+var directory = function() {
 	return {
 		initializeSearchBoxes : function() {
 			WDN.jQuery('#peoplefinder').submit(function(eventObject) { //on submit of the search form
@@ -93,7 +92,7 @@ WDN.jQuery(document).ready(function() {
 		WDN.jQuery(window).bind('hashchange', function(eventObject){
 			var hash = location.hash;
 			if (hash.match(/[^#q\/]/)) {
-				WDN.log('We have a hash match: '+ hash);
+				//alert('We have a hash match: '+ hash);
 				hash = hash.split('/'); //hash[1]
 				WDN.jQuery('#q').val(hash[1]);
 				service_peoplefinder.presentPeopleFinderResults(hash[1]);
@@ -111,7 +110,7 @@ WDN.jQuery(document).ready(function() {
 		});
 	});
 	WDN.loadJS('wdn/templates_3.0/scripts/toolbar_peoplefinder.js', function(){
-		WDN.toolbar_peoplefinder.serviceURL = '';
+		WDN.toolbar_peoplefinder.serviceURL = 'http://peoplefinder.unl.edu/';
 		WDN.toolbar_peoplefinder.configuedWebService = true;
 		if (window.location.hash) {
 			WDN.jQuery(window).trigger('hashchange');
