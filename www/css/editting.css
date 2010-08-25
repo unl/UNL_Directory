@@ -13,6 +13,9 @@ ul.listings li div.edit {
 ul.listings li:hover div.edit {
     display:block;	
 }
+#maincontent ul.listings li:hover {
+    cursor:pointer;	
+}
 #maincontent ul.listings li:hover ul {
     border-top:1px dotted #c4c2c2;
     padding-top:0px;

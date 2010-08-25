@@ -58,74 +58,13 @@ service_peoplefinder = function() {
 	};
 }();
 
-directory = function() {
-	return {
-		initializeSearchBoxes : function() {
-			WDN.jQuery('#peoplefinder').submit(function(eventObject) { //on submit of the search form
-				window.location.hash = '#q/' + WDN.jQuery('#'+this.id+' input.q').val() ; //triggering a hash change will run through the searching function
-				eventObject.preventDefault();
-				eventObject.stopPropagation();
-				WDN.jQuery('#q').focus().select();
-				return false;
-			});
-			WDN.jQuery('#q').focus(function(){
-				WDN.jQuery(this).siblings('label').hide();
-			});
-			WDN.jQuery('form.directorySearch ol > li > label').focus(function(){
-					WDN.jQuery(this).hide().siblings('input[name=q]').focus();
-			});
-			if (WDN.jQuery('#q').val() !== "") {
-				WDN.jQuery('#q').siblings('label').hide();
-			};
-			WDN.jQuery('input.q').blur(function() {
-				if (WDN.jQuery(this).val() === "") {
-					WDN.jQuery(this).siblings('label').show();
-				}
-			});
-			WDN.jQuery('#q').focus().select();
-		}
-	};
-}();
-
 WDN.jQuery(document).ready(function() {
-	WDN.loadJS('wdn/templates_3.0/scripts/plugins/hashchange/jQuery.hashchange.1-3.min.js', function() {
-		WDN.jQuery(window).bind('hashchange', function(eventObject){
-			var hash = location.hash;
-			if (hash.match(/[^#q\/]/)) {
-				WDN.log('We have a hash match: '+ hash);
-				hash = hash.split('/'); //hash[1]
-				WDN.jQuery('#q').val(hash[1]);
-				service_peoplefinder.presentPeopleFinderResults(hash[1]);
-				
-				eventObject.preventDefault();
-				eventObject.stopPropagation();
-				return false;
-			}
-			if (!hash) {
-				// Load the default instructions
-				WDN.jQuery('#maincontent').load('?format=partial', function(){
-					directory.initializeSearchBoxes();
-				});
-			}
-		});
-	});
 	WDN.loadJS('wdn/templates_3.0/scripts/toolbar_peoplefinder.js', function(){
-		WDN.toolbar_peoplefinder.serviceURL = '';
 		WDN.toolbar_peoplefinder.configuedWebService = true;
-		if (window.location.hash) {
-			WDN.jQuery(window).trigger('hashchange');
-		}
 	});
-	directory.initializeSearchBoxes();
-	WDN.jQuery('a.img-qrcode').live('click', function() {
-		WDN.jQuery(this).colorbox({open:true});
+	WDN.jQuery('ul.pfResult:not(.departments) li .overflow').click(function(){
+		service_peoplefinder.showIndividualPeopleFinderRecord(WDN.jQuery(this));
 		return false;
-	});
-});
-WDN.jQuery(window).keydown(function(event) {
-	if (event.which == '191') {
-		WDN.jQuery('#q').focus().select();
-		event.preventDefault();
-		event.stopPropagation();
-	}
+		}
+	);
 });
