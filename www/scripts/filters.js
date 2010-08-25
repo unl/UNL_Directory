@@ -1,4 +1,4 @@
-filters = function() {
+var filters = function() {
 	var departments = [];
 	var affiliations = [];
 	return {
