@@ -1,5 +1,9 @@
 <?php
-    echo $savvy->render($context, 'Peoplefinder/StandardForm.tpl.php');
+    if (isset($context->options['adv'])) {
+        echo $savvy->render($context, 'Peoplefinder/AdvancedForm.tpl.php');
+    } else {
+        echo $savvy->render($context, 'Peoplefinder/StandardForm.tpl.php');
+    }
 ?>
 <div class="two_col left">
     <div class="intro">

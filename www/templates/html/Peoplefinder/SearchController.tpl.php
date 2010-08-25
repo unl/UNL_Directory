@@ -1,6 +1,10 @@
 <?php
 if ($context->options['format'] != 'partial') {
-    echo $savvy->render($context, 'Peoplefinder/StandardForm.tpl.php');
+    if (isset($context->options['adv'])) {
+        echo $savvy->render($context, 'Peoplefinder/AdvancedForm.tpl.php');
+    } else {
+        echo $savvy->render($context, 'Peoplefinder/StandardForm.tpl.php');
+    }
 }
 
 // The web view is special.
