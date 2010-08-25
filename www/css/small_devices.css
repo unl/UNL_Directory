@@ -103,7 +103,7 @@
 }
 #maincontent ul.pfResult li.selected .vcard {display:none;}
 .eppa, .organization-unit, .tel, .type {display:none;}
-
+#maincontent ul.pfResult .tel {display:inline;}
 
 .planetred_profile, .recordDetails {float:left;}
 .recordDetails {
