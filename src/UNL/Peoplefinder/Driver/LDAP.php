@@ -224,7 +224,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
      */
     public function getAdvancedSearchMatches($query, $affiliation = null)
     {
-        $filter = new UNL_Peoplefinder_Driver_LDAP_AdvancedFilter($q['sn'], $query['cn'], $affiliation, '&', true);
+        $filter = new UNL_Peoplefinder_Driver_LDAP_AdvancedFilter($query['sn'], $query['cn'], $affiliation, '&', true);
         $this->query($filter->__toString(), $this->detailAttributes);
         return $this->getRecordsFromResults();
     }
