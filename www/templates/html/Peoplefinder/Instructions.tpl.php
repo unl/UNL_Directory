@@ -19,19 +19,20 @@
     </div>
     </div>
 </div>
-<!--  
+
 <div class="two_col right">
     <div class="intro">
-    <img width="100" height ="100" class="profile_pic medium planetred_profile" src="images/organizationVC.png" />
-    <h6 class="recordDetails">
-        Search <span class="search_context">Departments</span>
-    </h6>
-    <div class="intro_support clear">
-        
+	    <img width="100" height ="100" class="profile_pic medium planetred_profile" src="images/organizationVC.png" />
+	    <h6 class="recordDetails">
+	        Search <span class="search_context">Departments</span>
+	    </h6>
+	    <div class="intro_support clear">
+	        
+	    </div>
     </div>
-    </div>
+    <h5 class="coming">Coming Soon!</h5>
 </div>
--->
+
 <div id="filters" class="one_col left">
 <div class="zenbox energetic wdn_filterset">
     <h3>Filter People Results</h3>
