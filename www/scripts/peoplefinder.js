@@ -176,6 +176,10 @@ WDN.jQuery(document).ready(function() {
 		}
 	});
 	directory.initializeSearchBoxes();
+	WDN.jQuery('a.img-qrcode').live('click', function() {
+		WDN.jQuery(this).colorbox({open:true});
+		return false;
+	});
 });
 WDN.jQuery(window).keydown(function(event) {
 	if (event.which == '191') {

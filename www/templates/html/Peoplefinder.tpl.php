@@ -40,7 +40,7 @@ $page->breadcrumbs = '
 
 $page->titlegraphic = '<h1>Directory</h1>';
 
-$page->maincontentarea = $savvy->render($context->output);
+$page->maincontentarea = '<div class="four_col">' . $savvy->render($context->output) . '</div>';
 
 $page->footercontent = 'UNL | Office of University Communications | <a href="http://www1.unl.edu/wdn/wiki/About_Peoplefinder" onclick="window.open(this.href); return false;">About Peoplefinder</a><br /><br />';
 $page->footercontent .= 'Information obtained from this directory may not be used to provide addresses for mailings to students, faculty or staff.<br />Any solicitation of business, information, contributions or other response from individuals listed in this publication by mail, telephone or other means is forbidden.<br />';

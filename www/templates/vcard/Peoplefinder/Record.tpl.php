@@ -1,6 +1,4 @@
 <?php
-header('Content-Type: text/x-vcard');
-header('Content-Disposition: attachment; filename="'.$context->sn.', '.$context->givenName.'.vcf"');
 //connect, taking in UID
 echo "BEGIN:VCARD\n";
 echo "VERSION:3.0\n";
