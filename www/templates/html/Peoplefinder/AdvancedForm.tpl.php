@@ -1,9 +1,9 @@
-<form method="get" id="peoplefinder" action="<?php echo UNL_Peoplefinder::getURL();?>" class="directorySearch">
+<form method="get" id="peoplefinder" action="<?php echo UNL_Peoplefinder::getURL();?>" class="directorySearch advanced">
 <fieldset>
     <legend>Search for faculty, staff and students.</legend>
 <ol>
     <li>
-        <label for="sn" id="queryString">Last Name</label> 
+        Last Name: 
         <?php if (isset($context->options['chooser'])) {
             echo '<input type="hidden" name="chooser" value="true" />';
         }
@@ -14,7 +14,7 @@
         }
         ?>
         <input type="text" value="<?php echo $default; ?>" id="sn" name="sn" class="sn" />
-        <label for="cn">First Name</label> 
+        First Name: 
         <?php if (isset($context->options['chooser'])) {
             echo '<input type="hidden" name="chooser" value="true" />';
         }

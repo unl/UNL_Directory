@@ -175,6 +175,10 @@ a.img-qrcode{padding-left:24px;padding-right:0;background: url(images/qrcode.png
 	margin-top:10px;
 	
 }
+.directorySearch.advanced ol li:first-child input[type=text] {
+	width:200px;
+}
+
 .directorySearch ol li:first-child input[type=image] {
 	margin-bottom:-7px;
 	padding-left:5px;
