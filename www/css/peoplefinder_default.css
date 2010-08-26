@@ -159,11 +159,13 @@ a.img-qrcode{padding-left:24px;padding-right:0;background: url(images/qrcode.png
 }
 .directorySearch > fieldset > ol > li > label {
 	position:absolute;
-	top:22px;
+	top:-11px;
 	left:23px;
 	font-size:1.5em;
-	color:#98999a;
+	color:#5c5c5c;
 	cursor:text;
+	background:#fff;
+	padding:5px;
 }
 .directorySearch > fieldset > ol > li > label.sn{
     left:253px;	
@@ -171,9 +173,9 @@ a.img-qrcode{padding-left:24px;padding-right:0;background: url(images/qrcode.png
 .directorySearch ol li:first-child input[type=text] {
 	width:440px;
 	height:31px;
-	border:1px solid #dad09a;
+	border:1px solid #8a7c47;
 	font-size:1.5em;
-	color:#98999a;
+	color:#5c5c5c;
 	padding:5px 0 0 8px;
 	margin-top:10px;	
 }
@@ -213,7 +215,7 @@ li#filters fieldset {
 }
 .directorySearch li#filters ol li {background:none;display:inline;padding-right:15px;}
 #maincontent #advancedSearch {
-    background:#d7c47f;
+    background:#8a7c47;
     color:#fff;
     font-weight:bold;
     font-size:0.8em;

@@ -168,6 +168,7 @@ WDN.jQuery(document).ready(function() {
 		WDN.jQuery(this).colorbox({open:true});
 		return false;
 	});
+	WDN.jQuery('.directorySearch > fieldset > ol > li > label').css({'top' : '16px'});
 	WDN.jQuery('#advancedSearch').bind({
 		focus : function(){
 			WDN.jQuery("#queryString").remove();
