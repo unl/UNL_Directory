@@ -27,34 +27,10 @@ if (!is_array($context->options['q'])
 
 
 // The HTML view prefers to have them grouped by affiliation
-$by_affiliation = array();
-$by_affiliation['faculty']       = array();
-$by_affiliation['staff']         = array();
-$by_affiliation['student']       = array();
-$by_affiliation['organizations'] = array();
+$showing = count($context->results) + count($like_records);
 
-$like_by_affiliation = $by_affiliation;
-
-$records =& $context->results;
-$showing = 0;
-
-foreach(array('records'=>'by_affiliation', 'like_records'=>'like_by_affiliation') as $records_var=>$affiliation_var) {
-    foreach ($$records_var as $record) {
-        $showing++;
-        foreach ($record->ou as $ou) {
-            if ($ou == 'org') {
-                ${$affiliation_var}['organizations'][] = $record;
-                break;
-            }
-        }
-
-        if (isset($record->eduPersonAffiliation)) {
-            foreach ($record->eduPersonAffiliation as $affiliation) {
-                ${$affiliation_var}[$affiliation][] = $record;
-            }
-        }
-    }
-}
+$by_affiliation      = UNL_Peoplefinder_SearchResults::groupByAffiliation($context->results);
+$like_by_affiliation = UNL_Peoplefinder_SearchResults::groupByAffiliation($like_records);
 
 // We now have both the exact and like matches grouped by affiliation into special arrays.
 
