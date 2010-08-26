@@ -1,0 +1,69 @@
+/*
+************************************
+
+    For the editing interfaces
+
+************************************
+*/
+ul.listings li div.edit {
+	float:right;
+	margin-top:2px;
+	display:none;
+}
+ul.listings li:hover div.edit {
+    display:block;	
+}
+#maincontent ul.listings li:hover {
+    cursor:pointer;	
+}
+#maincontent ul.listings li:hover ul {
+    border-top:1px dotted #c4c2c2;
+    padding-top:0px;
+}
+
+/*Setup the main UI for buttons*/
+a.action { 
+    background:#90ad4c;
+    background-image: url('images/iconPlus.png');
+    background-image: url('images/iconPlus.png'), -moz-linear-gradient(center top,rgb(169,208,79) 63%,rgb(144,173,76) 87%);
+    background-image: url('images/iconPlus.png'), -webkit-gradient(linear,left top,left bottom,color-stop(0.63, rgb(169,208,79)),color-stop(0.87, rgb(144,173,76)));
+    background-position:5% 50%; 
+    background-origin: padding-box;
+    background-repeat:no-repeat;
+    font-size:1em;
+    font-weight:bold;
+    color:#fff !important;
+    padding:5px 5px 5px 25px;
+    border:1px solid #78923a;
+    border-radius:5px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    display:inline-block;
+}
+a.action:active {
+    background-image: url('images/iconPlus.png');   
+}
+a.solo { /*Setup the non-button UI*/
+    margin-right:10px;
+    padding:3px 19px 0 0;
+    width:16px;
+    height:16px;
+    background-position:bottom right;
+}
+
+a.feed-icon{margin-right:3px;}
+a.edit{
+    background-image:url('images/iconEdit.png');
+    background-repeat:no-repeat;
+}
+a.action.edit {
+    background:#F0CE69;
+    background-image:url('images/iconEdit.png');
+    background-image: url('images/iconEdit.png'), -moz-linear-gradient(center bottom,rgb(219,183,83) 11%,rgb(240,206,105) 30%);
+    background-image: url('images/iconEdit.png'), -webkit-gradient(linear,left bottom,left top,color-stop(0.11, rgb(219,183,83)),color-stop(0.3, rgb(240,206,105)));
+    background-position:5% 50%;
+    background-repeat:no-repeat;
+    border-color:#d4b455;
+    color:#5e4806 !important;
+}
+a.action.edit:active {background-image:url('images/iconEdit.png');}
