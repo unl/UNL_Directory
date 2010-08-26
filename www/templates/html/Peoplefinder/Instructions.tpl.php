@@ -7,7 +7,7 @@
 ?>
 <div class="two_col left">
     <div class="intro">
-    <img width="100" height ="100" class="profile_pic medium planetred_profile" src="<?php echo UNL_Peoplefinder::getURL(); ?>images/peopleHerbie.png" />
+    <img width="100" height ="100" class="profile_pic medium planetred_profile" src="<?php echo UNL_Peoplefinder::getURL(); ?>images/peopleHerbie.png" alt="sample people results" />
     <h6 class="recordDetails">
         Search <span class="search_context">People</span>
     </h6>
@@ -26,7 +26,7 @@
 
 <div class="two_col right">
     <div class="intro">
-	    <img width="100" height ="100" class="profile_pic medium planetred_profile" src="<?php echo UNL_Peoplefinder::getURL(); ?>images/organizationVC.png" />
+	    <img width="100" height ="100" class="profile_pic medium planetred_profile" src="<?php echo UNL_Peoplefinder::getURL(); ?>images/organizationVC.png" alt="sample department results" />
 	    <h6 class="recordDetails">
 	        Search <span class="search_context">Departments</span>
 	    </h6>
