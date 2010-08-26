@@ -164,9 +164,14 @@ WDN.jQuery(document).ready(function() {
 		WDN.jQuery(this).colorbox({open:true});
 		return false;
 	});
-	WDN.jQuery('#advancedSearch').click(function(){
-		directory.splitSearchBoxes();
-		return false;
+	WDN.jQuery('#advancedSearch').bind({
+		focus : function(){
+			WDN.jQuery("#queryString").remove();
+		},
+		click : function(){
+			directory.splitSearchBoxes();
+			return false;
+		}
 	});
 });
 WDN.jQuery(window).keydown(function(event) {
