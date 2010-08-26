@@ -165,6 +165,9 @@ a.img-qrcode{padding-left:24px;padding-right:0;background: url(images/qrcode.png
 	color:#98999a;
 	cursor:text;
 }
+.directorySearch > fieldset > ol > li > label.sn{
+    left:253px;	
+}
 .directorySearch ol li:first-child input[type=text] {
 	width:440px;
 	height:31px;
@@ -172,11 +175,14 @@ a.img-qrcode{padding-left:24px;padding-right:0;background: url(images/qrcode.png
 	font-size:1.5em;
 	color:#98999a;
 	padding:5px 0 0 8px;
-	margin-top:10px;
-	
+	margin-top:10px;	
 }
-.directorySearch.advanced ol li:first-child input[type=text] {
-	width:200px;
+.directorySearch ol li:first-child input.n[type=text] {
+	width:210px;
+	margin-right:10px;
+}
+.directorySearch ol li:first-child input.s[type=text]{
+    margin-right:0;	
 }
 
 .directorySearch ol li:first-child input[type=image] {
@@ -206,7 +212,21 @@ li#filters fieldset {
 	padding-bottom:5px;
 }
 .directorySearch li#filters ol li {background:none;display:inline;padding-right:15px;}
-
+#maincontent #advancedSearch {
+    background:#d7c47f;
+    color:#fff;
+    font-weight:bold;
+    font-size:0.8em;
+    padding:5px;
+    border-radius:3px;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    line-height:auto;
+    text-shadow:1px 1px 3px #888888;
+    border:1px solid #d7c47f;	
+}
+#maincontent #advancedSearch:focus, #maincontent #advancedSearch:hover{color:#fff !important;border-color:#c0af70;}
+#maincontent #advancedSearch:active{text-shadow:none;}
 /* 
 ***************************************************
 

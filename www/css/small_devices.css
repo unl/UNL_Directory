@@ -47,6 +47,21 @@
 .directorySearch input[type=image]{
     width:20px; 
 }
+#maincontent #advancedSearch {
+    background:#d7c47f;
+    color:#fff;
+    font-weight:bold;
+    font-size:0.8em;
+    padding:5px;
+    border-radius:3px;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    line-height:auto;
+    text-shadow:1px 1px 3px #888888;
+    border:1px solid #d7c47f;   
+}
+#maincontent #advancedSearch:focus, #maincontent #advancedSearch:hover{color:#fff !important;border-color:#c0af70;}
+#maincontent #advancedSearch:active{text-shadow:none;}
 /* 
 ***************************************************
 
@@ -104,6 +119,9 @@
 #maincontent ul.pfResult li.selected .vcard {display:none;}
 .eppa, .organization-unit, .tel, .type {display:none;}
 #maincontent ul.pfResult .tel {display:inline;}
+a.cInfo {
+    display:none;	
+}
 
 .planetred_profile, .recordDetails {float:left;}
 .recordDetails {
