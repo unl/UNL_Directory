@@ -37,7 +37,7 @@ var service_peoplefinder = function() {
 				query = cn +" "+ sn;
 			}
 			document.title = 'UNL | Directory | Search for ' + query;
-			WDN.jQuery("#breadcrumbs ul li:contains('Search for')").remove();
+			WDN.jQuery("#breadcrumbs ul li:last").remove();
 			WDN.jQuery('#breadcrumbs ul').append('<li>Search for '+WDN.jQuery('<div/>').text(query).html()+'</li>');
 		},
 		

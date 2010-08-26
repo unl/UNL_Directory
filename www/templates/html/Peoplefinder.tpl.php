@@ -37,6 +37,7 @@ $page->breadcrumbs = '
 <ul>
     <li><a href="http://www.unl.edu/" title="University of Nebraska&ndash;Lincoln">UNL</a></li>
     <li><a href="'.UNL_Peoplefinder::getURL().'">Directory</a></li>
+    <li>Search</li>
 </ul>';
 
 $page->titlegraphic = '<h1>Directory</h1>';
