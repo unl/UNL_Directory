@@ -16,12 +16,16 @@ if (count($context)) {
 //        }
 //        echo '</ul>';
 //    }
-    $i = 0;
-    echo '<ul class="department pfResult">'.PHP_EOL;
-    foreach ($context as $employee) {
-        echo $savvy->render($employee, 'Peoplefinder/RecordInList.tpl.php');
+    $by_affiliation = UNL_Peoplefinder_SearchResults::groupByAffiliation($context);
+    foreach ($by_affiliation as $affiliation=>$records) {
+        if (count($records)) {
+            $section               = new stdClass();
+            $section->affiliation  = $affiliation;
+            $section->results      = $records;
+            $section->like_results = array();
+            echo $savvy->render($section, 'Peoplefinder/SearchResults/ByAffiliation.tpl.php');
+        }
     }
-    echo '</ul>'.PHP_EOL;
 } else {
     echo 'No results could be found.';
 }
