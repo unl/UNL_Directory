@@ -40,9 +40,19 @@
     font-weight:bold;
     font-size:1.0em;
 }
+.advanced label {
+    display:inline-block;	
+}
 .directorySearch input[type=text]{
     width:80%;
     border:1px solid #d7c47f;	
+}
+.directorySearch ol li:first-child input.n[type=text] {
+    width:53%;
+    margin-right:10px;
+}
+.directorySearch ol li:first-child input.s[type=text]{
+    margin-right:0; 
 }
 .directorySearch input[type=image]{
     width:20px; 
