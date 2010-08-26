@@ -37,16 +37,11 @@ $like_by_affiliation = UNL_Peoplefinder_SearchResults::groupByAffiliation($like_
 foreach ($by_affiliation as $affiliation=>$records) {
     if (count($records)
         || count($like_by_affiliation[$affiliation])) {
-        echo '<div class="results affiliation '.$affiliation.'">';
-        echo '<h2>'.ucfirst($affiliation).'</h2>';
-        echo $savvy->render(new UNL_Peoplefinder_SearchResults(array('results'=>$records)));
-        if (count($like_by_affiliation[$affiliation])) {
-            echo '<div class="likeResults">';
-            echo '<h3>similar '.$affiliation.' results</h3>';
-            echo $savvy->render(new UNL_Peoplefinder_SearchResults(array('results'=>$like_by_affiliation[$affiliation])));
-            echo '</div>';
-        }
-        echo '</div>';
+        $section               = new stdClass();
+        $section->affiliation  = $affiliation;
+        $section->results      = $records;
+        $section->like_results = $like_by_affiliation[$affiliation];
+        echo $savvy->render($section, 'Peoplefinder/SearchResults/ByAffiliation.tpl.php');
     }
 }
 
