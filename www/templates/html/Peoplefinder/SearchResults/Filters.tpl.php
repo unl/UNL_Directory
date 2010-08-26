@@ -12,6 +12,7 @@
             <fieldset class="department">
                 <legend><span>By Department</span></legend>
                 <ol>
+                    <li></li>
                 </ol>
             </fieldset>
         </form>
