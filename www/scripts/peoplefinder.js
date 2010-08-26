@@ -68,7 +68,7 @@ var directory = function() {
 		initializeSearchBoxes : function() {
 			WDN.jQuery('#peoplefinder').submit(function(eventObject) { //on submit of the search form
 				if (WDN.jQuery('#'+this.id+' input.q').val().length) {
-					if(WDN.jQuery('#cn').val().length){
+					if(WDN.jQuery('#cn').length > 0){
 						window.location.hash = '#q/' + WDN.jQuery('#cn').val() + '/' + WDN.jQuery('#sn').val();
 						WDN.jQuery('#cn').focus().select();
 					} else {
