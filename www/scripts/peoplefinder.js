@@ -26,11 +26,16 @@ var service_peoplefinder = function() {
             }
 		},
 		
-		presentPeopleFinderResults : function(query){
+		presentPeopleFinderResults : function(){
 			WDN.jQuery('#filters').css({'opacity' : '0.4'});
 			WDN.jQuery('#q').siblings('label').hide();
 			WDN.jQuery('#maincontent div.two_col').remove();
-			WDN.toolbar_peoplefinder.queuePFRequest(query, 'results');
+			if (fullname) {
+				WDN.toolbar_peoplefinder.queuePFRequest(query, 'results');
+			} else {
+				WDN.toolbar_peoplefinder.queuePFRequest('', 'results', '', cn, sn);
+				query = cn +" "+ sn;
+			}
 			document.title = 'UNL | Directory | Search for ' + query;
 			WDN.jQuery("#breadcrumbs ul li:contains('Search for')").remove();
 			WDN.jQuery('#breadcrumbs ul').append('<li>Search for '+query+'</li>');
@@ -93,16 +98,24 @@ WDN.jQuery(document).ready(function() {
 	WDN.loadJS('wdn/templates_3.0/scripts/plugins/hashchange/jQuery.hashchange.1-3.min.js', function() {
 		WDN.jQuery(window).bind('hashchange', function(eventObject){
 			var hash = location.hash;
-			if (hash.match(/[^#q\/]/)) {
-				//alert('We have a hash match: '+ hash);
+			if (hash.match(/^#q\//)) {
 				hash = hash.split('/'); //hash[1]
+				fullname = true;
+				if(hash.length == 3){ // if 3, then we're looking for first and last name individually.
+					fullname = false;
+					cn = hash[1];
+					sn = hash[2];
+				} else { // it's all one search term.
+					query = hash[1];
+				}
+				
 				WDN.jQuery('#q').val(hash[1]);
-				service_peoplefinder.presentPeopleFinderResults(hash[1]);
+				service_peoplefinder.presentPeopleFinderResults();
 				
 				eventObject.preventDefault();
 				eventObject.stopPropagation();
 				return false;
-			}
+			} 
 			if (!hash) {
 				// Load the default instructions
 				WDN.jQuery('#maincontent').load('?format=partial', function(){
