@@ -30,7 +30,7 @@ var service_peoplefinder = function() {
 			WDN.jQuery('#filters').css({'opacity' : '0.4'});
 			WDN.jQuery('#q').siblings('label').hide();
 			WDN.jQuery('#maincontent div.two_col').remove();
-			if (fullname) {
+			if (!splitName) {
 				WDN.toolbar_peoplefinder.queuePFRequest(query, 'results');
 			} else {
 				WDN.toolbar_peoplefinder.queuePFRequest('', 'results', '', cn, sn);
@@ -97,12 +97,14 @@ var directory = function() {
 			WDN.jQuery('#q').focus().select();
 		},
 		
-		splitSearchBoxes : function() {
+		splitSearchBoxes : function(cn, sn) {
 			WDN.jQuery("#queryString").remove();
 			WDN.jQuery('#q').replaceWith('<label for="cn" class="cn">First Name</label><input type="text" value="" id="cn" name="cn" class="n q" /><label for="sn" class="sn">Last Name</label><input type="text" value="" id="sn" name="sn" class="s n q" />');
 			WDN.jQuery('#cn, #sn').focus(function(){
 				WDN.jQuery(this).prev('label').hide();
 			});
+			WDN.jQuery('#cn').val(cn);
+			WDN.jQuery('#sn').val(sn);
 			WDN.jQuery('form.directorySearch ol > li > label').focus(function(){
 					WDN.jQuery(this).hide().next('input').focus();
 			});
@@ -127,16 +129,18 @@ WDN.jQuery(document).ready(function() {
 			var hash = location.hash;
 			if (hash.match(/^#q\//)) {
 				hash = hash.split('/'); //hash[1]
-				fullname = true;
+				splitName = false;
 				if(hash.length == 3){ // if 3, then we're looking for first and last name individually.
-					fullname = false;
+					splitName = true;
 					cn = hash[1];
 					sn = hash[2];
+					directory.splitSearchBoxes(cn, sn);
 				} else { // it's all one search term.
 					query = hash[1];
+					WDN.jQuery('#q').val(hash[1]);
 				}
 				
-				WDN.jQuery('#q').val(hash[1]);
+				
 				service_peoplefinder.presentPeopleFinderResults();
 				
 				eventObject.preventDefault();
@@ -169,7 +173,7 @@ WDN.jQuery(document).ready(function() {
 			WDN.jQuery("#queryString").remove();
 		},
 		click : function(){
-			directory.splitSearchBoxes();
+			directory.splitSearchBoxes('','');
 			return false;
 		}
 	});
