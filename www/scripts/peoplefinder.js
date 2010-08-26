@@ -68,8 +68,13 @@ var directory = function() {
 		initializeSearchBoxes : function() {
 			WDN.jQuery('#peoplefinder').submit(function(eventObject) { //on submit of the search form
 				if (WDN.jQuery('#'+this.id+' input.q').val().length) {
-					window.location.hash = '#q/' + WDN.jQuery('#'+this.id+' input.q').val(); //triggering a hash change will run through the searching function
-					WDN.jQuery('#q').focus().select();
+					if(WDN.jQuery('#cn').val().length){
+						window.location.hash = '#q/' + WDN.jQuery('#cn').val() + '/' + WDN.jQuery('#sn').val();
+						WDN.jQuery('#cn').focus().select();
+					} else {
+						window.location.hash = '#q/' + WDN.jQuery('#'+this.id+' input.q').val(); //triggering a hash change will run through the searching function
+						WDN.jQuery('#q').focus().select();
+					}
 				}
 				eventObject.preventDefault();
 				eventObject.stopPropagation();
@@ -90,6 +95,28 @@ var directory = function() {
 				}
 			});
 			WDN.jQuery('#q').focus().select();
+		},
+		
+		splitSearchBoxes : function() {
+			WDN.jQuery("#queryString").remove();
+			WDN.jQuery('#q').replaceWith('<label for="cn" class="cn">First Name</label><input type="text" value="" id="cn" name="cn" class="n q" /><label for="sn" class="sn">Last Name</label><input type="text" value="" id="sn" name="sn" class="s n q" />');
+			WDN.jQuery('#cn, #sn').focus(function(){
+				WDN.jQuery(this).prev('label').hide();
+			});
+			WDN.jQuery('form.directorySearch ol > li > label').focus(function(){
+					WDN.jQuery(this).hide().next('input').focus();
+			});
+			if (WDN.jQuery('#sn').val() !== "") {
+				WDN.jQuery('#sn').prev('label').hide();
+			};
+			if (WDN.jQuery('#cn').val() !== "") {
+				WDN.jQuery('#cn').prev('label').hide();
+			};
+			WDN.jQuery('input.n').blur(function() {
+				if (WDN.jQuery(this).val() === "") {
+					WDN.jQuery(this).prev('label').show();
+				}
+			});
 		}
 	};
 }();
@@ -125,7 +152,8 @@ WDN.jQuery(document).ready(function() {
 		});
 	});
 	WDN.loadJS('wdn/templates_3.0/scripts/toolbar_peoplefinder.js', function(){
-		WDN.toolbar_peoplefinder.serviceURL = window.location.protocol + '//' + window.location.host + window.location.pathname;
+		//WDN.toolbar_peoplefinder.serviceURL = window.location.protocol + '//' + window.location.host + window.location.pathname;
+		WDN.toolbar_peoplefinder.serviceURL = 'http://peoplefinder.unl.edu/';
 		WDN.toolbar_peoplefinder.configuedWebService = true;
 		if (window.location.hash) {
 			WDN.jQuery(window).trigger('hashchange');
@@ -134,6 +162,10 @@ WDN.jQuery(document).ready(function() {
 	directory.initializeSearchBoxes();
 	WDN.jQuery('a.img-qrcode').live('click', function() {
 		WDN.jQuery(this).colorbox({open:true});
+		return false;
+	});
+	WDN.jQuery('#advancedSearch').click(function(){
+		directory.splitSearchBoxes();
 		return false;
 	});
 });

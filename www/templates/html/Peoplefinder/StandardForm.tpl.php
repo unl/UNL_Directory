@@ -15,6 +15,7 @@
 	    ?>
 	    <input type="text" value="<?php echo $default; ?>" id="q" name="q" class="q" />
 	    <input name="submitbutton" type="image" src="images/formSearch.png" value="Submit" />
+	    <a href="?adv" title="Advanced Search" id="advancedSearch">Advanced Search</a>
     </li>
 </ol>
 </fieldset>
