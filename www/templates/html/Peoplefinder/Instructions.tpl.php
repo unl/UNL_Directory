@@ -7,7 +7,7 @@
 ?>
 <div class="two_col left">
     <div class="intro">
-    <img width="100" height ="100" class="profile_pic medium planetred_profile" src="images/peopleHerbie.png" />
+    <img width="100" height ="100" class="profile_pic medium planetred_profile" src="<?php echo UNL_Peoplefinder::getURL(); ?>images/peopleHerbie.png" />
     <h6 class="recordDetails">
         Search <span class="search_context">People</span>
     </h6>
@@ -26,7 +26,7 @@
 
 <div class="two_col right">
     <div class="intro">
-	    <img width="100" height ="100" class="profile_pic medium planetred_profile" src="images/organizationVC.png" />
+	    <img width="100" height ="100" class="profile_pic medium planetred_profile" src="<?php echo UNL_Peoplefinder::getURL(); ?>images/organizationVC.png" />
 	    <h6 class="recordDetails">
 	        Search <span class="search_context">Departments</span>
 	    </h6>
@@ -36,25 +36,5 @@
     </div>
     <h5 class="coming">Coming Soon!</h5>
 </div>
-
-<div id="filters" class="one_col left">
-<div class="zenbox energetic wdn_filterset">
-    <h3>Filter People Results</h3>
-    <form method="post" action="#" class="filters">
-
-    <fieldset class="affiliation">
-        <legend><span>By Affiliation</span></legend>
-        <ol>
-           <li>
-           </li>
-        </ol>
-    </fieldset>
-    <fieldset class="department">
-        <legend><span>By Department</span></legend>
-        <ol>
-        </ol>
-    </fieldset>
-    </form>
-</div>
-</div>
+<?php echo $savvy->render(null, 'Peoplefinder/SearchResults/Filters.tpl.php'); ?>
 <div id="results" class="three_col right"></div>
