@@ -552,9 +552,6 @@ class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
                    );
 
         $res = self::getDB()->query($query);
-        if ($res->num_rows == 0) {
-            return array();
-        }
 
         return $this->_prepareResult($res);
     }
