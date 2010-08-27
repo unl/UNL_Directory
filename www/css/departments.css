@@ -46,7 +46,7 @@
 .departmentInfo .adr {margin:0 0 15px 0;}
 .departmentInfo .edit {float:right;}
 
-#employees > h2, #employees > p{display:none;}
+#listings + h2, #listings + h2 + p{display:none;}
 
 
 #maincontent #orgChart h2 {font-variant:normal;background:url('images/iconOrg.png') no-repeat 0 7px; padding-left:22px;margin-bottom:36px;}

@@ -46,7 +46,14 @@
     <ul class="wdn_tabs">
         <li><a href="#listings">Listings</a></li>
         <?php if ($department && count($department) > 0): ?>
-        <li><a href="#employees">All Employees <sup><?php echo count($department); ?></sup></a></li>
+        <li><a href="#results_faculty">All Employees <sup><?php echo count($department); ?></sup></a>
+	        <ul>
+	            <li><a href="#results_faculty">Faculty</a></li>
+	            <li><a href="#results_staff">Staff</a></li>
+                <li><a href="#results_student">Student</a></li>
+                <li><a href="#results_organizations">Organizations</a></li>
+            </ul>
+        </li>
         <?php endif; ?>
     </ul>
     <div class="wdn_tabs_content">
@@ -58,7 +65,6 @@
         }
         ?>
         </div>
-        <div id="employees">
         <?php
         if ($department && count($department) > 0) {
             // This listing has an official HR department associated with IT
@@ -67,7 +73,6 @@
         }
         
         ?>
-        </div>
     </div>
 </div>
 <div class="two_col right" id="orgChart">
