@@ -14,7 +14,10 @@ foreach ($context as $listing) {
     }
     echo '<li class="listing" id="listing_'.$listing->id.'">'.$savvy->render($listing, 'Officefinder/Department/Listing.tpl.php');
     if ($listing->hasChildren()) {
-        echo $savvy->render($listing->getChildren(), 'Officefinder/Department/Listings.tpl.php');
+        $children = $listing->getChildren();
+        if (count($children)) {
+            echo $savvy->render($children, 'Officefinder/Department/Listings.tpl.php');
+        }
     }
     echo '</li>';
 }
