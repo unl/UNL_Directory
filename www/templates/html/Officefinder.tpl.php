@@ -9,7 +9,10 @@ $page->head .= '
 <meta name="keywords" content="university of nebraska-lincoln student faculty staff directory vcard" />
 <meta name="author" content="Brett Bieber, UNL Office of University Communications" />
 <meta name="viewport" content="width = 320" />
-<link media="only screen and (max-device-width: 480px)" href="'.UNL_Peoplefinder::getURL().'css/small_devices.css" type="text/css" rel="stylesheet" />';
+<link media="only screen and (max-device-width: 480px)" href="'.UNL_Peoplefinder::getURL().'css/small_devices.css" type="text/css" rel="stylesheet" />
+<!--[if IE]>
+<link rel="stylesheet" type="text/css" media="screen" href="'.UNL_Peoplefinder::getURL().'css/ie.css" />
+<![endif]-->';
 
 if (isset($context->options['q'])) {
     $page->head .= '<meta name="robots" content="NOINDEX, NOFOLLOW" />

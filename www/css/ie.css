@@ -1,0 +1,7 @@
+#maincontent ul.pfResult li.selected div.overflow img.profile_pic { background:transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=/wdn/templates_3.0/css/header/images/wdn_idmProfileSmall.png, sizingMethod='scale') progid:DXImageTransform.Microsoft.Alpha(opacity=100); }
+
+#maincontent ul.pfResult li div.vcard img.profile_pic{background:transparent; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=/wdn/templates_3.0/css/header/images/wdn_idmProfileMedium.png, sizingMethod='scale') progid:DXImageTransform.Microsoft.Alpha(opacity=100); }
+
+.intro img.profile_pic{background:transparent; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=/wdn/templates_3.0/css/header/images/wdn_idmProfileMedium.png, sizingMethod='scale'); }
+
+#maincontent h5.coming { background:transparent; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=http://peoplefinder.unl.edu/css/images/comingSoon.png, sizingMethod='scale') progid:DXImageTransform.Microsoft.Alpha(opacity=80); }

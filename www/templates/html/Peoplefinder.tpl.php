@@ -21,6 +21,9 @@ if ($context->options['mobile'] === true) {
     $page->head .='<link href="'.UNL_Peoplefinder::getURL().'css/small_devices.css" type="text/css" rel="stylesheet" />';
 } else {
     $page->head .='<link href="'.UNL_Peoplefinder::getURL().'css/all_peoplefinder.css" type="text/css" rel="stylesheet" />
+                <!--[if IE]>
+                <link rel="stylesheet" type="text/css" media="screen" href="'.UNL_Peoplefinder::getURL().'css/ie.css" />
+                <![endif]-->
                 <script type="text/javascript">var PF_URL = "'.UNL_Peoplefinder::getURL().'";</script>
                 <script type="text/javascript" src="'.UNL_Peoplefinder::getURL().'scripts/peoplefinder.js"></script>';
 }
