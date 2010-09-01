@@ -18,6 +18,9 @@ class UNL_Officefinder_Record_NestedSetAdjacencyList extends UNL_Officefinder_Re
     function addChild(UNL_Officefinder_Record_NestedSet $newChild, $insertAsLastChild = true)
     {
         $newChild->parent_id = $this->id;
+        if ($insertAsLastChild) {
+            $newChild->sort_order = count($this->getChildren()) + 1;
+        }
         $newChild->update();
     }
 
@@ -46,7 +49,7 @@ class UNL_Officefinder_Record_NestedSetAdjacencyList extends UNL_Officefinder_Re
      * @return     mixed   the array with the data of all children
      *                     or false, if there are none
      */
-    function getChildren($orderBy = 'sort_order')
+    function getChildren($orderBy = 'sort_order, id')
     {
         return $this->_getChildren(null, $orderBy);
     }
