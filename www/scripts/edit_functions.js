@@ -15,7 +15,7 @@ WDN.jQuery(document).ready(function(){
 		stop: function(event, ui){
 			saveSortOrder(this);
 		},
-		items : 'li'
+		items : '> li'
 	});
 
 });
