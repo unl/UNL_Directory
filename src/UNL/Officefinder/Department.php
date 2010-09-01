@@ -3,7 +3,7 @@
  * @Entity
  * @Table(name="departments")
  */
-class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSet
+class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetPreorderTree
 {
     /** 
      * @Id @Column(type="integer")
