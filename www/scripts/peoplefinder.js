@@ -2,15 +2,28 @@ var service_peoplefinder = function() {
 	return {
 		updatePeopleFinderResults : function(){ //function called when the list has been rendered
 			if (WDN.jQuery("#results:contains('Sorry, no results could be found.')").length > 0 && secondTry == false) {
+				if (showNotice) {
+					clearTimeout(showNotice);
+				}
 				if (splitName == false && query.indexOf(' ') > 0) { //user did a simple search with a space, so try an advanced search
 					WDN.jQuery("#results").empty();
 					splitQuery = query.split(' ',2);
 					window.location.hash = '#q/' + splitQuery[0] + '/' + splitQuery[1];
+					currentSearch = splitQuery[0] + ' ' + splitQuery[1];
+					thisFirstName = splitQuery[0];
+					thisLastName = splitQuery[1];
 				}
 				if (splitName == true) { //user did an adavanced search, let's try flipping the terms
 					secondTry = true;
 					window.location.hash = '#q/' + hash[2] + '/' + hash[1];
+					currentSearch = hash[2] + ' ' + hash[1];
+					thisFirstName = hash[2];
+					thisLastName = hash[1];					
 				}
+				var showNotice = setTimeout(function() {
+					directory.showSearchNotice();
+				}, 1000);
+				directory.buildSearchNotice(originalSearch, thisFirstName, thisLastName);
 				return false;
 			}
 			WDN.loadJS('scripts/filters.js', function(){
@@ -79,14 +92,17 @@ var directory = function() {
 	return {
 		initializeSearchBoxes : function() {
 			WDN.jQuery('#peoplefinder').submit(function(eventObject) { //on submit of the search form
+				WDN.jQuery("#searchNotice").slideUp();
 				secondTry = false;
 				if (WDN.jQuery('#'+this.id+' input.q').val().length) {
 					if(WDN.jQuery('#cn').length > 0){
 						window.location.hash = '#q/' + WDN.jQuery('#cn').val() + '/' + WDN.jQuery('#sn').val();
+						originalSearch = WDN.jQuery('#cn').val() + ' ' + WDN.jQuery('#sn').val();
 						WDN.jQuery('#cn').focus().select();
 					} else {
 						window.location.hash = '#q/' + WDN.jQuery('#'+this.id+' input.q').val(); //triggering a hash change will run through the searching function
 						WDN.jQuery('#q').focus().select();
+						originalSearch = WDN.jQuery('#'+this.id+' input.q').val();
 					}
 				}
 				eventObject.preventDefault();
@@ -157,6 +173,15 @@ var directory = function() {
 			});
 			WDN.jQuery('#peoplefinder li').prepend('<label for="q" id="queryString">Enter a name to begin your search</label><input type="text" value="" id="q" name="q" class="q" />');
 			directory.fixLabel();
+		},
+		
+		buildSearchNotice : function(originalSearch, firstName, lastName) {
+			WDN.jQuery("#searchNotice").remove();
+			WDN.jQuery("#peoplefinder").after('<p id="searchNotice">Your original search for <span>'+originalSearch+'</span> did not return any results. So we tried a few more advanced searches and below is what we found for <span>First Name: '+firstName+' AND Last Name: '+lastName+'</span>.');
+		},
+		
+		showSearchNotice : function() {
+			WDN.jQuery("#searchNotice").slideDown(500);
 		}
 	};
 }();

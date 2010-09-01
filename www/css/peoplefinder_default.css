@@ -206,6 +206,23 @@ a.img-qrcode{padding-left:24px;padding-right:0;background: url(images/qrcode.png
 }
 #maincontent #advancedSearch:focus, #maincontent #advancedSearch:hover{color:#fff !important;border-color:#c0af70;}
 #maincontent #advancedSearch:active{text-shadow:none;}
+#maincontent #searchNotice {
+    display:none;
+    border-top:1px solid;
+    border-bottom:1px solid;
+    border-color:#d7d88d;
+    background:#FEFFCE;
+    padding:5px 15px;
+    color:#5d2401;
+    font-size:0.9em;
+}
+#maincontent #searchNotice span {
+    font-weight:bold;	
+    padding:2px;
+    color:#000;
+    background:#e6e4b1;
+}
+                                 
 /* 
 ***************************************************
 
