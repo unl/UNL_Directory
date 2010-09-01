@@ -7,7 +7,7 @@ foreach ($context as $var=>$value) {
         || $var == 'department_id') {
         $type = 'hidden';
     }
-    echo $var . ': <input type="'.$type.'" name="'.$var.'" value="'.$value.'" /><br />';
+    echo $var . ': <input type="'.$type.'" name="'.$var.'" value="'.$value.'" /><br />'.PHP_EOL;
 }
 ?>
     <input type="submit" />

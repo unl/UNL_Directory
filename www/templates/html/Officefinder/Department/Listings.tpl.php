@@ -19,7 +19,7 @@ foreach ($context as $listing) {
             echo $savvy->render($children, 'Officefinder/Department/Listings.tpl.php');
         }
     }
-    echo '</li>';
+    echo '</li>'.PHP_EOL;
 }
 ?>
 </ul>

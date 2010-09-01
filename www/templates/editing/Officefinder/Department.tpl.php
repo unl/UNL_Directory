@@ -15,7 +15,7 @@ foreach ($context as $var=>$value) {
         default:
             $type = 'text';
     }
-    echo $var . ': <input type="'.$type.'" name="'.$var.'" value="'.$value.'" /><br />';
+    echo $var . ': <input type="'.$type.'" name="'.$var.'" value="'.$value.'" /><br />'.PHP_EOL;
 }
 ?>
     <input type="submit" />
