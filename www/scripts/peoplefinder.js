@@ -1,6 +1,12 @@
 var service_peoplefinder = function() {
 	return {
 		updatePeopleFinderResults : function(){ //function called when the list has been rendered
+			if (WDN.jQuery("#results:contains('Sorry, no results could be found.')").length > 0  && splitName == false && query.indexOf(' ') > 0) {
+				WDN.jQuery("#results").empty();
+				splitQuery = query.split(' ',2);
+				window.location.hash = '#q/' + splitQuery[0] + '/' + splitQuery[1];
+				return false;
+			}
 			WDN.loadJS('scripts/filters.js', function(){
 				filters.initialize();
 			});
@@ -155,7 +161,7 @@ WDN.jQuery(document).ready(function() {
 			if (hash.match(/^#q\//)) {
 				hash = hash.split('/'); //hash[1]
 				splitName = false;
-				if(hash.length == 3){ // if 3, then we're looking for first and last name individually.
+				if(hash.length >= 3){ // if 3, then we're looking for first and last name individually.
 					splitName = true;
 					cn = hash[1];
 					sn = hash[2];
