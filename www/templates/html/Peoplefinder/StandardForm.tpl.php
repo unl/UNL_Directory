@@ -16,7 +16,9 @@
 	    <input type="text" value="<?php echo $default; ?>" id="q" name="q" class="q" />
 	    <input name="submitbutton" type="image" src="<?php echo UNL_Peoplefinder::getURL(); ?>images/formSearch.png" value="Submit" />
 	    <a href="<?php echo UNL_Peoplefinder::getURL(); ?>?adv" title="Switch searching type"  tabindex="0" id="advancedSearch" class="advanced">Advanced Search</a>
+	    
     </li>
 </ol>
+<a href="http://www.unl.edu/ucomm/splash/fieldguide_directory.shtml" id="directoryHelp" title="Find out what's new in the directory" class="tooltip">Directory Help</a>
 </fieldset>
 </form>

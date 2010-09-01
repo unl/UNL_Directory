@@ -222,7 +222,16 @@ a.img-qrcode{padding-left:24px;padding-right:0;background: url(images/qrcode.png
     color:#000;
     background:#e6e4b1;
 }
-                                 
+#directoryHelp{
+    background:url('/wdn/templates_3.0/css/content/images/notice/information.png') no-repeat 0 0;	
+    position:absolute;
+    right:0;
+    width:80px;
+    height:65px;
+    top:0;
+    text-indent:-99999px;
+    
+}                            
 /* 
 ***************************************************
 
