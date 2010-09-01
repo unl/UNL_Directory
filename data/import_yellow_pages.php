@@ -26,7 +26,18 @@ updateOfficialDepartment($sap_dept);
 // Get root again, because the left and right values have changed!
 $root = UNL_Officefinder_Department::getById(1);
 
-foreach (array('Buildings', 'Copy Centers', 'Religious Groups', 'Fax Numbers') as $semi_official_dept_name) {
+foreach (array(
+    'Buildings',
+    'Copy Centers',
+    'Religious Groups',
+    'Fax Access Numbers',
+    'Vice Chancellors',
+    'Unopa (University of Nebraska Office Professionals Association)',
+    'Operated By Follett Higher Education Group University Bookstore',
+    'Un Computing Services Network (University of Nebraska Central Administration)',
+    'Uaad Officers & Non-Committee Chair Executive Board',
+    'Administration',
+    ) as $semi_official_dept_name) {
     if (!($semi_official = UNL_Officefinder_Department::getByname($semi_official_dept_name))) {
         $semi_official       = new UNL_Officefinder_Department();
         $semi_official->name = $semi_official_dept_name;
@@ -42,9 +53,17 @@ $cleanup_file->setFlags(SplFileObject::READ_CSV);
 //exit();
 
 // Now rename a couple departments that are really mis-named:
-$dept = UNL_Officefinder_Department::getByOrg_unit('50001186');
-$dept->name = 'IANR Information Services';
-$dept->save();
+foreach (array(
+    '50001186'=>'IANR Information Services'
+    ) as $old=>$new) {
+    $dept = UNL_Officefinder_Department::getByOrg_unit($old);
+    if ($dept === false) {
+        $dept = UNL_Officefinder_Department::getByName($old);
+    }
+    $dept->name = $new;
+    $dept->save();
+}
+
 
 function updateOfficialDepartment(UNL_Peoplefinder_Department $sap_dept, UNL_Officefinder_Department &$parent = null)
 {
