@@ -104,16 +104,15 @@ var directory = function() {
 				WDN.jQuery("#queryString, #q").remove();
 				WDN.jQuery('#peoplefinder li').prepend('<label for="cn" class="cn">First Name</label><input type="text" value="" id="cn" name="cn" class="n q" /><label for="sn" class="sn">Last Name</label><input type="text" value="" id="sn" name="sn" class="s n q" />');
 			}
-			directory.fixLabel();
 			WDN.jQuery('#cn, #sn').focus(function(){
 				WDN.jQuery(this).prev('label').hide();
 			});
-			WDN.jQuery('#advancedSearch').removeClass('advanced').addClass('simple').text('Simple Search').bind({
+			WDN.jQuery('#advancedSearch').unbind('click').removeClass('advanced').addClass('simple').text('Simple Search').bind({
 				focus : function(){
 					WDN.jQuery("#queryString").remove();
 				},
 				click : function(eventObject){
-					directory.combineSearchBoxes('','');
+					directory.combineSearchBoxes();
 					eventObject.preventDefault();
 					eventObject.stopPropagation();
 					return false;
@@ -127,11 +126,12 @@ var directory = function() {
 			if(sn.length){
 				WDN.jQuery('label[for=sn]').hide();
 			}
+			directory.fixLabel();
 		},
 		
 		combineSearchBoxes : function() { //function called to prepare the simple search box
 			WDN.jQuery('#sn, #cn, label.cn, label.sn').remove();
-			WDN.jQuery('#advancedSearch').removeClass('simple').addClass('advanced').text('Advanced Search').bind({
+			WDN.jQuery('#advancedSearch').unbind('click').removeClass('simple').addClass('advanced').text('Advanced Search').bind({
 				focus : function(){
 					WDN.jQuery("#peoplefinder label").remove();
 				},
@@ -168,7 +168,6 @@ WDN.jQuery(document).ready(function() {
 					WDN.jQuery('#q').val(hash[1]);
 				}
 				
-				
 				service_peoplefinder.presentPeopleFinderResults();
 				
 				eventObject.preventDefault();
@@ -192,11 +191,7 @@ WDN.jQuery(document).ready(function() {
 		}
 	});
 	directory.initializeSearchBoxes();
-	WDN.jQuery('a.img-qrcode').live('click', function() {
-		WDN.jQuery(this).colorbox({open:true});
-		return false;
-	});
-	WDN.jQuery('#advancedSearch.advanced').bind({
+	WDN.jQuery('#advancedSearch').bind({
 		focus : function(){
 			WDN.jQuery("#queryString").remove();
 		},
@@ -204,6 +199,10 @@ WDN.jQuery(document).ready(function() {
 			directory.splitSearchBoxes('','');
 			return false;
 		}
+	});
+	WDN.jQuery('a.img-qrcode').live('click', function() {
+		WDN.jQuery(this).colorbox({open:true});
+		return false;
 	});
 });
 WDN.jQuery(window).keydown(function(event) {
