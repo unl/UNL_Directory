@@ -97,11 +97,25 @@ var directory = function() {
 			WDN.jQuery('#q').focus().select();
 		},
 		
+		fixLabel : function() {
+			WDN.jQuery('.directorySearch > fieldset > ol > li > label').css({'top' : '16px'});
+		},
+		
 		splitSearchBoxes : function(cn, sn) {
-			WDN.jQuery("#queryString").remove();
-			WDN.jQuery('#q').replaceWith('<label for="cn" class="cn">First Name</label><input type="text" value="" id="cn" name="cn" class="n q" /><label for="sn" class="sn">Last Name</label><input type="text" value="" id="sn" name="sn" class="s n q" />');
+			WDN.jQuery("#queryString, #q").remove();
+			WDN.jQuery('#peoplefinder li').prepend('<label for="cn" class="cn">First Name</label><input type="text" value="" id="cn" name="cn" class="n q" /><label for="sn" class="sn">Last Name</label><input type="text" value="" id="sn" name="sn" class="s n q" />');
+			directory.fixLabel();
 			WDN.jQuery('#cn, #sn').focus(function(){
 				WDN.jQuery(this).prev('label').hide();
+			});
+			WDN.jQuery('#advancedSearch').removeClass('advanced').addClass('simple').text('Simple Search').bind({
+				focus : function(){
+					WDN.jQuery("#queryString").remove();
+				},
+				click : function(){
+					directory.combineSearchBoxes('','');
+					return false;
+				}
 			});
 			WDN.jQuery('#cn').val(cn);
 			WDN.jQuery('#sn').val(sn);
@@ -119,6 +133,21 @@ var directory = function() {
 					WDN.jQuery(this).prev('label').show();
 				}
 			});
+		},
+		
+		combineSearchBoxes : function() {
+			WDN.jQuery('#sn, #cn, label.cn, label.sn').remove();
+			WDN.jQuery('#advancedSearch').removeClass('simple').addClass('advanced').text('Advanced Search').bind({
+				focus : function(){
+					WDN.jQuery("#peoplefinder label").remove();
+				},
+				click : function(){
+					directory.splitSearchBoxes('','');
+					return false;
+				}
+			});
+			WDN.jQuery('#peoplefinder li').prepend('<label for="q" id="queryString">Enter a name to begin your search</label><input type="text" value="" id="q" name="q" class="q" />');
+			directory.fixLabel();
 		}
 	};
 }();
@@ -169,7 +198,7 @@ WDN.jQuery(document).ready(function() {
 		return false;
 	});
 	WDN.jQuery('.directorySearch > fieldset > ol > li > label').css({'top' : '16px'});
-	WDN.jQuery('#advancedSearch').bind({
+	WDN.jQuery('#advancedSearch.advanced').bind({
 		focus : function(){
 			WDN.jQuery("#queryString").remove();
 		},
