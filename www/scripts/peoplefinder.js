@@ -163,15 +163,15 @@ WDN.jQuery(document).ready(function() {
 				splitName = false;
 				if(hash.length >= 3){ // if 3, then we're looking for first and last name individually.
 					splitName = true;
-					cn = hash[1];
-					sn = hash[2];
+					cn = unescape(hash[1]);
+					sn = unescape(hash[2]);
 					directory.splitSearchBoxes(cn, sn);
 				} else { // it's all one search term.
-					query = hash[1];
+					query = unescape(hash[1]);
 					if (WDN.jQuery('#cn').length){
 						directory.combineSearchBoxes();
 					}
-					WDN.jQuery('#q').val(hash[1]);
+					WDN.jQuery('#q').val(query);
 				}
 				
 				service_peoplefinder.presentPeopleFinderResults();
