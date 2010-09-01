@@ -112,6 +112,7 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
     function getLDAPResults()
     {
         if (!isset($this->_results)) {
+            UNL_Peoplefinder::$resultLimit = 500;
             $pf = new UNL_Peoplefinder($this->options);
             $this->_results = new ArrayIterator($pf->getHRPrimaryDepartmentMatches($this->name));
         }
