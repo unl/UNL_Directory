@@ -26,6 +26,8 @@ class UNL_Officefinder
 
     protected static $auth;
 
+    public static $admins = array();
+
     /**
      * The currently logged in user.
      * 

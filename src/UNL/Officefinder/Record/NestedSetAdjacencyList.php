@@ -121,8 +121,10 @@ class UNL_Officefinder_Record_NestedSetAdjacencyList extends UNL_Officefinder_Re
     protected function _prepareResult($res)
     {
         $ids = array();
-        while($row = $res->fetch_row()) {
-            $ids[] = $row[0];
+        if (is_object($res)) {
+            while($row = $res->fetch_row()) {
+                $ids[] = $row[0];
+            }
         }
         return new UNL_Officefinder_DepartmentList($ids);
     }

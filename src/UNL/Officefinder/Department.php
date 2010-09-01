@@ -151,6 +151,9 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
 
     function userCanEdit($user)
     {
+        if (in_array($user, UNL_Officefinder::$admins)) {
+            return true;
+        }
         return (bool)UNL_Officefinder_Department_Permission::getById($this->id, $user);
     }
 
