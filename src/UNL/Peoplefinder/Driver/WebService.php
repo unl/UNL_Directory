@@ -25,7 +25,11 @@ class UNL_Peoplefinder_Driver_WebService implements UNL_Peoplefinder_DriverInter
     }
     function getAdvancedSearchMatches($query, $affliation = null)
     {
-        throw new Exception('Not implemented yet');
+        $results = file_get_contents($this->service_url.'?sn='.urlencode($query['sn']).'&cn='.urlencode($query['cn']).'&format=php&affiliation='.urlencode($affiliation).'&method=getAdvancedSearchMatches');
+        if ($results) {
+            $results = unserialize($results);
+        }
+        return $results;
     }
     function getLikeMatches($query, $affiliation = null)
     {
