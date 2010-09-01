@@ -1,6 +1,11 @@
 <?php
 require_once dirname(__FILE__).'/../config.inc.php';
 
+if (isset($_COOKIE['unl_sso'])) {
+    // The user was logged in before, might as well get the CAS auth info.
+    UNL_Officefinder::getUser(true);
+}
+
 $options = $_GET;
 $options['driver'] = $driver;
 $peoplefinder  = new UNL_Officefinder($options);
