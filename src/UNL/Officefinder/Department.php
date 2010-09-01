@@ -133,7 +133,7 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
         return false;
     }
 
-    function getUnofficialChildDepartments($orderBy = 'lft')
+    function getUnofficialChildDepartments($orderBy = 'sort_order')
     {
         return $this->_getChildren('org_unit IS NULL', $orderBy);
     }

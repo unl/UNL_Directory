@@ -58,7 +58,7 @@
     <div class="wdn_tabs_content">
         <div id="listings">
         <?php
-        $listings = $context->getChildren();
+        $listings = $context->getUnofficialChildDepartments();
         if (count($listings)) {
             echo $savvy->render($listings, 'Officefinder/Department/Listings.tpl.php');
         }
