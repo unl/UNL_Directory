@@ -41,8 +41,8 @@ foreach (array(
     'Graduate Assistants',
     ) as $semi_official_dept_name) {
     if (!($semi_official = UNL_Officefinder_Department::getByname($semi_official_dept_name))) {
-        $semi_official       = new UNL_Officefinder_Department();
-        $semi_official->name = $semi_official_dept_name;
+        $semi_official           = new UNL_Officefinder_Department();
+        $semi_official->name     = $semi_official_dept_name;
         $semi_official->org_unit = '_'.md5($semi_official_dept_name);
         $semi_official->save();
         $root->addChild($semi_official);
@@ -269,7 +269,7 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
             $last_added            = $dept;
             while ($listing = $listings->fetch_object()) {
                 $child_clean_name = cleanField($listing->szDirLname.' '.$listing->szDirFname.' '.$listing->szDirAddText, false);
-                $child = UNL_Officefinder_Department::getByname($child_clean_name, 'org_unit IS NULL AND lft > '.$dept->lft.' AND rgt < '.$dept->rgt);
+                $child = UNL_Officefinder_Department::getByname($child_clean_name, 'org_unit IS NULL AND parent_id = '.$dept->id);
                 if ($child instanceof UNL_Officefinder_Department) {
                     continue;
                 }
