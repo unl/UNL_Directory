@@ -36,6 +36,7 @@
     padding:20px 20px 20px 45px;
     width:875px;
     margin-bottom:25px;
+    min-height:109px;
 }
 .departmentInfo .fn a, .departmentInfo .fn{max-width:none;}
 .departmentInfo .tel {display:block;}
