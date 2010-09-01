@@ -16,6 +16,7 @@
              <span class="postal-code"><?php echo $context->postal_code; ?><?php echo $context->email; ?></span>
              <span class="country-name">USA</span>
         </div>
+        <?php if (isset($context->phone)): ?>
         <div class="tel">
             <span class="value">
                 <?php
@@ -23,12 +24,17 @@
                 ?>
             </span>
         </div>
+        <?php endif; ?>
+        <?php if (isset($context->email)): ?>
         <span class="email">
            <a class="email" href="mailto:<?php echo $context->email; ?>"><?php echo $context->email; ?></a>
         </span>
+        <?php endif; ?>
+        <?php if (isset($context->website)): ?>
         <span class="url">
            <a class="url" href="<?php echo $context->website; ?>"><?php echo $context->website; ?></a>
         </span>
+        <?php endif; ?>
     </div>
     <?php
     if ($context->userCanEdit(UNL_Officefinder::getUser())) {
