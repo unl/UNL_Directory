@@ -32,11 +32,13 @@ foreach (array(
     'Religious Groups',
     'Fax Access Numbers',
     'Vice Chancellors',
-    'Unopa (University of Nebraska Office Professionals Association)',
+    'UNOPA (University of Nebraska Office Professionals Association)',
     'Operated By Follett Higher Education Group University Bookstore',
-    'Un Computing Services Network (University of Nebraska Central Administration)',
-    'Uaad Officers & Non-Committee Chair Executive Board',
+    'UN Computing Services Network (University of Nebraska Central Administration)',
+    'UAAD Officers & Non-Committee Chair Executive Board',
     'Administration',
+    'Colleges',
+    'Graduate Assistants',
     ) as $semi_official_dept_name) {
     if (!($semi_official = UNL_Officefinder_Department::getByname($semi_official_dept_name))) {
         $semi_official       = new UNL_Officefinder_Department();
@@ -306,6 +308,7 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
 
     /* free result set */
     $result->close();
+    include(dirname(__FILE__).'/minor_data_cleanups.php');
 }
 
 $db->close();
@@ -328,6 +331,8 @@ function cleanField($text, $correct_case = true)
     $text = preg_replace('/Uno([\s]|$)/', 'UNO$1', $text);
     $text = preg_replace('/Unk([\s]|$)/', 'UNK$1', $text);
     $text = preg_replace('/Unmc([\s]|$)/', 'UNMC$1', $text);
+    $text = preg_replace('/Uaad([\s]|$)/', 'UAAD$1', $text);
+    $text = preg_replace('/Unopa([\s]|$)/', 'UNOPA$1', $text);
     while(preg_match('/"([a-z])"/', $text, $matches)) {
         $text = str_replace($matches[0], strtoupper($matches[0]), $text);
     }
