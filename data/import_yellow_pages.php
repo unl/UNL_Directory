@@ -41,6 +41,10 @@ $cleanup_file->setFlags(SplFileObject::READ_CSV);
 //checkCleanupFile($cleanup_file);
 //exit();
 
+// Now rename a couple departments that are really mis-named:
+$dept = UNL_Officefinder_Department::getByOrg_unit('50001186');
+$dept->name = 'IANR Information Services';
+$dept->save();
 
 function updateOfficialDepartment(UNL_Peoplefinder_Department $sap_dept, UNL_Officefinder_Department &$parent = null)
 {
