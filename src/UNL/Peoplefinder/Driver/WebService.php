@@ -34,7 +34,7 @@ class UNL_Peoplefinder_Driver_WebService implements UNL_Peoplefinder_DriverInter
         }
         return $results;
     }
-    function getLikeMatches($query, $affiliation = null)
+    function getLikeMatches($query, $affiliation = null, $excluded_records = array())
     {
         $results = file_get_contents($this->service_url.'?q='.urlencode($query).'&format=php&affiliation='.urlencode($affiliation).'&method=getLikeMatches');
         if ($results) {
