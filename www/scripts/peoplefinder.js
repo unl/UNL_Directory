@@ -1,10 +1,16 @@
 var service_peoplefinder = function() {
 	return {
 		updatePeopleFinderResults : function(){ //function called when the list has been rendered
-			if (WDN.jQuery("#results:contains('Sorry, no results could be found.')").length > 0  && splitName == false && query.indexOf(' ') > 0) {
-				WDN.jQuery("#results").empty();
-				splitQuery = query.split(' ',2);
-				window.location.hash = '#q/' + splitQuery[0] + '/' + splitQuery[1];
+			if (WDN.jQuery("#results:contains('Sorry, no results could be found.')").length > 0 && secondTry == false) {
+				if (splitName == false && query.indexOf(' ') > 0) { //user did a simple search with a space, so try an advanced search
+					WDN.jQuery("#results").empty();
+					splitQuery = query.split(' ',2);
+					window.location.hash = '#q/' + splitQuery[0] + '/' + splitQuery[1];
+				}
+				if (splitName == true) { //user did an adavanced search, let's try flipping the terms
+					secondTry = true;
+					window.location.hash = '#q/' + hash[2] + '/' + hash[1];
+				}
 				return false;
 			}
 			WDN.loadJS('scripts/filters.js', function(){
@@ -73,6 +79,7 @@ var directory = function() {
 	return {
 		initializeSearchBoxes : function() {
 			WDN.jQuery('#peoplefinder').submit(function(eventObject) { //on submit of the search form
+				secondTry = false;
 				if (WDN.jQuery('#'+this.id+' input.q').val().length) {
 					if(WDN.jQuery('#cn').length > 0){
 						window.location.hash = '#q/' + WDN.jQuery('#cn').val() + '/' + WDN.jQuery('#sn').val();
@@ -156,8 +163,9 @@ var directory = function() {
 
 WDN.jQuery(document).ready(function() {
 	WDN.loadJS('wdn/templates_3.0/scripts/plugins/hashchange/jQuery.hashchange.1-3.min.js', function() {
+		secondTry = false; // var used to control how many attempts the automatic search guessing goes through
 		WDN.jQuery(window).bind('hashchange', function(eventObject){
-			var hash = location.hash;
+			hash = location.hash;
 			if (hash.match(/^#q\//)) {
 				hash = hash.split('/'); //hash[1]
 				splitName = false;
