@@ -191,6 +191,19 @@ a.img-qrcode{padding-left:24px;padding-right:0;background: url(images/qrcode.png
 	margin-bottom:-7px;
 	padding-left:5px;
 }
+#maincontent #advancedSearch {
+    background:#8a7c47;
+    color:#fff;
+    font-weight:bold;
+    font-size:0.8em;
+    padding:5px;
+    border-radius:3px;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    line-height:auto;
+    text-shadow:1px 1px 3px #888888;
+    border:1px solid #d7c47f;	
+}
 #maincontent #advancedSearch:focus, #maincontent #advancedSearch:hover{color:#fff !important;border-color:#c0af70;}
 #maincontent #advancedSearch:active{text-shadow:none;}
 /* 
