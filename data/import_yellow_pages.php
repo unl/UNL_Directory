@@ -86,7 +86,7 @@ function updateFields($old, $new) {
     }
 }
 
-
+$known_as = array();
 
 if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND iSeqNbr=0;')) {
     printf("Select returned %d rows.\n", $result->num_rows);
@@ -101,12 +101,7 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
         if (preg_match('/(.*)\(see (.*)\)/', $obj->szLname.' '.$obj->szFname.' '.$obj->szAddtText, $matches)) {
             // known-as listing
             echo 'known as listing!!'.$obj->szLname.' '.$obj->szFname.' '.$obj->szAddtText.PHP_EOL;
-            $parent_dept = UNL_Officefinder_Department::getByname($matches[2], 'org_unit IS NOT NULL');
-            if (!$parent_dept) {
-                echo 'Could not find the alias!'.$matches[2].'<br>'.PHP_EOL;
-            } else {
-                $parent_dept->addAlias($matches[1]);
-            }
+            $known_as[] = array($matches[2], $matches[1]);
             continue;
         }
 
@@ -292,7 +287,9 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
 
 $db->close();
 
-
+foreach ($known_as as $data) {
+    addKnownAs($data[0], $data[1]);
+}
 
 function cleanField($text, $correct_case = true)
 {
@@ -379,5 +376,14 @@ function sanityCheck()
     $ucomm = UNL_Officefinder_Department::getByID(355);
     if ($ucomm->getParent()->id != 2) {
         throw new Exception('UHOH');
+    }
+}
+
+function addKnownAs($official_dept_name, $alias) {
+    $parent_dept = UNL_Officefinder_Department::getByname($official_dept_name, 'org_unit IS NOT NULL');
+    if (!$parent_dept) {
+        echo 'Could not find the alias!'.$official_dept_name.'<br>'.PHP_EOL;
+    } else {
+        $parent_dept->addAlias($alias);
     }
 }
