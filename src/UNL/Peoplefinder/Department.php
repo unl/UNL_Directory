@@ -86,7 +86,7 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
             $xpath = '//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="org_unit"][@value="'.$this->org_unit.'"]/..';
         } else {
             $this->name = $options['d'];
-            $quoted = preg_replace('/([\'\"\?\&])/', '\\$1', $this->name);
+            $quoted = preg_replace('/([\'\"\?])/', '\\$1', $this->name);
 
             $xpath = '//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="name"][@value="'.$quoted.'"]/..';
         }
