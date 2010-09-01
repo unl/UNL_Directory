@@ -41,13 +41,13 @@ class UNL_Peoplefinder_SearchController
         }
         
         if (isset($options['method'])) {
-        	switch($options['method']) {
-        		case 'getLikeMatches':
-        		case 'getExactMatches':
-        		case 'getPhoneMatches':
-        			$search_method = $options['method'];
-        			break;
-        	}
+            switch($options['method']) {
+                case 'getLikeMatches':
+                case 'getExactMatches':
+                case 'getPhoneMatches':
+                    $search_method = $options['method'];
+                    break;
+            }
         }
 
         if (!is_array($this->options['q'])
