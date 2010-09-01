@@ -19,6 +19,8 @@
 	    
     </li>
 </ol>
+<?php if ($context->options['mobile'] != true) { ?>
 <a href="http://www.unl.edu/ucomm/splash/fieldguide_directory.shtml" id="directoryHelp" title="Find out what's new in the directory" class="tooltip">Directory Help</a>
+<?php }?>
 </fieldset>
 </form>
