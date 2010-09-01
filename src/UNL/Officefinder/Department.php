@@ -3,7 +3,7 @@
  * @Entity
  * @Table(name="departments")
  */
-class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetPreorderTree
+class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjacencyList
 {
     /** 
      * @Id @Column(type="integer")
@@ -42,6 +42,9 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetPreor
     public $lft;
     public $rgt;
     public $level;
+
+    public $parent_id;
+    public $sort_order;
 
     /** @Column(length=45) */
     public $uid;
