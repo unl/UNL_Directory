@@ -51,7 +51,6 @@
 	            <li><a href="#results_faculty">Faculty</a></li>
 	            <li class="selected"><a href="#results_staff">Staff</a></li>
                 <li><a href="#results_student">Student</a></li>
-                <li><a href="#results_organizations">Organizations</a></li>
             </ul>
         </li>
         <?php endif; ?>
