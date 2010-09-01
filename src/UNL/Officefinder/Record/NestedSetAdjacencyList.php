@@ -96,6 +96,24 @@ class UNL_Officefinder_Record_NestedSetAdjacencyList extends UNL_Officefinder_Re
     }
 
     /**
+     * remove a tree element
+     * this automatically remove all children and their children
+     * if a node shall be removed that has children
+     *
+     * @access     public
+     * @return     boolean returns either true or throws an error
+     */
+    function delete()
+    {
+
+        foreach ($this->getChildren() as $child) {
+            $child->delete();
+        }
+
+        return parent::delete();
+    }
+
+    /**
      * Prepare a mysqli_result object and return an iterator of the NestedSet objects
      *
      * @param mysqli_result $res The result containing ids of records
