@@ -102,8 +102,10 @@ var directory = function() {
 		},
 		
 		splitSearchBoxes : function(cn, sn) {
-			WDN.jQuery("#queryString, #q").remove();
-			WDN.jQuery('#peoplefinder li').prepend('<label for="cn" class="cn">First Name</label><input type="text" value="" id="cn" name="cn" class="n q" /><label for="sn" class="sn">Last Name</label><input type="text" value="" id="sn" name="sn" class="s n q" />');
+			if (WDN.jQuery('#q').length){
+				WDN.jQuery("#queryString, #q").remove();
+				WDN.jQuery('#peoplefinder li').prepend('<label for="cn" class="cn">First Name</label><input type="text" value="" id="cn" name="cn" class="n q" /><label for="sn" class="sn">Last Name</label><input type="text" value="" id="sn" name="sn" class="s n q" />');
+			}
 			directory.fixLabel();
 			WDN.jQuery('#cn, #sn').focus(function(){
 				WDN.jQuery(this).prev('label').hide();
