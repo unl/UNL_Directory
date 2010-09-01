@@ -10,7 +10,7 @@ $db->query('TRUNCATE telecom_unidaslt_to_departments');
 
 $sap_dept = new UNL_Peoplefinder_Department(array('d'=>'University of Nebraska - Lincoln'));
 
-if ($root = UNL_Officefinder_Department::getBylft(1)) {
+if ($root = UNL_Officefinder_Department::getByID(1)) {
     // Found an existing root
 } else {
     // Add a new root entry
@@ -24,7 +24,7 @@ if ($root = UNL_Officefinder_Department::getBylft(1)) {
 updateOfficialDepartment($sap_dept);
 
 // Get root again, because the left and right values have changed!
-$root = UNL_Officefinder_Department::getBylft(1);
+$root = UNL_Officefinder_Department::getById(1);
 
 foreach (array('Buildings', 'Copy Centers', 'Religious Groups', 'Fax Numbers') as $semi_official_dept_name) {
     if (!($semi_official = UNL_Officefinder_Department::getByname($semi_official_dept_name))) {
@@ -175,7 +175,7 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
                                 $parent_dept = new UNL_Officefinder_Department();
                                 $parent_dept->name = $row[2];
                                 $parent_dept->save();
-                                UNL_Officefinder_Department::getBylft(1)->addChild($parent_dept, true);
+                                UNL_Officefinder_Department::getByID(1)->addChild($parent_dept, true);
                             }
                         }
                         break;
@@ -227,8 +227,8 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
                 && !$dept->isChildOf($parent_dept)) {
                 $parent_dept->addChild($dept, true);
             } else {
-                if (!$dept->isChildOf(UNL_Officefinder_Department::getBylft(1))) {
-                    UNL_Officefinder_Department::getBylft(1)->addChild($dept, true);
+                if (!$dept->isChildOf(UNL_Officefinder_Department::getById(1))) {
+                    UNL_Officefinder_Department::getById(1)->addChild($dept, true);
                 }
             }
         }
