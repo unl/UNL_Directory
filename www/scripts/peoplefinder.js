@@ -80,28 +80,26 @@ var directory = function() {
 				eventObject.stopPropagation();
 				return false;
 			});
-			WDN.jQuery('#q').focus(function(){
-				WDN.jQuery(this).siblings('label').hide();
+			directory.fixLabel();
+		},
+		
+		fixLabel : function() { //called to reposition the label over the input and hide
+			WDN.jQuery('.directorySearch > fieldset > ol > li > label').css({'top' : '16px'}).focus(function(){
+					WDN.jQuery(this).hide().siblings('input[type=text]').next().focus();
 			});
-			WDN.jQuery('form.directorySearch ol > li > label').focus(function(){
-					WDN.jQuery(this).hide().siblings('input[name=q]').focus();
-			});
-			if (WDN.jQuery('#q').val() !== "") {
-				WDN.jQuery('#q').siblings('label').hide();
-			};
-			WDN.jQuery('input.q').blur(function() {
-				if (WDN.jQuery(this).val() === "") {
-					WDN.jQuery(this).siblings('label').show();
+			WDN.jQuery('.directorySearch input').bind({
+				focus : function(){
+					WDN.jQuery(this).siblings('label[for='+this.id+']').hide();
+				},
+				blur : function(){
+					if (WDN.jQuery(this).val() === "") {
+						WDN.jQuery(this).siblings('label[for='+this.id+']').show();
+					}
 				}
 			});
-			WDN.jQuery('#q').focus().select();
 		},
 		
-		fixLabel : function() {
-			WDN.jQuery('.directorySearch > fieldset > ol > li > label').css({'top' : '16px'});
-		},
-		
-		splitSearchBoxes : function(cn, sn) {
+		splitSearchBoxes : function(cn, sn) { //function called to prepare the advanced search boxes
 			if (WDN.jQuery('#q').length){
 				WDN.jQuery("#queryString, #q").remove();
 				WDN.jQuery('#peoplefinder li').prepend('<label for="cn" class="cn">First Name</label><input type="text" value="" id="cn" name="cn" class="n q" /><label for="sn" class="sn">Last Name</label><input type="text" value="" id="sn" name="sn" class="s n q" />');
@@ -114,37 +112,33 @@ var directory = function() {
 				focus : function(){
 					WDN.jQuery("#queryString").remove();
 				},
-				click : function(){
+				click : function(eventObject){
 					directory.combineSearchBoxes('','');
+					eventObject.preventDefault();
+					eventObject.stopPropagation();
 					return false;
 				}
 			});
 			WDN.jQuery('#cn').val(cn);
 			WDN.jQuery('#sn').val(sn);
-			WDN.jQuery('form.directorySearch ol > li > label').focus(function(){
-					WDN.jQuery(this).hide().next('input').focus();
-			});
-			if (WDN.jQuery('#sn').val() !== "") {
-				WDN.jQuery('#sn').prev('label').hide();
-			};
-			if (WDN.jQuery('#cn').val() !== "") {
-				WDN.jQuery('#cn').prev('label').hide();
-			};
-			WDN.jQuery('input.n').blur(function() {
-				if (WDN.jQuery(this).val() === "") {
-					WDN.jQuery(this).prev('label').show();
-				}
-			});
+			if(cn.length){
+				WDN.jQuery('label[for=cn]').hide();
+			}
+			if(sn.length){
+				WDN.jQuery('label[for=sn]').hide();
+			}
 		},
 		
-		combineSearchBoxes : function() {
+		combineSearchBoxes : function() { //function called to prepare the simple search box
 			WDN.jQuery('#sn, #cn, label.cn, label.sn').remove();
 			WDN.jQuery('#advancedSearch').removeClass('simple').addClass('advanced').text('Advanced Search').bind({
 				focus : function(){
 					WDN.jQuery("#peoplefinder label").remove();
 				},
-				click : function(){
+				click : function(eventObject){
 					directory.splitSearchBoxes('','');
+					eventObject.preventDefault();
+					eventObject.stopPropagation();
 					return false;
 				}
 			});
@@ -168,6 +162,9 @@ WDN.jQuery(document).ready(function() {
 					directory.splitSearchBoxes(cn, sn);
 				} else { // it's all one search term.
 					query = hash[1];
+					if (WDN.jQuery('#cn').length){
+						directory.combineSearchBoxes();
+					}
 					WDN.jQuery('#q').val(hash[1]);
 				}
 				
@@ -199,7 +196,6 @@ WDN.jQuery(document).ready(function() {
 		WDN.jQuery(this).colorbox({open:true});
 		return false;
 	});
-	WDN.jQuery('.directorySearch > fieldset > ol > li > label').css({'top' : '16px'});
 	WDN.jQuery('#advancedSearch.advanced').bind({
 		focus : function(){
 			WDN.jQuery("#queryString").remove();
