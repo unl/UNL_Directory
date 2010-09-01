@@ -1,8 +1,8 @@
 <?php
 UNL_Templates::$options['version'] = 3;
 $page = UNL_Templates::factory('Document');
-$page->doctitle = '<title>UNL | Officefinder</title>';
-$page->titlegraphic = '<h1>Officefinder</h1>';
+$page->doctitle = '<title>UNL | Directory</title>';
+$page->titlegraphic = '<h1>Directory</h1>';
 $page->addStylesheet(UNL_Peoplefinder::getURL().'css/all_peoplefinder.css');
 $page->head .= '
 <meta name="description" content="UNL Officefinder is the searchable department directory for the University. Information obtained from this directory may not be used to provide addresses for mailings to students, faculty or staff. Any solicitation of business, information, contributions or other response from individuals listed in this publication by mail, telephone or other means is forbidden." />
@@ -16,8 +16,7 @@ $page->head .= '
 
 if (isset($context->options['q'])) {
     $page->head .= '<meta name="robots" content="NOINDEX, NOFOLLOW" />
-    <script type="text/javascript" src="'.UNL_Peoplefinder::getURL().'scripts/officefinder.js"></script>';
-    
+    <script type="text/javascript" src="'.UNL_Peoplefinder::getURL().'scripts/officefinder.js"></script>';  
 }
 
 if (UNL_Officefinder::getUser()) {
@@ -28,6 +27,12 @@ if (UNL_Officefinder::getUser()) {
     WDN.loadCSS("'.UNL_Peoplefinder::getURL().'css/editing.css");
     </script>';
 }
+
+$page->breadcrumbs = '
+<ul>
+    <li><a href="http://www.unl.edu/" title="University of Nebraska&ndash;Lincoln">UNL</a></li>
+    <li><a href="'.UNL_Peoplefinder::getURL().'">Directory</a></li>
+</ul>';
 
 if ($context->options['mobile'] === true) {
     $page->maincontentarea = $savvy->render($context->output);
