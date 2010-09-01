@@ -14,8 +14,10 @@ foreach (array(
     if ($dept === false) {
         $dept = UNL_Officefinder_Department::getByName($old);
     }
-    $dept->name = $new;
-    $dept->save();
+    if ($dept) {
+        $dept->name = $new;
+        $dept->save();
+    }
 }
 foreach (array('University Communications Scarlet The\'') as $delete) {
     $dept = UNL_Officefinder_Department::getByOrg_unit($delete);
