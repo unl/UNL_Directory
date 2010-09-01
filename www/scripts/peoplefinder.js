@@ -1,30 +1,26 @@
 var service_peoplefinder = function() {
 	return {
 		updatePeopleFinderResults : function(){ //function called when the list has been rendered
-			if (WDN.jQuery("#results:contains('Sorry, no results could be found.')").length > 0 && secondTry == false) {
-				if (showNotice) {
-					clearTimeout(showNotice);
-				}
-				if (splitName == false && query.indexOf(' ') > 0) { //user did a simple search with a space, so try an advanced search
+			if (WDN.jQuery("#results:contains('Sorry, no results could be found.')").length > 0 && attempts < 3) {
+				if (splitName == false && originalSearch.indexOf(' ') > 0) { //user did a simple search with a space, so try an advanced search
 					WDN.jQuery("#results").empty();
-					splitQuery = query.split(' ',2);
-					window.location.hash = '#q/' + splitQuery[0] + '/' + splitQuery[1];
-					currentSearch = splitQuery[0] + ' ' + splitQuery[1];
-					thisFirstName = splitQuery[0];
-					thisLastName = splitQuery[1];
+					splitQuery = originalSearch.split(' ',2);
+					service_peoplefinder.anotherAttempt(splitQuery[0] ,splitQuery[1].substring(0,1));
 				}
-				if (splitName == true) { //user did an adavanced search, let's try flipping the terms
-					secondTry = true;
-					window.location.hash = '#q/' + hash[2] + '/' + hash[1];
-					currentSearch = hash[2] + ' ' + hash[1];
-					thisFirstName = hash[2];
-					thisLastName = hash[1];					
+				if (splitName == true) { //user did an adavanced search, let's try first letter first name, whole last name
+					if (attempts == 2) { //on our second attempt
+						splitQuery = originalSearch.split(' ',2);
+						service_peoplefinder.anotherAttempt(splitQuery[0].substring(0,1) ,splitQuery[1]);
+					} else { //user did first search from advanced search
+						splitQuery = originalSearch.split(' ',2);
+						service_peoplefinder.anotherAttempt(splitQuery[0] ,splitQuery[1].substring(0,1));
+					}					
 				}
-				var showNotice = setTimeout(function() {
-					directory.showSearchNotice();
-				}, 1000);
-				directory.buildSearchNotice(originalSearch, thisFirstName, thisLastName);
+				
 				return false;
+			} else if (attempts > 1){
+				//we finally have results, or else we've abandonded the search options
+				directory.showSearchNotice();
 			}
 			WDN.loadJS('scripts/filters.js', function(){
 				filters.initialize();
@@ -38,6 +34,12 @@ var service_peoplefinder = function() {
 				return false;
 				}
 			);
+		},
+		
+		anotherAttempt : function(firstName, lastName) {
+			window.location.hash = '#q/' + firstName + '/' +lastName;
+			directory.buildSearchNotice(originalSearch, firstName, lastName);
+			attempts++;
 		},
 		
 		updatePeopleFinderRecord : function(data, textStatus){ //function called when a record has been rendered
@@ -93,7 +95,6 @@ var directory = function() {
 		initializeSearchBoxes : function() {
 			WDN.jQuery('#peoplefinder').submit(function(eventObject) { //on submit of the search form
 				WDN.jQuery("#searchNotice").slideUp();
-				secondTry = false;
 				if (WDN.jQuery('#'+this.id+' input.q').val().length) {
 					if(WDN.jQuery('#cn').length > 0){
 						window.location.hash = '#q/' + WDN.jQuery('#cn').val() + '/' + WDN.jQuery('#sn').val();
@@ -182,13 +183,14 @@ var directory = function() {
 		
 		showSearchNotice : function() {
 			WDN.jQuery("#searchNotice").slideDown(500);
+			attempts = 1;
 		}
 	};
 }();
 
 WDN.jQuery(document).ready(function() {
 	WDN.loadJS('wdn/templates_3.0/scripts/plugins/hashchange/jQuery.hashchange.1-3.min.js', function() {
-		secondTry = false; // var used to control how many attempts the automatic search guessing goes through
+		attempts = 1; // var used to control how many attempts the automatic search guessing goes through
 		WDN.jQuery(window).bind('hashchange', function(eventObject){
 			hash = location.hash;
 			if (hash.match(/^#q\//)) {
