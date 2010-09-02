@@ -1,13 +1,27 @@
+#!/usr/bin/env php
 <?php
-ini_set('display_errors',true);
+ini_set('display_errors', true);
+error_reporting(E_ALL|E_STRICT);
 
-chdir(dirname(__FILE__));
-set_include_path(dirname(dirname(__FILE__)).':/usr/local/php5/lib/php');
+function autoload($class)
+{
+    $class = str_replace('_', '/', $class);
+    include $class . '.php';
+}
+    
+spl_autoload_register("autoload");
 
+set_include_path(dirname(dirname(__FILE__)).'/src/'.PATH_SEPARATOR.dirname(dirname(__FILE__)).'/lib/php');
 require_once 'UNL/Autoload.php';
 
-$pf = new UNL_Peoplefinder(new UNL_Peoplefinder_Driver_WebService());
+$options = array();
+$options['driver'] = new UNL_Peoplefinder_Driver_WebService();
+$peoplefinder  = new UNL_Peoplefinder($options);
 
-$sav = new UNL_Savant();
-echo $sav->render($pf);
+Savvy_ClassToTemplateMapper::$classname_replacement = 'UNL_';
+$savvy = new Savvy();
+$savvy->setTemplatePath(dirname(dirname(__FILE__)).'/data/cli');
+
+echo $savvy->render($peoplefinder);
+
 ?>
