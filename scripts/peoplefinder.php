@@ -14,9 +14,9 @@ spl_autoload_register("autoload");
 set_include_path(dirname(dirname(__FILE__)).'/src/'.PATH_SEPARATOR.dirname(dirname(__FILE__)).'/lib/php');
 require_once 'UNL/Autoload.php';
 
-$options = array();
+$options           = UNL_Peoplefinder_CLI_Router::route();
 $options['driver'] = new UNL_Peoplefinder_Driver_WebService();
-$peoplefinder  = new UNL_Peoplefinder($options);
+$peoplefinder      = new UNL_Peoplefinder($options);
 
 Savvy_ClassToTemplateMapper::$classname_replacement = 'UNL_';
 $savvy = new Savvy();
