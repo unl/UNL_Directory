@@ -6,5 +6,4 @@ foreach ($context as $record) {
     } else {
         echo $savvy->render($record);
     }
-    echo '______________________________'.PHP_EOL;
 }
