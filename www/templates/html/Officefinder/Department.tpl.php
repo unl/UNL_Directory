@@ -38,6 +38,9 @@
     </div>
     <?php
     if ($context->userCanEdit(UNL_Officefinder::getUser())) {
+        // Display all aliases
+        echo $savvy->render($context->getAliases());
+        include dirname(__FILE__).'/../../editing/Officefinder/Department/AddAliasForm.tpl.php';
         echo '<a href="'.$context->getURL().'&amp;format=editing" class="action edit">Edit</a><br />';
         include dirname(__FILE__).'/../../editing/Officefinder/Department/DeleteForm.tpl.php';
     }

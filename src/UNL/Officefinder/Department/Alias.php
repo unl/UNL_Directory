@@ -26,4 +26,9 @@ class UNL_Officefinder_Department_Alias extends UNL_Officefinder_Record
         }
         return false;
     }
+
+    function __toString()
+    {
+        return $this->name;
+    }
 }

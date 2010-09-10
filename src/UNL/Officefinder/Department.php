@@ -211,4 +211,9 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
     {
         return UNL_Officefinder::getURL().'?view=department&id='.$this->id;
     }
+
+    public function getAliases()
+    {
+        return new UNL_Officefinder_Department_Aliases(array('department_id'=>$this->id));
+    }
 }

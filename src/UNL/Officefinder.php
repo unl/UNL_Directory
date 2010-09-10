@@ -126,21 +126,33 @@ class UNL_Officefinder
         switch($_POST['_type']) {
             case 'department':
                 $record = $this->handlePostDBRecord('UNL_Officefinder_Department');
-                $this->redirect(self::getURL().'?view=department&id='.$record->id);
+                $this->redirect($record->getURL());
                 break;
             case 'delete_department':
-                $record = UNL_Officefinder_Department::getByID($_POST['department_id']);
-                if (!$record) {
-                    throw new Exception('No deparmtne with that ID was found');
-                }
-                if (!$record->userCanEdit(self::getUser(true))) {
-                    throw new Exception('You have no edit permissions for that record');
-                }
+                $record = $this->getPostedDepartment();
                 $parent = $record->getParent();
                 $record->delete();
-                $this->redirect(self::getURL().'?view=department&id='.$parent->id);
+                $this->redirect($parent->getURL());
+                break;
+            case 'add_dept_alias':
+                $record = $this->getPostedDepartment();
+                $record->addAlias($_POST['name']);
+                $this->redirect($record->getURL());
                 break;
         }
+    }
+
+    protected function getPostedDepartment($checkUserPermissions = true)
+    {
+        $record = UNL_Officefinder_Department::getByID($_POST['department_id']);
+        if (!$record) {
+            throw new Exception('No department with that ID was found');
+        }
+        if (true === $checkUserPermissions
+            && false === $record->userCanEdit(self::getUser(true))) {
+            throw new Exception('You have no edit permissions for that record');
+        }
+        return $record;
     }
 
     public static function getURL($mixed = null, $additional_params = array())
