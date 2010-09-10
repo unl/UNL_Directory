@@ -38,7 +38,7 @@
     </div>
     <?php
     if ($context->userCanEdit(UNL_Officefinder::getUser())) {
-        echo '<a href="'.UNL_Officefinder::getURL().'?view=department&amp;id='.$context->id.'&amp;format=editing" class="action edit">Edit</a><br />';
+        echo '<a href="'.$context->getURL().'&amp;format=editing" class="action edit">Edit</a><br />';
         include dirname(__FILE__).'/../../editing/Officefinder/Department/DeleteForm.tpl.php';
     }
 
@@ -86,7 +86,7 @@
 if (!$context->isRoot()) {
     $parent = $context->getParent();
     echo '<ul>
-            <li><a href="'.UNL_Officefinder::getURL().'?view=department&amp;id='.$parent->id.'">'.$parent->name.'</a>';
+            <li><a href="'.$parent->getURL().'">'.$parent->name.'</a>';
 }
 ?>
 
@@ -95,7 +95,7 @@ if (!$context->isRoot()) {
                     <?php if ($context->hasOfficialChildDepartments()): ?>
                     <ul>
                         <?php foreach ($context->getOfficialChildDepartments('name ASC') as $child): ?>
-                        <li><a href="<?php echo UNL_Officefinder::getURL(); ?>?view=department&amp;id=<?php echo $child->id; ?>"><?php echo $child->name; ?></a></li>
+                        <li><a href="<?php echo $child->getURL(); ?>"><?php echo $child->name; ?></a></li>
                         <?php endforeach; ?>
                     </ul>
                     <?php endif; ?>

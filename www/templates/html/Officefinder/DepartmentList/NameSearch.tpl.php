@@ -14,16 +14,16 @@ if (count($context)) {
 //        }
         echo '<li>
                 <div class="overflow">
-                    <a class="planetred_profile" href="?view=department&amp;id='.$department->id.'">
+                    <a class="planetred_profile" href="'.$department->getURL().'">
                         <img alt="Generic Icon" src="images/organization40.png" class="profile_pic small photo">
                     </a>
                     <div class="recordDetails">
                         <div class="fn">
-                            <a href="'.UNL_Officefinder::getURL().'?view=department&amp;id='.$department->id.'">'.$department->name.'</a>
+                            <a href="'.$department->getURL().'">'.$department->name.'</a>
                         </div>
                         '.$title.'
                     </div>
-                    <a class="cInfo"" href="'.UNL_Officefinder::getURL().'?view=department&amp;id='.$department->id.'" onclick="return service_officefinder.of_getUID(\''.$department->id.'\');">More Details</a>
+                    <a class="cInfo"" href="'.$department->getURL().'" onclick="return service_officefinder.of_getUID(\''.$department->id.'\');">More Details</a>
                 </div>
              </li>';
     }
