@@ -1,6 +1,6 @@
 <?php
 if (count($context)) {
-    echo '<h2>'.htmlentities($context->name).'</h2>';
+    echo '<h2>'.$context->name.'</h2>';
     if (isset($context->building)) {
         $bldgs = new UNL_Common_Building();
         if ($bldgs->buildingExists($context->building)) {
