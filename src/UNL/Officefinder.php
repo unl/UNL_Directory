@@ -139,6 +139,12 @@ class UNL_Officefinder
                 $record->addAlias($_POST['name']);
                 $this->redirect($record->getURL());
                 break;
+            case 'delete_dept_alias':
+                $record = $this->getPostedDepartment();
+                $alias = UNL_Officefinder_Department_Alias::getById($record->id, $_POST['name']);
+                $alias->delete();
+                $this->redirect($record->getURL());
+                break;
         }
     }
 
