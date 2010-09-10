@@ -243,12 +243,16 @@ class UNL_Officefinder
         foreach (get_object_vars($object) as $key=>$default_value) {
             if (isset($values[$key]) && !empty($values[$key])) {
                 $object->$key = $values[$key]; 
+            } elseif (isset($object->$key)                     // The object has the var set
+                      && !empty($object->$key)                 // The object has a value
+                      && isset($values[$key])                  // A value to sync has been set
+                      && (null === $values[$key]               // If the var is === null
+                          || '' === $values[$key])             // OR the var is set to '' assume null
+                      && !(in_array($key, $object->getKeys())) // Disallow unsetting keys
+                      ) {
+                // unset data which is should be set to null
+                $object->$key = null;
             }
-            // Failed attempt at unsetting data which is empty.
-//             elseif (isset($object->$key)
-//                      && !empty($object->$key)) {
-//                $object->$key = null;
-//            }
         }
     }
 
