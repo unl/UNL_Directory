@@ -7,6 +7,8 @@
 </script>
 <h3 class="zenform">Edit Department Record</h3>
 <form class="zenform" action="<?php echo $context->getURL(); ?>" method="post">
+    <input type="hidden" name="_type" value="department" />
+    <input type="hidden" name="id" value="<?php echo $context->id; ?>" />
     <fieldset>
         <legend>Department Details</legend>
         <ol>
