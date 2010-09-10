@@ -1,7 +1,7 @@
 <?php
 $address = $context->address;
 if (preg_match('/^([A-Z]+)\s/', $context->address, $matches)) {
-    $address = str_replace($matches[1], '<a class="location mapurl" href="http://www1.unl.edu/tour/'.$matches[1].'">'.$matches[1].'</a>', $context->address);
+    $address = str_replace($matches[1], '<a class="location mapurl" href="http://maps.unl.edu/#'.$matches[1].'">'.$matches[1].'</a>', $context->address);
 }
 
 echo '<div class="edit">';
