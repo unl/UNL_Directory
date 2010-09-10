@@ -11,25 +11,28 @@ $savvy = new Savvy();
 $savvy->setTemplatePath(dirname(__FILE__).'/templates/html');
 
 
-if ($peoplefinder->options['format'] != 'html') {
-    switch($peoplefinder->options['format']) {
-        case 'vcard':
-            header('Content-Type: text/x-vcard');
-            if ($peoplefinder->output[0] instanceof UNL_Peoplefinder_Record) {
-                header('Content-Disposition: attachment; filename="'.$peoplefinder->output[0]->sn.', '.$peoplefinder->output[0]->givenName.'.vcf"');
-            }
-            //intentional no break
-        case 'json':
-        case 'php':
-        case 'xml':
-            $savvy->addTemplatePath(dirname(__FILE__).'/templates/'.$peoplefinder->options['format']);
-            break;
-        case 'hcard':
-        case 'partial':
-            Savvy_ClassToTemplateMapper::$output_template['UNL_Peoplefinder'] = 'Peoplefinder-partial';
-        default:
-    }
+switch($peoplefinder->options['format']) {
+    case 'vcard':
+        header('Content-Type: text/x-vcard');
+        if ($peoplefinder->output[0] instanceof UNL_Peoplefinder_Record) {
+            header('Content-Disposition: attachment; filename="'.$peoplefinder->output[0]->sn.', '.$peoplefinder->output[0]->givenName.'.vcf"');
+        }
+        //intentional no break
+    case 'json':
+    case 'php':
+    case 'xml':
+        $savvy->addTemplatePath(dirname(__FILE__).'/templates/'.$peoplefinder->options['format']);
+        break;
+    case 'partial':
+    case 'hcard':
+        Savvy_ClassToTemplateMapper::$output_template['UNL_Peoplefinder'] = 'Peoplefinder-partial';
+        // intentional no break
+    case 'html':
+    default:
+        $savvy->setEscape('htmlentities');
 }
+
+$savvy->setEscape('htmlentities');
 
 echo $savvy->render($peoplefinder);
 

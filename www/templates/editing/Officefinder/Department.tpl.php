@@ -40,7 +40,7 @@
                     ?>
                 </select>
             </li>
-            <?php foreach (array('room', 'city', 'state', 'postal_code', 'phone', 'fax', 'email', 'website') as $var): ?>
+            <?php foreach (array('room', 'address', 'city', 'state', 'postal_code', 'phone', 'fax', 'email', 'website') as $var): ?>
             <li>
                 <label for="<?php echo $var; ?>"><?php echo ucwords(str_replace('_', ' ', $var)); ?></label>
                 <input type="text" id="<?php echo $var; ?>" name="<?php echo $var; ?>" value="<?php echo $context->$var; ?>" />

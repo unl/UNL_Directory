@@ -29,7 +29,7 @@ if (!is_array($context->options['q'])
 // The HTML view prefers to have them grouped by affiliation
 $showing = count($context->results) + count($like_records);
 
-$by_affiliation      = UNL_Peoplefinder_SearchResults::groupByAffiliation($context->results);
+$by_affiliation      = UNL_Peoplefinder_SearchResults::groupByAffiliation($context->getRaw('results'));
 $like_by_affiliation = UNL_Peoplefinder_SearchResults::groupByAffiliation($like_records);
 
 // We now have both the exact and like matches grouped by affiliation into special arrays.

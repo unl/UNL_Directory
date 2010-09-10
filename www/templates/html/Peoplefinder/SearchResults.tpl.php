@@ -12,11 +12,11 @@ if (($start+$num_rows)>count($context)) {
 
 echo "<div class='result_head'>Results ".($start+1)." - $end out of ".count($context).'</div>'.PHP_EOL;
 echo '<ul class="pfResult">'.PHP_EOL; //I need to put a class for CSS, however when we switch to chuncked results (student, staff, faculty) this @todo will need revisted
-for ($i = $start; $i<$end; $i++) {
-    if ($context[$i] instanceof UNL_Peoplefinder_Record) {
-        echo $savvy->render($context[$i], 'Peoplefinder/RecordInList.tpl.php');
+foreach ($context as $record) {
+    if ($record->getRawObject() instanceof UNL_Peoplefinder_Record) {
+        echo $savvy->render($record, 'Peoplefinder/RecordInList.tpl.php');
     } else {
-        echo $savvy->render($context[$i]);
+        echo $savvy->render($record);
     }
 }
 echo '</ul>'.PHP_EOL;

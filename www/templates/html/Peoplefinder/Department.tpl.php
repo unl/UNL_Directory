@@ -16,7 +16,7 @@ if (count($context)) {
 //        }
 //        echo '</ul>';
 //    }
-    $by_affiliation = UNL_Peoplefinder_SearchResults::groupByAffiliation($context);
+    $by_affiliation = UNL_Peoplefinder_SearchResults::groupByAffiliation($context->getRawObject());
     foreach ($by_affiliation as $affiliation=>$records) {
         if (count($records)) {
             $section               = new stdClass();
