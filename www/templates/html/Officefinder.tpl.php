@@ -12,7 +12,10 @@ $page->head .= '
 <link media="only screen and (max-device-width: 480px)" href="'.UNL_Peoplefinder::getURL().'css/small_devices.css" type="text/css" rel="stylesheet" />
 <!--[if IE]>
 <link rel="stylesheet" type="text/css" media="screen" href="'.UNL_Peoplefinder::getURL().'css/ie.css" />
-<![endif]-->';
+<![endif]-->
+<link rel="login" href="https://login.unl.edu/cas/login?service='.urlencode(UNL_Officefinder::getURL(null, $context->options)).'" />
+
+';
 
 if (isset($context->options['q'])) {
     $page->head .= '<meta name="robots" content="NOINDEX, NOFOLLOW" />

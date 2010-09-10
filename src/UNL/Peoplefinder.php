@@ -93,12 +93,42 @@ class UNL_Peoplefinder
         }
     }
 
-    public static function getURL()
+    public static function getURL($mixed = null, $additional_params = array())
     {
-        if (defined('UNL_PEOPLEFINDER_URI')) {
-            return UNL_PEOPLEFINDER_URI;
+         
+        $url = self::$url;
+        
+        if (is_object($mixed)) {
+            switch (get_class($mixed)) {
+            default:
+                    
+            }
         }
-        return self::$url;
+        
+        return self::addURLParams($url, $additional_params);
+    }
+
+    public static function addURLParams($url, $additional_params = array())
+    {
+        $params = array();
+        $params = array_merge($params, $additional_params);
+
+        $url .= '?';
+        
+        foreach ($params as $option=>$value) {
+            if ($option == 'driver') {
+                continue;
+            }
+            if ($option == 'format'
+                && $value = 'html') {
+                continue;
+            }
+            if (!empty($value)) {
+                $url .= "&$option=$value";
+            }
+        }
+        $url = str_replace('?&', '?', $url);
+        return trim($url, '?;=');
     }
 
     public function determineView()

@@ -142,10 +142,20 @@ class UNL_Officefinder
                 break;
         }
     }
-    
-    public static function getURL()
+
+    public static function getURL($mixed = null, $additional_params = array())
     {
-        return UNL_Peoplefinder::getURL().'departments/';
+         
+        $url = UNL_Peoplefinder::$url.'departments/';
+        
+        if (is_object($mixed)) {
+            switch (get_class($mixed)) {
+            default:
+                    
+            }
+        }
+
+        return UNL_Peoplefinder::addURLParams($url, $additional_params);
     }
 
     function handlePostDBRecord($type)
