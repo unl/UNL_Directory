@@ -86,7 +86,7 @@
 if (!$context->isRoot()) {
     $parent = $context->getParent();
     echo '<ul>
-            <li><a href="?view=department&amp;id='.$parent->id.'">'.$parent->name.'</a>';
+            <li><a href="'.UNL_Officefinder::getURL().'?view=department&amp;id='.$parent->id.'">'.$parent->name.'</a>';
 }
 ?>
 
