@@ -34,6 +34,10 @@ var service_peoplefinder = function() {
 				return false;
 				}
 			);
+			WDN.jQuery('ul.pfResult.departments li .overflow').click(function(){
+				window.location = WDN.jQuery(this + '.fn a').attr('href');
+				}
+			);
 		},
 		
 		anotherAttempt : function(firstName, lastName) {
