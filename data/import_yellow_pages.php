@@ -227,6 +227,9 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
                 // Assume 68588
                 $obj->sZipCd5 = '68588';
             }
+            if (strlen(trim($obj->sZipCd4)) == 3) {
+                $obj->sZipCd4 = '0'.trim($obj->sZipCd4);
+            }
             $dept->postal_code = trim($obj->sZipCd5).'-'.trim($obj->sZipCd4);
         }
 
