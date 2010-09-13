@@ -126,6 +126,10 @@ class UNL_Officefinder
         switch($_POST['_type']) {
             case 'department':
                 $record = $this->handlePostDBRecord('UNL_Officefinder_Department');
+                if (isset($_POST['parent_id'])) {
+                    $this->redirect(self::getURL(null, array('view' => 'department',
+                                                             'id'   => $record->parent_id)));
+                }
                 $this->redirect($record->getURL());
                 break;
             case 'delete_department':

@@ -43,6 +43,8 @@
         include dirname(__FILE__).'/../../editing/Officefinder/Department/AddAliasForm.tpl.php';
         echo '<a href="'.$context->getURL().'&amp;format=editing" class="action edit">Edit</a><br />';
         include dirname(__FILE__).'/../../editing/Officefinder/Department/DeleteForm.tpl.php';
+        echo '<a href="'.UNL_Officefinder::getURL(null, array('view'      => 'department',
+                                                              'parent_id' => $context->id)).'&amp;format=editing">Add a new child-listing</a>';
     }
 
     // Get the official org unit if possible

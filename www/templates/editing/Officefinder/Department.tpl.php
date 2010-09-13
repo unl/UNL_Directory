@@ -8,7 +8,13 @@
 <h3 class="zenform">Edit Department Record</h3>
 <form class="zenform" action="<?php echo $context->getURL(); ?>" method="post">
     <input type="hidden" name="_type" value="department" />
+    <?php if (isset($context->id)): ?>
     <input type="hidden" name="id" value="<?php echo $context->id; ?>" />
+    <?php elseif (isset($context->options['parent_id'])) : ?>
+    <input type="hidden" name="parent_id" value="<?php echo (int)$context->options['parent_id']; ?>" />
+    <?php else :
+            throw new Exception('You must edit a record, or set a new parent.'); 
+          endif; ?>
     <fieldset>
         <legend>Department Details</legend>
         <ol>
