@@ -7,14 +7,22 @@
 */
 #listings li div.edit {
 	margin-top:2px;
-	display:block;
 	position:absolute;
-	margin-left:-50px;
+	margin-left:-43px;
+	display:none;
 }
+#listings li:hover > div.edit {display:block;}
 #listings li div.edit form {display:none;}
 #listings li div.edit a {
 	display:inline;
 	font-size:0.8em;
+}
+#listings li div.edit a.action.delete {
+    text-indent:-99999px;
+    background: url('images/iconTrash.png') no-repeat 0 0;
+    width:12px;	
+    margin:0 5px;
+    float:right;
 }
 #listings li:hover div.edit {
     display:block;	
