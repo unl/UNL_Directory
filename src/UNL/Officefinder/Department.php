@@ -154,7 +154,18 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
         if (in_array($user, UNL_Officefinder::$admins)) {
             return true;
         }
-        return (bool)UNL_Officefinder_Department_Permission::getById($this->id, $user);
+
+        if (isset($this->id)
+            && (bool)UNL_Officefinder_Department_Permission::getById($this->id, $user)) {
+            return true;
+        }
+
+        if (isset($this->parent_id)
+            && true === UNL_Officefinder_Department::getByID($this->parent_id)->userCanEdit($user)) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -212,8 +223,23 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
         return UNL_Officefinder::getURL().'?view=department&id='.$this->id;
     }
 
+    /**
+     * Get the aliases for this department
+     *
+     * @return UNL_Officefinder_Department_Aliases
+     */
     public function getAliases()
     {
         return new UNL_Officefinder_Department_Aliases(array('department_id'=>$this->id));
+    }
+
+    /**
+     * Get the users with permission over this department
+     *
+     * @return UNL_Officefinder_Department_Users
+     */
+    public function getUsers()
+    {
+        return new UNL_Officefinder_Department_Users(array('department_id'=>$this->id));
     }
 }
