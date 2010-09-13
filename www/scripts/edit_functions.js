@@ -22,7 +22,7 @@ WDN.jQuery(document).ready(function(){
 		WDN.log(href);
 		WDN.jQuery(this).attr('href', href.replace('format=editing', 'format[]=editing&format[]=partial'));
 	});
-	WDN.jQuery('ul.listings a.edit').colorbox({width: '75%', height: '75%'});
+	WDN.jQuery('a.edit').colorbox({width: '75%', height: '75%'});
 });
 
 function saveSortOrder(list) {//this function determines the order of the list and sends it to the DB.
