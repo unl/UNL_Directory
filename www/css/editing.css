@@ -6,7 +6,8 @@
 ************************************
 */
 #listings li div.edit {
-	margin-top:2px;
+	padding:5px;
+	margin-top:-2px;
 	position:absolute;
 	margin-left:-43px;
 	display:none;
@@ -21,14 +22,14 @@
     text-indent:-99999px;
     background: url('images/iconTrash.png') no-repeat 0 0;
     width:12px;	
-    margin:0 5px;
+    margin:0 2px;
     float:right;
 }
 #listings li:hover div.edit {
     display:block;	
 }
 #maincontent #listings li:hover {
-    cursor:pointer;	
+    cursor:move;	
 }
 /*
 #maincontent #listings li:hover ul {
