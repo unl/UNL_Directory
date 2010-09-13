@@ -30,9 +30,9 @@ function saveSortOrder(list) {//this function determines the order of the list a
 	var results = WDN.jQuery(list).sortable('toArray');
 
 	for (i = 0; i<results.length; i++) {
-		if (WDN.jQuery('#'+results[i]+' form.sortform input[name=sort_order]').attr('value') != i+1) {
-			WDN.jQuery('#'+results[i]+' form.sortform input[name=sort_order]').attr('value', i+1);
-			WDN.jQuery.post(WDN.jQuery('#'+results[i]+' form.sortform').attr('action'), WDN.jQuery('#'+results[i]+' form.sortform').serialize());
+		if (WDN.jQuery('#'+results[i]+' > div.edit form.sortform input[name=sort_order]').attr('value') != i+1) {
+			WDN.jQuery('#'+results[i]+' > div.edit form.sortform input[name=sort_order]').attr('value', i+1);
+			WDN.jQuery.post(WDN.jQuery('#'+results[i]+' > div.edit form.sortform').attr('action'), WDN.jQuery('#'+results[i]+' > div.edit form.sortform').serialize());
 		}
 	}
 }
