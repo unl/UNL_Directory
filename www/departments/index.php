@@ -15,7 +15,6 @@ Savvy_ClassToTemplateMapper::$classname_replacement = 'UNL_';
 $savvy = new Savvy();
 $savvy->setTemplatePath(dirname(dirname(__FILE__)).'/templates/html');
 
-
 switch($peoplefinder->options['format']) {
     case 'json':
     case 'php':
@@ -33,6 +32,13 @@ switch($peoplefinder->options['format']) {
         // intentional no break
     default:
         $savvy->setEscape('htmlentities');
+        break;
+    case array('editing', 'partial'):
+    case array('partial', 'editing'):
+        $savvy->setEscape('htmlentities');
+        $savvy->addTemplatePath(dirname(dirname(__FILE__)).'/templates/editing');
+        Savvy_ClassToTemplateMapper::$output_template['UNL_Officefinder'] = 'Peoplefinder-partial';
+        break;
 }
 
 echo $savvy->render($peoplefinder);
