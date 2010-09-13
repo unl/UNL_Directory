@@ -41,8 +41,13 @@
         // Display all aliases
         echo $savvy->render($context->getAliases());
         include dirname(__FILE__).'/../../editing/Officefinder/Department/AddAliasForm.tpl.php';
+
+        echo $savvy->render($context->getUsers());
+        include dirname(__FILE__).'/../../editing/Officefinder/Department/User/AddForm.tpl.php';
+
         echo '<a href="'.$context->getURL().'&amp;format=editing" class="action edit">Edit</a><br />';
         include dirname(__FILE__).'/../../editing/Officefinder/Department/DeleteForm.tpl.php';
+
         echo '<a href="'.UNL_Officefinder::getURL(null, array('view'      => 'department',
                                                               'parent_id' => $context->id)).'&amp;format=editing">Add a new child-listing</a>';
     }

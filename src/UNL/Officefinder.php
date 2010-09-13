@@ -44,7 +44,7 @@ class UNL_Officefinder
         $this->options = $options + $this->options;
 
         $this->authenticate(true);
-        
+
         try {
             if (!empty($_POST)) {
                 $this->handlePost();
@@ -137,6 +137,17 @@ class UNL_Officefinder
                 $parent = $record->getParent();
                 $record->delete();
                 $this->redirect($parent->getURL());
+                break;
+            case 'add_dept_user':
+                $record = $this->getPostedDepartment();
+                $record->addUser($_POST['uid']);
+                $this->redirect($record->getURL());
+                break;
+            case 'delete_dept_user':
+                $record = $this->getPostedDepartment();
+                $user = UNL_Officefinder_Department_User::getById($record->id, $_POST['uid']);
+                $user->delete();
+                $this->redirect($record->getURL());
                 break;
             case 'add_dept_alias':
                 $record = $this->getPostedDepartment();
