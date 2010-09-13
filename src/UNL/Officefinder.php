@@ -182,16 +182,17 @@ class UNL_Officefinder
             if (!($record = call_user_func(array($type, 'getByID'), $_POST['id']))) {
                 throw new Exception('The record could not be retrieved', 404);
             }
-            if (!$record->userCanEdit(self::getUser(true))) {
-                throw new Exception('You cannot edit that record.', 401);
-            }
         } else {
-            $record = new UNL_Officefinder_Department;
+            $record = new $type;
         }
 
         $this->filterPostValues();
 
         self::setObjectFromArray($record, $_POST);
+
+        if (!$record->userCanEdit(self::getUser(true))) {
+            throw new Exception('You cannot edit that record.', 401);
+        }
 
         if (!$record->save()) {
             throw new Exception('Could not save the record', 500);
