@@ -95,7 +95,7 @@ var directory = function() {
 		initializeSearchBoxes : function() {
 			WDN.jQuery('#peoplefinder').submit(function(eventObject) { //on submit of the search form
 				WDN.jQuery("#searchNotice").slideUp();
-				if (WDN.jQuery('#'+this.id+' input.q:gt(0)').val().length) {
+				if (WDN.jQuery('#'+this.id+' input.q').val().length || WDN.jQuery('#'+this.id+' input.q:gt(0)').val().length) {
 					if((WDN.jQuery('#cn').length > 0) || (WDN.jQuery('#sn').length > 0)){
 						window.location.hash = '#q/' + WDN.jQuery('#cn').val() + '/' + WDN.jQuery('#sn').val();
 						originalSearch = WDN.jQuery('#cn').val() + ' ' + WDN.jQuery('#sn').val();
