@@ -123,43 +123,50 @@ class UNL_Officefinder
             // Nothing to do here
             return;
         }
+        $redirect = false;
         switch($_POST['_type']) {
             case 'department':
                 $record = $this->handlePostDBRecord('UNL_Officefinder_Department');
                 if (isset($_POST['parent_id'])) {
-                    $this->redirect(self::getURL(null, array('view' => 'department',
-                                                             'id'   => $record->parent_id)));
+                    $redirect = self::getURL(null, array('view' => 'department',
+                                                         'id'   => $record->parent_id));
+                } else {
+                    $redirect = $record->getURL();
                 }
-                $this->redirect($record->getURL());
                 break;
             case 'delete_department':
                 $record = $this->getPostedDepartment();
                 $parent = $record->getParent();
                 $record->delete();
-                $this->redirect($parent->getURL());
+                $redirect = $parent->getURL();
                 break;
             case 'add_dept_user':
                 $record = $this->getPostedDepartment();
                 $record->addUser($_POST['uid']);
-                $this->redirect($record->getURL());
+                $redirect = $record->getURL();
                 break;
             case 'delete_dept_user':
                 $record = $this->getPostedDepartment();
                 $user = UNL_Officefinder_Department_User::getById($record->id, $_POST['uid']);
                 $user->delete();
-                $this->redirect($record->getURL());
+                $redirect = $record->getURL();
                 break;
             case 'add_dept_alias':
                 $record = $this->getPostedDepartment();
                 $record->addAlias($_POST['name']);
-                $this->redirect($record->getURL());
+                $redirect = $record->getURL();
                 break;
             case 'delete_dept_alias':
                 $record = $this->getPostedDepartment();
                 $alias = UNL_Officefinder_Department_Alias::getById($record->id, $_POST['name']);
                 $alias->delete();
-                $this->redirect($record->getURL());
+                $redirect = $record->getURL();
                 break;
+        }
+        if ($redirect
+            && !(isset($this->options['redirect'])
+                 && $this->options['redirect'] == '0')) {
+            $this->redirect($redirect);
         }
     }
 
@@ -277,12 +284,12 @@ class UNL_Officefinder
         foreach (get_object_vars($object) as $key=>$default_value) {
             if (isset($values[$key]) && !empty($values[$key])) {
                 $object->$key = $values[$key]; 
-            } elseif (isset($object->$key)                     // The object has the var set
-                      && !empty($object->$key)                 // The object has a value
-                      && isset($values[$key])                  // A value to sync has been set
-                      && (null === $values[$key]               // If the var is === null
-                          || '' === $values[$key])             // OR the var is set to '' assume null
-                      && !(in_array($key, $object->getKeys())) // Disallow unsetting keys
+            } elseif (isset($object->$key)                  // The object has the var set
+                      && !empty($object->$key)              // The object has a value
+                      && isset($values[$key])               // A value to sync has been set
+                      && (null === $values[$key]            // If the var is === null
+                          || '' === $values[$key])          // OR the var is set to '' assume null
+                      && !(in_array($key, $object->keys())) // Disallow unsetting keys
                       ) {
                 // unset data which is should be set to null
                 $object->$key = null;
