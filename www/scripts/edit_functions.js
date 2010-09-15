@@ -1,38 +1,85 @@
-WDN.jQuery(document).ready(function(){
-	WDN.loadJS('/wdn/templates_3.0/scripts/plugins/jeditable/jquery.jeditable.js', function(){
+var admin_editting = function() {
+	return {
+		initialize : function() { //called each time maincontent loads
+			WDN.tabs.initialize();
+			admin_editting.appendHref();
+			admin_editting.bindEditLinks();
+			admin_editting.bindSortable();
+			admin_editting.bindColorbox();
+		},
 		
-	});
-	WDN.jQuery('ul.listings').sortable({ //make all the lists on the edit interface sortable
-		revert: false,
-		scroll: true,
-		delay: 100,
-		opacity: 0.45,
-		tolerance: 'pointer',
-		helper: 'clone',
-		start: function(event, ui){
-			
+		submitForm : function() {
+			WDN.jQuery('#colorbox form').submit(function() {
+				WDN.jQuery.post(WDN.jQuery('.departmentInfo form').eq(0).attr('action') + '&format=partial&redirect=0', 
+				WDN.jQuery(this).serialize(),
+				function(data) { //reload the maincontent with the new changes
+					WDN.jQuery('#maincontent').html(data);
+					WDN.jQuery.colorbox.close();
+					admin_editting.initialize();
+				}
+			);
+				return false;
+			});
 		},
-		stop: function(event, ui){
-			saveSortOrder(this);
+		
+		appendHref : function() {
+			WDN.jQuery('a.edit[href*=format=editing]').each(function(){
+				href = this.href;
+				WDN.jQuery(this).attr('href', href.replace('format=editing', 'format[]=editing&format[]=partial'));
+			});
 		},
-		items : '> li'
-	});
-	WDN.jQuery('a.edit[href*=format=editing]').each(function(){
-		href = this.href;
-		WDN.log(href);
-		WDN.jQuery(this).attr('href', href.replace('format=editing', 'format[]=editing&format[]=partial'));
-	});
-	WDN.jQuery('a.edit').colorbox({width: '75%', height: '75%'});
-});
+		
+		bindColorbox : function() {
+			WDN.jQuery('a.edit').colorbox({
+				width: '75%', 
+				height: '75%', 
+				onComplete : function(){
+					admin_editting.submitForm();
+				}
+			});
+		},
+		
+		bindSortable : function() {
+			WDN.jQuery('ul.listings').sortable({ //make all the lists on the edit interface sortable
+				revert: false,
+				scroll: true,
+				delay: 100,
+				opacity: 0.45,
+				tolerance: 'pointer',
+				helper: 'clone',
+				start: function(event, ui){
+					
+				},
+				stop: function(event, ui){
+					admin_editting.saveSortOrder(this);
+				},
+				items : '> li'
+			});
+		},
+		
+		saveSortOrder : function(list) { //this function determines the order of the list and sends it to the DB.
+			WDN.jQuery(list).sortable('refresh');
+			var results = WDN.jQuery(list).sortable('toArray');
 
-function saveSortOrder(list) {//this function determines the order of the list and sends it to the DB.
-	WDN.jQuery(list).sortable('refresh');
-	var results = WDN.jQuery(list).sortable('toArray');
-
-	for (i = 0; i<results.length; i++) {
-		if (WDN.jQuery('#'+results[i]+' > div.edit form.sortform input[name=sort_order]').attr('value') != i+1) {
-			WDN.jQuery('#'+results[i]+' > div.edit form.sortform input[name=sort_order]').attr('value', i+1);
-			WDN.jQuery.post(WDN.jQuery('#'+results[i]+' > div.edit form.sortform').attr('action'), WDN.jQuery('#'+results[i]+' > div.edit form.sortform').serialize());
+			for (i = 0; i<results.length; i++) {
+				if (WDN.jQuery('#'+results[i]+' > div.edit form.sortform input[name=sort_order]').attr('value') != i+1) {
+					WDN.jQuery('#'+results[i]+' > div.edit form.sortform input[name=sort_order]').attr('value', i+1);
+					WDN.jQuery.post(WDN.jQuery('#'+results[i]+' > div.edit form.sortform').attr('action'), WDN.jQuery('#'+results[i]+' > div.edit form.sortform').serialize());
+				}
+			}
+		},
+		
+		bindEditLinks : function() {
+			WDN.jQuery('a.edit').colorbox(
+			{
+				width : '75%', 
+				height : '75%', 
+				onComplete : function(){admin_editting.submitForm();}
+			}
+			);
 		}
-	}
-}
+	};
+}();
+WDN.jQuery(document).ready(function(){
+	admin_editting.initialize();
+});
