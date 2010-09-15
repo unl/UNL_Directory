@@ -53,7 +53,7 @@ var admin_editting = function() {
 				stop: function(event, ui){
 					admin_editting.saveSortOrder(this);
 				},
-				items : '> li'
+				items : 'li'
 			});
 		},
 		
@@ -71,12 +71,16 @@ var admin_editting = function() {
 		
 		bindEditLinks : function() {
 			WDN.jQuery('a.edit').colorbox(
-			{
-				width : '75%', 
-				height : '75%', 
-				onComplete : function(){admin_editting.submitForm();}
-			}
+				{
+					width : '75%', 
+					height : '75%', 
+					onComplete : function(){admin_editting.submitForm();}
+				}
 			);
+		},
+		
+		formatDepartmentLists : function() {
+			WDN.jQuery('#editBox li').not(':last-child').children('a').after(',');
 		}
 	};
 }();

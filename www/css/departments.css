@@ -37,6 +37,7 @@
     width:875px;
     margin-bottom:25px;
     min-height:109px;
+    display:inline-block;
 }
 .departmentInfo .fn a, .departmentInfo .fn{max-width:none;}
 .departmentInfo .tel {display:block;}
