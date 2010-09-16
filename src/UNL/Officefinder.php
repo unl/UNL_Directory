@@ -311,4 +311,16 @@ class UNL_Officefinder
             exit($exit);
         }
     }
+
+    /**
+     * Check if the user is an admin or not
+     *
+     * @param string $user The UID of the user, eg:bbieber2
+     *
+     * @return bool
+     */
+    public static function isAdmin($user)
+    {
+        return in_array($user, self::$admins);
+    }
 }
