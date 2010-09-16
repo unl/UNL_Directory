@@ -9,6 +9,8 @@ if ($context->userCanEdit(UNL_Officefinder::getUser())) {
     echo ' <a href="'.$context->getURL().'&amp;format=editing" class="action edit">edit</a>'.PHP_EOL;
     echo $savvy->render($context, 'Officefinder/Department/Listing/SortForm.tpl.php');
     include dirname(__FILE__).'/../../../editing/Officefinder/Department/DeleteForm.tpl.php';
+    echo ' <a href="'.UNL_Officefinder::getURL(null, array('view'      => 'department',
+                                                          'parent_id' => $context->id)).'&amp;format=editing" class="action addchild">Add child</a>';
 }
 echo '</div>';
 
