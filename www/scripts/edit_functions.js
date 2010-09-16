@@ -64,7 +64,8 @@ var admin_editting = function() {
 			for (i = 0; i<results.length; i++) {
 				if (WDN.jQuery('#'+results[i]+' > div.edit form.sortform input[name=sort_order]').attr('value') != i+1) {
 					WDN.jQuery('#'+results[i]+' > div.edit form.sortform input[name=sort_order]').attr('value', i+1);
-					WDN.jQuery.post(WDN.jQuery('#'+results[i]+' > div.edit form.sortform').attr('action'), WDN.jQuery('#'+results[i]+' > div.edit form.sortform').serialize());
+					WDN.jQuery.post(WDN.jQuery('#'+results[i]+' > div.edit form.sortform').attr('action')+'&redirect=0',
+									WDN.jQuery('#'+results[i]+' > div.edit form.sortform').serialize());
 				}
 			}
 		},
