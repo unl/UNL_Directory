@@ -28,11 +28,10 @@ $driver = new UNL_Peoplefinder_Driver_LDAP();
 // Otherwise, use the webservice driver
 $driver = new UNL_Peoplefinder_Driver_WebService(array('service_url'=>'http://ucommbieber.unl.edu/workspace/peoplefinder/www/service.php'));
 
-/*
-//database connection info for officefinder portions
-UNL_Officefinder::$db_user = '';
-UNL_Officefinder::$db_pass = '';
+// Database connection info for officefinder portions
+UNL_Officefinder::$db_user = 'officefinder';
+UNL_Officefinder::$db_pass = 'officefinder';
 
 // Officefinder editing admins
-UNL_Officefinder::$admins = array('bbieber2', 'smeranda', 'erasmussen2');
-*/
+UNL_Officefinder::$admins = array('bbieber2', 'smeranda2', 'erasmussen2');
+
