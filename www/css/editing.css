@@ -6,23 +6,21 @@
 ************************************
 */
 #listings li div.edit {
-	padding:5px;
-	margin-top:-2px;
-	position:absolute;
-	margin-left:-43px;
-	display:none;
+    padding:5px;
+    display:none;
+    float:right;
 }
 #listings li:hover > div.edit {display:block;}
 #listings li div.edit form {display:none;}
 #listings li div.edit a {
-	display:inline;
-	font-size:0.8em;
+    display:inline;
+    font-size:0.8em;
 }
 #listings li div.edit a.action.delete, #editBox ul li a {
     text-indent:-99999px;
     background: url('images/iconTrash.png') no-repeat 0 0;
-    width:12px;	
-    margin:0 2px;
+    width:12px; 
+    margin:2px;
     float:right;
 }
 #editBox ul li a { float:left;}
