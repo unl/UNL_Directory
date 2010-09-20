@@ -21,6 +21,7 @@ UNL_Peoplefinder_Driver_LDAP::$bindPW = 'flibbertygibberty';
 
 UNL_Peoplefinder::$url = 'http://peoplefinder.unl.edu/';
 set_time_limit(5);
+
 // If you have LDAP access credentials, best to use this driver
 $driver = new UNL_Peoplefinder_Driver_LDAP();
 
@@ -31,4 +32,5 @@ $driver = new UNL_Peoplefinder_Driver_WebService(array('service_url'=>'http://uc
 //database connection info
 UNL_Officefinder::$db_user = '';
 UNL_Officefinder::$db_pass = '';
+UNL_Officefinder::$admins = array('bbieber2', 'smeranda', 'erasmussen2');
 */
