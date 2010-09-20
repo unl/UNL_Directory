@@ -16,26 +16,21 @@
     display:inline;
     font-size:0.8em;
 }
-#listings li div.edit a.action.delete, #editBox ul li a {
+#maincontent a.action.delete {
     text-indent:-99999px;
     background: url('images/iconTrash.png') no-repeat 0 0;
     width:12px; 
     margin:2px;
     float:right;
 }
-#editBox ul li a { float:left;}
+#editBox ul li a.action { float:left;}
 #listings li:hover div.edit {
-    display:block;	
+    display:block;
 }
 #maincontent #listings li:hover {
-    cursor:move;	
+    cursor:move;
 }
-/*
-#maincontent #listings li:hover ul {
-    border-top:1px dotted #c4c2c2;
-    padding-top:0px;
-}
-*/
+
 #departmentDisplay {
     float:left;
     width:575px;
@@ -58,14 +53,26 @@
     float:right;
     padding-left:5px; 
 }
-#editBox ul {
+#editBox ul.dept_users,
+#editBox ul.dept_aliases {
     list-style: none;
     padding:0;	
 }
-#editBox ul li {
+#editBox ul.dept_users li,
+#editBox ul.dept_aliases li {
     border-bottom:1px dashed #bdab61;
-    padding:2px 5px;	
+    padding:2px 5px;
 }
-#editBox ul li form {
-    display:none;	
+#editBox form.delete {
+    display:none;
+}
+
+#editBox ul.edit_actions {
+    clear:both;
+    margin-top:10px;
+    border-top:1px dashed #BDAB61;
+}
+#editBox ul.edit_actions li {
+    display:inline;
+    padding:2px;
 }
