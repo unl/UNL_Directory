@@ -10,55 +10,52 @@ $userCanEdit = $context->userCanEdit(UNL_Officefinder::getUser());
     }
     ?>
     <div id="departmentDisplay">
-	    <img alt="Building Image" src="<?php echo $image_url; ?>" width="100" height="100" class="frame photo">
-	    <h2 class="fn org">
-	       <?php echo $context->name; ?>
-	       <?php
-               if ($userCanEdit) {
-	           
-            echo '<ul class="edit_actions">';
-                echo '<li><a href="'.$context->getURL().'&amp;format=editing" class="action edit" title="Edit">Edit</a></li>';
-
-                if (!isset($context->org_unit) || UNL_Officefinder::isAdmin(UNL_Officefinder::getUser(true))) {
-                    // Only allow Admins to delete "official" SAP departments
-                    echo '<li>';
-                    include dirname(__FILE__).'/../../editing/Officefinder/Department/DeleteForm.tpl.php';
-                    echo '</li>';
-                }
-
-            echo '</ul>';
-               }
-           ?>
-	    </h2>
-	    <div class="vcardInfo">
-	        <div class="adr label">
-	             <span class="street-address"><?php echo $context->address; ?></span>
-	             <span class="room"><?php echo $context->room.' <a class="location mapurl" href="http://maps.unl.edu/#'.$context->building.'">'.$context->building.'</a>'; ?></span>
-	             <span class="locality"><?php echo $context->city; ?></span>
-	             <span class="region"><?php echo $context->state; ?></span>
-	             <span class="postal-code"><?php echo $context->postal_code; ?><?php echo $context->email; ?></span>
-	             <span class="country-name">USA</span>
-	        </div>
-	        <?php if (isset($context->phone)): ?>
-	        <div class="tel">
-	            <span class="value">
-	                <?php
-	                echo $savvy->render($context->phone, 'Peoplefinder/Record/TelephoneNumber.tpl.php');
-	                ?>
-	            </span>
-	        </div>
-	        <?php endif; ?>
-	        <?php if (isset($context->email)): ?>
-	        <span class="email">
-	           <a class="email" href="mailto:<?php echo $context->email; ?>"><?php echo $context->email; ?></a>
-	        </span>
-	        <?php endif; ?>
-	        <?php if (isset($context->website)): ?>
-	        <span class="url">
-	           <a class="url" href="<?php echo $context->website; ?>"><?php echo $context->website; ?></a>
-	        </span>
-	        <?php endif; ?>
-	    </div>
+        <img alt="Building Image" src="<?php echo $image_url; ?>" width="100" height="100" class="frame photo">
+        <h2 class="fn org">
+            <?php echo $context->name; ?>
+            <?php
+            if ($userCanEdit) {
+                echo '<ul class="edit_actions">';
+                    echo '<li><a href="'.$context->getURL().'&amp;format=editing" class="action edit" title="Edit">Edit</a></li>';
+                    if (!isset($context->org_unit) || UNL_Officefinder::isAdmin(UNL_Officefinder::getUser(true))) {
+                        // Only allow Admins to delete "official" SAP departments
+                        echo '<li>';
+                        include dirname(__FILE__).'/../../editing/Officefinder/Department/DeleteForm.tpl.php';
+                        echo '</li>';
+                    }
+                echo '</ul>';
+            }
+            ?>
+        </h2>
+        <div class="vcardInfo">
+            <div class="adr label">
+                 <span class="street-address"><?php echo $context->address; ?></span>
+                 <span class="room"><?php echo $context->room.' <a class="location mapurl" href="http://maps.unl.edu/#'.$context->building.'">'.$context->building.'</a>'; ?></span>
+                 <span class="locality"><?php echo $context->city; ?></span>
+                 <span class="region"><?php echo $context->state; ?></span>
+                 <span class="postal-code"><?php echo $context->postal_code; ?><?php echo $context->email; ?></span>
+                 <span class="country-name">USA</span>
+            </div>
+            <?php if (isset($context->phone)): ?>
+            <div class="tel">
+                <span class="value">
+                    <?php
+                    echo $savvy->render($context->phone, 'Peoplefinder/Record/TelephoneNumber.tpl.php');
+                    ?>
+                </span>
+            </div>
+            <?php endif; ?>
+            <?php if (isset($context->email)): ?>
+            <span class="email">
+               <a class="email" href="mailto:<?php echo $context->email; ?>"><?php echo $context->email; ?></a>
+            </span>
+            <?php endif; ?>
+            <?php if (isset($context->website)): ?>
+            <span class="url">
+               <a class="url" href="<?php echo $context->website; ?>"><?php echo $context->website; ?></a>
+            </span>
+            <?php endif; ?>
+        </div>
     </div>
     <?php
     if ($userCanEdit) {
@@ -73,7 +70,7 @@ $userCanEdit = $context->userCanEdit(UNL_Officefinder::getUser());
             echo $savvy->render($context->getUsers());
             include dirname(__FILE__).'/../../editing/Officefinder/Department/User/AddForm.tpl.php';
             echo '</div>';
-    
+
         echo '</div>';
     }
 
@@ -88,9 +85,9 @@ $userCanEdit = $context->userCanEdit(UNL_Officefinder::getUser());
         <li><a href="#listings">Listings</a></li>
         <?php if ($department && count($department) > 0): ?>
         <li><a href="#results_faculty">All Employees <sup><?php echo count($department); ?></sup></a>
-	        <ul>
-	            <li><a href="#results_faculty">Faculty</a></li>
-	            <li><a href="#results_staff">Staff</a></li>
+            <ul>
+                <li><a href="#results_faculty">Faculty</a></li>
+                <li><a href="#results_staff">Staff</a></li>
                 <li><a href="#results_student">Student</a></li>
             </ul>
         </li>
