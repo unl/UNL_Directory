@@ -37,14 +37,11 @@
     cursor:move;
 }
 
-#departmentDisplay {
-    float:left;
-    width:575px;
-}
 #editBox {
     float:right;
     padding:5px;
     width:290px;
+    border:1px solid #BDAB61;
     border-radius:5px;
     -webkit-border-radius:5px;
     -moz-border-radius:5px;
@@ -58,7 +55,7 @@
 #editBox div.aliases {
     width:135px;
     float:left;
-    padding-right:5px;	
+    padding-right:5px;
 }
 #editBox div.users {
     width:135px;
@@ -72,31 +69,33 @@
 }
 #editBox ul.dept_users li,
 #editBox ul.dept_aliases li {
-    border-bottom:1px dashed #bdab61;
     padding:2px 5px;
+}
+#editBox ul.dept_users li:not(:last-child),
+#editBox ul.dept_aliases li:not(:last-child) {
+    border-bottom:1px dashed #bdab61;
 }
 #editBox form.delete {
     display:none;
 }
 
-#editBox ul.edit_actions {
-    float:right;
-    width:100%;
-    margin-top:20px;
-    border-top:1px dashed #BDAB61;
-    padding:10px 0 0 0;
-}
-#editBox ul.edit_actions li {
-    display:inline;
-    padding:2px;
+#departmentDisplay {
     float:left;
+    width:570px;
 }
-#editBox ul.edit_actions li:not(:last-child) {
-	margin:0 20px 0 0;
+#departmentDisplay ul.edit_actions {
+	display:inline;
+	padding:0;
 }
-#editBox ul.edit_actions li a {
-    float:left;
-    text-indent:0;
-    padding:0 0 0 20px;
-    font-size:14px;
+#departmentDisplay ul.edit_actions li {
+	display:inline;
+}
+#departmentDisplay ul.edit_actions li a {
+	width:16px;
+	height:16px;
+	margin:0 0 0 6px;
+	text-indent:-9999px;
+	display:inline-block;
+	position:relative;
+	top:2px;
 }
