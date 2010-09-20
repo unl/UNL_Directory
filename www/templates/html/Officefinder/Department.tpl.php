@@ -11,7 +11,25 @@ $userCanEdit = $context->userCanEdit(UNL_Officefinder::getUser());
     ?>
     <div id="departmentDisplay">
 	    <img alt="Building Image" src="<?php echo $image_url; ?>" width="100" height="100" class="frame photo">
-	    <h2 class="fn org"><?php echo $context->name; ?></h2>
+	    <h2 class="fn org">
+	       <?php echo $context->name; ?>
+	       <?php
+               if ($userCanEdit) {
+	           
+            echo '<ul class="edit_actions">';
+                echo '<li><a href="'.$context->getURL().'&amp;format=editing" class="action edit" title="Edit">Edit</a></li>';
+
+                if (!isset($context->org_unit) || UNL_Officefinder::isAdmin(UNL_Officefinder::getUser(true))) {
+                    // Only allow Admins to delete "official" SAP departments
+                    echo '<li>';
+                    include dirname(__FILE__).'/../../editing/Officefinder/Department/DeleteForm.tpl.php';
+                    echo '</li>';
+                }
+
+            echo '</ul>';
+               }
+           ?>
+	    </h2>
 	    <div class="vcardInfo">
 	        <div class="adr label">
 	             <span class="street-address"><?php echo $context->address; ?></span>
@@ -56,17 +74,6 @@ $userCanEdit = $context->userCanEdit(UNL_Officefinder::getUser());
             include dirname(__FILE__).'/../../editing/Officefinder/Department/User/AddForm.tpl.php';
             echo '</div>';
     
-            echo '<ul class="edit_actions">';
-                echo '<li><a href="'.$context->getURL().'&amp;format=editing" class="action edit">Edit</a></li>';
-
-                if (!isset($context->org_unit) || UNL_Officefinder::isAdmin(UNL_Officefinder::getUser(true))) {
-                    // Only allow Admins to delete "official" SAP departments
-                    echo '<li>';
-                    include dirname(__FILE__).'/../../editing/Officefinder/Department/DeleteForm.tpl.php';
-                    echo '</li>';
-                }
-
-            echo '</ul>';
         echo '</div>';
     }
 
