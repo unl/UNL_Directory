@@ -186,6 +186,14 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
         return !empty($this->org_unit);
     }
 
+    function update()
+    {
+        if ($user = UNL_Officefinder::getUser()) {
+            $this->uidlastupdated = $user;
+        }
+        return parent::update();
+    }
+
     function getOfficialParent()
     {
         $query = sprintf('SELECT * FROM %s '.
