@@ -6,7 +6,6 @@
 ************************************
 */
 #listings li div.edit {
-    padding:5px;
     display:none;
     float:right;
 }
@@ -15,13 +14,20 @@
 #listings li div.edit a {
     display:inline;
     font-size:0.8em;
+    text-indent:-9999px;
+    width:16px;
+    height:16px;
+    margin:2px;
+    float:left;
+}
+#maincontent a.action.edit {
+    background: url('images/iconEdit.png') no-repeat 0 0;
 }
 #maincontent a.action.delete {
-    text-indent:-99999px;
     background: url('images/iconTrash.png') no-repeat 0 0;
-    width:12px; 
-    margin:2px;
-    float:right;
+}
+#maincontent a.action.addchild {
+    background: url('images/iconOrg.png') no-repeat 0 0;
 }
 #editBox ul li a.action { float:left;}
 #listings li:hover div.edit {
