@@ -48,28 +48,11 @@ class UNL_Officefinder_Record
             }
         }
 
-        $sql = '';
-
         if (!$key_set) {
-            $fields = $this->prepareInsertSQL($sql);
-        } else {
-            $fields = $this->prepareUpdateSQL($sql);
+            return $this->insert();
         }
 
-        $values = array();
-        $values[] = $this->getTypeString(array_keys($fields)); 
-        foreach ($fields as $key=>$value) {
-            $values[] =& $this->$key;
-        }
-        
-        if ($key_set) {
-            // We're doing an update, so add in the keys!
-            $values[0] .= $this->getTypeString($this->keys());
-            foreach ($this->keys() as $key) {
-                $values[] =& $this->$key;
-            }
-        }
-        return $this->prepareAndExecute($sql, $values);
+        return $this->update();
     }
     
     function insert()
