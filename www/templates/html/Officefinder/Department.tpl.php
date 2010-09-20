@@ -1,3 +1,7 @@
+<?php
+// Check if the user can edit and store this result for later
+$userCanEdit = $context->userCanEdit(UNL_Officefinder::getUser());
+?>
 <div class="departmentInfo">
     <?php
     $image_url = 'http://maps.unl.edu/BuildingImages/icon_md.png';
@@ -38,36 +42,38 @@
 	        <?php endif; ?>
 	    </div>
     </div>
-    <div id="editBox">
     <?php
-    if ($context->userCanEdit(UNL_Officefinder::getUser())) {
-        // Display all aliases
-        echo '<div class="aliases">';
-        echo $savvy->render($context->getAliases());
-        include dirname(__FILE__).'/../../editing/Officefinder/Department/AddAliasForm.tpl.php';
-        echo '</div>';
-        
-        echo '<div class="users">';
-        echo $savvy->render($context->getUsers());
-        include dirname(__FILE__).'/../../editing/Officefinder/Department/User/AddForm.tpl.php';
-        echo '</div>';
-        
-        echo '<a href="'.$context->getURL().'&amp;format=editing" class="action edit">Edit</a><br />';
+    if ($userCanEdit) {
+        echo '<div id="editBox">';
+            // Display all aliases
+            echo '<div class="aliases">';
+            echo $savvy->render($context->getAliases());
+            include dirname(__FILE__).'/../../editing/Officefinder/Department/AddAliasForm.tpl.php';
+            echo '</div>';
+            
+            echo '<div class="users">';
+            echo $savvy->render($context->getUsers());
+            include dirname(__FILE__).'/../../editing/Officefinder/Department/User/AddForm.tpl.php';
+            echo '</div>';
+    
+            echo '<ul class="edit_actions">';
+                echo '<li><a href="'.$context->getURL().'&amp;format=editing" class="action edit">Edit</a></li>';
 
-        if (!isset($context->org_unit) || UNL_Officefinder::isAdmin(UNL_Officefinder::getUser(true))) {
-            // Only allow Admins to delete "official" SAP departments
-            include dirname(__FILE__).'/../../editing/Officefinder/Department/DeleteForm.tpl.php';
-        }
+                if (!isset($context->org_unit) || UNL_Officefinder::isAdmin(UNL_Officefinder::getUser(true))) {
+                    // Only allow Admins to delete "official" SAP departments
+                    echo '<li>';
+                    include dirname(__FILE__).'/../../editing/Officefinder/Department/DeleteForm.tpl.php';
+                    echo '</li>';
+                }
 
-        echo '<a href="'.UNL_Officefinder::getURL(null, array('view'      => 'department',
-                                                              'parent_id' => $context->id)).'&amp;format=editing">Add a new child-listing</a>';
+            echo '</ul>';
+        echo '</div>';
     }
 
     // Get the official org unit if possible
     $department = $context->getHRDepartment();
 
     ?>
-    </div>
 </div>
 <div class="clear"></div>
 <div class="two_col left">
@@ -89,6 +95,10 @@
         $listings = $context->getUnofficialChildDepartments();
         if (count($listings)) {
             echo $savvy->render($listings, 'Officefinder/Department/Listings.tpl.php');
+        }
+        if ($userCanEdit) {
+            echo '<a href="'.UNL_Officefinder::getURL(null, array('view'      => 'department',
+                                                                  'parent_id' => $context->id)).'&amp;format=editing">Add a new child-listing</a>';
         }
         ?>
         </div>
