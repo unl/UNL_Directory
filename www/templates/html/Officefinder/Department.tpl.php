@@ -83,7 +83,7 @@ $userCanEdit = $context->userCanEdit(UNL_Officefinder::getUser());
         <li><a href="#results_faculty">All Employees <sup><?php echo count($department); ?></sup></a>
 	        <ul>
 	            <li><a href="#results_faculty">Faculty</a></li>
-	            <li class="selected"><a href="#results_staff">Staff</a></li>
+	            <li><a href="#results_staff">Staff</a></li>
                 <li><a href="#results_student">Student</a></li>
             </ul>
         </li>
