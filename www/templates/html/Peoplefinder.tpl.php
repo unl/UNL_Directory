@@ -28,6 +28,10 @@ if ($context->options['mobile'] === true) {
                 <script type="text/javascript" src="'.UNL_Peoplefinder::getURL().'scripts/peoplefinder.js"></script>';
 }
 
+if ($context->getRawObject() instanceof UNL_Officefinder) {
+    $page->head .= '<link rel="login" href="https://login.unl.edu/cas/login?service='.urlencode(UNL_Officefinder::getURL(null, $context->options)).'" />';
+}
+
 if (UNL_Officefinder::getUser()) {
     $page->head .= '
     <script type="text/javascript">
