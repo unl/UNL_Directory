@@ -34,10 +34,6 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
     public $email;
     /** @Column(length=45) */
     public $website;
-    /** @Column(length=45) */
-    public $acronym;
-    /** @Column(length=50) */
-    public $alternate;
 
     public $lft;
     public $rgt;
