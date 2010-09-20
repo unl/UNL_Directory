@@ -194,6 +194,19 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
         return parent::update();
     }
 
+    /**
+     * get the parent of the current element
+     * 
+     * @return UNL_Officefinder_Department
+     */
+    function getParent()
+    {
+        if (empty($this->parent_id)) {
+            return false;
+        }
+        return self::getById($this->parent_id);
+    }
+
     function getOfficialParent()
     {
         $query = sprintf('SELECT * FROM %s '.
