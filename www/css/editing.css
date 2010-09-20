@@ -11,7 +11,8 @@
 }
 #listings li:hover > div.edit {display:block;}
 #listings li div.edit form {display:none;}
-#listings li div.edit a {
+#listings li div.edit a,
+#editBox ul li a {
     display:inline;
     font-size:0.8em;
     text-indent:-9999px;
@@ -29,7 +30,6 @@
 #maincontent a.action.addchild {
     background: url('images/iconOrg.png') no-repeat 0 0;
 }
-#editBox ul li a.action { float:left;}
 #listings li:hover div.edit {
     display:block;
 }
@@ -47,7 +47,13 @@
     width:290px;
     border-radius:5px;
     -webkit-border-radius:5px;
-    -moz-border-radius:5px;	
+    -moz-border-radius:5px;
+}
+#editBox ul li a {
+	float:right;
+}
+#editBox input[type='text'] {
+	width:125px;
 }
 #editBox div.aliases {
     width:135px;
@@ -57,12 +63,12 @@
 #editBox div.users {
     width:135px;
     float:right;
-    padding-left:5px; 
+    padding-left:5px;
 }
 #editBox ul.dept_users,
 #editBox ul.dept_aliases {
     list-style: none;
-    padding:0;	
+    padding:0;
 }
 #editBox ul.dept_users li,
 #editBox ul.dept_aliases li {
@@ -74,11 +80,23 @@
 }
 
 #editBox ul.edit_actions {
-    clear:both;
-    margin-top:10px;
+    float:right;
+    width:100%;
+    margin-top:20px;
     border-top:1px dashed #BDAB61;
+    padding:10px 0 0 0;
 }
 #editBox ul.edit_actions li {
     display:inline;
     padding:2px;
+    float:left;
+}
+#editBox ul.edit_actions li:not(:last-child) {
+	margin:0 20px 0 0;
+}
+#editBox ul.edit_actions li a {
+    float:left;
+    text-indent:0;
+    padding:0 0 0 20px;
+    font-size:14px;
 }
