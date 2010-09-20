@@ -18,7 +18,7 @@ abstract class UNL_Officefinder_Record_NestedSet extends UNL_Officefinder_Record
      * @return     mixed   the array with the data of all children
      *                     or false, if there are none
      */
-    abstract function getChildren($orderBy);
+    abstract function getChildren($orderBy = '');
 
     abstract function isChildOf(UNL_Officefinder_Record_NestedSet $parent);
 
