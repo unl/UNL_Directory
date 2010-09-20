@@ -28,6 +28,15 @@ if ($context->options['mobile'] === true) {
                 <script type="text/javascript" src="'.UNL_Peoplefinder::getURL().'scripts/peoplefinder.js"></script>';
 }
 
+if (UNL_Officefinder::getUser()) {
+    $page->head .= '
+    <script type="text/javascript">
+    WDN.loadJS("wdn/templates_3.0/scripts/plugins/ui/jQuery.ui.js");
+    WDN.loadJS("'.UNL_Peoplefinder::getURL().'scripts/edit_functions.js");
+    WDN.loadCSS("'.UNL_Peoplefinder::getURL().'css/editing.css");
+    </script>';
+}
+
 if (isset($context->options['q']) 
     || isset($context->options['uid'])
     || isset($context->options['cn'])
