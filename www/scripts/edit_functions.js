@@ -2,7 +2,7 @@ var admin_editting = function() {
 	return {
 		initialize : function() { //called each time maincontent loads
 			WDN.tabs.initialize();
-                        admin_editting.appendHref();
+			admin_editting.appendHref();
 			admin_editting.bindEditLinks();
 			admin_editting.bindSortable();
 			admin_editting.bindColorbox();
