@@ -38,7 +38,7 @@
                         $selected = 'selected="selected"';
                     }
                     ?>
-                    <option value="<?php echo $code; ?>" <?php echo $selected; ?>><?php echo "$name ($code)"; ?></option>
+                    <option value="<?php echo htmlspecialchars($code); ?>" <?php echo $selected; ?>><?php echo htmlspecialchars($name).' ('.htmlspecialchars($code).')'; ?></option>
                     <?php endforeach;
                     if ($buildings->buildingExists($context->building)) {
                         echo '<option value="'.$context->building.'">'.$context->building.' (Unknown)</option>'.PHP_EOL;
