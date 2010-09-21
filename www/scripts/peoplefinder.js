@@ -251,7 +251,8 @@ WDN.jQuery(document).ready(function() {
 	});
 });
 WDN.jQuery(window).keydown(function(event) {
-	if (event.which == '191') {
+	if (WDN.jQuery('#q').length
+			&& event.which == '191') {
 		WDN.jQuery('#q').focus().select();
 		event.preventDefault();
 		event.stopPropagation();
