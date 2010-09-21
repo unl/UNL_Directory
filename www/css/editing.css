@@ -99,3 +99,7 @@
 	position:relative;
 	top:2px;
 }
+/*********************** COLORBOX ************************/
+#cboxTitle {
+    display:none !important;
+}

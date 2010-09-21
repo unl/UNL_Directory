@@ -1,8 +1,6 @@
 <script type="text/javascript">
 //<![CDATA[
-    WDN.jQuery(document).ready(function(){
-         WDN.initializePlugin('zenform');
-    });
+    WDN.loadCSS('<?php echo UNL_Peoplefinder::getURL(); ?>/css/zenform_anywhere.css.php');
 //]]>
 </script>
 <h3 class="zenform">Edit Department Record</h3>
