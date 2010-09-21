@@ -9,14 +9,14 @@ var admin_editting = function() {
 		
 		submitForm : function() {
 			WDN.jQuery('#colorbox form').submit(function() {
-				WDN.jQuery.post(WDN.jQuery('.departmentInfo form').eq(0).attr('action') + '&format=partial&redirect=0', 
-				WDN.jQuery(this).serialize(),
-				function(data) { //reload the maincontent with the new changes
-					WDN.jQuery('#maincontent').html(data);
-					WDN.jQuery.colorbox.close();
-					admin_editting.initialize();
-				}
-			);
+				WDN.jQuery.post(
+					window.location + '&format=partial&redirect=0',
+					WDN.jQuery(this).serialize(),
+					function(data) { //reload the maincontent with the new changes
+						WDN.jQuery('#maincontent').html(data);
+						WDN.jQuery.colorbox.close();
+						admin_editting.initialize();
+					});
 				return false;
 			});
 		},
