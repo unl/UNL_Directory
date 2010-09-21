@@ -2,6 +2,7 @@ var admin_editting = function() {
 	return {
 		initialize : function() { //called each time maincontent loads
 			WDN.tabs.initialize();
+                        admin_editting.appendHref();
 			admin_editting.bindEditLinks();
 			admin_editting.bindSortable();
 			admin_editting.bindColorbox();
@@ -20,13 +21,16 @@ var admin_editting = function() {
 				return false;
 			});
 		},
-		
+
+		appendHref : function() {
+			WDN.jQuery('a.edit[href*=format=editing]').each(function(){
+				href = this.href;
+				WDN.jQuery(this).attr('href', href.replace('format=editing', 'format[]=editing&format[]=partial'));
+			});
+		},
+
 		bindColorbox : function() {
 			WDN.jQuery('a.edit').colorbox({
-				href: function() {
-					href = WDN.jQuery(this).attr('href');
-					return href.replace('format=editing', 'format[]=editing&format[]=partial')
-				},
 				width: '75%',
 				height: '75%',
 				onComplete : function(){
