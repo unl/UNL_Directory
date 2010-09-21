@@ -31,7 +31,7 @@ var admin_editting = function() {
 
 		bindColorbox : function() {
 			WDN.jQuery('a.edit').colorbox({
-				width: '75%',
+				width: '740px',
 				height: '75%',
 				onComplete : function(){
 					admin_editting.submitForm();

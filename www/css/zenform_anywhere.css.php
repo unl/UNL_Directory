@@ -10,3 +10,7 @@ h3.zenform {
 form.zenform input[type="submit"] {
     color:#fff !important;
 }
+
+form.zenform {
+    width:640px;
+}
