@@ -11,10 +11,10 @@ class UNL_Officefinder_User_Departments extends UNL_Officefinder_DepartmentList
         }
         $records = array();
         $mysqli = UNL_Officefinder::getDB();
-        $sql = 'SELECT DISTINCT departments.id FROM departments, department_users
+        $sql = 'SELECT DISTINCT departments.id FROM departments, department_permissions
                 WHERE
-                    departments.id = department_users.department_id
-                    AND department_users.uid = "'.$mysqli->escape_string($this->options['uid']).'"';
+                    departments.id = department_permissions.department_id
+                    AND department_permissions.uid = "'.$mysqli->escape_string($this->options['uid']).'"';
         $sql .= ' ORDER BY departments.name';
         if ($result = $mysqli->query($sql)) {
             while($row = $result->fetch_array(MYSQLI_NUM)) {
