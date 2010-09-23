@@ -1,6 +1,6 @@
 <?php
 echo '<person>';
-foreach (get_object_vars($context) as $key=>$val) {
+foreach (get_object_vars($context->getRawObject()) as $key=>$val) {
     if ($val) {
         if ($val instanceof Traversable) {
             foreach ($val as $mkey=>$value) {

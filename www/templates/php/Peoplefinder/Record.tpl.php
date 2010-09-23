@@ -1,2 +1,2 @@
 <?php
-echo serialize($context);
+echo serialize($context->getRawObject());
