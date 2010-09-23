@@ -134,7 +134,7 @@ var directory = function() {
 		},
 		
 		splitSearchBoxes : function(cn, sn) { //function called to prepare the advanced search boxes
-			if (WDN.jQuery('#q').length){
+			if (WDN.jQuery('#peoplefinder').length){
 				WDN.jQuery("#queryString, #q").remove();
 				WDN.jQuery('#peoplefinder li').prepend('<label for="cn" class="cn">First Name</label><input type="text" value="" id="cn" name="cn" class="n q" /><label for="sn" class="sn">Last Name</label><input type="text" value="" id="sn" name="sn" class="s n q" />');
 			}
@@ -193,45 +193,47 @@ var directory = function() {
 }();
 
 WDN.jQuery(document).ready(function() {
-	WDN.loadJS('wdn/templates_3.0/scripts/plugins/hashchange/jQuery.hashchange.1-3.min.js', function() {
-		attempts = 1; // var used to control how many attempts the automatic search guessing goes through
-		WDN.jQuery(window).bind('hashchange', function(eventObject){
-			hash = location.hash;
-			if (hash.match(/^#q\//)) {
-				hash = hash.split('/'); //hash[1]
-				splitName = false;
-				if(hash.length >= 3){ // if 3, then we're looking for first and last name individually.
-					splitName = true;
-					cn = unescape(hash[1]);
-					sn = unescape(hash[2]);
-					directory.splitSearchBoxes(cn, sn);
-				} else { // it's all one search term.
-					query = unescape(hash[1]);
-					if (WDN.jQuery('#cn').length){
-						directory.combineSearchBoxes();
+	if (WDN.jQuery('#peoplefinder').length) {
+		WDN.loadJS('wdn/templates_3.0/scripts/plugins/hashchange/jQuery.hashchange.1-3.min.js', function() {
+			attempts = 1; // var used to control how many attempts the automatic search guessing goes through
+			WDN.jQuery(window).bind('hashchange', function(eventObject){
+				hash = location.hash;
+				if (hash.match(/^#q\//)) {
+					hash = hash.split('/'); //hash[1]
+					splitName = false;
+					if(hash.length >= 3){ // if 3, then we're looking for first and last name individually.
+						splitName = true;
+						cn = unescape(hash[1]);
+						sn = unescape(hash[2]);
+						directory.splitSearchBoxes(cn, sn);
+					} else { // it's all one search term.
+						query = unescape(hash[1]);
+						if (WDN.jQuery('#cn').length){
+							directory.combineSearchBoxes();
+						}
+						WDN.jQuery('#q').val(query);
 					}
-					WDN.jQuery('#q').val(query);
+					
+					service_peoplefinder.presentPeopleFinderResults();
+					
+					eventObject.preventDefault();
+					eventObject.stopPropagation();
+					return false;
+				} 
+				if (!hash) {
+					// Load the default instructions
+					WDN.jQuery('#maincontent').load('?format=partial', function(){
+						directory.initializeSearchBoxes();
+					});
 				}
-				
-				service_peoplefinder.presentPeopleFinderResults();
-				
-				eventObject.preventDefault();
-				eventObject.stopPropagation();
-				return false;
-			} 
-			if (!hash) {
-				// Load the default instructions
-				WDN.jQuery('#maincontent').load('?format=partial', function(){
-					directory.initializeSearchBoxes();
-				});
-			}
+			});
 		});
-	});
+	}
 	WDN.loadJS('wdn/templates_3.0/scripts/toolbar_peoplefinder.js', function(){
-		//WDN.toolbar_peoplefinder.serviceURL = window.location.protocol + '//' + window.location.host + window.location.pathname;
 		WDN.toolbar_peoplefinder.serviceURL = PF_URL;
 		WDN.toolbar_peoplefinder.configuedWebService = true;
-		if (window.location.hash) {
+		if (window.location.hash
+			&& WDN.jQuery('#peoplefinder').length) {
 			WDN.jQuery(window).trigger('hashchange');
 		}
 	});
@@ -252,8 +254,8 @@ WDN.jQuery(document).ready(function() {
 });
 WDN.jQuery(window).keydown(function(event) {
 	if (event.which == '191'
-			&& WDN.jQuery('#q').length) {
-		WDN.jQuery('#q').focus().select();
+			&& WDN.jQuery('#peoplefinder').length) {
+		WDN.jQuery('#peoplefinder #q').focus().select();
 		event.preventDefault();
 		event.stopPropagation();
 	}
