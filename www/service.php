@@ -40,8 +40,8 @@ $savvy->setTemplatePath(dirname(__FILE__).'/templates/html');
 
 switch($peoplefinder->options['format']) {
     case 'vcard':
-        header('Content-Type: text/x-vcard');
         if ($peoplefinder->output[0] instanceof UNL_Peoplefinder_Record) {
+            header('Content-Type: text/x-vcard');
             header('Content-Disposition: attachment; filename="'.$peoplefinder->output[0]->sn.', '.$peoplefinder->output[0]->givenName.'.vcf"');
         }
         //intentional no break
