@@ -247,6 +247,11 @@ WDN.jQuery(document).ready(function() {
 			return false;
 		}
 	});
+	WDN.jQuery('ul.pfResult:not(.departments) li .overflow').click(function(){
+		service_peoplefinder.showIndividualPeopleFinderRecord(WDN.jQuery(this));
+		return false;
+		}
+	);
 	WDN.jQuery('a.img-qrcode').live('click', function() {
 		WDN.jQuery(this).colorbox({open:true});
 		return false;
