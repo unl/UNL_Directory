@@ -59,19 +59,7 @@ $userCanEdit = $context->userCanEdit(UNL_Officefinder::getUser());
     </div>
     <?php
     if ($userCanEdit) {
-        echo '<div id="editBox">';
-            // Display all aliases
-            echo '<div class="aliases">';
-            echo $savvy->render($context->getAliases());
-            include dirname(__FILE__).'/../../editing/Officefinder/Department/AddAliasForm.tpl.php';
-            echo '</div>';
-            
-            echo '<div class="users">';
-            echo $savvy->render($context->getUsers());
-            include dirname(__FILE__).'/../../editing/Officefinder/Department/User/AddForm.tpl.php';
-            echo '</div>';
-
-        echo '</div>';
+        echo $savvy->render($context, 'Officefinder/Department/EditBox.tpl.php');
     }
 
     // Get the official org unit if possible
