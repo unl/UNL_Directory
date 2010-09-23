@@ -103,3 +103,13 @@
 #cboxTitle {
     display:none !important;
 }
+
+a.mydepts {
+	border-bottom:1px dashed;
+	color:#BA0000;
+	float:right;
+	font-family:sans-serif;
+	font-size:90%;
+	margin-top:-10px;
+	text-decoration:none;
+}

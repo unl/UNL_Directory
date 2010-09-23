@@ -8,7 +8,8 @@ if ($context->options['mobile'] === true) {
 
 $page = UNL_Templates::factory($template);
 
-$page->doctitle = '<title>UNL | Directory</title>';
+$page->doctitle     = '<title>UNL | Directory</title>';
+$page->titlegraphic = '<h1>Directory</h1>';
 
 $page->head .= '
 <meta name="description" content="UNL Peoplefinder is the Faculty, Staff and Student online directory for the University. Information obtained from this directory may not be used to provide addresses for mailings to students, faculty or staff. Any solicitation of business, information, contributions or other response from individuals listed in this publication by mail, telephone or other means is forbidden." />
@@ -39,6 +40,7 @@ if (UNL_Officefinder::getUser()) {
     WDN.loadJS("'.UNL_Peoplefinder::getURL().'scripts/edit_functions.js");
     WDN.loadCSS("'.UNL_Peoplefinder::getURL().'css/editing.css");
     </script>';
+    $page->titlegraphic .= '<a class="mydepts" href="'.UNL_Officefinder::getURL().'?view=mydepts">My Departments</a>';
 }
 
 if (isset($context->options['q']) 
@@ -55,8 +57,6 @@ $page->breadcrumbs = '
     <li><a href="'.UNL_Peoplefinder::getURL().'">Directory</a></li>
     <li>Search</li>
 </ul>';
-
-$page->titlegraphic = '<h1>Directory</h1>';
 
 if ($context->options['mobile'] === true) {
     $page->maincontentarea = $savvy->render($context->output);
