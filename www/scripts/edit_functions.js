@@ -1,7 +1,6 @@
 var admin_editting = function() {
 	return {
 		initialize : function() { //called each time maincontent loads
-			WDN.tabs.initialize();
 			admin_editting.appendHref();
 			admin_editting.bindEditLinks();
 			admin_editting.bindSortable();
@@ -15,6 +14,7 @@ var admin_editting = function() {
 					WDN.jQuery(this).serialize(),
 					function(data) { //reload the maincontent with the new changes
 						WDN.jQuery('#maincontent').html(data);
+						WDN.tabs.initialize();
 						WDN.jQuery.colorbox.close();
 						admin_editting.initialize();
 					});
