@@ -29,7 +29,6 @@ switch($peoplefinder->options['format']) {
         // intentional no break
     case 'html':
     default:
-        $savvy->setEscape('htmlentities');
 }
 
 $savvy->setEscape('htmlentities');

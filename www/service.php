@@ -55,7 +55,7 @@ switch($peoplefinder->options['format']) {
     case 'hcard':
     default:
         Savvy_ClassToTemplateMapper::$output_template['UNL_Peoplefinder'] = 'Peoplefinder-partial';
-        $savvy->setEscape('htmlentities');
 }
+$savvy->setEscape('htmlentities');
 
 echo $savvy->render($peoplefinder);
