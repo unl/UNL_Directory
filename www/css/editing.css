@@ -51,6 +51,18 @@
 }
 #editBox input[type='text'] {
 	width:125px;
+	border:1px solid #BDAB61;
+	background:#f9f8f2;
+}
+#editBox input[type='submit'] {
+	background: #897b42;
+	border: 1px solid #BDAB61;
+	margin-top:5px;
+    border-radius:5px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    color:#fff;
+    cursor:pointer;
 }
 #editBox div.aliases {
     width:135px;
