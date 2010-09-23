@@ -4,4 +4,3 @@ if (false == headers_sent()
     header('HTTP/1.1 '.$code.' '.$context->getMessage());
     header('Status: '.$code.' '.$context->getMessage());
 }
-echo $context->getMessage();
