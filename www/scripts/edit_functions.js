@@ -87,4 +87,14 @@ var admin_editting = function() {
 }();
 WDN.jQuery(document).ready(function(){
 	admin_editting.initialize();
+	WDN.jQuery('#userDepts').hover(function(){
+		WDN.get(WDN.jQuery(this).children('a').attr('href')+'&format=partial', function(data){
+			listHTML = '<div id="mydeptlist">' + data + '</div>';
+			WDN.log(listHTML);
+			WDN.jQuery('#userDepts').append(listHTML);
+		});
+	}, function(){
+		WDN.jQuery('#mydeptlist').remove();
+	});
+	
 });

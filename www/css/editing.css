@@ -5,6 +5,44 @@
 
 ************************************
 */
+a.mydepts {
+    color:#5c5c5c;
+    float:right;
+    font-family:sans-serif;
+    font-size:80%;
+    margin-top:-10px;
+    text-decoration:none;
+    background: #f7f7f7 url('images/iconSelect.png') no-repeat center right;
+    border:1px solid #ededed;
+    border-radius:3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius:3px;
+    padding:3px 18px 3px 10px;
+}
+#mydeptlist {
+    float:right;
+    background: #f7f7f7;
+    border:1px solid #ededed;
+    border-radius:3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius:3px;
+    margin-top:10px;
+    position:absolute;
+    right:20px;
+    width:200px;
+    padding:10px;
+    z-index:9999;
+}
+#mydeptlist li {
+    border-bottom:1px dashed #b1b1b1;
+    padding:5px 0;	
+}
+#mydeptlist li a {
+    color:#BA0000;
+    text-decoration:none;
+    font-size:80%;	
+    font-family:sans-serif;
+}
 #listings li div.edit {
     display:none;
     float:right;
@@ -114,14 +152,4 @@
 /*********************** COLORBOX ************************/
 #cboxTitle {
     display:none !important;
-}
-
-a.mydepts {
-	border-bottom:1px dashed;
-	color:#BA0000;
-	float:right;
-	font-family:sans-serif;
-	font-size:90%;
-	margin-top:-10px;
-	text-decoration:none;
 }
