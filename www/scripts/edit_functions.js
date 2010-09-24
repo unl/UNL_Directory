@@ -2,7 +2,6 @@ var admin_editting = function() {
 	return {
 		initialize : function() { //called each time maincontent loads
 			admin_editting.appendHref();
-			admin_editting.bindEditLinks();
 			admin_editting.bindSortable();
 			admin_editting.bindColorbox();
 		},
@@ -30,7 +29,7 @@ var admin_editting = function() {
 		},
 
 		bindColorbox : function() {
-			WDN.jQuery('a.edit').colorbox({
+			WDN.jQuery('a.edit, a.addchild').colorbox({
 				width: '740px',
 				height: '75%',
 				onComplete : function(){
@@ -68,16 +67,6 @@ var admin_editting = function() {
 									WDN.jQuery('#'+results[i]+' > div.edit form.sortform').serialize());
 				}
 			}
-		},
-		
-		bindEditLinks : function() {
-			WDN.jQuery('a.edit, a.addchild').colorbox(
-				{
-					width : '75%', 
-					height : '75%', 
-					onComplete : function(){admin_editting.submitForm();}
-				}
-			);
 		},
 		
 		formatDepartmentLists : function() {
