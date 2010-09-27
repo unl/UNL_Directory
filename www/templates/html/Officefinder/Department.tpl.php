@@ -33,7 +33,7 @@ $userCanEdit = $context->userCanEdit(UNL_Officefinder::getUser());
                  <span class="room"><?php echo $context->room.' <a class="location mapurl" href="http://maps.unl.edu/#'.$context->building.'">'.$context->building.'</a>'; ?></span>
                  <span class="locality"><?php echo $context->city; ?></span>
                  <span class="region"><?php echo $context->state; ?></span>
-                 <span class="postal-code"><?php echo $context->postal_code; ?><?php echo $context->email; ?></span>
+                 <span class="postal-code"><?php echo $context->postal_code; ?></span>
                  <span class="country-name">USA</span>
             </div>
             <?php if (isset($context->phone)): ?>
