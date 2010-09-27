@@ -112,7 +112,7 @@
 	padding-left:5px;
 	margin:5px 0;	
 }
-.vcard .tel, .vcard span.email, .vcard span.url, .departmentInfo .tel, .departmentInfo span.email, .departmentInfo span.url {
+.vcard .tel, .vcard span.email, .vcard span.url, .departmentInfo span.voice, .departmentInfo span.fax, .departmentInfo span.email, .departmentInfo span.url {
 	background:url('images/iconContactSprite.png') no-repeat;
 	padding-left:25px;
 	height:20px;
