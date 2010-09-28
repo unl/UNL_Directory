@@ -3,7 +3,7 @@
 $template = 'Document';
 
 if ($context->options['mobile'] === true) {
-    $template = 'Popup';
+    $template = 'Mobile';
 } 
 
 $page = UNL_Templates::factory($template);
