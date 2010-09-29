@@ -53,7 +53,8 @@
 }
 .directorySearch input[type=text]{
     width:80%;
-    border:1px solid #d7c47f;	
+    border:1px solid #d7c47f;
+    min-height:25px;
 }
 .directorySearch ol li:first-child input.n[type=text] {
     width:53%;
@@ -63,7 +64,8 @@
     margin-right:0; 
 }
 .directorySearch input[type=image]{
-    width:20px; 
+    width:20px;
+    margin-bottom:-5px;
 }
 #maincontent #advancedSearch {
     background:#d7c47f;
@@ -76,7 +78,8 @@
     -webkit-border-radius:3px;
     line-height:auto;
     text-shadow:1px 1px 3px #888888;
-    border:1px solid #d7c47f;   
+    border:1px solid #d7c47f;
+    float:right;
 }
 #maincontent #advancedSearch:focus, #maincontent #advancedSearch:hover{color:#fff !important;border-color:#c0af70;}
 #maincontent #advancedSearch:active{text-shadow:none;}
