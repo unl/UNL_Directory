@@ -102,7 +102,13 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
             throw new Exception('Invalid department name "'.$this->name.'"', 404);
         }
 
-        foreach ($results[0] as $attribute) {
+        $this->setFromSimpleXMLElement($results[0]);
+        
+    }
+
+    public function setFromSimpleXMLElement(SimpleXMLElement $result)
+    {
+        foreach ($result as $attribute) {
             if (isset($attribute['name'])) {
                 $this->{$attribute['name']} = (string)$attribute['value'];
             }
