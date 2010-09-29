@@ -63,7 +63,12 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
 
     protected $_results;
     
-    protected $_xml;
+    /**
+     * SimpleXMLElement of the HR Tree file
+     *
+     * @var SimpleXMLElement
+     */
+    protected static $_xml;
     
     public $options = array();
     
@@ -79,7 +84,7 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
         }
         $this->options = $options + $this->options;
 
-        $this->_xml = new SimpleXMLElement(file_get_contents(UNL_Peoplefinder::getDataDir().'/hr_tree.xml'));
+        $xml = self::getXML();
 
         if (isset($options['org_unit'])) {
             $this->org_unit = $options['org_unit'];
@@ -91,7 +96,7 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
             $xpath = '//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="name"][@value="'.$quoted.'"]/..';
         }
 
-        $results = $this->_xml->xpath($xpath);
+        $results = $xml->xpath($xpath);
 
         if (!isset($results[0])) {
             throw new Exception('Invalid department name "'.$this->name.'"', 404);
@@ -102,6 +107,19 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
                 $this->{$attribute['name']} = (string)$attribute['value'];
             }
         }
+    }
+    
+    /**
+     * Get the XML for the HR Tree
+     *
+     * @return SimpleXMLElement
+     */
+    protected static function getXML()
+    {
+        if (!isset(self::$_xml)) {
+            self::$_xml = new SimpleXMLElement(file_get_contents(UNL_Peoplefinder::getDataDir().'/hr_tree.xml'));
+        }
+        return self::$_xml;
     }
     
     /**
@@ -161,14 +179,14 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
     
     function hasChildren()
     {
-        $results = $this->_xml->xpath('//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="org_unit"][@value="'.$this->org_unit.'"]/../branch');
+        $results = self::getXML()->xpath('//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="org_unit"][@value="'.$this->org_unit.'"]/../branch');
         return count($results)?true:false;
     }
     
     function getChildren()
     {
         $children = array();
-        $results = $this->_xml->xpath('//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="org_unit"][@value="'.$this->org_unit.'"]/../branch');
+        $results = self::getXML()->xpath('//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="org_unit"][@value="'.$this->org_unit.'"]/../branch');
         foreach ($results as $result) {
             foreach ($result[0] as $attribute) {
                 if (isset($attribute['name'])
@@ -189,7 +207,7 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
      */
     public static function getById($id, $options = array())
     {
-        $xml = new SimpleXMLElement(file_get_contents(UNL_Peoplefinder::getDataDir().'/hr_tree.xml'));
+        $xml = self::getXML();
         $results = $xml->xpath('//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="org_unit"][@value='.$id.']/..');
         if (!$results) {
             return false;
