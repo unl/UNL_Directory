@@ -1,14 +1,17 @@
 <?php
 if (count($context)) {
     echo '<h2>'.$context->name.'</h2>';
+    $buildinig = '';
     if (isset($context->building)) {
+        $building = $context->building;
         $bldgs = new UNL_Common_Building();
         if ($bldgs->buildingExists($context->building)) {
             $sd = new UNL_Geography_SpatialData_Campus();
-            $context->building = '<a href="'.$sd->getMapUrl($context->building).'">'.htmlentities($bldgs->codes[$context->building]).'</a>';
+            $building = '<a href="'.$sd->getMapUrl($context->building).'">'.htmlentities($bldgs->codes[$context->building]).'</a>';
         }
+        $building = "<span class='location'>$building</span>";
     }
-    echo "<p>{$context->room} <span class='location'>{$context->building}</span><br />{$context->city}, {$context->state} {$context->postal_code}</p>";
+    echo "<p>{$context->room} {$building}<br />{$context->city}, {$context->state} {$context->postal_code}</p>";
 //    if ($context->hasChildren()) {
 //        echo 'Sub-departments:<ul>';
 //        foreach ($context->getChildren() as $child) {
