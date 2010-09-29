@@ -26,7 +26,7 @@
 	    color-stop(0.88, rgb(215,196,127))
 	);
 	-webkit-border-radius:3px;
-    
+    display:inline-block;
 }
 .directorySearch legend {display:none;}
 #maincontent form.directorySearch ol{
@@ -36,7 +36,6 @@
     position:relative;
 }
 .directorySearch ol li:first-child{
-    height:46px;
     padding:0px;
     margin-left:-13px;
     margin-bottom:0px;
