@@ -79,31 +79,33 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
      */
     function __construct($options = array())
     {
-        if (!(isset($options['d']) || isset($options['org_unit']))) {
+        if (!(
+                isset($options['d'])
+                || isset($options['org_unit'])
+                || isset($options['xml'])
+              )
+           ) {
             throw new Exception('No department name or org_unit! Pass as the d or org_unit value.');
         }
         $this->options = $options + $this->options;
 
         $xml = self::getXML();
 
-        if (isset($options['org_unit'])) {
-            $this->org_unit = $options['org_unit'];
-            $xpath = '//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="org_unit"][@value="'.$this->org_unit.'"]/..';
-        } else {
-            $this->name = $options['d'];
-            $quoted = preg_replace('/([\'\"\?])/', '\\$1', $this->name);
+        $result = false;
 
-            $xpath = '//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="name"][@value="'.$quoted.'"]/..';
+        if (isset($options['xml'])) {
+            $result = $options['xml'];    
+        } elseif (isset($options['org_unit'])) {
+            $result = self::getXMLById($options['org_unit']);
+        } elseif (isset($options['d'])) {
+            $result = self::getXMLByName($options['d']);
+        }
+    
+        if (!$result) {
+            throw new Exception('Invalid department', 404);
         }
 
-        $results = $xml->xpath($xpath);
-
-        if (!isset($results[0])) {
-            throw new Exception('Invalid department name "'.$this->name.'"', 404);
-        }
-
-        $this->setFromSimpleXMLElement($results[0]);
-        
+        $this->setFromSimpleXMLElement($result);
     }
 
     public function setFromSimpleXMLElement(SimpleXMLElement $result)
@@ -213,12 +215,33 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
      */
     public static function getById($id, $options = array())
     {
-        $xml = self::getXML();
-        $results = $xml->xpath('//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="org_unit"][@value='.$id.']/..');
+        if ($result = self::getXMLById($id)) {
+            $options['xml'] = $result;
+            return new self($options);
+        }
+        return $result;
+    }
+
+    public static function getXMLByName($name)
+    {
+        $xml     = self::getXML();
+        $quoted  = preg_replace('/([\'\"\?])/', '\\$1', $name);
+        $xpath   = '//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="name"][@value="'.$quoted.'"]/..';
+        $results = $xml->xpath($xpath);
         if (!$results) {
             return false;
         }
-        $options['org_unit'] = $id;
-        return new self($options);
+        return $results[0];
     }
+
+    public static function getXMLById($id)
+    {
+        $xml     = self::getXML();
+        $xpath   = '//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="org_unit"][@value='.$id.']/..';
+        $results = $xml->xpath($xpath);
+        if (!$results) {
+            return false;
+        }
+        return $results[0];
+    } 
 }
