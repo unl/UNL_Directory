@@ -129,7 +129,7 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
             continue;
         }
 
-        $clean_name = cleanField($obj->szLname.' '.$obj->szFname.' '.$obj->szAddtText);
+        $clean_name = cleanField($obj->szLname.' '.$obj->szFname.' '.$obj->szAddtText.' '.$obj->mFreeFormText);
         echo $clean_name.', '.$obj->lMaster_id.'<br>'.PHP_EOL;
 
         $dept          = false;
@@ -269,7 +269,7 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
             $indentation_levels[0] = $dept;
             $last_added            = $dept;
             while ($listing = $listings->fetch_object()) {
-                $child_clean_name = cleanField($listing->szDirLname.' '.$listing->szDirFname.' '.$listing->szDirAddText, false);
+                $child_clean_name = cleanField($listing->szDirLname.' '.$listing->szDirFname.' '.$listing->szDirAddText.' '.$listing->mFreeFormText, false);
                 $child = UNL_Officefinder_Department::getByname($child_clean_name, 'org_unit IS NULL AND parent_id = '.$dept->id);
                 if ($child instanceof UNL_Officefinder_Department) {
                     continue;
