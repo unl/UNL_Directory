@@ -337,10 +337,10 @@ function cleanField($text, $correct_case = true)
         $text = str_replace($matches[0], strtoupper($matches[0]), $text);
     }
 
-    if (preg_match('/, (.*)/', $text, $matches)) {
+    if (preg_match('/, \((.*)\)$/', $text, $matches)) {
         if ($matches[1] !== 'Inc') {
             $text = $matches[1].' '.str_replace($matches[0], '', $text);
-            $text = cleanField($text);
+            $text = cleanField($text, $correct_case);
         }
     }
 
