@@ -122,8 +122,6 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
 
     while($obj = $result->fetch_object()){
 
-//        sanityCheck();
-
         if (preg_match('/(.*)\(see (.*)\)/', $obj->szLname.' '.$obj->szFname.' '.$obj->szAddtText, $matches)) {
             // known-as listing
             echo 'known as listing!!'.$obj->szLname.' '.$obj->szFname.' '.$obj->szAddtText.PHP_EOL;
@@ -209,7 +207,7 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
                 }
             }
         }
-//        sanityCheck();
+
         if (false === $dept) {
             // New department, no clue where this goes
             $dept = new UNL_Officefinder_Department();
@@ -245,10 +243,9 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
 //        $dept->website  = NULL;
 //        $dept->acronym  = NULL;
 //        $dept->known_as = NULL;
-//        sanityCheck();
         $dept->save();
         $db->query('INSERT INTO telecom_unidaslt_to_departments VALUES ('.$obj->lMaster_id.','.$dept->id.');');
-//        sanityCheck();
+
         if (false === $official_dept
             && !isset($dept->org_unit)) {
             // Find where the parent is
@@ -261,7 +258,7 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
                 }
             }
         }
-//        sanityCheck();
+
 
         $sql = "SELECT * FROM telecom_departments WHERE lGroup_id={$obj->lGroup_id} AND iSeqNbr !=0 ORDER BY iSeqNbr ASC;";
         $listings = $db->query($sql);
@@ -302,7 +299,6 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
                 // Store the last child at this level
                 $indentation_levels[$listing->tiIndDrg] = $child;
                 $last_added = $child;
-//                sanityCheck();
             }
         }
         $listings->close();
@@ -399,15 +395,6 @@ function checkCleanupFile($cleanup_file)
             }
             continue;
         }
-    }
-}
-
-function sanityCheck()
-{
-    // Begin sanity check!
-    $ucomm = UNL_Officefinder_Department::getByID(355);
-    if ($ucomm->getParent()->id != 2) {
-        throw new Exception('UHOH');
     }
 }
 
