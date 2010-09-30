@@ -28,7 +28,7 @@ If this is not correct, please let us know!
 </p><p>
 The system allows you to grant edit permissions to another UNL user if you would like to delegate this responsibility to others in your department. (See the documentation note at the end of this email).
 </p><p>
-Right now the online directory contains information from the 2009-2010 printed directory. We would like to give you the opportunity to correct the listings before the online directory goes live, and have set up a staging server to make edits on. This interface is exactly the same as the current Peoplefinder website, but now supports searching by department names. Please review your listings carefully. It is possible that some listing content may have been lost or altered in the data transfer. Use your 2009-2010 UNL Directory as your guide.
+Right now the online directory contains information from the 2009-2010 printed directory. We would like to give you the opportunity to correct the listings before the online directory goes live, and have set up a staging server to make edits on. This interface is exactly the same as the current Peoplefinder website, but now supports searching by department names. Please review your listings carefully. It is possible that some listings may have been lost, out of order, or altered in the data transfer. Please make any edits necessary and use your 2009-2010 UNL Directory as your guide.
 </p><p>
 You can access the staging server at <a style="outline: none;color: #ba0000;text-decoration: none;" href="http://peoplefinder-test.unl.edu/">http://peoplefinder-test.unl.edu/</a> to make your edits.
 </p><p>
@@ -45,7 +45,7 @@ Please feel free to call or email Linda Geisler (<a href="mailto:lgeisler1@unl.e
 </p>
 SUFFIX;
 
-$mailer               = new UNL_WDN_Emailer_Main();
+//$mailer = new UNL_WDN_Emailer_Main();
 
 
 foreach ($users as $user) {
@@ -60,11 +60,10 @@ foreach ($users as $user) {
     $email_body .= $email_suffix;
     
     
-    echo $user->mail;
-    $mailer->html_body    = $email_body;
-    $mailer->to_address   = 'smeranda2@unl.edu';
-    $mailer->from_address = 'Linda Geisler <lgeisler1@unl.edu>';
-    $mailer->subject      = 'New UNL Online Directory';
-    $mailer->send();
-    exit();
+    echo $user->uid.':'.$user->mail.PHP_EOL;
+//    $mailer->html_body    = $email_body;
+//    $mailer->to_address   = $user->mail;
+//    $mailer->from_address = 'Linda Geisler <lgeisler1@unl.edu>';
+//    $mailer->subject      = 'New UNL Online Directory';
+//    $mailer->send();
 }
