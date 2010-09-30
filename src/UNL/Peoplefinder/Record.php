@@ -184,7 +184,7 @@ class UNL_Peoplefinder_Record
 
     function __toString()
     {
-        return $this->uid;
+        return (string)$this->uid;
     }
 }
 
