@@ -22,29 +22,7 @@ class UNL_Common_Building_East
      */
     function __construct()
     {
-        $this->_checkDB();
-        if ($result = UNL_Common::getDB()->query('SELECT * FROM building_east')) {
-            while ($bldg = $result->fetch()) {
-                $this->codes[(string)$bldg['code']]=$bldg['name'];
-            }
-        }
+        $this->codes = UNL_Common::getDriver()->getEastBuildings();
     }
-    
-    protected function _checkDB()
-    {
-       if (!UNL_Common::tableExists('building_east')) {
-            UNL_Common::getDB()->exec(UNL_Common_Building_East::getTableDefinition());
-            UNL_Common::importCSV('building_east', UNL_Common::getDataDir().'building_east.csv');
-        }
-    }
-    
-    static function getTableDefinition()
-    {
-        return "CREATE TABLE building_east (
-                  id int(11) NOT NULL,
-                  code varchar(10) NOT NULL default '',
-                  name varchar(100) NOT NULL default '',
-                  PRIMARY KEY  (id)
-                ) ;";
-    }
+
 }

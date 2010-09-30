@@ -2,59 +2,28 @@
 
 class UNL_Common
 {
-    static public $db_file = 'unl_common.sqlite';
-    
-    static private $db;
-    
+
     /**
-     * Get the database.
-     * 
-     * @return PDO
+     * The driver to be used for retrieving data
+     *
+     * @var UNL_Common_DataDriverInterface
      */
-    static function getDB()
+    public static $driver;
+
+    /**
+     * Get the current data driver
+     *
+     * @return UNL_Common_DataDriverInterface
+     */
+    static public function getDriver()
     {
-        if (!isset(self::$db)) {
-            return self::__connect();
+        if (!isset(self::$driver)) {
+            require_once 'UNL/Common/DataDriverInterface.php';
+            require_once 'UNL/Common/JSONDataDriver.php';
+            self::$driver = new UNL_Common_JSONDataDriver();
         }
-        return self::$db;
+        return self::$driver;
     }
 
-    static public function getDataDir()
-    {
-        if (file_exists(dirname(dirname(dirname(__FILE__))) . '/data/UNL_Common/pear.unl.edu')) {
-            return dirname(dirname(dirname(__FILE__))) . '/data/UNL_Common/pear.unl.edu/';
-        }
-        if (file_exists(dirname(dirname(dirname(__FILE__))) . '/data/UNL_Common')) {
-            return dirname(dirname(dirname(__FILE__))) . '/data/UNL_Common/data/';
-        }
-        return dirname(dirname(dirname(__FILE__))) . '/data/';
-    }
-    
-    static protected function __connect()
-    {
-        $dsn = 'sqlite:'.self::getDataDir().self::$db_file;
-        if (self::$db = new PDO($dsn)) {
-            return self::$db;
-        }
-        throw new Exception('Cannot connect to database!');
-    }
-    
-    static function tableExists($table)
-    {
-        $db = self::getDB();
-        $result = $db->query("SELECT name FROM sqlite_master WHERE type='table' AND name='$table'");
-        return $result->rowCount() > 0;
-    }
-    
-    static function importCSV($table, $filename)
-    {
-        $db = self::getDB();
-        if ($h = fopen($filename,'r')) {
-            while ($line = fgets($h)) {
-                $db->exec("INSERT INTO ".$table." VALUES ($line);");
-            }
-        }
-    }
 }
 
-?>

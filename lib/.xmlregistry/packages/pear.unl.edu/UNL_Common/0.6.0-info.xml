@@ -12,39 +12,40 @@ This package contains commonly used elements for the University of Nebraska-Linc
   <email>brett.bieber@gmail.com</email>
   <active>yes</active>
  </lead>
- <date>2010-06-15</date>
- <time>10:29:15</time>
+ <date>2010-09-30</date>
+ <time>13:42:30</time>
  <version>
-  <release>0.5.0</release>
-  <api>0.5.0</api>
+  <release>0.6.0</release>
+  <api>0.6.0</api>
  </version>
  <stability>
   <release>alpha</release>
   <api>alpha</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
- <notes>Change database usage to PDO::SQlite
-Package source refactoring.
-Use Pyrus to package.
+ <notes>Major overhaul:
 
-Package UNL_Common API release notes for version 0.1.0.</notes>
+* Building data is no longer bundled with the package
+* The new DataDriverInterface allows custom data sources
+* Upgrades no longer required to retrieve campus building data
+
+UNL_Common is now driver-based. The default driver for building data uses a
+JSON output from the campus tour.</notes>
  <contents>
   <dir name="/">
-   <file role="test" name="tests/UNL_Common_CollegesTest.php" md5sum="64c302cff537da936dd7b296cdfd914e"/>
-   <file role="test" name="tests/UNL_Common_Building_EastTest.php" md5sum="4cd3e5f75da295500ceaaff84b27de43"/>
-   <file role="test" name="tests/UNL_Common_Building_CityTest.php" md5sum="e26b83d47fa963bc32740ccc6f4c2c86"/>
-   <file role="test" name="tests/UNL_Common_BuildingTest.php" md5sum="4f62c3b0f6b9f5e3f6b5a80204ec6d43"/>
-   <file role="php" name="src/UNL/Common/Colleges.php" md5sum="688b82e026b903072aa60a7558f2c7ea"/>
-   <file role="php" name="src/UNL/Common/Building/East.php" md5sum="3a98eb390b792a59bcf1807695ae22a1"/>
-   <file role="php" name="src/UNL/Common/Building/City.php" md5sum="1b2d0c1c54d8549c6f8a9261e86d11a1"/>
-   <file role="php" name="src/UNL/Common/Building.php" md5sum="dac29813bbb49a5f4b3c22187fa6d7da"/>
-   <file role="php" name="src/UNL/Common.php" md5sum="82bcfb4b251e866db53a6eedb4fdef0b"/>
-   <file role="doc" name="examples/Building.php" md5sum="c11d2a9907842f30ff70a53caec0a419"/>
-   <file role="data" name="data/unl_common.sqlite" md5sum="d028905da1b961b61663fbdbac876306"/>
-   <file role="data" name="data/building_east.csv" md5sum="8e9a993d9ec346a1f5b37de5196b0dde"/>
-   <file role="data" name="data/building_city.csv" md5sum="56364dfcdacdfe1919392e60779bbd0e"/>
-   <file role="data" name="data/building_addresses.csv" md5sum="089e47083be9ce07b3ab625a4500258a"/>
-   <file role="data" name="data/all_buildings.csv" md5sum="7dcc19ad9763810a4ba32702e15d020e"/>
+   <file role="test" name="test/UNL_Common/pear.unl.edu/UNL_Common_CollegesTest.php" md5sum="64c302cff537da936dd7b296cdfd914e"/>
+   <file role="test" name="test/UNL_Common/pear.unl.edu/UNL_Common_Building_EastTest.php" md5sum="4cd3e5f75da295500ceaaff84b27de43"/>
+   <file role="test" name="test/UNL_Common/pear.unl.edu/UNL_Common_Building_CityTest.php" md5sum="e26b83d47fa963bc32740ccc6f4c2c86"/>
+   <file role="test" name="test/UNL_Common/pear.unl.edu/UNL_Common_BuildingTest.php" md5sum="4f62c3b0f6b9f5e3f6b5a80204ec6d43"/>
+   <file role="php" name="php/UNL/Common/JSONDataDriver.php" md5sum="f53d7d1aba8dc6f84a6bbbb690d7e3ba"/>
+   <file role="php" name="php/UNL/Common/DataDriverInterface.php" md5sum="4dcf585e3a0faf7c4ae19bde975518ba"/>
+   <file role="php" name="php/UNL/Common/Colleges.php" md5sum="688b82e026b903072aa60a7558f2c7ea"/>
+   <file role="php" name="php/UNL/Common/Building/East.php" md5sum="0cf6433bb05b029d4caa3a9dcf61e135"/>
+   <file role="php" name="php/UNL/Common/Building/City.php" md5sum="fea6a9f978aa6eef6d2fc0f641210f3e"/>
+   <file role="php" name="php/UNL/Common/Building.php" md5sum="dac29813bbb49a5f4b3c22187fa6d7da"/>
+   <file role="php" name="php/UNL/Common.php" md5sum="ac93a391b5a6eb7d5b9939d3ec6d3a1d"/>
+   <file role="doc" name="doc/UNL_Common/pear.unl.edu/examples/examples/Building.php" md5sum="c11d2a9907842f30ff70a53caec0a419"/>
+   <file role="data" name="data/UNL_Common/pear.unl.edu/building_addresses.csv" md5sum="089e47083be9ce07b3ab625a4500258a"/>
   </dir>
  </contents>
  <dependencies>
@@ -53,7 +54,7 @@ Package UNL_Common API release notes for version 0.1.0.</notes>
     <min>5.2.0</min>
    </php>
    <pearinstaller>
-    <min>1.4.0</min>
+    <min>2.0.0a1</min>
    </pearinstaller>
   </required>
  </dependencies>

@@ -23,29 +23,7 @@ class UNL_Common_Building_City
      */
     function __construct()
     {
-        $this->_checkDB();
-        if ($result = UNL_Common::getDB()->query('SELECT * FROM building_city')) {
-            while ($bldg = $result->fetch()) {
-                $this->codes[(string)$bldg['code']]=$bldg['name'];
-            }
-        }
+        $this->codes = UNL_Common::getDriver()->getCityBuildings();
     }
-    
-    protected function _checkDB()
-    {
-       if (!UNL_Common::tableExists('building_city')) {
-            UNL_Common::getDB()->exec(UNL_Common_Building_City::getTableDefinition());
-            UNL_Common::importCSV('building_city', UNL_Common::getDataDir().'building_city.csv');
-        }
-    }
-    
-    static function getTableDefinition()
-    {
-        return "CREATE TABLE building_city (
-                  id int(11) NOT NULL,
-                  code varchar(10) NOT NULL default '',
-                  name varchar(100) NOT NULL default '',
-                  PRIMARY KEY  (id)
-                ) ;";
-    }
+
 }

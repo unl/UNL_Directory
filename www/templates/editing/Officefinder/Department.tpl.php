@@ -28,17 +28,26 @@
                 <label for="building">Campus Building</label>
                 <select name="building" id="building">
                     <option value="">N/A</option>
-                    <?php
-                    $buildings = new UNL_Common_Building();
-                    foreach ($buildings->codes as $code=>$name):
-                    $selected = '';
-                    if ($code == $context->building) {
-                        $selected = 'selected="selected"';
-                    }
-                    ?>
-                    <option value="<?php echo htmlspecialchars($code); ?>" <?php echo $selected; ?>><?php echo htmlspecialchars($name).' ('.htmlspecialchars($code).')'; ?></option>
-                    <?php endforeach;
-                    if ($buildings->buildingExists($context->building)) {
+                    <?php foreach (array('City', 'East') as $campus): ?>
+                    <optgroup label="<?php echo $campus; ?> Campus">
+                        <?php
+                        $class = 'UNL_Common_Building_'.$campus;
+                        $buildings = new $class();
+                        asort($buildings->codes);
+                        foreach ($buildings->codes as $code=>$name):
+                            $selected = '';
+                            if ($code == $context->building) {
+                                $selected = 'selected="selected"';
+                            }
+                        ?>
+                        <option value="<?php echo htmlspecialchars($code); ?>" <?php echo $selected; ?>><?php echo htmlspecialchars($name).' ('.htmlspecialchars($code).')'; ?></option>
+                    
+                    <?php endforeach; ?>
+                    </optgroup>
+                    <?php 
+                    endforeach;
+                    $all = new UNL_Common_Building();
+                    if (!$all->buildingExists($context->building)) {
                         echo '<option value="'.$context->building.'">'.$context->building.' (Unknown)</option>'.PHP_EOL;
                     }
                     ?>
