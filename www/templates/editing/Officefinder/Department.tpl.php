@@ -28,7 +28,9 @@
                 <label for="building">Campus Building</label>
                 <select name="building" id="building">
                     <option value="">N/A</option>
-                    <?php foreach (array('City', 'East') as $campus): ?>
+                    <?php
+                    $found = false;
+                    foreach (array('City', 'East') as $campus): ?>
                     <optgroup label="<?php echo $campus; ?> Campus">
                         <?php
                         $class = 'UNL_Common_Building_'.$campus;
@@ -37,6 +39,7 @@
                         foreach ($buildings->codes as $code=>$name):
                             $selected = '';
                             if ($code == $context->building) {
+                                $found = true;
                                 $selected = 'selected="selected"';
                             }
                         ?>
@@ -46,9 +49,8 @@
                     </optgroup>
                     <?php 
                     endforeach;
-                    $all = new UNL_Common_Building();
-                    if (!$all->buildingExists($context->building)) {
-                        echo '<option value="'.$context->building.'">'.$context->building.' (Unknown)</option>'.PHP_EOL;
+                    if (!$found) {
+                        echo '<option value="'.$context->building.'">'.$context->building.' (Unknown building. Please correct if possible.)</option>'.PHP_EOL;
                     }
                     ?>
                 </select>
