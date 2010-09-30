@@ -23,6 +23,13 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
      * @var number
      */
     public $org_unit;
+
+    /**
+     * Organization abbreviation
+     *
+     * @var string 
+     */
+    public $org_abbr;
     
     /**
      * Building the department main office is in.

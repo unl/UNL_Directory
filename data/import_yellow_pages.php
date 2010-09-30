@@ -101,7 +101,7 @@ function updateOfficialDepartment(UNL_Peoplefinder_Department $sap_dept, UNL_Off
     }
 }
 
-function updateFields($old, $new) {
+function updateFields(UNL_Officefinder_Department $old, UNL_Peoplefinder_Department $new) {
     foreach ($old as $key=>$val) {
         if (isset($new->$key)
             && $key != 'options') {
@@ -109,6 +109,9 @@ function updateFields($old, $new) {
         }
         // Save it
         $old->save();
+        if (!empty($new->org_abbr)) {
+            $old->addAlias($new->org_abbr);
+        }
     }
 }
 
