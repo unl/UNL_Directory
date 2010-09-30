@@ -168,7 +168,7 @@ class UNL_Officefinder
             case 'add_dept_alias':
                 $record = $this->getPostedDepartment();
                 if (empty($_POST['name'])) {
-                    throw new Exception('You must enter the alias before submitting the form.')
+                    throw new Exception('You must enter the alias before submitting the form.');
                 }
                 $record->addAlias($_POST['name']);
                 $redirect = $record->getURL();
