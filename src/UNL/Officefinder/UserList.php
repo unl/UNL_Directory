@@ -13,7 +13,11 @@ class UNL_Officefinder_UserList extends ArrayIterator
      */
     function current()
     {
-        return self::getPeoplefinder()->getUID(parent::current());
+        try {
+            return self::getPeoplefinder()->getUID(parent::current());
+        } catch (Exception $e) {
+            return parent::current();
+        }
     }
 
     /**
