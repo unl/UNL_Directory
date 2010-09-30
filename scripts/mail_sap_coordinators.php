@@ -28,7 +28,7 @@ If this is not correct, please let us know!
 </p><p>
 The system allows you to grant edit permissions to another UNL user if you would like to delegate this responsibility to others in your department. (See the documentation note at the end of this email).
 </p><p>
-Right now the online directory contains information from the 2009-2010 printed directory. We would like to give you the opportunity to correct the listings before the online directory goes live, and have set up a <a href="http://peoplefinder-test.unl.edu/">staging server</a> to make edits on. This interface is exactly the same as the current Peoplefinder website, but now supports searching by department names. Please review your listings carefully. It is possible that some listing content may have been lost or altered in the data transfer. Use your 2009-2010 UNL Directory as your guide.
+Right now the online directory contains information from the 2009-2010 printed directory. We would like to give you the opportunity to correct the listings before the online directory goes live, and have set up a <a href="http://peoplefinder-test.unl.edu/">staging server</a> to make edits on. This interface is exactly the same as the current Peoplefinder website, but now supports searching by department names. Please review your listings carefully. It is possible that some listing content may have been lost, out of order, or altered in the data transfer. Use your 2009-2010 UNL Directory as your guide.
 </p><p>
 You can access the staging server at <a href="http://peoplefinder-test.unl.edu/">http://peoplefinder-test.unl.edu/</a> to make your edits.
 </p><p>
