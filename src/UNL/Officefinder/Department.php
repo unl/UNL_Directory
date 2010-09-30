@@ -172,6 +172,7 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
      */
     function addUser($user)
     {
+        $user = strtolower(trim($user));
         if (false === UNL_Officefinder_Department_Permission::getById($this->id, $user)) {
             $permission                = new UNL_Officefinder_Department_Permission();
             $permission->department_id = $this->id;
