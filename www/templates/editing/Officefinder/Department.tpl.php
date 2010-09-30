@@ -56,7 +56,7 @@
                 </select>
             </li>
             <?php foreach (array('room'        => '',
-                                 'address'     => 'Street address',
+                                 'address'     => 'Street address for USPS mailings',
                                  'city'        => '',
                                  'state'       => '',
                                  'postal_code' => '10 characters max, eg 68588-0424',
