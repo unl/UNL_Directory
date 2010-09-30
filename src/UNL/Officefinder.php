@@ -153,6 +153,9 @@ class UNL_Officefinder
                 break;
             case 'add_dept_user':
                 $record = $this->getPostedDepartment();
+                if (empty($_POST['uid'])) {
+                    throw new Exception('You must enter a username before adding a user.');
+                }
                 $record->addUser($_POST['uid']);
                 $redirect = $record->getURL();
                 break;
@@ -164,6 +167,9 @@ class UNL_Officefinder
                 break;
             case 'add_dept_alias':
                 $record = $this->getPostedDepartment();
+                if (empty($_POST['name'])) {
+                    throw new Exception('You must enter the alias before submitting the form.')
+                }
                 $record->addAlias($_POST['name']);
                 $redirect = $record->getURL();
                 break;
