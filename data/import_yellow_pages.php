@@ -128,7 +128,7 @@ if ($result = $db->query('SELECT * FROM telecom_departments WHERE sLstTyp=1 AND 
         if (preg_match('/(.*)\(see (.*)\)/', $obj->szLname.' '.$obj->szFname.' '.$obj->szAddtText, $matches)) {
             // known-as listing
             echo 'known as listing!!'.$obj->szLname.' '.$obj->szFname.' '.$obj->szAddtText.PHP_EOL;
-            $known_as[] = array($matches[2], $matches[1]);
+            $known_as[] = array(cleanField($matches[2]), cleanField($matches[1]));
             continue;
         }
 
@@ -340,10 +340,29 @@ function cleanField($text, $correct_case = true)
         $text = str_replace($matches[0], strtoupper($matches[0]), $text);
     }
 
-    if (preg_match('/, \((.*)\)$/', $text, $matches)) {
-        if ($matches[1] !== 'Inc') {
-            $text = $matches[1].' '.str_replace($matches[0], '', $text);
-            $text = cleanField($text, $correct_case);
+    if (preg_match('/, (.*)[\s]+?$/', $text, $matches)) {
+        switch ($matches[1]) {
+            case 'Office of':
+            case 'Office  of':
+            case 'Dept. of':
+            case 'Department of':
+            case 'Dept of':
+            case 'Dept  of':
+            case 'Department  of':
+            case 'Division of':
+            case 'Institute of':
+            case 'Institute for':
+            case 'School of':
+            case 'School  of':
+            case 'The':
+            case 'College  of':
+            case 'College of':
+            case 'Office  of ':
+            case 'University':
+                $text = $matches[1].' '.str_replace($matches[0], '', $text);
+                break;
+            default:
+                echo PHP_EOL,'UNKKKK'.$matches[1].PHP_EOL;
         }
     }
 
@@ -402,6 +421,16 @@ function checkCleanupFile($cleanup_file)
 }
 
 function addKnownAs($official_dept_name, $alias) {
+    
+    switch($official_dept_name) {
+        case 'University Communications':
+            $official_dept_name = 'Office of University Communications';
+            break;
+        case 'Residence Halls':
+            $official_dept_name = 'University Housing';
+            break;
+    }
+    
     $parent_dept = UNL_Officefinder_Department::getByname($official_dept_name, 'org_unit IS NOT NULL');
     if (!$parent_dept) {
         echo 'Could not find the alias!'.$official_dept_name.'<br>'.PHP_EOL;
