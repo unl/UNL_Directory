@@ -44,9 +44,24 @@
                     ?>
                 </select>
             </li>
-            <?php foreach (array('room', 'address', 'city', 'state', 'postal_code', 'phone', 'fax', 'email', 'website') as $var): ?>
+            <?php foreach (array('room'        => '',
+                                 'address'     => 'Street address',
+                                 'city'        => '',
+                                 'state'       => '',
+                                 'postal_code' => '10 characters max, eg 68588-0424',
+                                 'phone'       => 'Use the full number with area code',
+                                 'fax'         => 'Use the full number with area code',
+                                 'email'       => '',
+                                 'website'     => 'Always include http://') as $var=>$description): ?>
             <li>
-                <label for="<?php echo $var; ?>"><?php echo ucwords(str_replace('_', ' ', $var)); ?></label>
+                <label for="<?php echo $var; ?>">
+                    <?php
+                    echo ucwords(str_replace('_', ' ', $var));
+                    if (!empty($description)) {
+                        echo '<span class="helper">'.$description.'</span>';
+                    }
+                    ?>
+                </label>
                 <input type="text" id="<?php echo $var; ?>" name="<?php echo $var; ?>" value="<?php echo $context->$var; ?>" />
             </li>
             <?php endforeach; ?>
