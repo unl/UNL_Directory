@@ -114,6 +114,16 @@ class UNL_Officefinder
     }
 
     /**
+     * Set the currently logged in user, useful for testing and command line scripts
+     *
+     * @param string $user
+     */
+    public static function setUser($user)
+    {
+        self::$user = $user;
+    }
+
+    /**
      * Handle data that is POST'ed to the controller.
      * 
      * @return void
