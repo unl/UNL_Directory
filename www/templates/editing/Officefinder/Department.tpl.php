@@ -50,7 +50,7 @@
                     <?php 
                     endforeach;
                     if (!$found) {
-                        echo '<option value="'.$context->building.'">'.$context->building.' (Unknown building. Please correct if possible.)</option>'.PHP_EOL;
+                        echo '<option value="'.$context->building.'" selected="selected">'.$context->building.' (Unknown building. Please correct if possible.)</option>'.PHP_EOL;
                     }
                     ?>
                 </select>
