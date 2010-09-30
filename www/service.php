@@ -17,10 +17,10 @@ header('Access-Control-Allow-Methods: GET, OPTIONS');
 header('Access-Control-Allow-Headers: X-Requested-With');
 
 // Set the ages for the access-control header to 24 hours to improve speed/caching.
-header('Access-Control-Max-Age: 86400');
-
-// Set expires header for 24 hours to improve speed caching.
-header('Expires: '.date('r', strtotime('tomorrow')));
+//header('Access-Control-Max-Age: 86400');
+//
+//// Set expires header for 24 hours to improve speed caching.
+//header('Expires: '.date('r', strtotime('tomorrow')));
 
 // Exit early so the page isn't fully loaded for options requests
 if (strtolower($_SERVER['REQUEST_METHOD']) == 'options') {
