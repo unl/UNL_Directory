@@ -359,6 +359,7 @@ function cleanField($text, $correct_case = true)
             case 'College of':
             case 'Office  of ':
             case 'University':
+            case 'University ':
                 $text = $matches[1].' '.str_replace($matches[0], '', $text);
                 break;
             default:
