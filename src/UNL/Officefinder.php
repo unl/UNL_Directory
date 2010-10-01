@@ -151,7 +151,9 @@ class UNL_Officefinder
                 if (empty($_POST['uid'])) {
                     throw new Exception('You must enter a username before adding a user.');
                 }
-                $record->addUser($_POST['uid']);
+                $peoplefinder = new UNL_Peoplefinder(array('driver'=>$this->options['driver']));
+                $user = $peoplefinder->getUID($_POST['uid']);
+                $record->addUser($user->uid);
                 $redirect = $record->getURL();
                 break;
             case 'delete_dept_user':
