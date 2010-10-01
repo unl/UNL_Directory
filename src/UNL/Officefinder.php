@@ -46,25 +46,20 @@ class UNL_Officefinder
 
         $this->authenticate(true);
 
-        try {
-            if (!empty($_POST)) {
+        if (!empty($_POST)) {
+            try {
                 $this->handlePost();
+            } catch(Exception $e) {
+                $this->output[] = $e;
             }
+        }
+
+        try {
             $this->run();
         } catch(Exception $e) {
-            if (isset($this->options['ajaxupload'])) {
-                echo $e->getMessage();
-                exit();
-            }
-
-            if (false == headers_sent()
-                && $code = $e->getCode()) {
-                header('HTTP/1.1 '.$code.' '.$e->getMessage());
-                header('Status: '.$code.' '.$e->getMessage());
-            }
-
             $this->output[] = $e;
         }
+
     }
 
     /**
