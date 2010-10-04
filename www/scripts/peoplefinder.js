@@ -44,6 +44,7 @@ var service_peoplefinder = function() {
 			window.location.hash = '#q/' + firstName + '/' +lastName;
 			directory.buildSearchNotice(originalSearch, firstName, lastName);
 			attempts++;
+			WDN.log(attempts);
 		},
 		
 		updatePeopleFinderRecord : function(data, textStatus){ //function called when a record has been rendered
@@ -136,6 +137,7 @@ var directory = function() {
 		splitSearchBoxes : function(cn, sn) { //function called to prepare the advanced search boxes
 			if (WDN.jQuery('#peoplefinder').length){
 				WDN.jQuery("#queryString, #q").remove();
+				WDN.jQuery('label.cn, input#cn, label.sn, input#sn').remove();
 				WDN.jQuery('#peoplefinder li').prepend('<label for="cn" class="cn">First Name</label><input type="text" value="" id="cn" name="cn" class="n q" /><label for="sn" class="sn">Last Name</label><input type="text" value="" id="sn" name="sn" class="s n q" />');
 			}
 			WDN.jQuery('#cn, #sn').focus(function(){
