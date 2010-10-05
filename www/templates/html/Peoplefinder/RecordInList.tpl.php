@@ -16,7 +16,7 @@ $onclick = '';
 if (isset($parent->parent->context->options, $parent->parent->context->options['onclick'])) {
     $onclick .= ' onclick="return '.htmlentities($parent->parent->context->options['onclick'], ENT_QUOTES).'(\''.$context->uid.'\');"';
 }
-echo '    <a class="planetred_profile" href="http://planetred.unl.edu/pg/profile/unl_'.str_replace("-", "_", $context->uid).'" title="Planet Red Profile for '.$context->cn.'"><img class="profile_pic small photo" src="http://planetred.unl.edu/mod/profile/icondirect.php?username=unl_'.str_replace("-", "_", $context->uid).'&amp;size=small"  alt="Photo of '.$context->displayName.'" /></a>'.PHP_EOL;
+echo '    <a class="planetred_profile" href="http://planetred.unl.edu/pg/profile/unl_'.str_replace("-", "_", $context->uid).'" title="Planet Red Profile for '.$context->cn.'"><img class="profile_pic small photo" src="http://planetred.unl.edu/pg/icon/unl_'.str_replace("-", "_", $context->uid).'/small"  alt="Photo of '.$context->displayName.'" /></a>'.PHP_EOL;
 echo '    <div class="recordDetails">'.PHP_EOL;
 echo '        <div class="fn"><a href="'.UNL_Peoplefinder::getURL().'?uid='.$context->uid.'" '.$onclick.'>'.$name.'</a></div>'.PHP_EOL;
 if (isset($context->eduPersonPrimaryAffiliation)) {
