@@ -201,6 +201,7 @@ a.img-qrcode{padding-left:24px;padding-right:0;background: url(images/qrcode.png
     padding:5px 15px;
     color:#5d2401;
     font-size:0.9em;
+    clear:both;
 }
 #maincontent #searchNotice span {
     font-weight:bold;	
