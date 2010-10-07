@@ -107,6 +107,10 @@ a.mydepts {
     float:left;
     padding-right:5px;
 }
+#editBox li span {
+	max-width:105px;
+	display:inline-block;
+}
 #editBox div.users {
     width:135px;
     float:right;
