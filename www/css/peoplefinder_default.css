@@ -1,3 +1,18 @@
+#maincontent a#reportProblem {
+	position:absolute;
+	bottom:0;
+	right:0;
+	background:#efefef url('images/iconProblem.png') no-repeat 2px 5px;
+	border:2px solid #ddd;
+	border-radius:5px;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	padding:5px 5px 5px 21px;
+}
+#maincontent a#reportProblem:hover{
+	border:2px solid #ee0000;
+	background-position: 2px -20px;
+}
 /* 
 ***************************************************
 
@@ -5,7 +20,7 @@
 
 ***************************************************
 */
-#maincontent #results {min-height: 300px;}
+#maincontent #results {min-height: 300px;margin-bottom:35px;}
 #maincontent ul.pfResult {
 	padding:0px;
 	list-style:none;
