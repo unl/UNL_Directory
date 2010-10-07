@@ -49,11 +49,11 @@ $userCanEdit = $context->userCanEdit(UNL_Officefinder::getUser());
                 </span>
                 <?php endif; ?>
                 <?php if (isset($context->fax)): ?>
-                    <span class="fax">Fax:
-                        <?php
-                        echo $savvy->render($context->fax, 'Peoplefinder/Record/TelephoneNumber.tpl.php');
-                        ?>
-                    </span>
+                <span class="fax">Fax:
+                    <?php
+                    echo $savvy->render($context->fax, 'Peoplefinder/Record/TelephoneNumber.tpl.php');
+                    ?>
+                </span>
                 <?php endif; ?>
             </div>
             
