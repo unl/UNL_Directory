@@ -40,32 +40,39 @@ $userCanEdit = $context->userCanEdit(UNL_Officefinder::getUser());
                  <span class="country-name">USA</span>
             </div>
             
+            <?php if (isset($context->phone)): ?>
             <div class="tel">
-                <?php if (isset($context->phone)): ?>
                 <span class="voice">Phone:
                     <?php
                     echo $savvy->render($context->phone, 'Peoplefinder/Record/TelephoneNumber.tpl.php');
                     ?>
                 </span>
-                <?php endif; ?>
-                <?php if (isset($context->fax)): ?>
+            </div>
+            <?php endif; ?>
+            <?php if (isset($context->fax)): ?>
+            <div class="tel">
                 <span class="fax">Fax:
                     <?php
                     echo $savvy->render($context->fax, 'Peoplefinder/Record/TelephoneNumber.tpl.php');
                     ?>
                 </span>
-                <?php endif; ?>
             </div>
+            <?php endif; ?>
+            
             
             <?php if (isset($context->email)): ?>
-            <span class="email">
-               <a class="email" href="mailto:<?php echo $context->email; ?>"><?php echo $context->email; ?></a>
-            </span>
+            <div class="email">
+                <span class="email">
+                   <a class="email" href="mailto:<?php echo $context->email; ?>"><?php echo $context->email; ?></a>
+                </span>
+            </div>
             <?php endif; ?>
             <?php if (isset($context->website)): ?>
-            <span class="url">
-               <a class="url" href="<?php echo $context->website; ?>"><?php echo $context->website; ?></a>
-            </span>
+            <div class="url">
+                <span class="url">
+                   <a class="url" href="<?php echo $context->website; ?>"><?php echo $context->website; ?></a>
+                </span>
+            </div>
             <?php endif; ?>
         </div>
     </div>
