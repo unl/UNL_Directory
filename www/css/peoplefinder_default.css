@@ -119,10 +119,13 @@
 	height:20px;
 }
 .vcard span.email, .vcard span.url, .departmentInfo span.email, .departmentInfo span.url {
-	background-position:0 -21px;
+	background-position:0 -63px;
 	display:block;
 	margin-top:5px;
 	margin-bottom:3px;
+}
+.departmentInfo span.fax {
+	background-position:0 -84px;
 }
 .vcard span.url, .departmentInfo span.url {
     background-position:0 -42px;
