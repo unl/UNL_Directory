@@ -32,7 +32,7 @@
     background:#fbeca5;
     background-image: url('images/tornSpiral.png'), -moz-linear-gradient(    right center,    rgb(237,232,178) 83%,    rgb(230,215,147) 96%);
     background-image: url('images/tornSpiral.png'), -webkit-gradient(    linear,    right top,    left top,    color-stop(0.83, rgb(237,232,178)),    color-stop(0.96, rgb(230,215,147)));      
-    background-repeat:no-repeat;
+    background-repeat:repeat-y;
     padding:20px 20px 20px 45px;
     width:875px;
     margin-bottom:25px;
