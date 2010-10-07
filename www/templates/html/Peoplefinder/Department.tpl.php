@@ -19,6 +19,7 @@ if (count($context)) {
 //        }
 //        echo '</ul>';
 //    }
+    echo '<div id="all_employees">';
     $by_affiliation = UNL_Peoplefinder_SearchResults::groupByAffiliation($context->getRawObject());
     foreach ($by_affiliation as $affiliation=>$records) {
         if (count($records)) {
@@ -29,6 +30,7 @@ if (count($context)) {
             echo $savvy->render($section, 'Peoplefinder/SearchResults/ByAffiliation.tpl.php');
         }
     }
+    echo '</div>';
 } else {
     echo 'No results could be found.';
 }

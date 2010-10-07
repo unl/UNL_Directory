@@ -91,13 +91,7 @@ $userCanEdit = $context->userCanEdit(UNL_Officefinder::getUser());
     <ul class="wdn_tabs">
         <li><a href="#listings">Listings</a></li>
         <?php if ($department && count($department) > 0): ?>
-        <li><a href="#results_faculty">All Employees <sup><?php echo count($department); ?></sup></a>
-            <ul>
-                <li><a href="#results_faculty">Faculty</a></li>
-                <li><a href="#results_staff">Staff</a></li>
-                <li><a href="#results_student">Student</a></li>
-            </ul>
-        </li>
+        <li><a href="#all_employees">All Employees <sup><?php echo count($department); ?></sup></a></li>
         <?php endif; ?>
     </ul>
     <div class="wdn_tabs_content">
