@@ -110,6 +110,7 @@ a.mydepts {
 #editBox li span {
 	max-width:105px;
 	display:inline-block;
+	word-wrap:break-word;
 }
 #editBox div.users {
     width:135px;
