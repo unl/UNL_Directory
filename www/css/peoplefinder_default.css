@@ -13,6 +13,33 @@
 	border:2px solid #ee0000;
 	background-position: 2px -20px;
 }
+#maincontent #commentProblem {display:none;}
+#commentProblem h3 {
+	font-size:150%;
+	border-bottom: 1px solid #ddd;
+	margin-bottom:5px;
+}
+#commentProblem textarea {
+	width:90%;
+	display:block;
+	height:120px;
+	margin:10px 0;
+}
+#commentProblem input[type=submit] {
+	background:url('/wdn/templates_3.0/css/content/images/zenform/submit.png') right #af0202 no-repeat;
+	border:3px solid #fff;
+	color:#FFFFFF;
+	cursor:pointer;
+	font-size:1.2em;
+	margin:10px 10px 20px 0px;
+	padding:10px 36px 10px 16px;
+	width:auto;
+	min-height:39px;
+	-moz-border-radius:9px/10px;
+	-webkit-border-radius:9px 10px;
+	border-radius:9px/10px;
+	display:inline;
+}
 /* 
 ***************************************************
 

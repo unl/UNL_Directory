@@ -190,6 +190,15 @@ var directory = function() {
 		showSearchNotice : function() {
 			WDN.jQuery("#searchNotice").slideDown(500);
 			attempts = 1;
+		},
+		
+		buildProblemForm : function() {
+			WDN.loadCSS(PF_URL + 'css/comment.css');
+			directory.bindProblemFormSubmit();
+		},
+		
+		bindProblemFormSubmit : function() {
+			
 		}
 	};
 }();
@@ -257,6 +266,34 @@ WDN.jQuery(document).ready(function() {
 	WDN.jQuery('a.img-qrcode').live('click', function() {
 		WDN.jQuery(this).colorbox({open:true});
 		return false;
+	});
+	WDN.jQuery('#wdn_feedback_comments2').submit(function(event) {
+			var comments = WDN.jQuery('#wdn_feedback_comments2 textarea').val();
+			if (comments.length < 4) {
+				// Users must enter in at least 4 words.
+				alert('Please enter more information.');
+				return false;
+			}
+			WDN.post(
+				'http://www1.unl.edu/comments/', 
+				{comment:comments},
+				function () {
+					//WDN.analytics.callTrackEvent('Page Comment', 'Sent', window.location);
+				}
+			);
+			WDN.jQuery('#wdn_feedback_comments2').replaceWith('<h4>Thanks!</h4><p>Your problem has been sent and the magic will be restored as quickly as possible.</p><p>Click the "X" in the top right to close this box.</p>');
+			event.stopPropagation();
+			return false;
+		}
+	);
+	WDN.jQuery('#reportProblem').click(function(){
+		WDN.jQuery(this).colorbox({
+			inline : true,
+			href : '#commentProblem',
+			width : '45%', 
+			height : '45%'
+		});
+		
 	});
 });
 WDN.jQuery(window).keydown(function(event) {
