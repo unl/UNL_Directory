@@ -12,8 +12,11 @@ $userCanEdit = $context->userCanEdit(UNL_Officefinder::getUser());
     <div id="departmentDisplay">
         <img alt="Building Image" src="<?php echo $image_url; ?>" width="100" height="100" class="frame photo">
         <h2 class="fn org">
-            <?php echo $context->name; ?>
             <?php
+            echo $context->name;
+            if (!empty($context->org_unit)) {
+                echo ' <span class="unl-hr-org-unit-number">('.$context->org_unit.')</span>';
+            }
             if ($userCanEdit) {
                 echo '<ul class="edit_actions">';
                     echo '<li><a href="'.$context->getURL().'&amp;format=editing" class="action edit" title="Edit">Edit</a></li>';

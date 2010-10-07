@@ -39,6 +39,10 @@
     min-height:109px;
     display:inline-block;
 }
+
+.departmentInfo h2 .unl-hr-org-unit-number {font-size:70%;font-weight:normal; display:none;}
+.departmentInfo h2:hover .unl-hr-org-unit-number {display:inline;}
+
 .departmentInfo .fn a, .departmentInfo .fn{max-width:none;}
 .departmentInfo .tel {display:block;height:20px;margin-bottom:3px;}
 .departmentInfo span.voice, .departmentInfo span.fax{display:block;float:left;padding-right:10px;}
