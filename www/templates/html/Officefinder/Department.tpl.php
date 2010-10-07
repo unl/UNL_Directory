@@ -39,22 +39,24 @@ $userCanEdit = $context->userCanEdit(UNL_Officefinder::getUser());
                  <span class="postal-code"><?php echo $context->postal_code; ?></span>
                  <span class="country-name">USA</span>
             </div>
-            <?php if (isset($context->phone)): ?>
+            
             <div class="tel">
-                <span class="voice">
+                <?php if (isset($context->phone)): ?>
+                <span class="voice">Phone:
                     <?php
                     echo $savvy->render($context->phone, 'Peoplefinder/Record/TelephoneNumber.tpl.php');
                     ?>
                 </span>
+                <?php endif; ?>
                 <?php if (isset($context->fax)): ?>
-                    <span class="fax">
+                    <span class="fax">Fax:
                         <?php
                         echo $savvy->render($context->fax, 'Peoplefinder/Record/TelephoneNumber.tpl.php');
                         ?>
                     </span>
                 <?php endif; ?>
             </div>
-            <?php endif; ?>
+            
             <?php if (isset($context->email)): ?>
             <span class="email">
                <a class="email" href="mailto:<?php echo $context->email; ?>"><?php echo $context->email; ?></a>
