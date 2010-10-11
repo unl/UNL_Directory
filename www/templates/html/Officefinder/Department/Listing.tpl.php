@@ -16,10 +16,19 @@ if ($context->userCanEdit(UNL_Officefinder::getUser())) {
 ?>
 <div class="listingDetails">
     <?php echo $context->name ?>
+    <?php if (!empty($context->phone)): ?>
     <span class="tel"><?php echo $savvy->render($context->phone, 'Peoplefinder/Record/TelephoneNumber.tpl.php') ?></span>
+    <?php endif; ?>
     <?php if (isset($context->building)): ?>
     <span class="room"><?php echo $context->room.' <a class="location mapurl" href="http://maps.unl.edu/#'.$context->building.'">'.$context->building.'</a>'; ?></span>
     <?php endif; ?>
+    <?php if (isset($address)): ?>
     <span class="adr"><?php echo $address; ?></span>
+    <?php endif; ?>
+    <?php if (isset($context->postal_code)): ?>
     <span class="postal-code"><?php echo $context->postal_code; ?></span>
+    <?php endif; ?>
+    <?php if (isset($context->website)): ?>
+    <span class="postal-code"><a href="<?php echo $context->website; ?>"><?php echo $context->website; ?></a></span>
+    <?php endif; ?>
 </div>
