@@ -93,6 +93,14 @@ class UNL_Peoplefinder
         }
     }
 
+    /**
+     * Get the main URL for this instance or an individual object
+     *
+     * @param mixed $mixed             An object to retrieve the URL to
+     * @param array $additional_params Querystring params to add
+     * 
+     * @return string
+     */
     public static function getURL($mixed = null, $additional_params = array())
     {
          
@@ -108,6 +116,14 @@ class UNL_Peoplefinder
         return self::addURLParams($url, $additional_params);
     }
 
+    /**
+     * Add unique querystring parameters to a URL
+     * 
+     * @param string $url               The URL
+     * @param array  $additional_params Additional querystring parameters to add
+     * 
+     * @return string
+     */
     public static function addURLParams($url, $additional_params = array())
     {
         $params = array();
@@ -131,43 +147,53 @@ class UNL_Peoplefinder
         return trim($url, '?;=');
     }
 
+    /**
+     * Simple router which determines what view to use, based on $_GET parameters
+     * 
+     * @return void
+     */
     public function determineView()
     {
         switch(true) {
-            case isset($this->options['q']):
-            case isset($this->options['sn']):
-            case isset($this->options['cn']):
-                $this->options['view'] = 'search';
-                return;
-            case isset($this->options['uid']):
-                $this->options['view'] = 'record';
-                return;
+        case isset($this->options['q']):
+        case isset($this->options['sn']):
+        case isset($this->options['cn']):
+            $this->options['view'] = 'search';
+            return;
+        case isset($this->options['uid']):
+            $this->options['view'] = 'record';
+            return;
         }
 
     }
 
+    /**
+     * Render output based on the view determined
+     * 
+     * @return void
+     */
     function run()
     {
         $this->determineView();
-        if (isset($this->view_map[$this->options['view']])) {
-            if ($this->view_map[$this->options['view']] == 'UNL_Peoplefinder_Record') {
-                $this->output[] = $this->getUID($this->options['uid']);
-                return;
-            }
-            $this->options['peoplefinder'] =& $this;
-            $this->output[] = new $this->view_map[$this->options['view']]($this->options);
-        } else {
+        if (!isset($this->view_map[$this->options['view']])) {
             throw new Exception('Un-registered view', 404);
         }
+        if ($this->view_map[$this->options['view']] == 'UNL_Peoplefinder_Record') {
+            $this->output[] = $this->getUID($this->options['uid']);
+            return;
+        }
+        $this->options['peoplefinder'] =& $this;
+
+        $this->output[] = new $this->view_map[$this->options['view']]($this->options);
     }
 
     /**
      * Pass through calls to the driver.
      * 
-     * @method UNL_Peoplefinder_Record getUID() getUID(string $uid) get a record
-     * 
      * @param string $method The method to call
      * @param mixed  $args   Arguments
+     * 
+     * @method UNL_Peoplefinder_Record getUID() getUID(string $uid) get a record
      * 
      * @return mixed
      */
@@ -176,6 +202,11 @@ class UNL_Peoplefinder
         return call_user_func_array(array($this->driver, $method), $args);
     }
 
+    /**
+     * Get the path to the data directory for this project
+     *
+     * @return string
+     */
     public static function getDataDir()
     {
         return dirname(__FILE__).'/../../data';

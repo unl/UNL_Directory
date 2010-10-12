@@ -1,4 +1,29 @@
 <?php
+/**
+ * Main controller for Officefinder/Yellow pages of the online directory
+ * 
+ * PHP version 5
+ * 
+ * @category  Services
+ * @package   UNL_Peoplefinder
+ * @author    Brett Bieber <brett.bieber@gmail.com>
+ * @copyright 2010 Regents of the University of Nebraska
+ * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
+ * @link      http://peoplefinder.unl.edu/
+ */
+
+/**
+ * Peoplefinder class for UNL's online directory.
+ * 
+ * PHP version 5
+ * 
+ * @category  Services
+ * @package   UNL_Peoplefinder
+ * @author    Brett Bieber <brett.bieber@gmail.com>
+ * @copyright 2010 Regents of the University of Nebraska
+ * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
+ * @link      http://peoplefinder.unl.edu/
+ */
 class UNL_Officefinder
 {
     /**
@@ -39,7 +64,12 @@ class UNL_Officefinder
     public static $db_user = 'officefinder';
     
     public static $db_pass = 'officefinder';
-    
+
+    /**
+     * Construct a new officefinder object
+     * 
+     * @param array $options Associative array of options
+     */
     function __construct($options = array())
     {
         $this->options = $options + $this->options;
@@ -65,6 +95,8 @@ class UNL_Officefinder
     /**
      * Log in the current user
      * 
+     * @param bool $logoutonly Only allow logging out, and not logging in.
+     * 
      * @return void
      */
     static function authenticate($logoutonly = false)
@@ -86,12 +118,14 @@ class UNL_Officefinder
             exit();
         }
         self::$user = self::$auth->getUser();
-//        self::$user->last_login = date('Y-m-d H:i:s');
-//        self::$user->update();
+        //self::$user->last_login = date('Y-m-d H:i:s');
+        //self::$user->update();
     }
 
     /**
      * get the currently logged in user
+     * 
+     * @param bool $forceAuth Whether to force authentication or not
      * 
      * @return UNL_Peoplefinder_Record
      */
@@ -111,7 +145,9 @@ class UNL_Officefinder
     /**
      * Set the currently logged in user, useful for testing and command line scripts
      *
-     * @param string $user
+     * @param string $user Currently logged in user
+     * 
+     * @return void
      */
     public static function setUser($user)
     {
@@ -131,51 +167,51 @@ class UNL_Officefinder
         }
         $redirect = false;
         switch($_POST['_type']) {
-            case 'department':
-                $record = $this->handlePostDBRecord('UNL_Officefinder_Department');
-                if (isset($_POST['parent_id'])) {
-                    $redirect = self::getURL(null, array('view' => 'department',
-                                                         'id'   => $record->parent_id));
-                } else {
-                    $redirect = $record->getURL();
-                }
-                break;
-            case 'delete_department':
-                $record = $this->getPostedDepartment();
-                $parent = $record->getParent();
-                $record->delete();
-                $redirect = $parent->getURL();
-                break;
-            case 'add_dept_user':
-                $record = $this->getPostedDepartment();
-                if (empty($_POST['uid'])) {
-                    throw new Exception('You must enter a username before adding a user.');
-                }
-                $peoplefinder = new UNL_Peoplefinder(array('driver'=>$this->options['driver']));
-                $user = $peoplefinder->getUID($_POST['uid']);
-                $record->addUser($user->uid);
+        case 'department':
+            $record = $this->handlePostDBRecord('UNL_Officefinder_Department');
+            if (isset($_POST['parent_id'])) {
+                $redirect = self::getURL(null, array('view' => 'department',
+                                                     'id'   => $record->parent_id));
+            } else {
                 $redirect = $record->getURL();
-                break;
-            case 'delete_dept_user':
-                $record = $this->getPostedDepartment();
-                $user = UNL_Officefinder_Department_User::getById($record->id, $_POST['uid']);
-                $user->delete();
-                $redirect = $record->getURL();
-                break;
-            case 'add_dept_alias':
-                $record = $this->getPostedDepartment();
-                if (empty($_POST['name'])) {
-                    throw new Exception('You must enter the alias before submitting the form.');
-                }
-                $record->addAlias($_POST['name']);
-                $redirect = $record->getURL();
-                break;
-            case 'delete_dept_alias':
-                $record = $this->getPostedDepartment();
-                $alias = UNL_Officefinder_Department_Alias::getById($record->id, $_POST['name']);
-                $alias->delete();
-                $redirect = $record->getURL();
-                break;
+            }
+            break;
+        case 'delete_department':
+            $record = $this->getPostedDepartment();
+            $parent = $record->getParent();
+            $record->delete();
+            $redirect = $parent->getURL();
+            break;
+        case 'add_dept_user':
+            $record = $this->getPostedDepartment();
+            if (empty($_POST['uid'])) {
+                throw new Exception('You must enter a username before adding a user.');
+            }
+            $peoplefinder = new UNL_Peoplefinder(array('driver'=>$this->options['driver']));
+            $user         = $peoplefinder->getUID($_POST['uid']);
+            $record->addUser($user->uid);
+            $redirect = $record->getURL();
+            break;
+        case 'delete_dept_user':
+            $record = $this->getPostedDepartment();
+            $user   = UNL_Officefinder_Department_User::getById($record->id, $_POST['uid']);
+            $user->delete();
+            $redirect = $record->getURL();
+            break;
+        case 'add_dept_alias':
+            $record = $this->getPostedDepartment();
+            if (empty($_POST['name'])) {
+                throw new Exception('You must enter the alias before submitting the form.');
+            }
+            $record->addAlias($_POST['name']);
+            $redirect = $record->getURL();
+            break;
+        case 'delete_dept_alias':
+            $record = $this->getPostedDepartment();
+            $alias  = UNL_Officefinder_Department_Alias::getById($record->id, $_POST['name']);
+            $alias->delete();
+            $redirect = $record->getURL();
+            break;
         }
         if ($redirect
             && !(isset($this->options['redirect'])
@@ -184,6 +220,15 @@ class UNL_Officefinder
         }
     }
 
+    /**
+     * Determine what department the user is referring to in POST data
+     * 
+     * @param bool $checkUserPermissions Check if the user has permission
+     * 
+     * @throws Exception
+     * 
+     * @return UNL_Officefinder_Department
+     */
     protected function getPostedDepartment($checkUserPermissions = true)
     {
         $record = UNL_Officefinder_Department::getByID($_POST['department_id']);
@@ -197,6 +242,14 @@ class UNL_Officefinder
         return $record;
     }
 
+    /**
+     * Get the URL to the officefinder/yellow pages or a specific object
+     *
+     * @param mixed  $mixed             Object to retrieve URL for
+     * @param string $additional_params Additional querystring parameters to pass
+     * 
+     * @return string
+     */
     public static function getURL($mixed = null, $additional_params = array())
     {
          
@@ -212,6 +265,13 @@ class UNL_Officefinder
         return UNL_Peoplefinder::addURLParams($url, $additional_params);
     }
 
+    /**
+     * Handle saving of a posted record
+     * 
+     * @param string $type Name of a class that extends UNL_Officefinder_Record
+     * 
+     * @return UNL_Officefinder_Record
+     */
     function handlePostDBRecord($type)
     {
         if (!empty($_POST['id'])) {
@@ -237,32 +297,48 @@ class UNL_Officefinder
         return $record;
     }
 
+    /**
+     * Filter out any unwanted POST variables. Useful when records are
+     * synchronized from the POST array and certain fields should not be
+     * added or modified.
+     * 
+     * @return void
+     */
     function filterPostValues()
     {
         unset($_POST['id']);
     }
 
+    /**
+     * Simple router to determine what view based on options present
+     * 
+     * @return void
+     */
     public function determineView()
     {
         switch(true) {
-            case !empty($this->options['q']):
-                $this->options['view'] = 'search';
-                return;
-            case isset($this->options['d']):
-                $this->options['view'] = 'record';
-                return;
+        case !empty($this->options['q']):
+            $this->options['view'] = 'search';
+            return;
+        case isset($this->options['d']):
+            $this->options['view'] = 'record';
+            return;
         }
 
     }
 
+    /**
+     * Construct output based on options
+     * 
+     * @return void
+     */
     function run()
     {
         $this->determineView();
-        if (isset($this->view_map[$this->options['view']])) {
-            $this->output[] = new $this->view_map[$this->options['view']]($this->options);
-        } else {
+        if (!isset($this->view_map[$this->options['view']])) {
             throw new Exception('Un-registered view', 404);
         }
+        $this->output[] = new $this->view_map[$this->options['view']]($this->options);
     }
 
     /**
@@ -286,6 +362,7 @@ class UNL_Officefinder
      * 
      * @param mixed &$object The object to set, usually a UNL_Officefinder_Record
      * @param array $values  Associtive array of key=>value
+     * 
      * @throws Exception
      * 
      * @return void
@@ -312,11 +389,12 @@ class UNL_Officefinder
     }
 
     /**
-     * 
      * Redirect user to the specified url
      * 
      * @param string $url  Where to redirect
      * @param bool   $exit To exit or not
+     * 
+     * @return void
      */
     static function redirect($url, $exit = true)
     {

@@ -1,21 +1,61 @@
 <?php
+/**
+ * Simple Active Record implementation for Officefinder/Yellow pages of the
+ * online directory
+ * 
+ * PHP version 5
+ * 
+ * @category  Services
+ * @package   UNL_Peoplefinder
+ * @author    Brett Bieber <brett.bieber@gmail.com>
+ * @copyright 2010 Regents of the University of Nebraska
+ * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
+ * @link      http://peoplefinder.unl.edu/
+ */
+
+/**
+ * Simple active record implementation for UNL's online directory.
+ * 
+ * PHP version 5
+ * 
+ * @category  Services
+ * @package   UNL_Peoplefinder
+ * @author    Brett Bieber <brett.bieber@gmail.com>
+ * @copyright 2010 Regents of the University of Nebraska
+ * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
+ * @link      http://peoplefinder.unl.edu/
+ */
 class UNL_Officefinder_Record
 {
+    /**
+     * Prepare the insert SQL for this record
+     *
+     * @param string &$sql The INSERT SQL query to prepare
+     * 
+     * @return array Associative array of field value pairs
+     */
     protected function prepareInsertSQL(&$sql)
     {
-        $sql = 'INSERT INTO '.$this->getTable();
+        $sql    = 'INSERT INTO '.$this->getTable();
         $fields = get_object_vars($this);
         if (isset($fields['options'])) {
             unset($fields['options']);
         }
         $sql .= '(`'.implode('`,`', array_keys($fields)).'`)';
-        $sql .= ' VALUES ('.str_repeat('?,',count($fields)-1).'?)';
+        $sql .= ' VALUES ('.str_repeat('?,', count($fields)-1).'?)';
         return $fields;
     }
-    
-    function prepareUpdateSQL(&$sql)
+
+    /**
+     * Prepare the update SQL for this record
+     * 
+     * @param string &$sql The UPDATE SQL query to prepare
+     *
+     * @return array Associative array of field value pairs
+     */
+    protected function prepareUpdateSQL(&$sql)
     {
-        $sql = 'UPDATE '.$this->getTable().' ';
+        $sql    = 'UPDATE '.$this->getTable().' ';
         $fields = get_class_vars(get_class($this));
 
         $sql .= 'SET `'.implode('`=?,`', array_keys($fields)).'`=? ';
@@ -30,7 +70,12 @@ class UNL_Officefinder_Record
         $fields = array_intersect($fields, get_object_vars($this));
         return $fields;
     }
-    
+
+    /**
+     * Get the primary keys for this table in the database
+     *
+     * @return array
+     */
     function keys()
     {
         return array(
@@ -38,6 +83,12 @@ class UNL_Officefinder_Record
         );
     }
     
+    /**
+     * Save the record. This automatically determines if insert or update
+     * should be used, based on the primary keys.
+     * 
+     * @return bool
+     */
     function save()
     {
         $key_set = true;
@@ -54,24 +105,34 @@ class UNL_Officefinder_Record
 
         return $this->update();
     }
-    
+
+    /**
+     * Insert a new record into the database
+     *
+     * @return bool
+     */
     function insert()
     {
-        $sql = '';
-        $fields = $this->prepareInsertSQL($sql);
-        $values = array();
+        $sql      = '';
+        $fields   = $this->prepareInsertSQL($sql);
+        $values   = array();
         $values[] = $this->getTypeString(array_keys($fields));
         foreach ($fields as $key=>$value) {
             $values[] =& $this->$key;
         }
         return $this->prepareAndExecute($sql, $values);
     }
-    
+
+    /**
+     * Update this record in the database
+     *
+     * @return bool
+     */
     function update()
     {
-        $sql = '';
-        $fields = $this->prepareUpdateSQL($sql);
-        $values = array();
+        $sql      = '';
+        $fields   = $this->prepareUpdateSQL($sql);
+        $values   = array();
         $values[] = $this->getTypeString(array_keys($fields));
         foreach ($fields as $key=>$value) {
             $values[] =& $this->$key;
@@ -84,6 +145,16 @@ class UNL_Officefinder_Record
         return $this->prepareAndExecute($sql, $values);
     }
 
+    /**
+     * Prepare the SQL statement and execute the query
+     * 
+     * @param string $sql    The SQL query to execute
+     * @param array  $values Values used in the query
+     * 
+     * @throws Exception
+     * 
+     * @return true
+     */
     protected function prepareAndExecute($sql, $values)
     {
         $mysqli = self::getDB();
@@ -105,25 +176,39 @@ class UNL_Officefinder_Record
         return true;
 
     }
-    
+
+    /**
+     * Get the type string used with prepared statements for the fields given
+     *
+     * @param array $fields Array of field names
+     * 
+     * @return string
+     */
     function getTypeString($fields)
     {
         $types = '';
         foreach ($fields as $name) {
             switch($name) {
-                case 'id':
-                case 'department_id':
-                case 'sort':
-                    $types .= 'i';
-                    break;
-                default:
-                    $types .= 's';
-                    break;
+            case 'id':
+            case 'department_id':
+            case 'sort':
+                $types .= 'i';
+                break;
+            default:
+                $types .= 's';
+                break;
             }
         }
         return $types;
     }
-    
+
+    /**
+     * Convert the string given into a usable date for the RDBMS
+     *
+     * @param string $str A textual description of the date
+     * 
+     * @return string|false
+     */
     function getDate($str)
     {
         if ($time = strtotime($str)) {
@@ -137,25 +222,41 @@ class UNL_Officefinder_Record
         // strtotime couldn't handle it
         return false;
     }
-    
+
+    /**
+     * Simple method for getting a record by a single primary key
+     *
+     * @param string $table Table to retrieve record from
+     * @param int    $id    The primary key/ID value
+     * @param string $field The field that holds the primary key
+     * 
+     * @return false | UNL_Officefinder_Record
+     */
     public static function getRecordByID($table, $id, $field = 'id')
     {
         $mysqli = self::getDB();
-        $sql = "SELECT * FROM $table WHERE $field = ".intval($id).' LIMIT 1;';
+        $sql    = "SELECT * FROM $table WHERE $field = ".intval($id).' LIMIT 1;';
         if ($result = $mysqli->query($sql)) {
             return $result->fetch_assoc();
         }
         
         return false;
     }
-    
+
+    /**
+     * Delete this record in the database
+     *
+     * @return bool
+     */
     function delete()
     {
         $mysqli = self::getDB();
-        $sql = "DELETE FROM ".$this->getTable()." WHERE ";
+        $sql    = "DELETE FROM ".$this->getTable()." WHERE ";
         foreach ($this->keys() as $key) {
             if (empty($this->$key)) {
-                throw new Exception('Cannot delete records with unset primary keys!', 400);
+                throw new Exception('Cannot delete this record.' .
+                                    'The primary key, '.$key.' is not set!',
+                                    400);
             }
             $value = $this->$key;
             if ($this->getTypeString(array($key)) == 's') {
@@ -163,7 +264,7 @@ class UNL_Officefinder_Record
             }
             $sql .= $key.'='.$value.' AND ';
         }
-        $sql = substr($sql, 0, -4);
+        $sql  = substr($sql, 0, -4);
         $sql .= ' LIMIT 1;';
         if ($result = $mysqli->query($sql)) {
             return true;
@@ -171,28 +272,43 @@ class UNL_Officefinder_Record
         return false;
     }
 
+    /**
+     * Magic method for static calls
+     *
+     * @param string $method Method called
+     * @param array  $args   Array of arguments passed to the method
+     * 
+     * @method getBy[FIELD NAME]
+     * 
+     * @throws Exception
+     * 
+     * @return mixed
+     */
     public static function __callStatic($method, $args)
     {
         switch (true) {
-            case preg_match('/getBy([\w]+)/', $method, $matches):
-                $mysqli = self::getDB();
-                $class  = get_called_class();
-                $record = new $class;
-                $field  = strtolower($matches[1]);
-                $whereAdd = '';
-                if (isset($args[1])) {
-                    $whereAdd = $args[1] . ' AND ';
-                }
-                $sql    = 'SELECT * FROM '.$record->getTable(). ' WHERE '.$whereAdd.$field.' = "'.$mysqli->escape_string($args[0]).'"';
-                $result = $mysqli->query($sql);
+        case preg_match('/getBy([\w]+)/', $method, $matches):
+            $mysqli   = self::getDB();
+            $record   = new get_called_class();
+            $field    = strtolower($matches[1]);
+            $whereAdd = '';
+            if (isset($args[1])) {
+                $whereAdd = $args[1] . ' AND ';
+            }
+            $sql    = 'SELECT * FROM '
+                        . $record->getTable()
+                        . ' WHERE '
+                        . $whereAdd
+                        . $field . ' = "' . $mysqli->escape_string($args[0]) . '"';
+            $result = $mysqli->query($sql);
 
-                if ($result === false
-                    || $result->num_rows == 0) {
-                    return false;
-                }
+            if ($result === false
+                || $result->num_rows == 0) {
+                return false;
+            }
 
-                $record->synchronizeWithArray($result->fetch_assoc());
-                return $record;
+            $record->synchronizeWithArray($result->fetch_assoc());
+            return $record;
         }
         throw new Exception('Invalid static method called.');
     }
@@ -207,6 +323,13 @@ class UNL_Officefinder_Record
         return UNL_Officefinder::getDB();
     }
 
+    /**
+     * Synchronize member variables with the values in the array
+     * 
+     * @param array $data Associative array of field=>value pairs
+     * 
+     * @return void
+     */
     function synchronizeWithArray($data)
     {
         foreach ($data as $key=>$value) {
@@ -215,7 +338,9 @@ class UNL_Officefinder_Record
     }
 
     /**
-     * Reload data from the database
+     * Reload data from the database and refresh member variables
+     * 
+     * @return void
      */
     function reload()
     {
@@ -223,6 +348,11 @@ class UNL_Officefinder_Record
         $this->synchronizeWithArray($record->toArray());
     }
 
+    /**
+     * Return an array representation of the object
+     *
+     * @return array
+     */
     function toArray()
     {
         return get_object_vars($this);
