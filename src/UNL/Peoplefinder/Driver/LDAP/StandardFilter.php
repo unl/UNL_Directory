@@ -36,7 +36,7 @@ class UNL_Peoplefinder_Driver_LDAP_StandardFilter
     {
         if (!empty($inquery)) {
             //ignore grouping and wildcard characters
-            $inquery = str_replace(array('"',',','*'),'',$inquery);
+            $inquery = str_replace(array('"', ',', '*'), '', $inquery);
 
             //escape query
             $inquery = UNL_Peoplefinder_Driver_LDAP_Util::escape_filter_value($inquery);
@@ -58,7 +58,7 @@ class UNL_Peoplefinder_Driver_LDAP_StandardFilter
                 }
 
                 $filter .= '(|';
-                $filter .= "(mail=$arg)(cn=$arg)(givenName=$arg)(sn=$arg)";
+                $filter .= "(mail=$arg)(cn=$arg)(givenName=$arg)(sn=$arg)(eduPersonNickname=$arg)";
 
                 //find hyphenated and multi-word surnames in the exact matches query
                 if (!$wild) {
@@ -76,7 +76,7 @@ class UNL_Peoplefinder_Driver_LDAP_StandardFilter
 
             //and search for the string as entered
             $filter = "(|" .
-                    "(|(mail=$inquery)(cn=$inquery)(givenName=$inquery)(sn=$inquery))" .
+                    "(|(mail=$inquery)(cn=$inquery)(givenName=$inquery)(sn=$inquery)(eduPersonNickname=$inquery))" .
                     "$filter)";
         }
         $this->_filter = $filter;
