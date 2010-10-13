@@ -154,12 +154,9 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
             $this->unbind();
             //sort the results
             for ($i=0;$i<$this->lastResult['count'];$i++) {
+                $name = $this->lastResult[$i]['sn'][0];
                 if (isset($this->lastResult[$i]['givenname'])) {
-                    $name = $this->lastResult[$i]['sn'][0]
-                          . ', '
-                          . $this->lastResult[$i]['givenname'][0];
-                } else {
-                    $name = $this->lastResult[$i]['sn'][0];
+                    $name .= ', ' . $this->lastResult[$i]['givenname'][0];
                 }
                 $this->lastResult[$i]['insensitiveName'] = strtoupper($name);
             }
