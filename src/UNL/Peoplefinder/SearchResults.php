@@ -20,22 +20,14 @@ class UNL_Peoplefinder_SearchResults extends ArrayIterator
      */
     public static function groupByAffiliation($results)
     {
-        $by_affiliation                  = array();
-        $by_affiliation['faculty']       = array();
-        $by_affiliation['staff']         = array();
-        $by_affiliation['student']       = array();
-        $by_affiliation['organizations'] = array();
+        $by_affiliation = array();
 
         foreach ($results as $record) {
-            foreach ($record->ou as $ou) {
-                if ($ou == 'org') {
-                    $by_affiliation['organizations'][] = $record;
-                    break;
-                }
-            }
-    
             if (isset($record->eduPersonAffiliation)) {
                 foreach ($record->eduPersonAffiliation as $affiliation) {
+                    if (!isset($by_affiliation[$affiliation])) {
+                        $by_affiliation[$affiliation] = array();
+                    }
                     $by_affiliation[$affiliation][] = $record;
                 }
             }
