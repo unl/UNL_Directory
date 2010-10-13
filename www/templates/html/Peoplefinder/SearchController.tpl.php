@@ -34,13 +34,23 @@ $like_by_affiliation = UNL_Peoplefinder_SearchResults::groupByAffiliation($like_
 
 // We now have both the exact and like matches grouped by affiliation into special arrays.
 
-foreach ($by_affiliation as $affiliation=>$records) {
-    if (count($records)
+$affiliations = array_keys($by_affiliation + $like_by_affiliation);
+
+sort($affiliations);
+
+foreach ($affiliations as $affiliation) {
+    if (count($by_affiliation[$affiliation])
         || count($like_by_affiliation[$affiliation])) {
         $section               = new stdClass();
         $section->affiliation  = $affiliation;
-        $section->results      = $records;
-        $section->like_results = $like_by_affiliation[$affiliation];
+        $section->results      = array();
+        if (isset($by_affiliation[$affiliation])) {
+            $section->results      = $by_affiliation[$affiliation];
+        }
+        $section->like_results = array();
+        if (isset($like_by_affiliation[$affiliation])) {
+            $section->like_results = $like_by_affiliation[$affiliation];
+        }
         $section->options      = $context->options;
         echo $savvy->render($section, 'Peoplefinder/SearchResults/ByAffiliation.tpl.php');
     }
