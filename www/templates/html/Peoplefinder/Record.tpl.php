@@ -6,19 +6,21 @@ echo '<a href="'.UNL_Peoplefinder::getURL().'vcards/'.$context->uid.'" title="Do
 echo '<a title="QR Code vCard" href="http://chart.apis.google.com/chart?chs=400x400&amp;cht=qr&amp;chl=' . urlencode($savvy->render($context, 'templates/vcard/Peoplefinder/Record.tpl.php')) . '&amp;chld=L|1&amp;.png" class="img-qrcode">QR Code</a> ';
 
 echo '<div class="vcardInfo">'.PHP_EOL;
-
+$displayEmail = false;
 if (isset($context->mail)
     && ($context->eduPersonPrimaryAffiliation != 'student')) {
     $displayEmail = true;
-} else {
-    $displayEmail = false;
 }
-if ($displayEmail && isset($context->mail)) echo "<a class='email' href='mailto:{$context->mail}'>";
+if ($displayEmail && isset($context->mail)) {
+    echo "<a class='email' href='mailto:{$context->mail}'>";
+}
 if ($context->ou == 'org') {
     echo '<span class="cn">'.$context->cn.'</span>'.PHP_EOL;
 } else {
     echo '<span class="fn">'.$context->displayName.'</span>'.PHP_EOL;
-    if (isset($context->eduPersonNickname)) echo '<span class="nickname">'.$context->eduPersonNickname.'</span>'.PHP_EOL;
+    if (isset($context->eduPersonNickname)) {
+        echo '<span class="nickname">'.$context->eduPersonNickname.'</span>'.PHP_EOL;
+    }
 }
 if ($displayEmail && isset($context->unlEmailAlias)) echo "</a>\n";
 
