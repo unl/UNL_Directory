@@ -114,7 +114,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
                 return $this->connected;
             }
         }
-        throw new Exception('Cound not connect to LDAP directory.', 500);
+        throw new Exception('Cound not connect to the LDAP directory.', 500);
     }
     
     /**
