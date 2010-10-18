@@ -39,8 +39,8 @@ $affiliations = array_keys($by_affiliation + $like_by_affiliation);
 sort($affiliations);
 
 foreach ($affiliations as $affiliation) {
-    if (count($by_affiliation[$affiliation])
-        || count($like_by_affiliation[$affiliation])) {
+    if (isset($by_affiliation[$affiliation])
+        || isset($like_by_affiliation[$affiliation])) {
         $section               = new stdClass();
         $section->affiliation  = $affiliation;
         $section->results      = array();
