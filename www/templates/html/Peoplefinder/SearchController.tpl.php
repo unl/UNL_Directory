@@ -45,7 +45,7 @@ foreach ($affiliations as $affiliation) {
         $section->affiliation  = $affiliation;
         $section->results      = array();
         if (isset($by_affiliation[$affiliation])) {
-            $section->results      = $by_affiliation[$affiliation];
+            $section->results = $by_affiliation[$affiliation];
         }
         $section->like_results = array();
         if (isset($like_by_affiliation[$affiliation])) {
