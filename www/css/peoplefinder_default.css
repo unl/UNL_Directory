@@ -101,7 +101,10 @@
 .departments .fn, .departments .fn a {height:42px;max-height:42px;line-height:20px;}
 .cInfo {float:right;}
 
-#maincontent .results {margin-top:15px;}
+#maincontent .results {
+	margin-top:15px;
+	clear:both;
+}
 #maincontent .likeResults ul.pfResult {margin-top:0px;}
 
 #maincontent .result_head {color:#989898;font-size:10px;}
