@@ -23,6 +23,7 @@ class UNL_Peoplefinder_Driver_WebService implements UNL_Peoplefinder_DriverInter
         }
         return $results;
     }
+
     function getAdvancedSearchMatches($query, $affliation = null)
     {
         if (empty($affiliation)) {
@@ -34,12 +35,26 @@ class UNL_Peoplefinder_Driver_WebService implements UNL_Peoplefinder_DriverInter
         }
         return $results;
     }
+
     function getLikeMatches($query, $affiliation = null, $excluded_records = array())
     {
         $results = file_get_contents($this->service_url.'?q='.urlencode($query).'&format=php&affiliation='.urlencode($affiliation).'&method=getLikeMatches');
+        
         if ($results) {
             $results = unserialize($results);
         }
+
+        if (count($excluded_records)) {
+            foreach ($results as $i=>$record) {
+                foreach($excluded_records as $e=>$exclude) {
+                    if ((string)$exclude->uid == (string)$record->uid) {
+                        unset($results[$i]);
+                        break;
+                    }
+                }
+            }
+        }
+
         return $results;
     }
 
