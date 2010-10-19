@@ -5,8 +5,9 @@ if ($context->ou == 'org') {
 } else {
     $class = 'ppl_Sresult';
     $name = $context->sn . ',&nbsp;'. $context->givenName;
-    if (isset($context->eduPersonNickname)) {
-        $name .= ' "'.$context->eduPersonNickname.'"';
+    if (!empty($context->eduPersonNickname)
+        && $context->eduPersonNickname != ' ') {
+        $name .= ' ('.$context->eduPersonNickname.')';
     }
 }
 $class .= ' '.$context->eduPersonPrimaryAffiliation;
