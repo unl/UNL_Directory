@@ -258,6 +258,7 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
      */
     public function getUsers()
     {
+        UNL_Officefinder_UserList::setPeoplefinder(new UNL_Peoplefinder($this->options));
         return new UNL_Officefinder_Department_Users(array('department_id'=>$this->id));
     }
 }
