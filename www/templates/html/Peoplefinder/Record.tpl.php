@@ -18,8 +18,9 @@ if ($context->ou == 'org') {
     echo '<span class="cn">'.$context->cn.'</span>'.PHP_EOL;
 } else {
     echo '<span class="fn">'.$context->displayName.'</span>'.PHP_EOL;
-    if (isset($context->eduPersonNickname)) {
-        echo '<span class="nickname">'.$context->eduPersonNickname.'</span>'.PHP_EOL;
+    if (!empty($context->eduPersonNickname)
+        && $context->eduPersonNickname != ' ') {
+        echo ' ('.$context->eduPersonNickname.')';
     }
 }
 if ($displayEmail && isset($context->unlEmailAlias)) echo "</a>\n";
