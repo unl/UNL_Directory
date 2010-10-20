@@ -101,5 +101,9 @@ class UNL_Peoplefinder_Driver_WebService implements UNL_Peoplefinder_DriverInter
         }
         return $results;
     }
+    
+    public function getHROrgUnitNumberMatches($query, $affiliation = null)
+    {
+        throw new Exception('Not implemented yet!');
+    }
 }
-?>

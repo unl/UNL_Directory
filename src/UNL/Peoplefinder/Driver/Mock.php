@@ -30,4 +30,9 @@ class UNL_Peoplefinder_Driver_Mock implements UNL_Peoplefinder_DriverInterface
     {
         return array();
     }
+
+    public function getHROrgUnitNumberMatches($query, $affiliation = null)
+    {
+        throw new Exception('Not implemented yet!');
+    }
 }

@@ -48,6 +48,14 @@ interface UNL_Peoplefinder_DriverInterface
     function getHRPrimaryDepartmentMatches($query, $affiliation = null);
 
     /**
+     * Get results by organization unit number
+     * 
+     * @param string $query       The organization number, eg: 50000852
+     * @param string $affiliation eduPersonAffiliation, eg staff/faculty/student
+     */
+    function getHROrgUnitNumberMatches($query, $affiliation = null);
+
+    /**
      * get a UNL_Peoplefinder_Record for the user
      *
      * @param string $uid The unique user id eg: bbieber2

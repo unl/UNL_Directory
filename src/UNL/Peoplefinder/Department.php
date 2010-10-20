@@ -147,7 +147,7 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
         if (!isset($this->_results)) {
             UNL_Peoplefinder::$resultLimit = 500;
             $pf = new UNL_Peoplefinder($this->options);
-            $this->_results = new ArrayIterator($pf->getHRPrimaryDepartmentMatches($this->name));
+            $this->_results = $pf->getHROrgUnitNumberMatches($this->org_unit);
         }
         return $this->_results;
     }
