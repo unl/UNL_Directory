@@ -28,7 +28,20 @@ require_once 'UNL/LDAP/Entry/Attribute.php';
  */
 class UNL_LDAP_Entry
 {
-    
+    /**
+     * The UNL_LDAP connection
+     * 
+     * @var UNL_LDAP
+     */
+    protected $_ldap;
+
+    /**
+     * The actual LDAP entry result
+     *
+     * @var resource
+     */
+    protected $_entry;
+
     protected $_attributes;
     
     /**
@@ -37,9 +50,11 @@ class UNL_LDAP_Entry
      * @param resource &$link LDAP connection
      * @param resource $entry Entry resource from ldap_next_entry
      */
-    function __construct(&$link, $entry)
+    function __construct(UNL_LDAP &$ldap, $entry)
     {
-        $this->_attributes = ldap_get_attributes($link, $entry);
+        $this->_ldap       = $ldap;
+        $this->_entry      = $entry;
+        $this->_attributes = ldap_get_attributes($this->_ldap->getLink(), $this->_entry);
     }
     
     /**
@@ -70,5 +85,10 @@ class UNL_LDAP_Entry
         if (isset($this->_attributes[$name])) {
             return new UNL_LDAP_Entry_Attribute($this->_attributes[$name]);
         }
+    }
+
+    function dn()
+    {
+        return ldap_get_dn($this->_ldap->getLink(), $this->_entry);
     }
 }

@@ -91,6 +91,7 @@ class UNL_LDAP
         }
         if ($this->_ldap = ldap_connect($this->options['uri'])) {
             if (ldap_bind($this->_ldap, $this->options['bind_dn'], $this->options['bind_password'])) {
+                $this->options['bind_password'] = '****';
                 return $this;
             }
             throw new UNL_LDAP_Exception('Connection failure: ldap_bind() returned false for the server.');
@@ -179,7 +180,7 @@ class UNL_LDAP
         if ($sr === false) {
             throw new UNL_LDAP_Exception('Search failed');
         }
-        return new UNL_LDAP_Result($this->_ldap, $sr);
+        return new UNL_LDAP_Result($this, $sr);
     }
     
     /**
@@ -191,7 +192,17 @@ class UNL_LDAP
     {
         return $this->_ldap;
     }
-    
+
+    /**
+     * set the ldap connection resource link
+     *
+     * @return resource
+     */
+    public function setLink(&$link)
+    {
+        $this->_ldap = $link;
+    }
+
     /**
      * unbinds from the ldap directory.
      * 

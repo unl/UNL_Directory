@@ -10,8 +10,8 @@
   <email>brett.bieber@gmail.com</email>
   <active>yes</active>
  </lead>
- <date>2010-04-23</date>
- <time>09:37:47</time>
+ <date>2010-10-20</date>
+ <time>08:30:58</time>
  <version>
   <release>0.4.1</release>
   <api>0.4.0</api>
@@ -27,17 +27,17 @@ Bugfix Release:
  </notes>
  <contents>
   <dir name="/">
-   <file baseinstalldir="/" md5sum="58a0fd030a6b9cc8dd721d3feddb8240" name="UNL/LDAP/Result.php" role="php"/>
-   <file baseinstalldir="/" md5sum="89f2d218e91e3fd2413c79df8758e455" name="UNL/LDAP/People.php" role="php"/>
-   <file baseinstalldir="/" md5sum="3c3d370c93d9c8fa86039a7650872a2a" name="UNL/LDAP/Exception.php" role="php"/>
-   <file baseinstalldir="/" md5sum="1cc41913a00c454955c9c138a652f204" name="UNL/LDAP/Entry/Attribute.php" role="php"/>
-   <file baseinstalldir="/" md5sum="d0fe31664523d1b6f3492db0435d7398" name="UNL/LDAP/Entry.php" role="php"/>
-   <file baseinstalldir="/" md5sum="913f674a02c3e4c2c5fbeeaa61dd963f" name="UNL/LDAP.php" role="php"/>
-   <file baseinstalldir="/" md5sum="1fa66e7b752de71d29bc1b34d891e139" name="tests/UNL_LDAPTest.php" role="test"/>
-   <file baseinstalldir="/" md5sum="4ec63a962bbddbfd1d9b12eafe8148b1" name="docs/examples/twodirectories.php" role="doc"/>
-   <file baseinstalldir="/" md5sum="2b7c406732936e26f498af7cb4d050a8" name="docs/examples/simpleSearch.php" role="doc"/>
-   <file baseinstalldir="/" md5sum="0218ccc36b1ac31b6a241c43d06bb775" name="config.sample.php" role="data"/>
-   <file baseinstalldir="/" md5sum="70050811287cb990cdd6e409049e2b5e" name="build.xml" role="data"/>
+   <file name="UNL/LDAP/Result.php" role="php" md5sum="cc15d2a9d257a36149952622fff05128"/>
+   <file name="UNL/LDAP/People.php" role="php" md5sum="89f2d218e91e3fd2413c79df8758e455"/>
+   <file name="UNL/LDAP/Exception.php" role="php" md5sum="3c3d370c93d9c8fa86039a7650872a2a"/>
+   <file name="UNL/LDAP/Entry/Attribute.php" role="php" md5sum="0718586648d0db9433f8c983c162269d"/>
+   <file name="UNL/LDAP/Entry.php" role="php" md5sum="979f04fe5f23645548240887035df768"/>
+   <file name="UNL/LDAP.php" role="php" md5sum="48976e60790cf430c986407c6f6cc5a2"/>
+   <file name="tests/UNL_LDAPTest.php" role="test" md5sum="1fa66e7b752de71d29bc1b34d891e139"/>
+   <file name="docs/examples/twodirectories.php" role="doc" md5sum="4ec63a962bbddbfd1d9b12eafe8148b1"/>
+   <file name="docs/examples/simpleSearch.php" role="doc" md5sum="e2d4dd1aedc7531fa2fee7d202e74799"/>
+   <file name="config.sample.php" role="data" md5sum="0218ccc36b1ac31b6a241c43d06bb775"/>
+   <file name="build.xml" role="data" md5sum="70050811287cb990cdd6e409049e2b5e"/>
   </dir>
  </contents>
  <dependencies>
