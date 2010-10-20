@@ -21,6 +21,13 @@ if (count($context)) {
 //    }
     echo '<div id="all_employees">';
     $by_affiliation = UNL_Peoplefinder_SearchResults::groupByAffiliation($context->getRawObject());
+
+    // Hide student roles (usually faculty/staff that are also taking classes)
+    if (isset($by_affiliation['student'])) {
+        unset($by_affiliation['student']);
+    }
+
+    ksort($by_affiliation);
     foreach ($by_affiliation as $affiliation=>$records) {
         if (count($records)) {
             $section               = new stdClass();
