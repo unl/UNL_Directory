@@ -288,30 +288,41 @@ class UNL_Officefinder_Record
     {
         switch (true) {
         case preg_match('/getBy([\w]+)/', $method, $matches):
-            $mysqli   = self::getDB();
             $class    = get_called_class();
-            $record   = new $class;
             $field    = strtolower($matches[1]);
-            $whereAdd = '';
+            $whereAdd = null;
             if (isset($args[1])) {
-                $whereAdd = $args[1] . ' AND ';
+                $whereAdd = $args[1];
             }
-            $sql    = 'SELECT * FROM '
-                        . $record->getTable()
-                        . ' WHERE '
-                        . $whereAdd
-                        . $field . ' = "' . $mysqli->escape_string($args[0]) . '"';
-            $result = $mysqli->query($sql);
-
-            if ($result === false
-                || $result->num_rows == 0) {
-                return false;
-            }
-
-            $record->synchronizeWithArray($result->fetch_assoc());
-            return $record;
+            return self::getByAnyField($class, $field, $args[0], $whereAdd);
+            
         }
         throw new Exception('Invalid static method called.');
+    }
+
+    public static function getByAnyField($class, $field, $value, $whereAdd = '')
+    {
+        $record = new $class;
+
+        if (!empty($whereAdd)) {
+            $whereAdd = $whereAdd . ' AND ';
+        }
+
+        $mysqli = self::getDB();
+        $sql    = 'SELECT * FROM '
+                    . $record->getTable()
+                    . ' WHERE '
+                    . $whereAdd
+                    . $field . ' = "' . $mysqli->escape_string($value) . '"';
+        $result = $mysqli->query($sql);
+
+        if ($result === false
+            || $result->num_rows == 0) {
+            return false;
+        }
+
+        $record->synchronizeWithArray($result->fetch_assoc());
+        return $record;
     }
 
     /**
