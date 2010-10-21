@@ -22,9 +22,15 @@ if (count($context)) {
     echo '<div id="all_employees">';
     $by_affiliation = UNL_Peoplefinder_SearchResults::groupByAffiliation($context->getRawObject());
 
-    // Hide student roles (usually faculty/staff that are also taking classes)
-    if (isset($by_affiliation['student'])) {
-        unset($by_affiliation['student']);
+    // Hide various roles
+    $do_not_display = array(
+        'student',
+        'rif'
+        );
+    foreach ($do_not_display as $affiliation) {
+        if (isset($by_affiliation[$affiliation])) {
+            unset($by_affiliation[$affiliation]);
+        }
     }
 
     ksort($by_affiliation);
