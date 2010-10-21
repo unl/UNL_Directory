@@ -16,17 +16,21 @@ function updateOfficialDepartment(UNL_Peoplefinder_Department $sap_dept, UNL_Off
     if (!($dept = UNL_Officefinder_Department::getByorg_unit($sap_dept->org_unit))) {
         // Uhoh, new department!
         $dept = new UNL_Officefinder_Department();
-        updateFields($dept, $sap_dept);
-    }
 
-    // Now update all fields with the official data from SAP
-    //
+        // Now update all fields with the official data from SAP
+        updateFields($dept, $sap_dept);
+        
+        echo 'New department found:'.$dept->name.' ('.$dept->org_unit.')'.PHP_EOL;
+    }
 
     if ($parent) {
         if ($dept->isChildOf($parent)) {
             // All OK!
         } else {
-            // This department has moved
+            if (isset($dept->parent_id)) {
+                // This department has moved
+                echo 'Department move:'.$dept->name.' has moved from '.UNL_Officefinder_Department::getByID($dept->parent_id)->name.' to '.$parent->name.PHP_EOL;
+            }
             $parent->addChild($dept, true);
         }
     }
