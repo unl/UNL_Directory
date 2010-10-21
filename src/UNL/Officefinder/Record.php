@@ -289,7 +289,8 @@ class UNL_Officefinder_Record
         switch (true) {
         case preg_match('/getBy([\w]+)/', $method, $matches):
             $mysqli   = self::getDB();
-            $record   = new get_called_class();
+            $class    = get_called_class();
+            $record   = new $class;
             $field    = strtolower($matches[1]);
             $whereAdd = '';
             if (isset($args[1])) {
