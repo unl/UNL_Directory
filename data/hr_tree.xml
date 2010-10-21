@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE tree SYSTEM "treeml.dtd">
-<!-- Generated Wed Sep 29 18:25:24 2010 -->
+<!-- Generated Thu Oct 21 09:37:34 2010 -->
 <tree>
  <declarations>
    <attributeDecl name="name"        type="String" />
@@ -2096,9 +2096,9 @@
         <attribute name="postal_code" value="68033-2234"/>
        </branch>
        <branch>
-        <attribute name="name" value="ABE Business Center"/>
+        <attribute name="name" value="AVE Business Center"/>
         <attribute name="org_unit" value="50003026"/>
-        <attribute name="org_abbr" value="ABE Bus Ctr"/>
+        <attribute name="org_abbr" value="AVE Bus Ctr"/>
         <attribute name="building" value="C203 ANSC"/>
         <attribute name="city" value="UNL"/>
         <attribute name="state" value="NE"/>
@@ -2319,6 +2319,16 @@
         <attribute name="city" value="UNL"/>
         <attribute name="state" value="NE"/>
         <attribute name="postal_code" value="68583-0704"/>
+        <branch>
+         <attribute name="name" value="Educational Media"/>
+         <attribute name="org_unit" value="50000835"/>
+         <attribute name="org_abbr" value="Ed Media"/>
+         <attribute name="building" value="ACB"/>
+         <attribute name="room" value="104"/>
+         <attribute name="city" value="Lincoln"/>
+         <attribute name="state" value="NE"/>
+         <attribute name="postal_code" value="68583-0918"/>
+        </branch>
        </branch>
        <branch>
         <attribute name="name" value="Animal Science"/>
@@ -2368,16 +2378,6 @@
         <attribute name="postal_code" value="68583-0816"/>
        </branch>
        <branch>
-        <attribute name="name" value="Comm Information Technology"/>
-        <attribute name="org_unit" value="50000835"/>
-        <attribute name="org_abbr" value="Ed Media"/>
-        <attribute name="building" value="ACB"/>
-        <attribute name="room" value="104"/>
-        <attribute name="city" value="Lincoln"/>
-        <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68583-0918"/>
-       </branch>
-       <branch>
         <attribute name="name" value="Food Science &amp; Technology"/>
         <attribute name="org_unit" value="50000836"/>
         <attribute name="org_abbr" value="Food Sci&amp;Tec"/>
@@ -2424,21 +2424,39 @@
         </branch>
        </branch>
        <branch>
-        <attribute name="name" value="Vet &amp; Biomedical Sciences"/>
-        <attribute name="org_unit" value="50000845"/>
-        <attribute name="org_abbr" value="Vet Biom Sci"/>
+        <attribute name="name" value="School Vet &amp; Biomedical Sciences"/>
+        <attribute name="org_unit" value="50007275"/>
+        <attribute name="org_abbr" value="School VBS"/>
         <attribute name="building" value="120 VBS"/>
         <attribute name="city" value="UNL"/>
         <attribute name="state" value="NE"/>
         <attribute name="postal_code" value="68583-0905"/>
         <branch>
-         <attribute name="name" value="Great Plains Vet Ed Center"/>
-         <attribute name="org_unit" value="50001179"/>
-         <attribute name="org_abbr" value="GPVEC"/>
-         <attribute name="building" value="Box 187"/>
-         <attribute name="city" value="Clay Center"/>
+         <attribute name="name" value="Vet &amp; Biomedical Sciences"/>
+         <attribute name="org_unit" value="50000845"/>
+         <attribute name="org_abbr" value="Vet Biom Sci"/>
+         <attribute name="building" value="120 VBS"/>
+         <attribute name="city" value="UNL"/>
          <attribute name="state" value="NE"/>
-         <attribute name="postal_code" value="68933"/>
+         <attribute name="postal_code" value="68583-0905"/>
+         <branch>
+          <attribute name="name" value="Great Plains Vet Ed Center"/>
+          <attribute name="org_unit" value="50001179"/>
+          <attribute name="org_abbr" value="GPVEC"/>
+          <attribute name="building" value="Box 187"/>
+          <attribute name="city" value="Clay Center"/>
+          <attribute name="state" value="NE"/>
+          <attribute name="postal_code" value="68933"/>
+         </branch>
+        </branch>
+        <branch>
+         <attribute name="name" value="ISU/UNL Coop Vet Med Education Prog"/>
+         <attribute name="org_unit" value="50005175"/>
+         <attribute name="org_abbr" value="CVM     IANR"/>
+         <attribute name="building" value="120 VBS"/>
+         <attribute name="city" value="UNL"/>
+         <attribute name="state" value="NE"/>
+         <attribute name="postal_code" value="68583-0905"/>
         </branch>
        </branch>
        <branch>
@@ -2551,15 +2569,6 @@
         <attribute name="city" value="UNL"/>
         <attribute name="state" value="NE"/>
         <attribute name="postal_code" value="68583-0844"/>
-       </branch>
-       <branch>
-        <attribute name="name" value="ISU/UNL Coop Vet Med Education Prog"/>
-        <attribute name="org_unit" value="50005175"/>
-        <attribute name="org_abbr" value="CVM     IANR"/>
-        <attribute name="building" value="120 VBS"/>
-        <attribute name="city" value="UNL"/>
-        <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68583-0905"/>
        </branch>
        <branch>
         <attribute name="name" value="Plant Health"/>
@@ -7732,8 +7741,8 @@
        <attribute name="name" value="Srvc Learning Acad &amp; Amer Humanics"/>
        <attribute name="org_unit" value="50004350"/>
        <attribute name="org_abbr" value="LRN ACAD 461"/>
-       <attribute name="building" value="ASH"/>
-       <attribute name="room" value="220"/>
+       <attribute name="building" value="MBSC"/>
+       <attribute name="room" value="114"/>
        <attribute name="city" value="Omaha"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68182"/>
