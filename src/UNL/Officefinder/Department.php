@@ -89,6 +89,18 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
     }
 
     /**
+     * Retrieve a department
+     * 
+     * @param int $id
+     * 
+     * @return UNL_Officefinder_Department
+     */
+    public static function getByorg_unit($id)
+    {
+        return self::__callStatic('getByorg_unit', array($id));
+    }
+
+    /**
      * Get office sub-listings
      * 
      * @return UNL_Officefinder_Department_Listings
