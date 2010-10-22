@@ -60,7 +60,7 @@
 	border-top: 1px solid #e6e6e6;
 	width:100%;
 	padding: 5px 0px;
-	display:block;
+	display:inline-block;
 }
 #maincontent ul.pfResult li div.overflow {
 	min-height:47px;
@@ -93,7 +93,7 @@
 	font-size:18px;
 	font-weight:bold;
 	color:#464545 !important;	
-	max-width:530px;
+	max-width:290px;
 	max-height:35px;
 	min-height:18px;
 	overflow:hidden;
