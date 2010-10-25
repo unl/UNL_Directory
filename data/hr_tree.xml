@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE tree SYSTEM "treeml.dtd">
-<!-- Generated Thu Oct 21 09:37:34 2010 -->
+<!-- Generated Mon Oct 25 16:52:01 2010 -->
 <tree>
  <declarations>
    <attributeDecl name="name"        type="String" />
@@ -1053,26 +1053,6 @@
        <attribute name="city" value="Lincoln"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68588-0370"/>
-      </branch>
-     </branch>
-     <branch>
-      <attribute name="name" value="Information Services"/>
-      <attribute name="org_unit" value="50000904"/>
-      <attribute name="org_abbr" value="INFO SRV UNL"/>
-      <attribute name="building" value="LLS"/>
-      <attribute name="room" value="450"/>
-      <attribute name="city" value="Lincoln"/>
-      <attribute name="state" value="NE"/>
-      <attribute name="postal_code" value="68588-0496"/>
-      <branch>
-       <attribute name="name" value="Telecommunications Center"/>
-       <attribute name="org_unit" value="50001034"/>
-       <attribute name="org_abbr" value="TELECOMM UNL"/>
-       <attribute name="building" value="Nebraska Hall"/>
-       <attribute name="room" value="211"/>
-       <attribute name="city" value="Lincoln"/>
-       <attribute name="state" value="NE"/>
-       <attribute name="postal_code" value="68588-0522"/>
       </branch>
      </branch>
      <branch>
@@ -2518,10 +2498,10 @@
         <attribute name="name" value="West Central Rsch &amp; Ext Center"/>
         <attribute name="org_unit" value="50000944"/>
         <attribute name="org_abbr" value="WCREC"/>
-        <attribute name="building" value="461 W University Dr"/>
+        <attribute name="building" value="402 W State Farm Rd"/>
         <attribute name="city" value="North Platte"/>
         <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="69101-9495"/>
+        <attribute name="postal_code" value="69101-7751"/>
        </branch>
        <branch>
         <attribute name="name" value="Nebraska LEAD Program"/>
@@ -3765,6 +3745,26 @@
       <attribute name="city" value="UNL"/>
       <attribute name="state" value="NE"/>
       <attribute name="postal_code" value="68588-0139"/>
+     </branch>
+    </branch>
+    <branch>
+     <attribute name="name" value="Information Services"/>
+     <attribute name="org_unit" value="50000904"/>
+     <attribute name="org_abbr" value="INFO SRV UNL"/>
+     <attribute name="building" value="LLS"/>
+     <attribute name="room" value="450"/>
+     <attribute name="city" value="Lincoln"/>
+     <attribute name="state" value="NE"/>
+     <attribute name="postal_code" value="68588-0496"/>
+     <branch>
+      <attribute name="name" value="Telecommunications Center"/>
+      <attribute name="org_unit" value="50001034"/>
+      <attribute name="org_abbr" value="TELECOMM UNL"/>
+      <attribute name="building" value="Nebraska Hall"/>
+      <attribute name="room" value="211"/>
+      <attribute name="city" value="Lincoln"/>
+      <attribute name="state" value="NE"/>
+      <attribute name="postal_code" value="68588-0522"/>
      </branch>
     </branch>
     <branch>
