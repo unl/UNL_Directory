@@ -6,7 +6,7 @@ if (preg_match('/^([A-Z]+)\s/', $context->address, $matches)) {
 
 if ($context->userCanEdit(UNL_Officefinder::getUser())) {
     echo '<div class="edit">';
-    echo ' <a href="'.$context->getURL().'&amp;format=editing" class="action edit" title="Edit">edit</a>'.PHP_EOL;
+    echo ' <a href="'.$context->getURL().'?format=editing" class="action edit" title="Edit">edit</a>'.PHP_EOL;
     echo $savvy->render($context, 'Officefinder/Department/Listing/SortForm.tpl.php');
     include dirname(__FILE__).'/../../../editing/Officefinder/Department/DeleteForm.tpl.php';
     echo ' <a href="'.UNL_Officefinder::getURL(null, array('view'      => 'department',

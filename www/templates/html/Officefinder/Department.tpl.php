@@ -19,7 +19,7 @@ $userCanEdit = $context->userCanEdit(UNL_Officefinder::getUser());
             }
             if ($userCanEdit) {
                 echo '<ul class="edit_actions">';
-                    echo '<li><a href="'.$context->getURL().'&amp;format=editing" class="action edit" title="Edit">Edit</a></li>';
+                    echo '<li><a href="'.$context->getURL().'?format=editing" class="action edit" title="Edit">Edit</a></li>';
                     if (!isset($context->org_unit) || UNL_Officefinder::isAdmin(UNL_Officefinder::getUser(true))) {
                         // Only allow Admins to delete "official" SAP departments
                         echo '<li>';
