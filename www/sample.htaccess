@@ -4,4 +4,4 @@ RewriteRule ^search/(.*) service.php?q=$1
 RewriteRule ^vcards/(.*) service.php?format=vcard&uid=$1
 RewriteRule ^hcards/(.*) service.php?format=hcard&uid=$1
 
-RewriteRule ^departments/([\d]+)$ departments/index.php?view=department&id=$1
+RewriteRule ^departments/([\d]+)$ departments/index.php?view=department&id=$1 [QSA]
