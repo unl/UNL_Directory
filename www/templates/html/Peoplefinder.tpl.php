@@ -33,7 +33,13 @@ if ($context->getRawObject() instanceof UNL_Officefinder) {
     $page->head .= '<link rel="login" href="https://login.unl.edu/cas/login?service='.urlencode(UNL_Officefinder::getURL(null, $context->options)).'" />';
 }
 
-if (UNL_Officefinder::getUser()) {
+if (UNL_Officefinder::getUser()
+    && 
+        (
+        UNL_Officefinder::isAdmin(UNL_Officefinder::getUser())
+        || count(new UNL_Officefinder_User_Departments(array('uid'=>UNL_Officefinder::getUser())))
+        )
+    ) {
     $page->head .= '
     <script type="text/javascript">
     WDN.loadJS("wdn/templates_3.0/scripts/plugins/ui/jQuery.ui.js");
