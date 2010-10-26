@@ -54,7 +54,7 @@ foreach ($users as $user) {
     $departments = new UNL_Officefinder_User_Departments(array('uid'=>$user->uid));
     $email_body .= '<ul>';
     foreach ($departments as $department) {
-        $email_body .= '<li><a style="outline: none;color: #ba0000;text-decoration: none;" href="http://peoplefinder-test.unl.edu/departments/?view=department&amp;id='.$department->id.'">'.$department->name.'</a></li>'.PHP_EOL;
+        $email_body .= '<li><a style="outline: none;color: #ba0000;text-decoration: none;" href="http://peoplefinder-test.unl.edu/departments/'.$department->id.'">'.$department->name.'</a></li>'.PHP_EOL;
     }
     $email_body .= '</ul>';
     $email_body .= $email_suffix;
