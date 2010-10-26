@@ -9,7 +9,7 @@ var admin_editting = function() {
 		submitForm : function() {
 			WDN.jQuery('#colorbox form.zenform').submit(function() {
 				WDN.jQuery.post(
-					window.location.href.replace(window.location.hash, '') + '&format=partial&redirect=0',
+					window.location.href.replace(window.location.hash, '') + '?format=partial&redirect=0',
 					WDN.jQuery(this).serialize(),
 					function(data) { //reload the maincontent with the new changes
 						WDN.jQuery('#maincontent').html(data);
