@@ -64,6 +64,15 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
 
             UNL_Officefinder::setObjectFromArray($this, $record->toArray());
         }
+        if (!empty($options['sap'])) {
+            $record = self::getByorg_unit($options['sap']);
+
+            if ($record === false) {
+                throw new Exception('No record with that SAP ID exists', 404);
+            }
+
+            UNL_Officefinder::setObjectFromArray($this, $record->toArray());
+        }
     }
 
     function getTable()
