@@ -292,7 +292,7 @@ padding:10px;
     -webkit-border-radius:5px;
     border-radius:5px;
 }
-#maincontent .right .intro {opacity:0.3;filter:alpha(opacity=30);zoom:1;}
+
 .intro img.profile_pic{float:left;}
 h6.recordDetails {margin-top:15px;}
 h6.recordDetails span {
@@ -303,9 +303,8 @@ h6.recordDetails span {
 }
 .intro_support {
     height:150px;
-    padding:25px 200px 0 0;	
+    padding:10px 0 !important;
 }
 #maincontent .left .intro_support {
 	background:url('images/samplePeople.png') no-repeat bottom right;
-	padding-top:10px;
 }
