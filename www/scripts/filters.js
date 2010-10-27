@@ -56,12 +56,10 @@ var filters = function() {
 		
 		action : function(checkbox) {
 			checked = [];
-			if(checkbox.hasClass('filterAll')){
+			if (checkbox.hasClass('filterAll')) {
 				if (checkbox[0].checked){
-					WDN.jQuery('form.filters input').not('.filterAll').removeAttr('checked');
-					WDN.jQuery('.filterAll').attr('checked', 'checked');
-					WDN.jQuery('li.ppl_Sresult').show();
-				} 
+					filters.showAll();
+				}
 			} else {
 				WDN.jQuery('.filterAll').removeAttr('checked');
 				WDN.jQuery('li.ppl_Sresult').hide();
@@ -83,6 +81,8 @@ var filters = function() {
 			if (ids.length < 1) { //nothing in the array, therefore it's ALL
 				WDN.jQuery('#filterSummary a, span.operator').remove();
 				WDN.jQuery('#filterSummary').append('<a href="#" class="all">All Options</a>');
+				WDN.jQuery('.filterAll').attr('checked', 'checked');
+				filters.showAll();
 			} else { //at least one id exists in the array
 				WDN.jQuery('#filterSummary a, span.operator').remove();
 				WDN.jQuery.each(ids, function(key, value){
@@ -94,7 +94,12 @@ var filters = function() {
 		
 		scrubDept : function(string) {
 			return string.split(' ').join('').replace(/&|,/gi, '');
-			
+		},
+		
+		showAll : function() {
+			WDN.jQuery('form.filters input').not('.filterAll').removeAttr('checked');
+			WDN.jQuery('.filterAll').attr('checked', 'checked');
+			WDN.jQuery('li.ppl_Sresult').show();
 		}
 		
 	};
