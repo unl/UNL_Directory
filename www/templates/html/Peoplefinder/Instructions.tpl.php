@@ -31,10 +31,9 @@
 	        Search <span class="search_context">Departments</span>
 	    </h6>
 	    <div class="intro_support clear">
-	        
+	        <p>Search the UNL directory by entering a department name, person's name, or last three or more digits of a telephone number.</p>
 	    </div>
     </div>
-    <h5 class="coming">Coming Soon!</h5>
 </div>
 <?php echo $savvy->render(null, 'Peoplefinder/SearchResults/Filters.tpl.php'); ?>
 <div id="results" class="three_col right"></div>
