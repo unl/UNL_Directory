@@ -119,18 +119,31 @@ var directory = function() {
 		},
 		
 		fixLabel : function() { //called to reposition the label over the input and hide
+			WDN.jQuery('#q').focus().select();
 			WDN.jQuery('.directorySearch > fieldset > ol > li > label').css({'top' : '16px'}).focus(function(){
 					WDN.jQuery(this).hide().siblings('input[type=text]').next().focus();
 			});
 			WDN.jQuery('.directorySearch input').bind({
 				focus : function(){
-					WDN.jQuery(this).siblings('label[for='+this.id+']').hide();
+					if (WDN.jQuery(this).val() !== "") {
+						WDN.jQuery(this).siblings('label[for='+this.id+']').hide();
+					}
 				},
 				blur : function(){
 					if (WDN.jQuery(this).val() === "") {
 						WDN.jQuery(this).siblings('label[for='+this.id+']').show();
 					}
-				}
+				},
+				keyup : function(){
+					if (WDN.jQuery(this).val() !== "") {
+						WDN.jQuery(this).siblings('label[for='+this.id+']').hide();
+					}
+				},
+				change : function(){
+					if (WDN.jQuery(this).val() !== "") {
+						WDN.jQuery(this).siblings('label[for='+this.id+']').hide();
+					}
+				} 
 			});
 		},
 		
