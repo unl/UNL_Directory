@@ -26,7 +26,8 @@ if ($context->ou == 'org') {
 if ($displayEmail && isset($context->unlEmailAlias)) echo "</a>\n";
 
 if (isset($context->eduPersonAffiliation)) {
-    echo '<span class="eppa">('.implode(', ', $context->eduPersonAffiliation->getArrayCopy()).')</span>';
+    $affiliations = array_intersect(UNL_Peoplefinder::$displayedAffiliations, $context->eduPersonAffiliation->getArrayCopy());
+    echo '<span class="eppa">('.implode(', ', $affiliations).')</span>';
 }
 
 if (isset($context->unlSISClassLevel)) {
