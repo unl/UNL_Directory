@@ -309,15 +309,3 @@ h6.recordDetails span {
 	background:url('images/samplePeople.png') no-repeat bottom right;
 	padding-top:10px;
 }
-#maincontent h5.coming {
-    font-size:2.5em;
-    background:url('images/comingSoon.png') 0 0 no-repeat;
-    display:block;
-    text-indent:-999999px;
-    position:absolute;
-    top:100px;
-    right:108px;
-    width:243px;
-    height:124px;
-    opacity:0.8;
-}
