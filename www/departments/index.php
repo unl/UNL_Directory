@@ -41,4 +41,6 @@ switch($peoplefinder->options['format']) {
         break;
 }
 
+$savvy->addFilters(array('UNL_Officefinder', 'postRun'));
+
 echo $savvy->render($peoplefinder);

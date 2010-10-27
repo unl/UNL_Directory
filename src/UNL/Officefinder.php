@@ -415,4 +415,14 @@ class UNL_Officefinder
     {
         return in_array($user, self::$admins);
     }
+
+    public static function setReplacementData($field, $data)
+    {
+        UNL_Peoplefinder::setReplacementData($field, $data);
+    }
+    
+    function postRun($data)
+    {
+        return UNL_Peoplefinder::postRun($data);
+    }
 }

@@ -58,6 +58,8 @@ class UNL_Peoplefinder
                              'search'       => 'UNL_Peoplefinder_SearchController',
                              'record'       => 'UNL_Peoplefinder_Record');
 
+    protected static $replacement_data = array();
+
     /**
      * Constructor for the object.
      * 
@@ -210,5 +212,49 @@ class UNL_Peoplefinder
     public static function getDataDir()
     {
         return dirname(__FILE__).'/../../data';
+    }
+
+    public static function setReplacementData($field, $data)
+    {
+        self::$replacement_data[$field] = $data;
+    }
+    
+    function postRun($data)
+    {
+
+        if (isset(self::$replacement_data['doctitle'])
+            && strstr($data, '<title>')) {
+            $data = preg_replace('/<title>.*<\/title>/',
+                                '<title>'.self::$replacement_data['doctitle'].'</title>',
+                                $data);
+            unset(self::$replacement_data['doctitle']);
+        }
+
+        if (isset(self::$replacement_data['head'])
+            && strstr($data, '</head>')) {
+            $data = str_replace('</head>', self::$replacement_data['head'].'</head>', $data);
+            unset(self::$replacement_data['head']);
+        }
+
+        if (isset(self::$replacement_data['breadcrumbs'])
+            && strstr($data, '<!-- InstanceBeginEditable name="breadcrumbs" -->')) {
+
+            $start = strpos($data, '<!-- InstanceBeginEditable name="breadcrumbs" -->')+strlen('<!-- InstanceBeginEditable name="breadcrumbs" -->');
+            $end = strpos($data, '<!-- InstanceEndEditable -->', $start);
+
+            $data = substr($data, 0, $start).self::$replacement_data['breadcrumbs'].substr($data, $end);
+            unset(self::$replacement_data['breadcrumbs']);
+        }
+
+        if (isset(self::$replacement_data['pagetitle'])
+            && strstr($data, '<!-- InstanceBeginEditable name="pagetitle" -->')) {
+
+            $start = strpos($data, '<!-- InstanceBeginEditable name="pagetitle" -->')+strlen('<!-- InstanceBeginEditable name="pagetitle" -->');
+            $end = strpos($data, '<!-- InstanceEndEditable -->', $start);
+
+            $data = substr($data, 0, $start).self::$replacement_data['pagetitle'].substr($data, $end);
+            unset(self::$replacement_data['pagetitle']);
+        }
+        return $data;
     }
 }
