@@ -58,6 +58,28 @@ class UNL_Peoplefinder
                              'search'       => 'UNL_Peoplefinder_SearchController',
                              'record'       => 'UNL_Peoplefinder_Record');
 
+    /**
+     * This list contains the affiliations shown throughout the directory.
+     * 
+     * Certain affiliations are not appropriate for public display.
+     *
+     * @var array
+     */
+    public static $displayedAffiliations = array(
+        'student',
+//        'graduated',
+        'faculty',
+        'staff',
+//        'affiliate',
+//        'volunteer',
+//        'retiree',
+        'emeriti',
+//        'continue services',
+//        'rif',
+//        'override',  // (will exist in guest ou)
+//        'sponsored', // (will exist in guest ou)
+        );
+
     protected static $replacement_data = array();
 
     /**

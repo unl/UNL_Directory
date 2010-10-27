@@ -25,6 +25,10 @@ class UNL_Peoplefinder_SearchResults extends ArrayIterator
         foreach ($results as $record) {
             if (isset($record->eduPersonAffiliation)) {
                 foreach ($record->eduPersonAffiliation as $affiliation) {
+                    if (!in_array($affiliation, UNL_Peoplefinder::$displayedAffiliations)) {
+                        // This is an affiliation we do not want displayed
+                        continue;
+                    }
                     if (!isset($by_affiliation[$affiliation])) {
                         $by_affiliation[$affiliation] = array();
                     }

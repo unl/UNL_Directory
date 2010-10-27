@@ -22,21 +22,6 @@ if (count($context)) {
     echo '<div id="all_employees">';
     $by_affiliation = UNL_Peoplefinder_SearchResults::groupByAffiliation($context->getRawObject());
 
-    // Hide various roles
-    // @TODO Make this customizable by the application developer.
-    $do_not_display = array(
-        'emeriti',
-        'retired',
-        'rif',
-        'student',
-        'volunteer',
-        );
-    foreach ($do_not_display as $affiliation) {
-        if (isset($by_affiliation[$affiliation])) {
-            unset($by_affiliation[$affiliation]);
-        }
-    }
-
     ksort($by_affiliation);
     foreach ($by_affiliation as $affiliation=>$records) {
         if (count($records)) {
