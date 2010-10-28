@@ -16,6 +16,11 @@ class UNL_Peoplefinder_SearchController
     {
         $this->options = $options + $this->options;
 
+        $this->run();
+    }
+
+    function run()
+    {
         $search_method = 'getExactMatches';
 
         if (is_numeric(str_replace(array('-', '(', ')'),
