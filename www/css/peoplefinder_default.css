@@ -88,6 +88,7 @@
 }
 .recordDetails {
 	margin-left:20px;
+	max-width:540px;
 }
 .fn a, .fn {
 	font-size:18px;
@@ -98,7 +99,14 @@
 	min-height:20px;
 	overflow:hidden;
 }
-.departments .fn, .departments .fn a {height:42px;max-height:42px;line-height:20px;}
+.three_col.right .fn, 
+.three_col.right .fn a {
+    max-width:540px;
+}
+.departments .fn, .departments .fn a {
+    max-height:42px;line-height:20px;
+}
+
 .cInfo {float:right;}
 
 #maincontent .results {
