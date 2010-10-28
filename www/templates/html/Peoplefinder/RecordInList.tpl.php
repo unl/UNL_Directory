@@ -23,8 +23,14 @@ echo '        <div class="fn"><a href="'.UNL_Peoplefinder::getURL().'?uid='.$con
 if (isset($context->eduPersonPrimaryAffiliation)) {
     echo '        <div class="eppa">('.$context->eduPersonPrimaryAffiliation.')</div>'.PHP_EOL;
 }
-if (isset($context->unlHRPrimaryDepartment)) {
-    echo '        <div class="organization-unit">'.$context->unlHRPrimaryDepartment.'</div>'.PHP_EOL;
+if (isset($context->unlHROrgUnitNumber)) {
+    foreach ($context->unlHROrgUnitNumber as $orgUnit) {
+        if (!$org = UNL_Officefinder_Department::getByorg_unit($orgUnit)) {
+            // Couldn't retrieve this org's record from officefinder
+            continue;
+        }
+        echo '        <div class="organization-unit">'.$org->name.'</div>'.PHP_EOL;
+    }
 }
 if (isset($context->title)) {
     echo '        <div class="title">'.$context->title.'</div>'.PHP_EOL;

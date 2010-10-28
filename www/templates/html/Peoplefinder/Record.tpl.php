@@ -57,13 +57,19 @@ if (isset($context->title)) {
     echo "<span class='title'>{$context->title}</span>\n";
 }
 
-if (isset($context->unlHRPrimaryDepartment)) {
-    $org_name = 'University of Nebraska&ndash;Lincoln';
-    if ($context->unlHRPrimaryDepartment == 'Office of the President') {
-        $org_name = 'University of Nebraska';
+if (isset($context->unlHROrgUnitNumber)) {
+    foreach ($context->unlHROrgUnitNumber as $orgUnit) {
+        if (!$org = UNL_Officefinder_Department::getByorg_unit($orgUnit)) {
+            // Couldn't retrieve this org's record from officefinder
+            continue;
+        }
+        $parent_name = 'University of Nebraska&ndash;Lincoln';
+        if ($context->unlHRPrimaryDepartment == 'Office of the President') {
+            $parent_name = 'University of Nebraska';
+        }
+        $dept_url = $org->getURL();
+        echo "<span class='org'>\n\t<span class='organization-unit'><a href='{$dept_url}'>{$org->name}</a></span>\n\t<span class='organization-name'>$parent_name</span></span>\n";
     }
-    $dept_url = UNL_Officefinder::getURL().'?d='.urlencode($context->unlHRPrimaryDepartment);
-    echo "<span class='org'>\n\t<span class='organization-unit'><a href='{$dept_url}'>{$context->unlHRPrimaryDepartment}</a></span>\n\t<span class='organization-name'>$org_name</span></span>\n";
 }
 
 if (isset($context->postalAddress)) {
