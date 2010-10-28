@@ -7,11 +7,11 @@ if (count($context)) {
     foreach ($context as $department) {
 
         $title = '';
-//        if (!$department->isOfficialDepartment()) {
-//            $sub_dept   = $department;
-//            $department = $sub_dept->getOfficialParent();
-//            $title      = '<div class="title">'.$sub_dept->name.'</div>';
-//        }
+        if (!$department->isOfficialDepartment()) {
+            if ($parent = $department->getParent()) {
+                $title = '<div class="title">('.$parent->name.')</div>';
+            }
+        }
         echo '<li>
                 <div class="overflow">
                     <a class="planetred_profile" href="'.$department->getURL().'">
