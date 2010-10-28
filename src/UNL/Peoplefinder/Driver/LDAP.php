@@ -152,25 +152,31 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
             $this->lastResultCount = @ldap_count_entries($this->linkID, $sr);
             $this->lastResult      = @ldap_get_entries($this->linkID, $sr);
             $this->unbind();
-            //sort the results
-            for ($i=0;$i<$this->lastResult['count'];$i++) {
-                $name = $this->lastResult[$i]['sn'][0];
-                if (isset($this->lastResult[$i]['givenname'])) {
-                    $name .= ', ' . $this->lastResult[$i]['givenname'][0];
-                }
-                $this->lastResult[$i]['insensitiveName'] = strtoupper($name);
-            }
-            @reset($this->lastResult);
-            $this->lastResult = @UNL_Peoplefinder_Driver_LDAP_Util::array_csort(
-                                                    $this->lastResult,
-                                                    'insensitiveName',
-                                                    SORT_ASC);
+            $this->lastResult = $this->caseInsensitiveSortLDAPResults($this->lastResult);
             return $this->lastResult;
         } else {
             $result = ldap_get_entries($this->linkID, $sr);
             $this->unbind();
             return $result;
         }
+    }
+
+    protected function caseInsensitiveSortLDAPResults($result)
+    {
+        // sort the results
+        for ($i=0; $i<$result['count']; $i++) {
+            $name = $result[$i]['sn'][0];
+            if (isset($result[$i]['givenname'])) {
+                $name .= ', ' . $result[$i]['givenname'][0];
+            }
+            $result[$i]['insensitiveName'] = strtoupper($name);
+        }
+        reset($result);
+        $result = UNL_Peoplefinder_Driver_LDAP_Util::array_csort(
+                                                $result,
+                                                'insensitiveName',
+                                                SORT_ASC);
+        return $result;
     }
 
     
@@ -312,13 +318,10 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
     public function getHROrgUnitNumberMatches($query, $affiliation = null)
     {
         $filter = new UNL_Peoplefinder_Driver_LDAP_HROrgUnitNumberFilter($query);
-        
+
         // @TODO Clean up this mess. Either use UNL_LDAP entirely, or use something internal
-        $this->bind();
-        $results = ldap_search($this->linkID, self::$baseDN, $filter);
-        $ldap = new UNL_LDAP();
-        $ldap->setLink($this->linkID);
+        $this->query($filter->__toString(), $this->listAttributes);
         
-        return new UNL_Peoplefinder_Department_Personnel(new UNL_LDAP_Result($ldap, $results), $this);
+        return new UNL_Peoplefinder_Department_Personnel(new ArrayIterator($this->getRecordsFromResults()));
     }
 }
