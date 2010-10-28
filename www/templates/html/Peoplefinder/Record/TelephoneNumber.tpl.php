@@ -7,7 +7,7 @@ if (isset($_SERVER['HTTP_USER_AGENT']) &&
 } else {
     $link .= "tel:".$context;
 }
-$link .= '">'.$context.'</a>';
+$link .= '">'.preg_replace('/([\d]{3})([\d]{3})([\d]{4})/', '$1-$2-$3', $context).'</a>';
 echo $link;
 
 
