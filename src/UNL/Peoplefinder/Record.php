@@ -25,6 +25,7 @@ class UNL_Peoplefinder_Record
     public $telephoneNumber;
     public $title;
     public $uid;
+    public $unlHROrgUnitNumber;
     public $unlHRPrimaryDepartment;
     public $unlHRAddress;
     public $unlSISClassLevel;
