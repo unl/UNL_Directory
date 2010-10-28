@@ -21,8 +21,11 @@ if (count($context)) {
                         <div class="fn">
                             <a href="'.$department->getURL().'">'.$department->name.'</a>
                         </div>
-                        '.$title.'
-                    </div>
+                        '.$title;
+        if (isset($department->phone)) {
+            echo '        <div class="tel">'.$savvy->render($department->phone, 'Peoplefinder/Record/TelephoneNumber.tpl.php').'</div>'.PHP_EOL;
+        }
+        echo '      </div>
                     <a class="cInfo"" href="'.$department->getURL().'" onclick="return service_officefinder.of_getUID(\''.$department->id.'\');">More Details</a>
                 </div>
              </li>';
