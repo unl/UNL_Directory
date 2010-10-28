@@ -45,6 +45,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
         'givenName',
         'sn',
         'telephoneNumber',
+        'title',
         'uid',
         'unlHRPrimaryDepartment',
         'unlHROrgUnitNumber');
