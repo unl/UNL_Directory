@@ -16,7 +16,10 @@ $userCanEdit = $context->userCanEdit(UNL_Officefinder::getUser());
     <?php
     $image_url = 'http://maps.unl.edu/BuildingImages/icon_md.png';
     if (!empty($context->building)) {
-        $image_url = 'http://maps.unl.edu/'.$context->building.'/image';
+        $bldgs = new UNL_Common_Building();
+        if ($bldgs->buildingExists($context->building)) {
+            $image_url = 'http://maps.unl.edu/'.urlencode($context->building).'/image';
+        }
     }
     ?>
     <div id="departmentDisplay">
