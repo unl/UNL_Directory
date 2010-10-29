@@ -1,28 +1,14 @@
 <?php
-class UNL_Officefinder_TreeView
+class UNL_Officefinder_TreeView extends RecursiveIteratorIterator
 {
     function __construct($options = array())
     {
         // retrieve the left and right value of the $root node  
-        $root = UNL_Officefinder_Department::getByname('University of Nebraska - Lincoln');
+        //$root = UNL_Officefinder_Department::getByname('University of Nebraska - Lincoln');
+        $root = UNL_Officefinder_Department::getByname('Office of University Communications');
+        $iterator = new UNL_Officefinder_DepartmentList(array($root));
 
-        // start with an empty $right stack  
-        $right = array();
-
-        // now, retrieve all descendants of the $root node  
-        $result = UNL_Officefinder::getDB()->query('SELECT name, lft, rgt, level FROM departments '.
-                              'WHERE lft BETWEEN '.$root->lft.' AND '.
-                              $root->rgt.' ORDER BY lft ASC;');
-
-        echo '<pre>';
-        // display each row
-        while ($row = $result->fetch_assoc()) {  
-
-            // display indented node title
-            echo str_repeat('  ', $row['level']).$row['name']."\n";
-
-        }
-        echo '</pre>';
-        exit();
+        parent::__construct($iterator, RecursiveIteratorIterator::SELF_FIRST);
     }
+    
 }
