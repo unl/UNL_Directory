@@ -3,7 +3,7 @@
 foreach ($context as $listing)
 {
     echo '<div class="dept">';
-    echo '<strong>'.$listing->department->phone.' '.$listing->name.'</strong><br />';
+    echo '<strong>'.$savvy->render($listing->department->phone, 'Peoplefinder/Record/TelephoneNumber.tpl.php').' '.$listing->name.'</strong><br />';
     $listings = $listing->department->getChildren();
     if (count($listings)) :
         ?>
