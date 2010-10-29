@@ -1,5 +1,5 @@
 <?php
-class UNL_Officefinder_DepartmentList extends ArrayIterator
+class UNL_Officefinder_DepartmentList extends ArrayIterator implements RecursiveIterator
 {
     function current()
     {
@@ -11,5 +11,15 @@ class UNL_Officefinder_DepartmentList extends ArrayIterator
         $dept = new UNL_Officefinder_Department();
         $dept->synchronizeWithArray($current);
         return $dept;
+    }
+
+    function hasChildren()
+    {
+        return $this->current()->hasChildren();
+    }
+
+    function getChildren()
+    {
+        return $this->current()->getChildren();
     }
 }
