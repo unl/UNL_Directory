@@ -6,6 +6,10 @@ class UNL_Officefinder_DepartmentList_AlphaListing extends FilterIterator
     function __construct($options = array())
     {
         $this->options = $options + $this->options;
+
+        // Require login to view the full directory
+        UNL_Officefinder::getUser(true);
+
         $records = array();
         $mysqli = UNL_Officefinder::getDB();
         $sql = 'SELECT DISTINCT departments.id AS id, departments.name AS name

@@ -1,14 +1,14 @@
-
+<h2>Printer friendly version for <?php echo UNL_Officefinder::getUser(true); ?>, on <?php echo date('F jS, Y'); ?></h2>
 <?php
 foreach ($context as $listing)
 {
     echo '<div class="dept">';
     echo '<strong>'.$listing->department->phone.' '.$listing->name.'</strong><br />';
-    if ($listing->department->hasChildren()) :
+    $listings = $listing->department->getChildren();
+    if (count($listings)) :
         ?>
         <div id="listings">
         <?php
-        $listings = $listing->department->getChildren();
         echo $savvy->render($listings, 'Officefinder/Department/Listings.tpl.php');
         ?>
         </div>
