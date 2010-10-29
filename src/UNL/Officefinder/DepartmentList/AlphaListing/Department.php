@@ -7,7 +7,7 @@ class UNL_Officefinder_DepartmentList_AlphaListing_Department
 
     function __construct($name, $department)
     {
-        $this->name = $name;
+        $this->name       = $name;
         $this->department = $department;
     }
 }

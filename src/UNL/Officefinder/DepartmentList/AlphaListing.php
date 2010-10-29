@@ -1,5 +1,5 @@
 <?php
-class UNL_Officefinder_DepartmentList_AlphaListing extends LimitIterator
+class UNL_Officefinder_DepartmentList_AlphaListing extends FilterIterator
 {
     public $options = array('q'=>'');
 
@@ -24,6 +24,15 @@ class UNL_Officefinder_DepartmentList_AlphaListing extends LimitIterator
         }
         $mysqli->close();
         parent::__construct(new ArrayIterator($records));
+    }
+
+    function accept()
+    {
+        if ($this->current()->department->hasChildren()
+            || isset($this->current()->department->phone)) {
+            return true;
+        }
+        return false;
     }
 
     function current()
