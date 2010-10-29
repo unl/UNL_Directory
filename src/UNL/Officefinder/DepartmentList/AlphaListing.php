@@ -3,7 +3,7 @@ class UNL_Officefinder_DepartmentList_AlphaListing extends FilterIterator
 {
     public $options = array('q'=>'');
 
-    function __construct($options = array(), $offset = 0, $limit = -1)
+    function __construct($options = array())
     {
         $this->options = $options + $this->options;
         $records = array();
