@@ -15,8 +15,8 @@
         <p>Find contact information for faculty, staff and students.</p>
         <p>Search by:</p>
         <ul>
-            <li>First Name</li>
-            <li>Last Name</li>
+            <li>First name</li>
+            <li>Last name</li>
             <li>Both first and last name</li>
             <li>Last 3 or more digits of telephone</li>
         </ul>
@@ -31,7 +31,13 @@
 	        Search <span class="search_context">Departments</span>
 	    </h6>
 	    <div class="intro_support clear">
-	        <p>Search for UNL departments by entering a full or partial department name.</p>
+	        <p>Find UNL departments by entering a full or partial department name.</p>
+	        <p>Information available:</p>
+	        <ul>
+	        	<li>Department contact information and location on campus</li>
+	        	<li>Complete list of department employees</li>
+	        	<li>Organizational heirarchy of department</li>
+	        </ul>
 	    </div>
     </div>
 </div>
