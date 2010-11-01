@@ -31,7 +31,7 @@
 	        Search <span class="search_context">Departments</span>
 	    </h6>
 	    <div class="intro_support clear">
-	        <p>Search the UNL directory by entering a department name, person's name, or last three or more digits of a telephone number.</p>
+	        <p>Search for UNL departments by entering a full or partial department name.</p>
 	    </div>
     </div>
 </div>
