@@ -119,15 +119,9 @@ var directory = function() {
 		},
 		
 		fixLabel : function() { //called to reposition the label over the input and hide
-			WDN.jQuery('#q').focus().select();
-			WDN.jQuery('.directorySearch > fieldset > ol > li > label').css({'top' : '16px'}).focus(function(){
-					WDN.jQuery(this).hide().siblings('input[type=text]').next().focus();
-			});
 			WDN.jQuery('.directorySearch input').bind({
 				focus : function(){
-					if (WDN.jQuery(this).val() !== "") {
-						WDN.jQuery(this).siblings('label[for='+this.id+']').hide();
-					}
+					WDN.jQuery(this).siblings('label[for='+this.id+']').hide();
 				},
 				blur : function(){
 					if (WDN.jQuery(this).val() === "") {
@@ -143,7 +137,72 @@ var directory = function() {
 					if (WDN.jQuery(this).val() !== "") {
 						WDN.jQuery(this).siblings('label[for='+this.id+']').hide();
 					}
-				} 
+				},
+				click : function(){
+					if (WDN.jQuery(this).val() !== "") {
+						WDN.jQuery(this).siblings('label[for='+this.id+']').hide();
+					}
+				}
+			});
+			WDN.jQuery('.directorySearch input#q').qtip({
+		    	content: {
+		    		text: 'Enter a name to begin your search'
+		    	},
+		        position : {
+		        	corner : {
+		        		target : 'topLeft',
+		        		tooltip : 'bottomMiddle'
+		        	},
+		        	container: WDN.jQuery('body'),
+		        	adjust: {
+		        		x: 200
+		        	}
+		        },
+		        style: { 
+		        	tip: { 
+		        		corner: 'bottomMiddle' ,
+		        		size: { x: 25, y: 15 },
+		        		color: '#d7c47f'
+		        	},
+		        	"width":"300px",
+		        	"background-color": '#f7f3c3',
+		        	"color" : "#574f30",
+		        	classes : {
+		        		tooltip : 'searchHelp'
+		        	},
+		        	border : {
+		        		width : 0
+		        	}
+		        },
+		        show: {
+		            when: {
+		                event: 'focus'
+		            }
+		        },
+		        hide: {
+		            when: {
+		                event: 'unfocus'
+		            },
+		            delay: 100,
+		            effect: {
+		            	length:100
+		            }
+		        },
+		        api : {
+		        	beforeHide : function(){
+		        		WDN.setCookie('dir_qTip', '1', 3600);
+		        	},
+		        	
+		        	beforeShow : function(){
+		        		if (WDN.getCookie('dir_qTip') == 1) {
+		        			return false;
+		        		}
+		        	}
+		        }
+		    });
+			WDN.jQuery('#q').focus().select();
+			WDN.jQuery('.directorySearch > fieldset > ol > li > label').css({'top' : '15px'}).focus(function(){
+					WDN.jQuery(this).hide().siblings('input[type=text]').next().focus();
 			});
 		},
 		

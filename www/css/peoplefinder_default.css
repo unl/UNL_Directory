@@ -234,7 +234,7 @@ img.profile_pic.medium {width:100px;height:100px;}
 .directorySearch > fieldset > ol > li > label {
 	position:absolute;
 	top:-11px;
-	left:23px;
+	left:16px;
 	font-size:1.5em;
 	color:#5c5c5c;
 	cursor:text;
@@ -250,8 +250,13 @@ img.profile_pic.medium {width:100px;height:100px;}
 	border:1px solid #8a7c47;
 	font-size:1.5em;
 	color:#5c5c5c;
-	padding:5px 0 0 8px;
+	padding:2px 0 0 8px;
 	margin-top:10px;	
+}
+.directorySearch ol li:first-child input[type=text]:focus {
+	-webkit-box-shadow: 0 0 1px 1px rgba(235, 239, 132, 0.5), 0 0 1px 3px rgba(235, 239, 132, 0.3);
+	-moz-box-shadow: 0 0 1px 2px rgba(235, 239, 132, 0.5), 0 0 1px 3px rgba(235, 239, 132, 0.3);
+	border-color:#f5e62f;
 }
 .directorySearch ol li:first-child input.n[type=text] {
 	width:210px;
@@ -290,6 +295,30 @@ img.profile_pic.medium {width:100px;height:100px;}
 }
 #maincontent #directoryHelp li {
 	padding:2px 0;	
+}
+/********************************************
+
+Search help qTip Styles
+
+*********************************************/
+
+.qtip.searchHelp {
+    max-width:300px;
+    color:#83774b;
+    font:77%/140% "Lucida Grande",Verdana,Arial;
+}
+.qtip.searchHelp .qtip-wrapper, .qtip.searchHelp .qtip-contentWrapper {
+    background-color:#d4e4f5;
+    border:1px solid #d7c47f;
+}
+.qtip.searchHelp .qtip-wrapper{
+    border-color: #d7c47f;
+}
+.qtip.searchHelp .qtip-content {}
+.qtip.searchHelp p {
+    padding:5px;
+    font-size:0.9em;
+    color:#032152;
 }
 /* 
 ***************************************************
