@@ -123,7 +123,7 @@
     border-top: 1px solid #e6e6e6;
     width:100%;
     padding: 5px 0px;
-    display:block;
+    display:inline-block;
 }
 #maincontent ul.pfResult li div.overflow {
     min-height:45px;
@@ -146,15 +146,16 @@ a.cInfo {
     margin-left:20px;
 }
 .fn a, .fn {
-    font-size:18px;
+    font-size:14px;
+    line-height:12px;
     font-weight:bold;
     color:#464545 !important;   
-    max-width:530px;
+    max-width:220px;
     max-height:35px;
     min-height:20px;
     overflow:hidden;
 }
-.departments .fn, .departments .fn a {height:42px;max-height:42px;line-height:20px;}
+.departments .fn, .departments .fn a {max-height:32px;line-height:14px;}
 .cInfo {float:right;}
 
 #maincontent .results {margin-top:15px;}
@@ -191,7 +192,7 @@ a.cInfo {
 .vcard > a.email {
     
 }
-.vcard .eppa, .vcard .epa, .vcard .organization-unit, .vcard .tel, .vcf, .title {display:block;}
+.vcard .eppa, .vcard .epa, .vcard .organization-unit, .vcard .tel, .vcf, .title {display:block;max-width:220px;overflow:hidden;}
 .vcard a.planetred_profile {
     margin-right:15px;
     min-width:114px;
