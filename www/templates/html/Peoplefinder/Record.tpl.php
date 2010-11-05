@@ -13,7 +13,7 @@ if (isset($context->mail)
     && ($context->eduPersonPrimaryAffiliation != 'student')) {
     $displayEmail = true;
 }
-if ($displayEmail && isset($context->mail)) {
+if ($displayEmail) {
     echo "<a class='email' href='mailto:{$context->mail}'>";
 }
 if ($context->ou == 'org') {
@@ -25,7 +25,9 @@ if ($context->ou == 'org') {
         echo ' ('.$context->eduPersonNickname.')';
     }
 }
-if ($displayEmail && isset($context->unlEmailAlias)) echo "</a>\n";
+if ($displayEmail) {
+    echo "</a>\n";
+}
 
 if (isset($context->eduPersonAffiliation)) {
     $affiliations = array_intersect(UNL_Peoplefinder::$displayedAffiliations, $context->eduPersonAffiliation->getArrayCopy());
