@@ -32,6 +32,7 @@ class UNL_Peoplefinder
     static public $displayResultLimit = UNL_PF_DISPLAY_LIMIT;
 
     static public $url = '';
+    static public $annotateUrl = '';
 
     /**
      * Options for this use.

@@ -25,7 +25,7 @@ if ($context->options['mobile'] === true) {
                 <!--[if IE]>
                 <link rel="stylesheet" type="text/css" media="screen" href="'.UNL_Peoplefinder::getURL().'css/ie.css" />
                 <![endif]-->
-                <script type="text/javascript">var PF_URL = "'.UNL_Peoplefinder::getURL().'";</script>
+                <script type="text/javascript">var PF_URL = "'.UNL_Peoplefinder::getURL().'", ANNOTATE_URL = "'.UNL_Peoplefinder::$annotateUrl.'";</script>
                 <script type="text/javascript" src="'.UNL_Peoplefinder::getURL().'scripts/peoplefinder.js"></script>';
 }
 

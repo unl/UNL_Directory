@@ -50,6 +50,15 @@ var service_peoplefinder = function() {
 		updatePeopleFinderRecord : function(data, textStatus){ //function called when a record has been rendered
 			if (textStatus == 'success') {
 				WDN.jQuery('li.current').append(data);
+				if (WDN.jQuery('.wdn_annotate')) {
+					if (!WDN.jQuery('head link[href='+ ANNOTATE_URL +'css/annotate.css]').length) {
+						WDN.loadCSS(ANNOTATE_URL + 'css/annotate.css');
+					}
+					WDN.loadJS(ANNOTATE_URL + 'scripts/annotate_functions.js', function() {
+						annotate.path = ANNOTATE_URL + '?view=annotation';
+						annotate.initialize();
+					});
+				}
 				WDN.jQuery('li.current .vcard a.planetred_profile').fadeIn(400);
 				WDN.jQuery('li.current .vcard').slideDown();
             	WDN.jQuery('li.selected .loading').hide();
@@ -264,15 +273,6 @@ var directory = function() {
 		showSearchNotice : function() {
 			WDN.jQuery("#searchNotice").slideDown(500);
 			attempts = 1;
-		},
-		
-		buildProblemForm : function() {
-			WDN.loadCSS(PF_URL + 'css/comment.css');
-			directory.bindProblemFormSubmit();
-		},
-		
-		bindProblemFormSubmit : function() {
-			
 		}
 	};
 }();

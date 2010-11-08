@@ -17,6 +17,9 @@ require_once 'UNL/Autoload.php';
 // Set the main URL for the site
 UNL_Peoplefinder::$url = 'http://peoplefinder.unl.edu/';
 
+//Set the annotation service's URL
+UNL_Peoplefinder::$annotateUrl = 'http://ucommsrv.unl.edu/annotate/';
+
 // Some LDAP queries take a long time, change this if necessary
 set_time_limit(5);
 
