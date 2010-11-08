@@ -34,6 +34,7 @@ if (count($context)) {
             $section->affiliation  = $affiliation;
             $section->results      = $records;
             $section->like_results = array();
+            $section->options      = $context->options;
             echo $savvy->render($section, 'Peoplefinder/SearchResults/ByAffiliation.tpl.php');
         }
     }
