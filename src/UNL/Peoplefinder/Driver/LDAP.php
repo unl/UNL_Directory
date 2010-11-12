@@ -166,6 +166,9 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
 
     protected function caseInsensitiveSortLDAPResults($result)
     {
+        if (!is_array($result)) {
+            return $result;
+        }
         // sort the results
         for ($i=0; $i<$result['count']; $i++) {
             $name = $result[$i]['sn'][0];
