@@ -6,7 +6,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
      * 
      * @param string
      */
-    static public $ldapServer = 'ldap-test.unl.edu';
+    static public $ldapServer = 'ldap.unl.edu ldap-backup.unl.edu';
     
     /**
      * LDAP Connection bind distinguised name
