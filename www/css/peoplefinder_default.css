@@ -196,6 +196,7 @@
 .vcard span.url, .departmentInfo span.url {
 	background-position:0 -42px;
 }
+.permalink {font-size:0.75em; text-transform:uppercase; font-weight:bold;}
 a.email {background:none;}
 a.text-vcard{padding-left:24px;padding-right:0;margin-top:2px;background-position:left -2px;float:left;clear:left;}
 a.img-qrcode{padding-left:24px;padding-right:0;margin-top:2px;background: url(images/qrcode.png) no-repeat 0 0;float:left;clear:left;}
