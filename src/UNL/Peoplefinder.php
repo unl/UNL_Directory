@@ -31,8 +31,8 @@ class UNL_Peoplefinder
     static public $resultLimit        = UNL_PF_RESULT_LIMIT;
     static public $displayResultLimit = UNL_PF_DISPLAY_LIMIT;
 
-    static public $url = '';
-    static public $annotateUrl = '';
+    static public $url         = '';
+    static public $annotateUrl = 'http://annotate.unl.edu/';
 
     /**
      * Options for this use.
