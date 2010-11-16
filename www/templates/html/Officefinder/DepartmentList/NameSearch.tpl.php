@@ -15,7 +15,7 @@ if (count($context)) {
         echo '<li>
                 <div class="overflow">
                     <a class="planetred_profile" href="'.$department->getURL().'">
-                        <img alt="Generic Icon" src="images/organization40.png" class="profile_pic small photo">
+                        <img alt="Generic Icon" src="'.UNL_Peoplefinder::getURL().'images/organization40.png" class="profile_pic small photo">
                     </a>
                     <div class="recordDetails">
                         <div class="fn">
