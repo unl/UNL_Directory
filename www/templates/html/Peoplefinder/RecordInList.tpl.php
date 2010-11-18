@@ -15,7 +15,7 @@ echo '<li class="'.$class.'">'.PHP_EOL;
 echo '    <div class="overflow">'.PHP_EOL;
 $onclick = '';
 if (isset($parent->parent->context->options, $parent->parent->context->options['onclick'])) {
-    $onclick .= ' onclick="return '.htmlentities($parent->parent->context->options['onclick'], ENT_QUOTES).'(\''.$context->uid.'\');"';
+    $onclick .= ' onclick="return '.htmlentities($parent->parent->context->options['onclick'], ENT_QUOTES).'(\''.addslashes($context->uid).'\');"';
 }
 echo '    <a class="planetred_profile" href="http://planetred.unl.edu/pg/profile/unl_'.str_replace("-", "_", $context->uid).'" title="Planet Red Profile for '.$context->cn.'"><img class="profile_pic small photo" src="http://planetred.unl.edu/pg/icon/unl_'.str_replace("-", "_", $context->uid).'/small"  alt="Photo of '.$context->displayName.'" /></a>'.PHP_EOL;
 echo '    <div class="recordDetails">'.PHP_EOL;
