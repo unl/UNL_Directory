@@ -14,10 +14,8 @@ if (isset($context->unlHROrgUnitNumber)) {
     }
     
 }
-if (isset($context->unlEmailAlias)) {
-    if (($context->eduPersonPrimaryAffiliation != 'student') && isset($context->unlEmailAlias)) {
-        echo "EMAIL;type=INTERNET;type=WORK;type=pref:".$context->unlEmailAlias."@unl.edu\n";
-    }
+if (isset($context->mail) && ($context->eduPersonPrimaryAffiliation != 'student')) {
+    echo "EMAIL;type=INTERNET;type=WORK;type=pref:".$context->mail."\n";
 }
 if ($context->eduPersonPrimaryAffiliation != "student") {
     echo "TEL;type=WORK;type=pref:".$context->telephoneNumber."\n";
