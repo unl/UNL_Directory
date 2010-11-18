@@ -153,7 +153,7 @@ var directory = function() {
 					}
 				}
 			});
-			WDN.loadJS('wdn/templates_3.0/scripts/plugins/jquery.qtip.js', function(){
+			WDN.loadJS('wdn/templates_3.0/scripts/plugins/qtip/jquery.qtip.js', function(){
 				WDN.jQuery('.directorySearch input#q').qtip({
 			    	content: {
 			    		text: 'Enter a name to begin your search'
