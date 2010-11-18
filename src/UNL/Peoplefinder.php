@@ -242,7 +242,7 @@ class UNL_Peoplefinder
         self::$replacement_data[$field] = $data;
     }
     
-    function postRun($data)
+    public static function postRun($data)
     {
 
         if (isset(self::$replacement_data['doctitle'])
