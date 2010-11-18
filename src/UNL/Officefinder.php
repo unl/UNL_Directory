@@ -421,7 +421,7 @@ class UNL_Officefinder
         UNL_Peoplefinder::setReplacementData($field, $data);
     }
     
-    function postRun($data)
+    public static function postRun($data)
     {
         return UNL_Peoplefinder::postRun($data);
     }
