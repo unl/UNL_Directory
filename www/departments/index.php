@@ -12,7 +12,7 @@ $peoplefinder  = new UNL_Officefinder($options);
 
 
 Savvy_ClassToTemplateMapper::$classname_replacement = 'UNL_';
-$savvy = new Savvy();
+$savvy = new Savvy_Turbo();
 $savvy->setTemplatePath(dirname(dirname(__FILE__)).'/templates/html');
 
 switch($peoplefinder->options['format']) {
@@ -41,6 +41,8 @@ switch($peoplefinder->options['format']) {
         break;
 }
 
-$savvy->addFilters(array('UNL_Officefinder', 'postRun'));
+if ($options['view'] != 'alphalisting') {
+    $savvy->addFilters(array('UNL_Officefinder', 'postRun'));
+}
 
 echo $savvy->render($peoplefinder);

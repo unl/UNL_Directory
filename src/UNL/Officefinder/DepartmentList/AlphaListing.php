@@ -1,5 +1,5 @@
 <?php
-class UNL_Officefinder_DepartmentList_AlphaListing extends FilterIterator
+class UNL_Officefinder_DepartmentList_AlphaListing extends FilterIterator implements Savvy_Turbo_CacheableInterface
 {
     public $options = array('q'=>'');
 
@@ -28,6 +28,21 @@ class UNL_Officefinder_DepartmentList_AlphaListing extends FilterIterator
         }
         $mysqli->close();
         parent::__construct(new ArrayIterator($records));
+    }
+
+    function preRun($cached)
+    {
+        // void
+    }
+
+    function run()
+    {
+        // void, all the processing is in the template output
+    }
+
+    function getCacheKey()
+    {
+        return 'alphalisting';
     }
 
     function accept()
