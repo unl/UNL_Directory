@@ -47,7 +47,7 @@ class UNL_Officefinder
                              'search'       => 'UNL_Officefinder_DepartmentList_NameSearch',
                              'department'   => 'UNL_Officefinder_Department',
                              'record'       => 'UNL_Peoplefinder_Department',
-                             'alphalisting' => 'UNL_Officefinder_DepartmentList_AlphaListing',
+                             'alphalisting' => 'UNL_Officefinder_DepartmentList_AlphaListing_LoginRequired',
                              'mydepts'      => 'UNL_Officefinder_User_Departments');
 
     protected static $auth;

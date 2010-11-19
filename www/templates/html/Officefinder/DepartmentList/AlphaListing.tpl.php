@@ -1,4 +1,3 @@
-<h2>Printer friendly version for <?php echo UNL_Officefinder::getUser(true); ?>, on <?php echo date('F jS, Y'); ?></h2>
 <?php
 foreach ($context as $listing)
 {
