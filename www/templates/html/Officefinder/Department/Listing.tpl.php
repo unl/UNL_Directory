@@ -4,7 +4,14 @@ if (preg_match('/^([A-Z]+)\s/', $context->address, $matches)) {
     $address = str_replace($matches[1], '<a class="location mapurl" href="http://maps.unl.edu/#'.$matches[1].'">'.$matches[1].'</a>', $context->address);
 }
 
-if ($context->userCanEdit(UNL_Officefinder::getUser())) {
+$userCanEdit = false;
+
+// Check if the user can edit and store this result for later
+if ($parent->parent->context->options['view'] != 'alphalisting') {
+    $userCanEdit = $context->userCanEdit(UNL_Officefinder::getUser());
+}
+
+if ($userCanEdit) {
     echo '<div class="edit">';
     echo ' <a href="'.$context->getURL().'?format=editing" class="action edit" title="Edit">edit</a>'.PHP_EOL;
     echo $savvy->render($context, 'Officefinder/Department/Listing/SortForm.tpl.php');

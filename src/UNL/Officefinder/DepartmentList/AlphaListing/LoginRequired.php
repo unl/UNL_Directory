@@ -1,11 +1,14 @@
 <?php
 class UNL_Officefinder_DepartmentList_AlphaListing_LoginRequired
 {
+    public $options;
     public $user;
     public $output;
     
     function __construct($options = array())
     {
+        $this->options = $options;
+
         // Login is required to view this
         $this->user = UNL_Officefinder::getUser(true);
 

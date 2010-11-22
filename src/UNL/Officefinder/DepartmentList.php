@@ -1,6 +1,8 @@
 <?php
 class UNL_Officefinder_DepartmentList extends ArrayIterator implements RecursiveIterator
 {
+    public $options;
+
     function current()
     {
         $current = parent::current();

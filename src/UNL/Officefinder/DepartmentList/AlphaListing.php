@@ -57,6 +57,8 @@ class UNL_Officefinder_DepartmentList_AlphaListing extends FilterIterator implem
     function current()
     {
         $row = parent::current();
-        return new UNL_Officefinder_DepartmentList_AlphaListing_Department($row[1], UNL_Officefinder_Department::getByID($row[0]));
+        return new UNL_Officefinder_DepartmentList_AlphaListing_Department($row[1],
+            UNL_Officefinder_Department::getByID($row[0]),
+            $this->options);
     }
 }
