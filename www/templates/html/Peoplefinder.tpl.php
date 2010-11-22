@@ -33,7 +33,8 @@ if ($context->getRawObject() instanceof UNL_Officefinder) {
     $page->head .= '<link rel="login" href="https://login.unl.edu/cas/login?service='.urlencode(UNL_Officefinder::getURL(null, $context->options)).'" />';
 }
 
-if (UNL_Officefinder::getUser()
+if ($context->options['view'] != 'alphalisting'
+    && UNL_Officefinder::getUser()
     && 
         (
         UNL_Officefinder::isAdmin(UNL_Officefinder::getUser())

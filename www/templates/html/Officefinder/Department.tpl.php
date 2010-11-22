@@ -9,8 +9,12 @@ UNL_Officefinder::setReplacementData('breadcrumbs', '
         <li>'.$context->name.'</li>
     </ul>');
 
+$userCanEdit = false;
+
 // Check if the user can edit and store this result for later
-$userCanEdit = $context->userCanEdit(UNL_Officefinder::getUser());
+if ($context->options['view'] != 'alphalisting') {
+    $userCanEdit = $context->userCanEdit(UNL_Officefinder::getUser());
+}
 ?>
 <div class="departmentInfo">
     <?php
