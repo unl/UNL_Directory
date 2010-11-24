@@ -38,7 +38,7 @@
 	        	<li>Complete list of department employees</li>
 	        	<li>Organizational hierarchy of department</li>
 	        </ul>
-	        <p>A printer friendly view is also available for UNL users. <a href="<?php echo UNL_Officefinder::getURL(); ?>?view=alphalisting">Log in and view the printer-friendly Yellow Page Directory</a></p>
+	        <p>A printer friendly view is also available for UNL users. <a href="<?php echo UNL_Officefinder::getURL(); ?>?view=alphalisting">Log in and view the printer-friendly Yellow Page Directory</a>.</p>
 	    </div>
     </div>
 </div>
