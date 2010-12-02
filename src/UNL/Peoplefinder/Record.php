@@ -12,6 +12,7 @@
  */
 class UNL_Peoplefinder_Record
 {
+    public $dn; // distinguished name
     public $cn;
     public $ou;
     public $eduPersonAffiliation;
@@ -181,6 +182,11 @@ class UNL_Peoplefinder_Record
                 $this->$var->__wakeup();
             }
         }
+    }
+
+    function getRoles()
+    {
+        return new UNL_Peoplefinder_Person_Roles(array('dn'=>$this->dn));
     }
 
     function __toString()
