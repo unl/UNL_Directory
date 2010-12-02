@@ -57,13 +57,11 @@ if (isset($context->unlSISClassLevel)) {
     echo '<span class="title"><span class="grade">'.$class.'</span>, <span class="major">'.$context->formatMajor($context->unlSISMajor).'</span> &ndash; <span class="college">'.$context->formatCollege((string) $context->unlSISCollege).'</span></span>';
 }
 
-if (isset($context->title)) {
-    echo "<span class='title'>{$context->title}</span>\n";
-}
-
 if (isset($context->unlHROrgUnitNumber)) {
-    foreach ($context->unlHROrgUnitNumber as $orgUnit) {
-        if (!$org = UNL_Officefinder_Department::getByorg_unit($orgUnit)) {
+    
+    $roles = $context->getRoles();
+    foreach ($roles as $role) {
+        if (!$org = UNL_Officefinder_Department::getByorg_unit($role->unlRoleHROrgUnitNumber)) {
             // Couldn't retrieve this org's record from officefinder
             continue;
         }
@@ -72,8 +70,9 @@ if (isset($context->unlHROrgUnitNumber)) {
             $parent_name = 'University of Nebraska';
         }
         $dept_url = $org->getURL();
-        echo "<span class='org'>\n\t<span class='organization-unit'><a href='{$dept_url}'>{$org->name}</a></span>\n\t<span class='organization-name'>$parent_name</span></span>\n";
+        echo "<span class='org'><span class='title'>{$role->description}</span>\n\t<span class='organization-unit'><a href='{$dept_url}'>{$org->name}</a></span>\n\t<span class='organization-name'>$parent_name</span></span>\n";
     }
+    
 }
 
 if (isset($context->postalAddress)) {
