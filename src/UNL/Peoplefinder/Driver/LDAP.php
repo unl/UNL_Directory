@@ -296,8 +296,14 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
     {
         $r = new UNL_Peoplefinder_Record();
         foreach (get_object_vars($r) as $var=>$val) {
-            if (isset($entry[strtolower($var)], $entry[strtolower($var)][0])) {
-                $r->$var = new UNL_LDAP_Entry_Attribute($entry[strtolower($var)]);
+            if (isset($entry[strtolower($var)])) {
+                switch(gettype($entry[strtolower($var)])) {
+                    case 'string':
+                        $r->$var = $entry[strtolower($var)];
+                        break;
+                    default:
+                        $r->$var = new UNL_LDAP_Entry_Attribute($entry[strtolower($var)]);
+                }
             }
         }
         $r->imageURL = $r->getImageURL();
