@@ -98,7 +98,7 @@ class UNL_Peoplefinder_Record
         return $address;
     }
 
-/**
+    /**
      * Formats a major subject code into a text description.
      *
      * @param string $subject Subject code for the major eg: MSYM
