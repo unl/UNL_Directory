@@ -50,7 +50,7 @@ a.mydepts {
 #listings li:hover > div.edit {display:block;}
 #listings li div.edit form {display:none;}
 #listings li div.edit a,
-#editBox ul li a {
+#editBox ul li a.action {
     display:inline;
     font-size:0.8em;
     text-indent:-9999px;
@@ -84,7 +84,7 @@ a.mydepts {
     -webkit-border-radius:5px;
     -moz-border-radius:5px;
 }
-#editBox ul li a {
+#editBox ul li a.action {
 	float:right;
 }
 #editBox input[type='text'] {
