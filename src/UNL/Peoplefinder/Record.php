@@ -44,7 +44,7 @@ class UNL_Peoplefinder_Record
 //    public $unlSISPermZip;
     public $unlSISMajor;
     public $unlEmailAlias;
-    
+
     function __construct($options = array())
     {
         if (isset($options['uid'])
@@ -52,9 +52,9 @@ class UNL_Peoplefinder_Record
             return $options['peoplefinder']->getUID($options['uid']);
         }
     }
-    
-    
-    
+
+
+
     /**
      * Takes in a string from the LDAP directory, usually formatted like:
      *     ### ___ UNL 68588-####
@@ -73,12 +73,12 @@ class UNL_Peoplefinder_Record
         $address['locality']       = '';
         $address['region']         = 'NE';
         $address['postal-code']    = '';
-        
+
         if (count($parts) == 3) {
             // Assume we have a street address, city, zip.
             $address['locality'] = trim($parts[1]);
         }
-        
+
         // Now lets find some important bits.
         foreach ($parts as $part) {
             if (preg_match('/([\d]{5})(\-[\d]{4})?/', $part)) {
@@ -86,7 +86,7 @@ class UNL_Peoplefinder_Record
                 $address['postal-code'] = trim($part);
             }
         }
-        
+
         switch (substr($address['postal-code'], 0, 3)) {
             case '681':
                 $address['locality'] = 'Omaha';
@@ -95,7 +95,7 @@ class UNL_Peoplefinder_Record
                 $address['locality'] = 'Lincoln';
                 break;
         }
-        
+
         return $address;
     }
 
@@ -103,7 +103,7 @@ class UNL_Peoplefinder_Record
      * Formats a major subject code into a text description.
      *
      * @param string $subject Subject code for the major eg: MSYM
-     * 
+     *
      * @return string
      */
     public function formatMajor($subject)
@@ -111,7 +111,7 @@ class UNL_Peoplefinder_Record
 
         $c = new UNL_Cache_Lite();
         if ($subject_xml = $c->get('catalog subjects')) {
-            
+
         } else {
             if ($subject_xml = file_get_contents('http://bulletin.unl.edu/?view=subjects&format=xml')) {
                 $c->save($subject_xml);
@@ -120,13 +120,13 @@ class UNL_Peoplefinder_Record
                 $c->get('catalog subjects');
             }
         }
-        
+
         $d = new DOMDocument();
         $d->loadXML($subject_xml);
         if ($subject_el = $d->getElementById($subject)) {
             return $subject_el->textContent;
         }
-        
+
         switch ($subject) {
             case 'UNDL':
                 return 'Undeclared';
@@ -136,12 +136,12 @@ class UNL_Peoplefinder_Record
                 return $subject;
         }
     }
-    
+
     /**
      * Format a three letter college abbreviation into the full college name.
      *
      * @param string $college College abbreviation = FPA
-     * 
+     *
      * @return string College of Fine &amp; Performing Arts
      */
     public function formatCollege($college)
@@ -151,7 +151,7 @@ class UNL_Peoplefinder_Record
         if (isset($colleges->colleges[$college])) {
             return htmlentities($colleges->colleges[$college]);
         }
-        
+
         return $college;
     }
 
@@ -173,15 +173,6 @@ class UNL_Peoplefinder_Record
         }
 
         return 'http://planetred.unl.edu/pg/icon/unl_'.str_replace('-', '_', $this->uid).'/'.$size.'/';
-    }
-    
-    function __wakeup()
-    {
-        foreach ($this as $var=>$val) {
-            if ($val instanceof UNL_LDAP_Entry_Attribute) {
-                $this->$var->__wakeup();
-            }
-        }
     }
 
     function getRoles()
