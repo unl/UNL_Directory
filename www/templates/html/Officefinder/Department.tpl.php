@@ -18,7 +18,7 @@ if ($context->options['view'] != 'alphalisting') {
 ?>
 <div class="departmentInfo">
     <?php
-    $image_url = 'http://maps.unl.edu/BuildingImages/icon_md.png';
+    $image_url = 'http://maps.unl.edu/images/building/icon_md.png';
     if (!empty($context->building)) {
         $bldgs = new UNL_Common_Building();
         if ($bldgs->buildingExists($context->building)) {
@@ -26,7 +26,7 @@ if ($context->options['view'] != 'alphalisting') {
         }
     }
     ?>
-    <div id="departmentDisplay">
+    <div id="departmentDisplay" class="vcard office">
         <img alt="Building Image" src="<?php echo $image_url; ?>" width="100" height="100" class="frame photo">
         <h2 class="fn org">
             <?php
@@ -49,12 +49,12 @@ if ($context->options['view'] != 'alphalisting') {
         </h2>
         <div class="vcardInfo">
             <div class="adr label">
-                 <span class="street-address"><?php echo $context->address; ?></span>
-                 <span class="room"><?php echo $context->room.' <a class="location mapurl" href="http://maps.unl.edu/#'.$context->building.'">'.$context->building.'</a>'; ?></span>
-                 <span class="locality"><?php echo $context->city; ?></span>
-                 <span class="region"><?php echo $context->state; ?></span>
-                 <span class="postal-code"><?php echo $context->postal_code; ?></span>
-                 <span class="country-name">USA</span>
+                <span class="room"><?php echo $context->room.' <a class="location mapurl" href="http://maps.unl.edu/#'.$context->building.'">'.$context->building.'</a>'; ?></span>
+                <span class="street-address"><?php echo $context->address; ?></span>
+                <span class="locality"><?php echo $context->city; ?></span>
+                <span class="region"><?php echo $context->state; ?></span>
+                <span class="postal-code"><?php echo $context->postal_code; ?></span>
+                <span class="country-name">USA</span>
             </div>
             
             <?php if (isset($context->phone)): ?>

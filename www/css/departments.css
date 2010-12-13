@@ -7,8 +7,11 @@
 */
 #maincontent #pfShowRecord .wdn_tabs, #maincontent #pfShowRecord .wdn_tabs_content {display:none;}
 .vcard.office{
-    background:#ede8b2;
-    border-color:#e6d793;
+    background:none;
+    border:none;
+    padding:0;
+    margin:0;
+    min-height:120px;
 }
 .vcard.office .departmentInfo {
     background:none;
@@ -44,8 +47,7 @@
 .departmentInfo h2:hover .unl-hr-org-unit-number {display:inline;}
 
 .departmentInfo .fn a, .departmentInfo .fn{max-width:none;}
-.departmentInfo .tel {display:block;height:20px;margin-bottom:3px;}
-.departmentInfo span.voice, .departmentInfo span.fax{display:block;float:left;padding-right:10px;}
+
 #maincontent .departmentInfo .photo {
     float:left;
     margin-right:20px;

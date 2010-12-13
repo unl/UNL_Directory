@@ -161,19 +161,12 @@
 	min-width:114px;
 }
 
-.vcard .org {
-	display:block;
-    border-left: 2px solid #CCD2D5;
-    margin: 5px 0;
-    padding-left: 5px;
-}
-
 .vcard .eppa, .vcard .epa {font-style:italic;font-size:0.8em;}
 .vcardInfo {margin-left:129px;}
 .vcard .adr, .departmentInfo .adr {
 	border-left:2px solid #CCD2D5;
 	padding-left:5px;
-	margin:5px 0;	
+	margin:5px 0;
 }
 
 .vcard span[class=street-address] {
@@ -188,21 +181,21 @@
 	display:none;
 }
 
-.vcard .tel, .vcard span.email, .vcard span.url, .departmentInfo span.voice, .departmentInfo span.fax, .departmentInfo span.email, .departmentInfo span.url {
+.vcard .tel, .vcard span.email, .vcard span.url, .vcard span.fax {
 	background:url('images/iconContactSprite.png') no-repeat;
 	padding-left:25px;
 	height:20px;
 }
-.vcard span.email, .vcard span.url, .departmentInfo span.email, .departmentInfo span.url {
+.vcard span.email, .vcard span.url {
 	background-position:0 -63px;
 	display:block;
 	margin-top:5px;
 	margin-bottom:3px;
 }
-.departmentInfo span.fax {
+.vcard span.fax {
 	background-position:0 -84px;
 }
-.vcard span.url, .departmentInfo span.url {
+.vcard span.url {
 	background-position:0 -42px;
 }
 .permalink {font-size:0.75em; text-transform:uppercase; font-weight:bold;}
