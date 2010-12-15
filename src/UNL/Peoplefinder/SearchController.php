@@ -45,12 +45,12 @@ class UNL_Peoplefinder_SearchController
             // Standard text search, run exact matches first.
         }
         
-        if (isset($options['method'])) {
-            switch($options['method']) {
+        if (isset($this->options['method'])) {
+            switch($this->options['method']) {
                 case 'getLikeMatches':
                 case 'getExactMatches':
                 case 'getPhoneMatches':
-                    $search_method = $options['method'];
+                    $search_method = $this->options['method'];
                     break;
             }
         }
