@@ -152,6 +152,15 @@ class UNL_Peoplefinder
     public static function addURLParams($url, $additional_params = array())
     {
         $params = array();
+        if (strpos($url, '?') !== false) {
+            list($url, $existing_params) = explode('?', $url);
+            $existing_params = explode('&', $existing_params);
+            foreach ($existing_params as $val) {
+                list($var, $val) = explode('=', $val);
+                $params[$var] = $val;
+            }
+        }
+
         $params = array_merge($params, $additional_params);
 
         $url .= '?';
