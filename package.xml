@@ -15,8 +15,8 @@ directory information and perform searches.
   <email>brett.bieber@gmail.com</email>
   <active>yes</active>
  </lead>
- <date>2010-03-31</date>
- <time>12:32:46</time>
+ <date>2010-12-16</date>
+ <time>09:44:57</time>
  <version>
   <release>0.1.0</release>
   <api>0.1.0</api>
@@ -36,7 +36,31 @@ Package UNL_Peoplefinder API release notes for version 0.1.0.</notes>
  <contents>
   <dir name="/">
    <dir name="data" baseinstalldir="/">
+    <dir name="cli">
+     <dir name="Peoplefinder">
+      <file role="data" name="Instructions.tpl.php"/>
+      <file role="data" name="RecordInList.tpl.php"/>
+      <file role="data" name="SearchController.tpl.php"/>
+      <file role="data" name="SearchResults.tpl.php"/>
+     </dir>
+     <file role="data" name="Peoplefinder.tpl.php"/>
+    </dir>
+    <dir name="directory_data_flow.graffle">
+     <dir name="QuickLook">
+      <file role="data" name="Preview.pdf"/>
+      <file role="data" name="Thumbnail.tiff"/>
+     </dir>
+     <file role="data" name="data.plist"/>
+     <file role="data" name="image1.png"/>
+     <file role="data" name="image2.png"/>
+    </dir>
+    <file role="data" name="centrex_yellow_pages.sql"/>
     <file role="data" name="hr_tree.xml"/>
+    <file role="data" name="import_yellow_pages.php"/>
+    <file role="data" name="minor_data_cleanups.php"/>
+    <file role="data" name="officefinder.sql"/>
+    <file role="data" name="setup_permissions.php"/>
+    <file role="data" name="update_hr_tree.php"/>
    </dir>
    <dir name="examples">
     <file role="doc" name="config.inc.php"/>
@@ -45,43 +69,86 @@ Package UNL_Peoplefinder API release notes for version 0.1.0.</notes>
     <file role="doc" name="getUID.php"/>
    </dir>
    <dir name="scripts" baseinstalldir="/">
+    <file role="script" name="mail_sap_coordinators.php"/>
     <file role="script" name="peoplefinder.php"/>
    </dir>
    <dir name="src" baseinstalldir="/">
     <dir name="UNL">
-     <dir name="Peoplefinder">
+     <dir name="Officefinder">
       <dir name="Department">
+       <file role="php" name="Alias.php"/>
+       <file role="php" name="Aliases.php"/>
+       <file role="php" name="Permission.php"/>
+       <file role="php" name="User.php"/>
+       <file role="php" name="Users.php"/>
+      </dir>
+      <dir name="DepartmentList">
+       <dir name="AlphaListing">
+        <file role="php" name="Department.php"/>
+        <file role="php" name="LoginRequired.php"/>
+       </dir>
+       <file role="php" name="AlphaListing.php"/>
+       <file role="php" name="NameSearch.php"/>
+       <file role="php" name="OrgUnit.php"/>
+      </dir>
+      <dir name="Record">
+       <file role="php" name="NestedSet.php"/>
+       <file role="php" name="NestedSetAdjacencyList.php"/>
+       <file role="php" name="NestedSetPreorderTree.php"/>
+      </dir>
+      <dir name="User">
+       <file role="php" name="Departments.php"/>
+      </dir>
+      <file role="php" name="Department.php"/>
+      <file role="php" name="DepartmentList.php"/>
+      <file role="php" name="Record.php"/>
+      <file role="php" name="TreeView.php"/>
+      <file role="php" name="User.php"/>
+      <file role="php" name="UserList.php"/>
+      <file role="php" name="Users.php"/>
+     </dir>
+     <dir name="Peoplefinder">
+      <dir name="CLI">
+       <file role="php" name="Router.php"/>
+      </dir>
+      <dir name="Department">
+       <file role="php" name="Personnel.php"/>
        <file role="php" name="Search.php"/>
       </dir>
       <dir name="Driver">
        <dir name="LDAP">
         <file role="php" name="AdvancedFilter.php"/>
         <file role="php" name="AffiliationFilter.php"/>
+        <file role="php" name="HROrgUnitNumberFilter.php"/>
+        <file role="php" name="HRPrimaryDepartmentFilter.php"/>
         <file role="php" name="OUFilter.php"/>
         <file role="php" name="StandardFilter.php"/>
         <file role="php" name="TelephoneFilter.php"/>
         <file role="php" name="Util.php"/>
        </dir>
        <file role="php" name="LDAP.php"/>
+       <file role="php" name="Mock.php"/>
        <file role="php" name="WebService.php"/>
       </dir>
-      <dir name="Renderer">
-       <file role="php" name="HTML.php"/>
-       <file role="php" name="JSON.php"/>
-       <file role="php" name="Serialized.php"/>
-       <file role="php" name="vCard.php"/>
-       <file role="php" name="XML.php"/>
+      <dir name="Person">
+       <file role="php" name="Roles.php"/>
       </dir>
       <file role="php" name="Department.php"/>
       <file role="php" name="DriverInterface.php"/>
+      <file role="php" name="Instructions.php"/>
+      <file role="php" name="InvalidArgumentException.php"/>
       <file role="php" name="Record.php"/>
-      <file role="php" name="RendererInterface.php"/>
+      <file role="php" name="SearchController.php"/>
+      <file role="php" name="SearchResults.php"/>
      </dir>
+     <file role="php" name="Officefinder.php"/>
      <file role="php" name="Peoplefinder.php"/>
     </dir>
    </dir>
    <dir name="tests" baseinstalldir="/">
     <file role="test" name="BrowserTest.php"/>
+    <file role="test" name="HRTreeSearch.php"/>
+    <file role="test" name="NestedSetTest.php"/>
     <file role="test" name="OUTest.php"/>
     <file role="test" name="PeoplefinderTest.php"/>
     <file role="test" name="testStudentWithNoLocalAddress.html"/>
@@ -89,14 +156,32 @@ Package UNL_Peoplefinder API release notes for version 0.1.0.</notes>
    <dir name="www" baseinstalldir="/">
     <dir name="css">
      <dir name="images">
+      <file role="www" name="comingSoon.png"/>
       <file role="www" name="formFilterBG.png"/>
       <file role="www" name="formSearchBG.png"/>
       <file role="www" name="formSearchEnds.png"/>
       <file role="www" name="iconContactSprite.png"/>
+      <file role="www" name="iconDown.png"/>
+      <file role="www" name="iconEdit.png"/>
+      <file role="www" name="iconOrg.png"/>
+      <file role="www" name="iconProblem.png"/>
+      <file role="www" name="iconSelect.png"/>
+      <file role="www" name="iconTrash.png"/>
+      <file role="www" name="loading.gif"/>
+      <file role="www" name="qrcode.png"/>
+      <file role="www" name="samplePeople.png"/>
       <file role="www" name="selectedBG.png"/>
+      <file role="www" name="sortable.png"/>
+      <file role="www" name="tornSpiral.png"/>
      </dir>
+     <file role="www" name="all_peoplefinder.css"/>
+     <file role="www" name="departments.css"/>
+     <file role="www" name="editing.css"/>
+     <file role="www" name="filters.css"/>
+     <file role="www" name="ie.css"/>
      <file role="www" name="peoplefinder_default.css"/>
      <file role="www" name="small_devices.css"/>
+     <file role="www" name="zenform_anywhere.css.php"/>
     </dir>
     <dir name="departments">
      <file role="www" name="index.php"/>
@@ -107,19 +192,136 @@ Package UNL_Peoplefinder API release notes for version 0.1.0.</notes>
      <file role="www" name="icon_question.gif"/>
      <file role="www" name="mobile.gif"/>
      <file role="www" name="organization.png"/>
+     <file role="www" name="organization40.png"/>
+     <file role="www" name="organizationVC.png"/>
+     <file role="www" name="peopleHerbie.png"/>
+     <file role="www" name="peopleSamples.png"/>
      <file role="www" name="person.gif"/>
     </dir>
     <dir name="scripts" baseinstalldir="/">
+     <file role="www" name="edit_functions.js"/>
+     <file role="www" name="filters.js"/>
      <file role="www" name="peoplefinder.js"/>
     </dir>
-    <file role="www" name="advancedForm.php"/>
+    <dir name="templates">
+     <dir name="editing">
+      <dir name="Officefinder">
+       <dir name="Department">
+        <dir name="Alias">
+         <file role="www" name="DeleteForm.tpl.php"/>
+        </dir>
+        <dir name="User">
+         <file role="www" name="AddForm.tpl.php"/>
+         <file role="www" name="DeleteForm.tpl.php"/>
+        </dir>
+        <file role="www" name="AddAliasForm.tpl.php"/>
+        <file role="www" name="DeleteForm.tpl.php"/>
+        <file role="www" name="Listing.tpl.php"/>
+       </dir>
+       <file role="www" name="Department.tpl.php"/>
+       <file role="www" name="DepartmentList.tpl.php"/>
+      </dir>
+     </dir>
+     <dir name="html">
+      <dir name="Officefinder">
+       <dir name="Department">
+        <dir name="Listing">
+         <file role="www" name="SortForm.tpl.php"/>
+        </dir>
+        <file role="www" name="Alias.tpl.php"/>
+        <file role="www" name="Aliases.tpl.php"/>
+        <file role="www" name="EditBox.tpl.php"/>
+        <file role="www" name="Listing.tpl.php"/>
+        <file role="www" name="Listings.tpl.php"/>
+        <file role="www" name="User.tpl.php"/>
+        <file role="www" name="Users.tpl.php"/>
+       </dir>
+       <dir name="DepartmentList">
+        <dir name="AlphaListing">
+         <file role="www" name="LoginRequired.tpl.php"/>
+        </dir>
+        <file role="www" name="AlphaListing.tpl.php"/>
+        <file role="www" name="NameSearch.tpl.php"/>
+       </dir>
+       <dir name="User">
+        <file role="www" name="Departments.tpl.php"/>
+       </dir>
+       <file role="www" name="Department.tpl.php"/>
+       <file role="www" name="TreeView.tpl.php"/>
+      </dir>
+      <dir name="Peoplefinder">
+       <dir name="Department">
+        <file role="www" name="Search.tpl.php"/>
+       </dir>
+       <dir name="Record">
+        <file role="www" name="TelephoneNumber.tpl.php"/>
+       </dir>
+       <dir name="SearchResults">
+        <file role="www" name="ByAffiliation.tpl.php"/>
+        <file role="www" name="Filters.tpl.php"/>
+       </dir>
+       <file role="www" name="AdvancedForm.tpl.php"/>
+       <file role="www" name="Department.tpl.php"/>
+       <file role="www" name="Instructions.tpl.php"/>
+       <file role="www" name="InvalidArgumentException.tpl.php"/>
+       <file role="www" name="Record.tpl.php"/>
+       <file role="www" name="RecordInList.tpl.php"/>
+       <file role="www" name="SearchController.tpl.php"/>
+       <file role="www" name="SearchResults.tpl.php"/>
+       <file role="www" name="StandardForm.tpl.php"/>
+      </dir>
+      <file role="www" name="Exception.tpl.php"/>
+      <file role="www" name="InvalidArgumentException.tpl.php"/>
+      <file role="www" name="Officefinder.tpl.php"/>
+      <file role="www" name="Peoplefinder-partial.tpl.php"/>
+      <file role="www" name="Peoplefinder.tpl.php"/>
+     </dir>
+     <dir name="json">
+      <dir name="Peoplefinder">
+       <file role="www" name="Record.tpl.php"/>
+       <file role="www" name="SearchController.tpl.php"/>
+       <file role="www" name="SearchResults.tpl.php"/>
+      </dir>
+      <file role="www" name="Exception.tpl.php"/>
+      <file role="www" name="Peoplefinder.tpl.php"/>
+     </dir>
+     <dir name="php">
+      <dir name="Peoplefinder">
+       <file role="www" name="Record.tpl.php"/>
+       <file role="www" name="SearchController.tpl.php"/>
+       <file role="www" name="SearchResults.tpl.php"/>
+      </dir>
+      <file role="www" name="Exception.tpl.php"/>
+      <file role="www" name="Peoplefinder.tpl.php"/>
+     </dir>
+     <dir name="vcard">
+      <dir name="Peoplefinder">
+       <file role="www" name="Record.tpl.php"/>
+      </dir>
+      <file role="www" name="Exception.tpl.php"/>
+      <file role="www" name="Peoplefinder.tpl.php"/>
+     </dir>
+     <dir name="xml">
+      <dir name="Peoplefinder">
+       <file role="www" name="InvalidArgumentException.tpl.php"/>
+       <file role="www" name="Record.tpl.php"/>
+       <file role="www" name="SearchController.tpl.php"/>
+       <file role="www" name="SearchResults.tpl.php"/>
+      </dir>
+      <file role="www" name="Exception.tpl.php"/>
+      <file role="www" name="Peoplefinder.tpl.php"/>
+     </dir>
+    </dir>
+    <file role="www" name=".htaccess"/>
     <file role="www" name="apple-touch-icon.png"/>
     <file role="www" name="config-sample.inc.php"/>
     <file role="www" name="config.inc.php"/>
+    <file role="www" name="favicon.ico"/>
     <file role="www" name="index.php"/>
     <file role="www" name="README"/>
+    <file role="www" name="robots.txt"/>
+    <file role="www" name="sample.htaccess"/>
     <file role="www" name="service.php"/>
-    <file role="www" name="standardForm.php"/>
    </dir>
   </dir>
  </contents>
