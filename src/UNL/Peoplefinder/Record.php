@@ -165,6 +165,7 @@ class UNL_Peoplefinder_Record
         switch ($size) {
             case 'large':
             case 'medium':
+            case 'small':
             case 'tiny':
             case 'topbar':
                 break;
