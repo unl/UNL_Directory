@@ -102,8 +102,8 @@ class UNL_Peoplefinder
             && $this->options['format'] == 'html' && (
                 ($this->options['mobile'] !== false && $this->options['mobile'] != 'no')
                 || (preg_match('/text\/vnd\.wap\.wml|application\/vnd\.wap\.xhtml\+xml/', $_SERVER['HTTP_ACCEPT']))
-                    || preg_match('/sony|symbian|nokia|samsung|mobile|windows ce|epoc/', $_SERVER['HTTP_USER_AGENT'])
-                    || preg_match('/mini|nitro|j2me|midp-|cldc-|netfront|mot|up\.browser|up\.link|audiovox/', $_SERVER['HTTP_USER_AGENT'])
+                    || preg_match('/sony|symbian|nokia|samsung|mobile|windows ce|epoc|opera mini/', $_SERVER['HTTP_USER_AGENT'])
+                    || preg_match('/nitro|j2me|midp-|cldc-|netfront|mot|up\.browser|up\.link|audiovox/', $_SERVER['HTTP_USER_AGENT'])
                     || preg_match('/blackberry|ericsson,|panasonic|philips|sanyo|sharp|sie-/', $_SERVER['HTTP_USER_AGENT'])
                     || preg_match('/portalmmm|blazer|avantgo|danger|palm|series60|palmsource|pocketpc/', $_SERVER['HTTP_USER_AGENT'])
                     || preg_match('/smartphone|rover|ipaq|au-mic,|alcatel|ericy|vodafone\/|wap1\.|wap2\.|iPhone|Android/', $_SERVER['HTTP_USER_AGENT'])
