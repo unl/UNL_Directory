@@ -97,10 +97,15 @@ class UNL_Peoplefinder_Driver_WebService implements UNL_Peoplefinder_DriverInter
         return $record;
     }
 
-    function getRoles($uid)
+    function getRoles($dn)
     {
-        throw new Exception('not implemented yet');
-        //$roles = file_get_contents();
+        $url = $this->service_url.'?view=roles&format=php&&dn='.urlencode($dn);
+        $results = file_get_contents($url);
+        if ($results) {
+            $results = unserialize($results);
+        }
+        
+        return new UNL_Peoplefinder_Person_Roles(array('iterator'=>new ArrayIterator($results)));
     }
 
     function getHRPrimaryDepartmentMatches($query, $affiliation = null)
