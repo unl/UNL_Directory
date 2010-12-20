@@ -210,7 +210,9 @@ class UNL_LDAP
      */
     function disconnect()
     {
-        return ldap_unbind($this->_ldap);
+        if ($this->_ldap) {
+            return ldap_unbind($this->_ldap);
+        }
     }
     
     /**
