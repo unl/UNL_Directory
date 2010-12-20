@@ -2,16 +2,18 @@
 	position:absolute;
 	bottom:0;
 	right:0;
-	background:#efefef url('images/iconProblem.png') no-repeat 2px 5px;
-	border:2px solid #ddd;
 	border-radius:5px;
 	-webkit-border-radius:5px;
 	-moz-border-radius:5px;
-	padding:5px 5px 5px 21px;
+	padding:3px 5px;
+	background:#ac0302;
+	color:#fff;
+	font-size: 0.7em;
+	text-transform:uppercase;
+	font-weight:bold;
 }
-#maincontent a#reportProblem:hover{
-	border:2px solid #ee0000;
-	background-position: 2px -20px;
+#maincontent a#reportProblem:focus{
+	color:#fff !important;
 }
 #maincontent #commentProblem {display:none;}
 #commentProblem h3 {
