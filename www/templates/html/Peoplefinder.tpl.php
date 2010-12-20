@@ -68,7 +68,7 @@ $page->breadcrumbs = '
 if ($context->options['mobile'] === true) {
     $page->maincontentarea = $savvy->render($context->output);
 } else {
-    $page->maincontentarea = '<div class="four_col">' . $savvy->render($context->output) . '<a id="reportProblem" href="http://www1.unl.edu/comments/">Report a Problem</a><div id="commentProblem"><h3>Report a Problem</h3><form id="wdn_feedback_comments2" method="post" action="http://www1.unl.edu/comments/"><textarea name="comment" id="comment" rows="" cols=""></textarea><input type="submit" value="Submit Comment" /></form></div></div>';
+    $page->maincontentarea = '<div class="four_col">' . $savvy->render($context->output) . '<a id="reportProblem" href="http://www1.unl.edu/comments/">Report a Problem</a><div id="commentProblem"><h3>Report a Problem</h3><form id="wdn_feedback_comments2" method="post" action="http://www1.unl.edu/comments/"><input type="hidden" id="page_address" value="" /><textarea name="comment" id="comment" rows="" cols=""></textarea><input type="submit" value="Submit Comment" /></form></div></div>';
 }
 $page->footercontent = 'UNL | Office of University Communications | <a href="http://www1.unl.edu/wdn/wiki/About_Peoplefinder" onclick="window.open(this.href); return false;">About Peoplefinder</a> | <a href="http://www1.unl.edu/comments/" title="Click here to direct your comments and questions">comments?</a><br /><br />';
 $page->footercontent .= 'Information obtained from this directory may not be used to provide addresses for mailings to students, faculty or staff.<br />Any solicitation of business, information, contributions or other response from individuals listed in this publication by mail, telephone or other means is forbidden.<br />';

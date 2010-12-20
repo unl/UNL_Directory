@@ -365,7 +365,10 @@ WDN.jQuery(document).ready(function() {
 			inline : true,
 			href : '#commentProblem',
 			width : '45%', 
-			height : '45%'
+			height : '45%',
+			onOpen : function() {
+				WDN.jQuery('#page_address').val(window.location);
+			}
 		});
 		
 	});
