@@ -360,7 +360,7 @@ WDN.jQuery(document).ready(function() {
 			return false;
 		}
 	);
-	WDN.jQuery('#reportProblem').click(function(){
+	WDN.jQuery('#reportProblem, a[href="http://www1.unl.edu/comments/"]').click(function(){
 		WDN.jQuery(this).colorbox({
 			inline : true,
 			href : '#commentProblem',
