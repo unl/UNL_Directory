@@ -360,14 +360,14 @@ WDN.jQuery(document).ready(function() {
 			return false;
 		}
 	);
-	WDN.jQuery('#reportProblem, a[href="http://www1.unl.edu/comments/"]').click(function(){
+	WDN.jQuery('.dir_correctionRequest, a[href="http://www1.unl.edu/comments/"]').click(function(){
 		WDN.jQuery(this).colorbox({
 			inline : true,
-			href : '#commentProblem',
+			href : WDN.jQuery(this).siblings('.commentProblem'),
 			width : '45%', 
 			height : '45%',
 			onOpen : function() {
-				WDN.jQuery('#page_address').val(window.location);
+				WDN.jQuery(this).siblings('.commentProblem').children('form').children('input[name="page_address"]').val(window.location);
 			}
 		});
 		

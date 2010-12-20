@@ -1,35 +1,49 @@
-#maincontent a#reportProblem {
+#maincontent a.dir_correctionRequest {
 	position:absolute;
 	bottom:0;
 	right:0;
-	border-radius:10px;
-	-webkit-border-radius:10px;
-	-moz-border-radius:10px;
-	padding:5px 8px;
+	border-radius:5px;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	padding:2px 4px;
 	background:#ac0302;
+	background: -moz-linear-gradient(top, #DD1616 0%, #AC0302 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#DD1616), color-stop(100%,#AC0302));
 	color:#fff;
+	text-shadow: 1px 1px 1px #6e0000;
 	font-size: 0.8em;
 	font-weight:bold;
 }
-#maincontent a#reportProblem:focus{
+#maincontent .vcardInfo a.dir_correctionRequest {
+	bottom:-5px;
+	right:-5px;
+	-webkit-box-shadow: 1px 1px 1px #949494;
+    -moz-box-shadow: 1px 1px 1px #949494;
+    box-shadow: 1px 1px 1px #949494; 
+}
+#maincontent a.dir_correctionRequest:hover {
+	background: -moz-linear-gradient(bottom, #DD1616 0%, #AC0302 20%);
+    background: -webkit-gradient(linear, left bottom, left top, color-stop(0%,#DD1616), color-stop(20%,#AC0302));
+}
+#maincontent a.dir_correctionRequest:focus{
 	color:#fff !important;
 }
-#maincontent #commentProblem {display:none;}
-#commentProblem h3 {
+#maincontent .commentProblem {display:none;}
+.commentProblem h3 {
 	font-size:150%;
 	border-bottom: 1px solid #ddd;
 	margin-bottom:5px;
 }
-#commentProblem textarea {
+.commentProblem textarea {
 	width:90%;
 	display:block;
 	height:120px;
 	margin:10px 0;
 }
-#commentProblem input[type=submit] {
+.commentProblem input[type=submit] {
 	background:url('/wdn/templates_3.0/css/content/images/zenform/submit.png') right #af0202 no-repeat;
 	border:3px solid #fff;
-	color:#FFFFFF;
+	color:#FFFFFF !important;
 	cursor:pointer;
 	font-size:1.2em;
 	margin:10px 10px 20px 0px;
