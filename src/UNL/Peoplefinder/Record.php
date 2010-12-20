@@ -176,11 +176,6 @@ class UNL_Peoplefinder_Record
         return 'http://planetred.unl.edu/pg/icon/unl_'.str_replace('-', '_', $this->uid).'/'.$size.'/';
     }
 
-    function getRoles()
-    {
-        return new UNL_Peoplefinder_Person_Roles(array('dn'=>$this->dn));
-    }
-
     function __toString()
     {
         return (string)$this->uid;

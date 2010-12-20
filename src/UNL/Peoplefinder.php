@@ -57,7 +57,8 @@ class UNL_Peoplefinder
 
     public $view_map = array('instructions' => 'UNL_Peoplefinder_Instructions',
                              'search'       => 'UNL_Peoplefinder_SearchController',
-                             'record'       => 'UNL_Peoplefinder_Record');
+                             'record'       => 'UNL_Peoplefinder_Record',
+                             'roles'        => 'UNL_Peoplefinder_Person_Roles');
 
     /**
      * This list contains the affiliations shown throughout the directory.

@@ -290,6 +290,18 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
         }
         return self::recordFromLDAPEntry($r[0]);
     }
+
+    function getRoles($dn)
+    {
+        $ldap   = UNL_LDAP::getConnection(
+                      array('uri'           => self::$ldapServer,
+                            'base'          => self::$baseDN,
+                            'suffix'        => 'ou=People,dc=unl,dc=edu',
+                            'bind_dn'       => self::$bindDN,
+                            'bind_password' => self::$bindPW));
+        return new UNL_Peoplefinder_Person_Roles(array('iterator'=>$ldap->search($dn, '(objectClass=unlRole)')));
+    }
+    
     
     public static function recordFromLDAPEntry(array $entry)
     {

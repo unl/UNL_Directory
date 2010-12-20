@@ -90,7 +90,17 @@ class UNL_Peoplefinder_Driver_WebService implements UNL_Peoplefinder_DriverInter
             throw new Exception('Could not find that user!', 404);
         }
 
-        return unserialize($record);
+        if (!$record = unserialize($record)) {
+            throw new Exception('Error retrieving the data from the web service');
+        }
+
+        return $record;
+    }
+
+    function getRoles($uid)
+    {
+        throw new Exception('not implemented yet');
+        //$roles = file_get_contents();
     }
 
     function getHRPrimaryDepartmentMatches($query, $affiliation = null)
