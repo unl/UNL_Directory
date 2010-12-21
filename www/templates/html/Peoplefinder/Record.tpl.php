@@ -109,10 +109,10 @@ if (isset($context->unlSISLocalPhone)) {
 if ($displayEmail) {
     echo "<span class='email'><a class='email' href='mailto:{$context->mail}'>{$context->mail}</a></span>\n";
 }
-echo '<a href="" class="dir_correctionRequest">Have a correction?</a>
+echo '<a href="http://www1.unl.edu/comments/" class="dir_correctionRequest pf_record" title="'.$context->uid.'">Have a correction?</a>
 	<div class="commentProblem">
 	<h3>Have a correction?</h3>
-	<form method="post" action="http://www1.unl.edu/comments/">
+	<form class="wdn_feedback_comments2" method="post" action="http://www1.unl.edu/comments/">
 		<input type="hidden" name="page_address" value="" />
 		<textarea name="comment" id="comment" rows="" cols=""></textarea>
 		<input type="submit" value="Submit" />

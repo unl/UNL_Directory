@@ -341,8 +341,9 @@ WDN.jQuery(document).ready(function() {
 		WDN.jQuery(this).colorbox({open:true});
 		return false;
 	});
-	WDN.jQuery('#wdn_feedback_comments2').submit(function(event) {
-			var comments = WDN.jQuery('#wdn_feedback_comments2 textarea').val();
+	WDN.jQuery('.wdn_feedback_comments2').live('submit', function(event) {
+			var comments = WDN.jQuery(this).children('textarea').val();
+			//var page_address = WDN.jQuery(this).children().val('input[name="page_address"]');
 			if (comments.length < 4) {
 				// Users must enter in at least 4 words.
 				alert('Please enter more information.');
@@ -350,27 +351,34 @@ WDN.jQuery(document).ready(function() {
 			}
 			WDN.post(
 				'http://www1.unl.edu/comments/', 
-				{comment:comments},
+				WDN.jQuery(this).serialize(),
 				function () {
-					//WDN.analytics.callTrackEvent('Page Comment', 'Sent', window.location);
 				}
 			);
-			WDN.jQuery('#wdn_feedback_comments2').replaceWith('<h4>Thanks!</h4><p>Your problem has been sent and the magic will be restored as quickly as possible.</p><p>Click the "X" in the top right to close this box.</p>');
+			WDN.jQuery(this).replaceWith('<h4>Thanks!</h4><p>Your correction has been sent and the magic will be restored as quickly as possible.</p><p>Click the "X" in the top right to close this box.</p>');
 			event.stopPropagation();
+			event.preventDefault();
 			return false;
 		}
 	);
-	WDN.jQuery('.dir_correctionRequest, a[href="http://www1.unl.edu/comments/"]').click(function(){
+	WDN.jQuery('a.dir_correctionRequest, a[href="http://www1.unl.edu/comments/"]').live('click', function(){
 		WDN.jQuery(this).colorbox({
 			inline : true,
+			open : true,
 			href : WDN.jQuery(this).siblings('.commentProblem'),
 			width : '45%', 
 			height : '45%',
+			title : false,
 			onOpen : function() {
-				WDN.jQuery(this).siblings('.commentProblem').children('form').children('input[name="page_address"]').val(window.location);
+				if (WDN.jQuery(this).hasClass('pf_record')){
+					page_address = PF_URL + '?uid=' + WDN.jQuery(this).attr('title');
+				} else {
+					page_address = window.location;
+				}
+				WDN.jQuery(this).siblings('.commentProblem').children('form').children('input[name="page_address"]').val(page_address);
 			}
 		});
-		
+		return false;
 	});
 });
 WDN.jQuery(window).keydown(function(event) {

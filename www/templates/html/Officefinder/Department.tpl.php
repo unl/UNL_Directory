@@ -165,7 +165,7 @@ if (!$context->isRoot()) {
 <a id="reportProblem" class="dir_correctionRequest" href="http://www1.unl.edu/comments/">Have a correction?</a>
 <div class="commentProblem">
 	<h3>Have a correction?</h3>
-	<form id="wdn_feedback_comments2" method="post" action="http://www1.unl.edu/comments/">
+	<form class="wdn_feedback_comments2" method="post" action="http://www1.unl.edu/comments/">
 		<input type="hidden" id="page_address" value="" />
 		<textarea name="comment" id="comment" rows="" cols=""></textarea>
 		<input type="submit" value="Submit" />
