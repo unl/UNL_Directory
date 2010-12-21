@@ -123,6 +123,6 @@ class UNL_Peoplefinder_Driver_WebService implements UNL_Peoplefinder_DriverInter
         if ($results) {
             $results = unserialize($results);
         }
-        return $results;
+        return new UNL_Peoplefinder_Department_Personnel($results);
     }
 }
