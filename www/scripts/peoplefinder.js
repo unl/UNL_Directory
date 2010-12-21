@@ -49,7 +49,19 @@ var service_peoplefinder = function() {
 		
 		updatePeopleFinderRecord : function(data, textStatus){ //function called when a record has been rendered
 			if (textStatus == 'success') {
+				correctionHTML = 
+					'<a href="http://www1.unl.edu/comments/" class="dir_correctionRequest pf_record">Have a correction?</a>' +
+					'<div class="commentProblem">' +
+						'<h3>Have a correction?</h3>' +
+						'<form class="wdn_feedback_comments2" method="post" action="http://www1.unl.edu/comments/">' +
+							'<input type="hidden" name="page_address" value="" />' +
+							'<textarea name="comment" id="comment" rows="" cols=""></textarea>' +
+							'<input type="submit" value="Submit" />' +
+						'</form>' +
+					'</div>';
 				WDN.jQuery('li.current').append(data);
+				WDN.jQuery('li.current .vcardInfo').append(correctionHTML);
+				WDN.jQuery('li.current input[name="page_address"]').val(WDN.jQuery('li.current .permalink').attr('href'));
 				if (WDN.jQuery('.wdn_annotate')) {
 					if (!WDN.jQuery('head link[href='+ ANNOTATE_URL +'css/annotate.css]').length) {
 						WDN.loadCSS(ANNOTATE_URL + 'css/annotate.css');
@@ -370,12 +382,9 @@ WDN.jQuery(document).ready(function() {
 			height : '45%',
 			title : false,
 			onOpen : function() {
-				if (WDN.jQuery(this).hasClass('pf_record')){
-					page_address = PF_URL + '?uid=' + WDN.jQuery(this).attr('title');
-				} else {
-					page_address = window.location;
+				if (!(WDN.jQuery(this).hasClass('pf_record'))){
+					WDN.jQuery(this).siblings('.commentProblem').children('form').children('input[name="page_address"]').val(window.location);
 				}
-				WDN.jQuery(this).siblings('.commentProblem').children('form').children('input[name="page_address"]').val(page_address);
 			}
 		});
 		return false;
