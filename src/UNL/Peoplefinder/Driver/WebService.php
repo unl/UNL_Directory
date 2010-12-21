@@ -119,6 +119,10 @@ class UNL_Peoplefinder_Driver_WebService implements UNL_Peoplefinder_DriverInter
     
     public function getHROrgUnitNumberMatches($query, $affiliation = null)
     {
-        throw new Exception('Not implemented yet!');
+        $results = file_get_contents('http://directory.unl.edu/departments/?view=deptlistings&org_unit='.urlencode($query).'&format=php'');
+        if ($results) {
+            $results = unserialize($results);
+        }
+        return $results;
     }
 }
