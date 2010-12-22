@@ -103,8 +103,10 @@ if (isset($context->telephoneNumber)) {
 
 if (isset($context->unlSISLocalPhone)) {
     echo '<div class="tel homeTel">
+             <span class="voice">
              <span class="type">Phone</span>
              <span class="value">'.$savvy->render($context->unlSISLocalPhone, 'Peoplefinder/Record/TelephoneNumber.tpl.php').'</span>
+             </span>
             </div>'.PHP_EOL;
 }
 
