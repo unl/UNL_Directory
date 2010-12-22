@@ -212,16 +212,18 @@
 	display:none;
 }
 
-.vcard .tel, .vcard span.email, .vcard span.url, .vcard span.fax {
+.vcard span.voice, .vcard span.fax, .vcard span.email, .vcard span.url {
 	background:url('images/iconContactSprite.png') no-repeat;
 	padding-left:25px;
 	height:20px;
+	margin-top:5px;
+    margin-bottom:3px;
+    display:block;
 }
 .vcard span.email, .vcard span.url {
 	background-position:0 -63px;
-	display:block;
-	margin-top:5px;
-	margin-bottom:3px;
+	
+	
 }
 .vcard span.fax {
 	background-position:0 -84px;

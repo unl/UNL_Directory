@@ -94,8 +94,10 @@ if (isset($context->postalAddress)) {
 if (isset($context->telephoneNumber)) {
     
     echo '<div class="tel workTel">
+             <span class="voice">
              <span class="type">Work</span>
              <span class="value">'.$savvy->render($context->telephoneNumber, 'Peoplefinder/Record/TelephoneNumber.tpl.php').'</span>
+             </span>
             </div>'.PHP_EOL;
 }
 
