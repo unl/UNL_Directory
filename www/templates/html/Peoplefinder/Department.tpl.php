@@ -1,7 +1,7 @@
 <?php
 if (count($context)) {
     echo '<h2>'.$context->name.'</h2>';
-    $buildinig = '';
+    $building = '';
     if (isset($context->building)) {
         $building = $context->building;
         $bldgs = new UNL_Common_Building();
