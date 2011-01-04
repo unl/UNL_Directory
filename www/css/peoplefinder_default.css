@@ -29,7 +29,7 @@
 #maincontent a.dir_correctionRequest:focus{
 	color:#fff !important;
 }
-#maincontent .commentProblem {display:none;}
+#maincontent .commentProblem, #footer .commentProblem  {display:none;}
 .commentProblem h3 {
 	font-size:150%;
 	border-bottom: 1px solid #ddd;
