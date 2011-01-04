@@ -373,7 +373,7 @@ WDN.jQuery(document).ready(function() {
 			return false;
 		}
 	);
-	WDN.jQuery('a.dir_correctionRequest, a[href="http://www1.unl.edu/comments/"]').live('click', function(){
+	WDN.jQuery('a.dir_correctionRequest').live('click', function(){
 		WDN.jQuery(this).colorbox({
 			inline : true,
 			open : true,
