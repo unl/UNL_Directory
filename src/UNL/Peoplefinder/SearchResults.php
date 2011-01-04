@@ -38,4 +38,12 @@ class UNL_Peoplefinder_SearchResults extends ArrayIterator
         }
         return $by_affiliation;
     }
+
+    public static function affiliationSort($affiliation1, $affiliation2)
+    {
+        if ($affiliation1 == 'emeriti') {
+            return true;
+        }
+        return $affiliation1 > $affiliation2;
+    }
 }

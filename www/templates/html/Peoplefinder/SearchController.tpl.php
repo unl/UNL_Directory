@@ -36,7 +36,7 @@ $like_by_affiliation = UNL_Peoplefinder_SearchResults::groupByAffiliation($like_
 
 $affiliations = array_keys($by_affiliation + $like_by_affiliation);
 
-sort($affiliations);
+usort($affiliations, array('UNL_Peoplefinder_SearchResults', 'affiliationSort'));
 
 foreach ($affiliations as $affiliation) {
     if (isset($by_affiliation[$affiliation])
