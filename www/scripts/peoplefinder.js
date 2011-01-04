@@ -27,7 +27,7 @@ var service_peoplefinder = function() {
 			});
 			WDN.jQuery('ul.pfResult li').each(function(){
 				//onClick = WDN.jQuery(this).find('.cInfo').attr('onclick');
-				WDN.jQuery(this).find('.cInfo, .fn a').removeAttr('onclick');
+				WDN.jQuery('.cInfo, .fn a', this).removeAttr('onclick');
 			});
 			WDN.jQuery('ul.pfResult:not(.departments) li .overflow').click(function(){
 				service_peoplefinder.showIndividualPeopleFinderRecord(WDN.jQuery(this));
@@ -35,7 +35,7 @@ var service_peoplefinder = function() {
 				}
 			);
 			WDN.jQuery('ul.pfResult.departments li .overflow').click(function(){
-				window.location = WDN.jQuery(this + '.fn a').attr('href');
+				window.location = WDN.jQuery('.fn a', this).attr('href');
 				}
 			);
 		},
