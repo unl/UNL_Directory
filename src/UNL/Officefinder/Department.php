@@ -109,6 +109,20 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
         return self::getByAnyField('UNL_Officefinder_Department', 'org_unit', $id);
     }
 
+    public static function getNameByOrgUnit($id)
+    {
+        static $names = array();
+        if (!isset($names[$id])) {
+            if ($org = self::getByorg_unit($id)) {
+                $names[$id] = $org->name;
+            } else {
+                $names[$id] = false;
+            }
+        }
+
+        return $names[$id];
+    }
+
     /**
      * Get office sub-listings
      * 

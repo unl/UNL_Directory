@@ -25,11 +25,11 @@ if (isset($context->eduPersonPrimaryAffiliation)) {
 }
 if (isset($context->unlHROrgUnitNumber)) {
     foreach ($context->unlHROrgUnitNumber as $orgUnit) {
-        if (!$org = UNL_Officefinder_Department::getByorg_unit($orgUnit)) {
+        if (!$name = UNL_Officefinder_Department::getNameByOrgUnit($orgUnit)) {
             // Couldn't retrieve this org's record from officefinder
             continue;
         }
-        echo '        <div class="organization-unit">'.$org->name.'</div>'.PHP_EOL;
+        echo '        <div class="organization-unit">'.$name.'</div>'.PHP_EOL;
     }
 }
 if (isset($context->title)) {
