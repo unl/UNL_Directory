@@ -208,6 +208,15 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
         return !empty($this->org_unit);
     }
 
+    function save()
+    {
+        if (!empty($this->website)
+            && !preg_match('/^https?\:\/\/.*/', $this->website)) {
+            $this->website = 'http://'.$this->website;
+        }
+        return parent::save();
+    }
+
     function update()
     {
         if ($user = UNL_Officefinder::getUser()) {
