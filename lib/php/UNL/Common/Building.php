@@ -8,24 +8,21 @@
  */
 require_once 'UNL/Common/Building/City.php';
 require_once 'UNL/Common/Building/East.php';
+require_once 'UNL/Common/Building/Lincoln.php';
 
 /**
- * Simple object which can retreive the buildings on both city and east campus.
+ * Simple object which can retreive the buildings on both city and east campus as well as UNL buildings off-campus in Lincoln.
  * 
  * @package UNL_Common
  */
-class UNL_Common_Building {
+class UNL_Common_Building
+{
     
     var $codes = array();
     
     function __construct()
     {
-        $east = new UNL_Common_Building_East();
-        $city = new UNL_Common_Building_City();
-        $this->codes = $east->codes;
-        foreach ($city->codes as $code=>$bldg) {
-            $this->codes[(string)$code] = $bldg;
-        }
+        $this->codes = UNL_Common::getDriver()->getAllBuildings();
         asort($this->codes,SORT_STRING);
     }
     
@@ -49,13 +46,12 @@ class UNL_Common_Building {
     {
         if (isset($this->codes[$code])) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
     
     /**
-     * returns city or east
+     * returns city, east or lincoln
      * 
      * @param string $code Building Code
      */
@@ -63,13 +59,15 @@ class UNL_Common_Building {
     {
         $east = new UNL_Common_Building_East();
         $city = new UNL_Common_Building_City();
+        $lincoln = new UNL_Common_Building_Lincoln();
         if (isset($east->codes[$code])) {
             return 'east';
         } elseif (isset($city->codes[$code])) {
             return 'city';
-        } else {
-            return false;
+        } elseif (isset($lincoln->codes[$code])) {
+            return 'lincoln';
         }
+        return false;
     }
 }
 

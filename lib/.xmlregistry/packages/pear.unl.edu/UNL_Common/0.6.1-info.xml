@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package xmlns="http://pear.php.net/dtd/package-2.1" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.1" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.1     http://pear.php.net/dtd/package-2.1.xsd" packagerversion="2.0.0">
+<package xmlns="http://pear.php.net/dtd/package-2.1" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.1" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.1     http://pear.php.net/dtd/package-2.1.xsd" packagerversion="2.0.0a1">
  <name>UNL_Common</name>
  <channel>pear.unl.edu</channel>
  <summary>Common elements for the University of Nebraska-Lincoln
@@ -12,10 +12,10 @@ This package contains commonly used elements for the University of Nebraska-Linc
   <email>brett.bieber@gmail.com</email>
   <active>yes</active>
  </lead>
- <date>2010-09-30</date>
- <time>13:42:30</time>
+ <date>2011-01-04</date>
+ <time>15:18:34</time>
  <version>
-  <release>0.6.0</release>
+  <release>0.6.1</release>
   <api>0.6.0</api>
  </version>
  <stability>
@@ -23,11 +23,7 @@ This package contains commonly used elements for the University of Nebraska-Linc
   <api>alpha</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
- <notes>Major overhaul:
-
-* Building data is no longer bundled with the package
-* The new DataDriverInterface allows custom data sources
-* Upgrades no longer required to retrieve campus building data
+ <notes>Speed improvements when retrieving building data with the JSON driver.
 
 UNL_Common is now driver-based. The default driver for building data uses a
 JSON output from the campus tour.</notes>
@@ -37,12 +33,13 @@ JSON output from the campus tour.</notes>
    <file role="test" name="test/UNL_Common/pear.unl.edu/UNL_Common_Building_EastTest.php" md5sum="4cd3e5f75da295500ceaaff84b27de43"/>
    <file role="test" name="test/UNL_Common/pear.unl.edu/UNL_Common_Building_CityTest.php" md5sum="e26b83d47fa963bc32740ccc6f4c2c86"/>
    <file role="test" name="test/UNL_Common/pear.unl.edu/UNL_Common_BuildingTest.php" md5sum="4f62c3b0f6b9f5e3f6b5a80204ec6d43"/>
-   <file role="php" name="php/UNL/Common/JSONDataDriver.php" md5sum="f53d7d1aba8dc6f84a6bbbb690d7e3ba"/>
-   <file role="php" name="php/UNL/Common/DataDriverInterface.php" md5sum="4dcf585e3a0faf7c4ae19bde975518ba"/>
+   <file role="php" name="php/UNL/Common/JSONDataDriver.php" md5sum="e4895b3a0db48652e9f8f181e435f27d"/>
+   <file role="php" name="php/UNL/Common/DataDriverInterface.php" md5sum="3399fb03a0a87ba4ba6716ac35d6323f"/>
    <file role="php" name="php/UNL/Common/Colleges.php" md5sum="688b82e026b903072aa60a7558f2c7ea"/>
+   <file role="php" name="php/UNL/Common/Building/Lincoln.php" md5sum="403814f00fcd81fac2bccc8fcf582288"/>
    <file role="php" name="php/UNL/Common/Building/East.php" md5sum="0cf6433bb05b029d4caa3a9dcf61e135"/>
    <file role="php" name="php/UNL/Common/Building/City.php" md5sum="fea6a9f978aa6eef6d2fc0f641210f3e"/>
-   <file role="php" name="php/UNL/Common/Building.php" md5sum="dac29813bbb49a5f4b3c22187fa6d7da"/>
+   <file role="php" name="php/UNL/Common/Building.php" md5sum="a14da8d89fc5550a418bf772cadbe7f5"/>
    <file role="php" name="php/UNL/Common.php" md5sum="ac93a391b5a6eb7d5b9939d3ec6d3a1d"/>
    <file role="doc" name="doc/UNL_Common/pear.unl.edu/examples/examples/Building.php" md5sum="c11d2a9907842f30ff70a53caec0a419"/>
    <file role="data" name="data/UNL_Common/pear.unl.edu/building_addresses.csv" md5sum="089e47083be9ce07b3ab625a4500258a"/>

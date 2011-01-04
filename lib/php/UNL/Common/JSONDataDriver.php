@@ -5,20 +5,42 @@ class UNL_Common_JSONDataDriver implements UNL_Common_DataDriverInterface
 
     function getAllBuildings()
     {
-        $uri = self::$tour_uri.'?view=allbuildings&format=json';
-        return $this->retrieveJSONData($uri);
+        static $buildings = false;
+        if (!$buildings) {
+            $uri = self::$tour_uri.'?view=allbuildings&format=json';
+            $buildings = $this->retrieveJSONData($uri);
+        }
+        return $buildings;
     }
 
     function getCityBuildings()
     {
-        $uri = self::$tour_uri.'?view=citybuildings&format=json';
-        return $this->retrieveJSONData($uri);
+        static $buildings = false;
+        if (!$buildings) {
+            $uri = self::$tour_uri.'?view=citybuildings&format=json';
+            $buildings = $this->retrieveJSONData($uri);
+        }
+        return $buildings;
     }
 
     function getEastBuildings()
     {
-        $uri = self::$tour_uri.'?view=eastbuildings&format=json';
-        return $this->retrieveJSONData($uri);
+        static $buildings = false;
+        if (!$buildings) {
+            $uri = self::$tour_uri.'?view=eastbuildings&format=json';
+            $buildings = $this->retrieveJSONData($uri);
+        }
+        return $buildings;
+    }
+
+    function getLincolnBuildings()
+    {
+        static $buildings = false;
+        if (!$buildings) {
+            $uri = self::$tour_uri.'?view=lincolnbuildings&format=json';
+            $buildings = $this->retrieveJSONData($uri);
+        }
+        return $buildings;
     }
 
     protected function retrieveJSONData($uri)
