@@ -347,14 +347,17 @@ class UNL_Officefinder
      * 
      * @return mysqli
      */
-    public static function getDB()
+    public static function &getDB()
     {
-        $db = new mysqli('localhost', self::$db_user, self::$db_pass, 'officefinder');
-        if (mysqli_connect_error()) {
-            throw new Exception('Database connection error (' . mysqli_connect_errno() . ') '
-                    . mysqli_connect_error(), 500);
+        static $db = false;
+        if (!$db) {
+            $db = new mysqli('localhost', self::$db_user, self::$db_pass, 'officefinder');
+            if (mysqli_connect_error()) {
+                throw new Exception('Database connection error (' . mysqli_connect_errno() . ') '
+                        . mysqli_connect_error(), 500);
+            }
+            $db->set_charset('utf8');
         }
-        $db->set_charset('utf8');
         return $db;
     }
 

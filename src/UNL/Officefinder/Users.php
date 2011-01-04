@@ -12,7 +12,6 @@ class UNL_Officefinder_Users extends UNL_Officefinder_UserList
                 $users[] = $row[0];
             }
         }
-        $mysqli->close();
         parent::__construct($users);
     }
 }

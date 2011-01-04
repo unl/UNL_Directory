@@ -22,7 +22,6 @@ class UNL_Officefinder_DepartmentList_NameSearch extends UNL_Officefinder_Depart
                 $records[] = $row[0];
             }
         }
-        $mysqli->close();
         parent::__construct($records);
     }
 

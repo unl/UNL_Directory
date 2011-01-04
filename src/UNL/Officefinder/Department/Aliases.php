@@ -22,7 +22,6 @@ class UNL_Officefinder_Department_Aliases extends ArrayIterator
                 $aliases[] = $row[0];
             }
         }
-        $mysqli->close();
         parent::__construct($aliases);
     }
     

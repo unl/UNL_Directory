@@ -26,7 +26,6 @@ class UNL_Officefinder_DepartmentList_AlphaListing extends FilterIterator implem
                 $records[] = $row;
             }
         }
-        $mysqli->close();
         parent::__construct(new ArrayIterator($records));
     }
 
