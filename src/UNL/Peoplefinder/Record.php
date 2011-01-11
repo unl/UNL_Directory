@@ -43,6 +43,7 @@ class UNL_Peoplefinder_Record
 //    public $unlSISPermState;
 //    public $unlSISPermZip;
     public $unlSISMajor;
+    public $unlSISMinor;
     public $unlEmailAlias;
 
     function __construct($options = array())
