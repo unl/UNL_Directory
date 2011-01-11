@@ -169,7 +169,7 @@
 .vcard > a.email {
 	
 }
-.vcard .vcardInfo .org {
+.vcard .vcardInfo .org, .vcard .vcardInfo > .title {
 	background: #E8F2F7;
     background: -moz-linear-gradient(top, #f2f9fe 0%, #E8F2F7 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f2f9fe), color-stop(100%,#E8F2F7));
@@ -185,7 +185,20 @@
 	border:1px solid #D7EBF4;
 }
 .vcard .vcardInfo .org .title {font-weight:bold;}
-.vcard .eppa, .vcard .epa, .vcard .organization-unit, .vcard .tel, .vcf, .title {display:block;}
+.vcard .eppa, .vcard .epa, .vcard .organization-unit, .vcard .tel, .vcf {display:block;}
+.vcard .title, .vcard .title .grade {
+	display:block;
+	border-bottom:1px solid #ccd2d5;
+	font-weight:bold;
+	margin-bottom:3px;
+	font-size:105%;
+}
+
+.vcard .title .major, .vcard .organization-unit, .vcard .organization-name {
+    text-indent:1em;
+    display:block;
+    font-weight:normal;
+}
 .vcard a.planetred_profile {
 	float:left;
 	margin-right:15px;

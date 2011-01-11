@@ -54,9 +54,9 @@ if (isset($context->unlSISClassLevel)) {
         default:
             $class = $context->unlSISClassLevel;
     }
-    echo '<span class="title"><span class="grade">'.$class.'</span>, ';
+    echo '<span class="title"><span class="grade">'.$class.'</span>';
     foreach ($context->unlSISMajor as $major) {
-        echo '<span class="major">'.$context->formatMajor($major).'</span> <br />';// <span class="college">'.$context->formatCollege((string) $context->unlSISCollege).'</span>';
+        echo '<span class="major">'.$context->formatMajor($major).'</span>';// <span class="college">'.$context->formatCollege((string) $context->unlSISCollege).'</span>';
     }
     echo '</span>';
 }
