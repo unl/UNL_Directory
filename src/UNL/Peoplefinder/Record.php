@@ -133,6 +133,8 @@ class UNL_Peoplefinder_Record
                 return 'Undeclared';
             case 'PBAC':
                 return 'Non-Degree Post-Baccalaureate';
+            case 'BSAD':
+                return 'Business Administration';
             default:
                 return $subject;
         }
