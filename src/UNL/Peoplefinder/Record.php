@@ -135,6 +135,8 @@ class UNL_Peoplefinder_Record
                 return 'Non-Degree Post-Baccalaureate';
             case 'BSAD':
                 return 'Business Administration';
+            case 'DIET':
+                return 'Dietetics';
             default:
                 return $subject;
         }
