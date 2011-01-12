@@ -137,6 +137,8 @@ class UNL_Peoplefinder_Record
                 return 'Business Administration';
             case 'DIET':
                 return 'Dietetics';
+            case 'COMP':
+                return 'Computer Science';
             default:
                 return $subject;
         }
