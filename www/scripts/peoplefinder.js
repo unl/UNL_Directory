@@ -49,14 +49,22 @@ var service_peoplefinder = function() {
 		
 		updatePeopleFinderRecord : function(data, textStatus){ //function called when a record has been rendered
 			if (textStatus == 'success') {
+				var name = "";
+				var mail = "";
+				if (WDN.idm.user.mail != null) {
+				    mail = WDN.idm.user.mail[0];
+                }
+				if (WDN.idm.user.uid != null) {
+				    name = WDN.idm.user.uid;;
+                }
 				correctionHTML = 
 					'<a href="http://www1.unl.edu/comments/" class="dir_correctionRequest pf_record">Have a correction?</a>' +
 					'<div class="commentProblem">' +
 						'<h3>Have a correction?</h3>' +
 						'<form class="wdn_feedback_comments2" method="post" action="http://www1.unl.edu/comments/">' +
 							'<input type="hidden" name="page_address" value="" />' +
-							'Name: <input type="text" name="name" id="name" value="" /> ' +
-							'Email: <input type="text" name="email" id="email" value="" />' +
+							'Name: <input type="text" name="name" id="name" value="' + name + '" /> ' +
+							'Email: <input type="text" name="email" id="email" value="' + mail + '" />' +
 							'<textarea name="comment" id="comment" rows="" cols=""></textarea>' +
 							'<input type="submit" value="Submit" />' +
 						'</form>' +
