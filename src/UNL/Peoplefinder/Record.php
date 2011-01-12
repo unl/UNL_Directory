@@ -129,18 +129,18 @@ class UNL_Peoplefinder_Record
         }
 
         switch ($subject) {
-            case 'UNDL':
-                return 'Undeclared';
-            case 'PBAC':
-                return 'Non-Degree Post-Baccalaureate';
-            case 'BSAD':
-                return 'Business Administration';
-            case 'DIET':
-                return 'Dietetics';
-            case 'COMP':
-                return 'Computer Science';
             case 'ACCG':
                 return 'Accounting';
+            case 'BSAD':
+                return 'Business Administration';
+            case 'COMP':
+                return 'Computer Science';
+            case 'DIET':
+                return 'Dietetics';
+            case 'PBAC':
+                return 'Non-Degree Post-Baccalaureate';
+            case 'UNDL':
+                return 'Undeclared';
             default:
                 return $subject;
         }
