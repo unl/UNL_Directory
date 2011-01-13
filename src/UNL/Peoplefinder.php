@@ -125,7 +125,7 @@ class UNL_Peoplefinder
         }
 
         if ( // Check the http_accept and user agent and see
-            preg_match('/text\/vnd\.wap\.wml|application\/vnd\.wap\.xhtml\+xml/', $_SERVER['HTTP_ACCEPT'])
+            preg_match('/text\/vnd\.wap\.wml|application\/vnd\.wap\.xhtml\+xml/i', $_SERVER['HTTP_ACCEPT'])
                 || 
             preg_match('/'.
                'sony|symbian|nokia|samsung|mobile|windows ce|epoc|opera mini|' .
@@ -133,7 +133,7 @@ class UNL_Peoplefinder
                'blackberry|ericsson,|panasonic|philips|sanyo|sharp|sie-|' .
                'portalmmm|blazer|avantgo|danger|palm|series60|palmsource|pocketpc|' .
                'smartphone|rover|ipaq|au-mic|alcatel|ericy|vodafone\/|wap1\.|wap2\.|iPhone|Android' .
-               '/', $_SERVER['HTTP_USER_AGENT'])
+               '/i', $_SERVER['HTTP_USER_AGENT'])
            ) {
             return true;
         }
