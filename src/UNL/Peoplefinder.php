@@ -125,8 +125,9 @@ class UNL_Peoplefinder
         }
 
         if ( // Check the http_accept and user agent and see
+            preg_match('/text\/vnd\.wap\.wml|application\/vnd\.wap\.xhtml\+xml/', $_SERVER['HTTP_ACCEPT'])
+                || 
             preg_match('/'.
-               'text\/vnd\.wap\.wml|application\/vnd\.wap\.xhtml\+xml|' .
                'sony|symbian|nokia|samsung|mobile|windows ce|epoc|opera mini|' .
                'nitro|j2me|midp-|cldc-|netfront|mot|up\.browser|up\.link|audiovox|' .
                'blackberry|ericsson,|panasonic|philips|sanyo|sharp|sie-|' .
