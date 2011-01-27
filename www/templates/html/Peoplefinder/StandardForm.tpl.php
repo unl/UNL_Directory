@@ -7,10 +7,10 @@
 	    <?php if (isset($context->options['chooser'])) {
 	        echo '<input type="hidden" name="chooser" value="true" />';
 	    }
-	    if (isset($context->options['q'])) {
+	    $default = '';
+	    if (isset($context->options['q'])
+	       && !is_array($context->options['q'])) {
 	        $default = htmlentities((string)$context->options['q'], ENT_QUOTES);
-	    } else {
-	        $default = '';
 	    }
 	    ?>
 	    <input type="text" value="<?php echo $default; ?>" id="q" name="q" class="q" />
