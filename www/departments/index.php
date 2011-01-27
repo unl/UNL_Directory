@@ -41,7 +41,7 @@ switch($peoplefinder->options['format']) {
         break;
 }
 
-if ($options['view'] != 'alphalisting') {
+if ($peoplefinder->options['view'] != 'alphalisting') {
     $savvy->addFilters(array('UNL_Officefinder', 'postRun'));
 }
 
