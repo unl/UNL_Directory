@@ -1,2 +1,8 @@
-<?php
-echo json_encode($context->getArrayCopy(), JSON_FORCE_OBJECT);
+[<?php
+$results = array();
+foreach ($context as $record) {
+    $results[] = $savvy->render($record);
+}
+echo implode(',', $results);
+?>
+]

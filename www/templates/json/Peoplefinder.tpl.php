@@ -1,2 +1,4 @@
-<?php
+{
+results: <?php
 echo $savvy->render($context->output);
+?>}
