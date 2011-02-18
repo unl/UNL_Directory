@@ -36,6 +36,8 @@ if (isset($context->title)
         isset($parent->parent, $parent->parent->context->options, $parent->parent->context->options['view'])
         && $parent->parent->context->options['view'] == 'department'
         )
+    && false === strpos(strtolower($context->title), 'retiree') // Let's not share retiree or disabled retiree status
+    && false === strpos(strtolower($context->title), 'royalty') // Do not show royalty recipients
     ) {
     echo '        <div class="title">'.$context->title.'</div>'.PHP_EOL;
 }
