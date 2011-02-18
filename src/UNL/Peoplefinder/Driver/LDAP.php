@@ -171,10 +171,16 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
         }
         // sort the results
         for ($i=0; $i<$result['count']; $i++) {
-            $name = $result[$i]['sn'][0];
+            $name = '';
+
+            if (isset($result[$i]['sn'])) {
+                $name = $result[$i]['sn'][0];
+            }
+
             if (isset($result[$i]['givenname'])) {
                 $name .= ', ' . $result[$i]['givenname'][0];
             }
+
             $result[$i]['insensitiveName'] = strtoupper($name);
         }
         reset($result);
