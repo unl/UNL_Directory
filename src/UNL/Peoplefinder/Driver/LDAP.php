@@ -305,7 +305,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
                             'suffix'        => 'ou=People,dc=unl,dc=edu',
                             'bind_dn'       => self::$bindDN,
                             'bind_password' => self::$bindPW));
-        return new UNL_Peoplefinder_Person_Roles(array('iterator'=>$ldap->search($dn, '(objectClass=unlRole)')));
+        return new UNL_Peoplefinder_Person_Roles(array('iterator'=>$ldap->search($dn, '(&(objectClass=unlRole)(!(unlListingOrder=NL)))')));
     }
     
     
