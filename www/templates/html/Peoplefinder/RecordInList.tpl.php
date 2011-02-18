@@ -30,7 +30,13 @@ if (isset($context->unlHROrgUnitNumber)) {
         }
     }
 }
-if (isset($context->title)) {
+
+if (isset($context->title)
+    && !(
+        isset($parent->parent, $parent->parent->context->options, $parent->parent->context->options['view'])
+        && $parent->parent->context->options['view'] == 'department'
+        )
+    ) {
     echo '        <div class="title">'.$context->title.'</div>'.PHP_EOL;
 }
 if (isset($context->telephoneNumber)) {
