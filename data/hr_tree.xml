@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE tree SYSTEM "treeml.dtd">
-<!-- Generated Mon Oct 25 16:52:01 2010 -->
+<!-- Generated Tue Feb 22 09:38:13 2011 -->
 <tree>
  <declarations>
    <attributeDecl name="name"        type="String" />
@@ -2003,6 +2003,16 @@
       <attribute name="org_unit" value="50005075"/>
       <attribute name="org_abbr" value="CESR     UNL"/>
      </branch>
+     <branch>
+      <attribute name="name" value="Holland Computing Center"/>
+      <attribute name="org_unit" value="50007300"/>
+      <attribute name="org_abbr" value="Holland  UNL"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Neuroimaging Center"/>
+      <attribute name="org_unit" value="50007301"/>
+      <attribute name="org_abbr" value="NeuroCtr UNL"/>
+     </branch>
     </branch>
     <branch>
      <attribute name="name" value="Institute of Ag &amp; Natural Resources"/>
@@ -2428,6 +2438,15 @@
           <attribute name="state" value="NE"/>
           <attribute name="postal_code" value="68933"/>
          </branch>
+         <branch>
+          <attribute name="name" value="Vet Diagnostic Center"/>
+          <attribute name="org_unit" value="50007278"/>
+          <attribute name="org_abbr" value="Vet Diagnost"/>
+          <attribute name="building" value="151 VDC"/>
+          <attribute name="city" value="UNL"/>
+          <attribute name="state" value="NE"/>
+          <attribute name="postal_code" value="68583-0907"/>
+         </branch>
         </branch>
         <branch>
          <attribute name="name" value="ISU/UNL Coop Vet Med Education Prog"/>
@@ -2554,7 +2573,7 @@
         <attribute name="name" value="Plant Health"/>
         <attribute name="org_unit" value="50006325"/>
         <attribute name="org_abbr" value="Plant Health"/>
-        <attribute name="building" value="271 PS"/>
+        <attribute name="building" value="279E PLSH"/>
         <attribute name="city" value="UNL"/>
         <attribute name="state" value="NE"/>
         <attribute name="postal_code" value="68583-0933"/>
@@ -5949,6 +5968,21 @@
       <attribute name="org_unit" value="50004277"/>
       <attribute name="org_abbr" value="NUCLRMED 347"/>
      </branch>
+     <branch>
+      <attribute name="name" value="Student Affairs"/>
+      <attribute name="org_unit" value="50007302"/>
+      <attribute name="org_abbr" value="St Affs  347"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Distance Education"/>
+      <attribute name="org_unit" value="50007303"/>
+      <attribute name="org_abbr" value="Dis Ed   347"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="AH Research Administration"/>
+      <attribute name="org_unit" value="50007351"/>
+      <attribute name="org_abbr" value="AHRsrch  347"/>
+     </branch>
     </branch>
     <branch>
      <attribute name="name" value="Chancellor&#39;s Support Staff"/>
@@ -7647,16 +7681,6 @@
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68182"/>
       </branch>
-      <branch>
-       <attribute name="name" value="Project Management"/>
-       <attribute name="org_unit" value="50004954"/>
-       <attribute name="org_abbr" value="PRMGT    462"/>
-       <attribute name="building" value="EAB"/>
-       <attribute name="room" value="008"/>
-       <attribute name="city" value="Omaha"/>
-       <attribute name="state" value="NE"/>
-       <attribute name="postal_code" value="68182"/>
-      </branch>
      </branch>
      <branch>
       <attribute name="name" value="Academic Affairs - General"/>
@@ -7728,16 +7752,6 @@
        </branch>
       </branch>
       <branch>
-       <attribute name="name" value="Sponsored Programs &amp; Research"/>
-       <attribute name="org_unit" value="50000973"/>
-       <attribute name="org_abbr" value="SP PRGMS 458"/>
-       <attribute name="building" value="EAB"/>
-       <attribute name="room" value="203"/>
-       <attribute name="city" value="Omaha"/>
-       <attribute name="state" value="NE"/>
-       <attribute name="postal_code" value="68182"/>
-      </branch>
-      <branch>
        <attribute name="name" value="Srvc Learning Acad &amp; Amer Humanics"/>
        <attribute name="org_unit" value="50004350"/>
        <attribute name="org_abbr" value="LRN ACAD 461"/>
@@ -7763,6 +7777,26 @@
        <attribute name="org_abbr" value="DUAL ENR 461"/>
        <attribute name="building" value="EAB"/>
        <attribute name="room" value="202"/>
+       <attribute name="city" value="Omaha"/>
+       <attribute name="state" value="NE"/>
+       <attribute name="postal_code" value="68182"/>
+      </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Office of Research &amp; Creative Actvty"/>
+      <attribute name="org_unit" value="50007350"/>
+      <attribute name="org_abbr" value="ORCA     458"/>
+      <attribute name="building" value="EAB"/>
+      <attribute name="room" value="203"/>
+      <attribute name="city" value="Omaha"/>
+      <attribute name="state" value="NE"/>
+      <attribute name="postal_code" value="68182"/>
+      <branch>
+       <attribute name="name" value="Sponsored Programs &amp; Research"/>
+       <attribute name="org_unit" value="50000973"/>
+       <attribute name="org_abbr" value="SP PRGMS 458"/>
+       <attribute name="building" value="EAB"/>
+       <attribute name="room" value="203"/>
        <attribute name="city" value="Omaha"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68182"/>
@@ -8597,7 +8631,7 @@
        <attribute name="org_unit" value="50001166"/>
        <attribute name="org_abbr" value="CTR R&amp;D  503"/>
        <attribute name="building" value="WSTC"/>
-       <attribute name="room" value="133C"/>
+       <attribute name="room" value="131E"/>
        <attribute name="city" value="Kearney"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68849"/>
@@ -9107,7 +9141,7 @@
       <attribute name="postal_code" value="68849"/>
      </branch>
      <branch>
-      <attribute name="name" value="Media Communications"/>
+      <attribute name="name" value="Media Relations"/>
       <attribute name="org_unit" value="50006800"/>
       <attribute name="org_abbr" value="MEDCOMM 518"/>
       <attribute name="building" value="CMCT"/>
