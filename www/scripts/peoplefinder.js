@@ -377,7 +377,7 @@ WDN.jQuery(document).ready(function() {
 				function () {
 				}
 			);
-			WDN.jQuery(this).replaceWith('<h4>Thanks!</h4><p>Your correction has been sent and the magic will be restored as quickly as possible.</p><p>Click the "X" in the top right to close this box.</p>');
+			WDN.jQuery(this).replaceWith('<h4>Thanks!</h4><p>Your request has been submitted.</p><p>Click the "X" in the top right to close this box.</p>');
 			event.stopPropagation();
 			event.preventDefault();
 			return false;
