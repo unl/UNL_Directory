@@ -290,7 +290,8 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
      */
     function getUID($uid)
     {
-        $r = $this->query("(&(uid=$uid))", $this->detailAttributes, false);
+        $filter = new UNL_Peoplefinder_Driver_LDAP_UIDFilter($uid);
+        $r = $this->query($filter->__toString(), $this->detailAttributes, false);
         if (!isset($r[0])) {
             throw new Exception('Cannot find that UID.', 404);
         }
