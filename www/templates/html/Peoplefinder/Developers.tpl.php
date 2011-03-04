@@ -147,7 +147,7 @@
         <ul>
             <?php 
             foreach ($context->resources as $resource) {
-                echo "<li><a href='?resource=$resource'>$resource</a></li>";
+                echo "<li><a href='?view=developers&resource=$resource'>$resource</a></li>";
             }
             ?>
         </ul>
