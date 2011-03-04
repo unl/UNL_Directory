@@ -1,7 +1,7 @@
 <?php
 class UNL_PeopleFinder_Developers_Record
 {
-    public $title       = "Record";
+    public $title       = "Peoplefinder Record";
     
     public $uri         = "service.php?uid={uid}";
     
