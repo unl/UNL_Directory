@@ -103,7 +103,7 @@
                                 <li>
                                     Calling this:
                                     <blockquote>
-                                        <p>GET <?php echo $resource->exampleURI; ?>?format=<?php echo $format; ?></p>
+                                        <p>GET <?php echo $resource->exampleURI; ?>&format=<?php echo $format; ?></p>
                                     </blockquote>
                                 </li>
                                 <li>
