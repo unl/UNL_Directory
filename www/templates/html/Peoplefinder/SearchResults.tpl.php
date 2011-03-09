@@ -10,7 +10,10 @@ if (($start+$num_rows)>count($context)) {
     $end = $start+$num_rows;
 }
 
-echo "<div class='result_head'>Results ".($start+1)." - $end out of ".count($context).'</div>'.PHP_EOL;
+if (!$parent->context->getRawObject() instanceof UNL_Peoplefinder_PersonList_AlphaListing) {
+    echo "<div class='result_head'>Results ".($start+1)." - $end out of ".count($context).'</div>'.PHP_EOL;
+}
+
 echo '<ul class="pfResult">'.PHP_EOL; //I need to put a class for CSS, however when we switch to chuncked results (student, staff, faculty) this @todo will need revisted
 foreach ($context as $record) {
     if ($record->getRawObject() instanceof UNL_Peoplefinder_Record) {
