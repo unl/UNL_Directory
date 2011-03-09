@@ -23,7 +23,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
      * @ignore
      */
     static public $bindPW             = 'putyourpasswordhere';
-    static public $baseDN             = 'dc=unl,dc=edu';
+    static public $baseDN             = 'ou=people,dc=unl,dc=edu';
     static public $ldapTimeout        = 10;
     
     /**
