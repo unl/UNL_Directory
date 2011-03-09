@@ -59,7 +59,9 @@ class UNL_Peoplefinder
                              'search'       => 'UNL_Peoplefinder_SearchController',
                              'record'       => 'UNL_Peoplefinder_Record',
                              'roles'        => 'UNL_Peoplefinder_Person_Roles',
-                             'developers'   => 'UNL_Peoplefinder_Developers');
+                             'developers'   => 'UNL_Peoplefinder_Developers',
+                             'alphalisting' => 'UNL_Peoplefinder_PersonList_AlphaListing',
+    );
 
     /**
      * This list contains the affiliations shown throughout the directory.
