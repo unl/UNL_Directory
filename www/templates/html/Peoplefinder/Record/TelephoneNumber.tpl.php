@@ -1,13 +1,15 @@
 <?php
 
+$clean_number = str_replace(array('(', ')', '-', ' '), '', $context);
+
 $link = '<a href="';
 if (isset($_SERVER['HTTP_USER_AGENT']) &&
     strpos($_SERVER['HTTP_USER_AGENT'], "iPhone") === false) {
-    $link .= "wtai://wp/mc;".str_replace(array("(", ")", "-"), "", $context);
+    $link .= "wtai://wp/mc;".$clean_number;
 } else {
-    $link .= "tel:".$context;
+    $link .= "tel:".$clean_number;
 }
-$link .= '">'.preg_replace('/([\d]{3})([\d]{3})([\d]{4})/', '$1-$2-$3', $context).'</a>';
+$link .= '">'.preg_replace('/([\d]{3})([\d]{3})([\d]{4})/', '$1-$2-$3', $clean_number).'</a>';
 echo $link;
 
 
@@ -28,7 +30,6 @@ echo $link;
  */
 
 
-$clean_number = str_replace(array('(', ')', '-'), '', $context);
 $on_campus_prefix = ' <abbr class="on-campus-dialing" title="For on-campus dialing only. Off-campus, dial '.$context.'">On-campus, ';
 $on_campus_suffix = '</abbr>';
 switch(true) {
