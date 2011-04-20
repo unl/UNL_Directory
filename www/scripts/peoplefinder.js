@@ -341,6 +341,7 @@ WDN.jQuery(document).ready(function() {
 		WDN.toolbar_peoplefinder.configuedWebService = true;
 		if (window.location.hash
 			&& WDN.jQuery('#peoplefinder').length) {
+			WDN.log('triggering hash chance');
 			WDN.jQuery(window).trigger('hashchange');
 		}
 	});
