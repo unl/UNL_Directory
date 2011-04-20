@@ -70,17 +70,8 @@ if ($context->options['mobile'] === true) {
 } else {
     $page->maincontentarea = '<div class="four_col">' . $savvy->render($context->output) . '</div>';
 }
-$page->footercontent = 'UNL | Office of University Communications | <a href="http://www1.unl.edu/wdn/wiki/About_Peoplefinder" onclick="window.open(this.href); return false;">About Peoplefinder</a> | <a href="http://www1.unl.edu/comments/" title="Click here to direct your comments and questions" class="dir_correctionRequest">comments?</a>
-					<div class="commentProblem">
-						<h3>Have a correction?</h3>
-						<form class="wdn_feedback_comments2" method="post" action="http://www1.unl.edu/comments/">
-							<input type="hidden" name="page_address" value="" />
-							Name: <input type="text" name="name" id="name" value="" />
-							Email: <input type="text" name="email" id="email" value="" />
-							<textarea name="comment" id="comment" rows="" cols=""></textarea>
-							<input type="submit" value="Submit" />
-						</form>
-					</div><br /><br />';
-$page->footercontent .= 'Information obtained from this directory may not be used to provide addresses for mailings to students, faculty or staff.<br />Any solicitation of business, information, contributions or other response from individuals listed in this publication by mail, telephone or other means is forbidden.<br />';
+$page->footercontent = 'UNL | Office of University Communications | <a href="http://www1.unl.edu/wdn/wiki/About_Peoplefinder" onclick="window.open(this.href); return false;">About Peoplefinder</a> | <a href="http://www1.unl.edu/comments/" title="Click here to direct your comments and questions" class="dir_correctionRequest">comments?</a>';
+$page->footercontent .= $savvy->render(null, 'CorrectionForm.tpl.php');
+$page->footercontent .= '<br /><br />Information obtained from this directory may not be used to provide addresses for mailings to students, faculty or staff.<br />Any solicitation of business, information, contributions or other response from individuals listed in this publication by mail, telephone or other means is forbidden.<br />';
 
 echo $page;
