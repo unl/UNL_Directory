@@ -138,6 +138,9 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
         if (!isset($this->org_unit)) {
             return false;
         }
+
+        // Remove any base so we can retrieve departments from anywhere
+        UNL_Peoplefinder_Department::setXPathBase('');
         return UNL_Peoplefinder_Department::getById($this->org_unit, $this->options);
     }
 
