@@ -171,8 +171,7 @@ class UNL_Officefinder
         case 'department':
             $record = $this->handlePostDBRecord('UNL_Officefinder_Department');
             if (isset($_POST['parent_id'])) {
-                $redirect = self::getURL(null, array('view' => 'department',
-                                                     'id'   => $record->parent_id));
+                $redirect = self::getURL().$record->parent_id;
             } else {
                 $redirect = $record->getURL();
             }
