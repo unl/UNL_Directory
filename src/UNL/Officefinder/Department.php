@@ -228,6 +228,17 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
             && !preg_match('/^https?\:\/\/.*/', $this->website)) {
             $this->website = 'http://'.$this->website;
         }
+
+        if (!empty($this->phone)
+            && preg_match('/^2\-?([\d]{4})$/', $this->phone, $matches)) {
+            $this->phone = '402-472-'.$matches[1];
+        }
+
+        if (!empty($this->fax)
+            && preg_match('/^2\-?([\d]{4})$/', $this->fax, $matches)) {
+            $this->fax = '402-472-'.$matches[1];
+        }
+
         return parent::save();
     }
 
