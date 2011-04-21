@@ -76,6 +76,11 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
      * @var SimpleXMLElement
      */
     protected static $_xml;
+
+    /**
+     * @var string Prefix added to all xpath queries
+     */
+    protected static $_xpath_base = '//attribute[@name="org_unit"][@value="50000003"]/..';
     
     public $options = array();
     
@@ -194,14 +199,14 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
     
     function hasChildren()
     {
-        $results = self::getXML()->xpath('//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="org_unit"][@value="'.$this->org_unit.'"]/../branch');
+        $results = self::getXML()->xpath(self::$_xpath_base.'//attribute[@name="org_unit"][@value="'.$this->org_unit.'"]/../branch');
         return count($results)?true:false;
     }
     
     function getChildren()
     {
         $children = array();
-        $results = self::getXML()->xpath('//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="org_unit"][@value="'.$this->org_unit.'"]/../branch');
+        $results = self::getXML()->xpath(self::$_xpath_base.'//attribute[@name="org_unit"][@value="'.$this->org_unit.'"]/../branch');
         foreach ($results as $result) {
             foreach ($result[0] as $attribute) {
                 if (isset($attribute['name'])
@@ -231,24 +236,29 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
 
     public static function getXMLByName($name)
     {
+        $quoted = preg_replace('/([\'\"\?])/', '\\$1', $name);
+        $xpath  = self::$_xpath_base.'//attribute[@name="name"][@value="'.$quoted.'"]/..';
+        return self::getXMLResult($xpath);
+    }
+
+    public static function getXMLById($id)
+    {
+        $xpath = self::$_xpath_base.'//attribute[@name="org_unit"][@value='.$id.']/..';
+        return self::getXMLResult($xpath);
+    }
+
+    public static function setXPathBase($base)
+    {
+        self::$_xpath_base = $base;
+    }
+
+    protected static function getXMLResult($xpath)
+    {
         $xml     = self::getXML();
-        $quoted  = preg_replace('/([\'\"\?])/', '\\$1', $name);
-        $xpath   = '//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="name"][@value="'.$quoted.'"]/..';
         $results = $xml->xpath($xpath);
         if (!$results) {
             return false;
         }
         return $results[0];
     }
-
-    public static function getXMLById($id)
-    {
-        $xml     = self::getXML();
-        $xpath   = '//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="org_unit"][@value='.$id.']/..';
-        $results = $xml->xpath($xpath);
-        if (!$results) {
-            return false;
-        }
-        return $results[0];
-    } 
 }
