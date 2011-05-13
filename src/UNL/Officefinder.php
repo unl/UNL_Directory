@@ -45,6 +45,7 @@ class UNL_Officefinder
                              //'search'       => 'UNL_Peoplefinder_Department_Search',
                              'tree'         => 'UNL_Officefinder_TreeView',
                              'search'       => 'UNL_Officefinder_DepartmentList_NameSearch',
+                             'buildingsearch' => 'UNL_Officefinder_DepartmentList_BuildingSearch',
                              'department'   => 'UNL_Officefinder_Department',
                              'deptlistings' => 'UNL_Peoplefinder_Department_Personnel',
                              'record'       => 'UNL_Peoplefinder_Department',
