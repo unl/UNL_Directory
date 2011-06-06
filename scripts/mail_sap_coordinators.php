@@ -44,7 +44,7 @@ foreach ($users as $user) {
     $mail = $user->mail;
     if (empty($mail)) {
         // user has no email in peoplefinder
-        $missing_email[] = $user->uid;
+        $missing_email[] = (string)$user->uid;
         continue;
     }
 
@@ -62,7 +62,7 @@ foreach ($users as $user) {
     echo $user->uid.':'.$mail.PHP_EOL;
 //    $mailer->html_body    = $email_body;
 ////    $mailer->to_address   = $mail;
-//    $mailer->to_address   = 'lgeisler1@unl.edu';
+//    $mailer->to_address   = 'brett.bieber@gmail.com';
 //    $mailer->from_address = 'Linda Geisler <lgeisler1@unl.edu>';
 //    $mailer->subject      = 'Update of online department and personnel listings';
 //    $mailer->send();
