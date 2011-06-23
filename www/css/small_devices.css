@@ -188,6 +188,7 @@ a.cInfo {
     position:relative;
     z-index:9;
     margin:0 auto;
+    display:none;
 }
 .vcard > a.email {
     
