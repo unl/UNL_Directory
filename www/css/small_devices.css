@@ -188,7 +188,6 @@ a.cInfo {
     position:relative;
     z-index:9;
     margin:0 auto;
-    display:none;
 }
 .vcard > a.email {
     
@@ -221,5 +220,5 @@ a.cInfo {
     background-position:0 -42px;
 }
 a.email {background:none;}
-a.text-vcard{padding-left:24px;padding-right:0;background-position:left -2px;margin:0;display:block;}
+a.text-vcard{padding-left:24px;padding-right:0;background-position:left -2px;margin:0;display:none;}
 a.img-qrcode{padding-left:24px;padding-right:0;background: url(images/qrcode.png) no-repeat 0 0;margin:141px 0 0 -122px;float:left;}
