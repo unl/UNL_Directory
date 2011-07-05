@@ -111,39 +111,24 @@ class UNL_Peoplefinder_Record
     {
 
         $c = new UNL_Cache_Lite();
-        if ($subject_xml = $c->get('catalog subjects')) {
+        $majors = $c->get('catalog majors');
 
-        } else {
-            if ($subject_xml = file_get_contents('http://bulletin.unl.edu/?view=subjects&format=xml')) {
-                $c->save($subject_xml);
+        if (!$majors) {
+            if ($majors = file_get_contents('http://bulletin.unl.edu/undergraduate/majors/lookup/?format=json')) {
+                $c->save($majors);
             } else {
                 $c->extendLife();
-                $c->get('catalog subjects');
+                $c->get('catalog majors');
             }
         }
 
-        $d = new DOMDocument();
-        $d->loadXML($subject_xml);
-        if ($subject_el = $d->getElementById($subject)) {
-            return $subject_el->textContent;
+        $majors = json_decode($majors, true);
+
+        if (array_key_exists($subject, $majors)) {
+            return $majors[$subject];
         }
 
-        switch ($subject) {
-            case 'ACCG':
-                return 'Accounting';
-            case 'BSAD':
-                return 'Business Administration';
-            case 'COMP':
-                return 'Computer Science';
-            case 'DIET':
-                return 'Dietetics';
-            case 'PBAC':
-                return 'Non-Degree Post-Baccalaureate';
-            case 'UNDL':
-                return 'Undeclared';
-            default:
-                return $subject;
-        }
+        return $subject;
     }
 
     /**
