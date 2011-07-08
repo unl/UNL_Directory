@@ -1,0 +1,1 @@
+ALTER TABLE `departments` ADD `academic` BOOLEAN NOT NULL DEFAULT '0' COMMENT 'Flag to indicate if department is academic' AFTER `website` 
