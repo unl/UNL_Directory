@@ -35,6 +35,9 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
     /** @Column(length=45) */
     public $website;
 
+    /** @Column(type="integer") */
+    public $academic;
+
     public $lft;
     public $rgt;
     public $level;
