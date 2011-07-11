@@ -10,9 +10,14 @@ class UNL_Officefinder_DepartmentList_AcademicDepartments extends UNL_Officefind
                     UNION
                 SELECT department_aliases.department_id as id, CONCAT(department_aliases.name, " (see ", departments.name, ")") as name
                 FROM department_aliases, departments
-                WHERE department_aliases.department_id = departments.id
+                WHERE department_aliases.department_id = departments.id AND departments.academic = 1
 
                 ORDER BY name;';
         return $sql;
+    }
+
+    function getCacheKey()
+    {
+        return 'academic departments';
     }
 }
