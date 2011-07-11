@@ -7,9 +7,6 @@ class UNL_Officefinder_DepartmentList_AlphaListing extends FilterIterator implem
     {
         $this->options = $options + $this->options;
 
-        // Require login to view the full directory
-        UNL_Officefinder::getUser(true);
-
         parent::__construct($this->getIterator());
     }
 
