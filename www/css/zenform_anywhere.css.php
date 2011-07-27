@@ -1,7 +1,7 @@
 <?php
 $zenform = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/wdn/templates_3.0/css/content/zenform.css');
 header('Content-type: text/css');
-echo str_replace('#maincontent ', '', $zenform);
+echo str_replace(array('#maincontent ', 'url(\'images/zenform/'), array('', 'url(\'/wdn/templates_3.0/css/images/zenform/'), $zenform);
 ?>
 
 h3.zenform {
