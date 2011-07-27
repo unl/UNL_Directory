@@ -23,7 +23,7 @@ if ($context->ou == 'org') {
         && $context->eduPersonNickname != ' ') {
         echo ' ('.$context->eduPersonNickname.')';
     }
-    echo '<a class="permalink" href="'.UNL_Peoplefinder::getURL().'?uid='.$context->uid.'" title="Permalink for '.$context->displayName.'">link</a>';
+    echo ' <a class="permalink" href="'.UNL_Peoplefinder::getURL().'?uid='.$context->uid.'" title="Permalink for '.$context->displayName.'">link</a>';
 }
 if ($displayEmail) {
     echo "</a>\n";
