@@ -129,5 +129,4 @@ if (isset($context->unlSISLocalPhone)) {
 if ($displayEmail) {
     echo "<span class='email'><a class='email' href='mailto:{$context->mail}'>{$context->mail}</a></span>\n";
 }
-echo '';
 echo '</div>'.PHP_EOL.'</div>'.PHP_EOL;
