@@ -33,6 +33,11 @@ if ($context->getRawObject() instanceof UNL_Officefinder) {
     $page->head .= '<link rel="login" href="https://login.unl.edu/cas/login?service='.urlencode(UNL_Officefinder::getURL(null, $context->options)).'" />';
 }
 
+if (isset($context->options['print'])) {
+    $page->head .= '<script type="text/javascript">WDN.jQuery(document).ready(function(){window.print()});</script>';
+}
+
+
 if ($context->options['view'] != 'alphalisting'
     && UNL_Officefinder::getUser()
     && 
