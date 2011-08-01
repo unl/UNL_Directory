@@ -84,8 +84,6 @@ var service_peoplefinder = function() {
 				WDN.jQuery('li.current .vcard a.planetred_profile').fadeIn(400);
 				WDN.jQuery('li.current .vcard').slideDown();
             	WDN.jQuery('li.selected .loading').hide();
-            } else {
-                
             }
 		},
 		
