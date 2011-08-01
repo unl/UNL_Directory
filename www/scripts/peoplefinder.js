@@ -49,29 +49,11 @@ var service_peoplefinder = function() {
 		
 		updatePeopleFinderRecord : function(data, textStatus){ //function called when a record has been rendered
 			if (textStatus == 'success') {
-				var name = "";
-				var mail = "";
-				if (WDN.idm.user.mail != null) {
-				    mail = WDN.idm.user.mail[0];
-                }
-				if (WDN.idm.user.uid != null) {
-				    name = WDN.idm.user.uid;;
-                }
 				correctionHTML = 
-					'<a href="http://www1.unl.edu/comments/" class="dir_correctionRequest pf_record">Have a correction?</a>' +
-					'<div class="commentProblem">' +
-						'<h3>Have a correction?</h3>' +
-						'<form class="wdn_feedback_comments2" method="post" action="http://www1.unl.edu/comments/">' +
-							'<input type="hidden" name="page_address" value="" />' +
-							'Name: <input type="text" name="name" id="name" value="' + name + '" /> ' +
-							'Email: <input type="text" name="email" id="email" value="' + mail + '" />' +
-							'<textarea name="comment" id="comment" rows="" cols=""></textarea>' +
-							'<input type="submit" value="Submit" />' +
-						'</form>' +
-					'</div>';
+					'<a href="http://www1.unl.edu/comments/" class="dir_correctionRequest pf_record">Have a correction?</a>';
 				WDN.jQuery('li.current').append(data);
 				WDN.jQuery('li.current .vcardInfo').append(correctionHTML);
-				WDN.jQuery('li.current input[name="page_address"]').val(WDN.jQuery('li.current .permalink').attr('href'));
+				WDN.jQuery('input[name="page_address"]').val(WDN.jQuery('li.current .permalink').attr('href'));
 				if (WDN.jQuery('.wdn_annotate')) {
 					if (!WDN.jQuery('head link[href='+ ANNOTATE_URL +'css/annotate.css]').length) {
 						WDN.loadCSS(ANNOTATE_URL + 'css/annotate.css');
@@ -386,7 +368,7 @@ WDN.jQuery(document).ready(function() {
 		WDN.jQuery(this).colorbox({
 			inline : true,
 			open : true,
-			href : WDN.jQuery(this).siblings('.commentProblem'),
+			href : WDN.jQuery('div.commentProblem'),
 			width : '45%', 
 			height : '45%',
 			title : false,

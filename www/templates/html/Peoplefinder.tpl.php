@@ -69,44 +69,15 @@ $page->breadcrumbs = '
     <li><a href="'.UNL_Peoplefinder::getURL().'">Directory</a></li>
     <li>Search</li>
 </ul>';
-$correctionJS = "";
-if (isset($context->options['uid'])){
-$correctionJS = '<script type="text/javascript">
-    		WDN.jQuery("document").ready(function(){
-    			var name = "";
-				var mail = "";
-				if (WDN.idm.user.mail != null) {
-				    mail = WDN.idm.user.mail[0];
-                }
-				if (WDN.idm.user.uid != null) {
-				    name = WDN.idm.user.uid;;
-                }
-				correctionHTML = 
-					\'<a href="http://www1.unl.edu/comments/" class="dir_correctionRequest pf_record">Have a correction?</a>\' +
-					\'<div class="commentProblem">\' +
-						\'<h3>Have a correction?</h3>\' +
-						\'<form class="wdn_feedback_comments2" method="post" action="http://www1.unl.edu/comments/">\' +
-							\'<input type="hidden" name="page_address" value="" />\' +
-							\'Name: <input type="text" name="name" id="name" value="\' + name + \'" /> \' +
-							\'Email: <input type="text" name="email" id="email" value="\' + mail + \'" />\' +
-							\'<textarea name="comment" id="comment" rows="" cols=""></textarea>\' +
-							\'<input type="submit" value="Submit" />\' +
-						\'</form>\' +
-					\'</div>\';
-					WDN.jQuery(".vcardInfo").append(correctionHTML);
-					WDN.jQuery(\'input[name="page_address"]\').val(WDN.jQuery(".permalink").attr("href"));
-				});
-	    	</script>
-	    	';
-    }
- 
+
+
 if ($context->options['mobile'] === true) {
     $page->maincontentarea = $savvy->render($context->output);
 } else {
-    $page->maincontentarea = '<div class="four_col">' . $savvy->render($context->output) . $correctionJS .'</div>';
+    $page->maincontentarea = '<div class="four_col">' . $savvy->render($context->output) .'</div>';
 }
 $page->footercontent = 'UNL | Office of University Communications | <a href="http://www1.unl.edu/wdn/wiki/About_Peoplefinder" onclick="window.open(this.href); return false;">About Directory</a> | <a href="http://www1.unl.edu/comments/" title="Click here to direct your comments and questions" class="dir_correctionRequest">comments?</a>';
-$page->footercontent .= $savvy->render(null, 'CorrectionForm.tpl.php');
+$page->footercontent .= $savvy->render($context, 'CorrectionForm.tpl.php');
 $page->footercontent .= '<br /><br />Information obtained from this directory may not be used to provide addresses for mailings to students, faculty or staff.<br />Any solicitation of business, information, contributions or other response from individuals listed in this publication by mail, telephone or other means is forbidden.<br />';
 
 echo $page;
