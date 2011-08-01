@@ -249,6 +249,7 @@
 a.email {background:none;}
 a.text-vcard{padding-left:24px;padding-right:0;margin-top:2px;background-position:left -2px;float:left;clear:left;}
 a.img-qrcode{padding-left:24px;padding-right:0;margin-top:2px;background: url(images/qrcode.png) no-repeat 0 0;float:left;clear:left;}
+a.print{padding-left:24px;padding-right:0;margin-top:2px;background: url(images/qrcode.png) no-repeat 0 0;float:left;clear:left;}
 div.wdn_annotate.on{float:left;clear:left;}
 div.wdn_annotate.on a{padding:0 0 0 24px;margin-top:2px;background-color:transparent;background-position:0 2px;border:none;}
 img.profile_pic.medium {width:100px;height:100px;}
