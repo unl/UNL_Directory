@@ -162,4 +162,4 @@ if (!$context->isRoot()) {
 }
 ?>
 </div>
-<a id="reportProblem" class="dir_correctionRequest" href="http://www1.unl.edu/comments/">Have a correction?</a>
+<a id="reportProblem" class="dir_correctionRequest noprint" href="http://www1.unl.edu/comments/">Have a correction?</a>

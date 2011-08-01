@@ -1,4 +1,4 @@
-<div class="commentProblem">
+<div class="commentProblem noprint">
     <h3>Have a correction?</h3>
     <form class="wdn_feedback_comments2" method="post" action="http://www1.unl.edu/comments/">
         <input type="hidden" name="page_address" value="" />
@@ -27,7 +27,7 @@ WDN.jQuery("document").ready(function(){
 		WDN.jQuery('.commentProblem input[name="name"]').val(WDN.idm.user.uid);
 	}
 	correctionHTML = 
-		'<a href="http://www1.unl.edu/comments/" class="dir_correctionRequest pf_record">Have a correction?</a>';
+		'<a href="http://www1.unl.edu/comments/" class="dir_correctionRequest pf_record noprint">Have a correction?</a>';
 	WDN.jQuery(".vcardInfo").append(correctionHTML);
 });
 </script>
