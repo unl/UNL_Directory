@@ -5,18 +5,18 @@
          padding: 10px;
          width: auto;
     }
-    
+
     blockquote > p {
          clear: none;
          margin: 0pt;
          padding: 0pt;
     }
-    
+
     div.resource {
          border-bottom: #F0F0F0 5px solid;
          margin-bottom: 20px;
     }
-    
+
     #maincontent div.resource > ul {
         padding-left:0;
     }
@@ -25,7 +25,7 @@
         list-style:none;
     }
 
-    a.resources 
+    a.resources
     {
         float:right;
         font-size:12px
@@ -48,9 +48,9 @@
 </script>
 
 <div class="three_col left">
-    
+
     <?php
-        $resource = "UNL_PeopleFinder_Developers_" . $context->resource;
+        $resource = "UNL_Peoplefinder_Developers_" . $context->resource;
         $resource = new $resource;
         ?>
         <div class="resource">
@@ -64,11 +64,11 @@
                 </blockquote>
             </li>
             <li>
-                <h4 id="instance-properties"><a href="#instance-properties">Resource Properties</a></h4> 
+                <h4 id="instance-properties"><a href="#instance-properties">Resource Properties</a></h4>
                 <table class="zentable neutral">
                 <thead><tr><th>Property</th><th>Description</th><th>JSON</th><th>XML</th></tr></thead>
                   <tbody>
-                  <?php 
+                  <?php
                     foreach ($resource->properties as $property) {
                       echo "<tr>
                                 <td>$property[0]</td>
@@ -88,14 +88,14 @@
             <li>
                 <h4 id="instance-get-example-1"><a href="#instance-get-example-1">Example</a></h4>
                 <ul class="wdn_tabs">
-                <?php 
+                <?php
                  foreach ($resource->formats as $format) {
                      echo "<li><a href='#$format'>$format</a></li>";
                  }
                 ?>
                 </ul>
                 <div class="wdn_tabs_content">
-                     <?php 
+                     <?php
                      foreach ($resource->formats as $format) {
                          ?>
                          <div id="<?php echo $format; ?>">
@@ -108,7 +108,7 @@
                                 </li>
                                 <li>
                                     Provides this:
-                                    <?php 
+                                    <?php
                                     //Get the output.
                                     if (!$result = file_get_contents($resource->exampleURI."&format=$format")) {
                                         $result = "Error getting file contents.";
@@ -133,19 +133,19 @@
                          <?php
                      }
                      ?>
-                    
+
                 </div>
             </li>
         </ul>
     </div>
-    
+
 </div>
 <div class="col right">
     <div id='resources' class="zenbox primary" style="width:200px">
         <h3>Directory API</h3>
         <p>The following is a list of resources for Directory.</p>
         <ul>
-            <?php 
+            <?php
             foreach ($context->resources as $resource) {
                 echo "<li><a href='?view=developers&resource=$resource'>$resource</a></li>";
             }
