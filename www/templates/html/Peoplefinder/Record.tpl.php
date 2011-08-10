@@ -6,7 +6,9 @@ echo '<a class="planetred_profile" href="http://planetred.unl.edu/pg/profile/unl
 
 echo '<a href="'.UNL_Peoplefinder::getURL().'vcards/'.$context->uid.'" title="Download V-Card for '.$context->givenName.' '.$context->sn.'" class="text-vcard">vCard</a> ';
 echo '<a title="QR Code vCard" href="http://chart.apis.google.com/chart?chs=400x400&amp;cht=qr&amp;chl=' . urlencode($savvy->render($context, 'templates/vcard/Peoplefinder/Record.tpl.php')) . '&amp;chld=L|1&amp;.png" class="img-qrcode">QR Code</a> ';
-echo '<a title="Print this listing" href="'.$permalink.'&amp;print" class="print">Print</a> ';
+if (!$parent->context->options['mobile']) {
+    echo '<a title="Print this listing" href="'.$permalink.'&amp;print" class="print">Print</a> ';
+}
 echo '<div class="wdn_annotate" id="directory_'.$context->uid.'"></div>';
 
 echo '<div class="vcardInfo">'.PHP_EOL;
