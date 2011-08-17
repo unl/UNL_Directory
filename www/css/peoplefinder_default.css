@@ -1,7 +1,7 @@
 #cboxTitle {display:none !important;}
 #maincontent a.dir_correctionRequest {
 	position:absolute;
-	bottom:0;
+	bottom:-46px;
 	right:0;
 	border-radius:5px;
 	-webkit-border-radius:5px;
