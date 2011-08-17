@@ -60,7 +60,7 @@ if ($context->options['view'] != 'alphalisting') {
                 if (!empty($context->state)) {
                     echo "<span class='region'>" . $context->state . "</span>";
                 }
-                if (!empty($context->state)) {
+                if (!empty($context->postal_code)) {
                     echo "<span class='postal-code'>" . $context->postal_code . "</span>";
                 }
                 ?>
