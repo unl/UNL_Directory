@@ -216,10 +216,19 @@
 
 .vcard span[class=street-address] {
 	display:block;
+	content: ' ';
+}
+
+.vcard span[class=street-address]:after {
+    content: ' ';
 }
 
 .vcard span[class=locality]:after {
-	content: ',';
+	content: ', ';
+}
+
+.vcard span[class=region]:after {
+    content: ' ';
 }
 
 .vcard .country-name {
