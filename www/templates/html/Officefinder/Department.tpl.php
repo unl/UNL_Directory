@@ -50,11 +50,21 @@ if ($context->options['view'] != 'alphalisting') {
         <div class="vcardInfo">
             <div class="adr label">
                 <span class="room"><?php echo $context->room.' <a class="location mapurl" href="http://maps.unl.edu/#'.$context->building.'">'.$context->building.'</a>'; ?></span>
-                <span class="street-address"><?php echo $context->address; ?></span>
-                <span class="locality"><?php echo $context->city; ?></span>
-                <span class="region"><?php echo $context->state; ?></span>
-                <span class="postal-code"><?php echo $context->postal_code; ?></span>
-                <span class="country-name">USA</span>
+                <?php
+                if (!empty($context->address)) {
+                    echo "<span class='street-address'>" . $context->address . "</span>";
+                }
+                if (!empty($context->city)) {
+                    echo "<span class='locality'>" . $context->city . "</span>";
+                }
+                if (!empty($context->state)) {
+                    echo "<span class='region'>" . $context->state . "</span>";
+                }
+                if (!empty($context->state)) {
+                    echo "<span class='postal-code'>" . $context->postal_code . "</span>";
+                }
+                ?>
+                <span class='country-name'>USA</span>
             </div>
             
             <?php if (isset($context->phone)): ?>
