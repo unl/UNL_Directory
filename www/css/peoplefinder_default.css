@@ -77,11 +77,13 @@
 	width:100%;
 	padding: 5px 0px;
 	display:inline-block;
+	position:relative;
+    cursor:pointer;
 }
 #maincontent ul.pfResult li div.overflow {
 	min-height:47px;
 	padding: 7px 5px;
-	cursor:pointer;
+	display:inline-block;
 }
 #maincontent ul.pfResult li.selected div.overflow {opacity:0.4;filter:alpha(opacity=40);}
 #maincontent ul.pfResult li:hover, #maincontent ul.pfResult li.selected {
@@ -105,6 +107,9 @@
 	margin-left:20px;
 	max-width:540px;
 }
+.recordDetails .eppa {
+    display:none;	
+}
 .fn a, .fn {
 	font-size:18px;
 	font-weight:bold;
@@ -122,7 +127,7 @@
 	max-height:42px;line-height:20px;
 }
 
-.cInfo {float:right;}
+.cInfo {position:absolute;right:5px;}
 
 #maincontent .results {
 	margin-top:15px;
@@ -384,6 +389,7 @@ img.profile_pic.medium {width:100px;height:100px;}
     font-size:1.4em;
     width:auto;
     padding:0 8px;
+    cursor:pointer;
 }
 #maincontent #directoryHelp li a:focus {
     color:#fff !important;	
