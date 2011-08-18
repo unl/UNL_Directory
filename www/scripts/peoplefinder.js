@@ -72,7 +72,7 @@ var service_peoplefinder = function() {
 		presentPeopleFinderResults : function(){
 			WDN.jQuery('#filters').css({'opacity' : '0.4'});
 			WDN.jQuery('#q').siblings('label').hide();
-			WDN.jQuery('#maincontent div.two_col').remove();
+			WDN.jQuery('#maincontent .grid6, #maincontent .footer').remove();
 			if (!splitName) {
 				WDN.toolbar_peoplefinder.queuePFRequest(query, 'results');
 			} else {
@@ -214,7 +214,7 @@ var directory = function() {
 			    });
 			});
 			WDN.jQuery('#q').focus().select();
-			WDN.jQuery('.directorySearch > fieldset > ol > li > label').css({'top' : '15px'}).focus(function(){
+			WDN.jQuery('.directorySearch > fieldset > ol > li > label').css({'top' : '3px'}).focus(function(){
 					WDN.jQuery(this).hide().siblings('input[type=text]').next().focus();
 			});
 		},
@@ -223,7 +223,7 @@ var directory = function() {
 			if (WDN.jQuery('#peoplefinder').length){
 				WDN.jQuery("#queryString, #q").remove();
 				WDN.jQuery('label.cn, input#cn, label.sn, input#sn').remove();
-				WDN.jQuery('#peoplefinder li').prepend('<label for="cn" class="cn">First Name</label><input type="text" value="" id="cn" name="cn" class="n q" /><label for="sn" class="sn">Last Name</label><input type="text" value="" id="sn" name="sn" class="s n q" />');
+				WDN.jQuery('#peoplefinder fieldset li').prepend('<label for="cn" class="cn">First Name</label><input type="text" value="" id="cn" name="cn" class="n q" /><label for="sn" class="sn">Last Name</label><input type="text" value="" id="sn" name="sn" class="s n q" />');
 			}
 			WDN.jQuery('#cn, #sn').focus(function(){
 				WDN.jQuery(this).prev('label').hide();
@@ -263,7 +263,7 @@ var directory = function() {
 					return false;
 				}
 			});
-			WDN.jQuery('#peoplefinder li').prepend('<label for="q" id="queryString">Enter a name to begin your search</label><input type="text" value="" id="q" name="q" class="q" />');
+			WDN.jQuery('#peoplefinder fieldset li').prepend('<label for="q" id="queryString">Enter a name to begin your search</label><input type="text" value="" id="q" name="q" class="q" />');
 			directory.fixLabel();
 		},
 		

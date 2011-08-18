@@ -5,15 +5,14 @@
         echo $savvy->render($context, 'Peoplefinder/StandardForm.tpl.php');
     }
 ?>
-<div class="two_col left">
+<div class="grid6 first" id="instructions_people">
     <div class="intro">
     <img width="100" height ="100" class="profile_pic medium planetred_profile" src="<?php echo UNL_Peoplefinder::getURL(); ?>images/peopleHerbie.png" alt="sample people results" />
-    <h6 class="recordDetails">
+    <h3 class="recordDetails">
         Search <span class="search_context">People</span>
-    </h6>
+    </h3>
     <div class="intro_support clear">
-        <p>Find contact information for faculty, staff and students.</p>
-        <p>Search by:</p>
+        <p>Find contact information for faculty, staff and students. Search by:</p>
         <ul>
             <li>First name</li>
             <li>Last name</li>
@@ -24,23 +23,26 @@
     </div>
 </div>
 
-<div class="two_col right">
+<div class="grid6" id="instructions_departments">
     <div class="intro">
 	    <img width="100" height ="100" class="profile_pic medium planetred_profile" src="<?php echo UNL_Peoplefinder::getURL(); ?>images/organizationVC.png" alt="sample department results" />
-	    <h6 class="recordDetails">
+	    <h3 class="recordDetails">
 	        Search <span class="search_context">Departments</span>
-	    </h6>
+	    </h3>
 	    <div class="intro_support clear">
-	        <p>Find UNL departments by entering a full or partial department name.</p>
-	        <p>Information available:</p>
+	        <p>Find UNL departments by entering a full or partial department name. Information available:</p>
 	        <ul>
 	        	<li>Department contact information and location on campus</li>
 	        	<li>Complete list of department employees</li>
 	        	<li>Organizational hierarchy of department</li>
 	        </ul>
-	        <p>A printer friendly view is also available for UNL users. <a href="<?php echo UNL_Officefinder::getURL(); ?>?view=alphalisting">Log in and view the printer-friendly Yellow Page Directory</a>.</p>
 	    </div>
     </div>
 </div>
+<?php if(!$context->options['mobile']) :?>
+<div class="first footer">
+	<a href="<?php echo UNL_Officefinder::getURL(); ?>?view=alphalisting">Log in and view the printer-friendly Yellow Page Directory</a>
+</div>
+<?php endif;?>
 <?php echo $savvy->render(null, 'Peoplefinder/SearchResults/Filters.tpl.php'); ?>
-<div id="results" class="three_col right"></div>
+<div id="results" class="grid8"></div>

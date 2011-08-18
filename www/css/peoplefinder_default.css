@@ -88,7 +88,6 @@
 	background:#ecf4f9;
 }
 #maincontent ul.pfResult li.selected .vcard {display:none;}
-.eppa, .organization-unit, .tel, .type {display:none;}
 #maincontent ul.pfResult .tel {display:block;}
 #maincontent .on-campus-dialing {font-size:80%;text-transform:uppercase;color:#897B42;}
 
@@ -271,29 +270,36 @@ img.profile_pic.medium {width:100px;height:100px;}
 ***************************************************
 */
 .directorySearch {
-	width:740px;
-	background:url('images/formSearchBG.png') repeat-x top;
-	margin:15px 0 10px 0;
-	float:left;
+	background: rgb(229,220,167); /* Old browsers */
+	background: -moz-linear-gradient(top, rgba(229,220,167,1) 0%, rgba(217,196,128,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(229,220,167,1)), color-stop(100%,rgba(217,196,128,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, rgba(229,220,167,1) 0%,rgba(217,196,128,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, rgba(229,220,167,1) 0%,rgba(217,196,128,1) 100%); /* Opera11.10+ */
+	background: -ms-linear-gradient(top, rgba(229,220,167,1) 0%,rgba(217,196,128,1) 100%); /* IE10+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e5dca7', endColorstr='#d9c480',GradientType=0 ); /* IE6-9 */
+	background: linear-gradient(top, rgba(229,220,167,1) 0%,rgba(217,196,128,1) 100%); /* W3C */
+	-webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;
+    padding:1em;
+    display:block;
 }
 .directorySearch legend {display:none;}
 #maincontent form.directorySearch ol{
 	list-style:none;
-	display:block;
-	margin:0px;
-	background:url('images/formSearchEnds.png') no-repeat 0 -58px;
+	margin:0;
+	padding:0;
 	position:relative;
 }
-.directorySearch ol li:first-child{
-	background:url('images/formSearchEnds.png') no-repeat top right;
-	height:46px;
-	padding:0px;
-	margin-left:-13px;
-	margin-bottom:11px;
+.directorySearch ol li {
+    display:inline-block;	
+}
+.directorySearch > fieldset {
+	display:inline;	
 }
 .directorySearch > fieldset > ol > li > label {
 	position:absolute;
-	top:-11px;
+	top:3px;
 	left:16px;
 	font-size:1.5em;
 	color:#5c5c5c;
@@ -310,8 +316,7 @@ img.profile_pic.medium {width:100px;height:100px;}
 	border:1px solid #8a7c47;
 	font-size:1.5em;
 	color:#5c5c5c;
-	padding:2px 0 0 8px;
-	margin-top:10px;	
+	padding:2px 0 0 8px;	
 }
 .directorySearch ol li:first-child input[type=text]:focus {
 	-webkit-box-shadow: 0 0 1px 1px rgba(235, 239, 132, 0.5), 0 0 1px 3px rgba(235, 239, 132, 0.3);
@@ -324,11 +329,6 @@ img.profile_pic.medium {width:100px;height:100px;}
 }
 .directorySearch ol li:first-child input.s[type=text]{
 	margin-right:0;	
-}
-
-.directorySearch ol li:first-child input[type=image] {
-	margin-bottom:-7px;
-	padding-left:5px;
 }
 #maincontent #searchNotice {
 	display:none;
@@ -349,12 +349,44 @@ img.profile_pic.medium {width:100px;height:100px;}
 }
 #maincontent #directoryHelp {
 	float:right;
-	margin-top:18px;
-	width:175px;
-	list-style-type:square;
+	list-style:none;
 }
 #maincontent #directoryHelp li {
-	padding:2px 0;	
+	padding:0 0 6px 0;	
+}
+.directorySearch ol li:first-child input[type=submit], #maincontent #directoryHelp li a {
+    background: rgb(168,140,99); /* Old browsers */
+	background: -moz-linear-gradient(top, rgba(168,140,99,1) 0%, rgba(183,164,95,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(168,140,99,1)), color-stop(100%,rgba(183,164,95,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, rgba(168,140,99,1) 0%,rgba(183,164,95,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, rgba(168,140,99,1) 0%,rgba(183,164,95,1) 100%); /* Opera11.10+ */
+	background: -ms-linear-gradient(top, rgba(168,140,99,1) 0%,rgba(183,164,95,1) 100%); /* IE10+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a88c63', endColorstr='#b7a45f',GradientType=0 ); /* IE6-9 */
+	background: linear-gradient(top, rgba(168,140,99,1) 0%,rgba(183,164,95,1) 100%); /* W3C */
+  border: 1px solid #A5804C;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  color: #fff;
+  font-weight: bold;
+  font-size:0.8em;
+  line-height: 0;
+  padding: 2px 4px;
+  text-align: center;
+  text-shadow: 0 -1px 1px #9c937d;
+  text-transform: uppercase;
+  width: 150px;	
+}
+.directorySearch ol li:first-child input[type=submit] {
+    height:36px;
+    font-size:1.4em;
+    width:auto;
+    padding:0 8px;
+}
+#maincontent #directoryHelp li a:focus {
+    color:#fff !important;	
 }
 /********************************************
 
@@ -387,19 +419,16 @@ Search help qTip Styles
 
 ***************************************************
 */
+#maincontent .grid6.first{clear:both;}
 #maincontent .intro, #maincontent .intro{
-	background-image:-webkit-gradient(
-	linear,
-	left bottom,
-	left top,
-	color-stop(0.10, rgba(255,255,255, .3)),
-	color-stop(1, rgba(237,237,237, .8))
-);
-background-image:-moz-linear-gradient(
-	center bottom,
-	rgba(255,255,255, .3) 10%,
-	rgba(237,237,237, .8) 100%
-);
+	background: -moz-linear-gradient(top, rgba(237,237,237,0.8) 0%, rgba(255,255,255,0) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(237,237,237,0.8)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, rgba(237,237,237,0.8) 0%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, rgba(237,237,237,0.8) 0%,rgba(255,255,255,0) 100%); /* Opera11.10+ */
+background: -ms-linear-gradient(top, rgba(237,237,237,0.8) 0%,rgba(255,255,255,0) 100%); /* IE10+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ccededed', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
+background: linear-gradient(top, rgba(237,237,237,0.8) 0%,rgba(255,255,255,0) 100%); /* W3C */
+
 padding:10px;
 	-moz-border-radius:5px;
 	-webkit-border-radius:5px;
@@ -407,9 +436,12 @@ padding:10px;
 }
 
 .intro img.profile_pic{float:left;}
-h6.recordDetails {margin-top:15px;}
-h6.recordDetails span {
-	font-size:3.6em;
+#maincontent h3.recordDetails {
+	margin-top:15px;
+	font-size:2em;
+}
+#maincontent h3.recordDetails span {
+	font-size:2em;
 	font-weith:bold;
 	display:block;
 	margin-top:-6px;
@@ -420,4 +452,13 @@ h6.recordDetails span {
 }
 #maincontent .left .intro_support {
 	background:url('images/samplePeople.png') no-repeat bottom right;
+}
+#maincontent .footer {
+	background:#f7f7f7;border-width:1px 0 1px 0;border-color:#bbb;border-style:solid;padding:10px 20px;margin:20px 0 0;text-align:right;
+}
+#maincontent .contact_list .intro {
+	
+}
+#maincontent .contact_list h3 {
+    
 }
