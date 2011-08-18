@@ -29,11 +29,6 @@ var service_peoplefinder = function() {
 				//onClick = WDN.jQuery(this).find('.cInfo').attr('onclick');
 				WDN.jQuery('.cInfo, .fn a', this).removeAttr('onclick');
 			});
-			WDN.jQuery('ul.pfResult:not(.departments) li .overflow').click(function(){
-				service_peoplefinder.showIndividualPeopleFinderRecord(WDN.jQuery(this));
-				return false;
-				}
-			);
 			WDN.jQuery('ul.pfResult.departments li .overflow').click(function(){
 				window.location = WDN.jQuery('.fn a', this).attr('href');
 				}
@@ -85,17 +80,17 @@ var service_peoplefinder = function() {
 		},
 		
 		showIndividualPeopleFinderRecord : function(liRecord) {
-			if (liRecord.parent().hasClass('selected')) {
-				liRecord.siblings('.vcard').children('a.planetred_profile').fadeOut(400);
-				liRecord.siblings('.vcard').slideUp(function(){
+			if (liRecord.hasClass('selected')) {
+				liRecord.children('.vcard').children('a.planetred_profile').fadeOut(400);
+				liRecord.children('.vcard').slideUp(function(){
 					WDN.jQuery(this).remove();
 					
 				});
-				liRecord.parent().removeClass('selected');
+				liRecord.removeClass('selected');
 			} else {
 				liRecord.children('.loading').show();
 				WDN.jQuery('li.current').removeClass('current');
-				liRecord.parent('li').addClass('selected current');
+				liRecord.addClass('selected current');
 				var href = liRecord.find('a.cInfo').attr('href');
 				href = href.split('?uid=');
 				var url = WDN.toolbar_peoplefinder.serviceURL + 'service.php?view=hcard&uid=' + href[1];
@@ -335,9 +330,9 @@ WDN.jQuery(document).ready(function() {
 			return false;
 		}
 	});
-	WDN.jQuery('ul.pfResult:not(.departments) li .overflow').click(function(){
-		service_peoplefinder.showIndividualPeopleFinderRecord(WDN.jQuery(this));
-		return false;
+	WDN.jQuery('.ppl_Sresult').live('click', function(){
+			service_peoplefinder.showIndividualPeopleFinderRecord(WDN.jQuery(this));
+			return false;
 		}
 	);
 	WDN.jQuery('a.img-qrcode').live('click', function() {
