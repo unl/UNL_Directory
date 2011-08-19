@@ -17,7 +17,7 @@
 	color:#65553f;
 	border-bottom: 1px dashed #c7ad89;
 	padding:10px;
-	margin:-10px -10px 0 0;
+	margin:-10px 0 0 0;
 	position:relative;
 }
 #filters h4:before {
@@ -31,9 +31,20 @@
     left:-10px;
     bottom:-10px;
 }
+#filters h4:after {
+    content:'';
+    width:0;
+    height:0;
+    border-top:10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right:10px solid #fff;
+    position:absolute;
+    right:-10px;
+    bottom:-10px;
+}
 form.filters {color:#65553f;margin-top:15px;}
 form.filters fieldset {margin-bottom:10px;}
-form.filters legend span {display:block; width:208px; border-bottom:1px solid #c7ad89;font-weight:bold;margin-bottom:10px;font-size:1.1em;}
+form.filters legend {width:100%; border-bottom:1px solid #c7ad89;font-weight:bold;margin-bottom:10px;font-size:1.1em;}
 form.filters div.element {display:inline;}
 form.filters input[type="checkbox"] {width:20px;float:left;margin-left:-4px;}
 form.filters label {display:inline;margin-left:0px;font-size:0.9em;}

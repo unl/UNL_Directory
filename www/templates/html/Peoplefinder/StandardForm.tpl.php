@@ -1,4 +1,4 @@
-<form method="get" id="peoplefinder" action="<?php echo UNL_Peoplefinder::getURL(); ?>" class="directorySearch">
+<form method="get" id="peoplefinder" action="<?php echo UNL_Peoplefinder::getURL(); ?>" class="directorySearch first">
 <fieldset>
     <legend>Search for faculty, staff and students.</legend>
     <ol>

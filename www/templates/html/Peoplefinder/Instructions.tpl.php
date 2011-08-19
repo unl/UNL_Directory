@@ -45,4 +45,4 @@
 </div>
 <?php endif;?>
 <?php echo $savvy->render(null, 'Peoplefinder/SearchResults/Filters.tpl.php'); ?>
-<div id="results" class="grid8"></div>
+<div id="results" class="grid9"></div>

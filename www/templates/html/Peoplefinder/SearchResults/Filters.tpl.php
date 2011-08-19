@@ -1,18 +1,19 @@
-<div id="filters" class="grid4 first">
-    <div class="zenbox energetic wdn_filterset">
-        <h3>Filter Results</h3>
+<div id="filters" class="grid3 first">
+    <div class="wdn_filterset">
+        <h4>Filter Results</h4>
         <form method="post" action="#" class="filters">
             <fieldset class="affiliation">
-                <legend><span>By Affiliation</span></legend>
+                <legend>By Affiliation</legend>
                 <ol>
                    <li>
                    </li>
                 </ol>
             </fieldset>
             <fieldset class="department">
-                <legend><span>By Department</span></legend>
+                <legend>By Department</legend>
                 <ol>
-                    <li></li>
+                    <li>
+                    </li>
                 </ol>
             </fieldset>
         </form>

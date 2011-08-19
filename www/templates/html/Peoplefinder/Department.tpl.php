@@ -1,6 +1,6 @@
 <?php
 if (count($context)) {
-    echo '<h2>'.$context->name.'</h2>';
+    echo '<h3>'.$context->name.'</h3>';
     $building = '';
     if (isset($context->building)) {
         $building = $context->building;
