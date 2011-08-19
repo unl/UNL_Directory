@@ -1,18 +1,47 @@
 /*filter box*/
-#filters {margin-top:20px;display:none;}
-#filters h3 {
-	text-shadow: 1px 1px 1px #665d53;
-    filter: dropshadow(color=#665d53, offx=1, offy=1);
+#filters {
+	margin-top:40px;
+	clear:both;
+	background: #f5f0dd;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;
+    display:none;
 }
-form.filters {color:#a15901;margin-top:15px;}
-form.filters legend span {display:block; width:208px; border-bottom:1px solid #c39863;font-weight:bold;margin-bottom:10px;font-size:1.1em;}
+.wdn_filterset {
+    padding:10px;	
+}
+#filters h4 {
+	text-shadow: -1px -1px 1px #f7f5ee;
+	font-weight:bold;
+	color:#65553f;
+	border-bottom: 1px dashed #c7ad89;
+	padding:10px;
+	margin:-10px -10px 0 0;
+	position:relative;
+}
+#filters h4:before {
+    content:'';
+    width:0;
+    height:0;
+    border-top:10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left:10px solid #fff;
+    position:absolute;
+    left:-10px;
+    bottom:-10px;
+}
+form.filters {color:#65553f;margin-top:15px;}
+form.filters fieldset {margin-bottom:10px;}
+form.filters legend span {display:block; width:208px; border-bottom:1px solid #c7ad89;font-weight:bold;margin-bottom:10px;font-size:1.1em;}
 form.filters div.element {display:inline;}
 form.filters input[type="checkbox"] {width:20px;float:left;margin-left:-4px;}
-form.filters label {display:inline;margin-left:0px;font-size:.9em;}
+form.filters label {display:inline;margin-left:0px;font-size:0.9em;}
 form.filters ol li {clear:both;}
 #maincontent form.filters ol {list-style:none;padding-left:0px;}
 form.filters ol li.disabled {opacity: 0.5;filter:alpha(opacity=50);}
 form.filters ol li.disabled label {text-decoration: line-through;}
+form.filters ol li:first-child {font-weight:bold;}
 
 #maincontent #filterSummary {
     font-size:0.8em;
