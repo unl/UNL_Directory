@@ -1,6 +1,6 @@
 <?php
 echo '<div id="results_'.$context->affiliation.'" class="results affiliation '.$context->affiliation.'">';
-echo '<h2>'.ucfirst($context->affiliation).'</h2>';
+echo '<h3>'.ucfirst($context->affiliation).'</h3>';
 echo $savvy->render(new UNL_Peoplefinder_SearchResults(array('results'=>$context->results, 'options'=>$context->options )));
 if (count($context->like_results)) {
     echo '<div class="likeResults">';

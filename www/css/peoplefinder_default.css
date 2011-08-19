@@ -139,11 +139,11 @@
 /* Headings */
 
 
-#maincontent .results h2, #maincontent .likeResults h3, #maincontent #orgChart h2 {
+#maincontent .results h3, #maincontent .likeResults h3, #maincontent #orgChart h3 {
 	font-variant:small-caps;
 	font-weight:bold;
 }
-#maincontent .results h2, #maincontent #orgChart h2 {border-bottom:2px dotted #E6E6E6;padding-bottom:0;}
+#maincontent .results h3, #maincontent #orgChart h3 {border-bottom:2px dotted #E6E6E6;padding-bottom:0;}
 
 #maincontent .likeResults h3 {
 	font-size:1em;	
@@ -383,6 +383,11 @@ img.profile_pic.medium {width:100px;height:100px;}
   text-shadow: 0 -1px 1px #9c937d;
   text-transform: uppercase;
   width: 150px;	
+}
+.directorySearch ol li:first-child input[type=submit]:hover, #maincontent #directoryHelp li a:hover {
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.2);
 }
 .directorySearch ol li:first-child input[type=submit] {
     height:36px;
