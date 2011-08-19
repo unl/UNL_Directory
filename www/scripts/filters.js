@@ -17,7 +17,7 @@ var filters = function() {
 						filters.departmentArray(WDN.jQuery(this).text());
 						WDN.jQuery(this).parents('li.ppl_Sresult').addClass(filters.scrubDept(WDN.jQuery(this).text().toLowerCase()));
 					});
-					affiliations.push(WDN.jQuery(this).children('h2').eq(0).text());
+					affiliations.push(WDN.jQuery(this).children('h3').eq(0).text());
 				}
 			});
 			departments.sort();	
