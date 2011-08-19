@@ -66,7 +66,6 @@ var filters = function() {
 				WDN.jQuery('form.filters input').not('.filterAll').each(function(){ //loop through all the checkboxes
 					if (this.checked) {
 						WDN.jQuery('li.'+WDN.jQuery(this).attr('value')).show().parents('.affiliation').show(); //if a checkbox is checked, make sure the corresponding content is shown.
-						//WDN.jQuery('li.'+WDN.jQuery(this).attr('value'));
 						checked.push(WDN.jQuery(this).attr('id'));
 					}
 				});
