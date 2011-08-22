@@ -31,8 +31,7 @@ var service_peoplefinder = function() {
 			});
 			WDN.jQuery('ul.pfResult.departments li .overflow').click(function(){
 				window.location = WDN.jQuery('.fn a', this).attr('href');
-				}
-			);
+			});
 		},
 		
 		anotherAttempt : function(firstName, lastName) {
@@ -84,7 +83,6 @@ var service_peoplefinder = function() {
 				liRecord.children('.vcard').children('a.planetred_profile').fadeOut(400);
 				liRecord.children('.vcard').slideUp(function(){
 					WDN.jQuery(this).remove();
-					
 				});
 				liRecord.removeClass('selected');
 			} else {

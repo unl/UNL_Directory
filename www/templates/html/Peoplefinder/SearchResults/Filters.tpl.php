@@ -1,6 +1,6 @@
 <div id="filters" class="grid3 first">
     <div class="wdn_filterset">
-        <h4>Filter Results</h4>
+        <h4 class="formal">Filter Results</h4>
         <form method="post" action="#" class="filters">
             <fieldset class="affiliation">
                 <legend>By Affiliation</legend>
