@@ -43,7 +43,7 @@
                                 $selected = 'selected="selected"';
                             }
                         ?>
-                        <option value="<?php echo htmlspecialchars($code); ?>" <?php echo $selected; ?>><?php echo htmlspecialchars($name).' ('.htmlspecialchars($code).')'; ?></option>
+                        <option value="<?php echo htmlspecialchars($code, ENT_QUOTES); ?>" <?php echo $selected; ?>><?php echo htmlspecialchars($name).' ('.htmlspecialchars($code).')'; ?></option>
                     
                     <?php endforeach; ?>
                     </optgroup>
