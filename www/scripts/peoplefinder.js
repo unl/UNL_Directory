@@ -49,7 +49,7 @@ var service_peoplefinder = function() {
 				WDN.jQuery('li.current .vcardInfo').append(correctionHTML);
 				WDN.jQuery('input[name="page_address"]').val(WDN.jQuery('li.current .permalink').attr('href'));
 				if (WDN.jQuery('.wdn_annotate')) {
-					if (!WDN.jQuery('head link[href='+ ANNOTATE_URL +'css/annotate.css]').length) {
+					if (!WDN.jQuery('head link[href="'+ ANNOTATE_URL +'css/annotate.css"]').length) {
 						WDN.loadCSS(ANNOTATE_URL + 'css/annotate.css');
 					}
 					WDN.loadJS(ANNOTATE_URL + 'scripts/annotate_functions.js', function() {
