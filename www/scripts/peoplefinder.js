@@ -333,6 +333,11 @@ WDN.jQuery(document).ready(function() {
 			return false;
 		}
 	);
+	WDN.jQuery('.ppl_Sresult .vcard').live('click', function(event){
+			event.stopPropogation();
+			return false;
+		}
+	);
 	WDN.jQuery('a.img-qrcode').live('click', function() {
 		WDN.jQuery(this).colorbox({open:true});
 		return false;
