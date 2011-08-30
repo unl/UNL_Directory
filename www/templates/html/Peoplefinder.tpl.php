@@ -1,4 +1,5 @@
 <?php
+UNL_Templates::setCachingService(new UNL_Templates_CachingService_Null());
 
 $template = 'Document';
 
