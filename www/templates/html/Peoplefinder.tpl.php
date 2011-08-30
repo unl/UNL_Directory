@@ -1,7 +1,7 @@
 <?php
 UNL_Templates::setCachingService(new UNL_Templates_CachingService_Null());
 
-$template = 'Document';
+$template = 'Fixed_html5';
 
 if ($context->options['mobile'] === true) {
     $template = 'Mobile';
@@ -16,7 +16,6 @@ $page->head .= '
 <meta name="description" content="UNL Directory is the Faculty, Staff and Student online directory for the University. Information obtained from this directory may not be used to provide addresses for mailings to students, faculty or staff. Any solicitation of business, information, contributions or other response from individuals listed in this publication by mail, telephone or other means is forbidden." />
 <meta name="keywords" content="university of nebraska-lincoln student faculty staff directory vcard" />
 <meta name="author" content="Brett Bieber, UNL Office of University Communications" />
-<meta name="viewport" content="width = 320" />
 ';
 
 if ($context->options['mobile'] === true) {

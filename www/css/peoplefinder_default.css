@@ -1,3 +1,47 @@
+/*
+Copy the Document styles. We want to use the HTML5 template, which only comes in a fixed view.
+*/
+body #navigation,
+body #wdn_search,
+body #wdn_tool_links {
+    display: none;
+}
+
+body #pagetitle {
+    margin: 15px 0;
+}
+
+body #breadcrumbs ul li.selected {
+    padding: 5px 5px 6px 8px;
+    color: #686868;
+    margin: 3px 0;
+    position: relative;
+    z-index: 2;
+    background: #eee;
+    border: none;
+    border-radius: 0;
+    line-height: 1;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+body #breadcrumbs ul li.last-link {
+    border-radius: 0 3px 3px 0; 
+    -webkit-border-radius: 0 3px 3px 0;
+    -moz-border-radius: 0 3px 3px 0;
+}
+body #breadcrumbs ul li.selected a,
+body #breadcrumbs ul li.selected a:link,
+body #breadcrumbs ul li.selected a:visited {
+    color: #686868;
+    background-position: right 3px;
+}
+
+body #footer .footer_col {
+    display: none;
+}
+.nav_unpinned #wdn_content_wrapper {margin-top:0;}
+/*End Copy*/
 #cboxTitle {display:none !important;}
 #maincontent a.dir_correctionRequest {
 	position:absolute;
@@ -322,17 +366,7 @@ img.profile_pic.medium {width:100px;height:100px;}
 	display:inline;	
 }
 .directorySearch > fieldset > ol > li > label {
-	position:absolute;
-	top:3px;
-	left:16px;
-	font-size:1.5em;
-	color:#5c5c5c;
-	cursor:text;
-	background:#fff;
-	padding:5px;
-}
-.directorySearch > fieldset > ol > li > label.sn{
-	left:253px;	
+	display:none;
 }
 .directorySearch ol li:first-child input[type=text] {
 	width:440px;

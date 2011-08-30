@@ -13,7 +13,7 @@
                 $default = htmlentities((string)$context->options['q'], ENT_QUOTES);
             }
             ?>
-            <input type="text" value="<?php echo $default; ?>" id="q" name="q" class="q" />
+            <input type="text" autofocus placeholder="Enter a name to begin your search" value="<?php echo $default; ?>" id="q" name="q" class="q" />
             <input name="submitbutton" type="submit" value="Search" />
         </li>
     </ol>

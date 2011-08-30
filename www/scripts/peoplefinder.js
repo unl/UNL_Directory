@@ -65,7 +65,7 @@ var service_peoplefinder = function() {
 		
 		presentPeopleFinderResults : function(){
 			WDN.jQuery('#filters').css({'opacity' : '0.4'});
-			WDN.jQuery('#q').siblings('label').hide();
+			//WDN.jQuery('#q').siblings('label').hide();
 			WDN.jQuery('#maincontent .grid6, #maincontent .footer').remove();
 			if (!splitName) {
 				WDN.toolbar_peoplefinder.queuePFRequest(query, 'results');
@@ -123,7 +123,8 @@ var directory = function() {
 		},
 		
 		fixLabel : function() { //called to reposition the label over the input and hide
-			WDN.jQuery('.directorySearch input').bind({
+			/*
+			 WDN.jQuery('.directorySearch input').bind({
 				focus : function(){
 					WDN.jQuery(this).siblings('label[for='+this.id+']').hide();
 				},
@@ -148,6 +149,7 @@ var directory = function() {
 					}
 				}
 			});
+			*/
 			WDN.loadJS('wdn/templates_3.0/scripts/plugins/qtip/jquery.qtip.js', function(){
 				WDN.jQuery('.directorySearch input#q').qtip({
 			    	content: {
