@@ -31,7 +31,7 @@
 </ol>
 </fieldset>
 <ul id="directoryHelp">
-    <li><a href="<?php echo UNL_Peoplefinder::getURL(); ?>?adv" title="Switch searching type"  tabindex="0" id="simpleSearch" class="simple">Simple Search</a></li>
+    <li><a href="<?php echo UNL_Peoplefinder::getURL(); ?>?std" title="Switch searching type"  tabindex="0" id="simpleSearch" class="simple">Simple Search</a></li>
     <li>
         <?php if ($context->options['mobile'] != true) { ?>
             <a href="http://www.unl.edu/ucomm/splash/fieldguide_directory.shtml" title="Find out what's new in the directory">Directory Help</a>
