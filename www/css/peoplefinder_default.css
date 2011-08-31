@@ -45,8 +45,8 @@ body #footer .footer_col {
 #cboxTitle {display:none !important;}
 #maincontent a.dir_correctionRequest {
 	position:absolute;
-	bottom:-46px;
-	right:0;
+	bottom:5px;
+	right:5px;
 	border-radius:5px;
 	-webkit-border-radius:5px;
 	-moz-border-radius:5px;
@@ -60,8 +60,6 @@ body #footer .footer_col {
 	font-weight:bold;
 }
 #maincontent .vcardInfo a.dir_correctionRequest {
-	bottom:-5px;
-	right:-5px;
 	-webkit-box-shadow: 1px 1px 1px #949494;
     -moz-box-shadow: 1px 1px 1px #949494;
     box-shadow: 1px 1px 1px #949494; 
@@ -124,6 +122,9 @@ body #footer .footer_col {
 	position:relative;
     cursor:pointer;
 }
+#maincontent ul.pfResult.departments li {
+    cursor:auto;	
+}
 #maincontent ul.pfResult li div.overflow {
 	min-height:47px;
 	padding: 7px 5px;
@@ -133,7 +134,7 @@ body #footer .footer_col {
 #maincontent ul.pfResult li:hover, #maincontent ul.pfResult li.selected {
 	background:#ecf4f9;
 }
-#maincontent ul.pfResult li.selected .vcard {display:none;}
+#maincontent ul.pfResult li.selected .vcard {display:none;margin:0 10px;}
 #maincontent ul.pfResult .tel {display:block;}
 #maincontent .on-campus-dialing {font-size:80%;text-transform:uppercase;color:#897B42;}
 
@@ -157,8 +158,7 @@ body #footer .footer_col {
 .fn a, .fn {
 	font-size:18px;
 	font-weight:bold;
-	color:#464545 !important;	
-	max-width:290px;
+	color:#464545 !important;
 	max-height:35px;
 	min-height:20px;
 	overflow:hidden;
@@ -194,141 +194,7 @@ body #footer .footer_col {
 }
 #maincontent #pfShowRecord .wdn_tabs, #maincontent #pfShowRecord .wdn_tabs_content {display:none;}
 
-/* 
-***************************************************
 
-	Individual Peoplefinder Records
-
-***************************************************
-*/
-.vcard {
-	background:#fff;
-	border:1px solid #ccd2d5;
-	border-radius:5px;
-	-moz-border-radius:5px;
-	-webkit-border-radius:5px;
-	padding:15px;
-	min-height:200px;
-	position:relative;
-	width:425px;
-	z-index:9;
-	margin:6px auto 0 auto;
-}
-/* .vcardInfo > a.email[href^="mailto:"]:after {
-	background-image:none;
-	padding-right:0px;
-} */
-.vcard .vcardInfo .org, .vcard .vcardInfo > .title {
-	background: #E8F2F7;
-    background: -moz-linear-gradient(top, #f2f9fe 0%, #E8F2F7 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f2f9fe), color-stop(100%,#E8F2F7));
-    margin:3px 0;
-	display:inline-block;
-	font-size:0.9em;
-	width:95%;
-	padding:5px;
-	line-height:125%;
-	border-radius:5px;
-    -moz-border-radius:5px;
-    -webkit-border-radius:5px;
-	border:1px solid #D7EBF4;
-}
-.vcard .vcardInfo .org .title {font-weight:bold;}
-.vcard .eppa, .vcard .epa, .vcard .organization-unit, .vcard .tel, .vcf {display:block;}
-.vcard .title, .vcard .title .grade {
-	display:block;
-	border-bottom:1px solid #ccd2d5;
-	font-weight:bold;
-	margin-bottom:3px;
-	font-size:105%;
-}
-
-.vcard .title .major, .vcard .organization-unit, .vcard .organization-name {
-    text-indent:1em;
-    display:block;
-    font-weight:normal;
-}
-.vcard a.planetred_profile {
-	float:left;
-	margin-right:15px;
-	min-width:114px;
-}
-
-.vcard .eppa, .vcard .epa {font-style:italic;font-size:0.8em;}
-.vcardInfo {margin-left:129px;}
-.vcard .adr, .departmentInfo .adr {
-	border-left:2px solid #CCD2D5;
-	padding-left:5px;
-	margin:5px 0;
-}
-
-.vcard span[class=street-address] {
-	display:block;
-	content: ' ';
-}
-
-.vcard span[class=street-address]:after {
-    content: ' ';
-}
-
-.vcard span[class=locality]:after {
-	content: ', ';
-}
-
-.vcard span[class=region]:after {
-    content: ' ';
-}
-
-.vcard .country-name {
-	display:none;
-}
-.vcard .text-vcard, .vcard .img-qrcode, .vcard .print, .vcard .wdn_annotate.on a {
-    background: url('images/mimeIcons.png') no-repeat 0 0;
-    padding-left:20px;
-    float:left;
-    clear:left;
-    padding-right:0;
-    font-size:0.8em;
-    font-weight:bold;
-    margin:0 0 2px 10px;
-}
-.vcard .img-qrcode {
-    background-position:0 -17px;	
-}
-.vcard .print {
-	background-position:0 -33px;
-}
-.vcard .wdn_annotate.on a {
-    background-position:0 -50px;	
-}
-.vcard .text-vcard:after, .vcard .img-qrcode:after, .vcard .print:after, .vcard .wdn_annotate.on a:after {
-    display:none;	
-} 
-
-.vcard span.voice, .vcard span.fax, .vcard span.email, .vcard span.url {
-	background:url('images/iconContactSprite.png') no-repeat;
-	padding-left:25px;
-	height:20px;
-	margin-top:5px;
-    margin-bottom:3px;
-    display:block;
-}
-.vcard span.email, .vcard span.url {
-	background-position:0 -63px;
-	
-	
-}
-.vcard span.fax {
-	background-position:0 -84px;
-}
-.vcard span.url {
-	background-position:0 -42px;
-}
-.permalink {font-size:0.75em; text-transform:uppercase; font-weight:bold;}
-a.email {background:none;}
-div.wdn_annotate.on{float:left;clear:left;}
-div.wdn_annotate.on a{padding:0 0 0 24px;margin-top:2px;background-color:transparent;background-position:0 2px;border:none;}
-img.profile_pic.medium {width:100px;height:100px;}
 
 /* 
 ***************************************************
