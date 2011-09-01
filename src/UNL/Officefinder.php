@@ -78,6 +78,11 @@ class UNL_Officefinder
     {
         $this->options = $options + $this->options;
 
+        if ($this->options['format'] == 'html'
+            && $this->options['mobile'] != 'no') {
+            $this->options['mobile'] = UNL_MobileDetector::isMobileClient();
+        }
+
         $this->authenticate(true);
 
         if (!empty($_POST)) {
