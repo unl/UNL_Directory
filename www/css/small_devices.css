@@ -79,14 +79,12 @@
 	-o-border-radius: 3px;
 	border-radius: 3px;
 	color: #fff;
-	font-weight: bold;
 	font-size:1.2em;
 	text-align: center;
 	text-shadow: -1px -1px -1px #9c937d;
 	text-transform: uppercase;
 	width:30%;
-	float:right;
-	
+	padding:0;
 }
 #maincontent #directoryHelp {
     margin-top:1em;
@@ -115,12 +113,10 @@
 
 #maincontent #directoryHelp {
 	padding:0px;
-	white-space-collapse: discard;
 }
 #maincontent #directoryHelp li {
 	display:inline;
 	margin-right:15px;
-    white-space-collapse: discard;
 }
 /* 
 ***************************************************
