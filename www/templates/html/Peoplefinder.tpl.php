@@ -73,7 +73,7 @@ $page->breadcrumbs = '
 </ul>';
 
 
-
+$page->pagetitle = '<h2>Search the Directory</h2>';
 $page->maincontentarea = $savvy->render($context->output);
 $page->footercontent = 'UNL | Office of University Communications | <a href="http://www1.unl.edu/wdn/wiki/About_Peoplefinder" onclick="window.open(this.href); return false;">About Directory</a> | <a href="http://www1.unl.edu/comments/" title="Click here to direct your comments and questions" class="dir_correctionRequest">comments?</a>';
 $page->footercontent .= $savvy->render($context, 'CorrectionForm.tpl.php');
