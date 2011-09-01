@@ -260,7 +260,7 @@ a.cInfo {
 .vcard {
     margin-right:6px;
 }
-.vcard .fn {font-size:1.6em;}
+#maincontent .vcard .fn {font-size:1.6em;font-weight:bold;}
 .vcard .text-vcard, .vcard .img-qrcode, .vcard .print, .vcard .wdn_annotate.on a{
     line-height:1.5em;
 }
@@ -270,8 +270,60 @@ img.profile_pic.medium {
     background: url('/wdn/templates_3.0/css/header/images/wdn_idmProfileMedium.png') no-repeat top left;
     padding: 7px 7px 12px 7px;
 }
- #maincontent .vcard a.planetred_profile img {width:auto;}
- 
+#maincontent .vcard a.planetred_profile img {width:auto;}
+
+/* 
+***************************************************
+
+        Individual Officefinder Records
+
+***************************************************
+*/
+#maincontent .vcard.office > img {
+    width:114px;
+    float:left;
+    margin-right:15px;
+}
+.vcard.office {margin-bottom:1em;}
+.unl-hr-org-unit-number {display:none;}
+.vcard.office .vcardInfo {margin-bottom:0;}
+#listings + h3, #listings +h3 + p {display:none;}
+#all_employees:before, #listings:before { 
+    content: 'All Employees';
+    font-weight:bold;
+    font-family: Helvetica,"Lucida Grande",Verdana,Arial;
+    font-size:1.7em;
+    display:block;
+    border-bottom:2px dotted #E6E6E6;
+    padding-bottom:0;
+    font-variant:small-caps;
+}
+.wdn_tabs {display:none;}
+#listings:before { content: 'All Listings'; }
+#listings > ul.listings > li {
+    padding:5px 5px 0px 0px;
+    border-bottom: 1px dotted #d0cece;
+    list-style:none;
+    min-height:20px;
+}
+#maincontent ul.listings li ul {
+    padding:0px 5px;
+    padding-top:1px;
+    margin:3px 0px; 
+    padding-left:20px;
+    list-style:none; 
+}
+#maincontent ul.listings li ul li {
+    border-bottom:1px dotted #c4c2c2;
+    border-left:2px dotted #e6e6e6;
+    padding:3px;
+}
+#maincontent ul.listings li ul li:last-child {
+    border-bottom:none; 
+}
+.listing .tel{display:block;}
+#orgChart, #reportProblem {display:none;}
+
  /* Smartphones (portrait) ----------- */
 @media only screen 
     and (max-width : 320px) {
@@ -282,6 +334,12 @@ img.profile_pic.medium {
         width:auto;
         text-align:center;
         display:block;
+    }
+    #maincontent .vcard.office > img {
+        width:100px;
+        display:block;
+        float:none;
+        margin:0 auto;
     }
     .vcardInfo {margin-left:0;}
 }
