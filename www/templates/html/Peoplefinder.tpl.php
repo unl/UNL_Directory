@@ -18,11 +18,11 @@ $page->head .= '
 <meta name="author" content="Brett Bieber, UNL Office of University Communications" />
 ';
 
+$page->head .= '<link href="/wdn/templates_3.0/css/content/vcard.css" type="text/css" rel="stylesheet" />';
 if ($context->options['mobile'] === true) {
     $page->head .='<link href="'.UNL_Peoplefinder::getURL().'css/small_devices.css" type="text/css" rel="stylesheet" />';
 } else {
     $page->head .='<link href="'.UNL_Peoplefinder::getURL().'css/all_peoplefinder.css" type="text/css" rel="stylesheet" />
-    			<link href="/wdn/templates_3.0/css/content/vcard.css" type="text/css" rel="stylesheet" />
                 <!--[if IE]>
                 <link rel="stylesheet" type="text/css" media="screen" href="'.UNL_Peoplefinder::getURL().'css/ie.css" />
                 <![endif]-->
