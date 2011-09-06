@@ -336,7 +336,7 @@ WDN.jQuery(document).ready(function() {
 		}
 	);
 	WDN.jQuery('.ppl_Sresult .vcard').live('click', function(event){
-			event.stopPropogation();
+			event.stopPropagation();
 			return false;
 		}
 	);
