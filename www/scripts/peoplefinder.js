@@ -208,7 +208,7 @@ var directory = function() {
 			        }
 			    });
 			});
-			WDN.jQuery('#q').focus().select();
+			//WDN.jQuery('#q').focus().select();
 			WDN.jQuery('.directorySearch > fieldset > ol > li > label').css({'top' : '3px'}).focus(function(){
 					WDN.jQuery(this).hide().siblings('input[type=text]').next().focus();
 			});
