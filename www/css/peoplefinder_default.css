@@ -122,6 +122,9 @@ body #footer .footer_col {
 	position:relative;
     cursor:pointer;
 }
+#maincontent ul.pfResult li.selected .vcard {
+    cursor:default;
+}
 #maincontent ul.pfResult.departments li {
     cursor:auto;	
 }
