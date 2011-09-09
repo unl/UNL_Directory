@@ -18,6 +18,6 @@ class UNL_Officefinder_DepartmentList_AcademicDepartments extends UNL_Officefind
 
     function getCacheKey()
     {
-        return 'academic departments';
+        return false;
     }
 }
