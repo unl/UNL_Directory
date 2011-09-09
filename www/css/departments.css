@@ -10,8 +10,8 @@
     background:none;
     border:none;
     padding:0;
-    margin:0;
     min-height:120px;
+    margin:20px 20px 20px 45px;
 }
 .vcard.office .departmentInfo {
     background:none;
@@ -36,8 +36,7 @@
     background-image: url('images/tornSpiral.png'), -moz-linear-gradient(    right center,    rgb(237,232,178) 83%,    rgb(230,215,147) 96%);
     background-image: url('images/tornSpiral.png'), -webkit-gradient(    linear,    right top,    left top,    color-stop(0.83, rgb(237,232,178)),    color-stop(0.96, rgb(230,215,147)));      
     background-repeat:repeat-y;
-    padding:20px 20px 20px 45px;
-    width:875px;
+    width:100%;
     margin-bottom:25px;
     min-height:109px;
     display:inline-block;

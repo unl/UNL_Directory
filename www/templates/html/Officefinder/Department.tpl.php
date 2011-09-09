@@ -114,7 +114,7 @@ if ($context->options['view'] != 'alphalisting') {
     ?>
 </div>
 <div class="clear"></div>
-<div class="two_col left">
+<div class="grid8 first">
     <ul class="wdn_tabs">
         <li><a href="#listings">Listings</a></li>
         <?php if ($department && count($department) > 0): ?>
@@ -144,7 +144,7 @@ if ($context->options['view'] != 'alphalisting') {
         ?>
     </div>
 </div>
-<div class="two_col right" id="orgChart">
+<div class="grid4" id="orgChart">
 <h2>HR Organization Chart Position</h2>
 <?php
 if (!$context->isRoot()) {
