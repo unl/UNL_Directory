@@ -99,7 +99,7 @@ var filters = function() {
 		showAll : function() {
 			WDN.jQuery('form.filters input').not('.filterAll').removeAttr('checked');
 			WDN.jQuery('.filterAll').attr('checked', 'checked');
-			WDN.jQuery('li.ppl_Sresult').show();
+			WDN.jQuery('div.affiliation, li.ppl_Sresult').show();
 		}
 		
 	};
