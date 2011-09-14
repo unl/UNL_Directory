@@ -22,9 +22,9 @@ if ($displayEmail) {
     echo "<a class='email' href='mailto:{$context->mail}'>";
 }
 if ($context->ou == 'org') {
-    echo '<span class="cn">'.$context->cn.'</span>'.PHP_EOL;
+    echo '<span class="cn">'.$context->cn.'</span>';
 } else {
-    echo '<span class="fn">'.$context->displayName.'</span>'.PHP_EOL;
+    echo '<span class="fn">'.$context->displayName.'</span>';
     if (!empty($context->eduPersonNickname)
         && $context->eduPersonNickname != ' ') {
         echo ' ('.$context->eduPersonNickname.')';
@@ -77,10 +77,10 @@ if (isset($context->unlSISClassLevel)) {
 }
 
 if (isset($context->unlHROrgUnitNumber)) {
-    
+
     $roles = $parent->context->getRoles($context->dn);
     echo $savvy->render($roles);
-    
+
 }
 
 if (isset($context->postalAddress)) {
@@ -111,7 +111,7 @@ if (isset($context->postalAddress)) {
 }
 
 if (isset($context->telephoneNumber)) {
-    
+
     echo '<div class="tel workTel">
              <span class="voice">
              <span class="type">Work</span>
