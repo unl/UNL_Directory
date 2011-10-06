@@ -22,7 +22,7 @@ if ($context->options['view'] != 'alphalisting') {
     if (!empty($context->building)) {
         $bldgs = new UNL_Common_Building();
         if ($bldgs->buildingExists($context->building)) {
-            $image_url = 'http://maps.unl.edu/'.urlencode($context->building).'/image';
+            $image_url = 'http://maps.unl.edu/building/'.urlencode($context->building).'/image/1/md';
         }
     }
     ?>
