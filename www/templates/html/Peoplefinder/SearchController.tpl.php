@@ -12,6 +12,8 @@ if ($context->options['format'] != 'partial') {
 // First, we group results by affiliation
 // Second, we allow "Like" results to be displayed after the exact matches
 
+$showing = 0;
+
 UNL_Peoplefinder::$displayResultLimit -= count($context->results);
 
 if (count($context->dept_results)) {
@@ -27,7 +29,6 @@ if (!is_array($context->options['q'])
 
 
 // The HTML view prefers to have them grouped by affiliation
-$showing = count($context->results) + count($like_records);
 
 $by_affiliation      = UNL_Peoplefinder_SearchResults::groupByAffiliation($context->getRaw('results'));
 $like_by_affiliation = UNL_Peoplefinder_SearchResults::groupByAffiliation($like_records);
@@ -51,7 +52,12 @@ foreach ($affiliations as $affiliation) {
         if (isset($like_by_affiliation[$affiliation])) {
             $section->like_results = $like_by_affiliation[$affiliation];
         }
-        $section->options      = $context->options;
+
+        // Remember to tally up what is actually showing
+        $showing += count($section->results);
+        $showing += count($section->like_results);
+
+        $section->options = $context->options;
         echo $savvy->render($section, 'Peoplefinder/SearchResults/ByAffiliation.tpl.php');
     }
 }
