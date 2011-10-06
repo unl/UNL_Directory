@@ -14,7 +14,7 @@ var service_peoplefinder = function() {
 					} else { //user did first search from advanced search
 						splitQuery = originalSearch.split(' ',2);
 						service_peoplefinder.anotherAttempt(splitQuery[0] ,splitQuery[1].substring(0,1));
-					}					
+					}
 				}
 				
 				return false;
@@ -59,8 +59,8 @@ var service_peoplefinder = function() {
 				}
 				WDN.jQuery('li.current .vcard a.planetred_profile').fadeIn(400);
 				WDN.jQuery('li.current .vcard').slideDown();
-            	WDN.jQuery('li.selected .loading').hide();
-            }
+				WDN.jQuery('li.selected .loading').hide();
+			}
 		},
 		
 		presentPeopleFinderResults : function(){
@@ -352,7 +352,7 @@ WDN.jQuery(document).ready(function() {
 				return false;
 			}
 			WDN.post(
-				'http://www1.unl.edu/comments/', 
+				'http://www1.unl.edu/comments/',
 				WDN.jQuery(this).serialize(),
 				function () {
 				}
