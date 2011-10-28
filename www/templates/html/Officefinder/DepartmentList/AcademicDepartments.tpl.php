@@ -20,6 +20,7 @@ WDN.loadJS('../scripts/filters.js', function(){
     </div>
 </div>
 <div class="grid9">
+<h2>Academic Departments</h2>
 <?php
 $firstLetter = '';
 foreach ($context as $listing)
