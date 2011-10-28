@@ -21,6 +21,11 @@ WDN.loadJS('../scripts/filters.js', function(){
 </div>
 <div class="grid9">
 <h2>Academic Departments</h2>
+<ul style="display:inline;list-style:none;">
+    <?php foreach (range('A', 'Z') as $letter): ?>
+    <li style="display:inline;border:1px solid #eee;padding:0 5px;"><a href="#<?php echo $letter; ?>"><?php echo $letter; ?></a></li>
+    <?php endforeach; ?>
+</ul>
 <?php
 $firstLetter = '';
 foreach ($context as $listing)
