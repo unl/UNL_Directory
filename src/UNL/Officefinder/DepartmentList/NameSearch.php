@@ -19,6 +19,10 @@ class UNL_Officefinder_DepartmentList_NameSearch extends UNL_Officefinder_Depart
 
     function getSQL()
     {
+        $query = $this->options['q'];
+
+        $query = preg_replace('/\s(and|\&)\s/', ' % ', $query);
+
         $mysqli = UNL_Officefinder::getDB();
         $sql = 'SELECT DISTINCT d1.id
                 FROM departments d1 ';
@@ -30,9 +34,9 @@ class UNL_Officefinder_DepartmentList_NameSearch extends UNL_Officefinder_Depart
         $sql .= '
                 LEFT JOIN department_aliases ds ON ds.department_id = d1.id
                 WHERE (
-                d1.name LIKE "%'.$mysqli->escape_string($this->options['q']).'%"
+                d1.name LIKE "%'.$mysqli->escape_string($query).'%"
                 OR
-                ds.name LIKE "%'.$mysqli->escape_string($this->options['q']).'%"
+                ds.name LIKE "%'.$mysqli->escape_string($query).'%"
                 )
                 ORDER BY d1.name';
         return $sql;
