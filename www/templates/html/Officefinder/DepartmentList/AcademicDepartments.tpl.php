@@ -26,7 +26,6 @@ WDN.loadJS('../scripts/filters.js', function(){
         <li><a href="#<?php echo $letter; ?>"><?php echo $letter; ?></a></li>
         <?php endforeach; ?>
     </ul>
-    <ul class="pfResult departments">
     <?php
     $firstLetter = '';
     foreach ($context as $listing)
@@ -35,7 +34,10 @@ WDN.loadJS('../scripts/filters.js', function(){
         if ($firstLetter != strtoupper($listing->name[0])) {
             // New letter
             $firstLetter = strtoupper($listing->name[0]);
-            echo '</ul><h2 id="'.$firstLetter.'">'.$firstLetter.'</h3><ul class="pfResult departments">';
+            if ($firstLetter != 'A') {
+                echo '</ul>';
+            }
+            echo '<h2 id="'.$firstLetter.'">'.$firstLetter.'</h3><ul class="pfResult departments">';
         }
         echo $savvy->render($listing, 'Officefinder/DepartmentList/ListItem.tpl.php');
     }
