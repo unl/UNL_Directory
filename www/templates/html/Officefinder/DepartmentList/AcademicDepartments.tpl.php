@@ -43,7 +43,7 @@ foreach ($context as $listing)
     $parent = $listing->getParent();
     echo '
     <div class="dept parent_'.$parent->id.'">
-            <a href="'.$website.'">'.$listing->name.'</a> <span class="dir_partent">('.$parent->name.')</span>
+            <a href="'.$website.'">'.$listing->name.'</a> <span class="dir_parent">('.$parent->name.')</span>
     </div>';
 }
 ?>
