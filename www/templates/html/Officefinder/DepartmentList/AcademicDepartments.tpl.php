@@ -34,7 +34,7 @@ foreach ($context as $listing)
     if ($firstLetter != strtoupper($listing->name[0])) {
         // New letter
         $firstLetter = strtoupper($listing->name[0]);
-        echo '<h2 id="'.$firstLetter.'">'.$firstLetter.'</h3>';
+        echo '<h3 id="'.$firstLetter.'">'.$firstLetter.'</h3>';
     }
     $website = $listing->getURL();
     if (!empty($listing->website)) {
