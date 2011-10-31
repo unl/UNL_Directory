@@ -140,6 +140,11 @@ ul.listings li .listingDetails {
 }
 #maincontent ul#dir_nav li a {
     padding:0.5% 1%;
-    border:1px solid #eee;
+    border:1px solid #A7CEE5;
     line-height:1;
+    color:#637A88;
+}
+#maincontent ul#dir_nav li a:hover {
+    background:#637A88;
+    color:#fff;
 }
