@@ -70,7 +70,7 @@
     max-height:42px;line-height:20px;
 }
 
-.cInfo {position:absolute;right:5px;}
+.cInfo {position:absolute;right:5px;font-size:75%;}
 
 #maincontent .results {
     margin-top:15px;
@@ -86,3 +86,62 @@
     font-size:1em;  
 }
 #maincontent #pfShowRecord .wdn_tabs, #maincontent #pfShowRecord .wdn_tabs_content {display:none;}
+
+/*
+************************************
+
+    Academic department alpha listing
+
+************************************
+*/
+#maincontent #dir_nav {
+    display:block;
+    list-style:none;
+    padding:0;
+    margin:10px 0;
+}
+#maincontent ul#dir_nav li {
+    display:inline;
+}
+#maincontent ul#dir_nav li a {
+    padding:0.5% 1%;
+    border:1px solid #A7CEE5;
+    line-height:1;
+    color:#637A88;
+}
+#maincontent ul#dir_nav li a:hover {
+    background:#637A88;
+    color:#fff;
+}
+#maincontent #dir_departmentListing {
+    clear:none;
+}
+#maincontent #dir_departmentListing h4 {
+    background:#637A88;
+    color:#fff;
+    line-height:1;
+    padding:0.5% 1%;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;
+}
+#maincontent #dir_departmentListing .planetred_profile {
+    display:none;
+}
+#maincontent #dir_departmentListing .overflow {
+    min-height:0;
+    padding:0;
+}
+#maincontent #dir_departmentListing .fn, #maincontent #dir_departmentListing .fn a {
+    font-size:100%;
+    line-height:140%;
+    min-height:0;
+    overflow:auto;
+}
+#maincontent #dir_departmentListing .fn {
+    overflow:auto;
+}
+#maincontent #dir_departmentListing ul.pfResult li {
+    border-bottom:0;
+}
+#maincontent #dir_departmentListing .recordDetails {margin-left:0;}

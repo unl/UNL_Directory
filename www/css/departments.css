@@ -121,30 +121,3 @@ ul.listings li .listingDetails {
     
 }
 .listing .tel{display:block;}
-
-/*
-************************************
-
-    Academic department alpha listing
-
-************************************
-*/
-#maincontent ul#dir_nav {
-    display:block;
-    list-style:none;
-    padding:0;
-    margin:10px 0;
-}
-#maincontent ul#dir_nav li {
-    display:inline;
-}
-#maincontent ul#dir_nav li a {
-    padding:0.5% 1%;
-    border:1px solid #A7CEE5;
-    line-height:1;
-    color:#637A88;
-}
-#maincontent ul#dir_nav li a:hover {
-    background:#637A88;
-    color:#fff;
-}
