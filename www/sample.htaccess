@@ -6,3 +6,5 @@ RewriteRule ^hcards/(.*) service.php?format=hcard&uid=$1
 
 RewriteRule ^departments/(5000[\d]{4})$ departments/index.php?view=department&sap=$1 [QSA]
 RewriteRule ^departments/([\d]+)$ departments/index.php?view=department&id=$1 [QSA]
+RewriteRule ^departments/([\d]+)/listings$ departments/index.php?view=deptlistings&id=$1 [QSA]
+RewriteRule ^departments/([\d]+)/summary$ departments/index.php?view=deptsummary&id=$1 [QSA]
