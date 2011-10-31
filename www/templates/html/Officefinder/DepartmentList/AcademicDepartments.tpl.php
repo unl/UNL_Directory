@@ -19,7 +19,7 @@ WDN.loadJS('../scripts/filters.js', function(){
         </form>
     </div>
 </div>
-<div class="grid9">
+<div class="grid9" id="dir_departmentListing">
 <h2>Academic Departments</h2>
 <ul id="dir_nav">
     <?php foreach (range('A', 'Z') as $letter): ?>
