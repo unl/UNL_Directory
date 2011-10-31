@@ -8,6 +8,18 @@ class UNL_Officefinder_DepartmentList_NameSearch extends UNL_Officefinder_Depart
         $this->options = $options + $this->options;
         $records = array();
         $mysqli = UNL_Officefinder::getDB();
+        $sql = $this->getSQL();
+        if ($result = $mysqli->query($sql)) {
+            while($row = $result->fetch_array(MYSQLI_NUM)) {
+                $records[] = $row[0];
+            }
+        }
+        parent::__construct($records);
+    }
+
+    function getSQL()
+    {
+        $mysqli = UNL_Officefinder::getDB();
         $sql = 'SELECT DISTINCT d1.id
                 FROM departments d1 ';
         if ((bool)$this->options['parent_orgs'] === true) {
@@ -23,12 +35,7 @@ class UNL_Officefinder_DepartmentList_NameSearch extends UNL_Officefinder_Depart
                 ds.name LIKE "%'.$mysqli->escape_string($this->options['q']).'%"
                 )
                 ORDER BY d1.name';
-        if ($result = $mysqli->query($sql)) {
-            while($row = $result->fetch_array(MYSQLI_NUM)) {
-                $records[] = $row[0];
-            }
-        }
-        parent::__construct($records);
+        return $sql;
     }
 
 }
