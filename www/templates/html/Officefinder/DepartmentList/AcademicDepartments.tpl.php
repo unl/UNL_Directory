@@ -19,32 +19,26 @@ WDN.loadJS('../scripts/filters.js', function(){
         </form>
     </div>
 </div>
-<div class="grid9" id="dir_departmentListing">
-<h2>Academic Departments</h2>
-<ul id="dir_nav">
-    <?php foreach (range('A', 'Z') as $letter): ?>
-    <li><a href="#<?php echo $letter; ?>"><?php echo $letter; ?></a></li>
-    <?php endforeach; ?>
-</ul>
-<?php
-$firstLetter = '';
-foreach ($context as $listing)
-{
-    /* @var $listing UNL_Officefinder_Department */
-    if ($firstLetter != strtoupper($listing->name[0])) {
-        // New letter
-        $firstLetter = strtoupper($listing->name[0]);
-        echo '<h3 id="'.$firstLetter.'">'.$firstLetter.'</h3>';
+<div class="grid9 results departments" id="dir_departmentListing">
+    <h3>Academic Departments</h3>
+    <ul id="dir_nav">
+        <?php foreach (range('A', 'Z') as $letter): ?>
+        <li><a href="#<?php echo $letter; ?>"><?php echo $letter; ?></a></li>
+        <?php endforeach; ?>
+    </ul>
+    <ul class="pfResult departments">
+    <?php
+    $firstLetter = '';
+    foreach ($context as $listing)
+    {
+        /* @var $listing UNL_Officefinder_Department */
+        if ($firstLetter != strtoupper($listing->name[0])) {
+            // New letter
+            $firstLetter = strtoupper($listing->name[0]);
+            echo '</ul><h2 id="'.$firstLetter.'">'.$firstLetter.'</h3><ul class="pfResult departments">';
+        }
+        echo $savvy->render($listing, 'Officefinder/DepartmentList/ListItem.tpl.php');
     }
-    $website = $listing->getURL();
-    if (!empty($listing->website)) {
-        $website = $listing->website;
-    }
-    $parent = $listing->getParent();
-    echo '
-    <div class="dept parent_'.$parent->id.'">
-            <a href="'.$website.'">'.$listing->name.'</a> <span class="dir_parent">('.$parent->name.')</span>
-    </div>';
-}
-?>
+    ?>
+    </ul>
 </div>
