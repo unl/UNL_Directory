@@ -8,15 +8,42 @@ UNL_Officefinder::setReplacementData('breadcrumbs', '
         <li><a href="'.UNL_Peoplefinder::getURL().'">Directory</a></li>
         <li>'.$context->name.'</li>
     </ul>');
-
+UNL_Officefinder::setReplacementData('pagetitle', '<h2>'.$context->name.'</h2>');
 $userCanEdit = false;
 
 // Check if the user can edit and store this result for later
 if ($context->options['view'] != 'alphalisting') {
     $userCanEdit = $context->userCanEdit(UNL_Officefinder::getUser());
 }
-echo $savvy->render($context, 'Officefinder/Department/Summary.tpl.php');
-
+?>
+<section class="summary">
+    <h3 class="sec_header">
+        Department Summary
+    </h3>
+        <?php 
+        if ($userCanEdit) {
+        		echo '<div class="action_container">
+        				<a class="minibutton edit" href="'.$context->getURL().'?format=editing" title="Edit">Edit</a>
+        				<h4>Edit this Department</h4>';
+        			if (!isset($context->org_unit) || UNL_Officefinder::isAdmin(UNL_Officefinder::getUser(true))) {
+                        // Only allow Admins to delete "official" SAP departments
+                        include dirname(__FILE__).'/../../editing/Officefinder/Department/DeleteForm.tpl.php';
+                    }
+        		echo '</div>';
+            }
+        ?>
+    <div class="grid8 first">
+		<?php echo $savvy->render($context, 'Officefinder/Department/Summary.tpl.php'); ?>
+    </div>
+    <div class="grid4">
+	    <?php
+	    if ($userCanEdit) {
+	        echo $savvy->render($context, 'Officefinder/Department/EditBox.tpl.php');
+	    }
+	    ?>
+    </div>
+</section>
+<?php
 // Get the official org unit if possible
 $department = $context->getHRDepartment();
 ?>
@@ -52,7 +79,7 @@ $department = $context->getHRDepartment();
     </div>
 </div>
 <div class="grid4" id="orgChart">
-<h2>HR Organization Chart Position</h2>
+<h3>HR Organization Chart Position</h3>
 <?php
 if (!$context->isRoot()) {
     $parent = $context->getParent();

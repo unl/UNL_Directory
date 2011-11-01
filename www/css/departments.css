@@ -10,8 +10,6 @@
     background:none;
     border:none;
     padding:0;
-    min-height:120px;
-    margin:20px 20px 20px 45px;
 }
 .vcard.office .departmentInfo {
     background:none;
@@ -23,27 +21,28 @@
 
 .vcard.office .frame{float:left;max-width:100px;}
 
-#maincontent h2.fn {
-    font-size:18px;
-    font-weight:bold;
-    color:#464545 !important; 
-}
 .departmentInfo {
-    border-radius:10px;
-    -moz-border-radius:10px;
-    -webkit-border-radius:10px;
-    background:#fbeca5;
-    background-image: url('images/tornSpiral.png'), -moz-linear-gradient(    right center,    rgb(237,232,178) 83%,    rgb(230,215,147) 96%);
-    background-image: url('images/tornSpiral.png'), -webkit-gradient(    linear,    right top,    left top,    color-stop(0.83, rgb(237,232,178)),    color-stop(0.96, rgb(230,215,147)));      
-    background-repeat:repeat-y;
-    width:100%;
     margin-bottom:25px;
-    min-height:109px;
-    display:inline-block;
+    overflow:auto;
+    position:relative;
 }
-
-.departmentInfo h2 .unl-hr-org-unit-number {font-size:70%;font-weight:normal; display:none;}
-.departmentInfo h2:hover .unl-hr-org-unit-number {display:inline;}
+.summary {position:relative;}
+.summary h4 {display:none;}
+.departmentInfo .unl-hr-org-unit-number {
+    font-size:150%;
+    font-weight:bold;
+    color:#ccc; 
+    display:none;
+    position:absolute;
+    bottom:5%;
+    left:0;
+}
+.departmentInfo .unl-hr-org-unit-number span {
+    font-size:45%;
+    color:#ddd;
+    display:block;
+}
+.departmentInfo:hover .unl-hr-org-unit-number {display:inline;}
 
 .departmentInfo .fn a, .departmentInfo .fn{max-width:none;}
 
@@ -56,7 +55,7 @@
 #listings + h2, #listings + h2 + p{display:none;}
 
 
-#maincontent #orgChart h2 {font-variant:normal;background:url('images/iconOrg.png') no-repeat 0 7px; padding-left:22px;margin-bottom:36px;}
+#maincontent #orgChart h3 {font-variant:normal;background:url('images/iconOrg.png') no-repeat 0 7px; padding-left:22px;margin-bottom:36px;border-bottom:none;}
 
 #maincontent #orgChart ul {
     list-style:none;
@@ -121,3 +120,14 @@ ul.listings li .listingDetails {
     
 }
 .listing .tel{display:block;}
+.dep_result .departmentInfo {
+    background:#fff;
+    border:1px solid #dad6b4;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:5px;
+    display:block;
+    width:75%;
+    margin:0 auto;
+    padding:10px;
+}

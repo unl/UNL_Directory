@@ -14,29 +14,22 @@ if ($context->options['view'] != 'alphalisting') {
         }
     }
     ?>
-    <div id="departmentDisplay" class="vcard office">
+    <div class="vcard office">
+        <?php 
+        	if (!empty($context->org_unit)) {
+                echo ' <span class="unl-hr-org-unit-number"><span>Org. Unit Number</span>'.$context->org_unit.'</span>';
+            }
+        ?>
         <img alt="Building Image" src="<?php echo $image_url; ?>" width="100" height="100" class="frame photo">
-        <h2 class="fn org">
+        <h4 class="fn org">
             <?php
-            echo $context->name;
-            if (!empty($context->org_unit)) {
-                echo ' <span class="unl-hr-org-unit-number">('.$context->org_unit.')</span>';
-            }
-            if ($userCanEdit) {
-                echo '<ul class="edit_actions">';
-                    echo '<li><a href="'.$context->getURL().'?format=editing" class="action edit" title="Edit">Edit</a></li>';
-                    if (!isset($context->org_unit) || UNL_Officefinder::isAdmin(UNL_Officefinder::getUser(true))) {
-                        // Only allow Admins to delete "official" SAP departments
-                        echo '<li>';
-                        include dirname(__FILE__).'/../../../editing/Officefinder/Department/DeleteForm.tpl.php';
-                        echo '</li>';
-                    }
-                echo '</ul>';
-            }
+            	echo $context->name;
             ?>
-        </h2>
+            <a class="permalink" href="<?php echo $context->getURL();?>">link</a>
+        </h4>
         <div class="vcardInfo">
             <div class="adr label">
+                <span class="type">Address</span>
                 <span class="room"><?php echo $context->room.' <a class="location mapurl" href="http://maps.unl.edu/#'.$context->building.'" onclick="WDN.jQuery.colorbox({href:\'http://maps.unl.edu/'.$context->building.'?format=staticgooglemapsv2&size=400x400&zoom=17\', width:\'460px\', height:\'490px\'});return false;">'.$context->building.'</a>'; ?></span>
                 <?php
                 if (!empty($context->address)) {
@@ -91,9 +84,4 @@ if ($context->options['view'] != 'alphalisting') {
             <?php endif; ?>
         </div>
     </div>
-    <?php
-    if ($userCanEdit) {
-        echo $savvy->render($context, 'Officefinder/Department/EditBox.tpl.php');
-    }
-    ?>
 </div>

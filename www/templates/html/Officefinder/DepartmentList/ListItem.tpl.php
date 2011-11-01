@@ -5,7 +5,7 @@ if (!$context->isOfficialDepartment()) {
         $title = '<div class="title">('.$parent->name.')</div>';
     }
 }
-echo '<li>
+echo '<li class="dep_result">
     <div class="overflow">
     <a class="planetred_profile" href="'.$context->getURL().'">
     <img alt="Generic Icon" src="'.UNL_Peoplefinder::getURL().'images/organization40.png" class="profile_pic small photo">

@@ -25,9 +25,6 @@
 #maincontent ul.pfResult li.selected .vcard {
     cursor:default;
 }
-#maincontent ul.pfResult.departments li {
-    cursor:auto;    
-}
 #maincontent ul.pfResult li div.overflow {
     min-height:47px;
     padding: 7px 5px;
@@ -124,6 +121,7 @@
     -webkit-border-radius:3px;
     -moz-border-radius:3px;
     border-radius:3px;
+    margin-top:4%;
 }
 #maincontent h4.section span {
     float:right;
@@ -151,6 +149,7 @@
     min-height:0;
     overflow:auto;
 }
+#maincontent #dir_departmentListing .fn .permalink {font-size:0.75em; text-transform:uppercase; font-weight:bold; margin-left:1em; color:#ba0000 !important;}
 #maincontent #dir_departmentListing .fn {
     overflow:auto;
 }

@@ -29,9 +29,6 @@ var service_peoplefinder = function() {
 				//onClick = WDN.jQuery(this).find('.cInfo').attr('onclick');
 				WDN.jQuery('.cInfo, .fn a', this).removeAttr('onclick');
 			});
-			WDN.jQuery('ul.pfResult.departments li .overflow').click(function(){
-				window.location = WDN.jQuery('.fn a', this).attr('href');
-			});
 		},
 		
 		anotherAttempt : function(firstName, lastName) {
@@ -270,6 +267,24 @@ var directory = function() {
 		showSearchNotice : function() {
 			WDN.jQuery("#searchNotice").slideDown(500);
 			attempts = 1;
+		},
+		
+		showIndividualDepartmentRecord : function(liRecord) {
+			if (liRecord.hasClass('selected')) {
+				//liRecord.children('.departmentInfo').fadeOut(400);
+				liRecord.children('.departmentInfo').slideUp(function(){
+					WDN.jQuery(this).remove();
+					liRecord.removeClass('selected');
+				});
+			} else {
+				liRecord.children('.loading').show();
+				WDN.jQuery('li.current').removeClass('current');
+				liRecord.addClass('selected current');
+				var href = liRecord.find('a.cInfo').attr('href');
+				var url = href + '/summary?format=partial';
+				WDN.get(url, null, service_peoplefinder.updatePeopleFinderRecord);
+			}
+			return false;
 		}
 	};
 }();
@@ -335,7 +350,12 @@ WDN.jQuery(document).ready(function() {
 			return false;
 		}
 	);
-	WDN.jQuery('.ppl_Sresult .vcard').live('click', function(event){
+	WDN.jQuery('.dep_result').live('click', function(){
+			directory.showIndividualDepartmentRecord(WDN.jQuery(this));
+			return false;
+		}
+	);
+	WDN.jQuery('.ppl_Sresult .vcard, .dep_result .vcard').live('click', function(event){
 			event.stopPropagation();
 		}
 	);

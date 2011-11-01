@@ -75,15 +75,6 @@ a.mydepts {
     cursor:move;
 }
 
-#editBox {
-    float:right;
-    padding:5px;
-    width:290px;
-    border:1px solid #BDAB61;
-    border-radius:5px;
-    -webkit-border-radius:5px;
-    -moz-border-radius:5px;
-}
 #editBox ul li a.action {
 	float:right;
 }
