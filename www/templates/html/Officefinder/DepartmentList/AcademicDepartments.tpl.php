@@ -38,7 +38,7 @@ WDN.loadJS('../scripts/filters.js', function(){
             if ($firstLetter != 'A') {
                 echo '</ul>';
             }
-            echo '<h4 id="'.$firstLetter.'">'.$firstLetter.'</h4><ul class="pfResult departments">';
+            echo '<h4 id="'.$firstLetter.'" class="section">'.$firstLetter.'<span><a href="#dir_nav">Back to the top</a></span></h4><ul class="pfResult departments">';
         }
         echo $savvy->render($listing, 'Officefinder/DepartmentList/ListItem.tpl.php');
     }

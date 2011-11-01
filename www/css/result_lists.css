@@ -116,7 +116,7 @@
 #maincontent #dir_departmentListing {
     clear:none;
 }
-#maincontent #dir_departmentListing h4 {
+#maincontent h4.section {
     background:#65553f;
     color:#fff;
     line-height:1;
@@ -124,6 +124,19 @@
     -webkit-border-radius:3px;
     -moz-border-radius:3px;
     border-radius:3px;
+}
+#maincontent h4.section span {
+    float:right;
+    font-size:50%;
+    padding:4px;
+    font-weight:normal;
+}
+#maincontent h4.section span a {
+    color:#fff;
+}
+#maincontent h4.section span a:hover:before {
+    content: '\21A5 ';
+    font-wieght:bold;
 }
 #maincontent #dir_departmentListing .planetred_profile {
     display:none;
