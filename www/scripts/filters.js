@@ -62,7 +62,7 @@ var filters = function() {
 				}
 			} else {
 				WDN.jQuery('.filterAll').removeAttr('checked');
-				WDN.jQuery('div.affiliation, li.ppl_Sresult').hide();
+				WDN.jQuery('div.affiliation, div.results ul li').hide();
 				WDN.jQuery('form.filters input').not('.filterAll').each(function(){ //loop through all the checkboxes
 					if (this.checked) {
 						WDN.jQuery('li.'+WDN.jQuery(this).attr('value')).show().parents('.affiliation').show(); //if a checkbox is checked, make sure the corresponding content is shown.
@@ -99,7 +99,7 @@ var filters = function() {
 		showAll : function() {
 			WDN.jQuery('form.filters input').not('.filterAll').removeAttr('checked');
 			WDN.jQuery('.filterAll').attr('checked', 'checked');
-			WDN.jQuery('div.affiliation, li.ppl_Sresult').show();
+			WDN.jQuery('div.affiliation, div.results ul li').show();
 		}
 		
 	};
