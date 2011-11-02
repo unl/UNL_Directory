@@ -1,11 +1,16 @@
 <?php
 $title = '';
+$parent = $context->getParent();
 if (!$context->isOfficialDepartment()) {
-    if ($parent = $context->getParent()) {
+    if ($parent) {
         $title = '<div class="title">('.$parent->name.')</div>';
     }
 }
-echo '<li class="dep_result">
+$li_class = 'dep_result';
+if ($parent) {
+    $li_class .= ' parent_'.$parent->id;
+}
+echo '<li class="'.$li_class.'">
     <div class="overflow">
     <a class="planetred_profile" href="'.$context->getURL().'">
     <img alt="Generic Icon" src="'.UNL_Peoplefinder::getURL().'images/organization40.png" class="profile_pic small photo">
