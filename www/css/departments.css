@@ -33,7 +33,7 @@
     font-weight:bold;
     color:#95B8CC; 
     position:absolute;
-    bottom:0;
+    bottom:5%;
     left:0;
     content: attr(data-orgunit);
     z-index:1;
