@@ -4,7 +4,13 @@ if ($context->options['view'] != 'alphalisting') {
     $userCanEdit = $context->userCanEdit(UNL_Officefinder::getUser());
 }
 ?>
-<div class="departmentInfo">
+<div class="departmentInfo"
+        <?php 
+         if (!empty($context->org_unit)) {
+                echo ' data-orgUnit="'.$context->org_unit.'"';
+            }
+        ?>
+    >
     <?php
     $image_url = 'http://maps.unl.edu/images/building/icon_md.png';
     if (!empty($context->building)) {
@@ -15,11 +21,6 @@ if ($context->options['view'] != 'alphalisting') {
     }
     ?>
     <div class="vcard office">
-        <?php 
-        	if (!empty($context->org_unit)) {
-                echo ' <span class="unl-hr-org-unit-number"><span>Org. Unit Number</span>'.$context->org_unit.'</span>';
-            }
-        ?>
         <img alt="Building Image" src="<?php echo $image_url; ?>" width="100" height="100" class="frame photo">
         <h4 class="fn org">
             <?php

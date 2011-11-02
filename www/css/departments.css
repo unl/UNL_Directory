@@ -28,22 +28,16 @@
 }
 .summary {position:relative;}
 .summary h4 {display:none;}
-.departmentInfo .unl-hr-org-unit-number {
+.departmentInfo:hover:before {
     font-size:150%;
     font-weight:bold;
-    color:#ccc; 
-    display:none;
+    color:#95B8CC; 
     position:absolute;
-    bottom:5%;
-    left:0;
+    top:0;
+    right:0;
+    content: attr(data-orgunit);
+    z-index:1;
 }
-.departmentInfo .unl-hr-org-unit-number span {
-    font-size:45%;
-    color:#ddd;
-    display:block;
-}
-.departmentInfo:hover .unl-hr-org-unit-number {display:inline;}
-
 .departmentInfo .fn a, .departmentInfo .fn{max-width:none;}
 
 #maincontent .departmentInfo .photo {
