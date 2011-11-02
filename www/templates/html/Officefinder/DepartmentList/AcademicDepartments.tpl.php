@@ -1,6 +1,7 @@
 <script type="text/javascript">
 WDN.loadJS('../scripts/filters.js', function(){
-	filters.initialize();
+	WDN.jQuery('#filters').show();
+	filters.findClasses();
 });
 </script>
 <div id="filters" class="grid3 first">
@@ -11,8 +12,18 @@ WDN.loadJS('../scripts/filters.js', function(){
                 <legend>By College</legend>
                 <ol>
                     <li><input type="checkbox" checked="checked" class="filterAll" value="all" name="all" id="filterAllaffiliation"/><label for="filterAllaffiliation">All</label></li>
-                    <li><input type="checkbox" value="parent_85" name="parent_85" id="filterparent_85"/><label for="filterparent_85">Arts &amp; Sciences</label></li>
-                    <li><input type="checkbox" value="parent_70" name="parent_70" id="filterparent_70"/><label for="filterparent_70">Fine &amp; Performing Arts</label></li>
+                    <?php foreach(array(
+                        192 => 'Agricultural Sciences &amp; Natural Resources',
+                        55  => 'Architecture',
+                        85  => 'Arts &amp; Sciences',
+                        60  => 'Business Administration',
+                        144 => 'Education &amp; Human Sciences',
+                        121 => 'Engineering',
+                        70  => 'Fine &amp; Performing Arts', 
+                        139 => 'Journalism &amp; Mass Communications',
+                    ) as $college_id=>$college_name): ?>
+                    <li><input type="checkbox" value="parent_<?php echo $college_id; ?>" name="parent_<?php echo $college_id; ?>" id="filterparent_<?php echo $college_id; ?>"/><label for="filterparent_<?php echo $college_id; ?>"><?php echo $college_name; ?></label></li>
+                    <?php endforeach; ?>
                 </ol>
     
             </fieldset>
