@@ -119,6 +119,7 @@ body #footer .footer_col {
     border-radius:3px;
     padding:1em;
     display:block;
+    margin-bottom:24px;
 }
 .directorySearch legend {display:none;}
 #maincontent form.directorySearch ol{
