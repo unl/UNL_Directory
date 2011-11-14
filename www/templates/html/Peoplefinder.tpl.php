@@ -50,9 +50,8 @@ if ($context->options['view'] != 'alphalisting'
     ) {
     $page->head .= '
     <script type="text/javascript">
-    WDN.loadJS("wdn/templates_3.0/scripts/plugins/ui/jQuery.ui.js");
-    WDN.loadJS("'.UNL_Peoplefinder::getURL().'scripts/edit_functions.js");
-    WDN.loadCSS("'.UNL_Peoplefinder::getURL().'css/editing.css");
+    	WDN.loadJS("wdn/templates_3.0/scripts/plugins/ui/jQuery.ui.js", function() {WDN.loadJS("'.UNL_Peoplefinder::getURL().'scripts/edit_functions.js");});
+    	WDN.loadCSS("'.UNL_Peoplefinder::getURL().'css/editing.css");
     </script>';
     $page->titlegraphic .= '<div id="userDepts"><a class="mydepts" href="'.UNL_Officefinder::getURL().'?view=mydepts">My Departments</a></div>';
 }
