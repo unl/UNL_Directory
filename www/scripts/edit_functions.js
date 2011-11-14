@@ -31,14 +31,14 @@ var admin_editting = function() {
 		
 		//new approach to remove dependency on colorbox
 		bindMinibutton : function(){
-			WDN.jQuery('a.minibutton.edit').click(function(e){
+			WDN.jQuery('a.minibutton.edit').not('.selected').click(function(e){
 				WDN.jQuery(this).addClass('selected');
 				WDN.jQuery(this).siblings('.action_control').children('.form').load(WDN.jQuery(this).attr('href'), function() {
 					WDN.jQuery('body').append('<div class="context-overlay" />');
 					WDN.jQuery('.context-overlay').click(function(){
 						WDN.jQuery('.action_control').hide();
 						WDN.jQuery('a.minibutton').removeClass('selected');
-						WDN.jQuery(this).remove();
+						WDN.jQuery('.context-overlay').remove();
 					});
 					WDN.jQuery('.action_control').show();
 				});
