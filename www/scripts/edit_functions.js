@@ -3,6 +3,7 @@ var admin_editting = function() {
 		initialize : function() { //called each time maincontent loads
 			admin_editting.appendHref();
 			admin_editting.bindSortable();
+			admin_editting.bindMinibutton();
 			admin_editting.bindColorbox();
 		},
 		
@@ -27,9 +28,28 @@ var admin_editting = function() {
 				WDN.jQuery(this).attr('href', href.replace('format=editing', 'format[]=editing&format[]=partial'));
 			});
 		},
+		
+		//new approach to remove dependency on colorbox
+		bindMinibutton : function(){
+			WDN.jQuery('a.minibutton.edit').click(function(e){
+				WDN.jQuery(this).addClass('selected');
+				WDN.jQuery(this).siblings('.action_control').children('.form').load(WDN.jQuery(this).attr('href'), function() {
+					WDN.jQuery('body').append('<div class="context-overlay" />');
+					WDN.jQuery('.context-overlay').click(function(){
+						WDN.jQuery('.action_control').hide();
+						WDN.jQuery('a.minibutton').removeClass('selected');
+						WDN.jQuery(this).remove();
+					});
+					WDN.jQuery('.action_control').show();
+				});
+				e.preventDefault();
+				return false;
+			});
+			WDN.log('button bound');
+		},
 
 		bindColorbox : function() {
-			WDN.jQuery('a.edit, a.addchild').colorbox({
+			WDN.jQuery('a.edit, a.addchild').not('.minibutton').colorbox({
 				width: '740px',
 				height: '75%',
 				onComplete : function(){

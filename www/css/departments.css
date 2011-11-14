@@ -23,7 +23,6 @@
 
 .departmentInfo {
     margin-bottom:25px;
-    overflow:auto;
     position:relative;
 }
 .summary {position:relative;}
@@ -125,3 +124,4 @@ ul.listings li .listingDetails {
     margin:0 auto;
     padding:10px;
 }
+.pfResult .minibutton, .pfResult .action_control {display:none;}

@@ -17,22 +17,10 @@ if ($context->options['view'] != 'alphalisting') {
 }
 ?>
 <section class="summary">
-    <h3 class="sec_header">
-        Department Summary
-    </h3>
-        <?php 
-        if ($userCanEdit) {
-        		echo '<div class="action_container">
-        				<a class="minibutton edit" href="'.$context->getURL().'?format=editing" title="Edit">Edit</a>
-        				<h4>Edit this Department</h4>';
-        			if (!isset($context->org_unit) || UNL_Officefinder::isAdmin(UNL_Officefinder::getUser(true))) {
-                        // Only allow Admins to delete "official" SAP departments
-                        include dirname(__FILE__).'/../../editing/Officefinder/Department/DeleteForm.tpl.php';
-                    }
-        		echo '</div>';
-            }
-        ?>
     <div class="grid8 first">
+	    <h3 class="sec_header">
+	        Department Summary
+	    </h3>
 		<?php echo $savvy->render($context, 'Officefinder/Department/Summary.tpl.php'); ?>
     </div>
     <div class="grid4">

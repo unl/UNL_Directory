@@ -1,10 +1,4 @@
-<script type="text/javascript">
-//<![CDATA[
-    WDN.loadCSS('<?php echo UNL_Peoplefinder::getURL(); ?>css/zenform_anywhere.css.php');
-//]]>
-</script>
-<h3 class="zenform">Edit Department Record</h3>
-<form class="zenform" action="<?php echo $context->getURL(); ?>" method="post">
+<form action="<?php echo $context->getURL(); ?>" method="post">
     <input type="hidden" name="_type" value="department" />
     <?php if (isset($context->id)): ?>
     <input type="hidden" name="id" value="<?php echo $context->id; ?>" />

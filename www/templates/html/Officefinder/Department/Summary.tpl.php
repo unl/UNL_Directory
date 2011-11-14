@@ -20,6 +20,20 @@ if ($context->options['view'] != 'alphalisting') {
         }
     }
     ?>
+    
+    <?php 
+    if ($userCanEdit) {
+    	echo '<a class="minibutton edit" href="'.$context->getURL().'?format=editing" title="Edit"><span class="icon">Edit<span></a>
+        	<div class="action_control">
+            <h4>Edit this Department</h4>
+    		<div class="form"></div>';
+            if (!isset($context->org_unit) || UNL_Officefinder::isAdmin(UNL_Officefinder::getUser(true))) {
+            	// Only allow Admins to delete "official" SAP departments
+            	include dirname(__FILE__).'/../../../editing/Officefinder/Department/DeleteForm.tpl.php';
+            }
+        echo '</div>';
+    }
+    ?>
     <div class="vcard office">
         <img alt="Building Image" src="<?php echo $image_url; ?>" width="100" height="100" class="frame photo">
         <h4 class="fn org">
