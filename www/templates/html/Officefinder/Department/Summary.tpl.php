@@ -37,9 +37,11 @@ if ($context->options['view'] != 'alphalisting') {
     <div class="vcard office">
         <img alt="Building Image" src="<?php echo $image_url; ?>" width="100" height="100" class="frame photo">
         <h4 class="fn org">
+            <a href="<?php echo $context->getURL();?>">
             <?php
             	echo $context->name;
             ?>
+            </a>
             <a class="permalink" href="<?php echo $context->getURL();?>">link</a>
         </h4>
         <div class="vcardInfo">
