@@ -51,8 +51,10 @@ $department = $context->getHRDepartment();
             echo $savvy->render($listings, 'Officefinder/Department/Listings.tpl.php');
         }
         if ($userCanEdit) {
-            echo '<a href="'.UNL_Officefinder::getURL(null, array('view'      => 'department',
-                                                                  'parent_id' => $context->id)).'&amp;format=editing">Add a new child-listing</a>';
+            $edit_url = UNL_Officefinder::getURL(null, array('view'      => 'department',
+                                                             'parent_id' => $context->id,
+                                                             'format'    => 'editing'));
+            echo '<a href="'.htmlentities($edit_url, ENT_QUOTES).'">Add a new child-listing</a>';
         }
         ?>
         </div>
