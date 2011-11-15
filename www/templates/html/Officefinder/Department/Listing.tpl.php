@@ -20,8 +20,9 @@ if ($controller->context->options['view'] != 'alphalisting') {
 if ($userCanEdit) {
     echo ' <a href="'.$context->getURL().'?format=editing" class="minibutton edit" title="Edit"><span class="icon">Edit</span></a>'.PHP_EOL;
     echo '<div class="action_control">'.PHP_EOL;
-    echo ' <a href="'.UNL_Officefinder::getURL(null, array('view'      => 'department',
-                                                          'parent_id' => $context->id)).'&amp;format=editing" class="maxbutton add" title="Add Child"><span class="icon">Add a child listing</span></a>';
+    $edit_url = UNL_Officefinder::getURL(null, array('view'      => 'department',
+                                                     'parent_id' => $context->id)).'&format=editing';
+    echo ' <a href="'.htmlentities($edit_url, ENT_QUOTES).'" class="maxbutton add" title="Add Child"><span class="icon">Add a child listing</span></a>';
     echo '<div class="form"></div>'.PHP_EOL;
     echo $savvy->render($context, 'Officefinder/Department/Listing/SortForm.tpl.php');
     include dirname(__FILE__).'/../../../editing/Officefinder/Department/DeleteForm.tpl.php';
