@@ -90,7 +90,7 @@ var admin_editting = function() {
 				stop: function(event, ui){
 					admin_editting.saveSortOrder(this);
 				},
-				items : '> li, > li > li'
+				items : '> li, > li > ul > li'
 			});
 		},
 		
