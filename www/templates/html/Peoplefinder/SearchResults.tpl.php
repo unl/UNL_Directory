@@ -4,9 +4,7 @@
 $start = 0;
 $end   = count($context);
 
-if ($context->getRawObject() instanceof UNL_Peoplefinder_SearchResults) {
-    echo "<div class='result_head'>Results ".($start+1)." - $end</div>".PHP_EOL;
-}
+echo "<div class='result_head'>Results ".($start+1)." - $end</div>".PHP_EOL;
 
 echo '<ul class="pfResult">'.PHP_EOL; //I need to put a class for CSS, however when we switch to chuncked results (student, staff, faculty) this @todo will need revisted
 foreach ($context as $record) {
