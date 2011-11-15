@@ -52,7 +52,7 @@ var admin_editting = function() {
 		},
 		
 		bindMaxbutton : function(el){
-			WDN.jQuery(el).find('.maxbutton').click(function(e){
+			WDN.jQuery(el).find('.maxbutton').not('.selected').click(function(e){
 				ac = WDN.jQuery(this).siblings('.form');
 				ac.wrapInner('<div class="edit_form" />').append('<div class="add_form" />');
 				ac.find('.add_form').load(WDN.jQuery(this).attr('href'), function() {
