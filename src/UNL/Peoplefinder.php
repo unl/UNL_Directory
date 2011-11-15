@@ -166,7 +166,7 @@ class UNL_Peoplefinder
                 continue;
             }
             if ($option == 'format'
-                && $value = 'html') {
+                && $value == 'html') {
                 continue;
             }
             if (!empty($value)) {
