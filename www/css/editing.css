@@ -152,9 +152,10 @@ a.mydepts {
 .action_container {
     float:right;
 }
-.minibutton {
-    position: absolute;
-    text-indent:-99999em;
+.minibutton, .maxbutton {
+    font-size:80%;
+    font-weight:bold;
+    color: #767676 !important;
     display: inline-block;
     color: #333;
     text-shadow: 1px 1px 0 #fff;
@@ -178,19 +179,35 @@ a.mydepts {
     right:0;
     z-index:1;
 }
+.minibutton {
+    position: absolute;
+    text-indent:-99999em;
+}
+.maxbutton {
+    padding:0.2em 0.6em;
+    display:block;
+}
 .minibutton.edit span.icon {
     width:25px;
     display:block;
     background:url('images/iconEdit-button.png') no-repeat 3px 2px;
 }
+
+.maxbutton.add span.icon {
+    display:block;
+    background:url('images/iconAdd-button.png') no-repeat 100% 2px;
+}
 .minibutton.edit:hover span.icon, .minibutton.selected span.icon {
     background-position: 3px -19px;
 }
-.minibutton.selected {
-    -moz-linear-gradient(top,#767676,#9e9e9e);
+.maxbutton.add:hover span.icon, .maxbutton.add.selected span.icon {
+    background-position:100% -19px;
 }
-.minibutton:hover {
-    color:#fff;
+.minibutton.selected {
+    -moz-linear-gradient:(top,#767676,#9e9e9e);
+}
+.minibutton:hover, .maxbutton:hover {
+    color:#fff !important;
     text-decoration:none;
     text-shadow:-1px -1px 0 rgba(0,0,0,0.3);
     border-color:#518cc6;
@@ -205,7 +222,10 @@ a.mydepts {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#599bdc', endColorstr='#3072b3',GradientType=0 ); /* IE6-9 */
 
 }
-.minibutton.selected {
+.minibutton.selected, .maxbutton.selected {
+    color:#fff !important;
+    text-decoration:none;
+    text-shadow:-1px -1px 0 rgba(0,0,0,0.3);
     background: #767676; /* Old browsers */
     background: -moz-linear-gradient(top,  #767676 0%, #9e9e9e 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#767676), color-stop(100%,#9e9e9e)); /* Chrome,Safari4+ */
@@ -288,8 +308,9 @@ a.mydepts {
     padding:0;
     margin:0;
 }
-#maincontent .action_control form li {
+#maincontent .action_control form ol li {
     padding:0.5em 0;
+    border:0;
 }
 .action_control form label {
     display:block;
