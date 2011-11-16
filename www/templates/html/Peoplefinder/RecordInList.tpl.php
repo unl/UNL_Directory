@@ -35,8 +35,9 @@ if (isset($context->unlHROrgUnitNumber)) {
 
 if (isset($context->title)
     && !(
-        isset($parent->parent, $parent->parent->context->options, $parent->parent->context->options['view'])
+        isset($orgUnit, $parent->parent, $parent->parent->parent, $parent->parent->parent->parent, $parent->parent->context->options, $parent->parent->context->options['view'])
         && $parent->parent->context->options['view'] == 'department'
+        && $orgUnit != $parent->parent->parent->parent->context->org_unit
         )
     && false === strpos(strtolower($context->title), 'retiree') // Let's not share retiree or disabled retiree status
     && false === strpos(strtolower($context->title), 'royalty') // Do not show royalty recipients
