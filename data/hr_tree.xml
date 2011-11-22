@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE tree SYSTEM "treeml.dtd">
-<!-- Generated Mon Sep 12 09:44:23 2011 -->
+<!-- Generated Tue Nov 22 04:20:46 2011 -->
 <tree>
  <declarations>
    <attributeDecl name="name"        type="String" />
@@ -557,16 +557,6 @@
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68588-0438"/>
       </branch>
-     </branch>
-     <branch>
-      <attribute name="name" value="Operations Analysis"/>
-      <attribute name="org_unit" value="50000822"/>
-      <attribute name="org_abbr" value="OA       UNL"/>
-      <attribute name="building" value="ADMS"/>
-      <attribute name="room" value="314"/>
-      <attribute name="city" value="Lincoln"/>
-      <attribute name="state" value="NE"/>
-      <attribute name="postal_code" value="68588-0428"/>
      </branch>
      <branch>
       <attribute name="name" value="University Police"/>
@@ -1997,6 +1987,16 @@
       <attribute name="name" value="Neuroimaging Center"/>
       <attribute name="org_unit" value="50007301"/>
       <attribute name="org_abbr" value="NeuroCtr UNL"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Nebraska Innovation Campus"/>
+      <attribute name="org_unit" value="50007600"/>
+      <attribute name="org_abbr" value="NE INNOV UNL"/>
+      <attribute name="building" value="WHIT"/>
+      <attribute name="room" value="230F"/>
+      <attribute name="city" value="LINCOLN"/>
+      <attribute name="state" value="NE"/>
+      <attribute name="postal_code" value="68588-0857"/>
      </branch>
     </branch>
     <branch>
@@ -3653,6 +3653,16 @@
       <attribute name="state" value="NE"/>
       <attribute name="postal_code" value="68588-0450"/>
      </branch>
+    </branch>
+    <branch>
+     <attribute name="name" value="Operations Analysis"/>
+     <attribute name="org_unit" value="50000822"/>
+     <attribute name="org_abbr" value="OA       UNL"/>
+     <attribute name="building" value="ADMS"/>
+     <attribute name="room" value="314"/>
+     <attribute name="city" value="Lincoln"/>
+     <attribute name="state" value="NE"/>
+     <attribute name="postal_code" value="68588-0428"/>
     </branch>
     <branch>
      <attribute name="name" value="Athletics"/>
@@ -7650,6 +7660,16 @@
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68182"/>
       </branch>
+      <branch>
+       <attribute name="name" value="Project Management"/>
+       <attribute name="org_unit" value="50004954"/>
+       <attribute name="org_abbr" value="PRMGT    462"/>
+       <attribute name="building" value="EAB"/>
+       <attribute name="room" value="008"/>
+       <attribute name="city" value="Omaha"/>
+       <attribute name="state" value="NE"/>
+       <attribute name="postal_code" value="68182"/>
+      </branch>
      </branch>
      <branch>
       <attribute name="name" value="Academic Affairs - General"/>
@@ -7746,6 +7766,16 @@
        <attribute name="org_abbr" value="DUAL ENR 461"/>
        <attribute name="building" value="EAB"/>
        <attribute name="room" value="202"/>
+       <attribute name="city" value="Omaha"/>
+       <attribute name="state" value="NE"/>
+       <attribute name="postal_code" value="68182"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Thompson Learning Community"/>
+       <attribute name="org_unit" value="50007625"/>
+       <attribute name="org_abbr" value="TLC      461"/>
+       <attribute name="building" value="ASH"/>
+       <attribute name="room" value="200"/>
        <attribute name="city" value="Omaha"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68182"/>
@@ -8149,45 +8179,106 @@
       <attribute name="name" value="Student Affairs"/>
       <attribute name="org_unit" value="50000106"/>
       <attribute name="org_abbr" value="STD AFFR 514"/>
-      <attribute name="building" value="180"/>
+      <attribute name="building" value="MSAB"/>
+      <attribute name="room" value="180"/>
       <attribute name="city" value="Kearney"/>
       <attribute name="state" value="NE"/>
       <attribute name="postal_code" value="68849"/>
       <branch>
-       <attribute name="name" value="Academic Success"/>
-       <attribute name="org_unit" value="50002775"/>
-       <attribute name="org_abbr" value="Ac Sccss 514"/>
+       <attribute name="name" value="Student Services"/>
+       <attribute name="org_unit" value="50000650"/>
+       <attribute name="org_abbr" value="STD SVCS 514"/>
        <attribute name="building" value="MSAB"/>
-       <attribute name="room" value="172"/>
+       <attribute name="room" value="112"/>
        <attribute name="city" value="Kearney"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68849"/>
        <branch>
-        <attribute name="name" value="Learning Strategies"/>
-        <attribute name="org_unit" value="50000578"/>
-        <attribute name="org_abbr" value="LRNGSTRAT517"/>
+        <attribute name="name" value="Academic Success"/>
+        <attribute name="org_unit" value="50002775"/>
+        <attribute name="org_abbr" value="Ac Sccss 514"/>
         <attribute name="building" value="MSAB"/>
         <attribute name="room" value="172"/>
         <attribute name="city" value="Kearney"/>
         <attribute name="state" value="NE"/>
         <attribute name="postal_code" value="68849"/>
+        <branch>
+         <attribute name="name" value="Learning Strategies"/>
+         <attribute name="org_unit" value="50000578"/>
+         <attribute name="org_abbr" value="LRNGSTRAT514"/>
+         <attribute name="building" value="MSAB"/>
+         <attribute name="room" value="172"/>
+         <attribute name="city" value="Kearney"/>
+         <attribute name="state" value="NE"/>
+         <attribute name="postal_code" value="68849"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="Student Support Services"/>
+         <attribute name="org_unit" value="50000626"/>
+         <attribute name="org_abbr" value="STDSUPRT 514"/>
+         <attribute name="building" value="MSAB"/>
+         <attribute name="room" value="173"/>
+         <attribute name="city" value="Kearney"/>
+         <attribute name="state" value="NE"/>
+         <attribute name="postal_code" value="68849"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="Learning Commons"/>
+         <attribute name="org_unit" value="50001504"/>
+         <attribute name="org_abbr" value="LRN CMNS 514"/>
+         <attribute name="building" value="LIBR"/>
+         <attribute name="room" value="223"/>
+         <attribute name="city" value="Kearney"/>
+         <attribute name="state" value="NE"/>
+         <attribute name="postal_code" value="68849"/>
+        </branch>
        </branch>
        <branch>
-        <attribute name="name" value="Student Support Services"/>
-        <attribute name="org_unit" value="50000626"/>
-        <attribute name="org_abbr" value="STDSUPRT 514"/>
+        <attribute name="name" value="Academic and Career Services"/>
+        <attribute name="org_unit" value="50000618"/>
+        <attribute name="org_abbr" value="CRSERVS  514"/>
         <attribute name="building" value="MSAB"/>
-        <attribute name="room" value="173"/>
+        <attribute name="room" value="140"/>
         <attribute name="city" value="Kearney"/>
         <attribute name="state" value="NE"/>
         <attribute name="postal_code" value="68849"/>
        </branch>
        <branch>
-        <attribute name="name" value="Writing Center"/>
-        <attribute name="org_unit" value="50001504"/>
-        <attribute name="org_abbr" value="WRTNG CN 514"/>
-        <attribute name="building" value="LIBR"/>
-        <attribute name="room" value="223"/>
+        <attribute name="name" value="Counseling and Health Care"/>
+        <attribute name="org_unit" value="50004400"/>
+        <attribute name="org_abbr" value="CNS&amp;HC   514"/>
+        <attribute name="building" value="MSAB"/>
+        <attribute name="room" value="184"/>
+        <attribute name="city" value="Kearney"/>
+        <attribute name="state" value="NE"/>
+        <attribute name="postal_code" value="68849"/>
+        <branch>
+         <attribute name="name" value="Counseling"/>
+         <attribute name="org_unit" value="50000619"/>
+         <attribute name="org_abbr" value="CNSLNG   514"/>
+         <attribute name="building" value="MSAB"/>
+         <attribute name="room" value="144"/>
+         <attribute name="city" value="Kearney"/>
+         <attribute name="state" value="NE"/>
+         <attribute name="postal_code" value="68849"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="Health Care"/>
+         <attribute name="org_unit" value="50000623"/>
+         <attribute name="org_abbr" value="HLTHCAR  514"/>
+         <attribute name="building" value="MSAB"/>
+         <attribute name="room" value="184"/>
+         <attribute name="city" value="Kearney"/>
+         <attribute name="state" value="NE"/>
+         <attribute name="postal_code" value="68849"/>
+        </branch>
+       </branch>
+       <branch>
+        <attribute name="name" value="1st Year Program"/>
+        <attribute name="org_unit" value="50005227"/>
+        <attribute name="org_abbr" value="1YR PROG 514"/>
+        <attribute name="building" value="THMH"/>
+        <attribute name="room" value="109B"/>
         <attribute name="city" value="Kearney"/>
         <attribute name="state" value="NE"/>
         <attribute name="postal_code" value="68849"/>
@@ -8202,104 +8293,63 @@
        <attribute name="city" value="Kearney"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68849"/>
-       <branch>
-        <attribute name="name" value="Summer Advising Enrollment"/>
-        <attribute name="org_unit" value="50000650"/>
-        <attribute name="org_abbr" value="SUM ADV  514"/>
-        <attribute name="building" value="MSAB"/>
-        <attribute name="room" value="112"/>
-        <attribute name="city" value="Kearney"/>
-        <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68849"/>
-       </branch>
-      </branch>
-      <branch>
-       <attribute name="name" value="Academic and Career Services"/>
-       <attribute name="org_unit" value="50000618"/>
-       <attribute name="org_abbr" value="CRSERVS  514"/>
-       <attribute name="building" value="MSAB"/>
-       <attribute name="room" value="140"/>
-       <attribute name="city" value="Kearney"/>
-       <attribute name="state" value="NE"/>
-       <attribute name="postal_code" value="68849"/>
-       <branch>
-        <attribute name="name" value="1st Year Program"/>
-        <attribute name="org_unit" value="50005227"/>
-        <attribute name="org_abbr" value="1YR PROG 514"/>
-        <attribute name="building" value="THMH"/>
-        <attribute name="room" value="109B"/>
-        <attribute name="city" value="Kearney"/>
-        <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68849"/>
-       </branch>
-      </branch>
-      <branch>
-       <attribute name="name" value="Counseling and Health Care"/>
-       <attribute name="org_unit" value="50004400"/>
-       <attribute name="org_abbr" value="CNS&amp;HC   514"/>
-       <attribute name="building" value="MSAB"/>
-       <attribute name="room" value="184"/>
-       <attribute name="city" value="Kearney"/>
-       <attribute name="state" value="NE"/>
-       <attribute name="postal_code" value="68849"/>
-       <branch>
-        <attribute name="name" value="Counseling"/>
-        <attribute name="org_unit" value="50000619"/>
-        <attribute name="org_abbr" value="CNSLNG   514"/>
-        <attribute name="building" value="MSAB"/>
-        <attribute name="room" value="144"/>
-        <attribute name="city" value="Kearney"/>
-        <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68849"/>
-       </branch>
-       <branch>
-        <attribute name="name" value="Health Care"/>
-        <attribute name="org_unit" value="50000623"/>
-        <attribute name="org_abbr" value="HLTHCAR  514"/>
-        <attribute name="building" value="MSAB"/>
-        <attribute name="room" value="184"/>
-        <attribute name="city" value="Kearney"/>
-        <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68849"/>
-       </branch>
       </branch>
       <branch>
        <attribute name="name" value="Financial Aid"/>
        <attribute name="org_unit" value="50000620"/>
        <attribute name="org_abbr" value="FINAID  514"/>
        <attribute name="building" value="MSAB"/>
+       <attribute name="room" value="162"/>
        <attribute name="city" value="Kearney"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68849"/>
       </branch>
       <branch>
-       <attribute name="name" value="Residential and Greek Life"/>
+       <attribute name="name" value="Residence Life"/>
        <attribute name="org_unit" value="50000621"/>
-       <attribute name="org_abbr" value="RES/GRK  514"/>
-       <attribute name="building" value="NSU"/>
-       <attribute name="room" value="142E"/>
+       <attribute name="org_abbr" value="RES LIFE 514"/>
+       <attribute name="building" value="CONH"/>
        <attribute name="city" value="Kearney"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68849"/>
       </branch>
       <branch>
-       <attribute name="name" value="Student Center/Union"/>
-       <attribute name="org_unit" value="50000622"/>
-       <attribute name="org_abbr" value="STDUNION 508"/>
+       <attribute name="name" value="Student Life"/>
+       <attribute name="org_unit" value="50007575"/>
+       <attribute name="org_abbr" value="STDLIFE  514"/>
        <attribute name="building" value="NSU"/>
+       <attribute name="room" value="142G"/>
        <attribute name="city" value="Kearney"/>
-       <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68849"/>
-      </branch>
-      <branch>
-       <attribute name="name" value="Multi-Cultural"/>
-       <attribute name="org_unit" value="50000625"/>
-       <attribute name="org_abbr" value="MLTCUTRL 514"/>
-       <attribute name="building" value="NSU"/>
-       <attribute name="room" value="116"/>
-       <attribute name="city" value="Kearney"/>
-       <attribute name="state" value="NE"/>
-       <attribute name="postal_code" value="68849"/>
+       <branch>
+        <attribute name="name" value="Student Center/Union"/>
+        <attribute name="org_unit" value="50000622"/>
+        <attribute name="org_abbr" value="STDUNION 514"/>
+        <attribute name="building" value="NSU"/>
+        <attribute name="room" value="142G"/>
+        <attribute name="city" value="Kearney"/>
+        <attribute name="state" value="NE"/>
+        <attribute name="postal_code" value="68849"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Multi-Cultural"/>
+        <attribute name="org_unit" value="50000625"/>
+        <attribute name="org_abbr" value="MLTCUTRL 514"/>
+        <attribute name="building" value="NSU"/>
+        <attribute name="room" value="116"/>
+        <attribute name="city" value="Kearney"/>
+        <attribute name="state" value="NE"/>
+        <attribute name="postal_code" value="68849"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Greek Affairs"/>
+        <attribute name="org_unit" value="50000649"/>
+        <attribute name="org_abbr" value="GRK AFFRS514"/>
+        <attribute name="building" value="NSU"/>
+        <attribute name="room" value="142E"/>
+        <attribute name="city" value="Kearney"/>
+        <attribute name="postal_code" value="68849"/>
+       </branch>
       </branch>
      </branch>
      <branch>
@@ -8625,7 +8675,7 @@
        <attribute name="org_unit" value="50001166"/>
        <attribute name="org_abbr" value="CTR R&amp;D  503"/>
        <attribute name="building" value="WSTC"/>
-       <attribute name="room" value="131E"/>
+       <attribute name="room" value="125E"/>
        <attribute name="city" value="Kearney"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68849"/>
@@ -9075,6 +9125,15 @@
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68849"/>
       </branch>
+     </branch>
+     <branch>
+      <attribute name="name" value="Food Service"/>
+      <attribute name="org_unit" value="50006651"/>
+      <attribute name="org_abbr" value="Food Sv  515"/>
+      <attribute name="building" value="NSU"/>
+      <attribute name="city" value="Kearney"/>
+      <attribute name="state" value="NE"/>
+      <attribute name="postal_code" value="68849"/>
      </branch>
      <branch>
       <attribute name="name" value="Antelope Bookstore"/>
