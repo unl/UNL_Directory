@@ -33,27 +33,33 @@ WDN.loadJS('../scripts/filters.js', function(){
 <div class="grid9">
     <div class="results departments" id="dir_departmentListing">
     <h3>Academic Departments</h3>
-    <ul id="dir_nav">
-        <?php foreach (range('A', 'Z') as $letter): ?>
-        <li><a href="#<?php echo $letter; ?>"><?php echo $letter; ?></a></li>
-        <?php endforeach; ?>
-    </ul>
     <?php
-    $firstLetter = '';
+    $used_letters     = array();
+    $firstLetter      = '';
+    $department_lists = '';
     foreach ($context as $listing)
     {
         /* @var $listing UNL_Officefinder_Department */
         if ($firstLetter != strtoupper($listing->name[0])) {
             // New letter
             $firstLetter = strtoupper($listing->name[0]);
+            $used_letters[] = $firstLetter;
             if ($firstLetter != 'A') {
-                echo '</ul>';
+                $department_lists .= '</ul>';
             }
-            echo '<h4 id="'.$firstLetter.'" class="section">'.$firstLetter.'<span><a href="#dir_nav">Back to the top</a></span></h4><ul class="pfResult departments">';
+            $department_lists .= '<h4 id="'.$firstLetter.'" class="section">'.$firstLetter.'<span><a href="#dir_nav">Back to the top</a></span></h4><ul class="pfResult departments">';
         }
-        echo $savvy->render($listing, 'Officefinder/DepartmentList/ListItem.tpl.php');
+        $department_lists .= $savvy->render($listing, 'Officefinder/DepartmentList/ListItem.tpl.php');
     }
+    $department_lists .= '</ul>';
     ?>
+    <ul id="dir_nav">
+        <?php foreach ($used_letters as $letter): ?>
+        <li><a href="#<?php echo $letter; ?>"><?php echo $letter; ?></a></li>
+        <?php endforeach; ?>
     </ul>
+    <?php
+    echo $department_lists;
+    ?>
     </div>
 </div>
