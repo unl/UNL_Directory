@@ -1,4 +1,10 @@
 <?php
+/**
+ * This script is used to update departmental hierarchy data from an XML file.
+ * 
+ * Jim Liebgott maintains a process which scp's this file to directory.unl.edu.
+ * A cron job runs nightly to update the data.
+ */
 require_once dirname(__FILE__).'/../www/config.inc.php';
 error_reporting(E_ALL | E_STRICT);
 set_time_limit(0);
