@@ -8,3 +8,4 @@ RewriteRule ^departments/(5000[\d]{4})$ departments/index.php?view=department&sa
 RewriteRule ^departments/([\d]+)$ departments/index.php?view=department&id=$1 [QSA]
 RewriteRule ^departments/([\d]+)/listings$ departments/index.php?view=deptlistings&id=$1 [QSA]
 RewriteRule ^departments/([\d]+)/summary$ departments/index.php?view=deptsummary&id=$1 [QSA]
+RewriteRule ^departments/academic$ departments/index.php?view=academicdepts [QSA]
