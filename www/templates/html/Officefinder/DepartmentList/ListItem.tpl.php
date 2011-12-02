@@ -6,7 +6,7 @@ if (!$context->isOfficialDepartment()) {
         $title = '<div class="title">('.$parent->name.')</div>';
     }
 }
-$li_class = 'dep_result';
+$li_class = 'dep_result parent_'.$context->id;
 if ($parent) {
     $li_class .= ' parent_'.$parent->id;
 }
