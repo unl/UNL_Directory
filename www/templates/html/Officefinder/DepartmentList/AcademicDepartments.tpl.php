@@ -21,6 +21,7 @@ WDN.loadJS('../scripts/filters.js', function(){
                         121 => 'Engineering',
                         70  => 'Fine &amp; Performing Arts', 
                         139 => 'Journalism &amp; Mass Communications',
+                        75  => 'Law',
                     ) as $college_id=>$college_name): ?>
                     <li><input type="checkbox" value="parent_<?php echo $college_id; ?>" name="parent_<?php echo $college_id; ?>" id="filterparent_<?php echo $college_id; ?>"/><label for="filterparent_<?php echo $college_id; ?>"><?php echo $college_name; ?></label></li>
                     <?php endforeach; ?>
