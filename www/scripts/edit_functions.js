@@ -99,10 +99,11 @@ var admin_editting = function() {
 			var results = WDN.jQuery(list).sortable('toArray');
 
 			for (i = 0; i<results.length; i++) {
-				if (WDN.jQuery('#'+results[i]+' > div.edit form.sortform input[name=sort_order]').attr('value') != i+1) {
-					WDN.jQuery('#'+results[i]+' > div.edit form.sortform input[name=sort_order]').attr('value', i+1);
-					WDN.jQuery.post(WDN.jQuery('#'+results[i]+' > div.edit form.sortform').attr('action')+'?redirect=0',
-									WDN.jQuery('#'+results[i]+' > div.edit form.sortform').serialize());
+				WDN.log(results[i]);
+				if (WDN.jQuery('#'+results[i]+' > div.action_control form.sortform input[name=sort_order]').attr('value') != i+1) {
+					WDN.jQuery('#'+results[i]+' > div.action_control form.sortform input[name=sort_order]').attr('value', i+1);
+					WDN.jQuery.post(WDN.jQuery('#'+results[i]+' > div.action_control form.sortform').attr('action')+'?redirect=0',
+									WDN.jQuery('#'+results[i]+' > div.action_control form.sortform').serialize());
 				}
 			}
 		},
