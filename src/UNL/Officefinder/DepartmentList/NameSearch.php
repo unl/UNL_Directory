@@ -23,6 +23,9 @@ class UNL_Officefinder_DepartmentList_NameSearch extends UNL_Officefinder_Depart
 
         $query = preg_replace('/\s(and|\&)\s/', ' % ', $query);
 
+        // Expand multiple words, so Ag Education matches Agricultural Education
+        $query = preg_replace('/(\w+)\s+(\w+)/', '$1% $2', $query);
+
         $mysqli = UNL_Officefinder::getDB();
         $sql = 'SELECT DISTINCT d1.id
                 FROM departments d1 ';
