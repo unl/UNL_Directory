@@ -1,9 +1,9 @@
 <?php
 /**
  * Main controller for Officefinder/Yellow pages of the online directory
- * 
+ *
  * PHP version 5
- * 
+ *
  * @category  Services
  * @package   UNL_Peoplefinder
  * @author    Brett Bieber <brett.bieber@gmail.com>
@@ -14,9 +14,9 @@
 
 /**
  * Peoplefinder class for UNL's online directory.
- * 
+ *
  * PHP version 5
- * 
+ *
  * @category  Services
  * @package   UNL_Peoplefinder
  * @author    Brett Bieber <brett.bieber@gmail.com>
@@ -36,7 +36,7 @@ class UNL_Officefinder
 
     /**
      * The results of the search
-     * 
+     *
      * @var mixed
      */
     public $output;
@@ -55,24 +55,29 @@ class UNL_Officefinder
                              'academicdepts'  => 'UNL_Officefinder_DepartmentList_AcademicDepartments',
     );
 
+    /**
+     * Singleton authentication adapter/client
+     *
+     * @var UNL_Auth_SimpleCAS
+     */
     protected static $auth;
 
     public static $admins = array();
 
     /**
      * The currently logged in user.
-     * 
+     *
      * @var UNL_Peoplefinder_Record
      */
     protected static $user = false;
 
     public static $db_user = 'officefinder';
-    
+
     public static $db_pass = 'officefinder';
 
     /**
      * Construct a new officefinder object
-     * 
+     *
      * @param array $options Associative array of options
      */
     function __construct($options = array())
@@ -84,7 +89,7 @@ class UNL_Officefinder
             $this->options['mobile'] = UNL_MobileDetector::isMobileClient();
         }
 
-        $this->authenticate(true);
+        self::checkLogout();
 
         if (!empty($_POST)) {
             try {
@@ -103,40 +108,59 @@ class UNL_Officefinder
     }
 
     /**
-     * Log in the current user
-     * 
-     * @param bool $logoutonly Only allow logging out, and not logging in.
-     * 
-     * @return void
+     * Lazy load the authentication client
+     *
+     * @return UNL_Auth_SimpleCAS
      */
-    static function authenticate($logoutonly = false)
+    protected static function _getAuth()
     {
-        if (isset($_GET['logout'])) {
+        if (!self::$auth) {
             self::$auth = UNL_Auth::factory('SimpleCAS');
-            self::$auth->logout();
         }
 
-        if ($logoutonly) {
-            return true;
+        return self::$auth;
+    }
+
+    public static function checkLogout()
+    {
+        $auth = self::_getAuth();
+        if (isset($_GET['logout'])) {
+            $auth->logout();
+        }
+    }
+
+    /**
+     * Log in the current user
+     *
+     * @param boolean $gateway [optional] Should a gateway authentication be attempted
+     * @throws Exception
+     */
+    public static function authenticate($gateway = false)
+    {
+        $auth = self::_getAuth();
+
+        if ($gateway) {
+            $auth->gatewayAuthentication();
+        } else {
+            $auth->login();
+            if (!$auth->isLoggedIn()) {
+                throw new Exception('You must log in to view this resource!');
+                exit();
+            }
         }
 
-        self::$auth = UNL_Auth::factory('SimpleCAS');
-        self::$auth->login();
-
-        if (!self::$auth->isLoggedIn()) {
-            throw new Exception('You must log in to view this resource!');
-            exit();
+        if ($auth->isLoggedIn()) {
+            self::$user = $auth->getUser();
+            //self::$user->last_login = date('Y-m-d H:i:s');
+            //self::$user->update();
         }
-        self::$user = self::$auth->getUser();
-        //self::$user->last_login = date('Y-m-d H:i:s');
-        //self::$user->update();
     }
 
     /**
      * get the currently logged in user
-     * 
+     *
      * @param bool $forceAuth Whether to force authentication or not
-     * 
+     *
      * @return UNL_Peoplefinder_Record
      */
     public static function getUser($forceAuth = false)
@@ -144,11 +168,11 @@ class UNL_Officefinder
         if (self::$user) {
             return self::$user;
         }
-        
+
         if ($forceAuth) {
             self::authenticate();
         }
-        
+
         return self::$user;
     }
 
@@ -156,7 +180,7 @@ class UNL_Officefinder
      * Set the currently logged in user, useful for testing and command line scripts
      *
      * @param string $user Currently logged in user
-     * 
+     *
      * @return void
      */
     public static function setUser($user)
@@ -166,7 +190,7 @@ class UNL_Officefinder
 
     /**
      * Handle data that is POST'ed to the controller.
-     * 
+     *
      * @return void
      */
     function handlePost()
@@ -231,11 +255,11 @@ class UNL_Officefinder
 
     /**
      * Determine what department the user is referring to in POST data
-     * 
+     *
      * @param bool $checkUserPermissions Check if the user has permission
-     * 
+     *
      * @throws Exception
-     * 
+     *
      * @return UNL_Officefinder_Department
      */
     protected function getPostedDepartment($checkUserPermissions = true)
@@ -256,18 +280,18 @@ class UNL_Officefinder
      *
      * @param mixed  $mixed             Object to retrieve URL for
      * @param string $additional_params Additional querystring parameters to pass
-     * 
+     *
      * @return string
      */
     public static function getURL($mixed = null, $additional_params = array())
     {
-         
+
         $url = UNL_Peoplefinder::$url.'departments/';
-        
+
         if (is_object($mixed)) {
             switch (get_class($mixed)) {
             default:
-                    
+
             }
         }
 
@@ -276,9 +300,9 @@ class UNL_Officefinder
 
     /**
      * Handle saving of a posted record
-     * 
+     *
      * @param string $type Name of a class that extends UNL_Officefinder_Record
-     * 
+     *
      * @return UNL_Officefinder_Record
      */
     function handlePostDBRecord($type)
@@ -310,7 +334,7 @@ class UNL_Officefinder
      * Filter out any unwanted POST variables. Useful when records are
      * synchronized from the POST array and certain fields should not be
      * added or modified.
-     * 
+     *
      * @return void
      */
     function filterPostValues()
@@ -320,7 +344,7 @@ class UNL_Officefinder
 
     /**
      * Simple router to determine what view based on options present
-     * 
+     *
      * @return void
      */
     public function determineView()
@@ -338,7 +362,7 @@ class UNL_Officefinder
 
     /**
      * Construct output based on options
-     * 
+     *
      * @return void
      */
     function run()
@@ -352,7 +376,7 @@ class UNL_Officefinder
 
     /**
      * Connect to the database and return it
-     * 
+     *
      * @return mysqli
      */
     public static function &getDB()
@@ -371,12 +395,12 @@ class UNL_Officefinder
 
     /**
      * Set the public properties for an object with the values in an associative array
-     * 
+     *
      * @param mixed &$object The object to set, usually a UNL_Officefinder_Record
      * @param array $values  Associtive array of key=>value
-     * 
+     *
      * @throws Exception
-     * 
+     *
      * @return void
      */
     public static function setObjectFromArray(&$object, $values)
@@ -386,7 +410,7 @@ class UNL_Officefinder
         }
         foreach (get_object_vars($object) as $key=>$default_value) {
             if (isset($values[$key]) && !empty($values[$key])) {
-                $object->$key = $values[$key]; 
+                $object->$key = $values[$key];
             } elseif (isset($object->$key)                  // The object has the var set
                       && !empty($object->$key)              // The object has a value
                       && isset($values[$key])               // A value to sync has been set
@@ -402,10 +426,10 @@ class UNL_Officefinder
 
     /**
      * Redirect user to the specified url
-     * 
+     *
      * @param string $url  Where to redirect
      * @param bool   $exit To exit or not
-     * 
+     *
      * @return void
      */
     static function redirect($url, $exit = true)
@@ -432,7 +456,7 @@ class UNL_Officefinder
     {
         UNL_Peoplefinder::setReplacementData($field, $data);
     }
-    
+
     public static function postRun($data)
     {
         return UNL_Peoplefinder::postRun($data);

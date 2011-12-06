@@ -6,12 +6,15 @@ class UNL_Officefinder_User_Departments extends UNL_Officefinder_DepartmentList
     function __construct($options = array())
     {
         $this->options = $options + $this->options;
+
+        // Require authentication
+        $authUser = UNL_Officefinder::getUser(true);
+
         if (empty($this->options['uid'])) {
-            $this->options['uid'] = UNL_Officefinder::getUser(true);
+            $this->options['uid'] = $authUser;
         }
 
-        if ($this->options['uid'] !== UNL_Officefinder::getUser(true)
-            && !UNL_Officefinder::isAdmin(UNL_Officefinder::getUser(true))) {
+        if ($this->options['uid'] !== $authUser && !UNL_Officefinder::isAdmin($authUser)) {
             throw new Exception('Only administrators can view departments others have permission to.');
         }
 
