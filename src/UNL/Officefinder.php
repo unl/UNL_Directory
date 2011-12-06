@@ -84,9 +84,14 @@ class UNL_Officefinder
     {
         $this->options = $options + $this->options;
 
-        if ($this->options['format'] == 'html'
-            && $this->options['mobile'] != 'no') {
-            $this->options['mobile'] = UNL_MobileDetector::isMobileClient();
+        if ($this->options['format'] == 'html') {
+            if (isset($_COOKIE['unl_sso'])) {
+                self::authenticate(true);
+            }
+
+            if ($this->options['mobile'] != 'no') {
+                $this->options['mobile'] = UNL_MobileDetector::isMobileClient();
+            }
         }
 
         self::checkLogout();
