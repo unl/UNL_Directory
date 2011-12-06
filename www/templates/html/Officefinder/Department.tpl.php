@@ -4,7 +4,7 @@
 UNL_Officefinder::setReplacementData('doctitle', 'UNL | Directory | '.$context->name);
 UNL_Officefinder::setReplacementData('breadcrumbs', '
     <ul>
-        <li><a href="http://www.unl.edu/" title="University of Nebraska–Lincoln">UNL</a></li>
+        <li><a href="http://www.unl.edu/" title="University of Nebraska&ndash;Lincoln">UNL</a></li>
         <li><a href="'.UNL_Peoplefinder::getURL().'">Directory</a></li>
         <li>'.$context->name.'</li>
     </ul>');
