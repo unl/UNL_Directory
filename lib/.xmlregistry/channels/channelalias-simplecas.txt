@@ -1,1 +1,1 @@
-simplecas.googlecode.com/svn
+saltybeagle.github.com/SimpleCAS

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" packagerversion="1.9.1" version="2.0" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
+<package xmlns="http://pear.php.net/dtd/package-2.1" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.1" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.1     http://pear.php.net/dtd/package-2.1.xsd" packagerversion="2.0.0">
  <name>SimpleCAS</name>
- <channel>simplecas.googlecode.com/svn</channel>
+ <channel>saltybeagle.github.com/SimpleCAS</channel>
  <summary>A PHP5 library for CAS Authentication.</summary>
  <description>This package is a PHP5 only library for identifying users
 in a JA-SIG CAS secured environment.</description>
@@ -29,34 +29,40 @@ in a JA-SIG CAS secured environment.</description>
   <email>ericrasmussen1@gmail.com</email>
   <active>yes</active>
  </helper>
- <date>2010-07-13</date>
- <time>13:25:12</time>
+ <date>2011-12-06</date>
+ <time>13:24:52</time>
  <version>
-  <release>0.5.0</release>
-  <api>0.5.0</api>
+  <release>0.6.0</release>
+  <api>0.6.0</api>
  </version>
  <stability>
-  <release>beta</release>
-  <api>beta</api>
+  <release>alpha</release>
+  <api>alpha</api>
  </stability>
  <license uri="http://www1.unl.edu/wdn/wiki/Software_License">BSD License</license>
- <notes>
-* Allow service url to be customized with SimpleCAS::setURL($url); [ericrasmussen1]
- </notes>
+ <notes>Feature Release:
+
+* Added support for the CAS features gateway and renew and added new [kabel]
+
+
+No API backwards compatibility changes
+</notes>
  <contents>
   <dir name="/">
-   <file baseinstalldir="/" md5sum="ad9c06f186ce8fa739d6e716f6c9b48d" name="SimpleCAS/SingleSignOut.php" role="php"/>
-   <file baseinstalldir="/" md5sum="7a49aa1c67563ed628202c3e9244dcdc" name="SimpleCAS/ProxyGranting/Storage/File.php" role="php"/>
-   <file baseinstalldir="/" md5sum="26b6d753c3f9098be6493c818aabd959" name="SimpleCAS/ProxyGranting/Storage.php" role="php"/>
-   <file baseinstalldir="/" md5sum="e96b4c13218c39664fdeb8dc8d4e7541" name="SimpleCAS/ProxyGranting.php" role="php"/>
-   <file baseinstalldir="/" md5sum="46feaaf938c6eb0f7f260125a646b3fb" name="SimpleCAS/Protocol/Version2/ValidationResponse.php" role="php"/>
-   <file baseinstalldir="/" md5sum="f4ed06c8ae5918cfb9790ca72c6256d0" name="SimpleCAS/Protocol/Version2.php" role="php"/>
-   <file baseinstalldir="/" md5sum="80862315b001dcfa1fde9348341ff432" name="SimpleCAS/Protocol/Version1.php" role="php"/>
-   <file baseinstalldir="/" md5sum="daf05e7a073e2ac47ddb0c7ea6a83e33" name="SimpleCAS/Protocol.php" role="php"/>
-   <file baseinstalldir="/" md5sum="d93480efa786598948935145b06352a6" name="SimpleCAS/Autoload.php" role="php"/>
-   <file baseinstalldir="/" md5sum="a9d96c7d2032b5432306ffba5438d0f1" name="SimpleCAS.php" role="php"/>
-   <file baseinstalldir="/" md5sum="9d686c3553b6c8be0af988ddfb363f0c" name="docs/examples/Zend_Auth_Adapter_SimpleCAS.php" role="doc"/>
-   <file baseinstalldir="/" md5sum="2254593f10efc23cd0eadab309506e15" name="docs/examples/simple.php" role="doc"/>
+   <file role="php" name="src/SimpleCAS/SingleSignOut.php" md5sum="ad9c06f186ce8fa739d6e716f6c9b48d"/>
+   <file role="php" name="src/SimpleCAS/ProxyGranting/Storage/File.php" md5sum="338e3c247a610c54b463b128e9796958"/>
+   <file role="php" name="src/SimpleCAS/ProxyGranting/Storage.php" md5sum="3eb6a0c0c58a17fde16e2fa0370c0cca"/>
+   <file role="php" name="src/SimpleCAS/ProxyGranting.php" md5sum="831fd17f2e6a4ae1ab2660dd877603ae"/>
+   <file role="php" name="src/SimpleCAS/Protocol/Version2/ValidationResponse.php" md5sum="1810517782f2375d3b97a0de2c8927ea"/>
+   <file role="php" name="src/SimpleCAS/Protocol/Version2.php" md5sum="9e83ca7caec01e524dc6b61096c13458"/>
+   <file role="php" name="src/SimpleCAS/Protocol/Version1.php" md5sum="998d46b603857ee68936006dec691363"/>
+   <file role="php" name="src/SimpleCAS/Protocol.php" md5sum="96a3d2b1f16c8e528f413a0790db7b93"/>
+   <file role="php" name="src/SimpleCAS/Autoload.php" md5sum="d93480efa786598948935145b06352a6"/>
+   <file role="php" name="src/SimpleCAS.php" md5sum="8f00c0610636f8f8dc1e289e95e8f1b0"/>
+   <file role="doc" name="docs/examples/Zend_Auth_Adapter_SimpleCAS.php" md5sum="9d686c3553b6c8be0af988ddfb363f0c"/>
+   <file role="doc" name="docs/examples/simple_renew.php" md5sum="4e2c2e2ebcfdb335ffbb36da5aab5190"/>
+   <file role="doc" name="docs/examples/simple_gateway.php" md5sum="927bd6158bce3619fdad333351ca202d"/>
+   <file role="doc" name="docs/examples/simple.php" md5sum="a2a7d83eaa0e145a7c742464af96d7a0"/>
   </dir>
  </contents>
  <dependencies>
