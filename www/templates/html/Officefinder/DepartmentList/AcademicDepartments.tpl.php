@@ -1,3 +1,7 @@
+<?php 
+UNL_Officefinder::setReplacementData('doctitle', 'UNL | Directory | Academic Departments');
+UNL_Officefinder::setReplacementData('pagetitle', '<h2>Academic Departments</h2>');
+?>
 <script type="text/javascript">
 WDN.loadJS('../scripts/filters.js', function(){
 	WDN.jQuery('#filters').show();
@@ -33,7 +37,6 @@ WDN.loadJS('../scripts/filters.js', function(){
 </div>
 <div class="grid9">
     <div class="results departments" id="dir_departmentListing">
-    <h3>Academic Departments</h3>
     <?php
     $used_letters     = array();
     $firstLetter      = '';
