@@ -13,53 +13,56 @@
  */
 
 include_once 'Auth/Container.php';
-require_once 'UNL/Auth/CAS.php';
 
 class UNL_Auth_CAS_PEARAuth extends Auth_Container
 {
+    /**
+     * 
+     * @var UNL_Auth_CAS
+     */
     protected $cas;
     
     public function __construct($options)
     {
-        $this->cas = UNL_Auth_CAS::getInstance();
+        $this->cas = UNL_Auth::factory('CAS', $options);
     }
     
     public function getPEARAuth($options = null, $loginFunction = null, $showLogin = true)
     {
         if (!isset($loginFunction)) {
-            $loginFunction = array('UNL_Auth_CAS_PEARAuth', 'login');
+            $loginFunction = array($this, 'login');
         }
         $auth = new Auth($this, $options, $loginFunction, $showLogin);
         if ($this->checkAuth()) {
             $auth->setAuth($this->getUsername());
         }
-        $auth->setLogoutCallback(array('UNL_Auth_CAS_PEARAuth','logout'));
+        $auth->setLogoutCallback(array($this,'logout'));
         return $auth;
     }
     
     public function login()
     {
-        UNL_Auth_CAS::getInstance()->login();
+        $this->cas->login();
     }
     
     public function logout()
     {
-        return UNL_Auth_CAS::getInstance()->logout();
+        return $this->cas->logout();
     }
     
     public function getAuth()
     {
-        return UNL_Auth_CAS::getInstance()->isLoggedIn();
+        return $this->cas->isLoggedIn();
     }
     
     public function checkAuth()
     {
-        return UNL_Auth_CAS::getInstance()->isLoggedIn();
+        return $this->cas->isLoggedIn();
     }
     
     public function getUsername()
     {
-        return UNL_Auth_CAS::getInstance()->getUser();
+        return $this->cas->getUser();
     }
     
 }

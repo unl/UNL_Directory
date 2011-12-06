@@ -65,8 +65,10 @@ class UNL_Auth_CAS extends UNL_Auth
     /**
      * The class constructor used to initialize the phpCAS class settings.
      */
-    private function __construct(array $options = null)
+    private function __construct(array $options = array())
     {
+        $options = array_merge($this->cas_options, $options);
+        
         if (session_id() != '') {
             $start_session = false;
         } else {
@@ -74,7 +76,7 @@ class UNL_Auth_CAS extends UNL_Auth
         }
         phpCAS::setDebug(false);
         phpCAS::client(CAS_VERSION_2_0,
-            $this->cas_options['host'], $this->cas_options['port'], $this->cas_options['path'],
+            $options['host'], $options['port'], $options['path'],
             $start_session);
         phpCAS::setNoCasServerValidation();
         phpCAS::setCacheTimesForAuthRecheck(-1);
@@ -90,7 +92,12 @@ class UNL_Auth_CAS extends UNL_Auth
     public static function getInstance()
     {
         if (null === self::$_instance) {
-            self::$_instance = new self();
+            if (func_num_args() && null !== func_get_arg(0))  {
+                $options = func_get_arg(0);
+            }  else {
+                $options = array();
+            }
+            self::$_instance = new self($options);
         }
 
         return self::$_instance;

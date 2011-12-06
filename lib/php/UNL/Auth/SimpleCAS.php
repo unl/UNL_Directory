@@ -13,7 +13,6 @@
  */
 
 require_once 'SimpleCAS/Autoload.php';
-require_once 'HTTP/Request2.php';
 
 /**
  * UNL_Auth_SimpleCAS
@@ -59,9 +58,13 @@ class UNL_Auth_SimpleCAS extends UNL_Auth
     private function __construct(array $options = array())
     {
         $options = array_merge($this->options, $options);
-        $protocol = new SimpleCAS_Protocol_Version2($this->options);
+        $protocol = new SimpleCAS_Protocol_Version2($options);
         
-        $protocol->getRequest()->setConfig('ssl_verify_peer', false);
+        $request = $protocol->getRequest();
+        $defaultClass = SimpleCAS_Protocol::DEFAULT_REQUEST_CLASS;
+        if ($request instanceof $defaultClass) {
+            $protocol->getRequest()->setConfig('ssl_verify_peer', false);
+        }
         
         $this->client = SimpleCAS::client($protocol);
         if ($this->client->isAuthenticated()) {
@@ -78,7 +81,12 @@ class UNL_Auth_SimpleCAS extends UNL_Auth
     public static function getInstance()
     {
         if (null === self::$_instance) {
-            self::$_instance = new self();
+            if (func_num_args() && null !== func_get_arg(0))  {
+                $options = func_get_arg(0);
+            }  else {
+                $options = array();
+            }
+            self::$_instance = new self($options);
         }
 
         return self::$_instance;
@@ -99,9 +107,22 @@ class UNL_Auth_SimpleCAS extends UNL_Auth
         return $this->client->forceAuthentication();
     }
     
-    function logout()
+    function logout($url = '')
     {
-        return $this->client->logout();
+        return $this->client->logout($url);
     }
+
+    /**
+     * Pass through unknown function calls to the SimpleCAS client
+     *
+     * @param string $name      Method to call
+     * @param array  $arguments Arguments to the method
+     *
+     * @return mixed
+     */
+    public function __call($name, $arguments)
+    {
+        return call_user_func_array(array($this->client, $name), $arguments);
+    }
+    
 }
-?>

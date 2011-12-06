@@ -49,7 +49,7 @@ class UNL_Officefinder_DepartmentList_AlphaListing extends FilterIterator implem
 
     function getCacheKey()
     {
-        return 'alphalisting';
+        return false;
     }
 
     function accept()

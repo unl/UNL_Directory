@@ -49,9 +49,9 @@ class UNL_Auth_SimpleCAS_ZendAuth implements Zend_Auth_Adapter_Interface
      *
      * @return void
      */ 
-    public function __construct()
+    public function __construct(array $options = array())
     {
-        $this->_simplecas = UNL_Auth::factory('SimpleCAS');
+        $this->_simplecas = UNL_Auth::factory('SimpleCAS', $options);
     }
 
     /**
