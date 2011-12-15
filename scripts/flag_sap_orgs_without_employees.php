@@ -5,6 +5,12 @@
  */
 require_once dirname(__FILE__).'/../www/config.inc.php';
 
+// Step 1.) Reset suppress flag on all departments to false (0)
+$db = UNL_Officefinder::getDB();
+$db->query('UPDATE departments SET suppress = 0;');
+
+
+// Step 2.) Suppress all departments with (no children AND no hr personnel)
 $departments = new UNL_Officefinder_DepartmentList_OfficialOrgUnits();
 
 $departments_without_children = new UNL_Officefinder_DepartmentList_Filter_HasNoChildren($departments);
@@ -16,4 +22,30 @@ foreach ($departments_with_nohrpersonnel as $department) {
     echo 'Hiding ' . $department->name . ' (' . $department->org_unit . ')' . PHP_EOL;
     $department->suppress = true;
     $department->save();
+}
+
+
+// Step 3.) Suppress parent if needed
+function checkChildren(UNL_Officefinder_Department $parent)
+{
+    foreach ($parent->getChildren() as $child) {
+        if (!$child->suppressed) {
+            // This listing has a child which is visible
+            return;
+        }
+    }
+    echo 'Hiding parent ' . $department->name . ' (' . $department->org_unit . ')' . PHP_EOL;
+    $parent->suppress = 1;
+    $parent->save();
+
+    if (!$parent->isRoot()) {
+        return checkChildren($parent->getParent());
+    }
+}
+
+$suppressed_depts = new UNL_Officefinder_DepartmentList_Suppressed();
+foreach ($suppressed_depts as $suppressed) {
+    /* @var $suppressed UNL_Officefinder_Department */
+    $parent = $suppressed->getParent();
+    checkChildren($parent);
 }
