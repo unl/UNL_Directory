@@ -82,7 +82,10 @@ if (!$context->isRoot()) {
                 <li><?php echo $context->name; ?>
                     <?php if ($context->hasOfficialChildDepartments()): ?>
                     <ul>
-                        <?php foreach ($context->getOfficialChildDepartments('name ASC') as $child): ?>
+                        <?php foreach (
+                                new UNL_Officefinder_DepartmentList_Filter_Suppressed(
+                                    $context->getOfficialChildDepartments('name ASC')
+                                    ) as $child): ?>
                         <li><a href="<?php echo $child->getURL(); ?>"><?php echo $child->name; ?></a></li>
                         <?php endforeach; ?>
                     </ul>
