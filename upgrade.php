@@ -25,11 +25,13 @@ do {
 
 echo 'initialization complete!<br />'.PHP_EOL;
 
-echo 'Adding academic field to departments...<br />'.PHP_EOL;
-$result = $mysqli->query(file_get_contents(__DIR__.'/data/add_academic.sql'));
-if (!$result) {
-    if (mysqli_errno($mysqli) == 1060) {
-        echo 'Field already has been added<br />'.PHP_EOL;
+foreach (array(__DIR__.'/data/add_academic.sql'=>'academic field') as $sql_file => $field_name) {
+    echo 'Adding '.$field_name.' to departments...<br />'.PHP_EOL;
+    $result = $mysqli->query(file_get_contents($sql_file));
+    if (!$result) {
+        if (mysqli_errno($mysqli) == 1060) {
+            echo 'Field already has been added<br />'.PHP_EOL;
+        }
     }
 }
 
