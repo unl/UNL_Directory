@@ -25,7 +25,11 @@ do {
 
 echo 'initialization complete!<br />'.PHP_EOL;
 
-foreach (array(__DIR__.'/data/add_academic.sql'=>'academic field') as $sql_file => $field_name) {
+foreach (
+    array(
+        __DIR__.'/data/add_academic.sql'=>'academic field',
+        __DIR__.'/data/add_suppress.sql'=>'suppress field',
+    ) as $sql_file => $field_name) {
     echo 'Adding '.$field_name.' to departments...<br />'.PHP_EOL;
     $result = $mysqli->query(file_get_contents($sql_file));
     if (!$result) {

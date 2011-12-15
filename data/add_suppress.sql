@@ -1,0 +1,2 @@
+ALTER TABLE `departments` ADD `suppress` BOOLEAN NOT NULL DEFAULT '0' COMMENT 'Suppress displaying this department? Typically used to hide official SAP orgs with no appointments and children.' AFTER `academic` ,
+ADD INDEX ( `suppress` ) 

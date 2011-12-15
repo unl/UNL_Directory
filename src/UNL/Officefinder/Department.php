@@ -38,6 +38,9 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
     /** @Column(type="integer") */
     public $academic;
 
+    /** @Column(type="integer") */
+    public $suppress;
+
     public $lft;
     public $rgt;
     public $level;
@@ -243,6 +246,11 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
         if (!empty($this->fax)
             && preg_match('/^2\-?([\d]{4})$/', $this->fax, $matches)) {
             $this->fax = '402-472-'.$matches[1];
+        }
+
+        if (empty($this->suppress)) {
+            // Default suppression to false
+            $this->suppress = 0;
         }
 
         return parent::save();
