@@ -29,12 +29,12 @@ foreach ($departments_with_nohrpersonnel as $department) {
 function checkChildren(UNL_Officefinder_Department $parent)
 {
     foreach ($parent->getChildren() as $child) {
-        if (!$child->suppressed) {
+        if (!$child->suppress) {
             // This listing has a child which is visible
             return;
         }
     }
-    echo 'Hiding parent ' . $department->name . ' (' . $department->org_unit . ')' . PHP_EOL;
+    echo 'Hiding parent ' . $parent->name . ' (' . $parent->org_unit . ')' . PHP_EOL;
     $parent->suppress = 1;
     $parent->save();
 
