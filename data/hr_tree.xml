@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE tree SYSTEM "treeml.dtd">
-<!-- Generated Tue Nov 22 04:20:46 2011 -->
+<!-- Generated Tue Jan 17 04:22:10 2012 -->
 <tree>
  <declarations>
    <attributeDecl name="name"        type="String" />
@@ -2078,6 +2078,15 @@
         <attribute name="city" value="UNL"/>
         <attribute name="state" value="NE"/>
         <attribute name="postal_code" value="68583-0908"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="HAPPI Business Center"/>
+        <attribute name="org_unit" value="50003027"/>
+        <attribute name="org_abbr" value="HAPPI BusCtr"/>
+        <attribute name="building" value="279 PLSH"/>
+        <attribute name="city" value="UNL"/>
+        <attribute name="state" value="NE"/>
+        <attribute name="postal_code" value="68583-0915"/>
        </branch>
        <branch>
         <attribute name="name" value="VBI Business Center"/>
@@ -6119,9 +6128,9 @@
        <attribute name="postal_code" value="UNMC"/>
       </branch>
       <branch>
-       <attribute name="name" value="Office for Std Equity &amp; Multi-Cultrl"/>
+       <attribute name="name" value="Recruitment and Student Engagement"/>
        <attribute name="org_unit" value="50001220"/>
-       <attribute name="org_abbr" value="Of Std Eq315"/>
+       <attribute name="org_abbr" value="RecStuEng315"/>
        <attribute name="building" value="SLC"/>
        <attribute name="room" value="2069"/>
        <attribute name="city" value="68198-4275"/>
