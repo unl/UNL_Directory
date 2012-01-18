@@ -1,7 +1,10 @@
 <?php
 class UNL_Peoplefinder_Developers
 {
-    public $resources = array('Record', "Search");
+    public $resources = array(
+        'Record',
+        'Search',
+    );
     
     public $resource;
     
