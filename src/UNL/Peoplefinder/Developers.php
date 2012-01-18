@@ -4,6 +4,7 @@ class UNL_Peoplefinder_Developers
     public $resources = array(
         'Record',
         'Search',
+        'Department',
     );
     
     public $resource;
