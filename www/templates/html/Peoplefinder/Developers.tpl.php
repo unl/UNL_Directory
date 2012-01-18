@@ -97,20 +97,21 @@
                 <div class="wdn_tabs_content">
                      <?php
                      foreach ($resource->formats as $format) {
+                         $url = UNL_Peoplefinder::addURLParams($resource->exampleURI, array('format' => $format));
                          ?>
                          <div id="<?php echo $format; ?>">
                             <ul>
                                 <li>
                                     Calling this:
                                     <blockquote>
-                                        <p>GET <?php echo $resource->exampleURI; ?>&format=<?php echo $format; ?></p>
+                                        <p>GET <?php echo $url; ?></p>
                                     </blockquote>
                                 </li>
                                 <li>
                                     Provides this:
                                     <?php
                                     //Get the output.
-                                    if (!$result = file_get_contents($resource->exampleURI."&format=$format")) {
+                                    if (!$result = file_get_contents($url)) {
                                         $result = "Error getting file contents.";
                                     }
                                     switch($format) {
