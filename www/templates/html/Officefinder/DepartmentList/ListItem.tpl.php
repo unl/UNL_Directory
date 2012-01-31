@@ -25,6 +25,6 @@ if ($parent) {
         <div class="tel"><?php echo $savvy->render($context->phone, 'Peoplefinder/Record/TelephoneNumber.tpl.php') ?></div>
     <?php endif; ?>
     </div>
-    <a class="cInfo" href="<?php echo $context->getURL() ?>" onclick="return service_officefinder.of_getUID('<?php echo $context->id ?>');">More Details</a>
+    <a class="cInfo" href="<?php echo $context->getURL() ?>">More Details</a>
     </div>
 </li>
