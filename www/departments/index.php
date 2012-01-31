@@ -5,6 +5,15 @@ $options = $_GET;
 $options['driver'] = $driver;
 $peoplefinder  = new UNL_Officefinder($options);
 
+// Specify domains from which requests are allowed
+header('Access-Control-Allow-Origin: *');
+
+// Specify which request methods are allowed
+header('Access-Control-Allow-Methods: GET, OPTIONS');
+
+// Additional headers which may be sent along with the CORS request
+// The X-Requested-With header allows jQuery requests to go through
+header('Access-Control-Allow-Headers: X-Requested-With');
 
 Savvy_ClassToTemplateMapper::$classname_replacement = 'UNL_';
 $savvy = new Savvy_Turbo();
