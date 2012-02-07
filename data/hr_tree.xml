@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE tree SYSTEM "treeml.dtd">
-<!-- Generated Tue Jan 17 04:22:10 2012 -->
+<!-- Generated Tue Feb  7 09:22:08 2012 -->
 <tree>
  <declarations>
    <attributeDecl name="name"        type="String" />
@@ -6289,6 +6289,11 @@
       <attribute name="org_unit" value="50007100"/>
       <attribute name="org_abbr" value="COPH OEDS392"/>
      </branch>
+     <branch>
+      <attribute name="name" value="COPH Office of Public Hlth Practice"/>
+      <attribute name="org_unit" value="50007650"/>
+      <attribute name="org_abbr" value="OfficePHP394"/>
+     </branch>
     </branch>
    </branch>
   </branch>
@@ -8475,7 +8480,7 @@
       <attribute name="org_unit" value="50000498"/>
       <attribute name="org_abbr" value="N&amp;SS UNK 501"/>
       <attribute name="building" value="COPH"/>
-      <attribute name="room" value="101A"/>
+      <attribute name="room" value="240"/>
       <attribute name="city" value="Kearney"/>
       <attribute name="state" value="NE"/>
       <attribute name="postal_code" value="68849"/>
