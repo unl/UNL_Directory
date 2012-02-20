@@ -167,6 +167,7 @@
 
 ***************************************************
 */
+#maincontent .profile_pic {width:auto;height:auto;}
 #maincontent .results h3, #maincontent #orgChart h3 {
     border-bottom:2px dotted #E6E6E6;
     padding-bottom:0;
