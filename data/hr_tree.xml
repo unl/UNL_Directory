@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE tree SYSTEM "treeml.dtd">
-<!-- Generated Tue Feb  7 09:22:08 2012 -->
+<!-- Generated Tue Feb 21 06:22:12 2012 -->
 <tree>
  <declarations>
    <attributeDecl name="name"        type="String" />
@@ -4125,15 +4125,6 @@
        </branch>
       </branch>
       <branch>
-       <attribute name="name" value="Transportation"/>
-       <attribute name="org_unit" value="50000771"/>
-       <attribute name="org_abbr" value="Transprt 305"/>
-       <attribute name="building" value="TRAN"/>
-       <attribute name="city" value="68198-5520"/>
-       <attribute name="state" value="NE"/>
-       <attribute name="postal_code" value="UNMC"/>
-      </branch>
-      <branch>
        <attribute name="name" value="Recycling"/>
        <attribute name="org_unit" value="50000773"/>
        <attribute name="org_abbr" value="Recyclng 305"/>
@@ -6014,9 +6005,9 @@
       <attribute name="org_abbr" value="NUCLRMED 347"/>
      </branch>
      <branch>
-      <attribute name="name" value="Student Affairs"/>
+      <attribute name="name" value="SAHP Student Affairs"/>
       <attribute name="org_unit" value="50007302"/>
-      <attribute name="org_abbr" value="St Affs  347"/>
+      <attribute name="org_abbr" value="SAHP SA  347"/>
      </branch>
      <branch>
       <attribute name="name" value="Distance Education"/>
