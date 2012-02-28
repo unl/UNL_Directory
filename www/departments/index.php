@@ -23,10 +23,10 @@ switch($peoplefinder->options['format']) {
     case 'json':
     case 'php':
     case 'vcard':
+    case 'xml':
         $savvy->addTemplatePath(dirname(dirname(__FILE__)).'/templates/'.$peoplefinder->options['format']);
         break;
     case 'xml':
-        $savvy->setEscape('htmlspecialchars');
         $savvy->addTemplatePath(dirname(dirname(__FILE__)).'/templates/'.$peoplefinder->options['format']);
         break;
     case 'editing':

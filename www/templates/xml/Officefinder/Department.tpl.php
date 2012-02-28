@@ -6,6 +6,7 @@
     if (is_array($value)) {
         continue;
     }
+    $value = htmlspecialchars($value);
     ?>
     <?php echo "<$key>$value</$key>\n"; ?>
     <?php endforeach; ?>
