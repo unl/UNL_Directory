@@ -87,7 +87,7 @@
 .wdn_tabs_content {position:relative;}
 .loading{right:120px;}
 #listings > ul.listings > li {
-    padding:5px 5px 0px 0px;
+    padding:5px 30px 0px 0px;
     border-bottom: 1px dotted #d0cece;
     list-style:none;
     min-height:20px;
@@ -111,7 +111,7 @@
 ul.listings li:hover {
 }
 ul.listings li .listingDetails {
-    
+ 
 }
 .listing .tel{display:block;}
 .dep_result .departmentInfo {
