@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE tree SYSTEM "treeml.dtd">
-<!-- Generated Tue Feb 21 06:22:12 2012 -->
+<!-- Generated Fri Apr  6 09:22:42 2012 -->
 <tree>
  <declarations>
    <attributeDecl name="name"        type="String" />
@@ -6915,16 +6915,16 @@
        <attribute name="city" value="Omaha"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68182"/>
-       <branch>
-        <attribute name="name" value="Veteran Services"/>
-        <attribute name="org_unit" value="50000929"/>
-        <attribute name="org_abbr" value="VET AFRS 465"/>
-        <attribute name="building" value="EAB"/>
-        <attribute name="room" value="103"/>
-        <attribute name="city" value="Omaha"/>
-        <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68182"/>
-       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Miltary &amp; Veteran University Srvcs"/>
+       <attribute name="org_unit" value="50000929"/>
+       <attribute name="org_abbr" value="MAV US   465"/>
+       <attribute name="building" value="EAB"/>
+       <attribute name="room" value="103"/>
+       <attribute name="city" value="Omaha"/>
+       <attribute name="state" value="NE"/>
+       <attribute name="postal_code" value="68182"/>
       </branch>
       <branch>
        <attribute name="name" value="Career Center"/>
@@ -7716,14 +7716,29 @@
        <attribute name="postal_code" value="68182"/>
       </branch>
       <branch>
-       <attribute name="name" value="Institutional Research"/>
-       <attribute name="org_unit" value="50000953"/>
-       <attribute name="org_abbr" value="IR UNO   461"/>
-       <attribute name="building" value="EAB"/>
-       <attribute name="room" value="202"/>
-       <attribute name="city" value="Omaha"/>
-       <attribute name="state" value="NE"/>
-       <attribute name="postal_code" value="68182"/>
+       <attribute name="name" value="Office of Institutional EffectivenessUNO"/>
+       <attribute name="org_unit" value="50007700"/>
+       <attribute name="org_abbr" value="OIE      461"/>
+       <branch>
+        <attribute name="name" value="Institutional Research"/>
+        <attribute name="org_unit" value="50000953"/>
+        <attribute name="org_abbr" value="IR UNO   461"/>
+        <attribute name="building" value="EAB"/>
+        <attribute name="room" value="202"/>
+        <attribute name="city" value="Omaha"/>
+        <attribute name="state" value="NE"/>
+        <attribute name="postal_code" value="68182"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Decision Support Services"/>
+        <attribute name="org_unit" value="50007701"/>
+        <attribute name="org_abbr" value="DSS      461"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="AQIP"/>
+        <attribute name="org_unit" value="50007702"/>
+        <attribute name="org_abbr" value="AQIP     461"/>
+       </branch>
       </branch>
       <branch>
        <attribute name="name" value="Faculty Development"/>
@@ -9126,6 +9141,15 @@
        <attribute name="org_abbr" value="FACREVBD 510"/>
        <attribute name="building" value="GSB"/>
        <attribute name="room" value="101"/>
+       <attribute name="city" value="Kearney"/>
+       <attribute name="state" value="NE"/>
+       <attribute name="postal_code" value="68849"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Utilities Services"/>
+       <attribute name="org_unit" value="50002759"/>
+       <attribute name="org_abbr" value="UTIL SVC 510"/>
+       <attribute name="building" value="FAC"/>
        <attribute name="city" value="Kearney"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68849"/>
