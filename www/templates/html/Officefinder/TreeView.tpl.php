@@ -16,7 +16,7 @@ foreach ($context as $department) {
     }
     echo PHP_EOL;
     echo str_repeat(' ', $context->getDepth());
-    echo '<li class="d'.$context->getDepth().'">'.$department->name;
+    echo '<li class="d'.$context->getDepth().'"><a href="'.$department->getURL().'">'.$department->name.'</a>';
     $depth = $context->getDepth();
 }
 ?>
