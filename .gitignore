@@ -1,0 +1,9 @@
+/.buildpath
+/.cache
+/.project
+/.settings
+/*.tar
+/*.tgz
+/*.zip
+/www/.htaccess
+/www/config.inc.php
