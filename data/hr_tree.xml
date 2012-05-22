@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE tree SYSTEM "treeml.dtd">
-<!-- Generated Fri Apr  6 09:22:42 2012 -->
+<!-- Generated Mon May 21 18:22:11 2012 -->
 <tree>
  <declarations>
    <attributeDecl name="name"        type="String" />
@@ -4316,6 +4316,11 @@
        <attribute name="org_abbr" value="CAS ACAP 390"/>
       </branch>
      </branch>
+     <branch>
+      <attribute name="name" value="FACT"/>
+      <attribute name="org_unit" value="50007025"/>
+      <attribute name="org_abbr" value="FACT     305"/>
+     </branch>
     </branch>
     <branch>
      <attribute name="name" value="College of Medicine"/>
@@ -4731,11 +4736,6 @@
        <attribute name="city" value="68198-5541"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="UNMC"/>
-      </branch>
-      <branch>
-       <attribute name="name" value="FACT"/>
-       <attribute name="org_unit" value="50007025"/>
-       <attribute name="org_abbr" value="FACT     319"/>
       </branch>
      </branch>
      <branch>
@@ -6372,6 +6372,36 @@
         <attribute name="name" value="Position Number Holding Area"/>
         <attribute name="org_unit" value="50003829"/>
         <attribute name="org_abbr" value="POS NO HOLD"/>
+        <branch>
+         <attribute name="name" value="Academic Records and Registration"/>
+         <attribute name="org_unit" value="50000197"/>
+         <attribute name="org_abbr" value="REC REG 465"/>
+         <attribute name="building" value="EAB"/>
+         <attribute name="room" value="101"/>
+         <attribute name="city" value="Omaha"/>
+         <attribute name="state" value="NE"/>
+         <attribute name="postal_code" value="68182"/>
+         <branch>
+          <attribute name="name" value="Academic Support Services"/>
+          <attribute name="org_unit" value="50000923"/>
+          <attribute name="org_abbr" value="ACADSPRT 465"/>
+          <attribute name="building" value="EAB"/>
+          <attribute name="room" value="105"/>
+          <attribute name="city" value="Omaha"/>
+          <attribute name="state" value="NE"/>
+          <attribute name="postal_code" value="68182"/>
+         </branch>
+        </branch>
+        <branch>
+         <attribute name="name" value="MavLink"/>
+         <attribute name="org_unit" value="50006850"/>
+         <attribute name="org_abbr" value="MAVLINK"/>
+         <attribute name="building" value="EAB"/>
+         <attribute name="room" value="105"/>
+         <attribute name="city" value="Omaha"/>
+         <attribute name="state" value="NE"/>
+         <attribute name="postal_code" value="68182"/>
+        </branch>
        </branch>
       </branch>
       <branch>
@@ -6787,26 +6817,6 @@
        </branch>
       </branch>
       <branch>
-       <attribute name="name" value="Academic Records and Registration"/>
-       <attribute name="org_unit" value="50000197"/>
-       <attribute name="org_abbr" value="REC REG 465"/>
-       <attribute name="building" value="EAB"/>
-       <attribute name="room" value="101"/>
-       <attribute name="city" value="Omaha"/>
-       <attribute name="state" value="NE"/>
-       <attribute name="postal_code" value="68182"/>
-       <branch>
-        <attribute name="name" value="Academic Support Services"/>
-        <attribute name="org_unit" value="50000923"/>
-        <attribute name="org_abbr" value="ACADSPRT 465"/>
-        <attribute name="building" value="EAB"/>
-        <attribute name="room" value="105"/>
-        <attribute name="city" value="Omaha"/>
-        <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68182"/>
-       </branch>
-      </branch>
-      <branch>
        <attribute name="name" value="Enrollment Services"/>
        <attribute name="org_unit" value="50003828"/>
        <attribute name="org_abbr" value="ENRLMNT 465"/>
@@ -6821,26 +6831,6 @@
         <attribute name="org_abbr" value="TST CTR 465"/>
         <attribute name="building" value="EAB"/>
         <attribute name="room" value="113"/>
-        <attribute name="city" value="Omaha"/>
-        <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68182"/>
-       </branch>
-       <branch>
-        <attribute name="name" value="Orientation"/>
-        <attribute name="org_unit" value="50000918"/>
-        <attribute name="org_abbr" value="ORIENRN 465"/>
-        <attribute name="building" value="EAB"/>
-        <attribute name="room" value="111"/>
-        <attribute name="city" value="Omaha"/>
-        <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68182"/>
-       </branch>
-       <branch>
-        <attribute name="name" value="Recruitment Services"/>
-        <attribute name="org_unit" value="50000925"/>
-        <attribute name="org_abbr" value="RECRUIT 465"/>
-        <attribute name="building" value="EAB"/>
-        <attribute name="room" value="111"/>
         <attribute name="city" value="Omaha"/>
         <attribute name="state" value="NE"/>
         <attribute name="postal_code" value="68182"/>
@@ -6872,46 +6862,6 @@
        <attribute name="org_abbr" value="DISSRV   465"/>
        <attribute name="building" value="EAB"/>
        <attribute name="room" value="204"/>
-       <attribute name="city" value="Omaha"/>
-       <attribute name="state" value="NE"/>
-       <attribute name="postal_code" value="68182"/>
-      </branch>
-      <branch>
-       <attribute name="name" value="Undergraduate Admissions"/>
-       <attribute name="org_unit" value="50000922"/>
-       <attribute name="org_abbr" value="UG ADM 465"/>
-       <attribute name="building" value="EAB"/>
-       <attribute name="room" value="103"/>
-       <attribute name="city" value="Omaha"/>
-       <attribute name="state" value="NE"/>
-       <attribute name="postal_code" value="68182"/>
-      </branch>
-      <branch>
-       <attribute name="name" value="Records &amp; Registration"/>
-       <attribute name="org_unit" value="50000924"/>
-       <attribute name="org_abbr" value="RCDS REG 465"/>
-       <attribute name="building" value="EAB"/>
-       <attribute name="room" value="105"/>
-       <attribute name="city" value="Omaha"/>
-       <attribute name="state" value="NE"/>
-       <attribute name="postal_code" value="68182"/>
-       <branch>
-        <attribute name="name" value="MavLink"/>
-        <attribute name="org_unit" value="50006850"/>
-        <attribute name="org_abbr" value="MAVLINK"/>
-        <attribute name="building" value="EAB"/>
-        <attribute name="room" value="105"/>
-        <attribute name="city" value="Omaha"/>
-        <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68182"/>
-       </branch>
-      </branch>
-      <branch>
-       <attribute name="name" value="Financial Aid"/>
-       <attribute name="org_unit" value="50000926"/>
-       <attribute name="org_abbr" value="FIN AID 465"/>
-       <attribute name="building" value="EAB"/>
-       <attribute name="room" value="103"/>
        <attribute name="city" value="Omaha"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68182"/>
@@ -7677,6 +7627,61 @@
       </branch>
      </branch>
      <branch>
+      <attribute name="name" value="Enrollment Management and Marking"/>
+      <attribute name="org_unit" value="50007725"/>
+      <attribute name="org_abbr" value="EM &amp; M   409"/>
+      <branch>
+       <attribute name="name" value="Undergraduate Admissions             UN"/>
+       <attribute name="org_unit" value="50000922"/>
+       <attribute name="org_abbr" value="UG ADM 409"/>
+       <attribute name="building" value="EAB"/>
+       <attribute name="room" value="103"/>
+       <attribute name="city" value="Omaha"/>
+       <attribute name="state" value="NE"/>
+       <attribute name="postal_code" value="68182"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Records &amp; Registration"/>
+       <attribute name="org_unit" value="50000924"/>
+       <attribute name="org_abbr" value="RCDS REG 409"/>
+       <attribute name="building" value="EAB"/>
+       <attribute name="room" value="105"/>
+       <attribute name="city" value="Omaha"/>
+       <attribute name="state" value="NE"/>
+       <attribute name="postal_code" value="68182"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Recruitment/Orientation"/>
+       <attribute name="org_unit" value="50000925"/>
+       <attribute name="org_abbr" value="RECRORNT 409"/>
+       <attribute name="building" value="EAB"/>
+       <attribute name="room" value="111"/>
+       <attribute name="city" value="Omaha"/>
+       <attribute name="state" value="NE"/>
+       <attribute name="postal_code" value="68182"/>
+       <branch>
+        <attribute name="name" value="Dual Enrollment"/>
+        <attribute name="org_unit" value="50006875"/>
+        <attribute name="org_abbr" value="DUAL ENR 409"/>
+        <attribute name="building" value="EAB"/>
+        <attribute name="room" value="202"/>
+        <attribute name="city" value="Omaha"/>
+        <attribute name="state" value="NE"/>
+        <attribute name="postal_code" value="68182"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Financial Aid"/>
+       <attribute name="org_unit" value="50000926"/>
+       <attribute name="org_abbr" value="FIN AID 409"/>
+       <attribute name="building" value="EAB"/>
+       <attribute name="room" value="103"/>
+       <attribute name="city" value="Omaha"/>
+       <attribute name="state" value="NE"/>
+       <attribute name="postal_code" value="68182"/>
+      </branch>
+     </branch>
+     <branch>
       <attribute name="name" value="Academic Affairs - General"/>
       <attribute name="org_unit" value="50000948"/>
       <attribute name="org_abbr" value="AA GEN   461"/>
@@ -7776,16 +7781,6 @@
        <attribute name="org_abbr" value="Collb Sci461"/>
        <attribute name="building" value="PKI"/>
        <attribute name="room" value="356"/>
-       <attribute name="city" value="Omaha"/>
-       <attribute name="state" value="NE"/>
-       <attribute name="postal_code" value="68182"/>
-      </branch>
-      <branch>
-       <attribute name="name" value="Dual Enrollment"/>
-       <attribute name="org_unit" value="50006875"/>
-       <attribute name="org_abbr" value="DUAL ENR 461"/>
-       <attribute name="building" value="EAB"/>
-       <attribute name="room" value="202"/>
        <attribute name="city" value="Omaha"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68182"/>
@@ -8226,8 +8221,8 @@
          <attribute name="name" value="Learning Strategies"/>
          <attribute name="org_unit" value="50000578"/>
          <attribute name="org_abbr" value="LRNGSTRAT514"/>
-         <attribute name="building" value="MSAB"/>
-         <attribute name="room" value="172"/>
+         <attribute name="building" value="LIBR"/>
+         <attribute name="room" value="208"/>
          <attribute name="city" value="Kearney"/>
          <attribute name="state" value="NE"/>
          <attribute name="postal_code" value="68849"/>
@@ -8297,8 +8292,8 @@
         <attribute name="name" value="1st Year Program"/>
         <attribute name="org_unit" value="50005227"/>
         <attribute name="org_abbr" value="1YR PROG 514"/>
-        <attribute name="building" value="THMH"/>
-        <attribute name="room" value="109B"/>
+        <attribute name="building" value="MSAB"/>
+        <attribute name="room" value="174"/>
         <attribute name="city" value="Kearney"/>
         <attribute name="state" value="NE"/>
         <attribute name="postal_code" value="68849"/>
@@ -8535,7 +8530,7 @@
        <attribute name="org_unit" value="50000551"/>
        <attribute name="org_abbr" value="HIST UNK 501"/>
        <attribute name="building" value="COPH"/>
-       <attribute name="room" value="130N"/>
+       <attribute name="room" value="103N"/>
        <attribute name="city" value="Kearney"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68849"/>
@@ -8675,7 +8670,7 @@
        <attribute name="org_unit" value="50000572"/>
        <attribute name="org_abbr" value="SFTYCNTR 503"/>
        <attribute name="building" value="WSTC"/>
-       <attribute name="room" value="E200"/>
+       <attribute name="room" value="227E"/>
        <attribute name="city" value="Kearney"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68849"/>
@@ -8685,7 +8680,7 @@
        <attribute name="org_unit" value="50000573"/>
        <attribute name="org_abbr" value="NBDC UNK 503"/>
        <attribute name="building" value="WSTC"/>
-       <attribute name="room" value="135C"/>
+       <attribute name="room" value="127E"/>
        <attribute name="city" value="Kearney"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68849"/>
@@ -8715,7 +8710,7 @@
        <attribute name="org_unit" value="50001501"/>
        <attribute name="org_abbr" value="WC COMP  503"/>
        <attribute name="building" value="WSTC"/>
-       <attribute name="room" value="254W"/>
+       <attribute name="room" value="243W"/>
        <attribute name="city" value="Kearney"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68849"/>
@@ -8973,7 +8968,7 @@
       <attribute name="org_unit" value="50001506"/>
       <attribute name="org_abbr" value="WOM STDS 524"/>
       <attribute name="building" value="FNDH"/>
-      <attribute name="room" value="2113"/>
+      <attribute name="room" value="2152"/>
       <attribute name="city" value="Kearney"/>
       <attribute name="state" value="NE"/>
       <attribute name="postal_code" value="68849"/>
@@ -9023,6 +9018,7 @@
       <attribute name="org_unit" value="50000490"/>
       <attribute name="org_abbr" value="FIN UNK  515"/>
       <attribute name="building" value="FNDH"/>
+      <attribute name="room" value="135"/>
       <attribute name="city" value="Kearney"/>
       <attribute name="state" value="NE"/>
       <attribute name="postal_code" value="68849"/>
@@ -9070,8 +9066,8 @@
        <attribute name="name" value="Health/Wellness Program"/>
        <attribute name="org_unit" value="50001508"/>
        <attribute name="org_abbr" value="WELLNESS 515"/>
-       <attribute name="building" value="FNDH"/>
-       <attribute name="room" value="1200"/>
+       <attribute name="building" value="CUSH"/>
+       <attribute name="room" value="167"/>
        <attribute name="city" value="Kearney"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68849"/>
@@ -9091,7 +9087,7 @@
        <attribute name="org_unit" value="50002350"/>
        <attribute name="org_abbr" value="CHLD DEV 515"/>
        <attribute name="building" value="OTOL"/>
-       <attribute name="room" value="101"/>
+       <attribute name="room" value="102"/>
        <attribute name="city" value="Kearney"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68849"/>
@@ -9102,6 +9098,7 @@
       <attribute name="org_unit" value="50000493"/>
       <attribute name="org_abbr" value="PolicePS 515"/>
       <attribute name="building" value="GSB"/>
+      <attribute name="room" value="112"/>
       <attribute name="city" value="Kearney"/>
       <attribute name="state" value="NE"/>
       <attribute name="postal_code" value="68849"/>
@@ -9208,6 +9205,7 @@
       <attribute name="org_unit" value="50002375"/>
       <attribute name="org_abbr" value="ADVCRSRV 518"/>
       <attribute name="building" value="CMCT"/>
+      <attribute name="room" value="034"/>
       <attribute name="city" value="Kearney"/>
       <attribute name="state" value="NE"/>
       <attribute name="postal_code" value="68849"/>
