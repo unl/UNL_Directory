@@ -1,0 +1,21 @@
+Deploying the UNL directory web service
+============================================
+
+Prerequisites
+-------------
+The developer needs a SSH account on `directory.unl.edu` and
+has to be in the `ucomm` group.
+
+
+Local setup
+-----------
+::
+
+$ git remote add live ssh://directory.unl.edu/var/www/html/peoplefinder.unl.edu
+
+Deployment
+----------
+::
+
+$ git push live master
+
