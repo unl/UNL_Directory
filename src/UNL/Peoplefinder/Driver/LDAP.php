@@ -109,15 +109,26 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
     function bind()
     {
         $this->linkID = ldap_connect(self::$ldapServer);
+
+        if (!ldap_set_option($this->linkID, LDAP_OPT_PROTOCOL_VERSION, 3)) {
+            throw new Exception('Could not set LDAP_OPT_PROTOCOL_VERSION to 3', 500);
+        }
+
         if (!$this->linkID) {
             throw new Exception('ldap_connect failed! Cound not connect to the LDAP directory.', 500);
         }
+
+        if (!ldap_start_tls($this->linkID)) {
+            throw new Exception('Could not connect using StartTLS!', 500);
+        }
+
         $this->connected = ldap_bind($this->linkID,
                                      self::$bindDN,
                                      self::$bindPW);
         if (!$this->connected) {
             throw new Exception('ldap_bind failed! Could not connect to the LDAP directory.', 500);
         }
+
         return $this->connected;
     }
     
