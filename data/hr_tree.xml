@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE tree SYSTEM "treeml.dtd">
-<!-- Generated Mon May 21 18:22:11 2012 -->
+<!-- Generated Fri Jun 22 12:22:34 2012 -->
 <tree>
  <declarations>
    <attributeDecl name="name"        type="String" />
@@ -2268,9 +2268,9 @@
          <attribute name="postal_code" value="68583-0806"/>
         </branch>
         <branch>
-         <attribute name="name" value="Textiles Clothing &amp; Design"/>
+         <attribute name="name" value="Textiles, Merchan &amp; Fashion Design"/>
          <attribute name="org_unit" value="50000848"/>
-         <attribute name="org_abbr" value="IANR TCD"/>
+         <attribute name="org_abbr" value="IANR TMFD"/>
          <attribute name="building" value="234D HECO"/>
          <attribute name="city" value="UNL"/>
          <attribute name="state" value="NE"/>
@@ -6285,6 +6285,11 @@
       <attribute name="org_unit" value="50007650"/>
       <attribute name="org_abbr" value="OfficePHP394"/>
      </branch>
+     <branch>
+      <attribute name="name" value="COPH Center for Health Policy"/>
+      <attribute name="org_unit" value="50007750"/>
+      <attribute name="org_abbr" value="CTR HLTH 395"/>
+     </branch>
     </branch>
    </branch>
   </branch>
@@ -7477,9 +7482,9 @@
       <attribute name="postal_code" value="68182"/>
      </branch>
      <branch>
-      <attribute name="name" value="Academic Affairs - Technology"/>
+      <attribute name="name" value="Information Services"/>
       <attribute name="org_unit" value="50000949"/>
-      <attribute name="org_abbr" value="AA TECH  462"/>
+      <attribute name="org_abbr" value="IS TECH  462"/>
       <attribute name="building" value="EAB"/>
       <attribute name="room" value="005"/>
       <attribute name="city" value="Omaha"/>
@@ -7625,6 +7630,11 @@
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68182"/>
       </branch>
+      <branch>
+       <attribute name="name" value="Information Security/Enterprise Serv"/>
+       <attribute name="org_unit" value="50007800"/>
+       <attribute name="org_abbr" value="ISec/ES  462"/>
+      </branch>
      </branch>
      <branch>
       <attribute name="name" value="Enrollment Management and Marking"/>
@@ -7679,6 +7689,11 @@
        <attribute name="city" value="Omaha"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68182"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Marketing"/>
+       <attribute name="org_unit" value="50007726"/>
+       <attribute name="org_abbr" value="MARKETING409"/>
       </branch>
      </branch>
      <branch>
@@ -7911,9 +7926,9 @@
        <attribute name="postal_code" value="68182"/>
       </branch>
       <branch>
-       <attribute name="name" value="Marketing"/>
+       <attribute name="name" value="Athletic Marketing"/>
        <attribute name="org_unit" value="50000986"/>
-       <attribute name="org_abbr" value="MKTNG    478"/>
+       <attribute name="org_abbr" value="ATH MKTNG478"/>
        <attribute name="building" value="FH"/>
        <attribute name="room" value="109"/>
        <attribute name="city" value="Omaha"/>
