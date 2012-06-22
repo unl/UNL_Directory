@@ -89,14 +89,25 @@ class UNL_LDAP
         if ($this->_ldap !== false) {
             return $this;
         }
-        if ($this->_ldap = ldap_connect($this->options['uri'])) {
-            if (ldap_bind($this->_ldap, $this->options['bind_dn'], $this->options['bind_password'])) {
-                $this->options['bind_password'] = '****';
-                return $this;
-            }
+
+        if (!$this->_ldap = ldap_connect($this->options['uri'])) {
+            throw new UNL_LDAP_Exception('Could not connect to the LDAP server.');
+        }
+
+        if (!ldap_set_option($this->_ldap, LDAP_OPT_PROTOCOL_VERSION, 3)) {
+            throw new Exception('Could not set LDAP_OPT_PROTOCOL_VERSION to 3', 500);
+        }
+
+        if (!ldap_start_tls($this->_ldap)) {
+            throw new Exception('Could not connect using StartTLS!', 500);
+        }
+
+        if (!ldap_bind($this->_ldap, $this->options['bind_dn'], $this->options['bind_password'])) {
             throw new UNL_LDAP_Exception('Connection failure: ldap_bind() returned false for the server.');
         }
-        throw new UNL_LDAP_Exception('Could not connect to the LDAP server.');
+
+        $this->options['bind_password'] = '****';
+        return $this;
     }
     
     /**
