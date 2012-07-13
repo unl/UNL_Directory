@@ -1,9 +1,11 @@
 <div class="commentProblem noprint">
     <h3>Have a correction?</h3>
+    <p>If you'd like to correct your own entry, contact your UNL departmental HR liaison.</em><br />
+    For corrections to another person's contact information, use the form below.<br /><br /></p>
     <form class="wdn_feedback_comments2" method="post" action="http://www1.unl.edu/comments/">
         <input type="hidden" name="page_address" value="" />
-        Name: <input type="text" name="name" id="name" value="" />
-        Email: <input type="text" name="email" id="email" value="" />
+        <label for="name">Name:</label><input type="text" name="name" id="name" value="" />
+        <label for="email">Email:</label><input type="text" name="email" id="email" value="" /><br />
         <textarea name="comment" id="comment" rows="" cols=""></textarea>
         <input type="submit" value="Submit" />
     </form>

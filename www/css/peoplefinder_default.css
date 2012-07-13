@@ -83,6 +83,10 @@ body #footer .footer_col {
 	height:120px;
 	margin:10px 0;
 }
+.commentProblem label {
+	font-weight:bold;
+	margin:5px;
+}
 .commentProblem input[type=submit] {
 	background:url('/wdn/templates_3.0/css/content/images/zenform/submit.png') right #af0202 no-repeat;
 	border:3px solid #fff;
