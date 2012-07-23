@@ -10,7 +10,7 @@ error_reporting(E_ALL | E_STRICT);
 set_time_limit(0);
 $sap_dept = new UNL_Peoplefinder_Department(array('d'=>'University of Nebraska - Lincoln'));
 
-if (!$root = UNL_Officefinder_Department::getByID(1)) {
+if (!($root = UNL_Officefinder_Department::getByID(1))) {
     throw new Exception('Could not find the root element!');
 }
 
