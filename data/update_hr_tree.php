@@ -14,8 +14,16 @@ if (!$root = UNL_Officefinder_Department::getByID(1)) {
     throw new Exception('Could not find the root element!');
 }
 
+// Start updating at the 'root' of UNL's info within the XML tree
 updateOfficialDepartment($sap_dept);
 
+/**
+ * Method for recursively monitoring a peoplefinder (SAP/XML department) and updating the related
+ * records within the directory (MySQL Officefinder data).
+ *
+ * @param $sap_dept The XML department object
+ * @param $parent   The MySQL ORM department
+ */
 function updateOfficialDepartment(UNL_Peoplefinder_Department $sap_dept, UNL_Officefinder_Department &$parent = null)
 {
 
@@ -48,6 +56,13 @@ function updateOfficialDepartment(UNL_Peoplefinder_Department $sap_dept, UNL_Off
     }
 }
 
+/**
+ * This method is used to update data within the UNL directory. It allows updates
+ * only on certain fields.
+ *
+ * @param $old Object with the old data
+ * @param $new Object with the new data
+ */
 function updateFields(UNL_Officefinder_Department $old, UNL_Peoplefinder_Department $new)
 {
     foreach ($old as $key=>$val) {
