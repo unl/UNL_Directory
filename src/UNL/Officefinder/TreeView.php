@@ -13,7 +13,8 @@ class UNL_Officefinder_TreeView extends FilterIterator
 
     function accept()
     {
-        if ($this->getInnerIterator()->current()->isOfficialDepartment()) {
+        if ($this->getInnerIterator()->current()->isOfficialDepartment()
+            && strlen($this->getInnerIterator()->current()->org_unit) == 8) {
             return true;
         }
         return false;
