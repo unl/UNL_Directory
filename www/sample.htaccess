@@ -9,3 +9,4 @@ RewriteRule ^departments/([\d]+)$ departments/index.php?view=department&id=$1 [Q
 RewriteRule ^departments/([\d]+)/listings$ departments/index.php?view=deptlistings&id=$1 [QSA]
 RewriteRule ^departments/([\d]+)/summary$ departments/index.php?view=deptsummary&id=$1 [QSA]
 RewriteRule ^departments/academic$ departments/index.php?view=academicdepts [QSA]
+RewriteRule ^departments/tree$ departments/index.php?view=tree [QSA]
