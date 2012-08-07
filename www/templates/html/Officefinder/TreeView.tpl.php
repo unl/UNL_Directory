@@ -18,7 +18,6 @@ UNL_Officefinder::setReplacementData('pagetitle', '<h2>Departmental Hierarchy</h
     padding: 0 12px;
     line-height: 20px;
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAUAQMAAACK1e4oAAAABlBMVEUAAwCIiIgd2JB2AAAAAXRSTlMAQObYZgAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9YIBhQIJYVaFGwAAAARSURBVAjXY2hgQIf%2FGTDFGgDSkwqATqpCHAAAAABJRU5ErkJggg%3D%3D) no-repeat;
-    color: #369;
 }
 #maincontent ul.tree li:last-child {
     background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAUAQMAAACK1e4oAAAABlBMVEUAAwCIiIgd2JB2AAAAAXRSTlMAQObYZgAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9YIBhQIIhs%2Bgc8AAAAQSURBVAjXY2hgQIf%2FGbAAAKCTBYBUjWvCAAAAAElFTkSuQmCC) no-repeat;
@@ -71,6 +70,6 @@ foreach ($context as $department) {
 <div class="grid3">
     <ul>
     <li><span class="academic">Green</span> listings are shown on the <a href="academic">Academic Departments list</a></li>
-    <li><span class="suppressed">Struck</span> listings have no appointments, and are hidden from the public</li>
+    <li><span class="suppressed">Struck</span> listings have no SAP appointments or child listings, and are hidden from the public</li>
     </ul>
 </div>
