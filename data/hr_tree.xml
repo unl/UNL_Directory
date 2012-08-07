@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE tree SYSTEM "treeml.dtd">
-<!-- Generated Fri Jul 13 12:22:26 2012 -->
+<!-- Generated Mon Aug  6 21:22:29 2012 -->
 <tree>
  <declarations>
    <attributeDecl name="name"        type="String" />
@@ -1708,7 +1708,7 @@
       <branch>
        <attribute name="name" value="Child, Youth &amp; Family Studies"/>
        <attribute name="org_unit" value="50001040"/>
-       <attribute name="org_abbr" value="CYFS     UNL"/>
+       <attribute name="org_abbr" value="CYAF     UNL"/>
        <attribute name="building" value="MABL"/>
        <attribute name="room" value="135"/>
        <attribute name="city" value="Lincoln"/>
@@ -1726,9 +1726,9 @@
        <attribute name="postal_code" value="68583-0806"/>
       </branch>
       <branch>
-       <attribute name="name" value="Textiles Clothing &amp; Design"/>
+       <attribute name="name" value="Textiles, Merchan &amp; Fashion Design"/>
        <attribute name="org_unit" value="50001042"/>
-       <attribute name="org_abbr" value="TCD      UNL"/>
+       <attribute name="org_abbr" value="TMFD     UNL"/>
        <attribute name="building" value="HECO"/>
        <attribute name="room" value="234D"/>
        <attribute name="city" value="Lincoln"/>
@@ -2388,7 +2388,7 @@
         <branch>
          <attribute name="name" value="Child, Youth &amp; Family Studies"/>
          <attribute name="org_unit" value="50000846"/>
-         <attribute name="org_abbr" value="IANR CYFS"/>
+         <attribute name="org_abbr" value="IANR CYAF"/>
          <attribute name="building" value="MABL"/>
          <attribute name="room" value="135"/>
          <attribute name="city" value="Lincoln"/>
@@ -8150,7 +8150,7 @@
       </branch>
      </branch>
      <branch>
-      <attribute name="name" value="Enrollment Management and Marking"/>
+      <attribute name="name" value="Enrollment Management and Marketing"/>
       <attribute name="org_unit" value="50007725"/>
       <attribute name="org_abbr" value="EM &amp; M   409"/>
       <branch>
@@ -8209,9 +8209,9 @@
        <attribute name="org_abbr" value="MARKETING409"/>
       </branch>
       <branch>
-       <attribute name="name" value="Business Intelligence"/>
+       <attribute name="name" value="Business Systems Intelligence"/>
        <attribute name="org_unit" value="50007727"/>
-       <attribute name="org_abbr" value="BI       409"/>
+       <attribute name="org_abbr" value="BSI      409"/>
       </branch>
      </branch>
      <branch>
@@ -8327,6 +8327,11 @@
        <attribute name="city" value="Omaha"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68182"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Student-Community Leadership &amp; Serv"/>
+       <attribute name="org_unit" value="50007900"/>
+       <attribute name="org_abbr" value="STU-CL&amp;S 461"/>
       </branch>
      </branch>
      <branch>
