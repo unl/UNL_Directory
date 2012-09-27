@@ -318,7 +318,20 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
                             'suffix'        => 'ou=People,dc=unl,dc=edu',
                             'bind_dn'       => self::$bindDN,
                             'bind_password' => self::$bindPW));
-        return new UNL_Peoplefinder_Person_Roles(array('iterator'=>$ldap->search($dn, '(&(objectClass=unlRole)(!(unlListingOrder=NL)))')));
+
+        // Get jobs with a specified order
+        $ordered = $ldap->search($dn, '(&(objectClass=unlRole)(!(unlListingOrder=NL))(unlListingOrder=*))');
+        $ordered->sort('unlListingOrder');
+
+        // Get jobs without an order
+        $unordered = $ldap->search($dn, '(&(objectClass=unlRole)(!(unlListingOrder=*)))');
+
+        // Now combine the twop
+        $results = new AppendIterator();
+        $results->append($ordered);
+        $results->append($unordered);
+
+        return new UNL_Peoplefinder_Person_Roles(array('iterator'=>$results));
     }
     
     
