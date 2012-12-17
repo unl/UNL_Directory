@@ -1,10 +1,12 @@
 <?php
 $permalink = UNL_Peoplefinder::getURL().'?uid='.$context->uid;
 
+$preferredFirstName = $context->getPreferredFirstName();
+
 echo "<div class='vcard {$context->eduPersonPrimaryAffiliation}'>\n";
 echo '<a class="planetred_profile" href="http://planetred.unl.edu/pg/profile/unl_'.str_replace("-", "_", $context->uid).'" title="Planet Red Profile for '.$context->cn.'"><img class="profile_pic medium photo" src="'.htmlspecialchars($context->getImageURL()).'"  alt="Photo of '.$context->displayName.'" /></a> ';
 echo '<div class="wdn_vcardTools">';
-echo '<a href="'.UNL_Peoplefinder::getURL().'vcards/'.$context->uid.'" title="Download V-Card for '.$context->givenName.' '.$context->sn.'" class="text-vcard">vCard</a> ';
+echo '<a href="'.UNL_Peoplefinder::getURL().'vcards/'.$context->uid.'" title="Download V-Card for '.$preferredFirstName.' '.$context->sn.'" class="text-vcard">vCard</a> ';
 echo '<a title="QR Code vCard" href="http://chart.apis.google.com/chart?chs=400x400&amp;cht=qr&amp;chl=' . urlencode($savvy->render($context, 'templates/vcard/Peoplefinder/Record.tpl.php')) . '&amp;chld=L|1&amp;.png" class="img-qrcode">QR Code</a> ';
 if (!$parent->context->options['mobile']) {
     echo '<a title="Print this listing" href="'.$permalink.'&amp;print" class="print">Print</a> ';
@@ -24,10 +26,10 @@ if ($displayEmail) {
 if ($context->ou == 'org') {
     echo '<span class="cn">'.$context->cn.'</span>';
 } else {
-    echo '<span class="fn">'.$context->displayName.'</span>';
+    echo $preferredFirstName.' '.$context->sn;
     if (!empty($context->eduPersonNickname)
         && $context->eduPersonNickname != ' ') {
-        echo ' ('.$context->eduPersonNickname.')';
+        echo ' <span class="givenName">'.$context->givenName.'</span>';
     }
 }
 if ($displayEmail) {

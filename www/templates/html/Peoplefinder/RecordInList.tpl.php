@@ -4,10 +4,13 @@ if ($context->ou == 'org') {
     $name = $context->cn;
 } else {
     $class = 'ppl_Sresult';
-    $name = $context->sn . ',&nbsp;'. $context->givenName;
+
+    $preferredFirstName = $context->getPreferredFirstName();
+    
+    $name = $context->sn . ',&nbsp;'. $preferredFirstName;
     if (!empty($context->eduPersonNickname)
         && $context->eduPersonNickname != ' ') {
-        $name .= ' ('.$context->eduPersonNickname.')';
+        $name .= ' <span class="givenName">'.$context->givenName.'</span>';
     }
 }
 $class .= ' '.$context->eduPersonPrimaryAffiliation;
@@ -49,7 +52,7 @@ if (isset($context->telephoneNumber)) {
 }
 
 echo '    </div>'.PHP_EOL;
-echo '    <a href="'.UNL_Peoplefinder::getURL().'?uid='.$context->uid.'" class="cInfo" '.$onclick.'>Contact '.$context->givenName.'</a><div class="loading"></div>'.PHP_EOL;
+echo '    <a href="'.UNL_Peoplefinder::getURL().'?uid='.$context->uid.'" class="cInfo" '.$onclick.'>Contact '.$preferredFirstName.'</a><div class="loading"></div>'.PHP_EOL;
 if (isset($parent->parent->context->options['chooser'])) {
     echo '    <div class="pfchooser"><a href="#" onclick="return pfCatchUID(\''.$context->uid.'\');">Choose this person</a></div>'.PHP_EOL;
 }
