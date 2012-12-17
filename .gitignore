@@ -8,3 +8,6 @@
 /www/.htaccess
 /www/config.inc.php
 /www/wdn
+
+/.DS_Store
+/UNL_Directory.esproj/
