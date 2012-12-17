@@ -132,6 +132,22 @@ class UNL_Peoplefinder_Record
     }
 
     /**
+     * Get the preferred name for this person, eduPersonNickname or givenName
+     * 
+     * @return string
+     */
+    public function getPreferredFirstName()
+    {
+    
+        if (!empty($this->eduPersonNickname)
+            && $this->eduPersonNickname != ' ') {
+            return $this->eduPersonNickname;
+        }
+
+        return $this->givenName;
+    }
+
+    /**
      * Format a three letter college abbreviation into the full college name.
      *
      * @param string $college College abbreviation = FPA
