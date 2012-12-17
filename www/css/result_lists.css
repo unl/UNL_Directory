@@ -55,13 +55,19 @@
 .recordDetails .eppa {
     display:none;   
 }
-.fn a, .fn {
+.fn a, .fn, .vcardInfo > a.email {
     font-size:18px;
     font-weight:bold;
     color:#464545 !important;
     max-height:35px;
     min-height:20px;
     overflow:hidden;
+}
+.fn .givenName, .vcardInfo > a.email .givenName {
+    font-size: 60%;
+    color: rgb(36, 75, 134) !important;
+    text-transform: uppercase;
+    font-weight: normal;
 }
 .departments .fn, .departments .fn a {
     max-height:42px;line-height:20px;
