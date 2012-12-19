@@ -230,6 +230,12 @@ a.cInfo {
 .fn a {
     font-size:120%;
 }
+.fn .givenName, .vcardInfo > a.email .givenName {
+    font-size: 60%;
+    color: rgb(36, 75, 134) !important;
+    text-transform: uppercase;
+    font-weight: normal;
+}
 .on-campus-dialing {display:none;}
 .cInfo {float:right;}
 
@@ -267,6 +273,7 @@ a.cInfo {
 }
 
 .vcard .permalink, .vcard .text-vcard {display:none;}
+
 img.profile_pic.medium {
     background: url('/wdn/templates_3.0/css/header/images/wdn_idmProfileMedium.png') no-repeat top left;
     padding: 7px 7px 12px 7px;
