@@ -26,7 +26,7 @@ if ($displayEmail) {
 if ($context->ou == 'org') {
     echo '<span class="cn">'.$context->cn.'</span>';
 } else {
-    echo $preferredFirstName.' '.$context->sn;
+    echo '<span class="fn">'.$preferredFirstName.' '.$context->sn.'</span>';
     if (!empty($context->eduPersonNickname)
         && $context->eduPersonNickname != ' ') {
         echo ' <span class="givenName">'.$context->givenName.'</span>';
