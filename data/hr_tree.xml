@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE tree SYSTEM "treeml.dtd">
-<!-- Generated Mon Mar 18 09:23:03 2013 -->
+<!-- Generated Fri May 24 12:22:41 2013 -->
 <tree>
  <declarations>
    <attributeDecl name="name"        type="String" />
@@ -71,6 +71,11 @@
       <attribute name="name" value="Peter Kiewit Institute"/>
       <attribute name="org_unit" value="50006525"/>
       <attribute name="org_abbr" value="PKI      940"/>
+      <attribute name="building" value="PKI"/>
+      <attribute name="room" value="PKI391"/>
+      <attribute name="city" value="Omaha"/>
+      <attribute name="state" value="NE"/>
+      <attribute name="postal_code" value="68182"/>
       <branch>
        <attribute name="name" value="Peter Kiewit Institute - Omaha"/>
        <attribute name="org_unit" value="50006950"/>
@@ -666,9 +671,9 @@
        <attribute name="postal_code" value="68588-0641"/>
       </branch>
       <branch>
-       <attribute name="name" value="Purchasing"/>
+       <attribute name="name" value="Procurement Services"/>
        <attribute name="org_unit" value="50001016"/>
-       <attribute name="org_abbr" value="PURCHNG  UNL"/>
+       <attribute name="org_abbr" value="PROCURE  UNL"/>
        <attribute name="building" value="1700 Y ST"/>
        <attribute name="city" value="Lincoln"/>
        <attribute name="state" value="NE"/>
@@ -2145,9 +2150,9 @@
       <attribute name="org_abbr" value="Holland  UNL"/>
      </branch>
      <branch>
-      <attribute name="name" value="Neuroimaging Center"/>
+      <attribute name="name" value="Center for Brain Biology &amp; Behavior"/>
       <attribute name="org_unit" value="50007301"/>
-      <attribute name="org_abbr" value="NeuroCtr UNL"/>
+      <attribute name="org_abbr" value="CB3      UNL"/>
      </branch>
      <branch>
       <attribute name="name" value="Nebraska Innovation Campus"/>
@@ -3920,9 +3925,9 @@
       <attribute name="postal_code" value="68588-0448"/>
      </branch>
      <branch>
-      <attribute name="name" value="OASIS"/>
+      <attribute name="name" value="Jackie Gaughan Multicultural Cnt"/>
       <attribute name="org_unit" value="50003126"/>
-      <attribute name="org_abbr" value="OASIS    UNL"/>
+      <attribute name="org_abbr" value="JGAUGHAN UNL"/>
       <attribute name="building" value="1505 S ST"/>
       <attribute name="city" value="Lincoln"/>
       <attribute name="state" value="NE"/>
@@ -3930,9 +3935,9 @@
      </branch>
     </branch>
     <branch>
-     <attribute name="name" value="Operations Analysis"/>
+     <attribute name="name" value="Office of Internal Audit"/>
      <attribute name="org_unit" value="50000822"/>
-     <attribute name="org_abbr" value="OA       UNL"/>
+     <attribute name="org_abbr" value="INT ADT  UNL"/>
      <attribute name="building" value="ADMS"/>
      <attribute name="room" value="314"/>
      <attribute name="city" value="Lincoln"/>
@@ -3967,6 +3972,16 @@
      <attribute name="city" value="Lincoln"/>
      <attribute name="state" value="NE"/>
      <attribute name="postal_code" value="68588-0424"/>
+     <branch>
+      <attribute name="name" value="Publications &amp; Photography"/>
+      <attribute name="org_unit" value="50001015"/>
+      <attribute name="org_abbr" value="PUB&amp;PHOT UNL"/>
+      <attribute name="building" value="NH"/>
+      <attribute name="room" value="420"/>
+      <attribute name="city" value="UNL"/>
+      <attribute name="state" value="NE"/>
+      <attribute name="postal_code" value="68588-0524"/>
+     </branch>
     </branch>
     <branch>
      <attribute name="name" value="Institutional Research &amp; Planning"/>
@@ -4064,16 +4079,6 @@
       <attribute name="state" value="NE"/>
       <attribute name="postal_code" value="68588-0522"/>
      </branch>
-    </branch>
-    <branch>
-     <attribute name="name" value="Publications &amp; Photography"/>
-     <attribute name="org_unit" value="50001015"/>
-     <attribute name="org_abbr" value="PUB&amp;PHOT UNL"/>
-     <attribute name="building" value="NH"/>
-     <attribute name="room" value="420"/>
-     <attribute name="city" value="UNL"/>
-     <attribute name="state" value="NE"/>
-     <attribute name="postal_code" value="68588-0524"/>
     </branch>
     <branch>
      <attribute name="name" value="Alumni Association"/>
@@ -4351,7 +4356,7 @@
         <attribute name="postal_code" value="UNMC"/>
        </branch>
        <branch>
-        <attribute name="name" value="SAP Support/Cashiering"/>
+        <attribute name="name" value="Accounts Receivable/Cashiering"/>
         <attribute name="org_unit" value="50001234"/>
         <attribute name="org_abbr" value="Cashring 305"/>
         <attribute name="building" value="AC"/>
@@ -6908,7 +6913,8 @@
       <attribute name="name" value="Facilities Management and Planning"/>
       <attribute name="org_unit" value="50000188"/>
       <attribute name="org_abbr" value="FMP      401"/>
-      <attribute name="building" value="Center Location"/>
+      <attribute name="building" value="Kayser Hall"/>
+      <attribute name="room" value="KH438"/>
       <attribute name="city" value="Omaha"/>
       <attribute name="state" value="NE"/>
       <attribute name="postal_code" value="68182"/>
@@ -6925,8 +6931,8 @@
         <attribute name="name" value="Custodial Services"/>
         <attribute name="org_unit" value="50000783"/>
         <attribute name="org_abbr" value="CUST     401"/>
-        <attribute name="building" value="CB"/>
-        <attribute name="room" value="139"/>
+        <attribute name="building" value="KH"/>
+        <attribute name="room" value="KH421"/>
         <attribute name="city" value="Omaha"/>
         <attribute name="state" value="NE"/>
         <attribute name="postal_code" value="68182"/>
@@ -6935,8 +6941,8 @@
         <attribute name="name" value="Grounds"/>
         <attribute name="org_unit" value="50000784"/>
         <attribute name="org_abbr" value="GRNDS    401"/>
-        <attribute name="building" value="Annex"/>
-        <attribute name="room" value="16"/>
+        <attribute name="building" value="KH"/>
+        <attribute name="room" value="KH438"/>
         <attribute name="city" value="Omaha"/>
         <attribute name="state" value="NE"/>
         <attribute name="postal_code" value="68182"/>
@@ -6946,8 +6952,8 @@
        <attribute name="name" value="Maintenance and Operations"/>
        <attribute name="org_unit" value="50000277"/>
        <attribute name="org_abbr" value="MAINT    401"/>
-       <attribute name="building" value="CB"/>
-       <attribute name="room" value="139"/>
+       <attribute name="building" value="KH"/>
+       <attribute name="room" value="KH117"/>
        <attribute name="city" value="Omaha"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68182"/>
@@ -6956,7 +6962,8 @@
        <attribute name="name" value="Construction Services"/>
        <attribute name="org_unit" value="50000278"/>
        <attribute name="org_abbr" value="CONST    401"/>
-       <attribute name="building" value="Center Location"/>
+       <attribute name="building" value="Kayser Hall"/>
+       <attribute name="room" value="KH438"/>
        <attribute name="city" value="Omaha"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68182"/>
@@ -6965,7 +6972,8 @@
        <attribute name="name" value="Planning and Architectural Services"/>
        <attribute name="org_unit" value="50000279"/>
        <attribute name="org_abbr" value="PLNG     401"/>
-       <attribute name="building" value="Center Location"/>
+       <attribute name="building" value="Kayser Hall"/>
+       <attribute name="room" value="KH438"/>
        <attribute name="city" value="Omaha"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68182"/>
@@ -7015,7 +7023,8 @@
       <attribute name="name" value="Milo Bail Student Center"/>
       <attribute name="org_unit" value="50000198"/>
       <attribute name="org_abbr" value="MBSC     401"/>
-      <attribute name="building" value="Business Office"/>
+      <attribute name="building" value="MBSC Business Office"/>
+      <attribute name="room" value="MBSC Business Office 2nd Floor"/>
       <attribute name="city" value="Omaha"/>
       <attribute name="state" value="NE"/>
       <attribute name="postal_code" value="68182"/>
@@ -7023,7 +7032,8 @@
        <attribute name="name" value="Food Service"/>
        <attribute name="org_unit" value="50000875"/>
        <attribute name="org_abbr" value="FOOD SVC 401"/>
-       <attribute name="building" value="MBSC"/>
+       <attribute name="building" value="MBSC Food Services"/>
+       <attribute name="room" value="MBSC Food Services 2nd Floor"/>
        <attribute name="city" value="Omaha"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68182"/>
@@ -7052,7 +7062,8 @@
        <attribute name="name" value="Bookstore"/>
        <attribute name="org_unit" value="50000879"/>
        <attribute name="org_abbr" value="BKSTR    401"/>
-       <attribute name="building" value="MBSC"/>
+       <attribute name="building" value="MBSC Bookstore"/>
+       <attribute name="room" value="MBSC Bookstore 1st Floor"/>
        <attribute name="city" value="Omaha"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68182"/>
@@ -7264,7 +7275,8 @@
          <attribute name="name" value="Maverick Village"/>
          <attribute name="org_unit" value="50006376"/>
          <attribute name="org_abbr" value="MAV VILL 465"/>
-         <attribute name="building" value="6608 University Drive South"/>
+         <attribute name="building" value="University Drive South"/>
+         <attribute name="room" value="MV6608"/>
          <attribute name="city" value="Omaha"/>
          <attribute name="state" value="NE"/>
          <attribute name="postal_code" value="68182"/>
@@ -7273,7 +7285,8 @@
          <attribute name="name" value="University Village"/>
          <attribute name="org_unit" value="50006927"/>
          <attribute name="org_abbr" value="UN VILL  465"/>
-         <attribute name="building" value="6501 University Drive South"/>
+         <attribute name="building" value="University Drive South"/>
+         <attribute name="room" value="UV6501"/>
          <attribute name="city" value="Omaha"/>
          <attribute name="state" value="NE"/>
          <attribute name="postal_code" value="68182"/>
@@ -7286,16 +7299,6 @@
        <attribute name="org_abbr" value="CLTR AFS 465"/>
        <attribute name="building" value="MBSC"/>
        <attribute name="room" value="lst Floor"/>
-       <attribute name="city" value="Omaha"/>
-       <attribute name="state" value="NE"/>
-       <attribute name="postal_code" value="68182"/>
-      </branch>
-      <branch>
-       <attribute name="name" value="Project Achieve"/>
-       <attribute name="org_unit" value="50000895"/>
-       <attribute name="org_abbr" value="PRJACH   465"/>
-       <attribute name="building" value="EAB"/>
-       <attribute name="room" value="117"/>
        <attribute name="city" value="Omaha"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68182"/>
@@ -7521,7 +7524,7 @@
        <attribute name="postal_code" value="68182"/>
       </branch>
       <branch>
-       <attribute name="name" value="Finance, Banking and Law"/>
+       <attribute name="name" value="Dept of Finance Banking &amp; Real Est"/>
        <attribute name="org_unit" value="50000864"/>
        <attribute name="org_abbr" value="FIN BANK 428"/>
        <attribute name="building" value="MH"/>
@@ -7563,11 +7566,11 @@
         <attribute name="name" value="NBDC Business &amp; Technology Solutions"/>
         <attribute name="org_unit" value="50000874"/>
         <attribute name="org_abbr" value="NBDCTECH428"/>
-        <attribute name="building" value="ESU"/>
-        <attribute name="room" value="3"/>
+        <attribute name="building" value="MH"/>
+        <attribute name="room" value="MH200L"/>
         <attribute name="city" value="Omaha"/>
         <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68182-0164"/>
+        <attribute name="postal_code" value="68182"/>
        </branch>
       </branch>
      </branch>
@@ -7931,7 +7934,7 @@
       <attribute name="org_unit" value="50000182"/>
       <attribute name="org_abbr" value="GRAD UNO 458"/>
       <attribute name="building" value="EAB"/>
-      <attribute name="room" value="203"/>
+      <attribute name="room" value="EAB204"/>
       <attribute name="city" value="Omaha"/>
       <attribute name="state" value="NE"/>
       <attribute name="postal_code" value="68182"/>
@@ -8022,6 +8025,16 @@
        <attribute name="postal_code" value="68182"/>
       </branch>
       <branch>
+       <attribute name="name" value="Multimedia Technology Services"/>
+       <attribute name="org_unit" value="50000967"/>
+       <attribute name="org_abbr" value="MM TECH  462"/>
+       <attribute name="building" value="EAB"/>
+       <attribute name="room" value="012"/>
+       <attribute name="city" value="omaha"/>
+       <attribute name="state" value="NE"/>
+       <attribute name="postal_code" value="68182"/>
+      </branch>
+      <branch>
        <attribute name="name" value="Acad Partnerships for Instruction"/>
        <attribute name="org_unit" value="50004950"/>
        <attribute name="org_abbr" value="API      462"/>
@@ -8075,12 +8088,22 @@
        <attribute name="name" value="Information Security"/>
        <attribute name="org_unit" value="50007800"/>
        <attribute name="org_abbr" value="INFOSEC  462"/>
+       <attribute name="building" value="EAB"/>
+       <attribute name="room" value="EAB106N"/>
+       <attribute name="city" value="Omaha"/>
+       <attribute name="state" value="NE"/>
+       <attribute name="postal_code" value="68182"/>
       </branch>
      </branch>
      <branch>
       <attribute name="name" value="Enrollment Management                409"/>
       <attribute name="org_unit" value="50007725"/>
       <attribute name="org_abbr" value="EM       409"/>
+      <attribute name="building" value="EAB"/>
+      <attribute name="room" value="EAB108"/>
+      <attribute name="city" value="Omaha"/>
+      <attribute name="state" value="NE"/>
+      <attribute name="postal_code" value="68182"/>
       <branch>
        <attribute name="name" value="Testing Center"/>
        <attribute name="org_unit" value="50000893"/>
@@ -8114,11 +8137,21 @@
         <attribute name="name" value="Operations"/>
         <attribute name="org_unit" value="50008100"/>
         <attribute name="org_abbr" value="OPER     409"/>
+        <attribute name="building" value="EAB"/>
+        <attribute name="room" value="EAB111"/>
+        <attribute name="city" value="Omaha"/>
+        <attribute name="state" value="NE"/>
+        <attribute name="postal_code" value="68182"/>
        </branch>
        <branch>
         <attribute name="name" value="Campus Visits"/>
         <attribute name="org_unit" value="50008101"/>
         <attribute name="org_abbr" value="CAM VIS  409"/>
+        <attribute name="building" value="WC"/>
+        <attribute name="room" value="100WC"/>
+        <attribute name="city" value="Omaha"/>
+        <attribute name="state" value="NE"/>
+        <attribute name="postal_code" value="68182"/>
        </branch>
       </branch>
       <branch>
@@ -8155,6 +8188,11 @@
        <attribute name="name" value="Business Systems Intelligence"/>
        <attribute name="org_unit" value="50007727"/>
        <attribute name="org_abbr" value="BSI      409"/>
+       <attribute name="building" value="EAB"/>
+       <attribute name="room" value="EAB105"/>
+       <attribute name="city" value="Omaha"/>
+       <attribute name="state" value="NE"/>
+       <attribute name="postal_code" value="68182"/>
       </branch>
      </branch>
      <branch>
@@ -8166,6 +8204,16 @@
       <attribute name="city" value="Omaha"/>
       <attribute name="state" value="NE"/>
       <attribute name="postal_code" value="68182"/>
+      <branch>
+       <attribute name="name" value="Project Achieve"/>
+       <attribute name="org_unit" value="50000895"/>
+       <attribute name="org_abbr" value="PRJACH   461"/>
+       <attribute name="building" value="EAB"/>
+       <attribute name="room" value="117"/>
+       <attribute name="city" value="Omaha"/>
+       <attribute name="state" value="NE"/>
+       <attribute name="postal_code" value="68182"/>
+      </branch>
       <branch>
        <attribute name="name" value="Honors Program"/>
        <attribute name="org_unit" value="50000951"/>
@@ -8190,6 +8238,11 @@
        <attribute name="name" value="Office of Institutional EffectivenessUNO"/>
        <attribute name="org_unit" value="50007700"/>
        <attribute name="org_abbr" value="OIE      461"/>
+       <attribute name="building" value="EAB"/>
+       <attribute name="room" value="EAB202"/>
+       <attribute name="city" value="Omaha"/>
+       <attribute name="state" value="NE"/>
+       <attribute name="postal_code" value="68182"/>
        <branch>
         <attribute name="name" value="Institutional Research"/>
         <attribute name="org_unit" value="50000953"/>
@@ -8204,11 +8257,21 @@
         <attribute name="name" value="Decision Support Services"/>
         <attribute name="org_unit" value="50007701"/>
         <attribute name="org_abbr" value="DSS      461"/>
+        <attribute name="building" value="EAB"/>
+        <attribute name="room" value="EAB202"/>
+        <attribute name="city" value="Omaha"/>
+        <attribute name="state" value="NE"/>
+        <attribute name="postal_code" value="68182"/>
        </branch>
        <branch>
         <attribute name="name" value="AQIP"/>
         <attribute name="org_unit" value="50007702"/>
         <attribute name="org_abbr" value="AQIP     461"/>
+        <attribute name="building" value="EAB"/>
+        <attribute name="room" value="EAB202"/>
+        <attribute name="city" value="Omaha"/>
+        <attribute name="state" value="NE"/>
+        <attribute name="postal_code" value="68182"/>
        </branch>
       </branch>
       <branch>
@@ -8265,11 +8328,21 @@
        <attribute name="name" value="Student-Community Leadership &amp; Serv"/>
        <attribute name="org_unit" value="50007900"/>
        <attribute name="org_abbr" value="STU-CL&amp;S 461"/>
+       <attribute name="building" value="CB"/>
+       <attribute name="room" value="CB112"/>
+       <attribute name="city" value="Omaha"/>
+       <attribute name="state" value="NE"/>
+       <attribute name="postal_code" value="68182"/>
       </branch>
       <branch>
        <attribute name="name" value="Community Engagement Center"/>
        <attribute name="org_unit" value="50008025"/>
        <attribute name="org_abbr" value="CE CTR   461"/>
+       <attribute name="building" value="CB"/>
+       <attribute name="room" value="CB109"/>
+       <attribute name="city" value="Omaha"/>
+       <attribute name="state" value="NE"/>
+       <attribute name="postal_code" value="68182"/>
       </branch>
      </branch>
      <branch>
@@ -8340,6 +8413,11 @@
        <attribute name="name" value="International Studies"/>
        <attribute name="org_unit" value="50001280"/>
        <attribute name="org_abbr" value="INT STD  464"/>
+       <attribute name="building" value="ASH"/>
+       <attribute name="room" value="ASH238"/>
+       <attribute name="city" value="Omaha"/>
+       <attribute name="state" value="NE"/>
+       <attribute name="postal_code" value="68182"/>
       </branch>
      </branch>
      <branch>
@@ -8505,16 +8583,31 @@
        <attribute name="name" value="Men&#39;s Golf"/>
        <attribute name="org_unit" value="50007400"/>
        <attribute name="org_abbr" value="M GOLF   478"/>
+       <attribute name="building" value="FH"/>
+       <attribute name="room" value="FH215"/>
+       <attribute name="city" value="Omaha"/>
+       <attribute name="state" value="NE"/>
+       <attribute name="postal_code" value="68182"/>
       </branch>
       <branch>
        <attribute name="name" value="Men&#39;s Soccer"/>
        <attribute name="org_unit" value="50007401"/>
        <attribute name="org_abbr" value="M SOCCER 478"/>
+       <attribute name="building" value="FH"/>
+       <attribute name="room" value="FH"/>
+       <attribute name="city" value="Omaha"/>
+       <attribute name="state" value="NE"/>
+       <attribute name="postal_code" value="68182"/>
       </branch>
       <branch>
        <attribute name="name" value="Men&#39;s Tennis"/>
        <attribute name="org_unit" value="50007426"/>
        <attribute name="org_abbr" value="M TENNIS 478"/>
+       <attribute name="building" value="FH"/>
+       <attribute name="room" value="FH"/>
+       <attribute name="city" value="Omaha"/>
+       <attribute name="state" value="NE"/>
+       <attribute name="postal_code" value="68182"/>
       </branch>
      </branch>
      <branch>
