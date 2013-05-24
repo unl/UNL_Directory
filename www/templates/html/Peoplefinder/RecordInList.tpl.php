@@ -21,7 +21,7 @@ if (isset($parent->parent->context->options, $parent->parent->context->options['
     $onclick .= ' onclick="return '.htmlentities($parent->parent->context->options['onclick'], ENT_QUOTES).'(\''.addslashes($context->uid).'\');"';
 }
 if ($parent->parent->context->options['view'] != 'alphalisting') {
-    echo '    <img class="profile_pic small photo planetred_profile" src="http://planetred.unl.edu/pg/icon/unl_'.str_replace("-", "_", $context->uid).'/small"  alt="Photo of '.$context->displayName.'" />'.PHP_EOL;
+    echo '    <img class="profile_pic small photo planetred_profile" src="https://planetred.unl.edu/pg/icon/unl_'.str_replace("-", "_", $context->uid).'/small"  alt="Photo of '.$context->displayName.'" />'.PHP_EOL;
 }
 echo '    <div class="recordDetails">'.PHP_EOL;
 echo '        <div class="fn"><a href="'.UNL_Peoplefinder::getURL().'?uid='.$context->uid.'" '.$onclick.'>'.$name.'</a></div>'.PHP_EOL;
