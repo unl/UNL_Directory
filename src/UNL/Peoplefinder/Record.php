@@ -183,7 +183,7 @@ class UNL_Peoplefinder_Record
                 $size = 'medium';
         }
 
-        return 'http://planetred.unl.edu/pg/icon/unl_'.str_replace('-', '_', $this->uid).'/'.$size.'/';
+        return 'https://planetred.unl.edu/pg/icon/unl_'.str_replace('-', '_', $this->uid).'/'.$size.'/';
     }
 
     function __toString()
