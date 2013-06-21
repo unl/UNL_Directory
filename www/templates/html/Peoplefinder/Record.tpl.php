@@ -79,9 +79,11 @@ if (isset($context->unlSISClassLevel)) {
 }
 
 if (isset($context->unlHROrgUnitNumber)) {
-
     $roles = $parent->context->getRoles($context->dn);
-    echo $savvy->render($roles);
+    
+    if (count($roles)) {
+        echo $savvy->render($roles);
+    }
 
 }
 
