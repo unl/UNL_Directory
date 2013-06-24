@@ -98,6 +98,9 @@
                      <?php
                      foreach ($resource->formats as $format) {
                          $url = UNL_Peoplefinder::addURLParams($resource->exampleURI, array('format' => $format));
+                         if (substr($url, 0, 2) == '//') {
+                            $url = 'http:' . $url;
+                         }
                          ?>
                          <div id="<?php echo $format; ?>">
                             <ul>
