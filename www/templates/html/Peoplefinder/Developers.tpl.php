@@ -60,7 +60,13 @@
             <li>
                 <h4 id="instance-uri"><a href="#instance-uri">Resource URI</a></h4>
                 <blockquote>
-                    <p><?php echo $resource->uri; ?></p>
+                    <?php
+                    $uri = $resource->uri;
+                    if (substr($uri, 0, 2) == '//') {
+                        $uri = 'http:' . $uri;
+                    }
+                    ?>
+                    <p><?php echo $uri; ?></p>
                 </blockquote>
             </li>
             <li>
