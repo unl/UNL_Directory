@@ -1,6 +1,12 @@
 <?php
 echo '<person>';
-foreach (get_object_vars($context->getRawObject()) as $key=>$val) {
+$rawObject = $context;
+
+if ($context instanceof Savvy_ObjectProxy) {
+    $rawObject = $context->getRawObject();
+}
+
+foreach (get_object_vars($rawObject) as $key=>$val) {
     if ($val) {
         if ($val instanceof Traversable) {
             foreach ($val as $mkey=>$value) {
