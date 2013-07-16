@@ -91,16 +91,8 @@ if (isset($context->postalAddress)) {
     $address = $context->formatPostalAddress();
 
     if (strpos($address['postal-code'], '68588') == 0) {
-        $regex = "/([A-Za-z0-9].) ([A-Z0-9\&]{2,4})/" ; //& is for M&N Building
-
-        if (preg_match($regex, $address['street-address'], $matches)) {
-            $bldgs = new UNL_Common_Building();
-
-            if ($bldgs->buildingExists($matches[2])) {
-
-                $replace = '${1} <a class="location mapurl" href="http://maps.unl.edu/#${2}">${2}</a>';
-                $address['street-address'] = preg_replace($regex, $replace, $address['street-address']);
-            }
+        if ($code = $context->getUNLBuildingCode()) {
+            $address['street-address'] = str_replace($code, '<a class="location mapurl" href="http://maps.unl.edu/#'.$code.'">'.$code.'</a>', $address['street-address']);
         }
     }
 
