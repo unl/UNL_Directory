@@ -66,7 +66,14 @@ class UNL_Peoplefinder_Record
      */
     function formatPostalAddress()
     {
-        $parts = explode(',', $this->postalAddress);
+
+        if (isset($this->postalAddress)) {
+            $postalAddress = $this->postalAddress;
+        } else {
+            $postalAddress = $this->unlHRAddress;
+        }
+
+        $parts = explode(',', $postalAddress);
 
         // Set up defaults:
         $address = array();
@@ -82,7 +89,7 @@ class UNL_Peoplefinder_Record
 
         $matches = array();
         // Now lets find some important bits.
-        if (preg_match('/([\d]{5})(\-[\d]{4})?/', $this->postalAddress, $matches)) {
+        if (preg_match('/([\d]{5})(\-[\d]{4})?/', $postalAddress, $matches)) {
             // Found a zip-code
             $address['postal-code'] = $matches[0];
         }
@@ -192,7 +199,14 @@ class UNL_Peoplefinder_Record
      */
     public function getUNLBuildingCode()
     {
-        return UNL_Peoplefinder::getUNLBuildingCode((string)$this->postalAddress);
+        if (isset($this->postalAddress)) {
+            return UNL_Peoplefinder::getUNLBuildingCode((string)$this->postalAddress);
+        }
+        if (isset($this->unlHRAddress)) {
+            return UNL_Peoplefinder::getUNLBuildingCode((string)$this->unlHRAddress);
+        }
+
+        return false;
     }
 
     function __toString()
