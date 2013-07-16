@@ -19,7 +19,7 @@ foreach (get_object_vars($rawObject) as $key=>$val) {
         }
     }
 }
-if (isset($context->postalAddress)) {
+if (isset($context->postalAddress) || isset($context->unlHRAddress)) {
     echo '<unlDirectoryAddress>';
     foreach ($context->formatPostalAddress() as $key=>$val) {
         echo '<'.$key.'>'.$val.'</'.$key.'>';
