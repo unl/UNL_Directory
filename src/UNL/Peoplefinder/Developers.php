@@ -5,6 +5,7 @@ class UNL_Peoplefinder_Developers
         'Record',
         'Search',
         'Department',
+        'Department_Personnel',
     );
 
     public $resource;
