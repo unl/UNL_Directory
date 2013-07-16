@@ -63,6 +63,7 @@ class UNL_LDAP_Entry_Attribute extends ArrayIterator
      */
     public function __toString()
     {
+        $this->rewind();
         return (string)$this->current();
     }
 }
