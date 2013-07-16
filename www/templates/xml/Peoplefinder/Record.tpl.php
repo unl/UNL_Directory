@@ -19,4 +19,14 @@ foreach (get_object_vars($rawObject) as $key=>$val) {
         }
     }
 }
+if (isset($context->postalAddress)) {
+    echo '<unlDirectoryAddress>';
+    foreach ($context->formatPostalAddress() as $key=>$val) {
+        echo '<'.$key.'>'.$val.'</'.$key.'>';
+    }
+    if ($buildingCode = $context->getUNLBuildingCode()) {
+        echo '<unlBuildingCode>'.$buildingCode.'</unlBuildingCode>';
+    }
+    echo '</unlDirectoryAddress>';
+}
 echo '</person>'.PHP_EOL;
