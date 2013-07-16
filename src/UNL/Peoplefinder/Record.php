@@ -80,12 +80,11 @@ class UNL_Peoplefinder_Record
             $address['locality'] = trim($parts[1]);
         }
 
+        $matches = array();
         // Now lets find some important bits.
-        foreach ($parts as $part) {
-            if (preg_match('/([\d]{5})(\-[\d]{4})?/', $part)) {
-                // Found a zip-code
-                $address['postal-code'] = trim($part);
-            }
+        if (preg_match('/([\d]{5})(\-[\d]{4})?/', $this->postalAddress, $matches)) {
+            // Found a zip-code
+            $address['postal-code'] = $matches[0];
         }
 
         switch (substr($address['postal-code'], 0, 3)) {
@@ -184,6 +183,16 @@ class UNL_Peoplefinder_Record
         }
 
         return 'https://planetred.unl.edu/pg/icon/unl_'.str_replace('-', '_', $this->uid).'/'.$size.'/';
+    }
+
+    /**
+     * Returns a UNL building code for this person
+     *
+     * @return string | false
+     */
+    public function getUNLBuildingCode()
+    {
+        return UNL_Peoplefinder::getUNLBuildingCode((string)$this->postalAddress);
     }
 
     function __toString()
