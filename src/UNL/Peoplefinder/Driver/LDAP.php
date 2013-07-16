@@ -43,6 +43,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
         'eduPersonAffiliation',
         'eduPersonPrimaryAffiliation',
         'givenName',
+        'postalAddress',
         'sn',
         'telephoneNumber',
         'title',
