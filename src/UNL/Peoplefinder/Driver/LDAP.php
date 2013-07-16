@@ -368,4 +368,14 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
         
         return new UNL_Peoplefinder_Department_Personnel(new ArrayIterator($this->getRecordsFromResults()));
     }
+
+    public function getHROrgUnitNumbersMatches($query, $affiliation = null)
+    {
+        $filter = new UNL_Peoplefinder_Driver_LDAP_HROrgUnitNumbersFilter($query);
+
+        // @TODO Clean up this mess. Either use UNL_LDAP entirely, or use something internal
+        $this->query($filter->__toString(), $this->listAttributes);
+        
+        return new UNL_Peoplefinder_Department_Personnel(new ArrayIterator($this->getRecordsFromResults()));
+    }
 }
