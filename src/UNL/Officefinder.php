@@ -49,6 +49,7 @@ class UNL_Officefinder
                              'department'     => 'UNL_Officefinder_Department',
                              'deptsummary'    => 'UNL_Officefinder_Department_Summary',
                              'deptlistings'   => 'UNL_Peoplefinder_Department_Personnel',
+                             'personnelsubtree' => 'UNL_Peoplefinder_Department_PersonnelSubtree',
                              'record'         => 'UNL_Peoplefinder_Department',
                              'alphalisting'   => 'UNL_Officefinder_DepartmentList_AlphaListing_LoginRequired',
                              'mydepts'        => 'UNL_Officefinder_User_Departments',
