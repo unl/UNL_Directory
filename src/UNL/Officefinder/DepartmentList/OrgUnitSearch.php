@@ -25,7 +25,6 @@ class UNL_Officefinder_DepartmentList_OrgUnitSearch extends UNL_Officefinder_Dep
         $sql = 'SELECT id FROM departments
                 WHERE org_unit = '.$query.'
                 ORDER BY name';
-        echo $sql;
         return $sql;
     }
 
