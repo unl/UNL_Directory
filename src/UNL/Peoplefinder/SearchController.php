@@ -65,7 +65,11 @@ class UNL_Peoplefinder_SearchController
                 $this->options['peoplefinder']->$search_method($this->options['q'], $this->options['affiliation'])));
 
         if ($search_method != 'getAdvancedSearchMatches') {
-            $this->dept_results = new UNL_Officefinder_DepartmentList_NameSearch($this->options);
+            if (preg_match('/^[\d]{8}$/', $this->options['q'])) {
+                $this->dept_results = new UNL_Officefinder_DepartmentList_OrgUnitSearch($this->options);
+            } else {
+                $this->dept_results = new UNL_Officefinder_DepartmentList_NameSearch($this->options);
+            }
         }
     }
 }
