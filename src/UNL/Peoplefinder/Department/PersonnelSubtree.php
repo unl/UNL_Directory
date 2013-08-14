@@ -5,6 +5,9 @@ class UNL_Peoplefinder_Department_PersonnelSubtree extends ArrayIterator
 
     function __construct($mixed)
     {
+        // Increase result limit for this type of search
+        UNL_Peoplefinder::$resultLimit = 500;
+
         if (is_array($mixed)) {
             $this->options = $mixed;
             if (!empty($mixed['org_unit'])) {
