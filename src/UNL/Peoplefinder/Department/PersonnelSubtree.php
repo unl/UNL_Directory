@@ -15,14 +15,31 @@ class UNL_Peoplefinder_Department_PersonnelSubtree extends ArrayIterator
             } elseif (isset($mixed['id'])) {
                 $department = UNL_Officefinder_Department::getById($mixed['id']);
             }
+
+            // build list of org units
             $orgUnits = array();
             $orgUnits[] = $department->org_unit;
-            foreach ($department->getOfficialChildDepartments() as $sub_dept) {
-                $orgUnits[] = $sub_dept->org_unit;
-            }
-            $peoplefinder  = new UNL_Peoplefinder(array('driver'=>$this->options['driver']));
+            $this->getChildOrgUnits($department, $orgUnits);
+
+            $peoplefinder = new UNL_Peoplefinder(array('driver'=>$this->options['driver']));
             $mixed = $peoplefinder->getHROrgUnitNumbersMatches($orgUnits);
         }
         parent::__construct($mixed);
+    }
+
+    /**
+     * Find all child departments recursively
+     *
+     * @param UNL_Officefinder_Department $department The department
+     * @param array                       $orgUnits   Array of org units
+     */
+    protected function getChildOrgUnits($department, &$orgUnits)
+    {
+        foreach ($department->getOfficialChildDepartments() as $sub_dept) {
+            $orgUnits[] = $sub_dept->org_unit;
+
+            // depth-first search
+            $this->getChildOrgUnits($sub_dept, $orgUnits);
+        }
     }
 }
