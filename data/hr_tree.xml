@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE tree SYSTEM "treeml.dtd">
-<!-- Generated Fri May 24 12:22:41 2013 -->
+<!-- Generated Wed Aug 14 06:22:51 2013 -->
 <tree>
  <declarations>
    <attributeDecl name="name"        type="String" />
@@ -50,12 +50,47 @@
      <branch>
       <attribute name="name" value="Online Worldwide"/>
       <attribute name="org_unit" value="50000329"/>
-      <attribute name="org_abbr" value="ONLINE WW"/>
+      <attribute name="org_abbr" value="UNOW    UNCA"/>
       <attribute name="building" value="Varner Hall"/>
       <attribute name="room" value="106"/>
       <attribute name="city" value="Lincoln"/>
       <attribute name="state" value="NE"/>
       <attribute name="postal_code" value="68583-0743"/>
+      <branch>
+       <attribute name="name" value="Marketing"/>
+       <attribute name="org_unit" value="50008225"/>
+       <attribute name="org_abbr" value="MRKTG   UNCA"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Information Systems"/>
+       <attribute name="org_unit" value="50008226"/>
+       <attribute name="org_abbr" value="INFO SYSUNCA"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="UN High School"/>
+       <attribute name="org_unit" value="50008227"/>
+       <attribute name="org_abbr" value="UN HS   UNCA"/>
+       <branch>
+        <attribute name="name" value="Operations Team"/>
+        <attribute name="org_unit" value="50008228"/>
+        <attribute name="org_abbr" value="OP TM   UNCA"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Academic Team"/>
+        <attribute name="org_unit" value="50008229"/>
+        <attribute name="org_abbr" value="ACAD TM UNCA"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Recruiting Team"/>
+        <attribute name="org_unit" value="50008230"/>
+        <attribute name="org_abbr" value="RECR TM UNCA"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Curriculum Team"/>
+        <attribute name="org_unit" value="50008231"/>
+        <attribute name="org_abbr" value="CURR TM UNCA"/>
+       </branch>
+      </branch>
      </branch>
      <branch>
       <attribute name="name" value="International Affairs"/>
@@ -91,6 +126,11 @@
       <attribute name="name" value="NeSIS"/>
       <attribute name="org_unit" value="50007475"/>
       <attribute name="org_abbr" value="NeSIS"/>
+     </branch>
+     <branch>
+      <attribute name="name" value="Buffett Early Childhood Institute"/>
+      <attribute name="org_unit" value="50008150"/>
+      <attribute name="org_abbr" value="BUF EAR CHLD"/>
      </branch>
     </branch>
     <branch>
@@ -873,9 +913,9 @@
        <attribute name="postal_code" value="68588-0417"/>
       </branch>
       <branch>
-       <attribute name="name" value="Registration &amp; Records"/>
+       <attribute name="name" value="Office of the Registrar"/>
        <attribute name="org_unit" value="50000961"/>
-       <attribute name="org_abbr" value="REG/RCDS UNL"/>
+       <attribute name="org_abbr" value="RGSTR    UNL"/>
        <attribute name="building" value="ADMN"/>
        <attribute name="room" value="59"/>
        <attribute name="city" value="Lincoln"/>
@@ -3243,6 +3283,11 @@
        <attribute name="city" value="Lincoln"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68588-0622"/>
+       <branch>
+        <attribute name="name" value="Housing Learning Communities"/>
+        <attribute name="org_unit" value="50008300"/>
+        <attribute name="org_abbr" value="HSG LC   UNL"/>
+       </branch>
       </branch>
       <branch>
        <attribute name="name" value="Kauffman Center"/>
@@ -4061,18 +4106,18 @@
      </branch>
     </branch>
     <branch>
-     <attribute name="name" value="Information Services"/>
+     <attribute name="name" value="Information Technology Services"/>
      <attribute name="org_unit" value="50000904"/>
-     <attribute name="org_abbr" value="INFO SRV UNL"/>
+     <attribute name="org_abbr" value="IT SRVCS UNL"/>
      <attribute name="building" value="LLS"/>
      <attribute name="room" value="450"/>
      <attribute name="city" value="Lincoln"/>
      <attribute name="state" value="NE"/>
      <attribute name="postal_code" value="68588-0496"/>
      <branch>
-      <attribute name="name" value="Telecommunications Center"/>
+      <attribute name="name" value="Infrastructure and Operations"/>
       <attribute name="org_unit" value="50001034"/>
-      <attribute name="org_abbr" value="TELECOMM UNL"/>
+      <attribute name="org_abbr" value="INFR OPS UNL"/>
       <attribute name="building" value="Nebraska Hall"/>
       <attribute name="room" value="211"/>
       <attribute name="city" value="Lincoln"/>
@@ -4512,9 +4557,9 @@
        <attribute name="postal_code" value="UNMC"/>
       </branch>
       <branch>
-       <attribute name="name" value="FMP-Maintenance and Utilities"/>
+       <attribute name="name" value="FMP-Operations"/>
        <attribute name="org_unit" value="50001246"/>
-       <attribute name="org_abbr" value="FMP-Main 307"/>
+       <attribute name="org_abbr" value="FMP-Oper 307"/>
        <attribute name="building" value="SEB"/>
        <attribute name="city" value="68198-7100"/>
        <attribute name="state" value="NE"/>
@@ -4583,19 +4628,33 @@
         <attribute name="postal_code" value="UNMC"/>
        </branch>
        <branch>
-        <attribute name="name" value="FMP-Central Utilities"/>
-        <attribute name="org_unit" value="50000772"/>
-        <attribute name="org_abbr" value="FMP-Util 307"/>
-        <attribute name="building" value="SEB"/>
-        <attribute name="city" value="68198-7100"/>
-        <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="UNMC"/>
-       </branch>
-       <branch>
         <attribute name="name" value="FMP-Refrigeration"/>
         <attribute name="org_unit" value="50004800"/>
         <attribute name="org_abbr" value="FMP-REF 307"/>
        </branch>
+       <branch>
+        <attribute name="name" value="FMP-Fumehood"/>
+        <attribute name="org_unit" value="50005225"/>
+        <attribute name="org_abbr" value="FMP-FUME 307"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="FMP-Strategic Energy Initiatives"/>
+       <attribute name="org_unit" value="50000763"/>
+       <attribute name="org_abbr" value="FMP-Strat307"/>
+       <attribute name="building" value="SEB"/>
+       <attribute name="city" value="68198-7100"/>
+       <attribute name="state" value="NE"/>
+       <attribute name="postal_code" value="UNMC"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="FMP-Utilities"/>
+       <attribute name="org_unit" value="50000772"/>
+       <attribute name="org_abbr" value="FMP-Util 307"/>
+       <attribute name="building" value="SEB"/>
+       <attribute name="city" value="68198-7100"/>
+       <attribute name="state" value="NE"/>
+       <attribute name="postal_code" value="UNMC"/>
       </branch>
       <branch>
        <attribute name="name" value="FMP-Construction and Renovation"/>
@@ -6715,9 +6774,9 @@
       <attribute name="org_abbr" value="BIO STAT 366"/>
      </branch>
      <branch>
-      <attribute name="name" value="COPH Environ, Agri &amp; Occ Health Sci"/>
+      <attribute name="name" value="COPH Environ, Agri &amp; Occ Health"/>
       <attribute name="org_unit" value="50005427"/>
-      <attribute name="org_abbr" value="EA&amp;OHS   367"/>
+      <attribute name="org_abbr" value="EA&amp;OH     36"/>
      </branch>
      <branch>
       <attribute name="name" value="COPH Epidemiology"/>
@@ -6735,9 +6794,9 @@
       <attribute name="org_abbr" value="HPA&amp;RHR  370"/>
      </branch>
      <branch>
-      <attribute name="name" value="COPH Hlth Prm, Soc, &amp; Behv Hlth Sci"/>
+      <attribute name="name" value="COPH Hlth Pr, Soc &amp; Behv Health"/>
       <attribute name="org_unit" value="50005431"/>
-      <attribute name="org_abbr" value="HPS&amp;BHS  371"/>
+      <attribute name="org_abbr" value="HPS&amp;BH   371"/>
      </branch>
      <branch>
       <attribute name="name" value="COPH Health Services Res &amp; Admin"/>
@@ -7089,7 +7148,7 @@
       <attribute name="org_unit" value="50000275"/>
       <attribute name="org_abbr" value="SUP SER  401"/>
       <attribute name="building" value="EAB"/>
-      <attribute name="room" value="100"/>
+      <attribute name="room" value="211"/>
       <attribute name="city" value="Omaha"/>
       <attribute name="state" value="NE"/>
       <attribute name="postal_code" value="68182"/>
@@ -7118,7 +7177,7 @@
        <attribute name="org_unit" value="50000779"/>
        <attribute name="org_abbr" value="HLTH SFTY401"/>
        <attribute name="building" value="EAB"/>
-       <attribute name="room" value="100"/>
+       <attribute name="room" value="211"/>
        <attribute name="city" value="Omaha"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68182"/>
@@ -7173,9 +7232,9 @@
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68182"/>
        <branch>
-        <attribute name="name" value="Student Org &amp; Leadership Programs"/>
+        <attribute name="name" value="Ofc Student Life &amp; Leadership DevelopUNO"/>
         <attribute name="org_unit" value="50000877"/>
-        <attribute name="org_abbr" value="STU ORG  465"/>
+        <attribute name="org_abbr" value="STU LIFE 465"/>
         <attribute name="building" value="MBSC"/>
         <attribute name="room" value="Business Office"/>
         <attribute name="city" value="Omaha"/>
@@ -7233,9 +7292,9 @@
         </branch>
        </branch>
        <branch>
-        <attribute name="name" value="Counseling/University Division"/>
+        <attribute name="name" value="Counseling Center"/>
         <attribute name="org_unit" value="50000891"/>
-        <attribute name="org_abbr" value="COUNS UD 465"/>
+        <attribute name="org_abbr" value="COUNS CTR465"/>
         <attribute name="building" value="EAB"/>
         <attribute name="room" value="115"/>
         <attribute name="city" value="Omaha"/>
@@ -7334,9 +7393,9 @@
        <attribute name="postal_code" value="68182"/>
       </branch>
       <branch>
-       <attribute name="name" value="Career Center"/>
+       <attribute name="name" value="Academic &amp; Career Development Center"/>
        <attribute name="org_unit" value="50003827"/>
-       <attribute name="org_abbr" value="CareerCtr465"/>
+       <attribute name="org_abbr" value="ACDC     465"/>
        <attribute name="building" value="MBSC"/>
        <attribute name="room" value="111"/>
        <attribute name="city" value="Omaha"/>
@@ -7584,9 +7643,9 @@
       <attribute name="state" value="NE"/>
       <attribute name="postal_code" value="68182"/>
       <branch>
-       <attribute name="name" value="Educational Admin/Supervision"/>
+       <attribute name="name" value="Educational Leadership"/>
        <attribute name="org_unit" value="50000837"/>
-       <attribute name="org_abbr" value="ED ADMIN 430"/>
+       <attribute name="org_abbr" value="ED LDRSH UNO"/>
        <attribute name="building" value="KH"/>
        <attribute name="room" value="414"/>
        <attribute name="city" value="Omaha"/>
@@ -8364,6 +8423,11 @@
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68182"/>
       </branch>
+      <branch>
+       <attribute name="name" value="Center for Urban Sustainability"/>
+       <attribute name="org_unit" value="50008254"/>
+       <attribute name="org_abbr" value="CUS      458"/>
+      </branch>
      </branch>
      <branch>
       <attribute name="name" value="Engineering"/>
@@ -8721,6 +8785,16 @@
      <attribute name="org_abbr" value="UN COMM 427"/>
      <attribute name="building" value="EAB"/>
      <attribute name="room" value="108"/>
+     <attribute name="city" value="Omaha"/>
+     <attribute name="state" value="NE"/>
+     <attribute name="postal_code" value="68182"/>
+    </branch>
+    <branch>
+     <attribute name="name" value="Internal Audit"/>
+     <attribute name="org_unit" value="50008175"/>
+     <attribute name="org_abbr" value="INT ADT  400"/>
+     <attribute name="building" value="EAB"/>
+     <attribute name="room" value="209"/>
      <attribute name="city" value="Omaha"/>
      <attribute name="state" value="NE"/>
      <attribute name="postal_code" value="68182"/>
