@@ -24,6 +24,9 @@ function showChildren($dept, &$depth) {
     echo str_repeat(' ', $depth).$dept->name.': '.$dept->website.PHP_EOL;
     $depth++;
     foreach ($dept->getOfficialChildDepartments() as $child) {
+        if ($child->suppress) {
+            continue;
+        }
         showChildren($child, $depth);
     }
     $depth--;
