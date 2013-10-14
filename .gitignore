@@ -8,6 +8,6 @@
 /www/.htaccess
 /www/config.inc.php
 /www/wdn
-
+/data/faculty_education.csv
 /.DS_Store
 /UNL_Directory.esproj/
