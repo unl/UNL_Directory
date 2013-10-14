@@ -13,8 +13,10 @@ class UNL_Peoplefinder_FacultyEducationList_FacultyMember_Degrees extends Filter
     public function accept()
     {
         $degree = trim($this->current());
-        if (substr($degree, 0, 1) == 'B') {
-            return false;
+        switch (substr($degree, 0, 1)) {
+            case 'A':
+            case 'B':
+                return false;
         }
 
         return true;
