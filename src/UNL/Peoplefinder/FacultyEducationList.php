@@ -10,6 +10,7 @@ class UNL_Peoplefinder_FacultyEducationList extends FilterIterator
 
     function __construct($options = array())
     {
+        ini_set('auto_detect_line_endings', true);
         $file = new SplFileObject(__DIR__ . '/../../../data/faculty_education.csv');
         $file->setFlags(SplFileObject::READ_CSV);
 
