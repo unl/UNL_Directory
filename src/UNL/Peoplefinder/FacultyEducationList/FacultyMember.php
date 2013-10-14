@@ -20,6 +20,6 @@ class UNL_Peoplefinder_FacultyEducationList_FacultyMember
 
     public function getEducation()
     {
-        return trim($this->data['degree_string'], ', ');
+        return new UNL_Peoplefinder_FacultyEducationList_FacultyMember_Degrees($this->data['degree_string']);
     }
 }

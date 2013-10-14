@@ -8,7 +8,13 @@
 foreach ($context as $faculty) {
     echo '<tr>';
     echo '<td>'.$faculty->employee_name.'</td>';
-    echo '<td>'.$faculty->degree_string.'</td>';
+    echo '<td>';
+    $degrees = array();
+    foreach ($faculty->getEducation() as $degree) {
+        $degrees[] = $degree;
+    }
+    echo implode(', ', $degrees);
+    echo '</td>';
     echo '</tr>';
 }
 ?>
