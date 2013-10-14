@@ -61,6 +61,7 @@ class UNL_Peoplefinder
                              'roles'        => 'UNL_Peoplefinder_Person_Roles',
                              'developers'   => 'UNL_Peoplefinder_Developers',
                              'alphalisting' => 'UNL_Peoplefinder_PersonList_AlphaListing',
+                             'facultyedu'   => 'UNL_Peoplefinder_FacultyEducationList',
     );
 
     /**
