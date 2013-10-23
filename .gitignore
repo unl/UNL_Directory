@@ -7,6 +7,7 @@
 /*.zip
 /www/.htaccess
 /www/config.inc.php
+/www/faculty/all
 /www/wdn
 /data/faculty_education.csv
 .DS_Store
