@@ -3,3 +3,5 @@ DefaultType "text/html; charset=utf-8"
 
 # Use index.html as the directory index
 DirectoryIndex index.html
+
+Options -Indexes
