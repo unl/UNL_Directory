@@ -3,7 +3,7 @@ $page->doctitle  = '<title>Faculty Educational Credentials | University of Nebra
 $page->pagetitle = '<h2>Faculty Educational Credentials</h2>';
 ?>
 <p>The following is a list of UNL faculty educational credentials as of <?php echo $context->getDateLastUpdated(); ?></p>
-<table class="zentable">
+<table class="zentable cool">
 <thead>
     <th>Name</th>
     <th>Education</th>
