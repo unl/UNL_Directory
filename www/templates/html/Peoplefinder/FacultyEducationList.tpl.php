@@ -6,13 +6,13 @@ $page->doctitle  = '<title>Faculty Educational Credentials | University of Nebra
 $page->pagetitle = '<h2>Faculty Educational Credentials</h2>';
 ?>
 <p>The following is a list of UNL faculty educational credentials as of <?php echo $context->getDateLastUpdated(); ?></p>
-<p><?php echo count($context); ?> results</p>
 <div class="grid3 first">
 <?php echo $savvy->render(null, 'Peoplefinder/SearchResults/Filters.tpl.php'); ?>
 </div>
 <div class="grid9">
 <div class="results affiliation faculty">
 <h3>Faculty</h3>
+<div class="result_head">Results 1 - <?php echo count($context); ?></div>
 <table class="zentable cool">
 <thead>
     <tr>
@@ -71,7 +71,7 @@ if (count($context) > $context->options['limit']) {
 </div>
 </div>
 <script type="text/javascript">
-WDN.loadJS('../scripts/filters.js', function(){
+WDN.loadJS('<?php echo $url; ?>scripts/filters.js', function(){
 	filters.initialize();
 });
 </script>
