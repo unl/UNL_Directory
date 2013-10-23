@@ -12,3 +12,9 @@ RewriteRule ^departments/([\d]+)/personnelsubtree$ departments/index.php?view=pe
 RewriteRule ^departments/([\d]+)/personnel$ departments/index.php?view=deptlistings&id=$1 [QSA]
 RewriteRule ^departments/([\d]+)/summary$ departments/index.php?view=deptsummary&id=$1 [QSA]
 RewriteRule ^departments/tree$ departments/index.php?view=tree [QSA]
+
+# Faculty page
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^faculty/all$ index.php?view=facultyedu&limit=3000
