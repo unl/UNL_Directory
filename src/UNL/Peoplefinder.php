@@ -111,7 +111,7 @@ class UNL_Peoplefinder
         try {
             $this->run();
         } catch(Exception $e) {
-            $this->output[] = $e;
+            $this->output = $e;
         }
     }
 
@@ -210,12 +210,12 @@ class UNL_Peoplefinder
             throw new Exception('Un-registered view', 404);
         }
         if ($this->view_map[$this->options['view']] == 'UNL_Peoplefinder_Record') {
-            $this->output[] = $this->getUID($this->options['uid']);
+            $this->output = $this->getUID($this->options['uid']);
             return;
         }
         $this->options['peoplefinder'] =& $this;
 
-        $this->output[] = new $this->view_map[$this->options['view']]($this->options);
+        $this->output = new $this->view_map[$this->options['view']]($this->options);
     }
 
     /**

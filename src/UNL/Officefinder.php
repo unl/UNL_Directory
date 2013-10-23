@@ -101,14 +101,14 @@ class UNL_Officefinder
             try {
                 $this->handlePost();
             } catch(Exception $e) {
-                $this->output[] = $e;
+                $this->output = $e;
             }
         }
 
         try {
             $this->run();
         } catch(Exception $e) {
-            $this->output[] = $e;
+            $this->output = $e;
         }
 
     }
@@ -377,7 +377,7 @@ class UNL_Officefinder
         if (!isset($this->view_map[$this->options['view']])) {
             throw new Exception('Un-registered view', 404);
         }
-        $this->output[] = new $this->view_map[$this->options['view']]($this->options);
+        $this->output = new $this->view_map[$this->options['view']]($this->options);
     }
 
     /**
