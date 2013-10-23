@@ -11,13 +11,18 @@ class UNL_Peoplefinder_FacultyEducationList extends FilterIterator
     function __construct($options = array())
     {
         ini_set('auto_detect_line_endings', true);
-        $file = new SplFileObject(__DIR__ . '/../../../data/faculty_education.csv');
+        $file = new SplFileObject($this->getFacultyEducationFileName());
         $file->setFlags(SplFileObject::READ_CSV);
 
         // Read the columns
         $this->cols = $file->current();
 
         parent::__construct(new LimitIterator($file, 1));
+    }
+
+    protected function getFacultyEducationFileName()
+    {
+        return __DIR__ . '/../../../data/faculty_education.csv';
     }
 
     function current()
@@ -36,5 +41,10 @@ class UNL_Peoplefinder_FacultyEducationList extends FilterIterator
         // Mark this faculty member as seen
         $this->seen_nuids[] = $faculty->nu_id;
         return true;
+    }
+
+    public function getDateLastUpdated($format = 'm/d/y')
+    {
+        return date($format, filemtime($this->getFacultyEducationFileName()));
     }
 }
