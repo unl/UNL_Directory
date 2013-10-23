@@ -1,6 +1,5 @@
 <?php
-
-class Savvy_ObjectProxy_ArrayAccess extends Savvy_ObjectProxy implements ArrayAccess
+class Savvy_ObjectProxy_ArrayAccess extends Savvy_ObjectProxy implements ArrayAccess 
 {
     function offsetExists($offset)
     {
