@@ -88,7 +88,7 @@ var service_peoplefinder = function() {
 				liRecord.addClass('selected current');
 				var href = liRecord.find('a.cInfo').attr('href');
 				href = href.split('?uid=');
-				var url = WDN.toolbar_peoplefinder.serviceURL + 'service.php?view=hcard&uid=' + href[1];
+				var url = WDN.toolbar_peoplefinder.serviceURL + 'index.php?view=hcard&format=partial&uid=' + href[1];
 				WDN.get(url, null, service_peoplefinder.updatePeopleFinderRecord);
 			}
 			return false;
