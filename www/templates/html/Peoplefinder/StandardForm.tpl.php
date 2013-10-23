@@ -9,7 +9,7 @@
             }
             $default = '';
             if (isset($context->options['q'])
-                && !is_array($context->options['q'])) {
+                && !($context->options['q'] instanceof ArrayAccess)) {
                 $default = htmlentities((string)$context->options['q'], ENT_QUOTES);
             }
             ?>

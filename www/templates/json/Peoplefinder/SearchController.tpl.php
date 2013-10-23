@@ -2,7 +2,7 @@
 UNL_Peoplefinder::$displayResultLimit -= count($context->results);
 
 $like_records = array();
-if (!is_array($context->options['q'])
+if (!($context->options['q'] instanceof ArrayAccess)
     && !isset($context->options['method'])
     && UNL_Peoplefinder::$displayResultLimit) {
     // More room to display like results
