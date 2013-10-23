@@ -1,3 +1,7 @@
+<?php
+$page->doctitle  = '<title>Faculty Educational Credentials | University of Nebraska-Lincoln</title>';
+$page->pagetitle = '<h2>Faculty Educational Credentials</h2>';
+?>
 <table class="zentable">
 <thead>
     <th>Name</th>
