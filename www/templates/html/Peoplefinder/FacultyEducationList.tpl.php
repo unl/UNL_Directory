@@ -1,4 +1,7 @@
 <?php
+require_once dirname(dirname(dirname(dirname(__DIR__)))) . '/lib/StaticCache/src/StaticCache.php';
+$_GET = array();
+StaticCache::autoCache();
 $page->doctitle  = '<title>Faculty Educational Credentials | University of Nebraska-Lincoln</title>';
 $page->pagetitle = '<h2>Faculty Educational Credentials</h2>';
 ?>
@@ -68,7 +71,7 @@ if (count($context) > $context->options['limit']) {
 </div>
 </div>
 <script type="text/javascript">
-WDN.loadJS('scripts/filters.js', function(){
+WDN.loadJS('../scripts/filters.js', function(){
 	filters.initialize();
 });
 </script>
