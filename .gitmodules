@@ -1,0 +1,6 @@
+[submodule "vendor/StaticCache"]
+	path = vendor/StaticCache
+	url = https://github.com/saltybeagle/StaticCache.git
+[submodule "lib/StaticCache"]
+	path = lib/StaticCache
+	url = https://github.com/saltybeagle/StaticCache.git
