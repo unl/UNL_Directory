@@ -1,5 +1,5 @@
 <?php
-class UNL_Peoplefinder_FacultyEducationList extends FilterIterator
+class UNL_Peoplefinder_FacultyEducationList extends FilterIterator implements Countable
 {
     /*
      * Columns of data within the CSV file
@@ -8,8 +8,20 @@ class UNL_Peoplefinder_FacultyEducationList extends FilterIterator
 
     protected $seen_nuids = array();
 
+    /**
+     * Array of options passed from the constructor
+     * @var unknown
+     */
+    public $options = array(
+            'offset' => 0,
+            'limit'  => 30,
+            );
+
     function __construct($options = array())
     {
+
+        $this->options = $options + $this->options;
+        
         ini_set('auto_detect_line_endings', true);
         $file = new SplFileObject($this->getFacultyEducationFileName());
         $file->setFlags(SplFileObject::READ_CSV);
@@ -27,8 +39,8 @@ class UNL_Peoplefinder_FacultyEducationList extends FilterIterator
 
     function current()
     {
-        $data = parent::current();
-        return new UNL_Peoplefinder_FacultyEducationList_FacultyMember(array_combine($this->cols, $data));
+        $data = array_combine($this->cols, parent::current());
+        return new UNL_Peoplefinder_FacultyEducationList_FacultyMember($data, $this->options);
     }
 
     function accept()
@@ -41,6 +53,19 @@ class UNL_Peoplefinder_FacultyEducationList extends FilterIterator
         // Mark this faculty member as seen
         $this->seen_nuids[] = $faculty->nu_id;
         return true;
+    }
+
+    public function count()
+    {
+        $count = 0;
+        // Reset the number of seen NUIDs
+        $this->seen_nuids = array();
+        foreach ($this as $null) {
+            $count++;
+        }
+        // Reset the number of seen NUIDs
+        $this->seen_nuids = array();
+        return $count;
     }
 
     public function getDateLastUpdated($format = 'm/d/y')
