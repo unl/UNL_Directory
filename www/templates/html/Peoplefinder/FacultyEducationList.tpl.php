@@ -13,6 +13,11 @@ $page->pagetitle = '<h2>Faculty Educational Credentials</h2>';
 <div class="results affiliation faculty">
 <h3>Faculty</h3>
 <div class="result_head">Results 1 - <?php echo count($context); ?></div>
+<ul class="wdn_pagination">
+<?php foreach (range('A', 'Z') as $letter): ?>
+    <li><a href="#<?php echo $letter; ?>"><?php echo $letter; ?></a></li>
+<?php endforeach; ?>
+</ul>
 <table class="zentable cool">
 <thead>
     <tr>
@@ -22,6 +27,8 @@ $page->pagetitle = '<h2>Faculty Educational Credentials</h2>';
 </thead>
 <tbody>
 <?php
+$current_letter = false;
+
 $limited = new LimitIterator($context, $context->options['offset'], $context->options['limit']);
 foreach ($limited as $faculty) {
     try {
@@ -30,7 +37,13 @@ foreach ($limited as $faculty) {
         $record = false;
     }
 
-    echo '<tr class="ppl_Sresult faculty">';
+    $id = '';
+    if (substr($faculty->employee_name, 0, 1) !== $current_letter) {
+        $current_letter = substr($faculty->employee_name, 0, 1);
+        $id = 'id="'.$current_letter.'"';
+    }
+
+    echo '<tr class="ppl_Sresult faculty" '.$id.'>';
     echo '<td>';
     if ($record) {
         echo '<a href="'.$controller->getURL().'?uid='.$record->uid.'">'.$faculty->employee_name.'</a>';
