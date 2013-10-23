@@ -40,7 +40,7 @@ if ($context->ou != 'org') {
 }
 
 if (isset($context->eduPersonAffiliation)) {
-    $affiliations = array_intersect(UNL_Peoplefinder::$displayedAffiliations, $context->eduPersonAffiliation->getArrayCopy());
+    $affiliations = array_intersect(UNL_Peoplefinder::$displayedAffiliations, $context->getRaw('eduPersonAffiliation')->getArrayCopy());
     echo '<span class="eppa">('.implode(', ', $affiliations).')</span>';
 }
 
