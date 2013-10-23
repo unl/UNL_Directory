@@ -52,4 +52,6 @@ if ($peoplefinder->options['view'] != 'alphalisting') {
     $savvy->addFilters(array('UNL_Officefinder', 'postRun'));
 }
 
+$savvy->addGlobal('controller', $peoplefinder);
+
 echo $savvy->render($peoplefinder);

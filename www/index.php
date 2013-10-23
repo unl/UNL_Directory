@@ -51,6 +51,7 @@ switch($peoplefinder->options['format']) {
 }
 
 $savvy->setEscape('htmlentities');
+$savvy->addGlobal('controller', $peoplefinder);
 
 echo $savvy->render($peoplefinder);
 
