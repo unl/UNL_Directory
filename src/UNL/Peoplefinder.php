@@ -148,34 +148,41 @@ class UNL_Peoplefinder
      */
     public static function addURLParams($url, $additional_params = array())
     {
-        $params = array();
+        // Prevent double-encoding of URLs
+        $url = html_entity_decode($url, ENT_QUOTES, 'utf-8');
+
+        // Get existing params
+        $params = self::getURLParams($url);
+
+        // Combine with the new values
+        $params = $additional_params + $params;
+
         if (strpos($url, '?') !== false) {
-            list($url, $existing_params) = explode('?', $url);
-            $existing_params = explode('&', $existing_params);
-            foreach ($existing_params as $val) {
-                list($var, $val) = explode('=', $val);
-                $params[$var] = $val;
-            }
+            $url = substr($url, 0, strpos($url, '?'));
         }
 
-        $params = array_merge($params, $additional_params);
+        $url .= '?'.http_build_query($params);
 
-        $url .= '?';
-        
-        foreach ($params as $option=>$value) {
-            if ($option == 'driver') {
-                continue;
-            }
-            if ($option == 'format'
-                && $value == 'html') {
-                continue;
-            }
-            if (!empty($value)) {
-                $url .= "&$option=$value";
-            }
+        return trim($url, '?');
+    }
+
+    /**
+     * Get an associative array of the querystring parameters in a URL
+     *
+     * @param string $url
+     *
+     * @return array
+     */
+    public static function getURLParams($url)
+    {
+        $params = array();
+
+        $query = parse_url($url, PHP_URL_QUERY);
+        if (!is_null($query)) {
+            parse_str($query, $params);
         }
-        $url = str_replace('?&', '?', $url);
-        return trim($url, '?;=');
+
+        return $params;
     }
 
     /**
