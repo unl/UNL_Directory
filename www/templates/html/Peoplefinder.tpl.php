@@ -9,6 +9,8 @@ if ($context->options['mobile'] === true) {
 
 $page = UNL_Templates::factory($template);
 
+$savvy->addGlobal('page', $page);
+
 $page->doctitle     = '<title>UNL | Directory</title>';
 $page->titlegraphic = '<h1>Directory</h1>';
 
