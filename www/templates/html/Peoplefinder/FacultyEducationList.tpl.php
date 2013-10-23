@@ -37,6 +37,7 @@ foreach ($limited as $faculty) {
         $record = false;
     }
 
+    // If we're in a section with a new first letter, add the appropriate ID attribute
     $id = '';
     if (substr($faculty->employee_name, 0, 1) !== $current_letter) {
         $current_letter = substr($faculty->employee_name, 0, 1);
