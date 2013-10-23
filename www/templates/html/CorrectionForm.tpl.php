@@ -1,6 +1,6 @@
 <div class="commentProblem noprint">
     <h3>Have a correction?</h3>
-    <p>If you'd like to correct your own entry, contact your UNL departmental HR liaison.</em><br />
+    <p>If you'd like to correct your own entry, contact your UNL departmental HR liaison.<br />
     For corrections to another person's contact information, use the form below.<br /><br /></p>
     <form class="wdn_feedback_comments2" method="post" action="http://www1.unl.edu/comments/">
         <input type="hidden" name="page_address" value="" />
