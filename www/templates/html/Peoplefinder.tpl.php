@@ -32,7 +32,7 @@ if ($context->options['mobile'] === true) {
 }
 
 if ($context->getRawObject() instanceof UNL_Officefinder) {
-    $page->head .= '<link rel="login" href="https://login.unl.edu/cas/login?service='.urlencode(UNL_Officefinder::getURL(null, $context->options)).'" />';
+    $page->head .= '<link rel="login" href="https://login.unl.edu/cas/login?service='.urlencode(UNL_Officefinder::getURL(null, $context->getRaw('options'))).'" />';
 }
 
 if (isset($context->options['print'])) {
