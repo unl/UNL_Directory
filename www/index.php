@@ -1,7 +1,12 @@
 <?php
 require_once 'config.inc.php';
 
-$options = $_GET;
+$options = array();
+if (strpos($_SERVER['REQUEST_URI'], 'service.php') !== false) {
+    $options = array('format'=>'partial', 'onclick'=>'pf_getUID');
+}
+
+$options = $_GET + $options;
 $options['driver'] = $driver;
 $peoplefinder  = new UNL_Peoplefinder($options);
 
@@ -14,6 +19,11 @@ header('Access-Control-Allow-Methods: GET, OPTIONS');
 // Additional headers which may be sent along with the CORS request
 // The X-Requested-With header allows jQuery requests to go through
 header('Access-Control-Allow-Headers: X-Requested-With');
+
+// Exit early so the page isn't fully loaded for options requests
+if (strtolower($_SERVER['REQUEST_METHOD']) == 'options') {
+    exit();
+}
 
 Savvy_ClassToTemplateMapper::$classname_replacement = 'UNL_';
 $savvy = new Savvy();
