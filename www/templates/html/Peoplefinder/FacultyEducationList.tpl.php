@@ -4,10 +4,18 @@ $page->pagetitle = '<h2>Faculty Educational Credentials</h2>';
 ?>
 <p>The following is a list of UNL faculty educational credentials as of <?php echo $context->getDateLastUpdated(); ?></p>
 <p><?php echo count($context); ?> results</p>
+<div class="grid3 first">
+<?php echo $savvy->render(null, 'Peoplefinder/SearchResults/Filters.tpl.php'); ?>
+</div>
+<div class="grid9">
+<div class="results affiliation faculty">
+<h3>Faculty</h3>
 <table class="zentable cool">
 <thead>
-    <th>Name</th>
-    <th>Education</th>
+    <tr>
+        <th>Name</th>
+        <th>Education</th>
+    </tr>
 </thead>
 <tbody>
 <?php
@@ -19,10 +27,17 @@ foreach ($limited as $faculty) {
         $record = false;
     }
 
-    echo '<tr>';
+    echo '<tr class="ppl_Sresult faculty">';
     echo '<td>';
     if ($record) {
         echo '<a href="'.$controller->getURL().'?uid='.$record->uid.'">'.$faculty->employee_name.'</a>';
+        if (isset($record->unlHROrgUnitNumber)) {
+            foreach ($record->unlHROrgUnitNumber as $orgUnit) {
+                if ($name = UNL_Officefinder_Department::getNameByOrgUnit($orgUnit)) {
+                    echo '        <div class="organization-unit">'.$name.'</div>'.PHP_EOL;
+                }
+            }
+        }
     } else {
         echo $faculty->employee_name;
     }
@@ -50,4 +65,10 @@ if (count($context) > $context->options['limit']) {
     echo $savvy->render($pager, 'PaginationLinks.tpl.php');
 }
 ?>
-
+</div>
+</div>
+<script type="text/javascript">
+WDN.loadJS('scripts/filters.js', function(){
+	filters.initialize();
+});
+</script>

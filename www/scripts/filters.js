@@ -15,7 +15,7 @@ var filters = function() {
 				} else {
 					WDN.jQuery(WDN.jQuery(this).find('.organization-unit')).each(function() { //find the departments from the people records
 						filters.departmentArray(WDN.jQuery(this).text());
-						WDN.jQuery(this).parents('li.ppl_Sresult').addClass(filters.scrubDept(WDN.jQuery(this).text().toLowerCase()));
+						WDN.jQuery(this).parents('li.ppl_Sresult,tr.ppl_Sresult').addClass(filters.scrubDept(WDN.jQuery(this).text().toLowerCase()));
 					});
 					affiliations.push(WDN.jQuery(this).children('h3').eq(0).text());
 				}
@@ -64,10 +64,10 @@ var filters = function() {
 				}
 			} else {
 				WDN.jQuery('.filterAll').removeAttr('checked');
-				WDN.jQuery('div.affiliation, div.results ul li').hide();
+				WDN.jQuery('div.affiliation, div.results ul li, div.results tbody tr').hide();
 				WDN.jQuery('form.filters input').not('.filterAll').each(function(){ //loop through all the checkboxes
 					if (this.checked) {
-						WDN.jQuery('li.'+WDN.jQuery(this).attr('value')).show().parents('.affiliation').show(); //if a checkbox is checked, make sure the corresponding content is shown.
+						WDN.jQuery('li.'+WDN.jQuery(this).attr('value')+',tr.'+WDN.jQuery(this).attr('value')).show().parents('.affiliation').show(); //if a checkbox is checked, make sure the corresponding content is shown.
 						checked.push(WDN.jQuery(this).attr('id'));
 					}
 				});
@@ -102,7 +102,7 @@ var filters = function() {
 		showAll : function() {
 			WDN.jQuery('form.filters input').not('.filterAll').removeAttr('checked');
 			WDN.jQuery('.filterAll').attr('checked', 'checked');
-			WDN.jQuery('div.affiliation, div.results ul li').show();
+			WDN.jQuery('div.affiliation, div.results ul li, div.results tbody tr').show();
 		}
 		
 	};
