@@ -90,15 +90,16 @@ if (isset($context->unlHROrgUnitNumber)) {
 if (isset($context->postalAddress)) {
     $address = $context->formatPostalAddress();
 
-    if (strpos($address['postal-code'], '68588') == 0) {
-        if ($code = $context->getUNLBuildingCode()) {
-            $address['street-address'] = str_replace($code, '<a class="location mapurl" href="http://maps.unl.edu/#'.$code.'">'.$code.'</a>', $address['street-address']);
-        }
-    }
-
     echo '<div class="adr workAdr">
-         <span class="type">Work</span>
-         <span class="street-address">'. $address['street-address'] . '</span>
+         <span class="type">Work</span>';
+        if (strpos($address['postal-code'], '68588') == 0) {
+            if ($code = $context->getUNLBuildingCode()) {
+                echo '<span class="street-address">'. str_replace($code, '<a class="location mapurl" href="http://maps.unl.edu/#'.$code.'">'.$code.'</a>', $address['street-address']) . '</span>';
+            }
+        } else {
+            echo '<span class="street-address">'. $address['street-address'] . '</span>';
+        }
+        echo '
          <span class="locality">' . $address['locality'] . '</span>
          <span class="region">' . $address['region'] . '</span>
          <span class="postal-code">' . $address['postal-code'] . '</span>
