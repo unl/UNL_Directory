@@ -1,6 +1,6 @@
 <?php
 $userCanEdit = false;
-if ($context->options['view'] != 'alphalisting') {
+if ($controller->options['view'] != 'alphalisting') {
     $userCanEdit = $context->userCanEdit(UNL_Officefinder::getUser());
 }
 ?>

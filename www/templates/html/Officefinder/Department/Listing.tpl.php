@@ -6,13 +6,7 @@ if (preg_match('/^([A-Z]+)\s/', $context->address, $matches)) {
 
 $userCanEdit = false;
 
-// Find the topmost controller, we may be many levels deep.
-$controller = $parent;
-while (isset($controller->parent) && !isset($controller->context->options['view'])) {
-    $controller = $controller->parent;
-}
-
-if ($controller->context->options['view'] != 'alphalisting') {
+if ($controller->options['view'] != 'alphalisting') {
     // Check if the user can edit and store this result for later
     $userCanEdit = $context->userCanEdit(UNL_Officefinder::getUser());
 }

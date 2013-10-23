@@ -12,7 +12,7 @@ UNL_Officefinder::setReplacementData('pagetitle', '<h2>'.$context->name.'</h2>')
 $userCanEdit = false;
 
 // Check if the user can edit and store this result for later
-if ($context->options['view'] != 'alphalisting') {
+if ($controller->options['view'] != 'alphalisting') {
     $userCanEdit = $context->userCanEdit(UNL_Officefinder::getUser());
 }
 ?>

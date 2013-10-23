@@ -20,7 +20,7 @@ $onclick = '';
 if (isset($parent->parent->context->options, $parent->parent->context->options['onclick'])) {
     $onclick .= ' onclick="return '.htmlentities($parent->parent->context->options['onclick'], ENT_QUOTES).'(\''.addslashes($context->uid).'\');"';
 }
-if ($parent->parent->context->options['view'] != 'alphalisting') {
+if ($controller->options['view'] != 'alphalisting') {
     echo '    <img class="profile_pic small photo planetred_profile" src="https://planetred.unl.edu/pg/icon/unl_'.str_replace("-", "_", $context->uid).'/small"  alt="Photo of '.$context->displayName.'" />'.PHP_EOL;
 }
 echo '    <div class="recordDetails">'.PHP_EOL;
@@ -38,8 +38,8 @@ if (isset($context->unlHROrgUnitNumber)) {
 
 if (isset($context->title)
     && !(
-        isset($orgUnit, $parent->parent, $parent->parent->parent, $parent->parent->parent->parent, $parent->parent->context->options, $parent->parent->context->options['view'])
-        && $parent->parent->context->options['view'] == 'department'
+        isset($orgUnit, $parent->parent, $parent->parent->parent, $parent->parent->parent->parent)
+        && $controller->options['view'] == 'department'
         && $orgUnit != $parent->parent->parent->parent->context->org_unit
         )
     && false === strpos(strtolower($context->title), 'retiree') // Let's not share retiree or disabled retiree status
