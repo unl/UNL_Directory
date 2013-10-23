@@ -14,4 +14,8 @@ $compatible->dependencies['required']->package['pear2.php.net/PEAR2_Exception']-
 $compatible->dependencies['required']->package['pear2.php.net/PEAR2_MultiErrors']->save();
 $compatible->dependencies['required']->package['pear2.php.net/PEAR2_HTTP_Request']->save();
 */
+
+if (isset($package->files['www/config.inc.php'])) {
+    unset($package->files['www/config.inc.php']);
+}
 ?>
