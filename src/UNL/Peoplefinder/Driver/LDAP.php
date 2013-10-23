@@ -312,6 +312,16 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
         return self::recordFromLDAPEntry($r[0]);
     }
 
+    function getByNUID($nuid)
+    {
+        $filter = new UNL_Peoplefinder_Driver_LDAP_NUIDFilter($nuid);
+        $r = $this->query($filter->__toString(), $this->detailAttributes, false);
+        if (!isset($r[0])) {
+            throw new Exception('Cannot find that NUID.', 404);
+        }
+        return self::recordFromLDAPEntry($r[0]);
+    }
+
     function getRoles($dn)
     {
         $ldap   = UNL_LDAP::getConnection(
