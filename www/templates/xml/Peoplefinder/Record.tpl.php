@@ -22,10 +22,10 @@ foreach (get_object_vars($rawObject) as $key=>$val) {
 if (isset($context->postalAddress) || isset($context->unlHRAddress)) {
     echo '<unlDirectoryAddress>';
     foreach ($context->formatPostalAddress() as $key=>$val) {
-        echo '<'.$key.'>'.$val.'</'.$key.'>';
+        echo '<'.$key.'>'.htmlspecialchars($val).'</'.$key.'>';
     }
     if ($buildingCode = $context->getUNLBuildingCode()) {
-        echo '<unlBuildingCode>'.$buildingCode.'</unlBuildingCode>';
+        echo '<unlBuildingCode>'.htmlspecialchars($buildingCode).'</unlBuildingCode>';
     }
     echo '</unlDirectoryAddress>';
 }
