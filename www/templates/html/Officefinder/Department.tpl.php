@@ -48,7 +48,7 @@ $department = $context->getHRDepartment();
         <?php
         $listings = $context->getUnofficialChildDepartments();
         if (count($listings)) {
-            echo $savvy->render($listings->getRawObject(), 'Officefinder/Department/Listings.tpl.php');
+            echo $savvy->render($listings, 'Officefinder/Department/Listings.tpl.php');
         }
         if ($userCanEdit) {
             $edit_url = UNL_Officefinder::getURL(null, array('view'      => 'department',

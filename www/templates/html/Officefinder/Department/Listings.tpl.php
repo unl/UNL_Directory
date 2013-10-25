@@ -13,8 +13,12 @@ foreach ($context as $listing) {
         continue;
     }
     echo '<li class="listing" id="listing_'.$listing->id.'">'.$savvy->render($listing, 'Officefinder/Department/Listing.tpl.php');
-        $children = $listing->getRawObject()->getChildren();
-        echo $savvy->render($children, 'Officefinder/Department/Listings.tpl.php');
+    if ($listing->hasChildren()) {
+        $children = $listing->getChildren();
+        if (count($children)) {
+            echo $savvy->render($children, 'Officefinder/Department/Listings.tpl.php');
+        }
+    }
     echo '</li>'.PHP_EOL;
 }
 ?>

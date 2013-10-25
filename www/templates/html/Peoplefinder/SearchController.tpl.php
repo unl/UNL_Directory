@@ -17,7 +17,7 @@ $showing = 0;
 UNL_Peoplefinder::$displayResultLimit -= count($context->results);
 
 if (count($context->dept_results)) {
-    echo $savvy->render($context->dept_results->getRawObject());
+    echo $savvy->render($context->dept_results);
 }
 
 $like_records = array();
