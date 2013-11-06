@@ -5,7 +5,7 @@ echo $savvy->render(new UNL_Peoplefinder_SearchResults(array('results'=>$context
 if (count($context->like_results)) {
     echo '<div class="likeResults">';
     echo '<h3>similar '.$context->affiliation.' results</h3>';
-    echo $savvy->render(new UNL_Peoplefinder_SearchResults(array('results'=>$context->like_results, 'options'=>$context->options)));
+    echo $savvy->render(new UNL_Peoplefinder_SearchResults(array('results'=>$context->getRaw('like_results'), 'options'=>$context->options)));
     echo '</div>';
 }
 echo '</div>';
