@@ -1,6 +1,5 @@
 <?php
 
-
 $start = 0;
 $end   = count($context);
 
@@ -26,5 +25,3 @@ if (count($context) >= UNL_Peoplefinder::$resultLimit) {
     }
     echo '</p>';
 }
-
-?>
