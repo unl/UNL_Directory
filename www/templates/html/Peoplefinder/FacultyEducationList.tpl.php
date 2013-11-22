@@ -23,7 +23,6 @@ $page->head      = $page->getRaw('head').'<link rel="stylesheet" type="text/css"
 <thead>
     <tr>
         <th>Name</th>
-        <th>Education</th>
     </tr>
 </thead>
 <tbody>
@@ -59,8 +58,6 @@ foreach ($limited as $faculty) {
     } else {
         echo $faculty->employee_name;
     }
-    echo '</td>';
-    echo '<td>';
     $degrees = array();
     foreach ($faculty->getEducation() as $degree) {
         $degrees[] = $degree;
