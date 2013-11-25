@@ -34,13 +34,13 @@ if ($context->options['mobile'] === true) {
 }
 
 if ($context->getRawObject() instanceof UNL_Officefinder) {
-    $login_url = UNL_Officefinder::getURL(null, $context->getRaw('options');
+    $login_url = UNL_Officefinder::getURL(null, $context->getRaw('options'));
 
     if (strpos($login_url, '//') === 0) {
         $login_url = 'https:'.$login_url;
     }
 
-    $page->head .= '<link rel="login" href="https://login.unl.edu/cas/login?service='.urlencode($login_url)).'" />';
+    $page->head .= '<link rel="login" href="https://login.unl.edu/cas/login?service='.urlencode($login_url).'" />';
 }
 
 if (isset($context->options['print'])) {
