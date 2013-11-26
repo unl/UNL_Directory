@@ -92,7 +92,7 @@ if (isset($context->postalAddress)) {
 
     echo '<div class="adr workAdr">
          <span class="type">Work</span>';
-        if (strpos($address['postal-code'], '68588') == 0) {
+        if (strpos($address['postal-code'], '68588') === 0) {
             if ($code = $context->getUNLBuildingCode()) {
                 echo '<span class="street-address">'. str_replace($code, '<a class="location mapurl" href="http://maps.unl.edu/#'.$code.'">'.$code.'</a>', $address['street-address']) . '</span>';
             }
