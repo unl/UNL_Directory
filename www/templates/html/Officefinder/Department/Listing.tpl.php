@@ -26,6 +26,9 @@ if ($userCanEdit) {
 ?>
 <div class="listingDetails">
     <?php echo $context->name ?>
+    <?php if (isset($context->email)): ?>
+    <span class="email"><?php echo '<a href="mailto:'.$context->email.'">'.$context->email.'</a>'; ?></span>
+    <?php endif; ?>
     <?php if (!empty($context->phone)): ?>
     <span class="tel"><?php echo $savvy->render($context->phone, 'Peoplefinder/Record/TelephoneNumber.tpl.php') ?></span>
     <?php endif; ?>
