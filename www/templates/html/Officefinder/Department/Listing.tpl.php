@@ -42,6 +42,6 @@ if ($userCanEdit) {
     <span class="postal-code"><?php echo $context->postal_code; ?></span>
     <?php endif; ?>
     <?php if (isset($context->website)): ?>
-    <span class="postal-code"><a href="<?php echo $context->website; ?>"><?php echo $context->website; ?></a></span>
+    <span class="website"><a href="<?php echo $context->website; ?>"><?php echo $context->website; ?></a></span>
     <?php endif; ?>
 </div>
