@@ -1,11 +1,9 @@
 <?php
 UNL_Templates::setCachingService(new UNL_Templates_CachingService_Null());
 
-$template = 'Fixed_html5';
+UNL_Templates::$options['version'] = 4.0;
 
-if ($context->options['mobile'] === true) {
-    $template = 'Mobile';
-} 
+$template = 'Fixed';
 
 $page = UNL_Templates::factory($template);
 
