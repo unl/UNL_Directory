@@ -345,25 +345,25 @@ WDN.jQuery(document).ready(function() {
 			return false;
 		}
 	});
-	WDN.jQuery('.ppl_Sresult').live('click', function(){
+	WDN.jQuery('.ppl_Sresult').on('click', function(){
 			service_peoplefinder.showIndividualPeopleFinderRecord(WDN.jQuery(this));
 			return false;
 		}
 	);
-	WDN.jQuery('.dep_result').live('click', function(){
+	WDN.jQuery('.dep_result').on('click', function(){
 			directory.showIndividualDepartmentRecord(WDN.jQuery(this));
 			return false;
 		}
 	);
-	WDN.jQuery('.ppl_Sresult .vcard, .dep_result .vcard').live('click', function(event){
+	WDN.jQuery('.ppl_Sresult .vcard, .dep_result .vcard').on('click', function(event){
 			event.stopPropagation();
 		}
 	);
-	WDN.jQuery('a.img-qrcode').live('click', function() {
+	WDN.jQuery('a.img-qrcode').on('click', function() {
 		WDN.jQuery(this).colorbox({open:true});
 		return false;
 	});
-	WDN.jQuery('.wdn_feedback_comments2').live('submit', function(event) {
+	WDN.jQuery('.wdn_feedback_comments2').on('submit', function(event) {
 			var comments = WDN.jQuery(this).children('textarea').val();
 			//var page_address = WDN.jQuery(this).children().val('input[name="page_address"]');
 			if (comments.length < 4) {
@@ -383,7 +383,7 @@ WDN.jQuery(document).ready(function() {
 			return false;
 		}
 	);
-	WDN.jQuery('a.dir_correctionRequest').live('click', function(){
+	WDN.jQuery('a.dir_correctionRequest').on('click', function(){
 		WDN.jQuery(this).colorbox({
 			inline : true,
 			open : true,

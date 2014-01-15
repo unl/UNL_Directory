@@ -5,7 +5,7 @@ var admin_editting = function() {
 			admin_editting.bindSortable();
 			admin_editting.bindMinibutton();
 			admin_editting.bindColorbox();
-			WDN.jQuery('.action_control form').live('submit', function(){
+			WDN.jQuery('.action_control form').on('submit', function(){
 				admin_editting.submitForm(WDN.jQuery(this));
 				return false;
 			});

@@ -91,7 +91,7 @@ var filters = function() {
 					WDN.jQuery('#filterSummary').append(' <a href="#" class="'+WDN.jQuery('#'+value).attr('value')+'"><span class="group">'+WDN.jQuery('#'+value).closest('fieldset').children('legend').text()+':</span> '+WDN.jQuery('#'+value).siblings('label').text()+'</a><span class="operator"> OR </span>');
 				});
 			}
-			WDN.jQuery('#filterSummary a').live('click', function(e){e.preventDefault;return false;});
+			WDN.jQuery('#filterSummary a').on('click', function(e){e.preventDefault;return false;});
 			
 		},
 		
