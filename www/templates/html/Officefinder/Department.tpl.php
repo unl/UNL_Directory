@@ -1,7 +1,7 @@
 <?php
 
 // Set the page title and breadcrumbs
-UNL_Officefinder::setReplacementData('doctitle', 'UNL | Directory | '.$context->name);
+UNL_Officefinder::setReplacementData('doctitle', $context->name . ' | Directory | UNL');
 UNL_Officefinder::setReplacementData('breadcrumbs', '
     <ul>
         <li><a href="http://www.unl.edu/" title="University of Nebraska&ndash;Lincoln">UNL</a></li>

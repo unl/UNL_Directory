@@ -1,5 +1,5 @@
 <?php 
-UNL_Officefinder::setReplacementData('doctitle', 'UNL | Directory | Academic Departments');
+UNL_Officefinder::setReplacementData('doctitle', 'Academic Departments | Directory | UNL');
 UNL_Officefinder::setReplacementData('breadcrumbs', '
     <ul>
         <li><a href="http://www.unl.edu/" title="University of Nebraska&ndash;Lincoln">UNL</a></li>

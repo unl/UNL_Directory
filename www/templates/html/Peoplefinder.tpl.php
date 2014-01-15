@@ -9,7 +9,7 @@ $page = UNL_Templates::factory($template);
 
 $savvy->addGlobal('page', $page);
 
-$page->doctitle     = '<title>UNL | Directory</title>';
+$page->doctitle     = '<title>Directory | UNL</title>';
 $page->titlegraphic = '<h1>Directory</h1>';
 
 $page->head .= '
