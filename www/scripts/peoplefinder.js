@@ -299,7 +299,7 @@ WDN.jQuery(document).ready(function() {
     }
     
 	if (WDN.jQuery('#peoplefinder').length) {
-		WDN.loadJS('wdn/templates_3.0/scripts/plugins/hashchange/jQuery.hashchange.1-3.min.js', function() {
+		WDN.loadJS('/wdn/templates_4.0/scripts/plugins/hashchange/jquery.hashchange.min.js', function() {
 			attempts = 1; // var used to control how many attempts the automatic search guessing goes through
 			WDN.jQuery(window).bind('hashchange', function(eventObject){
 				hash = location.hash;
