@@ -3,6 +3,8 @@ $permalink = UNL_Peoplefinder::getURL().'?uid='.$context->uid;
 
 $preferredFirstName = $context->getPreferredFirstName();
 
+UNL_Peoplefinder::setReplacementData('pagetitle', '<h1>'.$context->displayName.'</h1>');
+
 echo "<div class='vcard {$context->eduPersonPrimaryAffiliation}'>\n";
 echo '<a class="planetred_profile" href="http://planetred.unl.edu/pg/profile/unl_'.str_replace("-", "_", $context->uid).'" title="Planet Red Profile for '.$context->cn.'"><img class="profile_pic medium photo" src="'.htmlspecialchars($context->getImageURL()).'"  alt="Photo of '.$context->displayName.'" /></a> ';
 echo '<div class="wdn_vcardTools">';

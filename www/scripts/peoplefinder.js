@@ -147,7 +147,7 @@ var directory = function() {
 				}
 			});
 			*/
-			WDN.loadJS('wdn/templates_3.0/scripts/plugins/qtip/jquery.qtip.js', function(){
+			WDN.loadJS('/wdn/templates_4.0/scripts/plugins/qtip/jquery.qtip.js', function(){
 				WDN.jQuery('.directorySearch input#q').qtip({
 			    	content: {
 			    		text: 'Enter a name to begin your search'
@@ -290,8 +290,16 @@ var directory = function() {
 }();
 
 WDN.jQuery(document).ready(function() {
+    WDN.toolbar_peoplefinder.serviceURL = PF_URL;
+    WDN.toolbar_peoplefinder.configuedWebService = true;
+    if (window.location.hash
+        && WDN.jQuery('#peoplefinder').length) {
+        WDN.log('triggering hash change');
+        WDN.jQuery(window).trigger('hashchange');
+    }
+    
 	if (WDN.jQuery('#peoplefinder').length) {
-		WDN.loadJS('wdn/templates_3.0/scripts/plugins/hashchange/jQuery.hashchange.1-3.min.js', function() {
+		WDN.loadJS('/wdn/templates_4.0/scripts/plugins/hashchange/jquery.hashchange.min.js', function() {
 			attempts = 1; // var used to control how many attempts the automatic search guessing goes through
 			WDN.jQuery(window).bind('hashchange', function(eventObject){
 				hash = location.hash;
@@ -326,15 +334,7 @@ WDN.jQuery(document).ready(function() {
 			});
 		});
 	}
-	WDN.loadJS('wdn/templates_3.0/scripts/toolbar_peoplefinder.js', function(){
-		WDN.toolbar_peoplefinder.serviceURL = PF_URL;
-		WDN.toolbar_peoplefinder.configuedWebService = true;
-		if (window.location.hash
-			&& WDN.jQuery('#peoplefinder').length) {
-			WDN.log('triggering hash change');
-			WDN.jQuery(window).trigger('hashchange');
-		}
-	});
+	
 	directory.initializeSearchBoxes();
 	WDN.jQuery('#advancedSearch').bind({
 		focus : function(){
@@ -345,25 +345,25 @@ WDN.jQuery(document).ready(function() {
 			return false;
 		}
 	});
-	WDN.jQuery('.ppl_Sresult').live('click', function(){
+	WDN.jQuery('.ppl_Sresult').on('click', function(){
 			service_peoplefinder.showIndividualPeopleFinderRecord(WDN.jQuery(this));
 			return false;
 		}
 	);
-	WDN.jQuery('.dep_result').live('click', function(){
+	WDN.jQuery('.dep_result').on('click', function(){
 			directory.showIndividualDepartmentRecord(WDN.jQuery(this));
 			return false;
 		}
 	);
-	WDN.jQuery('.ppl_Sresult .vcard, .dep_result .vcard').live('click', function(event){
+	WDN.jQuery('.ppl_Sresult .vcard, .dep_result .vcard').on('click', function(event){
 			event.stopPropagation();
 		}
 	);
-	WDN.jQuery('a.img-qrcode').live('click', function() {
+	WDN.jQuery('a.img-qrcode').on('click', function() {
 		WDN.jQuery(this).colorbox({open:true});
 		return false;
 	});
-	WDN.jQuery('.wdn_feedback_comments2').live('submit', function(event) {
+	WDN.jQuery('.wdn_feedback_comments2').on('submit', function(event) {
 			var comments = WDN.jQuery(this).children('textarea').val();
 			//var page_address = WDN.jQuery(this).children().val('input[name="page_address"]');
 			if (comments.length < 4) {
@@ -383,7 +383,7 @@ WDN.jQuery(document).ready(function() {
 			return false;
 		}
 	);
-	WDN.jQuery('a.dir_correctionRequest').live('click', function(){
+	WDN.jQuery('a.dir_correctionRequest').on('click', function(){
 		WDN.jQuery(this).colorbox({
 			inline : true,
 			open : true,

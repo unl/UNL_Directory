@@ -9,8 +9,8 @@ $page = UNL_Templates::factory($template);
 
 $savvy->addGlobal('page', $page);
 
-$page->doctitle     = '<title>UNL | Directory</title>';
-$page->titlegraphic = '<h1>Directory</h1>';
+$page->doctitle     = '<title>Directory | UNL</title>';
+$page->titlegraphic = '<a href="' . UNL_Peoplefinder::getURL() . '">Directory</a>';
 
 $page->head .= '
 <meta name="description" content="UNL Directory is the Faculty, Staff and Student online directory for the University. Information obtained from this directory may not be used to provide addresses for mailings to students, faculty or staff. Any solicitation of business, information, contributions or other response from individuals listed in this publication by mail, telephone or other means is forbidden." />
@@ -28,6 +28,7 @@ if ($context->options['mobile'] === true) {
                 <![endif]-->
                 <link rel="stylesheet" type="text/css" media="print" href="'.UNL_Peoplefinder::getURL().'css/print.css" />
                 <script type="text/javascript">var PF_URL = "'.UNL_Peoplefinder::getURL().'", ANNOTATE_URL = "'.UNL_Peoplefinder::$annotateUrl.'";</script>
+                <script type="text/javascript" src="'.UNL_Peoplefinder::getURL().'scripts/toolbar_peoplefinder.js"></script>
                 <script type="text/javascript" src="'.UNL_Peoplefinder::getURL().'scripts/peoplefinder.js"></script>';
 }
 
@@ -78,7 +79,7 @@ $page->breadcrumbs = '
 </ul>';
 
 
-$page->pagetitle = '<h2>Search the Directory</h2>';
+$page->pagetitle = '<h1>Search the Directory</h1>';
 $page->maincontentarea = $savvy->render($context->output);
 $page->footercontent = 'UNL | Office of University Communications | <a href="http://www1.unl.edu/wdn/wiki/About_Peoplefinder" onclick="window.open(this.href); return false;">About Directory</a> | <a href="http://www1.unl.edu/comments/" title="Click here to direct your comments and questions" class="dir_correctionRequest">comments?</a>';
 $page->footercontent .= $savvy->render($context, 'CorrectionForm.tpl.php');

@@ -50,6 +50,8 @@ switch($peoplefinder->options['format']) {
     default:
 }
 
+$savvy->addFilters(array('UNL_Peoplefinder', 'postRun'));
+
 $savvy->setEscape('htmlentities');
 $savvy->addGlobal('controller', $peoplefinder);
 
