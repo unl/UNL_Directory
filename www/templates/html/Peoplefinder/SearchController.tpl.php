@@ -24,7 +24,7 @@ $like_records = array();
 if (!($context->options['q'] instanceof ArrayAccess)
     && UNL_Peoplefinder::$displayResultLimit) {
     // More room to display like results
-    $like_records = $controller->getLikeMatches($context->options['q'], null, $context->getRaw('results'));
+    $like_records = $controller->getLikeMatches($context->options['q'], null, $context->getRaw('results'))->getRawObject();
 }
 
 
