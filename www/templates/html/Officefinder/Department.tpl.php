@@ -8,7 +8,7 @@ UNL_Officefinder::setReplacementData('breadcrumbs', '
         <li><a href="'.UNL_Peoplefinder::getURL().'">Directory</a></li>
         <li>'.$context->name.'</li>
     </ul>');
-UNL_Officefinder::setReplacementData('pagetitle', '<h2>'.$context->name.'</h2>');
+UNL_Officefinder::setReplacementData('pagetitle', '<h1>'.$context->name.'</h1>');
 $userCanEdit = false;
 
 // Check if the user can edit and store this result for later

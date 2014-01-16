@@ -6,7 +6,7 @@ UNL_Officefinder::setReplacementData('breadcrumbs', '
         <li><a href="'.UNL_Peoplefinder::getURL().'">Directory</a></li>
         <li>Academic Departments</li>
     </ul>');
-UNL_Officefinder::setReplacementData('pagetitle', '<h2>Academic Departments</h2>');
+UNL_Officefinder::setReplacementData('pagetitle', '<h1>Academic Departments</h1>');
 ?>
 <script type="text/javascript">
 WDN.loadJS('../scripts/filters.js', function(){

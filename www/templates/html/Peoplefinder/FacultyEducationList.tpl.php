@@ -3,7 +3,7 @@ require_once dirname(dirname(dirname(dirname(__DIR__)))) . '/lib/StaticCache/src
 $_GET = array();
 StaticCache::autoCache();
 $page->doctitle  = '<title>Faculty Educational Credentials | University of Nebraska-Lincoln</title>';
-$page->pagetitle = '<h2>Faculty Educational Credentials</h2>';
+$page->pagetitle = '<h1>Faculty Educational Credentials</h1>';
 $page->head      = $page->getRaw('head').'<link rel="stylesheet" type="text/css" media="screen" href="//directory.unl.edu/wdn/templates_3.0/css/content/pagination.css" />';
 ?>
 <p>The following is a list of UNL faculty educational credentials as of <?php echo $context->getDateLastUpdated(); ?></p>
