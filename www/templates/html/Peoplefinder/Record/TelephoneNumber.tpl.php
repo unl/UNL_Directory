@@ -27,7 +27,7 @@ echo $link;
  * 402-624-80XX 7-80XX ARDC (Mead, NE)
  * 402-370-40XX 7-40XX NEREC (Norfolk, NE)
  * 308-696-67XX 7-67XX WCREC (North Platte, NE)
- * 308-367-52XX 7-52XX NCTA (Curtis, NE) # Coming April 2012 or later
+ * 308-367-52XX 7-52XX NCTA
  */
 
 
@@ -49,7 +49,7 @@ switch(true) {
     case preg_match('/^(308)?69667([\d]{2})$/', $clean_number, $matches):
         echo $on_campus_prefix . '7-67' . $matches[2] . $on_campus_suffix;
         break;
-//     case preg_match('/^(308)?36752([\d]{2})$/', $clean_number, $matches):
-//         echo $on_campus_prefix . '7-52' . $matches[2] . $on_campus_suffix;
-//         break;
+    case preg_match('/^(308)?36752([\d]{2})$/', $clean_number, $matches):
+        echo $on_campus_prefix . '7-52' . $matches[2] . $on_campus_suffix;
+        break;
 }
