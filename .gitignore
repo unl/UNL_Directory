@@ -12,3 +12,7 @@
 /data/faculty_education.csv
 .DS_Store
 /UNL_Directory.esproj/
+/phpmyadmin
+/www/phpmyadmin
+/vagrant/dev/.vagrant
+/www/robots.txt

@@ -15,7 +15,7 @@ set_include_path(dirname(dirname(__FILE__)).'/src/'.PATH_SEPARATOR.dirname(dirna
 require_once 'UNL/Autoload.php';
 
 // Set the main URL for the site
-UNL_Peoplefinder::$url = 'http://peoplefinder.unl.edu/';
+UNL_Peoplefinder::$url = '/';
 
 //Set the annotation service's URL
 UNL_Peoplefinder::$annotateUrl = 'http://annotate.unl.edu/';
