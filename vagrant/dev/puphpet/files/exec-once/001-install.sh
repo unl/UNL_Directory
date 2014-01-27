@@ -23,4 +23,7 @@ fi
 #make a link to the phpmyadmin
 ln -s /var/www/html/phpmyadmin/ /var/www/html/www/phpmyadmin
 
+#move the robots.txt
+cp ${SYSTEM_BASEDIR}/vagrant/dev/puphpet/files/exec-once/robots.txt ${SYSTEM_BASEDIR}/www/robots.txt
+
 echo "FINISHED installing"
