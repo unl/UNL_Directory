@@ -393,7 +393,7 @@ class UNL_Officefinder
     {
         static $db = false;
         if (!$db) {
-            $db = new mysqli(self::$db_host, self::$db_user, self::$db_pass, self::db_name);
+            $db = new mysqli(self::$db_host, self::$db_user, self::$db_pass, self::$db_name);
             if (mysqli_connect_error()) {
                 throw new Exception('Database connection error (' . mysqli_connect_errno() . ') '
                         . mysqli_connect_error(), 500);
