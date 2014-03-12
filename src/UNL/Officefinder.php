@@ -75,6 +75,10 @@ class UNL_Officefinder
     public static $db_user = 'officefinder';
 
     public static $db_pass = 'officefinder';
+    
+    public static $db_name = 'officefinder';
+  
+    public static $db_host = 'localhost';
 
     /**
      * Construct a new officefinder object
@@ -389,7 +393,7 @@ class UNL_Officefinder
     {
         static $db = false;
         if (!$db) {
-            $db = new mysqli('localhost', self::$db_user, self::$db_pass, 'officefinder');
+            $db = new mysqli(self::$db_host, self::$db_user, self::$db_pass, self::$db_name);
             if (mysqli_connect_error()) {
                 throw new Exception('Database connection error (' . mysqli_connect_errno() . ') '
                         . mysqli_connect_error(), 500);
