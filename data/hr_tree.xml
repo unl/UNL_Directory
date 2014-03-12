@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE tree SYSTEM "treeml.dtd">
-<!-- Generated Wed Aug 14 06:22:51 2013 -->
+<!-- Generated Wed Mar 12 15:01:54 2014 -->
 <tree>
  <declarations>
    <attributeDecl name="name"        type="String" />
@@ -33,8 +33,8 @@
     <attribute name="name" value="Office of the President"/>
     <attribute name="org_unit" value="50000094"/>
     <attribute name="org_abbr" value="PRES UNCA"/>
-    <attribute name="building" value="Varner Hall"/>
-    <attribute name="room" value="135"/>
+    <attribute name="building" value="VARH"/>
+    <attribute name="room" value="3835 HOLDREGE ST"/>
     <attribute name="city" value="Lincoln"/>
     <attribute name="state" value="NE"/>
     <attribute name="postal_code" value="68583-0745"/>
@@ -175,6 +175,10 @@
       <attribute name="name" value="Administrative Systems Group"/>
       <attribute name="org_unit" value="50002325"/>
       <attribute name="org_abbr" value="ASG     UNCA"/>
+      <attribute name="room" value="901 N 17th St"/>
+      <attribute name="city" value="Lincoln"/>
+      <attribute name="state" value="NE"/>
+      <attribute name="postal_code" value="68588-0521"/>
      </branch>
     </branch>
     <branch>
@@ -387,7 +391,7 @@
      <attribute name="org_unit" value="50000084"/>
      <attribute name="org_abbr" value="VC BF UNL"/>
      <attribute name="building" value="ADMS"/>
-     <attribute name="room" value="302"/>
+     <attribute name="room" value="307"/>
      <attribute name="city" value="Lincoln"/>
      <attribute name="state" value="NE"/>
      <attribute name="postal_code" value="68588-0425"/>
@@ -406,7 +410,7 @@
        <attribute name="org_abbr" value="ACCTG    UNL"/>
        <attribute name="building" value="ADMS"/>
        <attribute name="room" value="401"/>
-       <attribute name="city" value="LINCOLN"/>
+       <attribute name="city" value="Lincoln"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68588-0439"/>
       </branch>
@@ -470,7 +474,7 @@
       <attribute name="name" value="FM&amp;P Administration"/>
       <attribute name="org_unit" value="50000820"/>
       <attribute name="org_abbr" value="FM&amp;P ADM UNL"/>
-      <attribute name="building" value="1901 Y"/>
+      <attribute name="building" value="1901 Y St"/>
       <attribute name="city" value="Lincoln"/>
       <attribute name="state" value="NE"/>
       <attribute name="postal_code" value="68588-0605"/>
@@ -531,10 +535,20 @@
        <attribute name="name" value="FM&amp;P Business Operations"/>
        <attribute name="org_unit" value="50006426"/>
        <attribute name="org_abbr" value="BUS OPS  UNL"/>
-       <attribute name="building" value="1901 Y"/>
+       <attribute name="building" value="1901 Y St"/>
        <attribute name="city" value="Lincoln"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68588-0605"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="FM&amp;P Waste Management &amp; Recycling"/>
+       <attribute name="org_unit" value="50008350"/>
+       <attribute name="org_abbr" value="WSTE MGT UNL"/>
+       <attribute name="building" value="FMP"/>
+       <attribute name="room" value="(Land-City)"/>
+       <attribute name="city" value="Lincoln"/>
+       <attribute name="state" value="NE"/>
+       <attribute name="postal_code" value="68588-0663"/>
       </branch>
      </branch>
      <branch>
@@ -669,8 +683,7 @@
       <attribute name="name" value="University Services"/>
       <attribute name="org_unit" value="50000824"/>
       <attribute name="org_abbr" value="UNIV SRV UNL"/>
-      <attribute name="building" value="1700 Y ST"/>
-      <attribute name="room" value="BSC"/>
+      <attribute name="building" value="1700 Y St"/>
       <attribute name="city" value="Lincoln"/>
       <attribute name="state" value="NE"/>
       <attribute name="postal_code" value="68588-0646"/>
@@ -687,7 +700,7 @@
        <attribute name="name" value="Inventory Control"/>
        <attribute name="org_unit" value="50001011"/>
        <attribute name="org_abbr" value="INVTRY   UNL"/>
-       <attribute name="building" value="1700 Y ST"/>
+       <attribute name="building" value="1700 Y St"/>
        <attribute name="city" value="Lincoln"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68588-0606"/>
@@ -696,7 +709,7 @@
        <attribute name="name" value="Mail Services"/>
        <attribute name="org_unit" value="50001013"/>
        <attribute name="org_abbr" value="MAIL SRV UNL"/>
-       <attribute name="building" value="1100 N 17"/>
+       <attribute name="building" value="1100 N 17 St"/>
        <attribute name="city" value="Lincoln"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68588-0699"/>
@@ -705,7 +718,7 @@
        <attribute name="name" value="Printing Services"/>
        <attribute name="org_unit" value="50001014"/>
        <attribute name="org_abbr" value="PRNT SRV UNL"/>
-       <attribute name="building" value="1700 Y"/>
+       <attribute name="building" value="1700 Y St"/>
        <attribute name="city" value="Lincoln"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68588-0641"/>
@@ -714,7 +727,7 @@
        <attribute name="name" value="Procurement Services"/>
        <attribute name="org_unit" value="50001016"/>
        <attribute name="org_abbr" value="PROCURE  UNL"/>
-       <attribute name="building" value="1700 Y ST"/>
+       <attribute name="building" value="1700 Y St"/>
        <attribute name="city" value="Lincoln"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68588-0645"/>
@@ -723,7 +736,7 @@
        <attribute name="name" value="Transportation Services"/>
        <attribute name="org_unit" value="50001017"/>
        <attribute name="org_abbr" value="TRNS SRV UNL"/>
-       <attribute name="building" value="1931 N ANTELOPE VALLEY"/>
+       <attribute name="building" value="1931 N ANTELOPE VALLEY pKWY"/>
        <attribute name="city" value="Lincoln"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68588-0603"/>
@@ -760,7 +773,7 @@
        <attribute name="name" value="Shared Services"/>
        <attribute name="org_unit" value="50001309"/>
        <attribute name="org_abbr" value="Share SrvUNL"/>
-       <attribute name="building" value="1700 Y ST"/>
+       <attribute name="building" value="1700 Y St"/>
        <attribute name="city" value="Lincoln"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68588-0647"/>
@@ -810,8 +823,12 @@
       <attribute name="name" value="Academic Services &amp; Enrollment Mgmt"/>
       <attribute name="org_unit" value="50007776"/>
       <attribute name="org_abbr" value="ASEM     UNL"/>
+      <attribute name="building" value="ALEX"/>
+      <attribute name="city" value="Lincoln"/>
+      <attribute name="state" value="NE"/>
+      <attribute name="postal_code" value="68588-0417"/>
       <branch>
-       <attribute name="name" value="Online &amp; Distance Ed"/>
+       <attribute name="name" value="Online &amp; Distance Education"/>
        <attribute name="org_unit" value="50000791"/>
        <attribute name="org_abbr" value="ODE      UNL"/>
        <attribute name="building" value="900 N 22"/>
@@ -822,7 +839,7 @@
         <attribute name="name" value="ODE Business Operations"/>
         <attribute name="org_unit" value="50000911"/>
         <attribute name="org_abbr" value="BUS OP   UNL"/>
-        <attribute name="building" value="900 N 22"/>
+        <attribute name="building" value="1520 N 20th Circle"/>
         <attribute name="city" value="Lincoln"/>
         <attribute name="state" value="NE"/>
         <attribute name="postal_code" value="68588-8307"/>
@@ -840,17 +857,16 @@
         <attribute name="name" value="ODE Academic Conferences"/>
         <attribute name="org_unit" value="50001053"/>
         <attribute name="org_abbr" value="AC CONF  UNL"/>
-        <attribute name="building" value="BENH"/>
-        <attribute name="room" value="305"/>
-        <attribute name="city" value="LINCOLN"/>
+        <attribute name="building" value="1520 N 20th Circle"/>
+        <attribute name="city" value="Lincoln"/>
         <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68588-6100"/>
+        <attribute name="postal_code" value="68588-8307"/>
        </branch>
        <branch>
         <attribute name="name" value="ODE Distance Education Srvcs"/>
         <attribute name="org_unit" value="50003002"/>
         <attribute name="org_abbr" value="DIS ED S UNL"/>
-        <attribute name="building" value="900 N 22"/>
+        <attribute name="building" value="1520 N 20th Circle"/>
         <attribute name="city" value="Lincoln"/>
         <attribute name="state" value="NE"/>
         <attribute name="postal_code" value="68588-8307"/>
@@ -859,7 +875,7 @@
         <attribute name="name" value="ODE Distance Education Pgms"/>
         <attribute name="org_unit" value="50003003"/>
         <attribute name="org_abbr" value="DIS ED P UNL"/>
-        <attribute name="building" value="900 N 22"/>
+        <attribute name="building" value="1520 N 20th Circle"/>
         <attribute name="city" value="Lincoln"/>
         <attribute name="state" value="NE"/>
         <attribute name="postal_code" value="68588-8307"/>
@@ -868,7 +884,7 @@
         <attribute name="name" value="ODE Professional Programs"/>
         <attribute name="org_unit" value="50003004"/>
         <attribute name="org_abbr" value="PROF PGM UNL"/>
-        <attribute name="building" value="900 N 22"/>
+        <attribute name="building" value="1520 N 20th Circle"/>
         <attribute name="city" value="Lincoln"/>
         <attribute name="state" value="NE"/>
         <attribute name="postal_code" value="68588-8307"/>
@@ -907,8 +923,8 @@
        <attribute name="name" value="Admissions"/>
        <attribute name="org_unit" value="50000959"/>
        <attribute name="org_abbr" value="ADMISSN  UNL"/>
-       <attribute name="building" value="1410 Q"/>
-       <attribute name="city" value="LINCOLN"/>
+       <attribute name="building" value="ALEX"/>
+       <attribute name="city" value="Lincoln"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68588-0417"/>
       </branch>
@@ -921,6 +937,15 @@
        <attribute name="city" value="Lincoln"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68588-0416"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="New Student Enrollment"/>
+       <attribute name="org_unit" value="50008325"/>
+       <attribute name="org_abbr" value="NSE      UNL"/>
+       <attribute name="building" value="ALEX"/>
+       <attribute name="city" value="Lincoln"/>
+       <attribute name="state" value="NE"/>
+       <attribute name="postal_code" value="68588-0417"/>
       </branch>
      </branch>
      <branch>
@@ -937,10 +962,10 @@
        <attribute name="org_unit" value="50001020"/>
        <attribute name="org_abbr" value="ARCH     UNL"/>
        <attribute name="building" value="ARCH"/>
-       <attribute name="room" value="210"/>
+       <attribute name="room" value="232"/>
        <attribute name="city" value="Lincoln"/>
        <attribute name="state" value="NE"/>
-       <attribute name="postal_code" value="68588-0106"/>
+       <attribute name="postal_code" value="68588-0107"/>
       </branch>
       <branch>
        <attribute name="name" value="Community &amp; Regional Planning"/>
@@ -967,7 +992,7 @@
        <attribute name="org_unit" value="50005026"/>
        <attribute name="org_abbr" value="LDSC AR  UNL"/>
        <attribute name="building" value="ARCH"/>
-       <attribute name="room" value="302"/>
+       <attribute name="room" value="232"/>
        <attribute name="city" value="Lincoln"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68588-0105"/>
@@ -978,7 +1003,7 @@
       <attribute name="org_unit" value="50000897"/>
       <attribute name="org_abbr" value="COL BUS  UNL"/>
       <attribute name="building" value="CBA"/>
-      <attribute name="room" value="214"/>
+      <attribute name="room" value="215"/>
       <attribute name="city" value="Lincoln"/>
       <attribute name="state" value="NE"/>
       <attribute name="postal_code" value="68588-0405"/>
@@ -1046,7 +1071,7 @@
         <attribute name="org_unit" value="50001302"/>
         <attribute name="org_abbr" value="Entrepen UNL"/>
         <attribute name="building" value="CBA"/>
-        <attribute name="room" value="209"/>
+        <attribute name="room" value="217"/>
         <attribute name="city" value="Lincoln"/>
         <attribute name="state" value="NE"/>
         <attribute name="postal_code" value="68588-0487"/>
@@ -1151,25 +1176,287 @@
       <attribute name="city" value="Lincoln"/>
       <attribute name="state" value="NE"/>
       <attribute name="postal_code" value="68588-0619"/>
+      <branch>
+       <attribute name="name" value="Intl Student &amp; Scholar Office"/>
+       <attribute name="org_unit" value="50008401"/>
+       <attribute name="org_abbr" value="ISSO     UNL"/>
+      </branch>
      </branch>
      <branch>
-      <attribute name="name" value="Education Abroad"/>
-      <attribute name="org_unit" value="50000901"/>
-      <attribute name="org_abbr" value="ED ABRD  UNL"/>
-      <attribute name="building" value="420 University Terrace"/>
-      <attribute name="city" value="Lincoln"/>
-      <attribute name="state" value="NE"/>
-      <attribute name="postal_code" value="68588-0682"/>
+      <attribute name="name" value="Senior International Officer"/>
+      <attribute name="org_unit" value="50008375"/>
+      <attribute name="org_abbr" value="SIO      UNL"/>
+      <branch>
+       <attribute name="name" value="Education Abroad"/>
+       <attribute name="org_unit" value="50000901"/>
+       <attribute name="org_abbr" value="ED ABRD  UNL"/>
+       <attribute name="building" value="LOVE SOUTH 127"/>
+       <attribute name="room" value="CC 4107"/>
+       <attribute name="city" value="Lincoln"/>
+       <attribute name="state" value="NE"/>
+       <attribute name="postal_code" value="68588-4107"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="International Engagement"/>
+       <attribute name="org_unit" value="50008376"/>
+       <attribute name="org_abbr" value="INTNLEGT UNL"/>
+      </branch>
      </branch>
      <branch>
-      <attribute name="name" value="Exploratory &amp; Pre-Prof Advising Ctr"/>
-      <attribute name="org_unit" value="50000902"/>
-      <attribute name="org_abbr" value="EPPAC    UNL"/>
-      <attribute name="building" value="ADMN"/>
-      <attribute name="room" value="33"/>
-      <attribute name="city" value="Lincoln"/>
-      <attribute name="state" value="NE"/>
-      <attribute name="postal_code" value="68588-0471"/>
+      <attribute name="name" value="Undergraduate Educ &amp; Student Success"/>
+      <attribute name="org_unit" value="50008450"/>
+      <attribute name="org_abbr" value="UE &amp; SS  UNL"/>
+      <branch>
+       <attribute name="name" value="Exploratory &amp; Pre-Prof Advising Ctr"/>
+       <attribute name="org_unit" value="50000902"/>
+       <attribute name="org_abbr" value="EPPAC    UNL"/>
+       <attribute name="building" value="LLS"/>
+       <attribute name="room" value="127"/>
+       <attribute name="city" value="Lincoln"/>
+       <attribute name="state" value="NE"/>
+       <attribute name="postal_code" value="68588-4108"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Career Services"/>
+       <attribute name="org_unit" value="50000960"/>
+       <attribute name="org_abbr" value="CRER SRV UNL"/>
+       <attribute name="building" value="NU"/>
+       <attribute name="room" value="230"/>
+       <attribute name="city" value="Lincoln"/>
+       <attribute name="state" value="NE"/>
+       <attribute name="postal_code" value="68588-0451"/>
+       <branch>
+        <attribute name="name" value="Internships @ Government Agencies"/>
+        <attribute name="org_unit" value="50001116"/>
+        <attribute name="org_abbr" value="INTERNS  UNL"/>
+        <attribute name="building" value="Nebraska Union"/>
+        <attribute name="room" value="230"/>
+        <attribute name="city" value="Lincoln"/>
+        <attribute name="state" value="NE"/>
+        <attribute name="postal_code" value="68588-0451"/>
+       </branch>
+       <branch>
+        <attribute name="name" value="Off-Campus Work-Study Units"/>
+        <attribute name="org_unit" value="50001117"/>
+        <attribute name="org_abbr" value="OC WS    UNL"/>
+        <attribute name="building" value="Nebraska Union"/>
+        <attribute name="room" value="230"/>
+        <attribute name="city" value="Lincoln"/>
+        <attribute name="state" value="NE"/>
+        <attribute name="postal_code" value="68588-0451"/>
+        <branch>
+         <attribute name="name" value="Game &amp; Parks Commission"/>
+         <attribute name="org_unit" value="50001412"/>
+         <attribute name="org_abbr" value="GAME PKS UNL"/>
+         <attribute name="building" value="2200 North 33rd Street"/>
+         <attribute name="city" value="Lincoln"/>
+         <attribute name="state" value="NE"/>
+         <attribute name="postal_code" value="68503"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="US Attorney&#39;s Office"/>
+         <attribute name="org_unit" value="50001414"/>
+         <attribute name="org_abbr" value="US ATT   UNL"/>
+         <attribute name="building" value="100 Centennial Mall North"/>
+         <attribute name="city" value="Lincoln"/>
+         <attribute name="state" value="NE"/>
+         <attribute name="postal_code" value="68508"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="Burwell Jr-Sr High School"/>
+         <attribute name="org_unit" value="50001417"/>
+         <attribute name="org_abbr" value="BURWELL  UNL"/>
+         <attribute name="building" value="PO Box 670"/>
+         <attribute name="city" value="Burwell"/>
+         <attribute name="state" value="NE"/>
+         <attribute name="postal_code" value="68823"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="NE Crop Improvement Assn"/>
+         <attribute name="org_unit" value="50001421"/>
+         <attribute name="org_abbr" value="NE CROP  UNL"/>
+         <attribute name="building" value="Plant Science Hall"/>
+         <attribute name="room" value="267"/>
+         <attribute name="city" value="Lincoln"/>
+         <attribute name="state" value="NE"/>
+         <attribute name="postal_code" value="68583-0911"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="Midwest Archeological Ctr"/>
+         <attribute name="org_unit" value="50001422"/>
+         <attribute name="org_abbr" value="MW ARCH  UNL"/>
+         <attribute name="building" value="100 Centennial Mall N"/>
+         <attribute name="room" value="47"/>
+         <attribute name="city" value="Lincoln"/>
+         <attribute name="state" value="NE"/>
+         <attribute name="postal_code" value="68508"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="Wagon Train Project"/>
+         <attribute name="org_unit" value="50001423"/>
+         <attribute name="org_abbr" value="WAGON TR UNL"/>
+         <attribute name="building" value="512 South 7th Street"/>
+         <attribute name="room" value="200"/>
+         <attribute name="city" value="Lincoln"/>
+         <attribute name="state" value="NE"/>
+         <attribute name="postal_code" value="68508"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="Centennial Mall Child Care"/>
+         <attribute name="org_unit" value="50001424"/>
+         <attribute name="org_abbr" value="CNT MALL UNL"/>
+         <attribute name="building" value="100 Centennial Mall"/>
+         <attribute name="room" value="140"/>
+         <attribute name="city" value="Lincoln"/>
+         <attribute name="state" value="NE"/>
+         <attribute name="postal_code" value="68508"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="H &amp; H Srvcs: Protect/Safety Div"/>
+         <attribute name="org_unit" value="50001425"/>
+         <attribute name="org_abbr" value="H&amp;H SRVC UNL"/>
+         <attribute name="building" value="Whitehall Campus"/>
+         <attribute name="room" value="PO Box 9"/>
+         <attribute name="city" value="Lincoln"/>
+         <attribute name="state" value="NE"/>
+         <attribute name="postal_code" value="68509"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="Bldg Division: Capital Archives"/>
+         <attribute name="org_unit" value="50001426"/>
+         <attribute name="org_abbr" value="CAP ARCH UNL"/>
+         <attribute name="building" value="521 South 14th Street"/>
+         <attribute name="city" value="Lincoln"/>
+         <attribute name="state" value="NE"/>
+         <attribute name="postal_code" value="68508"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="YMCA"/>
+         <attribute name="org_unit" value="50001675"/>
+         <attribute name="org_abbr" value="YMCA     UNL"/>
+         <attribute name="building" value="1039 P Street"/>
+         <attribute name="city" value="Lincoln"/>
+         <attribute name="state" value="NE"/>
+         <attribute name="postal_code" value="68509"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="ACLU Nebraska Foundation"/>
+         <attribute name="org_unit" value="50002625"/>
+         <attribute name="org_abbr" value="ACLU FND UNL"/>
+         <attribute name="building" value="941 O St"/>
+         <attribute name="room" value="Ste 706"/>
+         <attribute name="city" value="Lincoln"/>
+         <attribute name="state" value="NE"/>
+         <attribute name="postal_code" value="68508"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="Seward County Attorney&#39;s Ofc"/>
+         <attribute name="org_unit" value="50003075"/>
+         <attribute name="org_abbr" value="SEWRD AT UNL"/>
+         <attribute name="building" value="Seward St"/>
+         <attribute name="room" value="529"/>
+         <attribute name="city" value="Seward"/>
+         <attribute name="state" value="NE"/>
+         <attribute name="postal_code" value="68434"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="YWCA of Lincoln"/>
+         <attribute name="org_unit" value="50003425"/>
+         <attribute name="org_abbr" value="YWCA     UNL"/>
+         <attribute name="building" value="1432 N Street"/>
+         <attribute name="city" value="Lincoln"/>
+         <attribute name="state" value="NE"/>
+         <attribute name="postal_code" value="68508"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="Nebraska Pork Producers Assoc"/>
+         <attribute name="org_unit" value="50004300"/>
+         <attribute name="org_abbr" value="NEPORKPR UNL"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="Seward County District Court"/>
+         <attribute name="org_unit" value="50004850"/>
+         <attribute name="org_abbr" value="SCoDsCrt UNL"/>
+         <attribute name="building" value="529 Seward St, Rm 301"/>
+         <attribute name="city" value="Seward"/>
+         <attribute name="state" value="NE"/>
+         <attribute name="postal_code" value="68434-0036"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="Nebraska Appleseed Center"/>
+         <attribute name="org_unit" value="50004925"/>
+         <attribute name="org_abbr" value="NEAPPLE  UNL"/>
+         <attribute name="building" value="941 O St, Suite 105"/>
+         <attribute name="city" value="Lincoln"/>
+         <attribute name="state" value="NE"/>
+         <attribute name="postal_code" value="68508-3626"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="United Way of Lincoln/Lancaster Cnty"/>
+         <attribute name="org_unit" value="50005250"/>
+         <attribute name="org_abbr" value="UNIT WAY UNL"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="Northeast Family Center"/>
+         <attribute name="org_unit" value="50005875"/>
+         <attribute name="org_abbr" value="NRTHES F UNL"/>
+         <attribute name="building" value="6220 Logan Ave"/>
+         <attribute name="city" value="Lincoln"/>
+         <attribute name="state" value="NE"/>
+         <attribute name="postal_code" value="68507"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="Friendship Home"/>
+         <attribute name="org_unit" value="50006926"/>
+         <attribute name="org_abbr" value="FRSHP HM UNL"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="Legal Aid of Nebraska"/>
+         <attribute name="org_unit" value="50007875"/>
+         <attribute name="org_abbr" value="LEGALAID UNL"/>
+        </branch>
+        <branch>
+         <attribute name="name" value="Nebraska Department of Education"/>
+         <attribute name="org_unit" value="50008400"/>
+         <attribute name="org_abbr" value="DEPT ED  UNL"/>
+        </branch>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="University Honors Program"/>
+       <attribute name="org_unit" value="50001109"/>
+       <attribute name="org_abbr" value="HONR PGM UNL"/>
+       <attribute name="building" value="NRC"/>
+       <attribute name="room" value="118"/>
+       <attribute name="city" value="LIN&#39;"/>
+       <attribute name="state" value="NE"/>
+       <attribute name="postal_code" value="68588-0659"/>
+       <branch>
+        <attribute name="name" value="National Collegiate Honors Council"/>
+        <attribute name="org_unit" value="50008475"/>
+        <attribute name="org_abbr" value="NCHC     UNL"/>
+        <attribute name="building" value="NRC"/>
+        <attribute name="room" value="1100"/>
+        <attribute name="city" value="Lincoln"/>
+        <attribute name="state" value="NE"/>
+        <attribute name="postal_code" value="68588-0627"/>
+       </branch>
+      </branch>
+      <branch>
+       <attribute name="name" value="Undergraduate Programs"/>
+       <attribute name="org_unit" value="50002975"/>
+       <attribute name="org_abbr" value="UG PGMS  UNL"/>
+       <attribute name="building" value="SEH"/>
+       <attribute name="room" value="201"/>
+       <attribute name="city" value="Lincoln"/>
+       <attribute name="state" value="NE"/>
+       <attribute name="postal_code" value="68588-0683"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="First Year Exp &amp; Transition Programs"/>
+       <attribute name="org_unit" value="50008451"/>
+       <attribute name="org_abbr" value="FYE&amp;TP   UNL"/>
+      </branch>
      </branch>
      <branch>
       <attribute name="name" value="University Libraries"/>
@@ -1211,7 +1498,7 @@
        <attribute name="postal_code" value="68588-0118"/>
       </branch>
       <branch>
-       <attribute name="name" value="Center of Great Plains Studies"/>
+       <attribute name="name" value="Center for Great Plains Studies"/>
        <attribute name="org_unit" value="50001077"/>
        <attribute name="org_abbr" value="GRT PLNS UNL"/>
        <attribute name="building" value="1155 Q Street"/>
@@ -1271,7 +1558,7 @@
        <attribute name="postal_code" value="68588-0115"/>
       </branch>
       <branch>
-       <attribute name="name" value="Ctr Children Family &amp; the Law"/>
+       <attribute name="name" value="Ctr on Children Families &amp; the Law"/>
        <attribute name="org_unit" value="50001082"/>
        <attribute name="org_abbr" value="CH/FM/LW UNL"/>
        <attribute name="building" value="206 S 13TH ST"/>
@@ -1290,7 +1577,7 @@
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68588-0333"/>
        <branch>
-        <attribute name="name" value="Program of English as 2nd Language"/>
+        <attribute name="name" value="Program in English as 2nd Language"/>
         <attribute name="org_unit" value="50001101"/>
         <attribute name="org_abbr" value="ESL      UNL"/>
         <attribute name="building" value="ANDR"/>
@@ -1390,9 +1677,9 @@
        </branch>
       </branch>
       <branch>
-       <attribute name="name" value="Modern Language &amp; Literature"/>
+       <attribute name="name" value="Modern Languages &amp; Literatures"/>
        <attribute name="org_unit" value="50001090"/>
-       <attribute name="org_abbr" value="MOD LANG UNL"/>
+       <attribute name="org_abbr" value="MOD LANG UN"/>
        <attribute name="building" value="OLDH"/>
        <attribute name="room" value="1111"/>
        <attribute name="city" value="Lincoln"/>
@@ -1453,8 +1740,8 @@
         <attribute name="org_unit" value="50001100"/>
         <attribute name="org_abbr" value="SOC RSCH UNL"/>
         <attribute name="building" value="BENH"/>
-        <attribute name="room" value="118"/>
-        <attribute name="city" value="LINCOLN"/>
+        <attribute name="room" value="301"/>
+        <attribute name="city" value="Lincoln"/>
         <attribute name="state" value="NE"/>
         <attribute name="postal_code" value="68588-6102"/>
        </branch>
@@ -1490,7 +1777,7 @@
        <attribute name="postal_code" value="68508-0347"/>
       </branch>
       <branch>
-       <attribute name="name" value="Judaic Studies"/>
+       <attribute name="name" value="Harris Center for Judaic Studies"/>
        <attribute name="org_unit" value="50001106"/>
        <attribute name="org_abbr" value="JUD STD  UNL"/>
        <attribute name="building" value="SEH"/>
@@ -1558,6 +1845,11 @@
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68583-0983"/>
       </branch>
+      <branch>
+       <attribute name="name" value="Program in English Second Language"/>
+       <attribute name="org_unit" value="50008377"/>
+       <attribute name="org_abbr" value="PIESL    UNL"/>
+      </branch>
      </branch>
      <branch>
       <attribute name="name" value="College of Engineering"/>
@@ -1572,11 +1864,10 @@
        <attribute name="name" value="Eng Dean&#39;s Office-Omaha"/>
        <attribute name="org_unit" value="50001057"/>
        <attribute name="org_abbr" value="EngDeanO UNL"/>
-       <attribute name="building" value="Engineering"/>
-       <attribute name="room" value="116"/>
-       <attribute name="city" value="Omaha"/>
+       <attribute name="building" value="100 Peter Kiewit Institute"/>
+       <attribute name="city" value="Lincoln"/>
        <attribute name="state" value="NE"/>
-       <attribute name="postal_code" value="68182"/>
+       <attribute name="postal_code" value="68182-0176"/>
       </branch>
       <branch>
        <attribute name="name" value="Chemical &amp; Biomolecular Engineering"/>
@@ -1592,9 +1883,9 @@
        <attribute name="name" value="Civil Engineering-Lincoln"/>
        <attribute name="org_unit" value="50001059"/>
        <attribute name="org_abbr" value="CIVIL EG UNL"/>
-       <attribute name="building" value="NH"/>
-       <attribute name="room" value="W348"/>
-       <attribute name="city" value="LINCOLN"/>
+       <attribute name="building" value="SLNK"/>
+       <attribute name="room" value="N104"/>
+       <attribute name="city" value="Lincoln"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68588-0531"/>
        <branch>
@@ -1622,37 +1913,47 @@
        <attribute name="name" value="Durham School Arch Engr &amp; Const"/>
        <attribute name="org_unit" value="50004975"/>
        <attribute name="org_abbr" value="DS AEC   UNL"/>
+       <attribute name="building" value="PKI"/>
+       <attribute name="room" value="107"/>
+       <attribute name="city" value="Omaha"/>
+       <attribute name="state" value="NE"/>
+       <attribute name="postal_code" value="68182-0816"/>
        <branch>
         <attribute name="name" value="Construction Management"/>
         <attribute name="org_unit" value="50001061"/>
         <attribute name="org_abbr" value="CON MGMT UNL"/>
-        <attribute name="building" value="NH"/>
-        <attribute name="room" value="W145"/>
-        <attribute name="city" value="Lincoln"/>
+        <attribute name="building" value="PKI"/>
+        <attribute name="room" value="107"/>
+        <attribute name="city" value="Omaha"/>
         <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68588-0500"/>
+        <attribute name="postal_code" value="68182-0816"/>
        </branch>
        <branch>
         <attribute name="name" value="Construction Systems"/>
         <attribute name="org_unit" value="50001062"/>
         <attribute name="org_abbr" value="CON SYST UNL"/>
-        <attribute name="building" value="Peter Kiewit Institute"/>
-        <attribute name="room" value="107C"/>
+        <attribute name="building" value="PKI"/>
+        <attribute name="room" value="107"/>
         <attribute name="city" value="Omaha"/>
         <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68182-0181"/>
+        <attribute name="postal_code" value="68182-0816"/>
        </branch>
        <branch>
         <attribute name="name" value="Architectural Engineering"/>
         <attribute name="org_unit" value="50001408"/>
         <attribute name="org_abbr" value="ARCH ENG UNL"/>
+        <attribute name="building" value="PK!"/>
+        <attribute name="room" value="107"/>
+        <attribute name="city" value="Omaha"/>
+        <attribute name="state" value="NE"/>
+        <attribute name="postal_code" value="68182-0816"/>
        </branch>
       </branch>
       <branch>
        <attribute name="name" value="Electrical Engineering"/>
        <attribute name="org_unit" value="50001063"/>
        <attribute name="org_abbr" value="ELEC ENG UNL"/>
-       <attribute name="building" value="WSEC"/>
+       <attribute name="building" value="SEC"/>
        <attribute name="room" value="209N"/>
        <attribute name="city" value="Lincoln"/>
        <attribute name="state" value="NE"/>
@@ -1672,11 +1973,11 @@
        <attribute name="name" value="Mechanical &amp; Materials Engineering"/>
        <attribute name="org_unit" value="50001067"/>
        <attribute name="org_abbr" value="M M E    UNL"/>
-       <attribute name="building" value="SEC"/>
-       <attribute name="room" value="N104"/>
+       <attribute name="building" value="NH"/>
+       <attribute name="room" value="W342"/>
        <attribute name="city" value="Lincoln"/>
        <attribute name="state" value="NE"/>
-       <attribute name="postal_code" value="68588-0656"/>
+       <attribute name="postal_code" value="68588-0526"/>
       </branch>
       <branch>
        <attribute name="name" value="Engineering Research Center"/>
@@ -1722,6 +2023,11 @@
        <attribute name="name" value="Bio Process Development Facility"/>
        <attribute name="org_unit" value="50007775"/>
        <attribute name="org_abbr" value="BPDF     UNL"/>
+       <attribute name="building" value="OTHM"/>
+       <attribute name="room" value="304"/>
+       <attribute name="city" value="Lincoln"/>
+       <attribute name="state" value="NE"/>
+       <attribute name="postal_code" value="68588-0668"/>
       </branch>
      </branch>
      <branch>
@@ -1790,7 +2096,7 @@
       <attribute name="org_abbr" value="COL EHS  UNL"/>
       <attribute name="building" value="MABL"/>
       <attribute name="room" value="233"/>
-      <attribute name="city" value="LINCOLN"/>
+      <attribute name="city" value="Lincoln"/>
       <attribute name="state" value="NE"/>
       <attribute name="postal_code" value="68588-0234"/>
       <branch>
@@ -1808,7 +2114,7 @@
        <attribute name="org_unit" value="50001041"/>
        <attribute name="org_abbr" value="NUTR/HS  UNL"/>
        <attribute name="building" value="LEV"/>
-       <attribute name="room" value="316A"/>
+       <attribute name="room" value="110"/>
        <attribute name="city" value="Lincoln"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68583-0806"/>
@@ -1826,7 +2132,8 @@
         <attribute name="name" value="Intl Quilt Study Center &amp; Museum"/>
         <attribute name="org_unit" value="50005976"/>
         <attribute name="org_abbr" value="IQSC &amp; M UNL"/>
-        <attribute name="building" value="1523 N 33RD ST"/>
+        <attribute name="building" value="QSC"/>
+        <attribute name="room" value="304"/>
         <attribute name="city" value="Lincoln"/>
         <attribute name="state" value="NE"/>
         <attribute name="postal_code" value="68583-0838"/>
@@ -1857,9 +2164,9 @@
         <attribute name="org_abbr" value="BUROS    UNL"/>
         <attribute name="building" value="TEAC"/>
         <attribute name="room" value="21"/>
-        <attribute name="city" value="LINCOLN"/>
+        <attribute name="city" value="Lincoln"/>
         <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68588-0353"/>
+        <attribute name="postal_code" value="68588-0348"/>
        </branch>
        <branch>
         <attribute name="name" value="Center for Instructional Innovation"/>
@@ -1940,7 +2247,7 @@
        <attribute name="room" value="216"/>
        <attribute name="city" value="Lincoln"/>
        <attribute name="state" value="NE"/>
-       <attribute name="postal_code" value="50004425"/>
+       <attribute name="postal_code" value="68588-0235"/>
       </branch>
      </branch>
      <branch>
@@ -1973,43 +2280,13 @@
       </branch>
      </branch>
      <branch>
-      <attribute name="name" value="Academic Senate"/>
+      <attribute name="name" value="Faculty Senate"/>
       <attribute name="org_unit" value="50001108"/>
-      <attribute name="org_abbr" value="ACAD SEN UNL"/>
+      <attribute name="org_abbr" value="FAC SEN  UNL"/>
       <attribute name="building" value="1227 R Street"/>
       <attribute name="city" value="Lincoln"/>
       <attribute name="state" value="NE"/>
       <attribute name="postal_code" value="68588-0210"/>
-     </branch>
-     <branch>
-      <attribute name="name" value="Undergraduate Education Programs"/>
-      <attribute name="org_unit" value="50002975"/>
-      <attribute name="org_abbr" value="UGRD ED  UNL"/>
-      <attribute name="building" value="SEH"/>
-      <attribute name="room" value="201"/>
-      <attribute name="city" value="Lincoln"/>
-      <attribute name="state" value="NE"/>
-      <attribute name="postal_code" value="68588-0434"/>
-      <branch>
-       <attribute name="name" value="University Honors Program"/>
-       <attribute name="org_unit" value="50001109"/>
-       <attribute name="org_abbr" value="HONR PGM UNL"/>
-       <attribute name="building" value="NRC"/>
-       <attribute name="room" value="118"/>
-       <attribute name="city" value="LIN&#39;"/>
-       <attribute name="state" value="NE"/>
-       <attribute name="postal_code" value="68588-0659"/>
-      </branch>
-      <branch>
-       <attribute name="name" value="University Foundations Program"/>
-       <attribute name="org_unit" value="50001111"/>
-       <attribute name="org_abbr" value="FND PGM  UNL"/>
-       <attribute name="building" value="Andrews Hall"/>
-       <attribute name="room" value="338"/>
-       <attribute name="city" value="Lincoln"/>
-       <attribute name="state" value="NE"/>
-       <attribute name="postal_code" value="68588-0370"/>
-      </branch>
      </branch>
      <branch>
       <attribute name="name" value="Summer Sessions"/>
@@ -2099,7 +2376,7 @@
       <attribute name="state" value="NE"/>
       <attribute name="postal_code" value="68588-0433"/>
       <branch>
-       <attribute name="name" value="NRI Center of Biotechnology"/>
+       <attribute name="name" value="Center for Biotechnology"/>
        <attribute name="org_unit" value="50001318"/>
        <attribute name="org_abbr" value="Biotech  UNL"/>
        <attribute name="building" value="BEAD"/>
@@ -2112,11 +2389,11 @@
        <attribute name="name" value="Nebr Ctr for Materials &amp; Nanoscience"/>
        <attribute name="org_unit" value="50001319"/>
        <attribute name="org_abbr" value="NECtrM&amp;N UNL"/>
-       <attribute name="building" value="BL"/>
-       <attribute name="room" value="111"/>
+       <attribute name="building" value="NANO"/>
+       <attribute name="room" value="N201"/>
        <attribute name="city" value="Lincoln"/>
        <attribute name="state" value="NE"/>
-       <attribute name="postal_code" value="68588-0113"/>
+       <attribute name="postal_code" value="68588-0298"/>
       </branch>
      </branch>
      <branch>
@@ -2140,7 +2417,7 @@
       <attribute name="postal_code" value="68588-0430"/>
      </branch>
      <branch>
-      <attribute name="name" value="Research Resp-Human Res Prot Prog"/>
+      <attribute name="name" value="Research Resp-Human Subj Prot Prog"/>
       <attribute name="org_unit" value="50001315"/>
       <attribute name="org_abbr" value="COMP HS UNL"/>
       <attribute name="building" value="ADMS"/>
@@ -2183,16 +2460,31 @@
       <attribute name="name" value="Center for Energy Sciences Research"/>
       <attribute name="org_unit" value="50005075"/>
       <attribute name="org_abbr" value="CESR     UNL"/>
+      <attribute name="building" value="WHIT"/>
+      <attribute name="room" value="230"/>
+      <attribute name="city" value="Lincoln"/>
+      <attribute name="state" value="NE"/>
+      <attribute name="postal_code" value="68583-0857"/>
      </branch>
      <branch>
       <attribute name="name" value="Holland Computing Center"/>
       <attribute name="org_unit" value="50007300"/>
       <attribute name="org_abbr" value="Holland  UNL"/>
+      <attribute name="building" value="SHOR"/>
+      <attribute name="room" value="201"/>
+      <attribute name="city" value="Lincoln"/>
+      <attribute name="state" value="NE"/>
+      <attribute name="postal_code" value="68588-0150"/>
      </branch>
      <branch>
       <attribute name="name" value="Center for Brain Biology &amp; Behavior"/>
       <attribute name="org_unit" value="50007301"/>
       <attribute name="org_abbr" value="CB3      UNL"/>
+      <attribute name="building" value="BURN"/>
+      <attribute name="room" value="238"/>
+      <attribute name="city" value="Lincoln"/>
+      <attribute name="state" value="NE"/>
+      <attribute name="postal_code" value="68588-0308"/>
      </branch>
      <branch>
       <attribute name="name" value="Nebraska Innovation Campus"/>
@@ -2200,7 +2492,7 @@
       <attribute name="org_abbr" value="NE INNOV UNL"/>
       <attribute name="building" value="WHIT"/>
       <attribute name="room" value="230F"/>
-      <attribute name="city" value="LINCOLN"/>
+      <attribute name="city" value="Lincoln"/>
       <attribute name="state" value="NE"/>
       <attribute name="postal_code" value="68588-0857"/>
      </branch>
@@ -2208,14 +2500,18 @@
       <attribute name="name" value="Nebraska Center for Virology"/>
       <attribute name="org_unit" value="50007850"/>
       <attribute name="org_abbr" value="VIROLOGY UNL"/>
+      <attribute name="building" value="MOLR"/>
+      <attribute name="room" value="102"/>
+      <attribute name="city" value="Lincoln"/>
+      <attribute name="state" value="NE"/>
+      <attribute name="postal_code" value="68583-0900"/>
      </branch>
     </branch>
     <branch>
      <attribute name="name" value="Institute of Ag &amp; Natural Resources"/>
      <attribute name="org_unit" value="50000087"/>
      <attribute name="org_abbr" value="IANR"/>
-     <attribute name="building" value="Agricultural Hall"/>
-     <attribute name="room" value="202"/>
+     <attribute name="building" value="AGH"/>
      <attribute name="city" value="Lincoln"/>
      <attribute name="state" value="NE"/>
      <attribute name="postal_code" value="68583-0708"/>
@@ -2249,10 +2545,11 @@
         <attribute name="name" value="Filley Hall Business Center"/>
         <attribute name="org_unit" value="50000913"/>
         <attribute name="org_abbr" value="FH Bus Ctr"/>
-        <attribute name="building" value="221 FYH"/>
-        <attribute name="city" value="UNL"/>
+        <attribute name="building" value="FYH"/>
+        <attribute name="room" value="205"/>
+        <attribute name="city" value="Lincoln"/>
         <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68583-0756"/>
+        <attribute name="postal_code" value="68583-0956"/>
        </branch>
        <branch>
         <attribute name="name" value="Natural Resources Business Center"/>
@@ -2286,17 +2583,19 @@
         <attribute name="name" value="ASSIST Business Center"/>
         <attribute name="org_unit" value="50003025"/>
         <attribute name="org_abbr" value="AssistBusCtr"/>
-        <attribute name="building" value="1071 County Rd G"/>
-        <attribute name="city" value="Ithaca"/>
+        <attribute name="building" value="ENTO"/>
+        <attribute name="room" value="3"/>
+        <attribute name="city" value="Lincoln"/>
         <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68033-2234"/>
+        <attribute name="postal_code" value="68583-0816"/>
        </branch>
        <branch>
         <attribute name="name" value="AVE Business Center"/>
         <attribute name="org_unit" value="50003026"/>
         <attribute name="org_abbr" value="AVE Bus Ctr"/>
-        <attribute name="building" value="C203 ANSC"/>
-        <attribute name="city" value="UNL"/>
+        <attribute name="building" value="ANSC"/>
+        <attribute name="room" value="C203"/>
+        <attribute name="city" value="Lincoln"/>
         <attribute name="state" value="NE"/>
         <attribute name="postal_code" value="68583-0908"/>
        </branch>
@@ -2334,7 +2633,7 @@
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68583-0704"/>
        <branch>
-        <attribute name="name" value="Agricultural Rsch Division"/>
+        <attribute name="name" value="Agricultural Research Division"/>
         <attribute name="org_unit" value="50000786"/>
         <attribute name="org_abbr" value="Ag Rsch Div"/>
         <attribute name="building" value="207 AGH"/>
@@ -2369,7 +2668,7 @@
          <attribute name="postal_code" value="68933-0166"/>
         </branch>
         <branch>
-         <attribute name="name" value="South Central Ag Rsch Lab"/>
+         <attribute name="name" value="South Central Ag Research Lab"/>
          <attribute name="org_unit" value="50000945"/>
          <attribute name="org_abbr" value="SC Ag Lab"/>
          <attribute name="building" value="PO Box 66"/>
@@ -2418,8 +2717,9 @@
          <attribute name="name" value="4-H Youth Development"/>
          <attribute name="org_unit" value="50000940"/>
          <attribute name="org_abbr" value="4H Youth Dev"/>
-         <attribute name="building" value="114 AGH"/>
-         <attribute name="city" value="UNL"/>
+         <attribute name="building" value="AGH"/>
+         <attribute name="room" value="114"/>
+         <attribute name="city" value="Lincoln"/>
          <attribute name="state" value="NE"/>
          <attribute name="postal_code" value="68583-0700"/>
          <branch>
@@ -2436,8 +2736,9 @@
          <attribute name="name" value="e-Extension"/>
          <attribute name="org_unit" value="50004077"/>
          <attribute name="org_abbr" value="e-Exten"/>
-         <attribute name="building" value="104 ACB"/>
-         <attribute name="city" value="UN-L"/>
+         <attribute name="building" value="ACB"/>
+         <attribute name="room" value="6"/>
+         <attribute name="city" value="Lincoln"/>
          <attribute name="state" value="NE"/>
          <attribute name="postal_code" value="68583-0918"/>
         </branch>
@@ -2455,8 +2756,9 @@
         <attribute name="name" value="College of Education &amp; Human Sci"/>
         <attribute name="org_unit" value="50000800"/>
         <attribute name="org_abbr" value="CEHS    IANR"/>
-        <attribute name="building" value="105 HECO"/>
-        <attribute name="city" value="UNL"/>
+        <attribute name="building" value="HECO"/>
+        <attribute name="room" value="105"/>
+        <attribute name="city" value="Lincoln"/>
         <attribute name="state" value="NE"/>
         <attribute name="postal_code" value="68583-0800"/>
         <branch>
@@ -2492,8 +2794,9 @@
         <attribute name="name" value="Agronomy &amp; Horticulture"/>
         <attribute name="org_unit" value="50000827"/>
         <attribute name="org_abbr" value="Agron &amp; Hort"/>
-        <attribute name="building" value="279 PLSH"/>
-        <attribute name="city" value="UNL"/>
+        <attribute name="building" value="KEIM"/>
+        <attribute name="room" value="202"/>
+        <attribute name="city" value="Lincoln"/>
         <attribute name="state" value="NE"/>
         <attribute name="postal_code" value="68583-0915"/>
        </branch>
@@ -2510,8 +2813,9 @@
         <attribute name="name" value="Ag Leadership Educ &amp; Comm"/>
         <attribute name="org_unit" value="50000829"/>
         <attribute name="org_abbr" value="ALEC"/>
-        <attribute name="building" value="300 AGH"/>
-        <attribute name="city" value="UNL"/>
+        <attribute name="building" value="AGH"/>
+        <attribute name="room" value="300"/>
+        <attribute name="city" value="Lincoln"/>
         <attribute name="state" value="NE"/>
         <attribute name="postal_code" value="68583-0704"/>
         <branch>
@@ -2585,8 +2889,9 @@
         <attribute name="name" value="Entomology"/>
         <attribute name="org_unit" value="50000834"/>
         <attribute name="org_abbr" value="Entomology"/>
-        <attribute name="building" value="202 ENTO"/>
-        <attribute name="city" value="UNL"/>
+        <attribute name="building" value="ENTO"/>
+        <attribute name="room" value="103"/>
+        <attribute name="city" value="Lincoln"/>
         <attribute name="state" value="NE"/>
         <attribute name="postal_code" value="68583-0816"/>
        </branch>
@@ -2604,8 +2909,9 @@
         <attribute name="name" value="Plant Pathology"/>
         <attribute name="org_unit" value="50000843"/>
         <attribute name="org_abbr" value="Plant Path"/>
-        <attribute name="building" value="406 PLSH"/>
-        <attribute name="city" value="UNL"/>
+        <attribute name="building" value="PLSH"/>
+        <attribute name="room" value="406"/>
+        <attribute name="city" value="Lincoln"/>
         <attribute name="state" value="NE"/>
         <attribute name="postal_code" value="68583-0722"/>
        </branch>
@@ -2613,16 +2919,18 @@
         <attribute name="name" value="School of Natural Resources"/>
         <attribute name="org_unit" value="50000844"/>
         <attribute name="org_abbr" value="SNR"/>
-        <attribute name="building" value="912 HARH"/>
-        <attribute name="city" value="UNL"/>
+        <attribute name="building" value="HARH"/>
+        <attribute name="room" value="101"/>
+        <attribute name="city" value="Lincoln"/>
         <attribute name="state" value="NE"/>
         <attribute name="postal_code" value="68583-0989"/>
         <branch>
          <attribute name="name" value="Survey Division - School of Nat Res"/>
          <attribute name="org_unit" value="50000887"/>
          <attribute name="org_abbr" value="SURVEY DIV"/>
-         <attribute name="building" value="912 HARH"/>
-         <attribute name="city" value="UNL"/>
+         <attribute name="building" value="HARH"/>
+         <attribute name="room" value="912"/>
+         <attribute name="city" value="Lincoln"/>
          <attribute name="state" value="NE"/>
          <attribute name="postal_code" value="68583-0989"/>
         </branch>
@@ -2630,8 +2938,9 @@
          <attribute name="name" value="Nebraska Coop Fish &amp; Wildlife Rsch"/>
          <attribute name="org_unit" value="50003954"/>
          <attribute name="org_abbr" value="COOP F/W RSC"/>
-         <attribute name="building" value="422 HARH"/>
-         <attribute name="city" value="UNL"/>
+         <attribute name="building" value="HARH"/>
+         <attribute name="room" value="422"/>
+         <attribute name="city" value="Lincoln"/>
          <attribute name="state" value="NE"/>
          <attribute name="postal_code" value="68583-0984"/>
         </branch>
@@ -2648,15 +2957,16 @@
          <attribute name="name" value="Vet &amp; Biomedical Sciences"/>
          <attribute name="org_unit" value="50000845"/>
          <attribute name="org_abbr" value="Vet Biom Sci"/>
-         <attribute name="building" value="120 VBS"/>
-         <attribute name="city" value="UNL"/>
+         <attribute name="building" value="VBS"/>
+         <attribute name="room" value="120"/>
+         <attribute name="city" value="Lincoln"/>
          <attribute name="state" value="NE"/>
          <attribute name="postal_code" value="68583-0905"/>
          <branch>
           <attribute name="name" value="Great Plains Vet Ed Center"/>
           <attribute name="org_unit" value="50001179"/>
           <attribute name="org_abbr" value="GPVEC"/>
-          <attribute name="building" value="Box 187"/>
+          <attribute name="building" value="Box 148"/>
           <attribute name="city" value="Clay Center"/>
           <attribute name="state" value="NE"/>
           <attribute name="postal_code" value="68933"/>
@@ -2675,8 +2985,9 @@
          <attribute name="name" value="ISU/UNL Coop Vet Med Education Prog"/>
          <attribute name="org_unit" value="50005175"/>
          <attribute name="org_abbr" value="CVM     IANR"/>
-         <attribute name="building" value="120 VBS"/>
-         <attribute name="city" value="UNL"/>
+         <attribute name="building" value="VBS"/>
+         <attribute name="room" value="120"/>
+         <attribute name="city" value="Lincoln"/>
          <attribute name="state" value="NE"/>
          <attribute name="postal_code" value="68583-0905"/>
         </branch>
@@ -2704,10 +3015,11 @@
         <attribute name="name" value="Southeast Rsch &amp; Ext Center"/>
         <attribute name="org_unit" value="50000941"/>
         <attribute name="org_abbr" value="SREC"/>
-        <attribute name="building" value="211 MUSH"/>
-        <attribute name="city" value="UNL"/>
+        <attribute name="building" value="1701"/>
+        <attribute name="room" value="County Road G"/>
+        <attribute name="city" value="Ithaca"/>
         <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68583-0714"/>
+        <attribute name="postal_code" value="68033-2234"/>
         <branch>
          <attribute name="name" value="Farm Business Association"/>
          <attribute name="org_unit" value="50000947"/>
@@ -2749,8 +3061,9 @@
         <attribute name="name" value="Nebraska LEAD Program"/>
         <attribute name="org_unit" value="50000946"/>
         <attribute name="org_abbr" value="NE LEAD Pgm"/>
-        <attribute name="building" value="318 BCH"/>
-        <attribute name="city" value="UNL"/>
+        <attribute name="building" value="BCH"/>
+        <attribute name="room" value="318"/>
+        <attribute name="city" value="Lincoln"/>
         <attribute name="state" value="NE"/>
         <attribute name="postal_code" value="68583-0763"/>
        </branch>
@@ -2758,11 +3071,11 @@
         <attribute name="name" value="Grassland Studies Center"/>
         <attribute name="org_unit" value="50000954"/>
         <attribute name="org_abbr" value="Grassland St"/>
-        <attribute name="building" value="BCH"/>
-        <attribute name="room" value="306"/>
+        <attribute name="building" value="KEIM"/>
+        <attribute name="room" value="203"/>
         <attribute name="city" value="Lincoln"/>
         <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68583-0736"/>
+        <attribute name="postal_code" value="68583-0953"/>
        </branch>
        <branch>
         <attribute name="name" value="Food Processing Center"/>
@@ -2797,25 +3110,28 @@
        <attribute name="name" value="Global Engagement"/>
        <attribute name="org_unit" value="50000789"/>
        <attribute name="org_abbr" value="Gbl Engage"/>
-       <attribute name="building" value="313 AGH"/>
+       <attribute name="building" value="AGH"/>
+       <attribute name="room" value="313"/>
        <attribute name="city" value="Lincoln"/>
        <attribute name="state" value="NE"/>
-       <attribute name="postal_code" value="68583-0705"/>
+       <attribute name="postal_code" value="68583-0701"/>
       </branch>
       <branch>
        <attribute name="name" value="Nebraska Forest Service"/>
        <attribute name="org_unit" value="50000889"/>
        <attribute name="org_abbr" value="NFS"/>
-       <attribute name="building" value="103 ENTO"/>
-       <attribute name="city" value="UNL"/>
+       <attribute name="building" value="FORS"/>
+       <attribute name="room" value="102"/>
+       <attribute name="city" value="Lincoln"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68583-0815"/>
        <branch>
         <attribute name="name" value="Nebraska Statewide Arboretum - NFS"/>
         <attribute name="org_unit" value="50001185"/>
         <attribute name="org_abbr" value="NSA"/>
-        <attribute name="building" value="206 BCH"/>
-        <attribute name="city" value="UNL"/>
+        <attribute name="building" value="BCH"/>
+        <attribute name="room" value="206"/>
+        <attribute name="city" value="Lincoln"/>
         <attribute name="state" value="NE"/>
         <attribute name="postal_code" value="68583-0715"/>
        </branch>
@@ -2850,9 +3166,9 @@
        <attribute name="postal_code" value="68583-0707"/>
       </branch>
       <branch>
-       <attribute name="name" value="Information Services"/>
+       <attribute name="name" value="Information Technology Services"/>
        <attribute name="org_unit" value="50001186"/>
-       <attribute name="org_abbr" value="IANR IS"/>
+       <attribute name="org_abbr" value="IANR      IS"/>
        <attribute name="building" value="450 LLS"/>
        <attribute name="city" value="UNL"/>
        <attribute name="state" value="NE"/>
@@ -2879,18 +3195,20 @@
         <attribute name="name" value="Water Center"/>
         <attribute name="org_unit" value="50002225"/>
         <attribute name="org_abbr" value="Water Ctr"/>
-        <attribute name="building" value="103 FORS"/>
-        <attribute name="city" value="UNL"/>
+        <attribute name="building" value="HARH"/>
+        <attribute name="room" value="153"/>
+        <attribute name="city" value="Lincoln"/>
         <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68583-0844"/>
+        <attribute name="postal_code" value="68583-0979"/>
        </branch>
       </branch>
       <branch>
        <attribute name="name" value="Rural Futures Institute"/>
        <attribute name="org_unit" value="50002800"/>
        <attribute name="org_abbr" value="Rural Future"/>
-       <attribute name="building" value="103 MILH"/>
-       <attribute name="city" value="UNL"/>
+       <attribute name="building" value="MILH"/>
+       <attribute name="room" value="103"/>
+       <attribute name="city" value="Lincoln"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68583-0710"/>
       </branch>
@@ -3287,6 +3605,11 @@
         <attribute name="name" value="Housing Learning Communities"/>
         <attribute name="org_unit" value="50008300"/>
         <attribute name="org_abbr" value="HSG LC   UNL"/>
+        <attribute name="building" value="ARH"/>
+        <attribute name="room" value="(Learning Comm)"/>
+        <attribute name="city" value="Lincoln"/>
+        <attribute name="state" value="NE"/>
+        <attribute name="postal_code" value="68588-0602"/>
        </branch>
       </branch>
       <branch>
@@ -3301,7 +3624,8 @@
         <attribute name="name" value="Kauffman Residence Life"/>
         <attribute name="org_unit" value="50002101"/>
         <attribute name="org_abbr" value="KAUF RES UNL"/>
-        <attribute name="building" value="600 North 15th Street"/>
+        <attribute name="building" value="SELQ"/>
+        <attribute name="room" value="(Res Life)"/>
         <attribute name="city" value="Lincoln"/>
         <attribute name="state" value="NE"/>
         <attribute name="postal_code" value="68588-0621"/>
@@ -3310,7 +3634,8 @@
         <attribute name="name" value="Kauffman Facilities Operations"/>
         <attribute name="org_unit" value="50002103"/>
         <attribute name="org_abbr" value="KAUF FAC UNL"/>
-        <attribute name="building" value="600 North 15th Street"/>
+        <attribute name="building" value="SELQ"/>
+        <attribute name="room" value="(Fac Ops)"/>
         <attribute name="city" value="Lincoln"/>
         <attribute name="state" value="NE"/>
         <attribute name="postal_code" value="68588-0621"/>
@@ -3354,6 +3679,11 @@
         <attribute name="name" value="Courtyards Residence Life"/>
         <attribute name="org_unit" value="50003953"/>
         <attribute name="org_abbr" value="CYD RES UNL"/>
+        <attribute name="building" value="NRC"/>
+        <attribute name="room" value="(Res Life)"/>
+        <attribute name="city" value="Lincoln"/>
+        <attribute name="state" value="NE"/>
+        <attribute name="postal_code" value="68588-0626"/>
        </branch>
       </branch>
       <branch>
@@ -3364,6 +3694,11 @@
         <attribute name="name" value="Village Facilities Operations"/>
         <attribute name="org_unit" value="50004326"/>
         <attribute name="org_abbr" value="VIL FAC UNL"/>
+        <attribute name="building" value="HRH"/>
+        <attribute name="room" value="(Fac Ops)"/>
+        <attribute name="city" value="Lincoln"/>
+        <attribute name="state" value="NE"/>
+        <attribute name="postal_code" value="68588-0616"/>
        </branch>
        <branch>
         <attribute name="name" value="Village Dining Service"/>
@@ -3374,11 +3709,21 @@
         <attribute name="name" value="Village Residence Life"/>
         <attribute name="org_unit" value="50004328"/>
         <attribute name="org_abbr" value="VIL RES UNL"/>
+        <attribute name="building" value="HRH"/>
+        <attribute name="room" value="(Res Life)"/>
+        <attribute name="city" value="Lincoln"/>
+        <attribute name="state" value="NE"/>
+        <attribute name="postal_code" value="68588-0616"/>
        </branch>
        <branch>
         <attribute name="name" value="Village Snack Bar"/>
         <attribute name="org_unit" value="50004550"/>
         <attribute name="org_abbr" value="VIL SBAR UNL"/>
+        <attribute name="building" value="SELQ"/>
+        <attribute name="room" value="(UDS Retail)"/>
+        <attribute name="city" value="Lincoln"/>
+        <attribute name="state" value="NE"/>
+        <attribute name="postal_code" value="68588-6106"/>
        </branch>
       </branch>
       <branch>
@@ -3389,6 +3734,11 @@
         <attribute name="name" value="Knoll Facilities Operations"/>
         <attribute name="org_unit" value="50006776"/>
         <attribute name="org_abbr" value="KN FAC   UNL"/>
+        <attribute name="building" value="UNST"/>
+        <attribute name="room" value="(Fac Ops)"/>
+        <attribute name="city" value="Lincoln"/>
+        <attribute name="state" value="NE"/>
+        <attribute name="postal_code" value="68588-0621"/>
        </branch>
        <branch>
         <attribute name="name" value="Knoll Dining Service"/>
@@ -3399,11 +3749,21 @@
         <attribute name="name" value="Knoll Snack Bar"/>
         <attribute name="org_unit" value="50006778"/>
         <attribute name="org_abbr" value="KN SB    UNL"/>
+        <attribute name="building" value="SELQ"/>
+        <attribute name="room" value="(UDS Retail)"/>
+        <attribute name="city" value="Lincoln"/>
+        <attribute name="state" value="NE"/>
+        <attribute name="postal_code" value="68588-6106"/>
        </branch>
        <branch>
         <attribute name="name" value="Knoll Residence Life"/>
         <attribute name="org_unit" value="50006779"/>
         <attribute name="org_abbr" value="KN RES   UNL"/>
+        <attribute name="building" value="UNST"/>
+        <attribute name="room" value="(Res Life)"/>
+        <attribute name="city" value="Lincoln"/>
+        <attribute name="state" value="NE"/>
+        <attribute name="postal_code" value="68588-0621"/>
        </branch>
       </branch>
      </branch>
@@ -3411,7 +3771,7 @@
       <attribute name="name" value="University Health Center"/>
       <attribute name="org_unit" value="50000956"/>
       <attribute name="org_abbr" value="UHC      UNL"/>
-      <attribute name="building" value="1500 U"/>
+      <attribute name="building" value="1500 U St"/>
       <attribute name="room" value="UHC"/>
       <attribute name="city" value="Lincoln"/>
       <attribute name="state" value="NE"/>
@@ -3430,9 +3790,8 @@
        <attribute name="name" value="Child Care"/>
        <attribute name="org_unit" value="50001112"/>
        <attribute name="org_abbr" value="CHILD CR UNL"/>
-       <attribute name="building" value="W"/>
-       <attribute name="room" value="2225"/>
-       <attribute name="city" value="LINCOLN"/>
+       <attribute name="building" value="2225 W St"/>
+       <attribute name="city" value="Lincoln"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68588-0850"/>
       </branch>
@@ -3447,7 +3806,7 @@
        <attribute name="postal_code" value="68583-0923"/>
       </branch>
       <branch>
-       <attribute name="name" value="University Dining Srvcs East"/>
+       <attribute name="name" value="University Dining Services East"/>
        <attribute name="org_unit" value="50001114"/>
        <attribute name="org_abbr" value="DIN EAST UNL"/>
        <attribute name="building" value="ECU"/>
@@ -3475,298 +3834,6 @@
        <attribute name="city" value="Lincoln"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68588-0452"/>
-      </branch>
-     </branch>
-     <branch>
-      <attribute name="name" value="Career Services"/>
-      <attribute name="org_unit" value="50000960"/>
-      <attribute name="org_abbr" value="CRER SRV UNL"/>
-      <attribute name="building" value="NU"/>
-      <attribute name="room" value="230"/>
-      <attribute name="city" value="Lincoln"/>
-      <attribute name="state" value="NE"/>
-      <attribute name="postal_code" value="68588-0451"/>
-      <branch>
-       <attribute name="name" value="Internships @ Government Agencies"/>
-       <attribute name="org_unit" value="50001116"/>
-       <attribute name="org_abbr" value="INTERNS  UNL"/>
-       <attribute name="building" value="Nebraska Union"/>
-       <attribute name="room" value="230"/>
-       <attribute name="city" value="Lincoln"/>
-       <attribute name="state" value="NE"/>
-       <attribute name="postal_code" value="68588-0451"/>
-      </branch>
-      <branch>
-       <attribute name="name" value="Off-Campus Work-Study Units"/>
-       <attribute name="org_unit" value="50001117"/>
-       <attribute name="org_abbr" value="OC WS    UNL"/>
-       <attribute name="building" value="Nebraska Union"/>
-       <attribute name="room" value="230"/>
-       <attribute name="city" value="Lincoln"/>
-       <attribute name="state" value="NE"/>
-       <attribute name="postal_code" value="68588-0451"/>
-       <branch>
-        <attribute name="name" value="Criminal Justice (UNO Recv)"/>
-        <attribute name="org_unit" value="50001410"/>
-        <attribute name="org_abbr" value="CRIM JUS UNL"/>
-        <attribute name="building" value="Neihardt"/>
-        <attribute name="room" value="1100"/>
-        <attribute name="city" value="Lincoln"/>
-        <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68588-0630"/>
-       </branch>
-       <branch>
-        <attribute name="name" value="Game &amp; Parks Commission"/>
-        <attribute name="org_unit" value="50001412"/>
-        <attribute name="org_abbr" value="GAME PKS UNL"/>
-        <attribute name="building" value="2200 North 33rd Street"/>
-        <attribute name="city" value="Lincoln"/>
-        <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68503"/>
-       </branch>
-       <branch>
-        <attribute name="name" value="NE Historical Society"/>
-        <attribute name="org_unit" value="50001413"/>
-        <attribute name="org_abbr" value="HIST SOC UNL"/>
-        <attribute name="building" value="Box 82554"/>
-        <attribute name="city" value="Lincoln"/>
-        <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68501"/>
-       </branch>
-       <branch>
-        <attribute name="name" value="US Attorney&#39;s Office"/>
-        <attribute name="org_unit" value="50001414"/>
-        <attribute name="org_abbr" value="US ATT   UNL"/>
-        <attribute name="building" value="100 Centennial Mall North"/>
-        <attribute name="city" value="Lincoln"/>
-        <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68508"/>
-       </branch>
-       <branch>
-        <attribute name="name" value="Trinity Child Care"/>
-        <attribute name="org_unit" value="50001415"/>
-        <attribute name="org_abbr" value="TRIN CC  UNL"/>
-        <attribute name="building" value="1345 South 16th Street"/>
-        <attribute name="city" value="Lincoln"/>
-        <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68502"/>
-       </branch>
-       <branch>
-        <attribute name="name" value="Burwell Jr-Sr High School"/>
-        <attribute name="org_unit" value="50001417"/>
-        <attribute name="org_abbr" value="BURWELL  UNL"/>
-        <attribute name="building" value="PO Box 670"/>
-        <attribute name="city" value="Burwell"/>
-        <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68823"/>
-       </branch>
-       <branch>
-        <attribute name="name" value="NE Crop Improvement Assn"/>
-        <attribute name="org_unit" value="50001421"/>
-        <attribute name="org_abbr" value="NE CROP  UNL"/>
-        <attribute name="building" value="Plant Science Hall"/>
-        <attribute name="room" value="267"/>
-        <attribute name="city" value="Lincoln"/>
-        <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68583-0911"/>
-       </branch>
-       <branch>
-        <attribute name="name" value="Midwest Archeological Ctr"/>
-        <attribute name="org_unit" value="50001422"/>
-        <attribute name="org_abbr" value="MW ARCH  UNL"/>
-        <attribute name="building" value="100 Centennial Mall N"/>
-        <attribute name="room" value="47"/>
-        <attribute name="city" value="Lincoln"/>
-        <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68508"/>
-       </branch>
-       <branch>
-        <attribute name="name" value="Wagon Train Project"/>
-        <attribute name="org_unit" value="50001423"/>
-        <attribute name="org_abbr" value="WAGON TR UNL"/>
-        <attribute name="building" value="512 South 7th Street"/>
-        <attribute name="room" value="200"/>
-        <attribute name="city" value="Lincoln"/>
-        <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68508"/>
-       </branch>
-       <branch>
-        <attribute name="name" value="Centennial Mall Child Care"/>
-        <attribute name="org_unit" value="50001424"/>
-        <attribute name="org_abbr" value="CNT MALL UNL"/>
-        <attribute name="building" value="100 Centennial Mall"/>
-        <attribute name="room" value="140"/>
-        <attribute name="city" value="Lincoln"/>
-        <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68508"/>
-       </branch>
-       <branch>
-        <attribute name="name" value="H &amp; H Srvcs: Protect/Safety Div"/>
-        <attribute name="org_unit" value="50001425"/>
-        <attribute name="org_abbr" value="H&amp;H SRVC UNL"/>
-        <attribute name="building" value="Whitehall Campus"/>
-        <attribute name="room" value="PO Box 9"/>
-        <attribute name="city" value="Lincoln"/>
-        <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68509"/>
-       </branch>
-       <branch>
-        <attribute name="name" value="Bldg Division: Capital Archives"/>
-        <attribute name="org_unit" value="50001426"/>
-        <attribute name="org_abbr" value="CAP ARCH UNL"/>
-        <attribute name="building" value="521 South 14th Street"/>
-        <attribute name="city" value="Lincoln"/>
-        <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68508"/>
-       </branch>
-       <branch>
-        <attribute name="name" value="Saratoga Elementary School"/>
-        <attribute name="org_unit" value="50001600"/>
-        <attribute name="org_abbr" value="SARATOGA UNL"/>
-        <attribute name="building" value="2215 S 13th St"/>
-        <attribute name="city" value="Lincoln"/>
-        <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68502"/>
-       </branch>
-       <branch>
-        <attribute name="name" value="Calvert Elementary School"/>
-        <attribute name="org_unit" value="50001601"/>
-        <attribute name="org_abbr" value="CALVERT  UNL"/>
-        <attribute name="building" value="2709 S 46th St"/>
-        <attribute name="city" value="Lincoln"/>
-        <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68506"/>
-       </branch>
-       <branch>
-        <attribute name="name" value="Clinton Elementary School"/>
-        <attribute name="org_unit" value="50001602"/>
-        <attribute name="org_abbr" value="CLINTON  UNL"/>
-        <attribute name="building" value="1520 N 29th St"/>
-        <attribute name="city" value="Lincoln"/>
-        <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68513"/>
-       </branch>
-       <branch>
-        <attribute name="name" value="Hartley Elementary School"/>
-        <attribute name="org_unit" value="50001603"/>
-        <attribute name="org_abbr" value="HARTLEY  UNL"/>
-        <attribute name="building" value="730 N 33rd St"/>
-        <attribute name="city" value="Lincoln"/>
-        <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68503"/>
-       </branch>
-       <branch>
-        <attribute name="name" value="YMCA"/>
-        <attribute name="org_unit" value="50001675"/>
-        <attribute name="org_abbr" value="YMCA     UNL"/>
-        <attribute name="building" value="1039 P Street"/>
-        <attribute name="city" value="Lincoln"/>
-        <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68509"/>
-       </branch>
-       <branch>
-        <attribute name="name" value="Everett Elementary"/>
-        <attribute name="org_unit" value="50001800"/>
-        <attribute name="org_abbr" value="EVERETT  UNL"/>
-        <attribute name="building" value="1123 C Street"/>
-        <attribute name="city" value="68502"/>
-        <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="LINCOLN"/>
-       </branch>
-       <branch>
-        <attribute name="name" value="Lakeview Elementary"/>
-        <attribute name="org_unit" value="50001801"/>
-        <attribute name="org_abbr" value="LAKEVIEW UNL"/>
-        <attribute name="building" value="300 Capital Beach Blvd"/>
-        <attribute name="city" value="68528"/>
-        <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="LINCOLN"/>
-       </branch>
-       <branch>
-        <attribute name="name" value="Randolph Elementary"/>
-        <attribute name="org_unit" value="50001802"/>
-        <attribute name="org_abbr" value="RANDOLPH UNL"/>
-        <attribute name="building" value="1024 South 37th Street"/>
-        <attribute name="city" value="68510"/>
-        <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="LINCOLN"/>
-       </branch>
-       <branch>
-        <attribute name="name" value="ACLU Nebraska Foundation"/>
-        <attribute name="org_unit" value="50002625"/>
-        <attribute name="org_abbr" value="ACLU FND UNL"/>
-        <attribute name="building" value="941 O St"/>
-        <attribute name="room" value="Ste 706"/>
-        <attribute name="city" value="Lincoln"/>
-        <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68508"/>
-       </branch>
-       <branch>
-        <attribute name="name" value="Seward County Attorney&#39;s Ofc"/>
-        <attribute name="org_unit" value="50003075"/>
-        <attribute name="org_abbr" value="SEWRD AT UNL"/>
-        <attribute name="building" value="Seward St"/>
-        <attribute name="room" value="529"/>
-        <attribute name="city" value="Seward"/>
-        <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68434"/>
-       </branch>
-       <branch>
-        <attribute name="name" value="YWCA of Lincoln"/>
-        <attribute name="org_unit" value="50003425"/>
-        <attribute name="org_abbr" value="YWCA     UNL"/>
-        <attribute name="building" value="1432 N Street"/>
-        <attribute name="city" value="Lincoln"/>
-        <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68508"/>
-       </branch>
-       <branch>
-        <attribute name="name" value="Nebraska Pork Producers Assoc"/>
-        <attribute name="org_unit" value="50004300"/>
-        <attribute name="org_abbr" value="NEPORKPR UNL"/>
-       </branch>
-       <branch>
-        <attribute name="name" value="Seward County District Court"/>
-        <attribute name="org_unit" value="50004850"/>
-        <attribute name="org_abbr" value="SCoDsCrt UNL"/>
-        <attribute name="building" value="529 Seward St, Rm 301"/>
-        <attribute name="city" value="Seward"/>
-        <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68434-0036"/>
-       </branch>
-       <branch>
-        <attribute name="name" value="Nebraska Appleseed Center"/>
-        <attribute name="org_unit" value="50004925"/>
-        <attribute name="org_abbr" value="NEAPPLE  UNL"/>
-        <attribute name="building" value="941 O St, Suite 105"/>
-        <attribute name="city" value="Lincoln"/>
-        <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68508-3626"/>
-       </branch>
-       <branch>
-        <attribute name="name" value="United Way of Lincoln/Lancaster Cnty"/>
-        <attribute name="org_unit" value="50005250"/>
-        <attribute name="org_abbr" value="UNIT WAY UNL"/>
-       </branch>
-       <branch>
-        <attribute name="name" value="Northeast Family Center"/>
-        <attribute name="org_unit" value="50005875"/>
-        <attribute name="org_abbr" value="NRTHES F UNL"/>
-        <attribute name="building" value="6220 Logan Ave"/>
-        <attribute name="city" value="Lincoln"/>
-        <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68507"/>
-       </branch>
-       <branch>
-        <attribute name="name" value="Friendship Home"/>
-        <attribute name="org_unit" value="50006926"/>
-        <attribute name="org_abbr" value="FRSHP HM UNL"/>
-       </branch>
-       <branch>
-        <attribute name="name" value="Legal Aid of Nebraska"/>
-        <attribute name="org_unit" value="50007875"/>
-        <attribute name="org_abbr" value="LEGALAID UNL"/>
-       </branch>
       </branch>
      </branch>
      <branch>
@@ -4033,6 +4100,7 @@
      <attribute name="org_unit" value="50000853"/>
      <attribute name="org_abbr" value="RSCH PLN UNL"/>
      <attribute name="building" value="ADMN"/>
+     <attribute name="room" value="332"/>
      <attribute name="city" value="Lincoln"/>
      <attribute name="state" value="NE"/>
      <attribute name="postal_code" value="68588-0435"/>
@@ -4057,7 +4125,7 @@
      <attribute name="postal_code" value="68588-0300"/>
     </branch>
     <branch>
-     <attribute name="name" value="Lentz Center for Asian Culture"/>
+     <attribute name="name" value="Lentz - Asian Culture"/>
      <attribute name="org_unit" value="50000856"/>
      <attribute name="org_abbr" value="LENTZ    UNL"/>
      <attribute name="building" value="1115 Q"/>
@@ -4110,7 +4178,7 @@
      <attribute name="org_unit" value="50000904"/>
      <attribute name="org_abbr" value="IT SRVCS UNL"/>
      <attribute name="building" value="LLS"/>
-     <attribute name="room" value="450"/>
+     <attribute name="room" value="413"/>
      <attribute name="city" value="Lincoln"/>
      <attribute name="state" value="NE"/>
      <attribute name="postal_code" value="68588-0496"/>
@@ -6776,7 +6844,7 @@
      <branch>
       <attribute name="name" value="COPH Environ, Agri &amp; Occ Health"/>
       <attribute name="org_unit" value="50005427"/>
-      <attribute name="org_abbr" value="EA&amp;OH     36"/>
+      <attribute name="org_abbr" value="EA&amp;OH    367"/>
      </branch>
      <branch>
       <attribute name="name" value="COPH Epidemiology"/>
@@ -7363,9 +7431,9 @@
        <attribute name="postal_code" value="68182"/>
       </branch>
       <branch>
-       <attribute name="name" value="Orientation"/>
+       <attribute name="name" value="New Student Programming"/>
        <attribute name="org_unit" value="50000918"/>
-       <attribute name="org_abbr" value="ORIENRN  465"/>
+       <attribute name="org_abbr" value="NEW ST PR465"/>
        <attribute name="building" value="EAB"/>
        <attribute name="room" value="111"/>
        <attribute name="city" value="Omaha"/>
@@ -7383,9 +7451,9 @@
        <attribute name="postal_code" value="68182"/>
       </branch>
       <branch>
-       <attribute name="name" value="Miltary &amp; Veteran University Srvcs"/>
+       <attribute name="name" value="Office of Military and Veteran Srvcs"/>
        <attribute name="org_unit" value="50000929"/>
-       <attribute name="org_abbr" value="MAV US   465"/>
+       <attribute name="org_abbr" value="MILVETSRV465"/>
        <attribute name="building" value="EAB"/>
        <attribute name="room" value="103"/>
        <attribute name="city" value="Omaha"/>
@@ -7406,6 +7474,26 @@
        <attribute name="name" value="Enrollment Services"/>
        <attribute name="org_unit" value="50003828"/>
        <attribute name="org_abbr" value="ENRLMNT  465"/>
+       <attribute name="building" value="EAB"/>
+       <attribute name="room" value="115"/>
+       <attribute name="city" value="Omaha"/>
+       <attribute name="state" value="NE"/>
+       <attribute name="postal_code" value="68182"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Ofc of Civic &amp; Social Responsibility"/>
+       <attribute name="org_unit" value="50007900"/>
+       <attribute name="org_abbr" value="OFF-C&amp;SR 465"/>
+       <attribute name="building" value="CB"/>
+       <attribute name="room" value="CB112"/>
+       <attribute name="city" value="Omaha"/>
+       <attribute name="state" value="NE"/>
+       <attribute name="postal_code" value="68182"/>
+      </branch>
+      <branch>
+       <attribute name="name" value="Student Conduct"/>
+       <attribute name="org_unit" value="50008402"/>
+       <attribute name="org_abbr" value="ST COND  465"/>
        <attribute name="building" value="EAB"/>
        <attribute name="room" value="115"/>
        <attribute name="city" value="Omaha"/>
@@ -7621,16 +7709,6 @@
        <attribute name="city" value="Omaha"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68182"/>
-       <branch>
-        <attribute name="name" value="NBDC Business &amp; Technology Solutions"/>
-        <attribute name="org_unit" value="50000874"/>
-        <attribute name="org_abbr" value="NBDCTECH428"/>
-        <attribute name="building" value="MH"/>
-        <attribute name="room" value="MH200L"/>
-        <attribute name="city" value="Omaha"/>
-        <attribute name="state" value="NE"/>
-        <attribute name="postal_code" value="68182"/>
-       </branch>
       </branch>
      </branch>
      <branch>
@@ -7645,7 +7723,7 @@
       <branch>
        <attribute name="name" value="Educational Leadership"/>
        <attribute name="org_unit" value="50000837"/>
-       <attribute name="org_abbr" value="ED LDRSH UNO"/>
+       <attribute name="org_abbr" value="ED LDRSH 430"/>
        <attribute name="building" value="KH"/>
        <attribute name="room" value="414"/>
        <attribute name="city" value="Omaha"/>
@@ -8155,7 +8233,7 @@
       </branch>
      </branch>
      <branch>
-      <attribute name="name" value="Enrollment Management                409"/>
+      <attribute name="name" value="Enrollment Management"/>
       <attribute name="org_unit" value="50007725"/>
       <attribute name="org_abbr" value="EM       409"/>
       <attribute name="building" value="EAB"/>
@@ -8224,9 +8302,9 @@
        <attribute name="postal_code" value="68182"/>
       </branch>
       <branch>
-       <attribute name="name" value="Financial Aid"/>
+       <attribute name="name" value="Ofc of Financial Support/Scholarship"/>
        <attribute name="org_unit" value="50000926"/>
-       <attribute name="org_abbr" value="FIN AID  409"/>
+       <attribute name="org_abbr" value="OFSS     409"/>
        <attribute name="building" value="EAB"/>
        <attribute name="room" value="103"/>
        <attribute name="city" value="Omaha"/>
@@ -8354,9 +8432,9 @@
        </branch>
       </branch>
       <branch>
-       <attribute name="name" value="Srvc Learning Acad &amp; Amer Humanics"/>
+       <attribute name="name" value="Service Learning Academy"/>
        <attribute name="org_unit" value="50004350"/>
-       <attribute name="org_abbr" value="LRN ACAD 461"/>
+       <attribute name="org_abbr" value="SRV LRN  461"/>
        <attribute name="building" value="MBSC"/>
        <attribute name="room" value="114"/>
        <attribute name="city" value="Omaha"/>
@@ -8379,16 +8457,6 @@
        <attribute name="org_abbr" value="TLC      461"/>
        <attribute name="building" value="ASH"/>
        <attribute name="room" value="200"/>
-       <attribute name="city" value="Omaha"/>
-       <attribute name="state" value="NE"/>
-       <attribute name="postal_code" value="68182"/>
-      </branch>
-      <branch>
-       <attribute name="name" value="Student-Community Leadership &amp; Serv"/>
-       <attribute name="org_unit" value="50007900"/>
-       <attribute name="org_abbr" value="STU-CL&amp;S 461"/>
-       <attribute name="building" value="CB"/>
-       <attribute name="room" value="CB112"/>
        <attribute name="city" value="Omaha"/>
        <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68182"/>
@@ -8427,6 +8495,11 @@
        <attribute name="name" value="Center for Urban Sustainability"/>
        <attribute name="org_unit" value="50008254"/>
        <attribute name="org_abbr" value="CUS      458"/>
+       <attribute name="building" value="EAB"/>
+       <attribute name="room" value="203"/>
+       <attribute name="city" value="Omaha"/>
+       <attribute name="state" value="NE"/>
+       <attribute name="postal_code" value="68182"/>
       </branch>
      </branch>
      <branch>
@@ -8978,6 +9051,7 @@
        <attribute name="building" value="NSU"/>
        <attribute name="room" value="142G"/>
        <attribute name="city" value="Kearney"/>
+       <attribute name="state" value="NE"/>
        <attribute name="postal_code" value="68849"/>
        <branch>
         <attribute name="name" value="Student Center/Union"/>
@@ -9006,6 +9080,7 @@
         <attribute name="building" value="NSU"/>
         <attribute name="room" value="142E"/>
         <attribute name="city" value="Kearney"/>
+        <attribute name="state" value="NE"/>
         <attribute name="postal_code" value="68849"/>
        </branch>
       </branch>
@@ -9173,7 +9248,7 @@
        <attribute name="postal_code" value="68849"/>
       </branch>
       <branch>
-       <attribute name="name" value="Computer Science &amp; Information Syst"/>
+       <attribute name="name" value="Computer Science &amp; Information Tech"/>
        <attribute name="org_unit" value="50000547"/>
        <attribute name="org_abbr" value="COMP SCI 501"/>
        <attribute name="building" value="OTOL"/>
@@ -9423,9 +9498,9 @@
        <attribute name="postal_code" value="68849"/>
       </branch>
       <branch>
-       <attribute name="name" value="Health, Physical Ed &amp; Recreation"/>
+       <attribute name="name" value="Kinesiology &amp; Sports Sciences"/>
        <attribute name="org_unit" value="50000577"/>
-       <attribute name="org_abbr" value="HPER UNK 509"/>
+       <attribute name="org_abbr" value="KSS  UNK 509"/>
        <attribute name="building" value="CUSH"/>
        <attribute name="room" value="129"/>
        <attribute name="city" value="Kearney"/>
@@ -9463,9 +9538,9 @@
        <attribute name="postal_code" value="68849"/>
       </branch>
       <branch>
-       <attribute name="name" value="KASE"/>
+       <attribute name="name" value="Educator Certification Office"/>
        <attribute name="org_unit" value="50001167"/>
-       <attribute name="org_abbr" value="KASE  UNK500"/>
+       <attribute name="org_abbr" value="EC       500"/>
        <attribute name="building" value="COE"/>
        <attribute name="room" value="C128"/>
        <attribute name="city" value="Kearney"/>
@@ -9896,91 +9971,141 @@
       <attribute name="name" value="Mens Baseball"/>
       <attribute name="org_unit" value="50008075"/>
       <attribute name="org_abbr" value="MBASEBL  511"/>
+      <attribute name="building" value="HSC"/>
+      <attribute name="room" value="102"/>
+      <attribute name="city" value="Kearney"/>
+      <attribute name="state" value="NE"/>
+      <attribute name="postal_code" value="68849"/>
      </branch>
      <branch>
       <attribute name="name" value="Mens Basketball"/>
       <attribute name="org_unit" value="50008076"/>
       <attribute name="org_abbr" value="MBSKTBL  511"/>
+      <attribute name="building" value="HSC"/>
+      <attribute name="room" value="102"/>
+      <attribute name="city" value="Kearney"/>
+      <attribute name="state" value="NE"/>
+      <attribute name="postal_code" value="68849"/>
      </branch>
      <branch>
       <attribute name="name" value="Womens Basketball"/>
       <attribute name="org_unit" value="50008077"/>
       <attribute name="org_abbr" value="WBSKTBL  511"/>
-     </branch>
-     <branch>
-      <attribute name="name" value="Mens Cross Country"/>
-      <attribute name="org_unit" value="50008078"/>
-      <attribute name="org_abbr" value="MCROSSC  511"/>
-     </branch>
-     <branch>
-      <attribute name="name" value="Womens Cross Country"/>
-      <attribute name="org_unit" value="50008079"/>
-      <attribute name="org_abbr" value="WCROSSC  511"/>
+      <attribute name="building" value="HSC"/>
+      <attribute name="room" value="102"/>
+      <attribute name="city" value="Kearney"/>
+      <attribute name="state" value="NE"/>
+      <attribute name="postal_code" value="68849"/>
      </branch>
      <branch>
       <attribute name="name" value="Football"/>
       <attribute name="org_unit" value="50008080"/>
       <attribute name="org_abbr" value="MFOOTBL  511"/>
+      <attribute name="building" value="HSC"/>
+      <attribute name="room" value="102"/>
+      <attribute name="city" value="Kearney"/>
+      <attribute name="state" value="NE"/>
+      <attribute name="postal_code" value="68849"/>
      </branch>
      <branch>
       <attribute name="name" value="Mens Golf"/>
       <attribute name="org_unit" value="50008081"/>
       <attribute name="org_abbr" value="MGOLF    511"/>
+      <attribute name="building" value="HSC"/>
+      <attribute name="room" value="102"/>
+      <attribute name="city" value="Kearney"/>
+      <attribute name="state" value="NE"/>
+      <attribute name="postal_code" value="68849"/>
      </branch>
      <branch>
       <attribute name="name" value="Womens Golf"/>
       <attribute name="org_unit" value="50008082"/>
       <attribute name="org_abbr" value="WGOLF    511"/>
+      <attribute name="building" value="HSC"/>
+      <attribute name="room" value="102"/>
+      <attribute name="city" value="Kearney"/>
+      <attribute name="state" value="NE"/>
+      <attribute name="postal_code" value="68849"/>
      </branch>
      <branch>
       <attribute name="name" value="Womens Soccer"/>
       <attribute name="org_unit" value="50008083"/>
       <attribute name="org_abbr" value="WSOCCER  511"/>
+      <attribute name="building" value="HSC"/>
+      <attribute name="room" value="102"/>
+      <attribute name="city" value="Kearney"/>
+      <attribute name="state" value="NE"/>
+      <attribute name="postal_code" value="68849"/>
      </branch>
      <branch>
       <attribute name="name" value="Womens Softball"/>
       <attribute name="org_unit" value="50008084"/>
       <attribute name="org_abbr" value="WSOFTBL  511"/>
+      <attribute name="building" value="HSC"/>
+      <attribute name="room" value="102"/>
+      <attribute name="city" value="Kearney"/>
+      <attribute name="state" value="NE"/>
+      <attribute name="postal_code" value="68849"/>
      </branch>
      <branch>
       <attribute name="name" value="Mens Swimming"/>
       <attribute name="org_unit" value="50008085"/>
       <attribute name="org_abbr" value="MSWIM    511"/>
+      <attribute name="building" value="HSC"/>
+      <attribute name="room" value="102"/>
+      <attribute name="city" value="Kearney"/>
+      <attribute name="state" value="NE"/>
+      <attribute name="postal_code" value="68849"/>
      </branch>
      <branch>
       <attribute name="name" value="Womens Swimming"/>
       <attribute name="org_unit" value="50008086"/>
       <attribute name="org_abbr" value="WSWIM    511"/>
+      <attribute name="building" value="HSC"/>
+      <attribute name="room" value="102"/>
+      <attribute name="city" value="Kearney"/>
+      <attribute name="state" value="NE"/>
+      <attribute name="postal_code" value="68849"/>
      </branch>
      <branch>
       <attribute name="name" value="Mens Tennis"/>
       <attribute name="org_unit" value="50008087"/>
       <attribute name="org_abbr" value="MTENNIS  511"/>
-     </branch>
-     <branch>
-      <attribute name="name" value="Womens Tennis"/>
-      <attribute name="org_unit" value="50008088"/>
-      <attribute name="org_abbr" value="WTENNIS  511"/>
+      <attribute name="building" value="HSC"/>
+      <attribute name="room" value="102"/>
+      <attribute name="city" value="Kearney"/>
+      <attribute name="state" value="NE"/>
+      <attribute name="postal_code" value="68849"/>
      </branch>
      <branch>
       <attribute name="name" value="Mens Track"/>
       <attribute name="org_unit" value="50008089"/>
       <attribute name="org_abbr" value="MTRACK   511"/>
-     </branch>
-     <branch>
-      <attribute name="name" value="Womens Track"/>
-      <attribute name="org_unit" value="50008090"/>
-      <attribute name="org_abbr" value="WTRACK   511"/>
+      <attribute name="building" value="HSC"/>
+      <attribute name="room" value="102"/>
+      <attribute name="city" value="Kearney"/>
+      <attribute name="state" value="NE"/>
+      <attribute name="postal_code" value="68849"/>
      </branch>
      <branch>
       <attribute name="name" value="Womens Volleyball"/>
       <attribute name="org_unit" value="50008091"/>
       <attribute name="org_abbr" value="WVLLYBL  511"/>
+      <attribute name="building" value="HSC"/>
+      <attribute name="room" value="102"/>
+      <attribute name="city" value="Kearney"/>
+      <attribute name="state" value="NE"/>
+      <attribute name="postal_code" value="68849"/>
      </branch>
      <branch>
       <attribute name="name" value="Mens Wrestling"/>
       <attribute name="org_unit" value="50008092"/>
       <attribute name="org_abbr" value="MWSLING  511"/>
+      <attribute name="building" value="HSC"/>
+      <attribute name="room" value="102"/>
+      <attribute name="city" value="Kearney"/>
+      <attribute name="state" value="NE"/>
+      <attribute name="postal_code" value="68849"/>
      </branch>
     </branch>
     <branch>
