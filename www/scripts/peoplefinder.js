@@ -147,6 +147,7 @@ var directory = function() {
 				}
 			});
 			*/
+            WDN.loadCSS('/wdn/templates_4.0/scripts/plugins/qtip/jquery.qtip.css');
 			WDN.loadJS('/wdn/templates_4.0/scripts/plugins/qtip/jquery.qtip.js', function(){
 				WDN.jQuery('.directorySearch input#q').qtip({
 			    	content: {
@@ -156,26 +157,6 @@ var directory = function() {
 			        	corner : {
 			        		target : 'topLeft',
 			        		tooltip : 'bottomMiddle'
-			        	},
-			        	container: WDN.jQuery('body'),
-			        	adjust: {
-			        		x: 200
-			        	}
-			        },
-			        style: { 
-			        	tip: { 
-			        		corner: 'bottomMiddle' ,
-			        		size: { x: 25, y: 15 },
-			        		color: '#d7c47f'
-			        	},
-			        	"width":"300px",
-			        	"background-color": '#f7f3c3',
-			        	"color" : "#574f30",
-			        	classes : {
-			        		tooltip : 'searchHelp'
-			        	},
-			        	border : {
-			        		width : 0
 			        	}
 			        },
 			        show: {
