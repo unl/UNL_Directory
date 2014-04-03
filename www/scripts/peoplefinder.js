@@ -63,7 +63,7 @@ var service_peoplefinder = function() {
 		presentPeopleFinderResults : function(){
 			WDN.jQuery('#filters').css({'opacity' : '0.4'});
 			//WDN.jQuery('#q').siblings('label').hide();
-			WDN.jQuery('#maincontent .grid6, #maincontent .footer').remove();
+			WDN.jQuery('.help-container').remove();
 			if (!splitName) {
 				WDN.toolbar_peoplefinder.queuePFRequest(query, 'results');
 			} else {
