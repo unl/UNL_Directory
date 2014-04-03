@@ -1,5 +1,5 @@
 <div class="wdn-band search-container">
-    <div class="wdn-inner-wrapper">
+    <div class="wdn-inner-wrapper wdn-inner-padding-none">
         <?php
         if (isset($context->options['adv'])) {
             echo $savvy->render($context, 'Peoplefinder/AdvancedForm.tpl.php');
