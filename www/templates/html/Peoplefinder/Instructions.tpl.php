@@ -58,7 +58,11 @@
 
 <div class="wdn-band results-container">
     <div class="wdn-inner-wrapper">
-        <?php echo $savvy->render(null, 'Peoplefinder/SearchResults/Filters.tpl.php'); ?>
-        <div id="results"></div>
+        <div class="wdn-grid-set">
+            <div class="wdn-col-one-fourth">
+                <?php echo $savvy->render(null, 'Peoplefinder/SearchResults/Filters.tpl.php'); ?>
+            </div>
+            <div id="results" class="wdn-col-three-fourths"></div>
+        </div>
     </div>
 </div>
