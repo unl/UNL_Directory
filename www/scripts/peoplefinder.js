@@ -172,17 +172,6 @@ var directory = function() {
 			            effect: {
 			            	length:100
 			            }
-			        },
-			        api : {
-			        	beforeHide : function(){
-			        		WDN.setCookie('dir_qTip', '1', 3600);
-			        	},
-			        	
-			        	beforeShow : function(){
-			        		if (WDN.getCookie('dir_qTip') == 1) {
-			        			return false;
-			        		}
-			        	}
 			        }
 			    });
 			});
