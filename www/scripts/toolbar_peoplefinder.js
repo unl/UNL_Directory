@@ -42,7 +42,7 @@ WDN.toolbar_peoplefinder = function() {
             }
             clearTimeout(pfreq_q);
             if (q.length > 2 || splitQuery.length > 10) {
-                document.getElementById(resultsdiv).innerHTML = '<img alt="progress" id="pfprogress" src="'+WDN.template_path+'wdn/templates_3.0/css/header/images/colorbox/loading.gif" />';
+                document.getElementById(resultsdiv).innerHTML = '<img alt="progress" id="pfprogress" src="css/images/loading.gif" />';
                 pfreq_q = setTimeout('WDN.toolbar_peoplefinder.getPeopleFinderResults("'+escape(q)+splitQuery+'", '+chooser+')', 400);
             } else if (q.length>0) {
                 document.getElementById(resultsdiv).innerHTML = 'Please enter more information.';
