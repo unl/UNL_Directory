@@ -255,13 +255,35 @@ var directory = function() {
 				WDN.get(url, null, service_peoplefinder.updatePeopleFinderRecord);
 			}
 			return false;
-		}
+		},
+        
+        initializeCorrectionForms : function() {
+            WDN.jQuery('a.dir_correctionRequest').one('click', function(){
+                WDN.initializePlugin('modal', [function() {
+                    WDN.jQuery(this).colorbox({
+                        inline : true,
+                        open : true,
+                        href : WDN.jQuery('div.commentProblem'),
+                        width : '45%',
+                        height : '45%',
+                        title : false,
+                        onOpen : function() {
+                            if (!(WDN.jQuery(this).hasClass('pf_record'))){
+                                WDN.jQuery(this).siblings('.commentProblem').children('form').children('input[name="page_address"]').val(window.location);
+                            }
+                        }
+                    });
+                }]);
+                return false;
+            });
+        }
 	};
 }();
 
 WDN.jQuery(document).ready(function() {
     WDN.toolbar_peoplefinder.serviceURL = PF_URL;
     WDN.toolbar_peoplefinder.configuedWebService = true;
+    directory.initializeCorrectionForms();
     if (window.location.hash
         && WDN.jQuery('#peoplefinder').length) {
         WDN.log('triggering hash change');
@@ -353,22 +375,6 @@ WDN.jQuery(document).ready(function() {
 			return false;
 		}
 	);
-	WDN.jQuery('a.dir_correctionRequest').on('click', function(){
-		WDN.jQuery(this).colorbox({
-			inline : true,
-			open : true,
-			href : WDN.jQuery('div.commentProblem'),
-			width : '45%', 
-			height : '45%',
-			title : false,
-			onOpen : function() {
-				if (!(WDN.jQuery(this).hasClass('pf_record'))){
-					WDN.jQuery(this).siblings('.commentProblem').children('form').children('input[name="page_address"]').val(window.location);
-				}
-			}
-		});
-		return false;
-	});
 });
 WDN.jQuery(window).keydown(function(event) {
 	if (event.which == '191'
