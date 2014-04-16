@@ -296,7 +296,7 @@ padding:10px;
 	font-size:2em;
 	font-weith:bold;
 	display:block;
-	margin-top:-6px;
+	line-height: 1em;
 }
 .intro_support {
 	padding:10px 0 !important;
