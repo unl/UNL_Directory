@@ -80,7 +80,17 @@ $page->breadcrumbs = '
 
 
 $page->pagetitle = '<h1>Search the Directory</h1>';
-$page->maincontentarea = $savvy->render($context->output);
+
+if ($context->options['view'] == 'instructions') {
+    //Don't wrap the home page, because we want it to use bands
+    $page->maincontentarea = $savvy->render($context->output);
+} else {
+    //Wrap everything else
+    $page->maincontentarea = '<div class="wdn-band"><div class="wdn-inner-wrapper">' . $savvy->render($context->output) . '</div></div>';
+}
+
+
+
 $page->footercontent = 'UNL | Office of University Communications | <a href="http://www1.unl.edu/wdn/wiki/About_Peoplefinder" onclick="window.open(this.href); return false;">About Directory</a> | <a href="http://www1.unl.edu/comments/" title="Click here to direct your comments and questions" class="dir_correctionRequest">comments?</a>';
 $page->footercontent .= $savvy->render($context, 'CorrectionForm.tpl.php');
 $page->footercontent .= '<br /><br />Information obtained from this directory may not be used to provide addresses for mailings to students, faculty or staff.<br />Any solicitation of business, information, contributions or other response from individuals listed in this publication by mail, telephone or other means is forbidden.<br />';
