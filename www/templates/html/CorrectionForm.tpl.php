@@ -22,15 +22,21 @@ WDN.jQuery("document").ready(function(){
 
 	WDN.jQuery('input[name="page_address"]').val(location);
 
-	if (WDN.idm.user.mail != null) {
-		WDN.jQuery('.commentProblem input[name="email"]').val(WDN.idm.user.mail[0]);
-	}
-	if (WDN.idm.user.uid != null) {
-		WDN.jQuery('.commentProblem input[name="name"]').val(WDN.idm.user.uid);
-	}
+    require(['idm'], function(idm) {
+        if (idm.getEmailAddress()) {
+            WDN.jQuery('.commentProblem input[name="email"]').val(idm.getEmailAddress());
+        }
+        if (idm.getUserId()) {
+            WDN.jQuery('.commentProblem input[name="name"]').val(idm.getUserId());
+        }
+    })
+	
 	correctionHTML = 
 		'<a href="http://www1.unl.edu/comments/" class="dir_correctionRequest pf_record noprint">Have a correction?</a>';
 	WDN.jQuery(".vcardInfo").append(correctionHTML);
+    
+    //Initialize the new correction form link
+    directory.initializeCorrectionForms();
 });
 </script>
 <?php endif; ?>
