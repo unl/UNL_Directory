@@ -59,6 +59,10 @@ var service_peoplefinder = function() {
 				WDN.jQuery('li.current .vcard a.planetred_profile').fadeIn(400);
 				WDN.jQuery('li.current .vcard').slideDown();
 				WDN.jQuery('li.selected .loading').hide();
+                WDN.jQuery('.ppl_Sresult .vcard, .dep_result .vcard').on('click', function(event){
+                        event.stopPropagation();
+                    }
+                );
 			}
 		},
 		
@@ -298,10 +302,6 @@ var directory = function() {
             WDN.jQuery('.dep_result').on('click', function(){
                     directory.showIndividualDepartmentRecord(WDN.jQuery(this));
                     return false;
-                }
-            );
-            WDN.jQuery('.ppl_Sresult .vcard, .dep_result .vcard').on('click', function(event){
-                    event.stopPropagation();
                 }
             );
             WDN.jQuery('a.img-qrcode').on('click', function() {
