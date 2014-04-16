@@ -264,8 +264,8 @@ var directory = function() {
                         inline : true,
                         open : true,
                         href : WDN.jQuery('div.commentProblem'),
-                        width : '45%',
-                        height : '45%',
+                        width : '80%',
+                        height : '90%',
                         title : false,
                         onOpen : function() {
                             if (!(WDN.jQuery(this).hasClass('pf_record'))){

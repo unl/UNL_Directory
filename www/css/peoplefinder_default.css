@@ -313,3 +313,8 @@ padding:10px;
 #maincontent .contact_list h3 {
     
 }
+
+#colorbox #cboxLoadedContent {
+    background: rgb(242, 242, 242);
+    padding: 1em;
+}
