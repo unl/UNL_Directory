@@ -167,11 +167,11 @@ body #footer .footer_col {
 	background:#e6e4b1;
 }
 #maincontent #directoryHelp {
-	float:right;
 	list-style:none;
 }
 #maincontent #directoryHelp li {
-	padding:0 0 6px 0;	
+	padding:0 0 6px 0;
+    display: inline;
 }
 .directorySearch ol li:first-child input[type=submit], #maincontent #directoryHelp li a {
     background: rgb(168,140,99); /* Old browsers */
