@@ -170,10 +170,13 @@ body #footer .footer_col {
 	list-style:none;
 }
 #maincontent #directoryHelp li {
-	padding:0 0 6px 0;
-    display: inline;
+     padding:0 0 6px 0;
+     display: inline;
+ }
+#maincontent #directoryHelp li a {
+    border-bottom: none;
 }
-.directorySearch ol li:first-child input[type=submit], #maincontent #directoryHelp li a {
+.directorySearch ol li:first-child input[type=submit] {
     background: rgb(168,140,99); /* Old browsers */
 	background: -moz-linear-gradient(top, rgba(168,140,99,1) 0%, rgba(183,164,95,1) 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(168,140,99,1)), color-stop(100%,rgba(183,164,95,1))); /* Chrome,Safari4+ */
