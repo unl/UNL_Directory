@@ -1,4 +1,4 @@
-<div class="wdn-band wdn-light-neutral-band search-container">
+<div id="searchform" class="wdn-band wdn-light-neutral-band search-container">
     <div class="wdn-inner-wrapper wdn-inner-padding-none">
         <?php
         if (isset($context->options['adv'])) {

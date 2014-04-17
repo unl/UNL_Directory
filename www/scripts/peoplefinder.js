@@ -191,11 +191,9 @@ var directory = function() {
 			if (WDN.jQuery('#peoplefinder').length){
 				WDN.jQuery("#queryString, #q").remove();
 				WDN.jQuery('label.cn, input#cn, label.sn, input#sn').remove();
-				WDN.jQuery('#peoplefinder fieldset li').prepend('<label for="cn" class="cn">First Name</label><input type="text" value="" id="cn" name="cn" class="n q" /><label for="sn" class="sn">Last Name</label><input type="text" value="" id="sn" name="sn" class="s n q" />');
+                WDN.jQuery('#peoplefinder').addClass('advanced');
+				WDN.jQuery('#peoplefinder .input-group').prepend('<input type="text" id="cn" name="cn" title="First Name" placeholder="First Name" class="n q" /><input type="text" id="sn" name="sn" title="Last Name" placeholder="Last Name" class="s n q" />');
 			}
-			WDN.jQuery('#cn, #sn').focus(function(){
-				WDN.jQuery(this).prev('label').hide();
-			});
 			WDN.jQuery('#advancedSearch').unbind('click').removeClass('advanced').addClass('simple').text('Simple Search').bind({
 				focus : function(){
 					WDN.jQuery("#queryString").remove();
@@ -209,21 +207,13 @@ var directory = function() {
 			});
 			WDN.jQuery('#cn').val(cn);
 			WDN.jQuery('#sn').val(sn);
-			if(cn.length){
-				WDN.jQuery('label[for=cn]').hide();
-			}
-			if(sn.length){
-				WDN.jQuery('label[for=sn]').hide();
-			}
 			directory.fixLabel();
 		},
 		
 		combineSearchBoxes : function() { //function called to prepare the simple search box
 			WDN.jQuery('#sn, #cn, label.cn, label.sn').remove();
+            WDN.jQuery('#peoplefinder').removeClass('advanced');
 			WDN.jQuery('#advancedSearch').unbind('click').removeClass('simple').addClass('advanced').text('Advanced Search').bind({
-				focus : function(){
-					WDN.jQuery("#peoplefinder label").remove();
-				},
 				click : function(eventObject){
 					directory.splitSearchBoxes('','');
 					eventObject.preventDefault();
@@ -231,7 +221,7 @@ var directory = function() {
 					return false;
 				}
 			});
-			WDN.jQuery('#peoplefinder fieldset li').prepend('<label for="q" id="queryString">Enter a name to begin your search</label><input type="text" value="" id="q" name="q" class="q" />');
+			WDN.jQuery('#peoplefinder .input-group').prepend('<input type="text" autofocus placeholder="Enter a name"id="q" name="q" title="Enter a name to begin your search" placeholder="Enter a name" class="q" />');
 			directory.fixLabel();
 		},
 		
