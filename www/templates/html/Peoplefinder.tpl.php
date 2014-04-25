@@ -11,7 +11,13 @@ $savvy->addGlobal('page', $page);
 
 $page->doctitle     = '<title>Directory | UNL</title>';
 $page->titlegraphic = '<a href="' . UNL_Peoplefinder::getURL() . '">Directory</a>';
-$page->__params['class']['value'] = 'terminal';
+
+$classes = array('terminal');
+
+if (in_array($controller->options['view'], array('instructions', 'search'))) {
+    $classes[] = 'hide-pagetitle';
+}
+$page->__params['class']['value'] = implode(' ', $classes);
 
 $page->head .= '
 <meta name="description" content="UNL Directory is the Faculty, Staff and Student online directory for the University. Information obtained from this directory may not be used to provide addresses for mailings to students, faculty or staff. Any solicitation of business, information, contributions or other response from individuals listed in this publication by mail, telephone or other means is forbidden." />
