@@ -126,62 +126,6 @@ var directory = function() {
 		},
 		
 		fixLabel : function() { //called to reposition the label over the input and hide
-			/*
-			 WDN.jQuery('.directorySearch input').bind({
-				focus : function(){
-					WDN.jQuery(this).siblings('label[for='+this.id+']').hide();
-				},
-				blur : function(){
-					if (WDN.jQuery(this).val() === "") {
-						WDN.jQuery(this).siblings('label[for='+this.id+']').show();
-					}
-				},
-				keyup : function(){
-					if (WDN.jQuery(this).val() !== "") {
-						WDN.jQuery(this).siblings('label[for='+this.id+']').hide();
-					}
-				},
-				change : function(){
-					if (WDN.jQuery(this).val() !== "") {
-						WDN.jQuery(this).siblings('label[for='+this.id+']').hide();
-					}
-				},
-				click : function(){
-					if (WDN.jQuery(this).val() !== "") {
-						WDN.jQuery(this).siblings('label[for='+this.id+']').hide();
-					}
-				}
-			});
-			*/
-            WDN.loadCSS('/wdn/templates_4.0/scripts/plugins/qtip/jquery.qtip.css');
-			WDN.loadJS('/wdn/templates_4.0/scripts/plugins/qtip/jquery.qtip.js', function(){
-				WDN.jQuery('.directorySearch input#q').qtip({
-			    	content: {
-			    		text: 'Enter a name to begin your search'
-			    	},
-			        position : {
-			        	corner : {
-			        		target : 'topLeft',
-			        		tooltip : 'bottomMiddle'
-			        	}
-			        },
-			        show: {
-			            when: {
-			                event: 'focus'
-			            }
-			        },
-			        hide: {
-			            when: {
-			                event: 'unfocus'
-			            },
-			            delay: 100,
-			            effect: {
-			            	length:100
-			            }
-			        }
-			    });
-			});
-			//WDN.jQuery('#q').focus().select();
 			WDN.jQuery('.directorySearch > fieldset > ol > li > label').css({'top' : '3px'}).focus(function(){
 					WDN.jQuery(this).hide().siblings('input[type=text]').next().focus();
 			});
