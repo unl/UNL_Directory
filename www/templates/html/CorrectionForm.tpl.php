@@ -6,6 +6,7 @@
         <input type="hidden" name="page_address" value="" />
         <label for="name">Name:</label><input type="text" name="name" id="name" value="" />
         <label for="email">Email:</label><input type="text" name="email" id="email" value="" /><br />
+        <label for="comment">What is your correction?</label>
         <textarea name="comment" id="comment" rows="" cols=""></textarea>
         <input type="submit" value="Submit" />
     </form>
