@@ -1,4 +1,4 @@
-<div id="filters" class="grid3 first">
+<div id="filters">
     <div class="wdn_filterset">
         <h4 class="formal">Filter Results</h4>
         <form method="post" action="#" class="filters">
@@ -16,6 +16,7 @@
                     </li>
                 </ol>
             </fieldset>
+            <input type="submit" disabled="disabled" value="Submit" />
         </form>
     </div>
 </div>

@@ -1,5 +1,5 @@
 <?php
-UNL_Officefinder::setReplacementData('pagetitle', '<h2>Departmental Hierarchy</h2>');
+UNL_Officefinder::setReplacementData('pagetitle', '<h1>Departmental Hierarchy</h1>');
 ?>
 <p>This view contains the departmental hierarchy found in SAP, the University's financial system.</p>
 <style>

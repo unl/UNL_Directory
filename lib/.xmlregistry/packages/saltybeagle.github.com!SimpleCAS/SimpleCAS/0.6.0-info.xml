@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package xmlns="http://pear.php.net/dtd/package-2.1" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.1" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.1     http://pear.php.net/dtd/package-2.1.xsd" packagerversion="2.0.0">
+<package xmlns="http://pear.php.net/dtd/package-2.1" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.1" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.1     http://pear.php.net/dtd/package-2.1.xsd">
  <name>SimpleCAS</name>
  <channel>saltybeagle.github.com/SimpleCAS</channel>
  <summary>A PHP5 library for CAS Authentication.</summary>
@@ -29,8 +29,8 @@ in a JA-SIG CAS secured environment.</description>
   <email>ericrasmussen1@gmail.com</email>
   <active>yes</active>
  </helper>
- <date>2011-12-06</date>
- <time>13:24:52</time>
+ <date>2014-04-16</date>
+ <time>15:48:30</time>
  <version>
   <release>0.6.0</release>
   <api>0.6.0</api>
@@ -53,12 +53,12 @@ No API backwards compatibility changes
    <file role="php" name="src/SimpleCAS/ProxyGranting/Storage/File.php" md5sum="338e3c247a610c54b463b128e9796958"/>
    <file role="php" name="src/SimpleCAS/ProxyGranting/Storage.php" md5sum="3eb6a0c0c58a17fde16e2fa0370c0cca"/>
    <file role="php" name="src/SimpleCAS/ProxyGranting.php" md5sum="831fd17f2e6a4ae1ab2660dd877603ae"/>
-   <file role="php" name="src/SimpleCAS/Protocol/Version2/ValidationResponse.php" md5sum="1810517782f2375d3b97a0de2c8927ea"/>
-   <file role="php" name="src/SimpleCAS/Protocol/Version2.php" md5sum="9e83ca7caec01e524dc6b61096c13458"/>
-   <file role="php" name="src/SimpleCAS/Protocol/Version1.php" md5sum="998d46b603857ee68936006dec691363"/>
+   <file role="php" name="src/SimpleCAS/Protocol/Version2/ValidationResponse.php" md5sum="34a2345455486cb334632e724d811050"/>
+   <file role="php" name="src/SimpleCAS/Protocol/Version2.php" md5sum="dd970f0551f244f7ad6860e51b70a347"/>
+   <file role="php" name="src/SimpleCAS/Protocol/Version1.php" md5sum="9d7cf7fd72f8f85de0db7f362eba9cc8"/>
    <file role="php" name="src/SimpleCAS/Protocol.php" md5sum="96a3d2b1f16c8e528f413a0790db7b93"/>
    <file role="php" name="src/SimpleCAS/Autoload.php" md5sum="d93480efa786598948935145b06352a6"/>
-   <file role="php" name="src/SimpleCAS.php" md5sum="8f00c0610636f8f8dc1e289e95e8f1b0"/>
+   <file role="php" name="src/SimpleCAS.php" md5sum="7865aa00041d59c71e2ecec731dd0388"/>
    <file role="doc" name="docs/examples/Zend_Auth_Adapter_SimpleCAS.php" md5sum="9d686c3553b6c8be0af988ddfb363f0c"/>
    <file role="doc" name="docs/examples/simple_renew.php" md5sum="4e2c2e2ebcfdb335ffbb36da5aab5190"/>
    <file role="doc" name="docs/examples/simple_gateway.php" md5sum="927bd6158bce3619fdad333351ca202d"/>

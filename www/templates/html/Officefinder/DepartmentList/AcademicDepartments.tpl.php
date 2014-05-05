@@ -1,12 +1,12 @@
 <?php 
-UNL_Officefinder::setReplacementData('doctitle', 'UNL | Directory | Academic Departments');
+UNL_Officefinder::setReplacementData('doctitle', 'Academic Departments | Directory | UNL');
 UNL_Officefinder::setReplacementData('breadcrumbs', '
     <ul>
         <li><a href="http://www.unl.edu/" title="University of Nebraska&ndash;Lincoln">UNL</a></li>
         <li><a href="'.UNL_Peoplefinder::getURL().'">Directory</a></li>
         <li>Academic Departments</li>
     </ul>');
-UNL_Officefinder::setReplacementData('pagetitle', '<h2>Academic Departments</h2>');
+UNL_Officefinder::setReplacementData('pagetitle', '<h1>Academic Departments</h1>');
 ?>
 <script type="text/javascript">
 WDN.loadJS('../scripts/filters.js', function(){
@@ -36,7 +36,7 @@ WDN.loadJS('../scripts/filters.js', function(){
                     <li><input type="checkbox" value="parent_<?php echo $college_id; ?>" name="parent_<?php echo $college_id; ?>" id="filterparent_<?php echo $college_id; ?>"/><label for="filterparent_<?php echo $college_id; ?>"><?php echo $college_name; ?></label></li>
                     <?php endforeach; ?>
                 </ol>
-    
+                <input type="submit" disabled="disabled" value="Submit" />
             </fieldset>
         </form>
     </div>

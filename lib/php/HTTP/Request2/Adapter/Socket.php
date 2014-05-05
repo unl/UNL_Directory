@@ -6,7 +6,7 @@
  *
  * LICENSE:
  *
- * Copyright (c) 2008, 2009, Alexey Borzov <avb@php.net>
+ * Copyright (c) 2008-2011, Alexey Borzov <avb@php.net>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -37,7 +37,7 @@
  * @package    HTTP_Request2
  * @author     Alexey Borzov <avb@php.net>
  * @license    http://opensource.org/licenses/bsd-license.php New BSD License
- * @version    SVN: $Id: Socket.php 290921 2009-11-18 17:31:58Z avb $
+ * @version    SVN: $Id: Socket.php 308301 2011-02-13 13:02:20Z avb $
  * @link       http://pear.php.net/package/HTTP_Request2
  */
 
@@ -55,7 +55,7 @@ require_once 'HTTP/Request2/Adapter.php';
  * @category    HTTP
  * @package     HTTP_Request2
  * @author      Alexey Borzov <avb@php.net>
- * @version     Release: 0.5.2
+ * @version     Release: 0.6.0
  */
 class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
 {
@@ -193,10 +193,12 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
         unset($this->request, $this->requestBody);
 
         if (!empty($e)) {
+            $this->redirectCountdown = null;
             throw $e;
         }
 
         if (!$request->getConfig('follow_redirects') || !$response->isRedirect()) {
+            $this->redirectCountdown = null;
             return $response;
         } else {
             return $this->handleRedirect($request, $response);
@@ -419,6 +421,7 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
             $this->redirectCountdown = $request->getConfig('max_redirects');
         }
         if (0 == $this->redirectCountdown) {
+            $this->redirectCountdown = null;
             // Copying cURL behaviour
             throw new HTTP_Request2_Exception(
                 'Maximum (' . $request->getConfig('max_redirects') . ') redirects followed'
@@ -432,6 +435,7 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
         if ($redirectUrl->isAbsolute()
             && !in_array($redirectUrl->getScheme(), array('http', 'https'))
         ) {
+            $this->redirectCountdown = null;
             throw new HTTP_Request2_Exception(
                 'Refusing to redirect to a non-HTTP URL ' . $redirectUrl->__toString()
             );

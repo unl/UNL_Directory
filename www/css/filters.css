@@ -77,3 +77,6 @@ form.filters.loading fieldset {
     display:none;
 }
 span.operator:last-child{display:none;}
+form.filters input[type="submit"] {
+    display: none;
+}
