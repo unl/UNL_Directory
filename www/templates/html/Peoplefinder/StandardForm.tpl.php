@@ -12,7 +12,7 @@
     <div class="input-group">
         <input type="text" autofocus placeholder="Enter a name" value="<?php echo $default; ?>" id="q" name="q" title="Enter a name to begin your search" plaseholder="Enter a name" class="q" />
         <span class="input-group-btn">
-            <button name="submitbutton" type="submit" value="Search" class="button wdn-icon-search"></button>
+            <button name="submitbutton" type="submit" value="Search" title="Search" class="button wdn-icon-search"></button>
         </span>
     </div>
 

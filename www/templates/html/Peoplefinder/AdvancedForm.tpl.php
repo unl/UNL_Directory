@@ -23,7 +23,7 @@
         <input type="text" value="<?php echo $default; ?>" id="sn" name="sn" title="Last Name" placeholder="Last Name" class="s n q" />
         <input type="hidden" name="adv" value="1" />
         <span class="input-group-btn">
-            <button name="submitbutton" type="submit" value="Search"  class="button wdn-icon-search"></button>
+            <button name="submitbutton" type="submit" value="Search" title="Search" class="button wdn-icon-search"></button>
         </span>
     </div>
 
