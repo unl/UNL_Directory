@@ -198,7 +198,8 @@ var directory = function() {
 		},
         
         initializeCorrectionForms : function() {
-            WDN.jQuery('a.dir_correctionRequest').one('click', function(){
+            WDN.jQuery('a.dir_correctionRequest').on('click', function(){
+                
                 WDN.initializePlugin('modal', [function() {
                     WDN.jQuery(this).colorbox({
                         inline : true,
