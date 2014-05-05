@@ -36,7 +36,7 @@ WDN.loadJS('../scripts/filters.js', function(){
                     <li><input type="checkbox" value="parent_<?php echo $college_id; ?>" name="parent_<?php echo $college_id; ?>" id="filterparent_<?php echo $college_id; ?>"/><label for="filterparent_<?php echo $college_id; ?>"><?php echo $college_name; ?></label></li>
                     <?php endforeach; ?>
                 </ol>
-    
+                <input type="submit" disabled="disabled" value="Submit" />
             </fieldset>
         </form>
     </div>

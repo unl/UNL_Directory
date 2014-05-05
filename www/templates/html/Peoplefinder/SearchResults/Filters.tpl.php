@@ -16,6 +16,7 @@
                     </li>
                 </ol>
             </fieldset>
+            <input type="submit" disabled="disabled" value="Submit" />
         </form>
     </div>
 </div>
