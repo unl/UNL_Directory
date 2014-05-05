@@ -63,6 +63,7 @@ var service_peoplefinder = function() {
                         event.stopPropagation();
                     }
                 );
+                directory.initializeCorrectionForms();
 			}
 		},
 		
