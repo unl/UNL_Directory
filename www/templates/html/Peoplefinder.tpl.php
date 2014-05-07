@@ -91,7 +91,7 @@ if ($context->options['view'] == 'instructions') {
     $page->maincontentarea = $savvy->render($context->output);
 } else {
     //Wrap everything else
-    $page->maincontentarea = '<div class="wdn-band"><div class="wdn-inner-wrapper">' . $savvy->render($context->output) . '</div></div>';
+    $page->maincontentarea = '<div class="wdn-band"><div class="wdn-inner-wrapper wdn-inner-padding-sm">' . $savvy->render($context->output) . '</div></div>';
 }
 
 
