@@ -112,6 +112,7 @@
     -moz-background-clip:padding-box;
     background-clip:padding-box;
     width:100%;
+    font-size: .8em;
 }
 .vcard .text-vcard, .vcard .img-qrcode, .vcard .print, .vcard .wdn_annotate.on a {
     background: url('images/iconMimeSprite.png') no-repeat 0 0;
