@@ -7,7 +7,6 @@ var filters = function() {
 			WDN.jQuery('#filters').show();
 			filters.findClasses();
 			WDN.jQuery(".filters legend").on('click keypress', function (e) {
-				console.log(e.keyCode);
 				if (e.keyCode !== undefined && !(e.keyCode == 0 || e.keyCode == 13)) {
 					//Not a space or enter key press
 					return;
