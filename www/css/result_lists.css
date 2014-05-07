@@ -144,6 +144,9 @@
 #maincontent #dir_departmentListing .planetred_profile {
     display:none;
 }
+#maincontent .departments a.planetred_profile {
+    border-bottom: none;
+}
 #maincontent #dir_departmentListing .overflow {
     min-height:0;
     padding:0;

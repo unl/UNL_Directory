@@ -57,6 +57,7 @@
     float:left;
     margin-right:15px;
     width:114px;
+    border-bottom: none;
 }
 
 .vcard .eppa, .vcard .epa {font-style:italic;font-size:0.8em;}
@@ -113,6 +114,9 @@
     background-clip:padding-box;
     width:100%;
     font-size: .8em;
+}
+.wdn_vcardTools a {
+    border-bottom: none !important;
 }
 .vcard .text-vcard, .vcard .img-qrcode, .vcard .print, .vcard .wdn_annotate.on a {
     background: url('images/iconMimeSprite.png') no-repeat 0 0;
