@@ -241,7 +241,11 @@ var directory = function() {
                 }
             );
             WDN.jQuery('a.img-qrcode').on('click', function() {
-                WDN.jQuery(this).colorbox({open:true});
+                var href = this;
+                WDN.initializePlugin('modal', [function() {
+                    WDN.jQuery(href).colorbox({open:true});
+                    return false;
+                }]);
                 return false;
             });
         }
