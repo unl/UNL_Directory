@@ -13,7 +13,7 @@
 <div class="wdn-band help-container">
     <div class="wdn-inner-wrapper">
         <section class="wdn-grid-set">
-            <div class="wdn-col-one-half"  id="instructions_people">
+            <div class="bp2-wdn-col-one-half"  id="instructions_people">
                 <div class="intro">
                     <img width="100" height ="100" class="profile_pic medium planetred_profile" src="<?php echo UNL_Peoplefinder::getURL(); ?>images/peopleHerbie.png" alt="sample people results" />
                     <h3 class="recordDetails">
@@ -30,7 +30,7 @@
                     </div>
                 </div>
             </div>
-            <div class="wdn-col-one-half" id="instructions_departments">
+            <div class="bp2-wdn-col-one-half" id="instructions_departments">
                 <div class="intro">
                     <img width="100" height ="100" class="profile_pic medium planetred_profile" src="<?php echo UNL_Peoplefinder::getURL(); ?>images/organizationVC.png" alt="sample department results" />
                     <h3 class="recordDetails">
