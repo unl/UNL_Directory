@@ -296,6 +296,7 @@ WDN.jQuery(document).ready(function() {
 					});
 				}
 			});
+			WDN.jQuery(window).trigger('hashchange');
 		});
 	}
 	
