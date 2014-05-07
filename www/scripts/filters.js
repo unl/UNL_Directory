@@ -26,6 +26,15 @@ var filters = function() {
 					}
 				});
 			});
+
+			WDN.jQuery('#filters').removeClass('few-results');
+			WDN.jQuery('#filters').removeClass('many-results');
+			var total = WDN.jQuery('.ppl_Sresult');
+			if (total.length <= 10) {
+				WDN.jQuery('#filters').addClass('few-results');
+			} else {
+				WDN.jQuery('#filters').addClass('many-results');
+			}
 		},
 		
 		findClasses : function() {

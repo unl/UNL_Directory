@@ -82,3 +82,8 @@ form.filters input[type="submit"] {
 form.filters fieldset ol {
     display: none;
 }
+@media all and (max-width: 768px) {
+    #filters.few-results {
+        display: none !important;
+    }
+}
