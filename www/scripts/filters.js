@@ -11,13 +11,9 @@ var filters = function() {
 					//Not a space or enter key press
 					return;
 				}
-				$header = WDN.jQuery(this);
-				//getting the next element
+				$header  = WDN.jQuery(this);
 				$content = $header.next();
-				//open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
 				$content.slideToggle(500, function () {
-					//execute this after slideToggle is done
-					//change text of header based on visibility of content div
 					if ($content.is(":visible")) {
 						//Expanded
 						$header.children('.toggle').text("Collapse");
@@ -29,7 +25,6 @@ var filters = function() {
 						$content.attr('aria-expanded', 'false');
 					}
 				});
-
 			});
 		},
 		
