@@ -32,9 +32,9 @@ $savvy->setTemplatePath(dirname(__FILE__).'/templates/html');
 
 switch($peoplefinder->options['format']) {
     case 'vcard':
-        if ($peoplefinder->output[0] instanceof UNL_Peoplefinder_Record) {
+        if ($peoplefinder->output instanceof UNL_Peoplefinder_Record) {
             header('Content-Type: text/x-vcard');
-            header('Content-Disposition: attachment; filename="'.$peoplefinder->output[0]->sn.', '.$peoplefinder->output[0]->givenName.'.vcf"');
+            header('Content-Disposition: attachment; filename="'.$peoplefinder->output->sn.', '.$peoplefinder->output->givenName.'.vcf"');
         }
         //intentional no break
     case 'json':
