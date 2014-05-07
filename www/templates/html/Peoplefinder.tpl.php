@@ -25,19 +25,17 @@ $page->head .= '
 <meta name="author" content="Brett Bieber, UNL Office of University Communications" />
 ';
 
-if ($context->options['mobile'] === true) {
-    $page->head .='<link href="'.UNL_Peoplefinder::getURL().'css/small_devices.css" type="text/css" rel="stylesheet" />';
-} else {
-    $page->head .='<link href="'.UNL_Peoplefinder::getURL().'css/all_peoplefinder.css" type="text/css" rel="stylesheet" />
-                <!--[if IE]>
-                <link rel="stylesheet" type="text/css" media="screen" href="'.UNL_Peoplefinder::getURL().'css/ie.css" />
-                <![endif]-->
-                <link rel="stylesheet" type="text/css" media="print" href="'.UNL_Peoplefinder::getURL().'css/print.css" />
-                <link rel="stylesheet" type="text/css" href="'.UNL_Peoplefinder::getURL().'css/vcard.css" />
-                <script type="text/javascript">var PF_URL = "'.UNL_Peoplefinder::getURL().'", ANNOTATE_URL = "'.UNL_Peoplefinder::$annotateUrl.'";</script>
-                <script type="text/javascript" src="'.UNL_Peoplefinder::getURL().'scripts/toolbar_peoplefinder.js"></script>
-                <script type="text/javascript" src="'.UNL_Peoplefinder::getURL().'scripts/peoplefinder.js"></script>';
-}
+
+$page->head .='<link href="'.UNL_Peoplefinder::getURL().'css/all_peoplefinder.css" type="text/css" rel="stylesheet" />
+            <!--[if IE]>
+            <link rel="stylesheet" type="text/css" media="screen" href="'.UNL_Peoplefinder::getURL().'css/ie.css" />
+            <![endif]-->
+            <link rel="stylesheet" type="text/css" media="print" href="'.UNL_Peoplefinder::getURL().'css/print.css" />
+            <link rel="stylesheet" type="text/css" href="'.UNL_Peoplefinder::getURL().'css/vcard.css" />
+            <script type="text/javascript">var PF_URL = "'.UNL_Peoplefinder::getURL().'", ANNOTATE_URL = "'.UNL_Peoplefinder::$annotateUrl.'";</script>
+            <script type="text/javascript" src="'.UNL_Peoplefinder::getURL().'scripts/toolbar_peoplefinder.js"></script>
+            <script type="text/javascript" src="'.UNL_Peoplefinder::getURL().'scripts/peoplefinder.js"></script>';
+
 
 if ($context->getRawObject() instanceof UNL_Officefinder) {
     $login_url = UNL_Officefinder::getURL(null, $context->getRaw('options'));
