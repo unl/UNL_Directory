@@ -19,11 +19,7 @@
     <ul id="directoryHelp">
         <li><a href="<?php echo UNL_Peoplefinder::getURL(); ?>?adv" title="Switch searching type"  tabindex="0" id="advancedSearch" class="advanced wdn-button">Advanced Search</a></li>
         <li>
-            <?php if ($context->options['mobile'] != true) {?>
-                <a href="http://www.unl.edu/ucomm/splash/fieldguide_directory.shtml" title="Find out what's new in the directory" class="wdn-button">Directory Help</a>
-            <?php } else {?>
-                <a href="http://m.unl.edu/?view=proxy&u=http://www.unl.edu/ucomm/splash/fieldguide_directory.shtml" title="Find out what's new in the directory" class="wdn-button">Directory Help</a>
-            <?php }?>
+            <a href="http://www.unl.edu/ucomm/splash/fieldguide_directory.shtml" title="Find out what's new in the directory" class="wdn-button">Directory Help</a>
         </li>
     </ul>
 </form>
