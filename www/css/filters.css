@@ -80,3 +80,6 @@ span.operator:last-child{display:none;}
 form.filters input[type="submit"] {
     display: none;
 }
+form.filters fieldset ol {
+    display: none;
+}

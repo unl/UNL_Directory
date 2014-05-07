@@ -3,15 +3,15 @@
         <h4 class="formal">Filter Results</h4>
         <form method="post" action="#" class="filters">
             <fieldset class="affiliation">
-                <legend>By Affiliation</legend>
-                <ol>
+                <legend tabindex="0" role="button" atrai-controls="filters_affiliation">By Affiliation (<span class="toggle">Expand</span>)</legend>
+                <ol id="filters_affiliation" role="region"  aria-expanded="false">
                    <li>
                    </li>
                 </ol>
             </fieldset>
             <fieldset class="department">
-                <legend>By Department</legend>
-                <ol>
+                <legend tabindex="0" role="button" atrai-controls="filters_department">By Department (<span class="toggle">Expand</span>)</legend>
+                <ol id="filters_department" role="region"  aria-expanded="false">
                     <li>
                     </li>
                 </ol>

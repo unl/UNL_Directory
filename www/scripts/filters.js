@@ -6,6 +6,32 @@ var filters = function() {
 			WDN.jQuery('form.filters fieldset ol').empty().parents('form').addClass('loading');
 			WDN.jQuery('#filters').show();
 			filters.findClasses();
+			WDN.jQuery(".filters legend").on('click keypress', function (e) {
+				console.log(e.keyCode);
+				if (e.keyCode !== undefined && !(e.keyCode == 0 || e.keyCode == 13)) {
+					//Not a space or enter key press
+					return;
+				}
+				$header = WDN.jQuery(this);
+				//getting the next element
+				$content = $header.next();
+				//open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
+				$content.slideToggle(500, function () {
+					//execute this after slideToggle is done
+					//change text of header based on visibility of content div
+					if ($content.is(":visible")) {
+						//Expanded
+						$header.children('.toggle').text("Collapse");
+						$content.attr('aria-expanded', 'true');
+						$content.focus();
+					} else {
+						//Collapsed
+						$header.children('.toggle').text("Expand");
+						$content.attr('aria-expanded', 'false');
+					}
+				});
+
+			});
 		},
 		
 		findClasses : function() {
