@@ -86,7 +86,7 @@ $page->breadcrumbs = '
 
 $page->pagetitle = '<h1>Search the Directory</h1>';
 
-if ($context->options['view'] == 'instructions') {
+if (in_array($context->options['view'], array('instructions', 'search'))) {
     //Don't wrap the home page, because we want it to use bands
     $page->maincontentarea = $savvy->render($context->output);
 } else {

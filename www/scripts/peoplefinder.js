@@ -263,6 +263,7 @@ WDN.jQuery(document).ready(function() {
     WDN.toolbar_peoplefinder.serviceURL = PF_URL;
     WDN.toolbar_peoplefinder.configuedWebService = true;
     directory.initializeCorrectionForms();
+	
     if (window.location.hash
         && WDN.jQuery('#peoplefinder').length) {
         WDN.log('triggering hash change');
@@ -312,6 +313,11 @@ WDN.jQuery(document).ready(function() {
 	
 	directory.initializeSearchBoxes();
     directory.initializeSearchResultListeners();
+
+	if (WDN.jQuery("#results").html().length) {
+		attempts = 1;
+		service_peoplefinder.updatePeopleFinderResults();
+	}
 	
 	WDN.jQuery('.wdn_feedback_comments2').on('submit', function(event) {
 			var comments = WDN.jQuery(this).children('textarea').val();

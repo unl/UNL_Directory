@@ -1,10 +1,25 @@
 <?php
 if ($context->options['format'] != 'partial') {
-    if (isset($context->options['adv'])) {
-        echo $savvy->render($context, 'Peoplefinder/AdvancedForm.tpl.php');
-    } else {
-        echo $savvy->render($context, 'Peoplefinder/StandardForm.tpl.php');
-    }
+    ?>
+    <div id="searchform" class="wdn-band wdn-light-neutral-band search-container">
+        <div class="wdn-inner-wrapper wdn-inner-padding-sm">
+            <?php
+            if (isset($context->options['adv'])) {
+                echo $savvy->render($context, 'Peoplefinder/AdvancedForm.tpl.php');
+            } else {
+                echo $savvy->render($context, 'Peoplefinder/StandardForm.tpl.php');
+            }
+            ?>
+        </div>
+    </div>
+    <div class="wdn-band results-container">
+        <div class="wdn-inner-wrapper">
+            <div class="wdn-grid-set">
+                <div class="bp2-wdn-col-one-fourth">
+                    <?php echo $savvy->render(null, 'Peoplefinder/SearchResults/Filters.tpl.php'); ?>
+                </div>
+                <div id="results" class="bp2-wdn-col-three-fourths">
+    <?php
 }
 
 // The web view is special.
@@ -65,6 +80,13 @@ foreach ($affiliations as $affiliation) {
 if (count($context->dept_results) == 0
     && $showing == 0) {
     echo 'Sorry, no results could be found.';
+}
+
+
+if ($context->options['format'] != 'partial') {
+    ?>
+    </div></div></div></div>
+    <?php
 }
 
 ?>
