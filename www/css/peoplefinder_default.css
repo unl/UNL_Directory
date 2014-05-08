@@ -247,12 +247,9 @@ Search help qTip Styles
 */
 #maincontent .grid6.first{clear:both;}
 #maincontent .intro, #maincontent .intro{
-	background-color: #E7E2D6;
-
-padding:10px;
-	-moz-border-radius:5px;
-	-webkit-border-radius:5px;
-	border-radius:5px;
+    background-color: #FDFDFB;
+    border-top: 5px solid #BDBAB5;
+    padding: 1em 7.5%;
 }
 
 .intro img.profile_pic{float:left;}
@@ -273,7 +270,7 @@ padding:10px;
 	background:url('images/samplePeople.png') no-repeat bottom right;
 }
 #maincontent .footer {
-	background:#f7f7f7;border-width:1px 0 1px 0;border-color:#bbb;border-style:solid;padding:10px 20px;margin:20px 0 0;text-align:right;
+    border-width:1px 0 1px 0;border-color:#bbb;border-style:solid;padding:10px 20px;margin:20px 0 0;text-align:right;
 }
 #maincontent .contact_list .intro {
 	
