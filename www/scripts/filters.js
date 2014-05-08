@@ -11,17 +11,18 @@ var filters = function() {
 			return;
 		}
 		$header  = WDN.jQuery(this);
-		$content = $header.next();
+		$container = $header.next();
+		$content = $container.find('ol');
 		$content.slideToggle(100, function () {
 			if ($content.is(":visible")) {
 				//Expanded
-				$header.children('.toggle').text("Collapse");
-				$content.attr('aria-expanded', 'true');
+				$header.find('.toggle').text("Collapse");
+				$container.attr('aria-expanded', 'true');
 				$content.focus();
 			} else {
 				//Collapsed
-				$header.children('.toggle').text("Expand");
-				$content.attr('aria-expanded', 'false');
+				$header.find('.toggle').text("Expand");
+				$container.attr('aria-expanded', 'false');
 			}
 		});
 	});
