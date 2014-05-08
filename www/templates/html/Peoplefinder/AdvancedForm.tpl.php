@@ -1,26 +1,23 @@
 <form method="get" id="peoplefinder" action="<?php echo UNL_Peoplefinder::getURL();?>" class="directorySearch advanced">
 
     <div class="input-group">
-        <?php if (isset($context->options['chooser'])) {
+        <?php 
+        if (isset($context->options['chooser'])) {
             echo '<input type="hidden" name="chooser" value="true" />';
         }
+        $cn_default = '';
         if (isset($context->options['cn'])) {
-            $default = htmlentities($context->options['cn'], ENT_QUOTES);
-        } else {
-            $default = '';
+            $cn_default = htmlentities($context->options['cn'], ENT_QUOTES);
         }
-        ?>
-        <input type="text" value="<?php echo $default; ?>" id="cn" name="cn" title="First Name" placeholder="First Name" class="n q" />
-        <?php if (isset($context->options['chooser'])) {
-            echo '<input type="hidden" name="chooser" value="true" />';
-        }
+        $sn_default = '';
         if (isset($context->options['sn'])) {
-            $default = htmlentities($context->options['sn'], ENT_QUOTES);
-        } else {
-            $default = '';
+            $sn_default = htmlentities($context->options['sn'], ENT_QUOTES);
         }
         ?>
-        <input type="text" value="<?php echo $default; ?>" id="sn" name="sn" title="Last Name" placeholder="Last Name" class="s n q" />
+<input type="text" value="<?php echo $cn_default; ?>" id="cn" name="cn" title="First Name" placeholder="First Name" class="n q" /><input type="text" value="<?php echo $sn_default; ?>" id="sn" name="sn" title="Last Name" placeholder="Last Name" class="s n q" />
+        <?php 
+        ?>
+        
         <input type="hidden" name="adv" value="1" />
         <span class="input-group-btn">
             <button name="submitbutton" type="submit" value="Search" title="Search" class="button wdn-icon-search"></button>
