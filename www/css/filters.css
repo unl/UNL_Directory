@@ -67,11 +67,6 @@ form.filters ol li:first-child {font-weight:bold;}
     font-size: 1.1em;
     font-style:italic;
 }
-form.filters.loading {
-    display:block;	
-    left:80px;
-    top:40px;
-}
 form.filters.loading fieldset {
     display:none;
 }
