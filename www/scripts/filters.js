@@ -12,7 +12,7 @@ var filters = function() {
 		}
 		$header  = WDN.jQuery(this);
 		$content = $header.next();
-		$content.slideToggle(500, function () {
+		$content.slideToggle(100, function () {
 			if ($content.is(":visible")) {
 				//Expanded
 				$header.children('.toggle').text("Collapse");
