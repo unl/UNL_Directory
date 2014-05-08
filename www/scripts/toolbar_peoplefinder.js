@@ -91,4 +91,4 @@ WDN.toolbar_peoplefinder = function() {
 var pf_getUID = WDN.toolbar_peoplefinder.pf_getUID;
 var queuePFChooser = WDN.toolbar_peoplefinder.queuePFChooser;
 var queuePFRequest = WDN.toolbar_peoplefinder.queuePFRequest;
-var $progress = WDN.jQuery('<progress>', {class: 'wdn_search_progress loading'}).text('Loading...');
+var $progress = WDN.jQuery('<progress>', {'class': 'wdn_search_progress loading'}).text('Loading...');
