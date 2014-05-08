@@ -127,6 +127,15 @@ var directory = function() {
 				eventObject.stopPropagation();
 				return false;
 			});
+			WDN.jQuery('#advancedSearch').bind({
+				focus : function(){
+					WDN.jQuery("#queryString").remove();
+				},
+				click : function(){
+					directory.splitSearchBoxes('','');
+					return false;
+				}
+			});
 			directory.fixLabel();
 		},
 		
@@ -225,15 +234,6 @@ var directory = function() {
         },
         
         initializeSearchResultListeners : function() {
-            WDN.jQuery('#advancedSearch').bind({
-                focus : function(){
-                    WDN.jQuery("#queryString").remove();
-                },
-                click : function(){
-                    directory.splitSearchBoxes('','');
-                    return false;
-                }
-            });
             WDN.jQuery('.ppl_Sresult').on('click', function(){
                     service_peoplefinder.showIndividualPeopleFinderRecord(WDN.jQuery(this));
                     return false;
