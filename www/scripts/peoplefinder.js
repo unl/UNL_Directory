@@ -201,6 +201,9 @@ var directory = function() {
 					liRecord.removeClass('selected');
 				});
 			} else {
+				if (liRecord.children('.loading').length == 0) {
+					liRecord.append($progress);
+				}
 				liRecord.children('.loading').show();
 				WDN.jQuery('li.current').removeClass('current');
 				liRecord.addClass('selected current');
