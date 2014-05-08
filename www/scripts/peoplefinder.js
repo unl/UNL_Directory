@@ -300,7 +300,10 @@ WDN.jQuery(document).ready(function() {
 					});
 				}
 			});
-			WDN.jQuery(window).trigger('hashchange');
+			if (location.hash != '') {
+				//trigger a hash change if a hash has been provided on load
+				WDN.jQuery(window).trigger('hashchange');
+			}
 		});
 	}
 	
