@@ -91,7 +91,6 @@ var service_peoplefinder = function() {
 				liRecord.removeClass('selected');
 			} else {
 				if (liRecord.children('.loading').length == 0) {
-					$progress = WDN.jQuery('<progress>', {class: 'wdn_search_progress loading'}).text('Loading...');
 					liRecord.append($progress);
 				}
 				
