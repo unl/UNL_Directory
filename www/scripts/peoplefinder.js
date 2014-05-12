@@ -314,7 +314,7 @@ WDN.jQuery(document).ready(function() {
 	directory.initializeSearchBoxes();
     directory.initializeSearchResultListeners();
 
-	if (WDN.jQuery("#results").html().length) {
+	if (WDN.jQuery("#results").length && WDN.jQuery("#results").html().length) {
 		attempts = 1;
 		service_peoplefinder.updatePeopleFinderResults();
 	}
