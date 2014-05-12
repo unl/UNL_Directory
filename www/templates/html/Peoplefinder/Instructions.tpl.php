@@ -60,7 +60,7 @@
             <div class="bp2-wdn-col-one-fourth">
                 <?php echo $savvy->render(null, 'Peoplefinder/SearchResults/Filters.tpl.php'); ?>
             </div>
-            <div id="results" class="bp2-wdn-col-three-fourths"></div>
+            <div id="results" tabindex="-1" class="bp2-wdn-col-three-fourths"></div>
         </div>
     </div>
 </div>

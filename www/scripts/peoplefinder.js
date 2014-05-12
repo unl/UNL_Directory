@@ -122,7 +122,7 @@ var directory = function() {
 						WDN.jQuery('#q').focus().select();
 						originalSearch = WDN.jQuery('#'+this.id+' input.q').val();
 					}
-				}
+				}WDN.jQuery('#results').focus();
 				eventObject.preventDefault();
 				eventObject.stopPropagation();
 				return false;
