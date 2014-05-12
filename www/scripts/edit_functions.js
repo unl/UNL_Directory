@@ -67,13 +67,15 @@ var admin_editting = function() {
 		},
 
 		bindColorbox : function() {
-			WDN.jQuery('a.edit, a.addchild').not('.minibutton').colorbox({
-				width: '740px',
-				height: '75%',
-				onComplete : function(){
-					admin_editting.submitForm(WDN.jQuery('#colorbox form.zenform'));
-				}
-			});
+			WDN.initializePlugin('modal', [function() {
+				WDN.jQuery('a.edit, a.addchild').not('.minibutton').colorbox({
+					width: '740px',
+					height: '75%',
+					onComplete : function(){
+						admin_editting.submitForm(WDN.jQuery('#colorbox form.zenform'));
+					}
+				});
+			}]);
 		},
 		
 		bindSortable : function() {
