@@ -42,7 +42,8 @@ WDN.toolbar_peoplefinder = function() {
             }
             clearTimeout(pfreq_q);
             if (q.length > 2 || splitQuery.length > 10) {
-                document.getElementById(resultsdiv).innerHTML = '<img alt="progress" id="pfprogress" src="'+WDN.template_path+'wdn/templates_3.0/css/header/images/colorbox/loading.gif" />';
+				console.log(resultsdiv);
+                WDN.jQuery('#'+resultsdiv).html($progress);
                 pfreq_q = setTimeout('WDN.toolbar_peoplefinder.getPeopleFinderResults("'+escape(q)+splitQuery+'", '+chooser+')', 400);
             } else if (q.length>0) {
                 document.getElementById(resultsdiv).innerHTML = 'Please enter more information.';
@@ -90,3 +91,4 @@ WDN.toolbar_peoplefinder = function() {
 var pf_getUID = WDN.toolbar_peoplefinder.pf_getUID;
 var queuePFChooser = WDN.toolbar_peoplefinder.queuePFChooser;
 var queuePFRequest = WDN.toolbar_peoplefinder.queuePFRequest;
+var $progress = WDN.jQuery('<progress>', {'class': 'wdn_search_progress loading'}).text('Loading...');

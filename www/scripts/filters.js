@@ -1,11 +1,47 @@
 var filters = function() {
 	var departments = [];
 	var affiliations = [];
+
+	/**
+	 * Expand / collapse filters
+	 */
+	WDN.jQuery(".filters legend").on('click keypress', function (e) {
+		if (e.keyCode !== undefined && !(e.keyCode == 0 || e.keyCode == 13)) {
+			//Not a space or enter key press
+			return;
+		}
+		$header  = WDN.jQuery(this);
+		$container = $header.next();
+		$content = $container.find('ol');
+		$content.slideToggle(100, function () {
+			if ($content.is(":visible")) {
+				//Expanded
+				$header.find('.toggle').text("Collapse");
+				$container.attr('aria-expanded', 'true');
+				$content.focus();
+			} else {
+				//Collapsed
+				$header.find('.toggle').text("Expand");
+				$container.attr('aria-expanded', 'false');
+			}
+		});
+	});
+
 	return {
 		initialize : function() {
 			WDN.jQuery('form.filters fieldset ol').empty().parents('form').addClass('loading');
 			WDN.jQuery('#filters').show();
 			filters.findClasses();
+
+			//Hide the filters if there is only a few results (on mobile)
+			WDN.jQuery('#filters').removeClass('few-results');
+			WDN.jQuery('#filters').removeClass('many-results');
+			var total = WDN.jQuery('.ppl_Sresult');
+			if (total.length <= 10) {
+				WDN.jQuery('#filters').addClass('few-results');
+			} else {
+				WDN.jQuery('#filters').addClass('many-results');
+			}
 		},
 		
 		findClasses : function() {

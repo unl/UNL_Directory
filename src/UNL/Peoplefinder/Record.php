@@ -79,7 +79,7 @@ class UNL_Peoplefinder_Record
         $address = array();
         $address['street-address'] = trim($parts[0]);
         $address['locality']       = '';
-        $address['region']         = 'NE';
+        $address['region']         = '';
         $address['postal-code']    = '';
 
         if (count($parts) == 3) {
@@ -94,12 +94,22 @@ class UNL_Peoplefinder_Record
             $address['postal-code'] = $matches[0];
         }
 
-        switch (substr($address['postal-code'], 0, 3)) {
-            case '681':
-                $address['locality'] = 'Omaha';
+        switch (substr($address['postal-code'], 0, 2)) {
+            case '65':
+                $address['region'] = 'MO';
                 break;
-            case '685':
-                $address['locality'] = 'Lincoln';
+            case '68':
+                $address['region'] = 'NE';
+
+                // What city in Nebraska?
+                switch (substr($address['postal-code'], 0, 3)) {
+                    case '681':
+                        $address['locality'] = 'Omaha';
+                        break;
+                    case '685':
+                        $address['locality'] = 'Lincoln';
+                        break;
+                }
                 break;
         }
 

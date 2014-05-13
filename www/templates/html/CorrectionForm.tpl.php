@@ -6,7 +6,8 @@
         <input type="hidden" name="page_address" value="" />
         <label for="name">Name:</label><input type="text" name="name" id="name" value="" />
         <label for="email">Email:</label><input type="text" name="email" id="email" value="" /><br />
-        <textarea name="comment" id="comment" rows="" cols=""></textarea>
+        <label for="comment">What is your correction?</label>
+        <textarea name="comment" id="comment"></textarea>
         <input type="submit" value="Submit" />
     </form>
 </div>
@@ -22,15 +23,21 @@ WDN.jQuery("document").ready(function(){
 
 	WDN.jQuery('input[name="page_address"]').val(location);
 
-	if (WDN.idm.user.mail != null) {
-		WDN.jQuery('.commentProblem input[name="email"]').val(WDN.idm.user.mail[0]);
-	}
-	if (WDN.idm.user.uid != null) {
-		WDN.jQuery('.commentProblem input[name="name"]').val(WDN.idm.user.uid);
-	}
+    require(['idm'], function(idm) {
+        if (idm.getEmailAddress()) {
+            WDN.jQuery('.commentProblem input[name="email"]').val(idm.getEmailAddress());
+        }
+        if (idm.getUserId()) {
+            WDN.jQuery('.commentProblem input[name="name"]').val(idm.getUserId());
+        }
+    })
+	
 	correctionHTML = 
 		'<a href="http://www1.unl.edu/comments/" class="dir_correctionRequest pf_record noprint">Have a correction?</a>';
 	WDN.jQuery(".vcardInfo").append(correctionHTML);
+    
+    //Initialize the new correction form link
+    directory.initializeCorrectionForms();
 });
 </script>
 <?php endif; ?>

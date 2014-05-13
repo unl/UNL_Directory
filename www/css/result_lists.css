@@ -5,7 +5,6 @@
 
 ***************************************************
 */
-#maincontent #results {min-height: 300px;margin-bottom:35px;}
 #maincontent ul.pfResult {
     padding:0px;
     list-style:none;
@@ -40,13 +39,9 @@
 
 .planetred_profile, .recordDetails {float:left;}
 .loading {
-    background:url('images/loading.gif') no-repeat top left;
-    height:40px;
-    width:40px;
-    float:left;
-    position:absolute;
-    right:250px;
-    display:none;   
+    display: block;
+    margin: 1em auto;
+    height: 1em;
 }
 .recordDetails {
     margin-left:20px;
@@ -144,6 +139,9 @@
 }
 #maincontent #dir_departmentListing .planetred_profile {
     display:none;
+}
+#maincontent .departments a.planetred_profile {
+    border-bottom: none;
 }
 #maincontent #dir_departmentListing .overflow {
     min-height:0;

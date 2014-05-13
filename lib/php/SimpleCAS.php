@@ -57,6 +57,13 @@ class SimpleCAS
     private $_authenticated = false;
 
     /**
+     * Should a redirect be done after ticket validation?
+     *
+     * @var bool
+     */
+    protected $validateRedirect = true;
+
+    /**
      * Protocol for the server running the CAS service.
      *
      * @var SimpleCAS_Protocol
@@ -112,25 +119,34 @@ class SimpleCAS
         if (!empty(self::$url)) {
             return self::$url;
         }
-        if (isset($_SERVER['HTTPS'])
-                && !empty($_SERVER['HTTPS'])
-                && $_SERVER['HTTPS'] == 'on') {
-            $protocol = 'https';
+
+        if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') {
+            $scheme = 'https';
         } else {
-            $protocol = 'http';
+            $scheme = 'http';
         }
 
-        $url = $protocol.'://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
+        $host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : null;
+        if (empty($host)) {
+            $host = $_SERVER['SERVER_NAME'];
+            $port = $_SERVER['SERVER_PORT'];
 
-        $replacements = array('/\?logout/'        => '',
+            if (($scheme == 'http' && $port != 80) || ($scheme == 'https' && $port != 443)) {
+                $host .= ':' . $port;
+            }
+        }
+
+        $url = $scheme . '://' . $host . $_SERVER['REQUEST_URI'];
+
+        $replacements = array(
+                '/\?logout/'        => '',
                 '/&ticket=[^&]*/'   => '',
                 '/\?ticket=[^&;]*/' => '?',
                 '/\?%26/'           => '?',
                 '/\?&/'             => '?',
-                '/\?$/'             => '');
-
-        $url = preg_replace(array_keys($replacements),
-                array_values($replacements), $url);
+                '/\?$/'             => ''
+        );
+        $url = preg_replace(array_keys($replacements), array_values($replacements), $url);
 
         return $url;
     }
@@ -200,10 +216,34 @@ class SimpleCAS
         }
 
         if (!is_null($name)) {
-            return $_SESSION[$this->_sessionNamespace][$name];
+            $value = null;
+            if (isset($_SESSION[$this->_sessionNamespace][$name])) {
+                $value = $_SESSION[$this->_sessionNamespace][$name];
+            }
+            return $value;
         }
 
         return $_SESSION[$this->_sessionNamespace];
+    }
+
+    /**
+     * Returns the session namespace name (the offset into the session)
+     *
+     * @return string
+     */
+    public function getSessionNamespace()
+    {
+        return $this->_sessionNamespace;
+    }
+
+    /**
+     * Returns the used protocol object
+     *
+     * @return SimpleCAS_Protocol
+     */
+    public function getProtocol()
+    {
+        return $this->protocol;
     }
 
     /**
@@ -219,11 +259,31 @@ class SimpleCAS
     /**
      * Set the ticket to be checked for authentication
      *
-     * @param unknown_type $ticket
+     * @param string $ticket
      */
     public function setTicket($ticket)
     {
         $this->_ticket = $ticket;
+    }
+    
+    /**
+     * Returns the extra attributes from Version 2 protocol validation
+     *
+     * @return array|null
+     */
+    public function getAttributes()
+    {
+        return $this->_getSession('ATTRIBUTES');
+    }
+
+    /**
+     * Set the flag controlling the after ticket validation redirect
+     *
+     * @param bool $value
+     */
+    public function setValidateRedirect($value)
+    {
+        $this->validateRedirect = (bool)$value;
     }
 
     /**
@@ -240,7 +300,15 @@ class SimpleCAS
     {
         if ($uid = $this->protocol->validateTicket($ticket, self::getURL())) {
             $this->setAuthenticated($uid);
-            $this->redirect(self::getURL());
+            
+            if ($this->protocol instanceof SimpleCAS_Protocol_Version2) {
+                $session =& $this->_getSession();
+                $session['ATTRIBUTES'] = $this->protocol->getAttributes();
+            }
+
+            if ($this->validateRedirect) {
+                $this->redirect(self::getURL());
+            }
             return true;
         } else {
             return false;

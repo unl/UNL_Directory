@@ -16,14 +16,14 @@ if ($controller->options['view'] != 'alphalisting') {
     $userCanEdit = $context->userCanEdit(UNL_Officefinder::getUser());
 }
 ?>
-<section class="summary">
-    <div class="grid8 first">
+<section class="summary wdn-grid-set">
+    <div class="bp2-wdn-col-three-fourths">
 	    <h3 class="sec_header">
 	        Department Summary
 	    </h3>
 		<?php echo $savvy->render($context, 'Officefinder/Department/Summary.tpl.php'); ?>
     </div>
-    <div class="grid4">
+    <div class="bp2-wdn-col-one-fourth">
 	    <?php
 	    if ($userCanEdit) {
 	        echo $savvy->render($context, 'Officefinder/Department/EditBox.tpl.php');
@@ -36,67 +36,69 @@ if ($controller->options['view'] != 'alphalisting') {
 $department = $context->getHRDepartment();
 ?>
 <div class="clear"></div>
-<div class="grid8 first">
-    <ul class="wdn_tabs">
-        <li><a href="#listings">Listings</a></li>
-        <?php if ($department && count($department) > 0): ?>
-        <li><a href="#all_employees">All Employees <sup><?php echo count($department); ?></sup></a></li>
-        <?php endif; ?>
-    </ul>
-    <div class="wdn_tabs_content">
-        <div id="listings">
+<div class="wdn-grid-set">
+    <div class="bp2-wdn-col-three-fourths">
+        <ul class="wdn_tabs">
+            <li><a href="#listings">Listings</a></li>
+            <?php if ($department && count($department) > 0): ?>
+            <li><a href="#all_employees">All Employees <sup><?php echo count($department); ?></sup></a></li>
+            <?php endif; ?>
+        </ul>
+        <div class="wdn_tabs_content">
+            <div id="listings">
+            <?php
+            $listings = $context->getUnofficialChildDepartments();
+            if (count($listings)) {
+                echo $savvy->render($listings, 'Officefinder/Department/Listings.tpl.php');
+            }
+            if ($userCanEdit) {
+                $edit_url = UNL_Officefinder::getURL(null, array('view'      => 'department',
+                                                                 'parent_id' => $context->id,
+                                                                 'format'    => 'editing'));
+                echo '<a href="'.htmlentities($edit_url, ENT_QUOTES).'">Add a new child-listing</a>';
+            }
+            ?>
+            </div>
+            <?php
+            if ($department && count($department) > 0) {
+                // This listing has an official HR department associated with IT
+                // render all those HR department details.
+                echo $savvy->render($department);
+            }
+            
+            ?>
+        </div>
+    </div>
+    <div class="bp2-wdn-col-one-fourth" id="orgChart">
+        <h3>HR Organization Chart Position</h3>
         <?php
-        $listings = $context->getUnofficialChildDepartments();
-        if (count($listings)) {
-            echo $savvy->render($listings, 'Officefinder/Department/Listings.tpl.php');
-        }
-        if ($userCanEdit) {
-            $edit_url = UNL_Officefinder::getURL(null, array('view'      => 'department',
-                                                             'parent_id' => $context->id,
-                                                             'format'    => 'editing'));
-            echo '<a href="'.htmlentities($edit_url, ENT_QUOTES).'">Add a new child-listing</a>';
+        if (!$context->isRoot()) {
+            $parent = $context->getParent();
+            echo '<ul>
+                    <li><a href="'.$parent->getURL().'">'.$parent->name.'</a>';
         }
         ?>
-        </div>
+    
+                <ul>
+                    <li><?php echo $context->name; ?>
+                        <?php if ($context->hasOfficialChildDepartments()): ?>
+                        <ul>
+                            <?php foreach (
+                                    new UNL_Officefinder_DepartmentList_Filter_Suppressed(
+                                        $context->getOfficialChildDepartments('name ASC')
+                                        ) as $child): ?>
+                            <li><a href="<?php echo $child->getURL(); ?>"><?php echo $child->name; ?></a></li>
+                            <?php endforeach; ?>
+                        </ul>
+                        <?php endif; ?>
+                    </li>
+                </ul>
         <?php
-        if ($department && count($department) > 0) {
-            // This listing has an official HR department associated with IT
-            // render all those HR department details.
-            echo $savvy->render($department);
+        if (!$context->isRoot()) {
+                echo '</li>
+            </ul>';
         }
-        
         ?>
     </div>
+    <a id="reportProblem" class="dir_correctionRequest noprint" href="http://www1.unl.edu/comments/">Have a correction?</a>
 </div>
-<div class="grid4" id="orgChart">
-<h3>HR Organization Chart Position</h3>
-<?php
-if (!$context->isRoot()) {
-    $parent = $context->getParent();
-    echo '<ul>
-            <li><a href="'.$parent->getURL().'">'.$parent->name.'</a>';
-}
-?>
-
-            <ul>
-                <li><?php echo $context->name; ?>
-                    <?php if ($context->hasOfficialChildDepartments()): ?>
-                    <ul>
-                        <?php foreach (
-                                new UNL_Officefinder_DepartmentList_Filter_Suppressed(
-                                    $context->getOfficialChildDepartments('name ASC')
-                                    ) as $child): ?>
-                        <li><a href="<?php echo $child->getURL(); ?>"><?php echo $child->name; ?></a></li>
-                        <?php endforeach; ?>
-                    </ul>
-                    <?php endif; ?>
-                </li>
-            </ul>
-<?php
-if (!$context->isRoot()) {
-        echo '</li>
-    </ul>';
-}
-?>
-</div>
-<a id="reportProblem" class="dir_correctionRequest noprint" href="http://www1.unl.edu/comments/">Have a correction?</a>

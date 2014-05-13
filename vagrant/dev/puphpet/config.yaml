@@ -72,6 +72,7 @@ apache:
     mpm_module: prefork
     mod_pagespeed: 0
     mod_spdy: 0
+    custom_fragment: 'EnableSendFile Off'
 php:
     version: '54'
     composer: '1'
