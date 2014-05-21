@@ -43,34 +43,43 @@ body #footer .footer_col {
 .nav_unpinned #wdn_content_wrapper {margin-top:0;}
 /*End Copy*/
 #cboxTitle {display:none !important;}
-#maincontent a.dir_correctionRequest {
-	position:absolute;
-	bottom:5px;
-	right:5px;
-	border-radius:5px;
-	-webkit-border-radius:5px;
-	-moz-border-radius:5px;
-	padding:2px 4px;
-	background:#ac0302;
-	background: -moz-linear-gradient(top, #DD1616 0%, #AC0302 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#DD1616), color-stop(100%,#AC0302));
-	color:#fff;
-	text-shadow: 1px 1px 1px #6e0000;
-	font-size: 0.7em;
-	font-weight:bold;
-}
-#maincontent .vcardInfo a.dir_correctionRequest {
-	-webkit-box-shadow: 1px 1px 1px #949494;
-    -moz-box-shadow: 1px 1px 1px #949494;
-    box-shadow: 1px 1px 1px #949494; 
-}
-#maincontent a.dir_correctionRequest:hover {
-	background: -moz-linear-gradient(bottom, #DD1616 0%, #AC0302 20%);
-    background: -webkit-gradient(linear, left bottom, left top, color-stop(0%,#DD1616), color-stop(20%,#AC0302));
-}
+
 #maincontent a.dir_correctionRequest:focus{
 	color:#fff !important;
 }
+
+#maincontent a.dir_correctionRequest {
+    font-size: 0.7em;
+}
+
+@media (min-width: 768px) {
+    #maincontent a.dir_correctionRequest {
+        position:absolute;
+        bottom:5px;
+        right:5px;
+        border-radius:5px;
+        -webkit-border-radius:5px;
+        -moz-border-radius:5px;
+        padding:2px 4px;
+        background:#ac0302;
+        background: -moz-linear-gradient(top, #DD1616 0%, #AC0302 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#DD1616), color-stop(100%,#AC0302));
+        color:#fff;
+        text-shadow: 1px 1px 1px #6e0000;
+        font-weight:bold;
+    }
+
+    #maincontent .vcardInfo a.dir_correctionRequest {
+        -webkit-box-shadow: 1px 1px 1px #949494;
+        -moz-box-shadow: 1px 1px 1px #949494;
+        box-shadow: 1px 1px 1px #949494;
+    }
+    #maincontent a.dir_correctionRequest:hover {
+        background: -moz-linear-gradient(bottom, #DD1616 0%, #AC0302 20%);
+        background: -webkit-gradient(linear, left bottom, left top, color-stop(0%,#DD1616), color-stop(20%,#AC0302));
+    }
+}
+
 #maincontent .commentProblem, #footer .commentProblem  {display:none;}
 
 /* 
