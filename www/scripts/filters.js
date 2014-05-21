@@ -16,12 +16,12 @@ var filters = function() {
 		$content.slideToggle(100, function () {
 			if ($content.is(":visible")) {
 				//Expanded
-				$header.find('.toggle').text("Collapse");
+				$header.find('.toggle').text("(Collapse)");
 				$container.attr('aria-expanded', 'true');
 				$content.focus();
 			} else {
 				//Collapsed
-				$header.find('.toggle').text("Expand");
+				$header.find('.toggle').text("(Expand)");
 				$container.attr('aria-expanded', 'false');
 			}
 		});
@@ -112,23 +112,25 @@ var filters = function() {
 		},
 		
 		buildSummary: function() {
-			WDN.jQuery('#results').prepend('<p id="filterSummary">Displaying People: <a class="all" href="">All Options</a>');
+			WDN.jQuery('#results').prepend('<p id="filterSummary">Displaying People: <span class="all selected-options">All Options</span>');
 		},
 		
 		updateSummary: function(ids) { //this function recives an array of all checked filters
 			if (ids.length < 1) { //nothing in the array, therefore it's ALL
-				WDN.jQuery('#filterSummary a, span.operator').remove();
-				WDN.jQuery('#filterSummary').append('<a href="#" class="all">All Options</a>');
+				WDN.jQuery('#filterSummary .selected-options, span.operator').remove();
+				WDN.jQuery('#filterSummary').append('<span class="all selected-options">All Options</span>');
 				WDN.jQuery('.filterAll').attr('checked', 'checked');
 				filters.showAll();
 			} else { //at least one id exists in the array
-				WDN.jQuery('#filterSummary a, span.operator').remove();
+				WDN.jQuery('#filterSummary .selected-options, span.operator').remove();
 				WDN.jQuery.each(ids, function(key, value){
-					WDN.jQuery('#filterSummary').append(' <a href="#" class="'+WDN.jQuery('#'+value).attr('value')+'"><span class="group">'+WDN.jQuery('#'+value).closest('fieldset').children('legend').text()+':</span> '+WDN.jQuery('#'+value).siblings('label').text()+'</a><span class="operator"> OR </span>');
+					var $legend = WDN.jQuery('#'+value).closest('fieldset').children('legend').children('span');
+					console.log($legend.text());
+					var text = $legend.clone().children().remove().end().text();
+					console.log(text);
+					WDN.jQuery('#filterSummary').append(' <span class="'+WDN.jQuery('#'+value).attr('value')+' selected-options"><span class="group">'+text+':</span> '+WDN.jQuery('#'+value).siblings('label').text()+'</span><span class="operator"> OR </span>');
 				});
 			}
-			WDN.jQuery('#filterSummary a').on('click', function(e){e.preventDefault;return false;});
-			
 		},
 		
 		scrubDept : function(string) {
