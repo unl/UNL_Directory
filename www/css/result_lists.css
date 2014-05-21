@@ -47,6 +47,16 @@
     margin-left:20px;
     max-width:540px;
 }
+
+@media (max-width: 480px) {
+    .recordDetails {
+        margin-top: .5em; /* Make sure the "contact name" link does not overlap on the person's name */
+    }
+    .on-campus-dialing {
+        display: none; /* They are probably on mobile, don't show on-campus.  It was over-lapping other elements on mobile. */
+    }
+}
+
 .recordDetails .eppa {
     display:none;   
 }
