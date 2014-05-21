@@ -61,7 +61,12 @@
 }
 
 .vcard .eppa, .vcard .epa {font-style:italic;font-size:0.8em;}
-.vcardInfo {margin-bottom:1em;}
+.vcardInfo {margin-left:129px; margin-bottom:3em;}
+
+@media (max-width: 768px) {
+    .vcardInfo {margin-left:0px}
+}
+
 .vcard .adr, .departmentInfo .adr {
     border-left:2px solid #CCD2D5;
     padding-left:5px;
