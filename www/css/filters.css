@@ -1,6 +1,5 @@
 /*filter box*/
 #filters {
-	margin-top:40px;
 	clear:both;
 	background: #f5f0dd;
     -webkit-border-radius:3px;
@@ -35,9 +34,9 @@
 }
 form.filters {color:#65553f;margin-top:15px;}
 form.filters fieldset {margin-bottom:10px;}
-form.filters legend {width:100%; border-bottom:1px solid #c7ad89;font-weight:bold;margin-bottom:10px;font-size:1.1em;}
+form.filters legend {width:100%; border-bottom:1px solid #c7ad89;font-weight:bold;margin-bottom:10px;font-size:1.1em;cursor:pointer}
 form.filters div.element {display:inline;}
-form.filters input[type="checkbox"] {width:20px;float:left;margin-left:-4px;}
+form.filters input[type="checkbox"] {width:20px;}
 form.filters label {display:inline;margin-left:0px;font-size:0.9em;}
 form.filters ol li {clear:both;}
 #maincontent form.filters ol {list-style:none;padding-left:0px;}
@@ -68,12 +67,24 @@ form.filters ol li:first-child {font-weight:bold;}
     font-size: 1.1em;
     font-style:italic;
 }
-form.filters.loading {
-    display:block;	
-    left:80px;
-    top:40px;
-}
 form.filters.loading fieldset {
     display:none;
 }
 span.operator:last-child{display:none;}
+form.filters input[type="submit"] {
+    display: none;
+}
+form.filters fieldset ol {
+    display: none;
+}
+@media all and (max-width: 768px) {
+    #filters.few-results {
+        display: none !important;
+    }
+}
+#filters_affiliation:focus {
+    outline: none;
+}
+#filters_department:focus {
+    outline: none;
+}

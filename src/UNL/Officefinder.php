@@ -31,8 +31,7 @@ class UNL_Officefinder
      */
     public $options = array('view'   => 'instructions',
                             'format' => 'html',
-                            'q'      => '',
-                            'mobile' => false);
+                            'q'      => '');
 
     /**
      * The results of the search
@@ -92,10 +91,6 @@ class UNL_Officefinder
         if ($this->options['format'] == 'html') {
             if (isset($_COOKIE['unl_sso'])) {
                 self::authenticate(true);
-            }
-
-            if ($this->options['mobile'] != 'no') {
-                $this->options['mobile'] = UNL_MobileDetector::isMobileClient();
             }
         }
 

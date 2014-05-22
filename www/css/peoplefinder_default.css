@@ -1,12 +1,6 @@
 /*
 Copy the Document styles. We want to use the HTML5 template, which only comes in a fixed view.
 */
-body #navigation,
-body #wdn_search,
-body #wdn_tool_links {
-    display: none;
-}
-
 body #pagetitle {
     margin: 15px 0;
 }
@@ -43,65 +37,45 @@ body #footer .footer_col {
 .nav_unpinned #wdn_content_wrapper {margin-top:0;}
 /*End Copy*/
 #cboxTitle {display:none !important;}
-#maincontent a.dir_correctionRequest {
-	position:absolute;
-	bottom:5px;
-	right:5px;
-	border-radius:5px;
-	-webkit-border-radius:5px;
-	-moz-border-radius:5px;
-	padding:2px 4px;
-	background:#ac0302;
-	background: -moz-linear-gradient(top, #DD1616 0%, #AC0302 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#DD1616), color-stop(100%,#AC0302));
-	color:#fff;
-	text-shadow: 1px 1px 1px #6e0000;
-	font-size: 0.8em;
-	font-weight:bold;
-}
-#maincontent .vcardInfo a.dir_correctionRequest {
-	-webkit-box-shadow: 1px 1px 1px #949494;
-    -moz-box-shadow: 1px 1px 1px #949494;
-    box-shadow: 1px 1px 1px #949494; 
-}
-#maincontent a.dir_correctionRequest:hover {
-	background: -moz-linear-gradient(bottom, #DD1616 0%, #AC0302 20%);
-    background: -webkit-gradient(linear, left bottom, left top, color-stop(0%,#DD1616), color-stop(20%,#AC0302));
-}
+
 #maincontent a.dir_correctionRequest:focus{
 	color:#fff !important;
 }
+
+#maincontent a.dir_correctionRequest {
+    font-size: 0.7em;
+}
+
+@media (min-width: 768px) {
+    #maincontent a.dir_correctionRequest {
+        position:absolute;
+        bottom:5px;
+        right:5px;
+        border-radius:5px;
+        -webkit-border-radius:5px;
+        -moz-border-radius:5px;
+        padding:2px 4px;
+        background:#ac0302;
+        background: -moz-linear-gradient(top, #DD1616 0%, #AC0302 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#DD1616), color-stop(100%,#AC0302));
+        color:#fff;
+        text-shadow: 1px 1px 1px #6e0000;
+        font-weight:bold;
+    }
+
+    #maincontent .vcardInfo a.dir_correctionRequest {
+        -webkit-box-shadow: 1px 1px 1px #949494;
+        -moz-box-shadow: 1px 1px 1px #949494;
+        box-shadow: 1px 1px 1px #949494;
+    }
+    #maincontent a.dir_correctionRequest:hover {
+        background: -moz-linear-gradient(bottom, #DD1616 0%, #AC0302 20%);
+        background: -webkit-gradient(linear, left bottom, left top, color-stop(0%,#DD1616), color-stop(20%,#AC0302));
+    }
+}
+
 #maincontent .commentProblem, #footer .commentProblem  {display:none;}
-.commentProblem h3 {
-	font-size:150%;
-	border-bottom: 1px solid #ddd;
-	margin-bottom:5px;
-}
-.commentProblem textarea {
-	width:90%;
-	display:block;
-	height:120px;
-	margin:10px 0;
-}
-.commentProblem label {
-	font-weight:bold;
-	margin:5px;
-}
-.commentProblem input[type=submit] {
-	background:url('/wdn/templates_3.0/css/content/images/zenform/submit.png') right #af0202 no-repeat;
-	border:3px solid #fff;
-	color:#FFFFFF !important;
-	cursor:pointer;
-	font-size:1.2em;
-	margin:10px 10px 20px 0px;
-	padding:10px 36px 10px 16px;
-	width:auto;
-	min-height:39px;
-	-moz-border-radius:9px/10px;
-	-webkit-border-radius:9px 10px;
-	border-radius:9px/10px;
-	display:inline;
-}
+
 /* 
 ***************************************************
 
@@ -110,20 +84,8 @@ body #footer .footer_col {
 ***************************************************
 */
 .directorySearch {
-	background: rgb(229,220,167); /* Old browsers */
-	background: -moz-linear-gradient(top, rgba(229,220,167,1) 0%, rgba(217,196,128,1) 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(229,220,167,1)), color-stop(100%,rgba(217,196,128,1))); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top, rgba(229,220,167,1) 0%,rgba(217,196,128,1) 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top, rgba(229,220,167,1) 0%,rgba(217,196,128,1) 100%); /* Opera11.10+ */
-	background: -ms-linear-gradient(top, rgba(229,220,167,1) 0%,rgba(217,196,128,1) 100%); /* IE10+ */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e5dca7', endColorstr='#d9c480',GradientType=0 ); /* IE6-9 */
-	background: linear-gradient(top, rgba(229,220,167,1) 0%,rgba(217,196,128,1) 100%); /* W3C */
-	-webkit-border-radius:3px;
-    -moz-border-radius:3px;
-    border-radius:3px;
     padding:1em;
     display:block;
-    margin-bottom:24px;
 }
 .directorySearch legend {display:none;}
 #maincontent form.directorySearch ol{
@@ -179,13 +141,16 @@ body #footer .footer_col {
 	background:#e6e4b1;
 }
 #maincontent #directoryHelp {
-	float:right;
 	list-style:none;
 }
 #maincontent #directoryHelp li {
-	padding:0 0 6px 0;	
+     padding:0 0 6px 0;
+     display: inline;
+ }
+#maincontent #directoryHelp li a {
+    border-bottom: none;
 }
-.directorySearch ol li:first-child input[type=submit], #maincontent #directoryHelp li a {
+.directorySearch ol li:first-child input[type=submit] {
     background: rgb(168,140,99); /* Old browsers */
 	background: -moz-linear-gradient(top, rgba(168,140,99,1) 0%, rgba(183,164,95,1) 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(168,140,99,1)), color-stop(100%,rgba(183,164,95,1))); /* Chrome,Safari4+ */
@@ -285,18 +250,9 @@ Search help qTip Styles
 */
 #maincontent .grid6.first{clear:both;}
 #maincontent .intro, #maincontent .intro{
-	background: -moz-linear-gradient(top, rgba(237,237,237,0.8) 0%, rgba(255,255,255,0) 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(237,237,237,0.8)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top, rgba(237,237,237,0.8) 0%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top, rgba(237,237,237,0.8) 0%,rgba(255,255,255,0) 100%); /* Opera11.10+ */
-background: -ms-linear-gradient(top, rgba(237,237,237,0.8) 0%,rgba(255,255,255,0) 100%); /* IE10+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ccededed', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
-background: linear-gradient(top, rgba(237,237,237,0.8) 0%,rgba(255,255,255,0) 100%); /* W3C */
-
-padding:10px;
-	-moz-border-radius:5px;
-	-webkit-border-radius:5px;
-	border-radius:5px;
+    background-color: #FDFDFB;
+    border-top: 5px solid #BDBAB5;
+    padding: 1em 7.5%;
 }
 
 .intro img.profile_pic{float:left;}
@@ -308,21 +264,106 @@ padding:10px;
 	font-size:2em;
 	font-weith:bold;
 	display:block;
-	margin-top:-6px;
+	line-height: 1em;
 }
 .intro_support {
-	height:150px;
 	padding:10px 0 !important;
 }
 #maincontent .left .intro_support {
 	background:url('images/samplePeople.png') no-repeat bottom right;
 }
 #maincontent .footer {
-	background:#f7f7f7;border-width:1px 0 1px 0;border-color:#bbb;border-style:solid;padding:10px 20px;margin:20px 0 0;text-align:right;
+    border-width:1px 0 1px 0;border-color:#bbb;border-style:solid;padding:10px 20px;margin:20px 0 0;text-align:right;
 }
 #maincontent .contact_list .intro {
 	
 }
 #maincontent .contact_list h3 {
     
+}
+
+#colorbox #cboxLoadedContent {
+    background: rgb(242, 242, 242);
+    padding: 1em;
+}
+
+form .input-group{
+    display:table
+}
+
+form .input-group>*{
+    display:table-cell;
+    -webkit-border-radius:0;
+    -webkit-background-clip:padding-box;
+    -moz-border-radius:0;
+    -moz-background-clip:padding;
+    border-radius:0;
+    background-clip:padding-box
+}
+
+form .input-group .input-group-btn{
+    width:1%;
+    vertical-align:middle
+}
+
+form .input-group .input-group-btn button{
+    font-size:18px;
+    line-height:normal;
+    padding:.8em 1.333em;
+    margin:0
+}
+
+form .input-group input{
+    margin:0;
+    border-radius: 0;
+}
+
+form .input-group :first-child{
+    -webkit-border-radius:4px 0 0 4px;
+    -webkit-background-clip:padding-box;
+    -moz-border-radius:4px 0 0 4px;
+    -moz-background-clip:padding;
+    border-radius:4px 0 0 4px;
+    background-clip:padding-box
+}
+
+form .input-group :last-child{
+    -webkit-border-bottom-right-radius:4px;
+    -moz-border-radius-bottomright:4px;
+    border-bottom-right-radius:4px;
+    -webkit-border-top-right-radius:4px;
+    -webkit-background-clip:padding-box;
+    -moz-border-radius-topright:4px;
+    -moz-background-clip:padding;
+    border-top-right-radius:4px;
+    background-clip:padding-box
+}
+
+form .input-group :last-child button{
+    -webkit-border-bottom-left-radius:0;
+    -moz-border-radius-bottomleft:0;
+    border-bottom-left-radius:0;
+    -webkit-border-top-left-radius:0;
+    -webkit-background-clip:padding-box;
+    -moz-border-radius-topleft:0;
+    -moz-background-clip:padding;
+    border-top-left-radius:0;
+    background-clip:padding-box
+}
+
+#searchform{
+    text-align:center;
+    background:#38431b url(images/050419.jpg) 50% 50% no-repeat;
+    -webkit-background-size:cover;
+    -moz-background-size:cover;
+    background-size:cover
+}
+
+#searchform .input-group{
+    margin:0 auto;
+    max-width:30em
+}
+
+#peoplefinder.advanced input.q {
+    width: 50%;
 }

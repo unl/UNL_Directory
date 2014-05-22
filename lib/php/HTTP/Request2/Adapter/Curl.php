@@ -6,7 +6,7 @@
  *
  * LICENSE:
  *
- * Copyright (c) 2008, 2009, Alexey Borzov <avb@php.net>
+ * Copyright (c) 2008-2011, Alexey Borzov <avb@php.net>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -37,7 +37,7 @@
  * @package    HTTP_Request2
  * @author     Alexey Borzov <avb@php.net>
  * @license    http://opensource.org/licenses/bsd-license.php New BSD License
- * @version    SVN: $Id: Curl.php 291118 2009-11-21 17:58:23Z avb $
+ * @version    SVN: $Id: Curl.php 308318 2011-02-14 10:10:19Z avb $
  * @link       http://pear.php.net/package/HTTP_Request2
  */
 
@@ -52,7 +52,7 @@ require_once 'HTTP/Request2/Adapter.php';
  * @category    HTTP
  * @package     HTTP_Request2
  * @author      Alexey Borzov <avb@php.net>
- * @version     Release: 0.5.2
+ * @version     Release: 0.6.0
  */
 class HTTP_Request2_Adapter_Curl extends HTTP_Request2_Adapter
 {
@@ -136,8 +136,10 @@ class HTTP_Request2_Adapter_Curl extends HTTP_Request2_Adapter
             }
         } catch (Exception $e) {
         }
-        $this->lastInfo = curl_getinfo($ch);
-        curl_close($ch);
+        if (isset($ch)) {
+            $this->lastInfo = curl_getinfo($ch);
+            curl_close($ch);
+        }
 
         $response = $this->response;
         unset($this->request, $this->requestBody, $this->response);
@@ -192,14 +194,16 @@ class HTTP_Request2_Adapter_Curl extends HTTP_Request2_Adapter
         if (!$this->request->getConfig('follow_redirects')) {
             curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false);
         } else {
-            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+            if (!@curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true)) {
+                throw new HTTP_Request2_Exception('Redirect support in curl is unavailable due to open_basedir or safe_mode setting');
+            }
             curl_setopt($ch, CURLOPT_MAXREDIRS, $this->request->getConfig('max_redirects'));
             // limit redirects to http(s), works in 5.2.10+
             if (defined('CURLOPT_REDIR_PROTOCOLS')) {
                 curl_setopt($ch, CURLOPT_REDIR_PROTOCOLS, CURLPROTO_HTTP | CURLPROTO_HTTPS);
             }
-            // works sometime after 5.3.0, http://bugs.php.net/bug.php?id=49571
-            if ($this->request->getConfig('strict_redirects') && defined('CURLOPT_POSTREDIR ')) {
+            // works in 5.3.2+, http://bugs.php.net/bug.php?id=49571
+            if ($this->request->getConfig('strict_redirects') && defined('CURLOPT_POSTREDIR')) {
                 curl_setopt($ch, CURLOPT_POSTREDIR, 3);
             }
         }

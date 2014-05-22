@@ -7,10 +7,8 @@
 */
 a.mydepts {
     color:#5c5c5c;
-    float:right;
     font-family:sans-serif;
     font-size:80%;
-    margin-top:-10px;
     text-decoration:none;
     background: #f7f7f7 url('images/iconSelect.png') no-repeat center right;
     border:1px solid #ededed;
@@ -20,18 +18,19 @@ a.mydepts {
     padding:3px 18px 3px 10px;
 }
 #mydeptlist {
-    float:right;
     background: #f7f7f7;
     border:1px solid #ededed;
-    border-radius:3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius:3px;
-    margin-top:10px;
     position:absolute;
-    right:20px;
-    width:200px;
     padding:10px;
     z-index:9999;
+}
+#mydeptlist h2 {
+    display: none;
+    font-size:.5em;
+}
+#mydeptlist ul {
+    margin: 0px;
+    font-size: .5em;
 }
 #mydeptlist li {
     border-bottom:1px dashed #b1b1b1;
@@ -40,7 +39,6 @@ a.mydepts {
 #mydeptlist li a {
     color:#BA0000;
     text-decoration:none;
-    font-size:80%;	
     font-family:sans-serif;
 }
 #listings li div.edit {
@@ -93,20 +91,10 @@ a.mydepts {
     color:#fff;
     cursor:pointer;
 }
-#editBox div.aliases {
-    width:135px;
-    float:left;
-    padding-right:5px;
-}
 #editBox li span {
-	max-width:105px;
+	max-width: 90%;
 	display:inline-block;
 	word-wrap:break-word;
-}
-#editBox div.users {
-    width:135px;
-    float:right;
-    padding-left:5px;
 }
 #editBox ul.dept_users,
 #editBox ul.dept_aliases {

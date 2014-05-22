@@ -6,7 +6,7 @@
  *
  * LICENSE:
  *
- * Copyright (c) 2008, 2009, Alexey Borzov <avb@php.net>
+ * Copyright (c) 2008-2011, Alexey Borzov <avb@php.net>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -37,7 +37,7 @@
  * @package    HTTP_Request2
  * @author     Alexey Borzov <avb@php.net>
  * @license    http://opensource.org/licenses/bsd-license.php New BSD License
- * @version    SVN: $Id: Response.php 290520 2009-11-11 20:09:42Z avb $
+ * @version    SVN: $Id: Response.php 308301 2011-02-13 13:02:20Z avb $
  * @link       http://pear.php.net/package/HTTP_Request2
  */
 
@@ -70,7 +70,7 @@ require_once 'HTTP/Request2/Exception.php';
  * @category   HTTP
  * @package    HTTP_Request2
  * @author     Alexey Borzov <avb@php.net>
- * @version    Release: 0.5.2
+ * @version    Release: 0.6.0
  * @link       http://tools.ietf.org/html/rfc2616#section-6
  */
 class HTTP_Request2_Response
@@ -398,7 +398,7 @@ class HTTP_Request2_Response
     */
     public function getBody()
     {
-        if (!$this->bodyEncoded ||
+        if (0 == strlen($this->body) || !$this->bodyEncoded ||
             !in_array(strtolower($this->getHeader('content-encoding')), array('gzip', 'deflate'))
         ) {
             return $this->body;

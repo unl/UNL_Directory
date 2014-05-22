@@ -5,7 +5,7 @@ var admin_editting = function() {
 			admin_editting.bindSortable();
 			admin_editting.bindMinibutton();
 			admin_editting.bindColorbox();
-			WDN.jQuery('.action_control form').live('submit', function(){
+			WDN.jQuery('.action_control form').on('submit', function(){
 				admin_editting.submitForm(WDN.jQuery(this));
 				return false;
 			});
@@ -25,7 +25,7 @@ var admin_editting = function() {
 		},
 
 		appendHref : function() {
-			WDN.jQuery('a.edit[href*=format=editing], a.add[href*=format=editing]').each(function(){
+			WDN.jQuery('a.edit[href*="format=editing"], a.add[href*="format=editing"]').each(function(){
 				href = this.href;
 				WDN.jQuery(this).attr('href', href.replace('format=editing', 'format[]=editing&format[]=partial'));
 			});
@@ -67,13 +67,15 @@ var admin_editting = function() {
 		},
 
 		bindColorbox : function() {
-			WDN.jQuery('a.edit, a.addchild').not('.minibutton').colorbox({
-				width: '740px',
-				height: '75%',
-				onComplete : function(){
-					admin_editting.submitForm(WDN.jQuery('#colorbox form.zenform'));
-				}
-			});
+			WDN.initializePlugin('modal', [function() {
+				WDN.jQuery('a.edit, a.addchild').not('.minibutton').colorbox({
+					width: '740px',
+					height: '75%',
+					onComplete : function(){
+						admin_editting.submitForm(WDN.jQuery('#colorbox form.zenform'));
+					}
+				});
+			}]);
 		},
 		
 		bindSortable : function() {
