@@ -7,10 +7,8 @@
 */
 a.mydepts {
     color:#5c5c5c;
-    float:right;
     font-family:sans-serif;
     font-size:80%;
-    margin-top:-10px;
     text-decoration:none;
     background: #f7f7f7 url('images/iconSelect.png') no-repeat center right;
     border:1px solid #ededed;
@@ -22,10 +20,17 @@ a.mydepts {
 #mydeptlist {
     background: #f7f7f7;
     border:1px solid #ededed;
-    margin-top:10px;
     position:absolute;
     padding:10px;
     z-index:9999;
+}
+#mydeptlist h2 {
+    display: none;
+    font-size:.5em;
+}
+#mydeptlist ul {
+    margin: 0px;
+    font-size: .5em;
 }
 #mydeptlist li {
     border-bottom:1px dashed #b1b1b1;
@@ -34,7 +39,6 @@ a.mydepts {
 #mydeptlist li a {
     color:#BA0000;
     text-decoration:none;
-    font-size:80%;	
     font-family:sans-serif;
 }
 #listings li div.edit {
