@@ -13,7 +13,7 @@ if ($context->options['format'] != 'partial') {
         </div>
     </div>
     <div class="wdn-band results-container">
-        <div class="wdn-inner-wrapper">
+        <div class="wdn-inner-wrapper wdn-inner-padding-sm">
             <div class="wdn-grid-set">
                 <div class="bp2-wdn-col-one-fourth">
                     <?php echo $savvy->render(null, 'Peoplefinder/SearchResults/Filters.tpl.php'); ?>

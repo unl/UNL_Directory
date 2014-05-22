@@ -46,6 +46,9 @@
 #results:focus {
     outline:none;
 }
+#results .results:first-of-type h3 {
+    margin-top: 0px;
+}
 .recordDetails {
     margin-left:20px;
     max-width:540px;
@@ -84,7 +87,6 @@
 .cInfo {position:absolute;right:5px;font-size:75%;}
 
 #maincontent .results {
-    margin-top:15px;
     clear:both;
 }
 #maincontent .likeResults ul.pfResult {margin-top:0px;}
