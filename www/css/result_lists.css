@@ -36,6 +36,7 @@
 #maincontent ul.pfResult li.selected .vcard {display:none;margin:0 10px;}
 #maincontent ul.pfResult .tel {display:block;}
 #maincontent .on-campus-dialing {font-size:80%;text-transform:uppercase;color:#897B42;}
+#maincontent .wdn_tabs_content .on-campus-dialing {color:#71632a;} /* account for contrast on the wdn_tabs_content background */
 
 .planetred_profile, .recordDetails {float:left;}
 .loading {
