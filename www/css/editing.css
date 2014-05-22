@@ -92,7 +92,7 @@ a.mydepts {
     cursor:pointer;
 }
 #editBox li span {
-	max-width:105px;
+	max-width: 90%;
 	display:inline-block;
 	word-wrap:break-word;
 }
