@@ -82,3 +82,9 @@ form.filters fieldset ol {
         display: none !important;
     }
 }
+#filters_affiliation:focus {
+    outline: none;
+}
+#filters_department:focus {
+    outline: none;
+}
