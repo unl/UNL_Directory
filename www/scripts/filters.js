@@ -130,7 +130,7 @@ var filters = function() {
 		},
 		
 		buildSummary: function() {
-			WDN.jQuery('#results').prepend('<p id="filterSummary">Displaying People: <span class="all selected-options">All Options</span>');
+			WDN.jQuery('#filters form').prepend('<p id="filterSummary">Displaying People: <span class="all selected-options">All Options</span>');
 		},
 		
 		updateSummary: function(ids) { //this function recives an array of all checked filters
