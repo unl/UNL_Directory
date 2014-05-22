@@ -43,6 +43,9 @@
     margin: 1em auto;
     height: 1em;
 }
+#results:focus {
+    outline:none;
+}
 .recordDetails {
     margin-left:20px;
     max-width:540px;
