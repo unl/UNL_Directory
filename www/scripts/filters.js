@@ -44,6 +44,18 @@ var filters = function() {
 			}
 		},
 		
+		expandFilters : function() {
+			WDN.jQuery('#filters ol').slideDown(100);
+			WDN.jQuery('#filters ol').attr('aria-expanded', 'true');
+			WDN.jQuery('#filters legend .toggle').text('(Collapse)');
+		},
+
+		collapseFilters : function() {
+			WDN.jQuery('#filters ol').slideUp(100);
+			WDN.jQuery('#filters ol').attr('aria-expanded', 'false');
+			WDN.jQuery('#filters legend .toggle').text('(Expand)');
+		},
+		
 		findClasses : function() {
 			WDN.jQuery('.results').each(function() {
 				if (WDN.jQuery(this).hasClass('departments')) { //for department filters
@@ -80,6 +92,12 @@ var filters = function() {
 			WDN.jQuery.each(array, function(key, value){
 				WDN.jQuery('fieldset.'+type+' ol').append('<li><input type="checkbox" id="filter'+filters.scrubDept(value.toLowerCase())+'" name="'+filters.scrubDept(value.toLowerCase())+'" value="'+filters.scrubDept(value.toLowerCase())+'" /><label for="filter'+filters.scrubDept(value.toLowerCase())+'" >'+value+'</label></li>');
 			});
+
+			if (WDN.jQuery(window).width() >= 768) {
+				filters.expandFilters();
+			} else {
+				filters.collapseFilters();
+			}
 		},
 		
 		cleanUp: function() {
