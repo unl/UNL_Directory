@@ -47,7 +47,13 @@ if ($controller->options['view'] != 'alphalisting') {
         <div class="vcardInfo">
             <div class="adr label">
                 <span class="type">Address</span>
-                <span class="room"><?php echo $context->room.' <a class="location mapurl" href="http://maps.unl.edu/#'.$context->building.'" onclick="WDN.jQuery.colorbox({href:\'http://maps.unl.edu/'.$context->building.'?format=staticgooglemapsv2&size=400x400&zoom=17\', width:\'460px\', height:\'490px\'});return false;">'.$context->building.'</a>'; ?></span>
+                <span class="room">
+                    <?php 
+                    if ($context->building) {
+                        echo $context->room.' <a class="location mapurl" href="http://maps.unl.edu/#'.$context->building.'" onclick="WDN.jQuery.colorbox({href:\'http://maps.unl.edu/'.$context->building.'?format=staticgooglemapsv2&size=400x400&zoom=17\', width:\'460px\', height:\'490px\'});return false;">'.$context->building.'</a>'; 
+                    }
+                    ?>
+                </span>
                 <?php
                 if (!empty($context->address)) {
                     echo "<span class='street-address'>" . $context->address . "</span>";
