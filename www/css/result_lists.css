@@ -81,7 +81,17 @@
     font-weight: normal;
 }
 .departments .fn, .departments .fn a {
-    max-height:42px;line-height:20px;
+    max-height:42px;
+    line-height:20px;
+}
+.departments .vcard .fn a {
+    font-size: 1.25em;
+}
+.departments .vcard  h4.fn {
+    margin-top: 0px;
+}
+.departments .vcard  .fn a.permalink {
+    font-size: .5em;
 }
 
 .cInfo {position:absolute;right:5px;font-size:75%;}
