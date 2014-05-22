@@ -16,7 +16,7 @@ if ($controller->options['view'] != 'alphalisting') {
     $userCanEdit = $context->userCanEdit(UNL_Officefinder::getUser());
 }
 ?>
-<section class="summary wdn-grid-set">
+<section class="summary wdn-grid-set department-summary">
     <div class="bp2-wdn-col-three-fourths">
 	    <h3 class="sec_header">
 	        Department Summary
