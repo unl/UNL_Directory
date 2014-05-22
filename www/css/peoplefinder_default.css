@@ -1,12 +1,6 @@
 /*
 Copy the Document styles. We want to use the HTML5 template, which only comes in a fixed view.
 */
-body #navigation,
-body #wdn_search,
-body #wdn_tool_links {
-    display: none;
-}
-
 body #pagetitle {
     margin: 15px 0;
 }
