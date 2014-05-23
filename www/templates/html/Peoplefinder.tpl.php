@@ -25,19 +25,17 @@ $page->head .= '
 <meta name="author" content="Brett Bieber, UNL Office of University Communications" />
 ';
 
-if ($context->options['mobile'] === true) {
-    $page->head .='<link href="'.UNL_Peoplefinder::getURL().'css/small_devices.css" type="text/css" rel="stylesheet" />';
-} else {
-    $page->head .='<link href="'.UNL_Peoplefinder::getURL().'css/all_peoplefinder.css" type="text/css" rel="stylesheet" />
-                <!--[if IE]>
-                <link rel="stylesheet" type="text/css" media="screen" href="'.UNL_Peoplefinder::getURL().'css/ie.css" />
-                <![endif]-->
-                <link rel="stylesheet" type="text/css" media="print" href="'.UNL_Peoplefinder::getURL().'css/print.css" />
-                <link rel="stylesheet" type="text/css" href="'.UNL_Peoplefinder::getURL().'css/vcard.css" />
-                <script type="text/javascript">var PF_URL = "'.UNL_Peoplefinder::getURL().'", ANNOTATE_URL = "'.UNL_Peoplefinder::$annotateUrl.'";</script>
-                <script type="text/javascript" src="'.UNL_Peoplefinder::getURL().'scripts/toolbar_peoplefinder.js"></script>
-                <script type="text/javascript" src="'.UNL_Peoplefinder::getURL().'scripts/peoplefinder.js"></script>';
-}
+
+$page->head .='<link href="'.UNL_Peoplefinder::getURL().'css/all_peoplefinder.css" type="text/css" rel="stylesheet" />
+            <!--[if IE]>
+            <link rel="stylesheet" type="text/css" media="screen" href="'.UNL_Peoplefinder::getURL().'css/ie.css" />
+            <![endif]-->
+            <link rel="stylesheet" type="text/css" media="print" href="'.UNL_Peoplefinder::getURL().'css/print.css" />
+            <link rel="stylesheet" type="text/css" href="'.UNL_Peoplefinder::getURL().'css/vcard.css" />
+            <script type="text/javascript">var PF_URL = "'.UNL_Peoplefinder::getURL().'", ANNOTATE_URL = "'.UNL_Peoplefinder::$annotateUrl.'";</script>
+            <script type="text/javascript" src="'.UNL_Peoplefinder::getURL().'scripts/toolbar_peoplefinder.js"></script>
+            <script type="text/javascript" src="'.UNL_Peoplefinder::getURL().'scripts/peoplefinder.js"></script>';
+
 
 if ($context->getRawObject() instanceof UNL_Officefinder) {
     $login_url = UNL_Officefinder::getURL(null, $context->getRaw('options'));
@@ -64,8 +62,10 @@ if ($context->options['view'] != 'alphalisting'
     ) {
     $page->head .= '
     <script type="text/javascript">
-        WDN.loadJS("/wdn/templates_3.0/scripts/plugins/ui/jQuery.ui.js", function() {WDN.loadJS("'.UNL_Peoplefinder::getURL().'scripts/edit_functions.js");});
-        WDN.loadCSS("'.UNL_Peoplefinder::getURL().'css/editing.css");
+        WDN.initializePlugin("jqueryui", [function () {
+            WDN.loadJS("'.UNL_Peoplefinder::getURL().'scripts/edit_functions.js");
+            WDN.loadCSS("'.UNL_Peoplefinder::getURL().'css/editing.css");
+        }]);
     </script>';
     $page->titlegraphic .= '<div id="userDepts"><a class="mydepts" href="'.UNL_Officefinder::getURL().'?view=mydepts">My Departments</a></div>';
 }
@@ -88,12 +88,12 @@ $page->breadcrumbs = '
 
 $page->pagetitle = '<h1>Search the Directory</h1>';
 
-if ($context->options['view'] == 'instructions') {
+if (in_array($context->options['view'], array('instructions', 'search'))) {
     //Don't wrap the home page, because we want it to use bands
     $page->maincontentarea = $savvy->render($context->output);
 } else {
     //Wrap everything else
-    $page->maincontentarea = '<div class="wdn-band"><div class="wdn-inner-wrapper">' . $savvy->render($context->output) . '</div></div>';
+    $page->maincontentarea = '<div class="wdn-band"><div class="wdn-inner-wrapper wdn-inner-padding-sm">' . $savvy->render($context->output) . '</div></div>';
 }
 
 

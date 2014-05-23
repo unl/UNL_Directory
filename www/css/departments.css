@@ -27,6 +27,10 @@
 }
 .summary {position:relative;}
 .summary h4 {display:none;}
+.department-summary h3 {
+    margin-top: 0px;
+    border-bottom: 1px solid #BDBAB5;
+}
 .departmentInfo:hover:before {
     font-size:150%;
     font-weight:bold;

@@ -36,21 +36,34 @@
 #maincontent ul.pfResult li.selected .vcard {display:none;margin:0 10px;}
 #maincontent ul.pfResult .tel {display:block;}
 #maincontent .on-campus-dialing {font-size:80%;text-transform:uppercase;color:#897B42;}
+#maincontent .wdn_tabs_content .on-campus-dialing {color:#71632a;} /* account for contrast on the wdn_tabs_content background */
 
 .planetred_profile, .recordDetails {float:left;}
 .loading {
-    background:url('images/loading.gif') no-repeat top left;
-    height:40px;
-    width:40px;
-    float:left;
-    position:absolute;
-    right:250px;
-    display:none;   
+    display: block;
+    margin: 1em auto;
+    height: 1em;
+}
+#results:focus {
+    outline:none;
+}
+#results .results:first-of-type h3 {
+    margin-top: 0px;
 }
 .recordDetails {
     margin-left:20px;
     max-width:540px;
 }
+
+@media (max-width: 480px) {
+    .recordDetails {
+        margin-top: .5em; /* Make sure the "contact name" link does not overlap on the person's name */
+    }
+    .on-campus-dialing {
+        display: none; /* They are probably on mobile, don't show on-campus.  It was over-lapping other elements on mobile. */
+    }
+}
+
 .recordDetails .eppa {
     display:none;   
 }
@@ -69,13 +82,22 @@
     font-weight: normal;
 }
 .departments .fn, .departments .fn a {
-    max-height:42px;line-height:20px;
+    max-height:42px;
+    line-height:20px;
+}
+.departments .vcard .fn a {
+    font-size: 1.25em;
+}
+.departments .vcard  h4.fn {
+    margin-top: 0px;
+}
+.departments .vcard  .fn a.permalink {
+    font-size: .5em;
 }
 
 .cInfo {position:absolute;right:5px;font-size:75%;}
 
 #maincontent .results {
-    margin-top:15px;
     clear:both;
 }
 #maincontent .likeResults ul.pfResult {margin-top:0px;}
@@ -143,6 +165,9 @@
 }
 #maincontent #dir_departmentListing .planetred_profile {
     display:none;
+}
+#maincontent .departments a.planetred_profile {
+    border-bottom: none;
 }
 #maincontent #dir_departmentListing .overflow {
     min-height:0;

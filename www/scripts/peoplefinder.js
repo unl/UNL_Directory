@@ -90,6 +90,10 @@ var service_peoplefinder = function() {
 				});
 				liRecord.removeClass('selected');
 			} else {
+				if (liRecord.children('.loading').length == 0) {
+					liRecord.append($progress);
+				}
+				
 				liRecord.children('.loading').show();
 				WDN.jQuery('li.current').removeClass('current');
 				liRecord.addClass('selected current');
@@ -118,10 +122,19 @@ var directory = function() {
 						WDN.jQuery('#q').focus().select();
 						originalSearch = WDN.jQuery('#'+this.id+' input.q').val();
 					}
-				}
+				}WDN.jQuery('#results').focus();
 				eventObject.preventDefault();
 				eventObject.stopPropagation();
 				return false;
+			});
+			WDN.jQuery('#advancedSearch').bind({
+				focus : function(){
+					WDN.jQuery("#queryString").remove();
+				},
+				click : function(){
+					directory.splitSearchBoxes('','');
+					return false;
+				}
 			});
 			directory.fixLabel();
 		},
@@ -188,6 +201,9 @@ var directory = function() {
 					liRecord.removeClass('selected');
 				});
 			} else {
+				if (liRecord.children('.loading').length == 0) {
+					liRecord.append($progress);
+				}
 				liRecord.children('.loading').show();
 				WDN.jQuery('li.current').removeClass('current');
 				liRecord.addClass('selected current');
@@ -221,15 +237,6 @@ var directory = function() {
         },
         
         initializeSearchResultListeners : function() {
-            WDN.jQuery('#advancedSearch').bind({
-                focus : function(){
-                    WDN.jQuery("#queryString").remove();
-                },
-                click : function(){
-                    directory.splitSearchBoxes('','');
-                    return false;
-                }
-            });
             WDN.jQuery('.ppl_Sresult').on('click', function(){
                     service_peoplefinder.showIndividualPeopleFinderRecord(WDN.jQuery(this));
                     return false;
@@ -241,7 +248,11 @@ var directory = function() {
                 }
             );
             WDN.jQuery('a.img-qrcode').on('click', function() {
-                WDN.jQuery(this).colorbox({open:true});
+                var href = this;
+                WDN.initializePlugin('modal', [function() {
+                    WDN.jQuery(href).colorbox({open:true});
+                    return false;
+                }]);
                 return false;
             });
         }
@@ -252,6 +263,7 @@ WDN.jQuery(document).ready(function() {
     WDN.toolbar_peoplefinder.serviceURL = PF_URL;
     WDN.toolbar_peoplefinder.configuedWebService = true;
     directory.initializeCorrectionForms();
+	
     if (window.location.hash
         && WDN.jQuery('#peoplefinder').length) {
         WDN.log('triggering hash change');
@@ -292,11 +304,20 @@ WDN.jQuery(document).ready(function() {
 					});
 				}
 			});
+			if (location.hash != '') {
+				//trigger a hash change if a hash has been provided on load
+				WDN.jQuery(window).trigger('hashchange');
+			}
 		});
 	}
 	
 	directory.initializeSearchBoxes();
     directory.initializeSearchResultListeners();
+
+	if (WDN.jQuery("#results").length && WDN.jQuery("#results").html().length) {
+		attempts = 1;
+		service_peoplefinder.updatePeopleFinderResults();
+	}
 	
 	WDN.jQuery('.wdn_feedback_comments2').on('submit', function(event) {
 			var comments = WDN.jQuery(this).children('textarea').val();

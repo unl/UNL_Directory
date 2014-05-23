@@ -38,8 +38,7 @@ class UNL_Peoplefinder
      * Options for this use.
      */
     public $options = array('view'   => 'instructions',
-                            'format' => 'html',
-                            'mobile' => false);
+                            'format' => 'html');
 
     /**
      * Driver for data retrieval
@@ -91,7 +90,7 @@ class UNL_Peoplefinder
     /**
      * Constructor for the object.
      * 
-     * @param array $options Options, format, driver, mobile etc.
+     * @param array $options Options, format, driver etc.
      */
     function __construct($options = array())
     {
@@ -102,11 +101,6 @@ class UNL_Peoplefinder
         $this->driver = $options['driver'];
 
         $this->options = $options + $this->options;
-
-        if ($this->options['format'] == 'html'
-            && $this->options['mobile'] != 'no') {
-            $this->options['mobile'] = UNL_MobileDetector::isMobileClient();
-        }
 
         try {
             $this->run();

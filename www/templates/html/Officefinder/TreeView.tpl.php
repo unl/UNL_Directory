@@ -33,43 +33,45 @@ UNL_Officefinder::setReplacementData('pagetitle', '<h1>Departmental Hierarchy</h
     text-decoration:line-through;
 }
 </style>
-<div class="grid9 first">
-<ul class="tree">
-<?php
-$depth = 0;
-foreach ($context as $department) {
-    
-    if ($context->getDepth() > $depth) {
-        echo '<ul>';
-    } elseif ($context->getDepth() < $depth) {
-        // Close the current list item
-        echo '</li>';
-        // Loop through until we reach the previous depth
-        echo str_repeat('</ul></li>', $depth - $context->getDepth());
-    } elseif($context->getDepth()==$depth) {
-        echo '</li>';
-    }
-    echo PHP_EOL;
-    echo str_repeat(' ', $context->getDepth());
-    $li_class = 'd' . $context->getDepth();
-    $d_class  = '';
-
-    if ($department->suppress) {
-        $li_class .= ' suppressed';
-    }
-    if ($department->academic) {
-        $d_class .= ' academic';
-    }
-    echo '<li class="' . $li_class . '"><a href="'.$department->getURL().'" class="' . $d_class . '">'.(($department->name)?$department->name:'/--NULL--/').' <span class="org_unit">('.$department->org_unit . ')</span></a>';
-    $depth = $context->getDepth();
-}
-?>
-</li>
-</ul>
-</div>
-<div class="grid3">
-    <ul>
-    <li><span class="academic">Green</span> listings are shown on the <a href="academic">Academic Departments list</a></li>
-    <li><span class="suppressed">Struck</span> listings have no SAP appointments or child listings, and are hidden from the public</li>
-    </ul>
+<div class="wdn-grid-set">
+    <div class="wdn-col-three-fourths">
+        <ul class="tree">
+            <?php
+            $depth = 0;
+            foreach ($context as $department) {
+                
+                if ($context->getDepth() > $depth) {
+                    echo '<ul>';
+                } elseif ($context->getDepth() < $depth) {
+                    // Close the current list item
+                    echo '</li>';
+                    // Loop through until we reach the previous depth
+                    echo str_repeat('</ul></li>', $depth - $context->getDepth());
+                } elseif($context->getDepth()==$depth) {
+                    echo '</li>';
+                }
+                echo PHP_EOL;
+                echo str_repeat(' ', $context->getDepth());
+                $li_class = 'd' . $context->getDepth();
+                $d_class  = '';
+            
+                if ($department->suppress) {
+                    $li_class .= ' suppressed';
+                }
+                if ($department->academic) {
+                    $d_class .= ' academic';
+                }
+                echo '<li class="' . $li_class . '"><a href="'.$department->getURL().'" class="' . $d_class . '">'.(($department->name)?$department->name:'/--NULL--/').' <span class="org_unit">('.$department->org_unit . ')</span></a>';
+                $depth = $context->getDepth();
+            }
+            ?>
+            </li>
+        </ul>
+    </div>
+    <div class="wdn-col-one-fourth">
+        <ul>
+        <li><span class="academic">Green</span> listings are shown on the <a href="academic">Academic Departments list</a></li>
+        <li><span class="suppressed">Struck</span> listings have no SAP appointments or child listings, and are hidden from the public</li>
+        </ul>
+    </div>
 </div>
