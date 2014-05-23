@@ -310,12 +310,14 @@ form .input-group .input-group-btn button{
     font-size:18px;
     line-height:normal;
     padding:.8em 1.333em;
-    margin:0
+    margin:0;
+    height: 3em;
 }
 
 form .input-group input{
     margin:0;
     border-radius: 0;
+    height: 3em;
 }
 
 form .input-group :first-child{
