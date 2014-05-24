@@ -263,12 +263,6 @@ WDN.jQuery(document).ready(function() {
     WDN.toolbar_peoplefinder.serviceURL = PF_URL;
     WDN.toolbar_peoplefinder.configuedWebService = true;
     directory.initializeCorrectionForms();
-	
-    if (window.location.hash
-        && WDN.jQuery('#peoplefinder').length) {
-        WDN.log('triggering hash change');
-        WDN.jQuery(window).trigger('hashchange');
-    }
     
 	if (WDN.jQuery('#peoplefinder').length) {
 		WDN.loadJS('/wdn/templates_4.0/scripts/plugins/hashchange/jquery.hashchange.min.js', function() {

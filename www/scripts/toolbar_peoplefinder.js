@@ -42,7 +42,6 @@ WDN.toolbar_peoplefinder = function() {
             }
             clearTimeout(pfreq_q);
             if (q.length > 2 || splitQuery.length > 10) {
-				console.log(resultsdiv);
                 WDN.jQuery('#'+resultsdiv).html($progress);
                 pfreq_q = setTimeout('WDN.toolbar_peoplefinder.getPeopleFinderResults("'+escape(q)+splitQuery+'", '+chooser+')', 400);
             } else if (q.length>0) {

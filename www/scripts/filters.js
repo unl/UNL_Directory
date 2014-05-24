@@ -143,9 +143,7 @@ var filters = function() {
 				WDN.jQuery('#filterSummary .selected-options, span.operator').remove();
 				WDN.jQuery.each(ids, function(key, value){
 					var $legend = WDN.jQuery('#'+value).closest('fieldset').children('legend').children('span');
-					console.log($legend.text());
 					var text = $legend.clone().children().remove().end().text();
-					console.log(text);
 					WDN.jQuery('#filterSummary').append(' <span class="'+WDN.jQuery('#'+value).attr('value')+' selected-options"><span class="group">'+text+':</span> '+WDN.jQuery('#'+value).siblings('label').text()+'</span><span class="operator"> OR </span>');
 				});
 			}
