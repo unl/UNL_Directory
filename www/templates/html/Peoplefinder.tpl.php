@@ -26,12 +26,12 @@ $page->head .= '
 ';
 
 
-$page->head .='<link href="'.UNL_Peoplefinder::getURL().'css/all_peoplefinder.css" type="text/css" rel="stylesheet" />
+$page->head .='<link href="'.UNL_Peoplefinder::getURL().'css/all_peoplefinder.css?v=4.0" type="text/css" rel="stylesheet" />
             <!--[if IE]>
-            <link rel="stylesheet" type="text/css" media="screen" href="'.UNL_Peoplefinder::getURL().'css/ie.css" />
+            <link rel="stylesheet" type="text/css" media="screen" href="'.UNL_Peoplefinder::getURL().'css/ie.css?v=4.0" />
             <![endif]-->
-            <link rel="stylesheet" type="text/css" media="print" href="'.UNL_Peoplefinder::getURL().'css/print.css" />
-            <link rel="stylesheet" type="text/css" href="'.UNL_Peoplefinder::getURL().'css/vcard.css" />
+            <link rel="stylesheet" type="text/css" media="print" href="'.UNL_Peoplefinder::getURL().'css/print.css?v=4.0" />
+            <link rel="stylesheet" type="text/css" href="'.UNL_Peoplefinder::getURL().'css/vcard.css?v=4.0" />
             <script type="text/javascript">var PF_URL = "'.UNL_Peoplefinder::getURL().'", ANNOTATE_URL = "'.UNL_Peoplefinder::$annotateUrl.'";</script>
             <script type="text/javascript" src="'.UNL_Peoplefinder::getURL().'scripts/toolbar_peoplefinder.js"></script>
             <script type="text/javascript" src="'.UNL_Peoplefinder::getURL().'scripts/peoplefinder.js"></script>';
@@ -64,7 +64,7 @@ if ($context->options['view'] != 'alphalisting'
     <script type="text/javascript">
         WDN.initializePlugin("jqueryui", [function () {
             WDN.loadJS("'.UNL_Peoplefinder::getURL().'scripts/edit_functions.js");
-            WDN.loadCSS("'.UNL_Peoplefinder::getURL().'css/editing.css");
+            WDN.loadCSS("'.UNL_Peoplefinder::getURL().'css/editing.css?v=4.0");
         }]);
     </script>';
     $page->titlegraphic .= '<div id="userDepts"><a class="mydepts" href="'.UNL_Officefinder::getURL().'?view=mydepts">My Departments</a></div>';
