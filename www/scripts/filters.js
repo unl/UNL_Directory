@@ -130,6 +130,7 @@ var filters = function() {
 		},
 		
 		buildSummary: function() {
+			WDN.jQuery('#filterSummary').remove(); //Make sure we don't duplicate #filterSummary 
 			WDN.jQuery('#filters form').prepend('<p id="filterSummary">Displaying People: <span class="all selected-options">All Options</span>');
 		},
 		
