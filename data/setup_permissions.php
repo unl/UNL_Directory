@@ -4,6 +4,10 @@ error_reporting(E_ALL | E_STRICT);
 
 ini_set("auto_detect_line_endings", true);
 
+/*
+ * Export the UNL HR contact list (go.unl.edu/hrcontacts) to CSV using the
+ * same format as the hr_contacts_sample.csv 
+ */
 $permissions = new SplFileObject(dirname(__FILE__).'/UNL Org Units with Contacts for Help Desk-Updated 4-2012.csv');
 $permissions->setFlags(SplFileObject::READ_CSV);
 
