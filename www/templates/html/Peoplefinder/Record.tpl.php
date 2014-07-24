@@ -80,7 +80,13 @@ if (isset($context->unlSISClassLevel)) {
 }
 
 if (isset($context->unlHROrgUnitNumber)) {
-    $roles = $parent->context->getRoles($context->dn);
+    if (!$parent->parent) {
+        // Viewing a Record (hcard, search result)
+        $roles = $parent->context->getRoles($context->dn);
+    } else {
+        // Viewing a Person (full webpage)
+        $roles = $parent->parent->context->getRoles($context->dn);
+    }
     
     if (count($roles)) {
         echo $savvy->render($roles);
@@ -130,3 +136,4 @@ if ($displayEmail) {
     echo "<span class='email'><a class='email' href='mailto:{$context->mail}'>{$context->mail}</a></span>\n";
 }
 echo '</div>'.PHP_EOL.'</div>'.PHP_EOL;
+

@@ -38,3 +38,4 @@ UNL_Officefinder::$db_pass = 'officefinder';
 // Officefinder editing admins
 UNL_Officefinder::$admins = array('bbieber2', 'smeranda2', 'erasmussen2');
 
+UNL_Knowledge_Driver_REST::$service_pass = 'examplepassword';
