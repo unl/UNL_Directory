@@ -299,14 +299,20 @@ class UNL_Peoplefinder
     {
         static $bldgs = false;
 
-        $regex = "/([A-Za-z0-9].) ([A-Z0-9\&]{2,4})/" ; //& is for M&N Building
+        if (!$bldgs) {
+            $bldgs = new UNL_Common_Building();
+        }
+
+        $regex = "/^([A-Z0-9&]{2,4}) /"; //& is for M&N Building
 
         if (preg_match($regex, $address, $matches)) {
+            if ($bldgs->buildingExists($matches[1])) {
+                return $matches[1];
+            }
+        }
 
-            if (!$bldgs) {
-                $bldgs = new UNL_Common_Building();
-            }            
-
+        $regex = "/([A-Za-z0-9].) ([A-Z0-9&]{2,4})/"; //& is for M&N Building
+        if (preg_match($regex, $address, $matches)) {
             if ($bldgs->buildingExists($matches[2])) {
                 return $matches[2];
             }
