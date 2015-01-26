@@ -1,4 +1,0 @@
-Package UNL_Peoplefinder release notes for version 0.1.0.
-
-Basic functionality is available. The default driver uses the
-web service, and no LDAP connection info is required.

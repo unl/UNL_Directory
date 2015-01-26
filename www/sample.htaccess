@@ -1,8 +1,10 @@
 RewriteEngine On
 RewriteBase /
-RewriteRule ^search/(.*) service.php?q=$1
-RewriteRule ^vcards/(.*) service.php?format=vcard&uid=$1
-RewriteRule ^hcards/(.*) service.php?format=hcard&uid=$1
+
+RewriteRule ^service.php index.php [QSA]
+RewriteRule ^search/(.*) index.php?q=$1
+RewriteRule ^vcards/(.*) index.php?format=vcard&uid=$1
+RewriteRule ^hcards/(.*) index.php?format=hcard&uid=$1
 
 RewriteRule ^departments/(5000[\d]{4})$ departments/index.php?view=department&sap=$1 [QSA]
 RewriteRule ^departments/([\d]+)$ departments/index.php?view=department&id=$1 [QSA]
@@ -14,7 +16,4 @@ RewriteRule ^departments/([\d]+)/summary$ departments/index.php?view=deptsummary
 RewriteRule ^departments/tree$ departments/index.php?view=tree [QSA]
 
 # Faculty page
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-
 RewriteRule ^faculty/all$ index.php?view=facultyedu&limit=3000
