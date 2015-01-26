@@ -9,6 +9,7 @@
 /www/config.inc.php
 /www/faculty/all
 /www/wdn
+/data/hr_tree.xml
 /data/faculty_education.csv
 .DS_Store
 /UNL_Directory.esproj/
