@@ -209,7 +209,6 @@ class UNL_Peoplefinder_Record
      */
     public function formatCollege($college)
     {
-        include_once 'UNL/Common/Colleges.php';
         $colleges = new UNL_Common_Colleges();
         if (isset($colleges->colleges[$college])) {
             return htmlentities($colleges->colleges[$college]);
