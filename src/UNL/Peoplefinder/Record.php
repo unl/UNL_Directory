@@ -54,11 +54,18 @@ class UNL_Peoplefinder_Record
         }
     }
 
-
+    protected function getCache()
+    {
+        return new UNL_Cache_Lite(array(
+            'cacheDir' => realpath(__DIR__ . '/../../../tmp') . '/',
+            'memoryCaching' => true,
+            'lifeTime' => 4 * 60 * 60, // 4 hours
+        ));
+    }
 
     /**
      * Takes in a string from the LDAP directory, usually formatted like:
-     *     ### ___ UNL 68588-####
+     *    ___ ### UNL 68588-####
      *    Where ### is the room number, ___ = Building Abbreviation, #### zip extension
      *
      * @param string
@@ -66,51 +73,95 @@ class UNL_Peoplefinder_Record
      */
     function formatPostalAddress()
     {
-
         if (isset($this->postalAddress)) {
             $postalAddress = $this->postalAddress;
         } else {
             $postalAddress = $this->unlHRAddress;
         }
 
+        if (empty($postalAddress)) {
+            return array();
+        }
+
         $parts = explode(',', $postalAddress);
+        $part = trim(array_shift($parts));
 
         // Set up defaults:
         $address = array();
-        $address['street-address'] = trim($parts[0]);
+        $address['street-address'] = $part;
         $address['locality']       = '';
         $address['region']         = '';
         $address['postal-code']    = '';
 
-        if (count($parts) == 3) {
-            // Assume we have a street address, city, zip.
-            $address['locality'] = trim($parts[1]);
+        $c = $this->getCache();
+        $bldgs = $c->get('UNL buildings');
+        if (!$bldgs) {
+            $bldgs = new UNL_Common_Building();
+            $bldgs = $bldgs->getAllCodes();
+            if ($bldgs) {
+                $c->save(serialize($bldgs));
+            }
+        } else {
+            $bldgs = unserialize($bldgs);
         }
 
-        $matches = array();
-        // Now lets find some important bits.
-        if (preg_match('/([\d]{5})(\-[\d]{4})?/', $postalAddress, $matches)) {
-            // Found a zip-code
-            $address['postal-code'] = $matches[0];
+        $streetParts = explode(' ', $part);
+        
+        // Extension workers have this prefix
+        if ($streetParts[0] == 'Extension') {
+            $address['street-address'] = implode(' ', array_slice($streetParts, 1));
+        }
+        
+        // check for a building code + room number
+        if (isset($bldgs[$streetParts[0]])) {
+            $address['unlBuildingCode'] = $streetParts[0];
+            if (isset($streetParts[1])) {
+                $address['roomNumber'] = $streetParts[1];
+            }
+        } else if (isset($streetParts[1]) && isset($bldgs[$streetParts[1]])) {
+            // legacy format (room number first)
+            $address['unlBuildingCode'] = $streetParts[1];
+            $address['roomNumber'] = $streetParts[0];
+        }
+        
+        // workers without a set room have the "mobile" room identifier
+        if (isset($address['roomNumber']) && strtolower($address['roomNumber']) == 'mobile') {
+            unset($address['roomNumber']);
         }
 
+        // postal code should be at the end
+        if (count($parts)) {
+            $part = trim(array_pop($parts));
+             if (preg_match('/^([\d]{5})(\-[\d]{4})?$/', $part)) {
+                $address['postal-code'] = $part;
+            }
+        }
+
+        // next from the end should be locality
+        if (count($parts)) {
+            $localityTranslate = array(
+                'City Campus' => 'Lincoln',
+                'UNL' => 'Lincoln',
+                'UNO' => 'Omaha',
+            );
+
+            $part = trim(array_pop($parts));
+
+            if (isset($localityTranslate[$part])) {
+                $part = $localityTranslate[$part];
+            }
+
+            $address['locality'] = $part;
+        }
+
+        // try to determine region (state) from postal code
         switch (substr($address['postal-code'], 0, 2)) {
             case '65':
                 $address['region'] = 'MO';
                 break;
+            case '69':
             case '68':
                 $address['region'] = 'NE';
-
-                // What city in Nebraska?
-                switch (substr($address['postal-code'], 0, 3)) {
-                    case '681':
-                        $address['locality'] = 'Omaha';
-                        break;
-                    case '685':
-                        $address['locality'] = 'Lincoln';
-                        break;
-                }
-                break;
         }
 
         return $address;
@@ -125,22 +176,20 @@ class UNL_Peoplefinder_Record
      */
     public function formatMajor($subject)
     {
-
-        $c = new UNL_Cache_Lite();
+        $c = $this->getCache();
         $majors = $c->get('catalog majors');
 
         if (!$majors) {
             if ($majors = file_get_contents('http://bulletin.unl.edu/undergraduate/majors/lookup/?format=json')) {
                 $c->save($majors);
             } else {
-                $c->extendLife();
-                $c->get('catalog majors');
+                $majors = '[]';
             }
         }
 
         $majors = json_decode($majors, true);
 
-        if (array_key_exists($subject, $majors)) {
+        if ($majors && isset($majors[$subject])) {
             return $majors[$subject];
         }
 
@@ -172,7 +221,6 @@ class UNL_Peoplefinder_Record
      */
     public function formatCollege($college)
     {
-        include_once 'UNL/Common/Colleges.php';
         $colleges = new UNL_Common_Colleges();
         if (isset($colleges->colleges[$college])) {
             return htmlentities($colleges->colleges[$college]);
@@ -200,23 +248,6 @@ class UNL_Peoplefinder_Record
         }
 
         return 'https://planetred.unl.edu/pg/icon/unl_'.str_replace('-', '_', $this->uid).'/'.$size.'/';
-    }
-
-    /**
-     * Returns a UNL building code for this person
-     *
-     * @return string | false
-     */
-    public function getUNLBuildingCode()
-    {
-        if (isset($this->postalAddress)) {
-            return UNL_Peoplefinder::getUNLBuildingCode((string)$this->postalAddress);
-        }
-        if (isset($this->unlHRAddress)) {
-            return UNL_Peoplefinder::getUNLBuildingCode((string)$this->unlHRAddress);
-        }
-
-        return false;
     }
 
     function __toString()

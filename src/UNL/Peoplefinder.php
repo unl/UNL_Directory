@@ -287,37 +287,4 @@ class UNL_Peoplefinder
         }
         return $data;
     }
-
-    /**
-     * Scans a string for a UNL building code
-     *
-     * @param string $address The address to check, e.g. 17 WICK, Lincoln, NE, 68588-0212
-     *
-     * @return unknown|boolean
-     */
-    public static function getUNLBuildingCode($address)
-    {
-        static $bldgs = false;
-
-        if (!$bldgs) {
-            $bldgs = new UNL_Common_Building();
-        }
-
-        $regex = "/^([A-Z0-9&]{2,4}) /"; //& is for M&N Building
-
-        if (preg_match($regex, $address, $matches)) {
-            if ($bldgs->buildingExists($matches[1])) {
-                return $matches[1];
-            }
-        }
-
-        $regex = "/([A-Za-z0-9].) ([A-Z0-9&]{2,4})/"; //& is for M&N Building
-        if (preg_match($regex, $address, $matches)) {
-            if ($bldgs->buildingExists($matches[2])) {
-                return $matches[2];
-            }
-        }
-
-        return false;
-    }
 }

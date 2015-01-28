@@ -113,7 +113,7 @@ class UNL_Peoplefinder_Driver_LDAP_Util
         return 
             '(&'
             . $filter
-            . '(!(|(eduPersonPrimaryAffiliation=guest)(uid=jfrancisco3)))' .
+            . '(!(eduPersonPrimaryAffiliation=guest))' .
             ')';
     }
 }

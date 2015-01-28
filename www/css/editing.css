@@ -5,6 +5,9 @@
 
 ************************************
 */
+#wdn_wrapper {
+	overflow: auto;
+}
 a.mydepts {
     color:#5c5c5c;
     font-family:sans-serif;
