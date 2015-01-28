@@ -105,8 +105,14 @@ class UNL_Peoplefinder_Record
             $bldgs = unserialize($bldgs);
         }
 
-        // check for a building code + room number
         $streetParts = explode(' ', $part);
+        
+        // Extension workers have this prefix
+        if ($streetParts[0] == 'Extension') {
+            $address['street-address'] = implode(' ', array_slice($streetParts, 1));
+        }
+        
+        // check for a building code + room number
         if (isset($bldgs[$streetParts[0]])) {
             $address['unlBuildingCode'] = $streetParts[0];
             if (isset($streetParts[1])) {
@@ -116,6 +122,11 @@ class UNL_Peoplefinder_Record
             // legacy format (room number first)
             $address['unlBuildingCode'] = $streetParts[1];
             $address['roomNumber'] = $streetParts[0];
+        }
+        
+        // workers without a set room have the "mobile" room identifier
+        if (isset($address['roomNumber']) && strtolower($address['roomNumber']) == 'mobile') {
+            unset($address['roomNumber']);
         }
 
         // postal code should be at the end
@@ -148,6 +159,7 @@ class UNL_Peoplefinder_Record
             case '65':
                 $address['region'] = 'MO';
                 break;
+            case '69':
             case '68':
                 $address['region'] = 'NE';
         }
