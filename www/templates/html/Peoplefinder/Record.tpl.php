@@ -88,7 +88,7 @@ if (isset($context->unlHROrgUnitNumber)) {
 
 }
 
-if ($address = $context->formatPostalAddress()) {
+if (($address = $context->formatPostalAddress()) && count($address)) {
     echo '<div class="adr workAdr">
          <span class="type">Work</span>';
         if (!empty($address['unlBuildingCode'])) {
