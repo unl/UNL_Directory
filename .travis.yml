@@ -1,0 +1,4 @@
+language: php
+php:
+- 5.5
+script: phpunit --verbose --bootstrap lib/php/UNL/Autoload.php tests
