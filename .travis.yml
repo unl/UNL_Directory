@@ -1,4 +1,4 @@
 language: php
 install:
-	- sudo apt-get install phpunit
+  - sudo apt-get install phpunit
 script: phpunit --verbose --bootstrap lib/php/UNL/Autoload.php tests
