@@ -17,15 +17,6 @@
 <?php if (isset($context->options['uid'])) : ?>
 <script type="text/javascript">
 WDN.jQuery("document").ready(function(){
-
-	var location = window.location.href;
-
-	if (WDN.jQuery(".permalink").size()) {
-		location = WDN.jQuery(".permalink").attr("href");
-	}
-
-	WDN.jQuery('input[name="initial_url"]').val(location);
-
     require(['idm'], function(idm) {
         if (idm.getEmailAddress()) {
             WDN.jQuery('.commentProblem input[name="email"]').val(idm.getEmailAddress());

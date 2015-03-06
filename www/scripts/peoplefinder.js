@@ -321,6 +321,9 @@ WDN.jQuery(document).ready(function() {
 				alert('Please enter more information.');
 				return false;
 			}
+
+			WDN.jQuery('.wdn_feedback_comments2 input[name="initial_url"]').val(window.location.href);
+			
 			WDN.post(
 				'http://ucommchat.unl.edu/clientLogin',
 				WDN.jQuery(this).serialize(),
