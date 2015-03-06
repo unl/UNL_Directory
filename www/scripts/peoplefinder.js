@@ -227,7 +227,7 @@ var directory = function() {
                         title : false,
                         onOpen : function() {
                             if (!(WDN.jQuery(this).hasClass('pf_record'))){
-                                WDN.jQuery(this).siblings('.commentProblem').children('form').children('input[name="page_address"]').val(window.location);
+                                WDN.jQuery(this).siblings('.commentProblem').children('form').children('input[name="initial_url"]').val(window.location);
                             }
                         }
                     });
@@ -322,7 +322,7 @@ WDN.jQuery(document).ready(function() {
 				return false;
 			}
 			WDN.post(
-				'http://www1.unl.edu/comments/',
+				'http://ucommchat.unl.edu/clientLogin',
 				WDN.jQuery(this).serialize(),
 				function () {
 				}
