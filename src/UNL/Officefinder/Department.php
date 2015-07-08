@@ -252,6 +252,10 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
             // Default suppression to false
             $this->suppress = 0;
         }
+        
+        if (empty($this->academic)) {
+            $this->academic = 0;
+        }
 
         return parent::save();
     }
