@@ -2,9 +2,9 @@
 //echo '<pre>';var_dump($context);echo '</pre>';
 ?>
 
-<?php if (isset($context->bio->ABSTRACT)) { ?>
+<?php if (isset($context->personal->BIO)) { ?>
   <div class="directory-knowledge-section directory-knowledge-section-bio">
-      <?php echo $context->bio->ABSTRACT ?>
+      <?php echo $context->personal->BIO; ?>
   </div>
 <?php } ?>
 
@@ -78,6 +78,11 @@
 
     .directory-knowledge-section-inner {
         padding-left: 3em;
+    }
+
+    .directory-knowledge-section-bio {
+        font-size: .9em;
+        line-height: 1.5em;
     }
 
 </style>

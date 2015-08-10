@@ -6,7 +6,7 @@ class UNL_Knowledge
 
     public $admin;
 
-    public $bio;
+    public $biosketch;
 
     public $courses;
 
@@ -15,6 +15,8 @@ class UNL_Knowledge
     public $grants;
 
     public $papers;
+
+    public $personal;
 
     /**
      * Driver for data retrieval

@@ -12,7 +12,7 @@ else {
 <section class="wdn-grid-set">
     <div class="bp2-wdn-col-two-sevenths">
         <?php // echo $savvy->render($context->record, 'Peoplefinder/Record.tpl.php'); ?>
-        <img class="frame" src="<?php echo $context->record->getImageURL('large'); ?>" alt="<?php echo $context->record->displayName ?>" />
+        <!-- <img class="frame" src="<?php echo $context->record->getImageURL('large'); ?>" alt="<?php echo $context->record->displayName ?>" /> -->
         <h1 class="clear-top"><?php echo $context->record->getPreferredFirstName(); ?> <?php echo $context->record->sn; ?></h1>
 
         <?php

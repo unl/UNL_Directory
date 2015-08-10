@@ -34,14 +34,15 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
             throw new Exception('Could not find that user!', 404);
         }
 
-        if ($records != 'null' && !$records = json_decode($records)) {
-            throw new Exception('Error retrieving the data from the web service');
+        if ($records != 'null' && $records != null && !$records = json_decode($records)) {var_dump($records);
+
+            throw new Exception('Error retrieving the data from the web service for ' . $category);
         }
 
         // Convert a single record from an object to an array with a single member
-        if ($records != 'null' && is_object($records->{$category})) {
+        if ($records != 'null' && $records != null && is_object($records->{$category})) {
             // Don't make
-            if ($category != 'BIOSKETCH') {
+            if ($category != 'BIOSKETCH' && $category != 'PCI') {
                 $records->{$category} = array($records->{$category});
             }
         }
@@ -56,11 +57,12 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
         $records->admin = $this->getCategory('ADMIN', $uid);
 
         if ($records->admin) {
-            $records->bio = $this->getCategory('BIOSKETCH', $uid);
+            $records->biosketch = $this->getCategory('BIOSKETCH', $uid);
             $records->courses = $this->getCategory('SCHTEACH', $uid);
             $records->education = $this->getCategory('EDUCATION', $uid);
-            $records->grants = $this->getCategory('CONGRANT', $uid);
-            $records->papers = $this->getCategory('INTELLCONT', $uid);
+            //$records->grants = $this->getCategory('CONGRANT', $uid);
+            //$records->papers = $this->getCategory('INTELLCONT', $uid);
+            $records->personal = $this->getCategory('PCI', $uid);
         }
 
         return $records;
