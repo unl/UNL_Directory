@@ -1,73 +1,75 @@
-<?php
-//echo '<pre>';var_dump($context);echo '</pre>';
-?>
-
-<?php if (isset($context->personal->BIO)) { ?>
+<?php if (isset($context->bio)) { ?>
   <div class="directory-knowledge-section directory-knowledge-section-bio">
-      <?php echo $context->personal->BIO; ?>
+      <?php echo $context->bio; ?>
   </div>
 <?php } ?>
-
 
 <?php if ($context->education) { ?>
     <div class="directory-knowledge-section directory-knowledge-section-education">
         <h3 class="wdn-brand wdn-icon-ok">Education</h3>
-        <div class="directory-knowledge-section-inner">
+        <ul class="directory-knowledge-section-inner">
             <?php foreach ($context->education as $degree) { ?>
-                <div class="directory-knowledge-item">
-                    <?php echo $degree->DEG; ?> <?php echo $degree->YR_COMP; ?> <?php echo $degree->SCHOOL; ?>
-                </div>
-
+                <li class="directory-knowledge-item">
+                    <?php echo $degree['EDUCATION']['DEG']; ?> <?php echo $degree['EDUCATION']['YR_COMP']; ?> <?php echo $degree['EDUCATION']['SCHOOL']; ?>
+                </li>
             <?php } ?>
-        </div>
+        </ul>
     </div>
 <?php } ?>
 
 <?php if ($context->courses) { ?>
     <div class="directory-knowledge-section directory-knowledge-section-courses">
         <h3 class="wdn-brand wdn-icon-user">Courses</h3>
-        <div class="directory-knowledge-section-inner">
+        <ul class="directory-knowledge-section-inner">
             <?php foreach ($context->courses as $course) { ?>
-                <div class="directory-knowledge-item">
-                    <?php echo $course->COURSEPRE; ?> <?php echo $course->COURSENUM; ?> (<?php echo $course->TYT_TERM; ?> <?php echo $course->TYY_TERM; ?>): <?php echo $course->TITLE; ?>
-                </div>
-
+                <li class="directory-knowledge-item">
+                    <?php echo $course['SCHTEACH']['COURSEPRE']; ?> <?php echo $course['SCHTEACH']['COURSENUM']; ?> (<?php echo $course['SCHTEACH']['TYT_TERM']; ?> <?php echo $course['SCHTEACH']['TYY_TERM']; ?>): <?php echo $course['SCHTEACH']['TITLE']; ?>
+                </li>
             <?php } ?>
-        </div>
+        </ul>
     </div>
 <?php } ?>
 
 <?php if ($context->papers) { ?>
     <div class="directory-knowledge-section directory-knowledge-section-papers">
-        <h3 class="wdn-brand wdn-icon-star-circled">Papers</h3>
-        <div class="directory-knowledge-section-inner">
+        <h3 class="wdn-brand wdn-icon-print">Papers</h3>
+        <ul class="directory-knowledge-section-inner">
             <?php foreach ($context->papers as $paper) { ?>
-                <div class="directory-knowledge-item">
-                    <?php echo $paper->TITLE; ?>
-                </div>
-
+                <li class="directory-knowledge-item">
+                    <?php echo $paper['INTELLCONT']['TITLE']; ?>
+                </li>
             <?php } ?>
-        </div>
+        </ul>
     </div>
 <?php } ?>
-
 
 <?php if ($context->grants) { ?>
     <div class="directory-knowledge-section directory-knowledge-section-grants">
         <h3 class="wdn-brand wdn-icon-rocket">Research &amp; Grants</h3>
-        <div class="directory-knowledge-section-inner">
-            <?php foreach ($context->grants as $grant) { ?>
-                <?php if ($grant->STATUS != 'Declined') { ?>
-                    <div class="directory-knowledge-item">
-                        <?php echo $grant->TITLE; ?>
-                    </div>
+        <ul class="directory-knowledge-section-inner">
+            <?php foreach ($context->grants as $grant) { ;?>
+                <?php if ($grant['CONGRANT']['STATUS'] != 'Declined') { ?>
+                    <li class="directory-knowledge-item">
+                        <?php echo $grant['CONGRANT']['TITLE']; ?>
+                    </li>
                 <?php } ?>
-
             <?php } ?>
-        </div>
+        </ul>
     </div>
 <?php } ?>
 
+<?php if ($context->honors) { ?>
+    <div class="directory-knowledge-section directory-knowledge-section-honors">
+        <h3 class="wdn-brand wdn-icon-star-circled">Awards &amp; Honors</h3>
+        <ul class="directory-knowledge-section-inner">
+            <?php foreach ($context->honors as $honor) { ?>
+                <li class="directory-knowledge-item">
+                    <?php echo $honor['AWARDHONOR']['NAME']; ?> &ndash; <em><?php echo $honor['AWARDHONOR']['ORG']; ?></em>
+                </li>
+            <?php } ?>
+        </ul>
+    </div>
+<?php } ?>
 
 <style>
     .directory-knowledge-section {
@@ -78,11 +80,6 @@
 
     .directory-knowledge-section-inner {
         padding-left: 3em;
-    }
-
-    .directory-knowledge-section-bio {
-        font-size: .9em;
-        line-height: 1.5em;
     }
 
 </style>

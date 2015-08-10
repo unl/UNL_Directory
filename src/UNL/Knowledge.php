@@ -4,9 +4,7 @@ class UNL_Knowledge
 {
     public $options = array();
 
-    public $admin;
-
-    public $biosketch;
+    public $bio;
 
     public $courses;
 
@@ -14,9 +12,11 @@ class UNL_Knowledge
 
     public $grants;
 
+    public $honors;
+
     public $papers;
 
-    public $personal;
+    public $public_web;
 
     /**
      * Driver for data retrieval

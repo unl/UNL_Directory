@@ -7,7 +7,9 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
      *
      * @var string
      */
-    public $service_url = 'https://dmdata.unl.edu/webservice/rest/';
+    public $service_url = 'https://www.digitalmeasures.com/login/service/v4/SchemaData/INDIVIDUAL-ACTIVITIES-University/';
+
+    public static $service_user;
 
     public static $service_pass;
 
@@ -20,50 +22,75 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
 
     function getCategory($category, $uid)
     {
-        $options = array(
-            "http" => array(
-                "method" => "GET",
-                "header" => "UNL_WS_AUTH: ".UNL_Knowledge_Driver_REST::$service_pass."\r\n" .
-                            "Accept: application/json\r\n"
-            )
-        );
-        $context = stream_context_create($options);
-        $records = file_get_contents($this->service_url.$category.'?username='.urlencode($uid), false, $context);
+        $curl = curl_init();
 
-        if (false === $records) {
-            throw new Exception('Could not find that user!', 404);
-        }
+        curl_setopt_array($curl, array(
+            CURLOPT_URL             => $this->service_url . 'USERNAME:' . $uid . '/' . $category,
+            CURLOPT_USERPWD         => UNL_Knowledge_Driver_REST::$service_user . ':' . UNL_Knowledge_Driver_REST::$service_pass,
+            CURLOPT_ENCODING        => 'gzip',
+            CURLOPT_FOLLOWLOCATION  => true,
+            CURLOPT_RETURNTRANSFER  => true,
+        ));
 
-        if ($records != 'null' && $records != null && !$records = json_decode($records)) {var_dump($records);
+        $responseData = curl_exec($curl);
 
-            throw new Exception('Error retrieving the data from the web service for ' . $category);
-        }
+        if (curl_errno($curl)) {
+            $errorMessage = curl_error($curl);
+        } else {
+            $statusCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
-        // Convert a single record from an object to an array with a single member
-        if ($records != 'null' && $records != null && is_object($records->{$category})) {
-            // Don't make
-            if ($category != 'BIOSKETCH' && $category != 'PCI') {
-                $records->{$category} = array($records->{$category});
+            if ($statusCode === 200) {
+                $xml = simplexml_load_string($responseData, "SimpleXMLElement", LIBXML_NOCDATA);
+                $json = json_encode($xml);
+                $array = json_decode($json,TRUE);
             }
         }
 
-        return isset($records->{$category}) ? $records->{$category} : null;
+        curl_close($curl);
+
+        return isset($array['Record'][$category]) ? $array['Record'][$category] : null;
     }
 
     function getRecords($uid)
     {
         $records = new UNL_Knowledge();
 
-        $records->admin = $this->getCategory('ADMIN', $uid);
+        $records->public_web = $this->getCategory('PUBLIC_WEB', $uid);
 
-        if ($records->admin) {
-            $records->biosketch = $this->getCategory('BIOSKETCH', $uid);
-            $records->courses = $this->getCategory('SCHTEACH', $uid);
-            $records->education = $this->getCategory('EDUCATION', $uid);
-            //$records->grants = $this->getCategory('CONGRANT', $uid);
-            //$records->papers = $this->getCategory('INTELLCONT', $uid);
-            $records->personal = $this->getCategory('PCI', $uid);
+        if ($records->public_web) {
+            $records->bio       = $this->cleanRecords($records->public_web['BIO']);
+            $records->courses   = $this->cleanRecords($records->public_web['SCHTEACH']);
+            $records->education = $this->cleanRecords($records->public_web['EDUCATION']);
+            $records->grants    = $this->cleanRecords($records->public_web['CONGRANT']);
+            $records->honors    = $this->cleanRecords($records->public_web['AWARDHONOR']);
+            $records->papers    = $this->cleanRecords($records->public_web['INTELLCONT']);
         }
+
+        return $records;
+    }
+
+    function cleanRecords($records)
+    {
+        if (is_array($records)) {
+            foreach ($records as $key => $value) {
+                if (isset($value['REF']) && $value['REF'] == false) {
+                    // Clear empty record within an array that has a blank REF value
+                    unset($records[$key]);
+                }
+            }
+
+            if (isset($records['REF']) && $records['REF'] == false) {
+                // Clear empty record that has a blank REF value
+                $records = null;
+            } else if (isset($records['REF'])) {
+                // Convert single record to indexed array at key 0
+                $temp = $records;
+                $records = array();
+                $records[0] = $temp;
+            }
+        }
+
+
 
         return $records;
     }
