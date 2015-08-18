@@ -58,12 +58,13 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
         $records->public_web = $this->getCategory('PUBLIC_WEB', $uid);
 
         if ($records->public_web) {
-            $records->bio       = $this->cleanRecords($records->public_web['BIO']);
-            $records->courses   = $this->cleanRecords($records->public_web['SCHTEACH']);
-            $records->education = $this->cleanRecords($records->public_web['EDUCATION']);
-            $records->grants    = $this->cleanRecords($records->public_web['CONGRANT']);
-            $records->honors    = $this->cleanRecords($records->public_web['AWARDHONOR']);
-            $records->papers    = $this->cleanRecords($records->public_web['INTELLCONT']);
+            $records->bio           = $this->cleanRecords($records->public_web['BIO']);
+            $records->courses       = $this->cleanRecords($records->public_web['SCHTEACH']);
+            $records->education     = $this->cleanRecords($records->public_web['EDUCATION']);
+            $records->grants        = $this->cleanRecords($records->public_web['CONGRANT']);
+            $records->honors        = $this->cleanRecords($records->public_web['AWARDHONOR']);
+            $records->papers        = $this->cleanRecords($records->public_web['INTELLCONT']);
+            $records->presentations = $this->cleanRecords($records->public_web['PRESENT']);
         }
 
         return $records;

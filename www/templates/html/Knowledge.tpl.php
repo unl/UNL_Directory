@@ -58,6 +58,19 @@
     </div>
 <?php } ?>
 
+<?php if ($context->presentations) { ?>
+    <div class="directory-knowledge-section directory-knowledge-section-presentations">
+        <h3 class="wdn-brand wdn-icon-star-circled">Presentations</h3>
+        <ul class="directory-knowledge-section-inner">
+            <?php foreach ($context->presentations as $presentations) { ?>
+                <li class="directory-knowledge-item">
+                    <?php echo $honor['PRESENT']['NAME']; ?>
+                </li>
+            <?php } ?>
+        </ul>
+    </div>
+<?php } ?>
+
 <?php if ($context->honors) { ?>
     <div class="directory-knowledge-section directory-knowledge-section-honors">
         <h3 class="wdn-brand wdn-icon-star-circled">Awards &amp; Honors</h3>

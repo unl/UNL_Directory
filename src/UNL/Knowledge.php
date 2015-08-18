@@ -16,6 +16,8 @@ class UNL_Knowledge
 
     public $papers;
 
+    public $presentations;
+
     public $public_web;
 
     /**
