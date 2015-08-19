@@ -62,9 +62,9 @@
     <div class="directory-knowledge-section directory-knowledge-section-presentations">
         <h3 class="wdn-brand"><img src="images/icons/keynote.svg" alt="">Presentations</h3>
         <ul class="directory-knowledge-section-inner">
-            <?php foreach ($context->presentations as $presentations) { ?>
+            <?php foreach ($context->presentations as $presentation) { ?>
                 <li class="directory-knowledge-item">
-                    <?php echo $honor['PRESENT']['NAME']; ?>
+                    <?php echo $presentation['PRESENT']['TITLE']; ?> &ndash; <em><?php echo $presentation['PRESENT']['ORG']; ?>, <?php echo $presentation['PRESENT']['LOCATION']; ?></em> &ndash; <?php echo $presentation['PRESENT']['DTM_DATE']; ?> <?php echo $presentation['PRESENT']['DTD_DATE']; ?>, <?php echo $presentation['PRESENT']['DTY_DATE']; ?>
                 </li>
             <?php } ?>
         </ul>
