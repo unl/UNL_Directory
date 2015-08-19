@@ -56,7 +56,7 @@ else {
             $displayEmail = true;
         }
         if ($displayEmail) {
-            echo "<div class='wdn-icon-mail wdn-sans-serif'<span class='email'><a class='email' href='mailto:{$context->record->mail}'>{$context->record->mail}</a></span></div>\n";
+            echo "<div class='wdn-icon-mail wdn-sans-serif'><span class='email'><a class='email' href='mailto:{$context->record->mail}'>{$context->record->mail}</a></span></div>\n";
         }
         echo '</div>';
         ?>
