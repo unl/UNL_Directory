@@ -13,42 +13,70 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
 
     public static $service_pass;
 
+    public static $cache;
+    public static $memcache_host;
+    public static $memcache_port;
+    public static $key_prefix = 'UNL_Directory_FacultyData_';
+
     function __construct($options = array())
     {
         if (isset($options['service_url'])) {
             $this->service_url = $options['service_url'];
         }
+
+        self::$cache = new Memcached;
+        self::$cache->addServer('localhost', 11211);
+    }
+
+    function getFromCache($key)
+    {
+        return self::$cache->get($key);
+    }
+
+    function cache($key, $object)
+    {
+        # cache for 1 week
+        self::$cache->set($key, $object, time() + 86400*7);
     }
 
     function getCategory($category, $uid)
     {
-        $curl = curl_init();
+        # check the cache for this
+        $key = self::$key_prefix . $category . '_' . $uid;
 
-        curl_setopt_array($curl, array(
-            CURLOPT_URL             => $this->service_url . 'USERNAME:' . $uid . '/' . $category,
-            CURLOPT_USERPWD         => UNL_Knowledge_Driver_REST::$service_user . ':' . UNL_Knowledge_Driver_REST::$service_pass,
-            CURLOPT_ENCODING        => 'gzip',
-            CURLOPT_FOLLOWLOCATION  => true,
-            CURLOPT_RETURNTRANSFER  => true,
-        ));
-
-        $responseData = curl_exec($curl);
-
-        if (curl_errno($curl)) {
-            $errorMessage = curl_error($curl);
+        if (($result = $this->getFromCache($key)) !== FALSE) {
+            return $result;
         } else {
-            $statusCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+            $curl = curl_init();
 
-            if ($statusCode === 200) {
-                $xml = simplexml_load_string($responseData, "SimpleXMLElement", LIBXML_NOCDATA);
-                $json = json_encode($xml);
-                $array = json_decode($json,TRUE);
+            curl_setopt_array($curl, array(
+                CURLOPT_URL             => $this->service_url . 'USERNAME:' . $uid . '/' . $category,
+                CURLOPT_USERPWD         => UNL_Knowledge_Driver_REST::$service_user . ':' . UNL_Knowledge_Driver_REST::$service_pass,
+                CURLOPT_ENCODING        => 'gzip',
+                CURLOPT_FOLLOWLOCATION  => true,
+                CURLOPT_RETURNTRANSFER  => true,
+            ));
+
+            $responseData = curl_exec($curl);
+
+            if (curl_errno($curl)) {
+                $errorMessage = curl_error($curl);
+            } else {
+                $statusCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+                if ($statusCode === 200) {
+                    $xml = simplexml_load_string($responseData, "SimpleXMLElement", LIBXML_NOCDATA);
+                    $json = json_encode($xml);
+                    $array = json_decode($json,TRUE);
+                }
             }
+
+            curl_close($curl);
+
+            $result = isset($array['Record'][$category]) ? $array['Record'][$category] : null;
+            $this->cache($key, $result);
+            return $result;
         }
-
-        curl_close($curl);
-
-        return isset($array['Record'][$category]) ? $array['Record'][$category] : null;
     }
 
     function getRecords($uid)
