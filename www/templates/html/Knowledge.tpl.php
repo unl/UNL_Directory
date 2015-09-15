@@ -32,7 +32,7 @@
 
 <?php if ($context->papers) { ?>
     <div class="directory-knowledge-section directory-knowledge-section-papers">
-        <h3 class="wdn-brand"><img src="images/icons/document-1.svg" alt="">Papers</h3>
+        <h3 class="wdn-brand"><img src="images/icons/document-1.svg" alt="">Publications and Other Intellectual Contributions</h3>
         <ul class="directory-knowledge-section-inner">
             <?php foreach ($context->papers as $paper) { ?>
                 <li class="directory-knowledge-item">
