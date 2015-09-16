@@ -13,15 +13,47 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
 
     public static $service_pass;
 
+    public static $cache;
+    public static $memcache_host;
+    public static $memcache_port;
+    public static $key_prefix = 'UNL_Directory_FacultyData_';
+    public static $cache_length = 604800; //default to one week
+
     function __construct($options = array())
     {
         if (isset($options['service_url'])) {
             $this->service_url = $options['service_url'];
         }
+
+        self::$cache = new Memcached;
+        self::$cache->addServer('localhost', 11211);
+    }
+
+    function getFromCache($key)
+    {
+        return self::$cache->get($key);
+    }
+
+    function cache($key, $object)
+    {
+        # cache for the given time
+        self::$cache->set($key, $object, time() + self::$cache_length);
     }
 
     function getCategory($category, $uid)
     {
+        # check the cache for this
+        $key = self::$key_prefix . $category . '_' . $uid;
+
+        try {
+            if (($result = $this->getFromCache($key)) !== FALSE) {
+                return $result;
+            }
+        } catch (Exception $e) {
+            error_log($e->message);
+        }
+        
+        # if that doesn't work, curl the API
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
@@ -48,7 +80,14 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
 
         curl_close($curl);
 
-        return isset($array['Record'][$category]) ? $array['Record'][$category] : null;
+        $result = isset($array['Record'][$category]) ? $array['Record'][$category] : null;
+
+        try {
+            $this->cache($key, $result);
+        } catch (Exception $e) {
+            error_log($e->message);
+        }
+        return $result;
     }
 
     function getRecords($uid)
