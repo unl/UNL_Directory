@@ -26,7 +26,7 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
         }
 
         self::$cache = new Memcached;
-        self::$cache->addServer('localhost', 11211);
+        self::$cache->addServer(self::$memcache_host, self::$memcache_port);
     }
 
     function getFromCache($key)
