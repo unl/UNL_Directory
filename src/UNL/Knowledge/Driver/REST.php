@@ -17,6 +17,7 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
     public static $memcache_host;
     public static $memcache_port;
     public static $key_prefix = 'UNL_Directory_FacultyData_';
+    public static $cache_length = 604800; //default to one week
 
     function __construct($options = array())
     {
@@ -35,8 +36,8 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
 
     function cache($key, $object)
     {
-        # cache for 1 week
-        self::$cache->set($key, $object, time() + 86400*7);
+        # cache for the given time
+        self::$cache->set($key, $object, time() + self::$cache_length);
     }
 
     function getCategory($category, $uid)
@@ -44,39 +45,49 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
         # check the cache for this
         $key = self::$key_prefix . $category . '_' . $uid;
 
-        if (($result = $this->getFromCache($key)) !== FALSE) {
-            return $result;
-        } else {
-            $curl = curl_init();
-
-            curl_setopt_array($curl, array(
-                CURLOPT_URL             => $this->service_url . 'USERNAME:' . $uid . '/' . $category,
-                CURLOPT_USERPWD         => UNL_Knowledge_Driver_REST::$service_user . ':' . UNL_Knowledge_Driver_REST::$service_pass,
-                CURLOPT_ENCODING        => 'gzip',
-                CURLOPT_FOLLOWLOCATION  => true,
-                CURLOPT_RETURNTRANSFER  => true,
-            ));
-
-            $responseData = curl_exec($curl);
-
-            if (curl_errno($curl)) {
-                $errorMessage = curl_error($curl);
-            } else {
-                $statusCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-
-                if ($statusCode === 200) {
-                    $xml = simplexml_load_string($responseData, "SimpleXMLElement", LIBXML_NOCDATA);
-                    $json = json_encode($xml);
-                    $array = json_decode($json,TRUE);
-                }
+        try {
+            if (($result = $this->getFromCache($key)) !== FALSE) {
+                return $result;
             }
-
-            curl_close($curl);
-
-            $result = isset($array['Record'][$category]) ? $array['Record'][$category] : null;
-            $this->cache($key, $result);
-            return $result;
+        } catch (Exception $e) {
+            error_log($e->message);
         }
+        
+        # if that doesn't work, curl the API
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL             => $this->service_url . 'USERNAME:' . $uid . '/' . $category,
+            CURLOPT_USERPWD         => UNL_Knowledge_Driver_REST::$service_user . ':' . UNL_Knowledge_Driver_REST::$service_pass,
+            CURLOPT_ENCODING        => 'gzip',
+            CURLOPT_FOLLOWLOCATION  => true,
+            CURLOPT_RETURNTRANSFER  => true,
+        ));
+
+        $responseData = curl_exec($curl);
+
+        if (curl_errno($curl)) {
+            $errorMessage = curl_error($curl);
+        } else {
+            $statusCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+            if ($statusCode === 200) {
+                $xml = simplexml_load_string($responseData, "SimpleXMLElement", LIBXML_NOCDATA);
+                $json = json_encode($xml);
+                $array = json_decode($json,TRUE);
+            }
+        }
+
+        curl_close($curl);
+
+        $result = isset($array['Record'][$category]) ? $array['Record'][$category] : null;
+
+        try {
+            $this->cache($key, $result);
+        } catch (Exception $e) {
+            error_log($e->message);
+        }
+        return $result;
     }
 
     function getRecords($uid)
