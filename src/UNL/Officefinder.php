@@ -132,7 +132,7 @@ class UNL_Officefinder
             $sessionMap = new SimpleCAS_SLOMap($cacheDriver);
             $protocol->setSessionMap($sessionMap);
 
-            self::$auth = new SimpleCAS::client($protocol);
+            self::$auth = SimpleCAS::client($protocol);
         }
 
         return self::$auth;
