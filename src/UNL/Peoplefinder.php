@@ -72,6 +72,7 @@ class UNL_Peoplefinder
         'search' => 'UNL_Peoplefinder_SearchController',
         'record' => 'UNL_Peoplefinder_Record',
         'avatar' => 'UNL_Peoplefinder_Record_Avatar',
+        'person' => 'UNL_Peoplefinder_Person',
         'roles' => 'UNL_Peoplefinder_Person_Roles',
         'developers' => 'UNL_Peoplefinder_Developers',
         'alphalisting' => 'UNL_Peoplefinder_PersonList_AlphaListing',

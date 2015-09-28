@@ -28,3 +28,9 @@ UNL_Officefinder::$db_pass = 'officefinder';
 // Officefinder editing admins
 UNL_Officefinder::$admins = array('bbieber2', 'smeranda2', 'erasmussen2');
 
+UNL_Knowledge_Driver_REST::$service_user = 'unl/web_service_unlwebcv';
+UNL_Knowledge_Driver_REST::$service_pass = 'examplepassword';
+
+# set the memcache host and port
+UNL_Knowledge_Driver_REST::$memcache_host = 'localhost';
+UNL_Knowledge_Driver_REST::$memcache_port = 11211;

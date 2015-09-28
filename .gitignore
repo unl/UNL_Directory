@@ -2,6 +2,7 @@
 /.buildpath
 /.cache
 /*.esproj
+/.idea
 /.project
 /.settings
 /*.sublime*
