@@ -10,6 +10,7 @@
 /*.zip
 /data/hr_tree.xml
 /data/faculty_education.csv
+/node_modules/
 /vagrant/dev/.vagrant
 /vendor
 /www/.htaccess
