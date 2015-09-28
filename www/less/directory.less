@@ -1,0 +1,218 @@
+@charset "UTF-8";
+
+@import "directory-icon-embedded.less";
+
+@import "lib/breakpoints.less";
+@import "lib/colors.less";
+@import "lib/fonts.less";
+
+.search-band {
+	text-align: center;
+    background: #38431b url(../images/050419.jpg) 50% 50% no-repeat;
+    background-size: cover;
+
+    .wdn-input-group {
+    	max-width: 30em;
+    	margin: 0 auto;
+    }
+
+    p {
+    	margin-bottom: 0;
+    }
+}
+
+.heading-block {
+	width: 100%;
+    margin: 0 0 1rem;
+    padding: 1.069em 1.425rem 1em;
+    .sans-serif-font();
+    font-size: 0.923rem;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: mix(@ui09, @page-background, 95%);
+
+    @media @bp2 {
+        padding: 1.069em 1.899rem 1em;
+        font-size: 0.802rem;
+    }
+
+    a {
+        float: right;
+        color: #fff;
+        margin-left: 0.451em;
+    }
+}
+
+.card {
+    margin-bottom: 1em;
+    border-top: 5px solid @ui05;
+    background-color: fadeout(#fff, 33%);
+    box-shadow: 0 0 0 1px fadeout(@ui14, 90%);
+    transition: all 0.2s ease-out;
+
+    .card-content {
+    	padding: 0 1.425rem 1.777em;
+
+	    @media @bp2 {
+	        padding: 0 1.899rem 2.369em;
+	    }
+    }
+
+    .card-profile {
+    	background-color: @ui05;
+    	text-align: center;
+    	display: block;
+
+    	.photo {
+    		display: block;
+    		height: 200px;
+    		margin: 0 auto;
+    		width: auto;
+    	}
+    }
+
+    .headline {
+    	font-size: 2.618rem;
+
+    	a {
+    		color: inherit;
+    		.heading-font();
+    	}
+
+    	[class^="icon-"] {
+    		visibility: hidden;
+    		font-size: 0.5em;
+    	}
+
+    	&:hover {
+    		[class^="icon-"] {
+    			visibility: visible;
+    		}
+    	}
+    }
+
+    &:hover {
+        border-top: 5px solid @scarlet;
+        background-color: #fff;
+        box-shadow: 0 0 1px 1px fadeout(@ui14, 80%);
+    }
+
+    h1 {
+        font-size: 2.618rem;
+    }
+
+    h2 {
+        font-size: 2.321rem;
+    }
+
+    .wdn-subhead {
+    	margin-bottom: 0;
+    }
+
+    .itemprop {
+        .sans-serif-font();
+        font-size: 0.887rem;
+        padding-left: 1.7em;
+        text-indent: -1.7em;
+
+        * {
+        	text-indent: 0;
+        }
+
+        &:before {
+            color: @ui05;
+            text-indent: 0;
+        }
+    }
+
+    .adr {
+    	.type {
+    		display: block;
+    		margin-top: -1.8em;
+    	}
+
+    	.street-address {
+    		display: block;
+    	}
+
+    	.country-name {
+    		display: none;
+    	}
+    }
+
+    .roles {
+    	list-style: none;
+    	padding: 0;
+    	border-top: 1px solid @ui04;
+
+    	> * {
+    		padding: 0.5em 0 0.5em 1.7em;
+    		border-bottom: 1px solid @ui04;
+    	}
+
+    	.title {
+    		margin-left: -1.7em;
+    		font-weight: bold;
+    		display: block;
+    		border-bottom: 1px dotted @ui03;
+    	}
+
+    	.organization-unit {
+    		display: block;
+    	}
+
+    	.parent-unl {
+    		.organization-name {
+    			display: none;
+    		}
+    	}
+    }
+
+    .description {
+        margin: 1em 0 0;
+        padding-top: 1em;
+        border-top: 1px solid @ui04;
+    }
+
+    &.vcard {
+    	max-width: 480px;
+    	margin: 0 auto;
+    }
+}
+
+.help-container,
+.results-container {
+	background-color: @ui02;
+}
+
+.directory-head {
+	background-color: @ui02;
+    .brand-font();
+}
+
+.directory-foot {
+	margin: 1.777em 0;
+    padding-top: 0.75em;
+    border-top: 1px solid @ui04;
+    text-align: center;
+}
+
+.wdn-main .vcard {
+	.eppa {
+		font-style: italic;
+	}
+
+	.fn, .n, .icon-link {
+		vertical-align: middle;
+	}
+}
+
+.vcard-tools {
+	display: flex;
+	text-align: center;
+
+	> * {
+		flex: 1 1 auto;
+		padding: 0.5em;
+	}
+}
