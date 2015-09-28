@@ -104,6 +104,7 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
             $records->honors        = $this->cleanRecords($records->public_web['AWARDHONOR']);
             $records->papers        = $this->cleanRecords($records->public_web['INTELLCONT']);
             $records->presentations = $this->cleanRecords($records->public_web['PRESENT']);
+            $records->performances  = $this->cleanRecords($records->public_web['PERFORM_EXHIBIT']);
         }
 
         return $records;

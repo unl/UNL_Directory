@@ -18,6 +18,8 @@ class UNL_Knowledge
 
     public $presentations;
 
+    public $performances;
+
     public $public_web;
 
     /**

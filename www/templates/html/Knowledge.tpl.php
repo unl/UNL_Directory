@@ -58,6 +58,19 @@
     </div>
 <?php } ?>
 
+<?php if ($context->performances) { ?>
+    <div class="directory-knowledge-section directory-knowledge-section-grants">
+        <h3 class="wdn-brand"><img src="images/icons/business-chart-2.svg" alt="">Artistic &amp; Professional Performances &amp; Exhibitions</h3>
+        <ul class="directory-knowledge-section-inner">
+            <?php foreach ($context->performances as $performance) { ?>
+                <li class="directory-knowledge-item">
+                    <?php echo $performance['PERFORM_EXHIBIT']['TITLE']; ?> &ndash; <em><?php echo $performance['PERFORM_EXHIBIT']['LOCATION']; ?></em> &ndash; <?php echo $performance['PERFORM_EXHIBIT']['DTM_START']; ?> <?php echo $performance['PERFORM_EXHIBIT']['DTD_START']; ?>, <?php echo $performance['PERFORM_EXHIBIT']['DTY_START']; ?>
+                </li>
+            <?php } ?>
+        </ul>
+    </div>
+<?php } ?>
+
 <?php if ($context->presentations) { ?>
     <div class="directory-knowledge-section directory-knowledge-section-presentations">
         <h3 class="wdn-brand"><img src="images/icons/keynote.svg" alt="">Presentations</h3>
