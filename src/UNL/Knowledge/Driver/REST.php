@@ -17,7 +17,7 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
     public static $memcache_host;
     public static $memcache_port;
     public static $key_prefix = 'UNL_Directory_FacultyData_';
-    public static $cache_length = 604800; //default to one week
+    public static $cache_length = 86400; //default to one day
 
     function __construct($options = array())
     {

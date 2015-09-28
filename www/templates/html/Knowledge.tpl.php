@@ -1,4 +1,4 @@
-<?php if (isset($context->bio)) { ?>
+<?php if (is_string($context->bio)) { ?>
   <div class="directory-knowledge-section directory-knowledge-section-bio">
       <?php echo $context->bio; ?>
   </div>
