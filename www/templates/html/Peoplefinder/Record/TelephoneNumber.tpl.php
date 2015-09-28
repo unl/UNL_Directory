@@ -1,18 +1,11 @@
 <?php
 
 $clean_number = str_replace(array('(', ')', '-', ' '), '', $context);
-
-$link = '<a href="';
-if (isset($_SERVER['HTTP_USER_AGENT']) &&
-    strpos($_SERVER['HTTP_USER_AGENT'], "iPhone") === false) {
-    $link .= "wtai://wp/mc;".$clean_number;
-} else {
-    $link .= "tel:".$clean_number;
-}
-$link .= '">'.preg_replace('/([\d]{3})([\d]{3})([\d]{4})/', '$1-$2-$3', $clean_number).'</a>';
-echo $link;
-
-
+?>
+<a href="tel:<?php echo $clean_number ?>" class="tel" itemprop="telephone">
+    <?php echo preg_replace('/([\d]{3})([\d]{3})([\d]{4})/', '$1-$2-$3', $clean_number) ?>
+</a>
+<?php
 /**
  * Some numbers can be dialed without dialing off-campus.
  *
