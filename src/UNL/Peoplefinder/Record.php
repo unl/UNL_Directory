@@ -10,14 +10,21 @@
  * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
  * @link      http://peoplefinder.unl.edu/
  */
-class UNL_Peoplefinder_Record
+class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable, JsonSerializable
 {
+    const PLANETRED_BASE_URL = 'https://planetred.unl.edu/pg/';
+
+    const SERIALIZE_VERSION_SAFE = 1;
+    const SERIALIZE_VERSION_SAFE_MULTIVALUE = 2;
+    const SERIALIZE_VERSION_FULL = 3;
+
     public $dn; // distinguished name
     public $cn;
     public $ou;
     public $eduPersonAffiliation;
     public $eduPersonNickname;
     public $eduPersonPrimaryAffiliation;
+    public $eduPersonPrincipalName;
     public $givenName;
     public $displayName;
     public $mail;
@@ -46,21 +53,42 @@ class UNL_Peoplefinder_Record
     public $unlSISMinor;
     public $unlEmailAlias;
 
-    function __construct($options = array())
+    private $cache;
+    private $permanentCache;
+
+    public function __construct($options = array())
     {
-        if (isset($options['uid'])
-            && $options['peoplefinder']) {
-            return $options['peoplefinder']->getUID($options['uid']);
+        if (isset($options['uid']) && $options['peoplefinder']) {
+            $remoteRecord = $options['peoplefinder']->getUID($options['uid']);
+            foreach (get_object_vars($remoteRecord) as $var => $value) {
+                $this->$var = $value;
+            }
         }
     }
 
-    protected function getCache()
+    protected function getCache($permanent = false)
     {
-        return new UNL_Cache_Lite(array(
-            'cacheDir' => realpath(__DIR__ . '/../../../tmp') . '/',
-            'memoryCaching' => true,
-            'lifeTime' => 4 * 60 * 60, // 4 hours
-        ));
+        if ($permanent) {
+            if (!$this->permanentCache instanceof UNL_Cache_Lite) {
+                $this->permanentCache = new UNL_Cache_Lite(array(
+                    'cacheDir' => realpath(__DIR__ . '/../../..') . '/tmp/permanent/',
+                    'memoryCaching' => true,
+                    'lifeTime' => null // forever
+                ));
+            }
+
+            return $this->permanentCache;
+        } else {
+            if (!$this->cache instanceof UNL_Cache_Lite) {
+                $this->cache = new UNL_Cache_Lite(array(
+                    'cacheDir' => realpath(__DIR__ . '/../../..') . '/tmp/',
+                    'memoryCaching' => true,
+                    'lifeTime' => 30 * 24 * 60 * 60, // 30 days
+                ));
+            }
+
+            return $this->cache;
+        }
     }
 
     protected function getBuildings() {
@@ -87,7 +115,7 @@ class UNL_Peoplefinder_Record
      * @param string
      * @return array Associative array.
      */
-    function formatPostalAddress()
+    public function formatPostalAddress()
     {
         if (isset($this->postalAddress)) {
             $postalAddress = $this->postalAddress;
@@ -112,12 +140,12 @@ class UNL_Peoplefinder_Record
         $address['postal-code']    = '';
 
         $streetParts = explode(' ', $part);
-        
+
         // Extension workers have this prefix
         if (strtolower($streetParts[0]) == 'extension') {
             $address['street-address'] = implode(' ', array_slice($streetParts, 1));
         }
-        
+
         // check for a building code + room number
         if (array_key_exists($streetParts[0], $bldgs) && array_key_exists($streetParts[1], $bldgs)) {
             // oh no, both are building codes! check if one is strictly numeric
@@ -143,7 +171,7 @@ class UNL_Peoplefinder_Record
             $address['unlBuildingCode'] = $streetParts[1];
             $address['roomNumber'] = $streetParts[0];
         }
-        
+
         // workers without a set room have the "mobile" room identifier
         if (isset($address['roomNumber']) && strtolower($address['roomNumber']) == 'mobile') {
             unset($address['roomNumber']);
@@ -200,7 +228,7 @@ class UNL_Peoplefinder_Record
         $majors = $c->get('catalog majors');
 
         if (!$majors) {
-            if ($majors = file_get_contents('http://bulletin.unl.edu/undergraduate/majors/lookup/?format=json')) {
+            if ($majors = file_get_contents('https://ucommabel.unl.edu/workspace/UNL_UndergraduateBulletin/www/majors/lookup?format=json')) {
                 $c->save($majors);
             } else {
                 $majors = '[]';
@@ -216,20 +244,80 @@ class UNL_Peoplefinder_Record
         return $subject;
     }
 
+    public function hasNickname()
+    {
+        return !empty($this->eduPersonNickname) && $this->eduPersonNickname != ' ';
+    }
+
     /**
      * Get the preferred name for this person, eduPersonNickname or givenName
-     * 
+     *
      * @return string
      */
     public function getPreferredFirstName()
     {
-    
-        if (!empty($this->eduPersonNickname)
-            && $this->eduPersonNickname != ' ') {
+        if ($this->hasNickname()) {
             return $this->eduPersonNickname;
         }
 
         return $this->givenName;
+    }
+
+    public function formatAffiliations()
+    {
+        if (!$this->eduPersonAffiliation) {
+            return false;
+        }
+
+        $affiliations = $this->eduPersonAffiliation;
+        if ($affiliations instanceof ArrayIterator) {
+            $affiliations = $affiliations->getArrayCopy();
+        }
+
+        $affiliations = array_intersect(UNL_Peoplefinder::$displayedAffiliations, $affiliations);
+
+        return implode(', ', $affiliations);
+    }
+
+    public function hasStudentInformation()
+    {
+        $studentInfomationFields = [
+            'unlSISClassLevel',
+            'unlSISCollege',
+            'unlSISMajor',
+            'unlSISMinor',
+        ];
+
+        foreach ($studentInfomationFields as $var) {
+            if (isset($this->$var)) {
+                return true;
+            }
+        }
+    }
+
+    public function formatClassLevel()
+    {
+        switch ($this->unlSISClassLevel) {
+            case 'FR':
+                $class = 'Freshman';
+                break;
+            case 'SR':
+                $class = 'Senior';
+                break;
+            case 'SO':
+                $class = 'Sophomore';
+                break;
+            case 'JR':
+                $class = 'Junior';
+                break;
+            case 'GR':
+                $class = 'Graduate Student';
+                break;
+            default:
+                $class = $this->unlSISClassLevel;
+        }
+
+        return $class;
     }
 
     /**
@@ -241,38 +329,164 @@ class UNL_Peoplefinder_Record
      */
     public function formatCollege($college)
     {
+        // clean up data from PeopleSoft
+        $college = str_replace('-U', '', $college);
+
         $colleges = new UNL_Common_Colleges();
-        if (isset($colleges->colleges[$college])) {
-            return htmlentities($colleges->colleges[$college]);
-        }
-
-        return $college;
+        return isset($colleges->colleges[$college]) ? $colleges->colleges[$college] : $college;
     }
 
-    function getImageURL($size = 'medium')
+    public function isPrimarilyStudent()
     {
-
-        if ($this->ou == 'org') {
-            return UNL_Peoplefinder::getURL().'images/organization.png';
-        }
-
-        switch ($size) {
-            case 'large':
-            case 'medium':
-            case 'small':
-            case 'tiny':
-            case 'topbar':
-                break;
-            default:
-                $size = 'medium';
-        }
-
-        return 'https://planetred.unl.edu/pg/icon/unl_'.str_replace('-', '_', $this->uid).'/'.$size.'/';
+        return $this->eduPersonPrimaryAffiliation == 'student';
     }
 
-    function __toString()
+    public function getRoles()
+    {
+        return UNL_Peoplefinder::getInstance()->getRoles($this->dn);
+    }
+
+    public function getProfileUid()
+    {
+        return str_replace('-', '_', $this->uid);
+    }
+
+    public function getProfileURL()
+    {
+        if ($this->ou === 'org') {
+            return false;
+        }
+
+        return self::PLANETRED_BASE_URL . 'profile/unl_' . $this->getProfileUid();
+    }
+
+    public function getImageURL($size = UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_MEDIUM)
+    {
+        $url = $this->getRecordUrl('avatar');
+        if ($size !== UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_MEDIUM) {
+            $url .= '?' . http_build_query(['s' => $size]);
+        }
+        return $url;
+    }
+
+    protected function getRecordUrl($type)
+    {
+        return UNL_Peoplefinder::getURL() . $type . '/' . $this->uid;
+    }
+
+    public function getUrl($options = [])
+    {
+        $baseUrl = $this->getRecordUrl('people');
+
+        if ($options) {
+            return $baseUrl . '?' . http_build_query($options);
+        }
+
+        return $baseUrl;
+    }
+
+    public function getVcardUrl()
+    {
+        return $this->getRecordUrl('vcards');
+    }
+
+    public function getHcardUrl()
+    {
+        return $this->getRecordUrl('hcards');
+    }
+
+    public function getPrintUrl()
+    {
+        return $this->getUrl(['print' => true]);
+    }
+
+    public function getQRCodeUrl($content)
+    {
+        // WARNING: Google has officially deprecated this API on April 20, 2012
+        $options = [
+            'cht' => 'qr',
+            'chs' => '400x400',
+            'chl' => $content,
+            'chld' => 'L|1',
+        ];
+        return 'https://chart.googleapis.com/chart?' . http_build_query($options);
+    }
+
+    protected function getPublicProperties()
+    {
+        $self = $this;
+        $getPublicProperties = function() use ($self) {
+            return get_object_vars($self);
+        };
+        $getPublicProperties = $getPublicProperties->bindTo(null, null);
+
+        return $getPublicProperties();
+    }
+
+    public function serialize($version = self::SERIALIZE_VERSION_FULL)
+    {
+        $data = $this->getPublicProperties();
+
+        foreach ($data as $key => $value) {
+            if ($value instanceof Traversable) {
+                if ($version === self::SERIALIZE_VERSION_SAFE) {
+                    $data[$key] = (string) $value;
+                } else {
+                    $data[$key] = iterator_to_array($value);
+                }
+            }
+        }
+
+        // inject methods as properties
+        $data['imageURL'] = $this->getImageURL();
+
+        if ($address = $this->formatPostalAddress()) {
+            $data['unlDirectoryAddress'] = $address;
+        }
+
+        // for backwards compatibliity (safe), cast to object
+        if ($version === self::SERIALIZE_VERSION_SAFE || $version === self::SERIALIZE_VERSION_SAFE_MULTIVALUE) {
+            $data = (object) $data;
+        }
+
+        return serialize($data);
+    }
+
+    public function unserialize($serialized)
+    {
+        $data = unserialize($serialized);
+
+        foreach (array_keys($this->getPublicProperties()) as $var) {
+            if (isset($data[$var])) {
+                $value = $data[$var];
+                if (is_array($value)) {
+                    $this->$var = new UNL_Peoplefinder_Driver_LDAP_Multivalue($value);
+                } else {
+                    $this->$var = $value;
+                }
+            }
+        }
+    }
+
+    public function jsonSerialize()
+    {
+        $data = $this->getPublicProperties();
+
+        //force uid to be a single value
+        $data['uid'] = (string) $this->uid;
+
+        // inject method as property
+        $data['imageURL'] = $this->getImageURL();
+
+        if ($address = $this->formatPostalAddress()) {
+            $data['unlDirectoryAddress'] = $address;
+        }
+
+        return $data;
+    }
+
+    public function __toString()
     {
         return (string)$this->uid;
     }
 }
-
