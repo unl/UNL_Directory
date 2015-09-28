@@ -58,7 +58,7 @@ class UNL_Officefinder
     /**
      * Singleton authentication adapter/client
      *
-     * @var UNL_Auth_SimpleCAS
+     * @var SimpleCAS
      */
     protected static $auth;
 
@@ -88,13 +88,13 @@ class UNL_Officefinder
     {
         $this->options = $options + $this->options;
 
+        self::checkLogout();
+
         if ($this->options['format'] == 'html') {
             if (isset($_COOKIE['unl_sso'])) {
                 self::authenticate(true);
             }
         }
-
-        self::checkLogout();
 
         if (!empty($_POST)) {
             try {
@@ -115,12 +115,24 @@ class UNL_Officefinder
     /**
      * Lazy load the authentication client
      *
-     * @return UNL_Auth_SimpleCAS
+     * @return SimpleCAS
      */
     protected static function _getAuth()
     {
         if (!self::$auth) {
-            self::$auth = UNL_Auth::factory('SimpleCAS');
+            $protocol = new SimpleCAS_Protocol_Version2([
+                'hostname' => 'login.unl.edu',
+                'port' => 443,
+                'uri' => 'cas',
+            ]);
+            $cacheDriver = new \Stash\Driver\FileSystem();
+            $cacheDriver->setOptions([
+                'path' => realpath(__DIR__ . '/../..') . '/tmp/simpleCAS_map',
+            ]);
+            $sessionMap = new SimpleCAS_SLOMap($cacheDriver);
+            $protocol->setSessionMap($sessionMap);
+
+            self::$auth = new SimpleCAS::client($protocol);
         }
 
         return self::$auth;
@@ -132,6 +144,8 @@ class UNL_Officefinder
         if (isset($_GET['logout'])) {
             $auth->logout();
         }
+
+        $auth->handleSingleLogOut();
     }
 
     /**
@@ -144,6 +158,11 @@ class UNL_Officefinder
     {
         $auth = self::_getAuth();
 
+        if ($auth->isAuthenticated()) {
+            self::$user = $auth->getUsername();
+            return;
+        }
+
         if ($gateway) {
             $auth->gatewayAuthentication();
         } else {
@@ -152,12 +171,6 @@ class UNL_Officefinder
                 throw new Exception('You must log in to view this resource!');
                 exit();
             }
-        }
-
-        if ($auth->isLoggedIn()) {
-            self::$user = $auth->getUser();
-            //self::$user->last_login = date('Y-m-d H:i:s');
-            //self::$user->update();
         }
     }
 
