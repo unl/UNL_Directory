@@ -3,11 +3,11 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
 {
     /**
      * Connection credentials
-     * 
+     *
      * @param string
      */
-    static public $ldapServer = 'ldap.unl.edu ldap-backup.unl.edu';
-    
+    static public $ldapServer = 'ldaps://ldap.unl.edu';
+
     /**
      * LDAP Connection bind distinguised name
      *
@@ -15,7 +15,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
      * @ignore
      */
     static public $bindDN = 'uid=insertyouruidhere,ou=service,dc=unl,dc=edu';
-    
+
     /**
      * LDAP connection password.
      *
@@ -25,16 +25,16 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
     static public $bindPW             = 'putyourpasswordhere';
     static public $baseDN             = 'ou=people,dc=unl,dc=edu';
     static public $ldapTimeout        = 10;
-    
+
     /**
      * Attribute arrays
      * Attributes are the fields retrieved in an LDAP QUERY, limit this to
      * ONLY what is USED/DISPLAYED!
      */
-    
+
     /**
      * List attributes are the attributes displayed in a list of results
-     * 
+     *
      * @var array
      */
     public $listAttributes = array(
@@ -51,7 +51,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
         'unlHRAddress',
         'unlHRPrimaryDepartment',
         'unlHROrgUnitNumber');
-    
+
     /**
      * Details are for UID detail display only.
      * @var array
@@ -87,21 +87,19 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
         'unlSISPermZip',
         'unlSISMajor',
         'unlEmailAlias');
-    
+
     /** Connection details */
     public $connected = false;
-    public $linkID;
+    protected $linkID;
 
     /** Result Info */
     public $lastQuery;
     public $lastResult;
-    public $lastResultCount = 0;
-    
-    function __construct()
+
+    public function __construct()
     {
-        
     }
-    
+
     /**
      * Binds to the LDAP directory using the bind credentials stored in
      * bindDN and bindPW

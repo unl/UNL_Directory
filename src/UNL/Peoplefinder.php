@@ -1,9 +1,9 @@
 <?php
 /**
  * Peoplefinder class for UNL's online directory.
- * 
+ *
  * PHP version 5
- * 
+ *
  * @category  Services
  * @package   UNL_Peoplefinder
  * @author    Brett Bieber <brett.bieber@gmail.com>
@@ -16,9 +16,9 @@ define('UNL_PF_RESULT_LIMIT', 100);
 
 /**
  * Peoplefinder class for UNL's online directory.
- * 
+ *
  * PHP version 5
- * 
+ *
  * @category  Services
  * @package   UNL_Peoplefinder
  * @author    Brett Bieber <brett.bieber@gmail.com>
@@ -28,17 +28,21 @@ define('UNL_PF_RESULT_LIMIT', 100);
  */
 class UNL_Peoplefinder
 {
-    static public $resultLimit        = UNL_PF_RESULT_LIMIT;
+    static public $resultLimit = UNL_PF_RESULT_LIMIT;
+
     static public $displayResultLimit = UNL_PF_DISPLAY_LIMIT;
 
-    static public $url         = '';
+    static public $url = '';
+
     static public $annotateUrl = 'http://annotate.unl.edu/';
 
     /**
      * Options for this use.
      */
-    public $options = array('view'   => 'instructions',
-                            'format' => 'html');
+    public $options = [
+        'view'   => 'instructions',
+        'format' => 'html'
+    ];
 
     /**
      * Driver for data retrieval
@@ -49,23 +53,25 @@ class UNL_Peoplefinder
 
     /**
      * The results of the search
-     * 
+     *
      * @var mixed
      */
     public $output;
 
-    public $view_map = array('instructions' => 'UNL_Peoplefinder_Instructions',
-                             'search'       => 'UNL_Peoplefinder_SearchController',
-                             'record'       => 'UNL_Peoplefinder_Record',
-                             'roles'        => 'UNL_Peoplefinder_Person_Roles',
-                             'developers'   => 'UNL_Peoplefinder_Developers',
-                             'alphalisting' => 'UNL_Peoplefinder_PersonList_AlphaListing',
-                             'facultyedu'   => 'UNL_Peoplefinder_FacultyEducationList',
-    );
+    public $view_map = [
+        'instructions' => 'UNL_Peoplefinder_Instructions',
+        'search' => 'UNL_Peoplefinder_SearchController',
+        'record' => 'UNL_Peoplefinder_Record',
+        'avatar' => 'UNL_Peoplefinder_Record_Avatar',
+        'roles' => 'UNL_Peoplefinder_Person_Roles',
+        'developers' => 'UNL_Peoplefinder_Developers',
+        'alphalisting' => 'UNL_Peoplefinder_PersonList_AlphaListing',
+        'facultyedu' => 'UNL_Peoplefinder_FacultyEducationList',
+    ];
 
     /**
      * This list contains the affiliations shown throughout the directory.
-     * 
+     *
      * Certain affiliations are not appropriate for public display.
      *
      * @var array
@@ -114,30 +120,30 @@ class UNL_Peoplefinder
      *
      * @param mixed $mixed             An object to retrieve the URL to
      * @param array $additional_params Querystring params to add
-     * 
+     *
      * @return string
      */
     public static function getURL($mixed = null, $additional_params = array())
     {
-         
+
         $url = self::$url;
-        
+
         if (is_object($mixed)) {
             switch (get_class($mixed)) {
             default:
-                    
+
             }
         }
-        
+
         return self::addURLParams($url, $additional_params);
     }
 
     /**
      * Add unique querystring parameters to a URL
-     * 
+     *
      * @param string $url               The URL
      * @param array  $additional_params Additional querystring parameters to add
-     * 
+     *
      * @return string
      */
     public static function addURLParams($url, $additional_params = array())
@@ -181,27 +187,26 @@ class UNL_Peoplefinder
 
     /**
      * Simple router which determines what view to use, based on $_GET parameters
-     * 
+     *
      * @return void
      */
     public function determineView()
     {
         switch(true) {
-        case isset($this->options['q']):
-        case isset($this->options['sn']):
-        case isset($this->options['cn']):
-            $this->options['view'] = 'search';
-            return;
-        case isset($this->options['uid']):
-            $this->options['view'] = 'record';
-            return;
+            case isset($this->options['q']):
+            case isset($this->options['sn']):
+            case isset($this->options['cn']):
+                $this->options['view'] = 'search';
+                return;
+            case isset($this->options['uid']) && !in_array($this->options['view'], $this->uidViews):
+                $this->options['view'] = 'record';
+                return;
         }
-
     }
 
     /**
      * Render output based on the view determined
-     * 
+     *
      * @return void
      */
     function run()
@@ -210,23 +215,24 @@ class UNL_Peoplefinder
         if (!isset($this->view_map[$this->options['view']])) {
             throw new Exception('Un-registered view', 404);
         }
-        if ($this->view_map[$this->options['view']] == 'UNL_Peoplefinder_Record') {
-            $this->output = $this->getUID($this->options['uid']);
-            return;
-        }
-        $this->options['peoplefinder'] =& $this;
 
+        $this->options['peoplefinder'] = $this;
         $this->output = new $this->view_map[$this->options['view']]($this->options);
+
+        if ($this->output instanceof UNL_Peoplefinder_DirectOutput) {
+            $this->output->send();
+            exit();
+        }
     }
 
     /**
      * Pass through calls to the driver.
-     * 
+     *
      * @param string $method The method to call
      * @param mixed  $args   Arguments
-     * 
+     *
      * @method UNL_Peoplefinder_Record getUID() getUID(string $uid) get a record
-     * 
+     *
      * @return mixed
      */
     function __call($method, $args)
@@ -248,7 +254,7 @@ class UNL_Peoplefinder
     {
         self::$replacement_data[$field] = $data;
     }
-    
+
     public static function postRun($data)
     {
 
