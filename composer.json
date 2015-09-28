@@ -1,0 +1,51 @@
+{
+	"autoload": {
+		"psr-0": {
+			"UNL": "src/"
+		}
+	},
+	"repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/saltybeagle/Savvy.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/saltybeagle/Savvy_Turbo.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/unlpear/UNL_Cache_Lite.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/unlpear/UNL_Common.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/saltybeagle/SimpleCAS.git"
+        },
+        {
+            "type": "pear",
+            "url": "http://pear.php.net"
+        },
+        {
+        	"type": "vcs",
+        	"url": "https://github.com/unl/phpdwtparser.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/unl/phpunltemplates.git"
+        }
+    ],
+    "require": {
+        "saltybeagle/savvy": "dev-master",
+        "saltybeagle/savvy_turbo": "0.1.*",
+        "unl/unl_cache_lite": "0.1.*",
+        "unl/common": "0.6.*",
+        "unl/php-dwt-parser": "0.9.*",
+        "unl/php-unl-templates": "1.4.*",
+        "pear-pear/HTTP_Request2": "*",
+        "simple-cas/simple-cas": "dev-master"
+    }
+}
