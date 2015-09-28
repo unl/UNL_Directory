@@ -8,7 +8,12 @@ if (strpos($_SERVER['REQUEST_URI'], 'service.php') !== false) {
 
 $options = $_GET + $options;
 $options['driver'] = $driver;
-$peoplefinder  = new UNL_Peoplefinder($options);
+
+if (strpos($_SERVER['REQUEST_URI'], '/departments/') === false) {
+    $peoplefinder  = new UNL_Peoplefinder($options);
+} else {
+    $peoplefinder  = new UNL_Officefinder($options);
+}
 
 // Specify domains from which requests are allowed
 header('Access-Control-Allow-Origin: *');
@@ -26,21 +31,26 @@ if (strtolower($_SERVER['REQUEST_METHOD']) == 'options') {
 }
 
 Savvy_ClassToTemplateMapper::$classname_replacement = 'UNL_';
-$savvy = new Savvy();
-$savvy->setTemplatePath(dirname(__FILE__).'/templates/html');
-
+$savvy = new Savvy_Turbo();
+$savvy->setTemplatePath(__DIR__.'/templates/html');
 
 switch($peoplefinder->options['format']) {
     case 'vcard':
-        if ($peoplefinder->output instanceof UNL_Peoplefinder_Record) {
-            header('Content-Type: text/x-vcard');
-            header('Content-Disposition: attachment; filename="'.$peoplefinder->output->sn.', '.$peoplefinder->output->givenName.'.vcf"');
-        }
-        //intentional no break
+        header('Content-Type: text/x-vcard');
+        $savvy->addTemplatePath(__DIR__.'/templates/vcard');
+        break;
     case 'json':
+        header('Content-Type: application/json');
+        $savvy->addTemplatePath(__DIR__.'/templates/json');
+        break;
     case 'php':
+        header('Content-Type: text/plain');
+        $savvy->addTemplatePath(__DIR__.'/templates/php');
+        break;
     case 'xml':
-        $savvy->addTemplatePath(dirname(__FILE__).'/templates/'.$peoplefinder->options['format']);
+        header('Content-type: text/xml');
+        $savvy->setEscape('htmlspecialchars');
+        $savvy->addTemplatePath(__DIR__.'/templates/xml');
         break;
     case 'partial':
     case 'hcard':
@@ -48,12 +58,13 @@ switch($peoplefinder->options['format']) {
         // intentional no break
     case 'html':
     default:
+        $savvy->setEscape('htmlspecialchars');
+        $savvy->setHTMLEscapeSettings(['quotes' => ENT_QUOTES | ENT_HTML5]);
+        if ($peoplefinder->options['view'] != 'alphalisting') {
+            $savvy->addFilters(array('UNL_Peoplefinder', 'postRun'));
+        }
 }
 
-$savvy->addFilters(array('UNL_Peoplefinder', 'postRun'));
-
-$savvy->setEscape('htmlentities');
 $savvy->addGlobal('controller', $peoplefinder);
 
 echo $savvy->render($peoplefinder);
-
