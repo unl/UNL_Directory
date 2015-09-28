@@ -36,6 +36,10 @@ class UNL_Peoplefinder
 
     static public $annotateUrl = 'http://annotate.unl.edu/';
 
+    static public $staticFileVersion = '4.0';
+
+    static protected $instance;
+
     /**
      * Options for this use.
      */
@@ -57,6 +61,11 @@ class UNL_Peoplefinder
      * @var mixed
      */
     public $output;
+
+    protected $uidViews = [
+        'record',
+        'avatar',
+    ];
 
     public $view_map = [
         'instructions' => 'UNL_Peoplefinder_Instructions',
@@ -95,11 +104,13 @@ class UNL_Peoplefinder
 
     /**
      * Constructor for the object.
-     * 
+     *
      * @param array $options Options, format, driver etc.
      */
     function __construct($options = array())
     {
+        self::$instance = $this;
+
         if (!isset($options['driver'])) {
             $options['driver'] = new UNL_Peoplefinder_Driver_WebService();
         }
@@ -113,6 +124,15 @@ class UNL_Peoplefinder
         } catch(Exception $e) {
             $this->output = $e;
         }
+    }
+
+    public static function getInstance($options = [])
+    {
+        if (null === self::$instance) {
+            return new self($options);
+        }
+
+        return self::$instance;
     }
 
     /**
