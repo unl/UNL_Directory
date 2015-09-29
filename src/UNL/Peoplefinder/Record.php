@@ -351,15 +351,96 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
      *
      * @param string $college College abbreviation = FPA
      *
-     * @return string College of Fine &amp; Performing Arts
+     * @return string College of Fine & Performing Arts
      */
     public function formatCollege($college)
     {
-        // clean up data from PeopleSoft
-        $college = str_replace('-U', '', $college);
+        // remove student level suffix
+        $college = str_replace(['-U', '-G'], '', $college);
 
-        $colleges = new UNL_Common_Colleges();
-        return isset($colleges->colleges[$college]) ? $colleges->colleges[$college] : $college;
+        $colleges = [
+            'CBA' => [
+                'title' => 'College of Business Administration',
+                'abbr' => 'CBA',
+                'org_unit_number' => '50000897',
+            ],
+            'FPA' => [
+                'title' => 'Hixson-Lied College of Fine & Performing Arts',
+                'abbr' => 'HLCFPA',
+                'org_unit_number' => '50000898',
+            ],
+            'ASC' => [
+                'title' => 'College of Arts & Sciences',
+                'abbr' => 'CAS',
+                'org_unit_number' => '50000906',
+            ],
+            'EHS' => [
+                'title' => 'College of Education and Human Sciences',
+                'abbr' => 'HLCFPA',
+                'org_unit_number' => '50000910',
+            ],
+            'JMC' => [
+                'title' => 'College of Journalism & Mass Communications',
+                'abbr' => 'CoJMC',
+                'org_unit_number' => '50000908',
+            ],
+            'ANR' => [
+                'title' => 'College of Agricultural Sciences & Natural Resources',
+                'abbr' => 'CASNR',
+                'org_unit_number' => '50000787',
+            ],
+            'ENG' => [
+                'title' => 'College of Engineering',
+                'abbr' => 'Engineering',
+                'org_unit_number' => '50000907',
+            ],
+            'ARH' => [
+                'title' => 'College of Architecture',
+                'abbr' => 'Architecture',
+                'org_unit_number' => '50000896',
+            ],
+            'DNT' => [
+                'title' => 'UNMC College of Dentistry',
+                'abbr' => 'Dentistry',
+                'directory_id' => '1350',
+            ],
+            'LAW' => [
+                'title' => 'Nebraska College of Law',
+                'abbr' => 'Law',
+                'org_unit_number' => '50000899',
+            ],
+            'GRD' => [
+                'title' => 'Office of Graduate Studies',
+                'abbr' => 'Grad Studies',
+                'org_unit_number' => '50000900',
+            ],
+            'GEN' => [
+                'title' => 'Exploratory & Pre-Professional Advising Center',
+                'abbr' => 'Explore Center',
+                'org_unit_number' => '50000902',
+            ],
+            'NUR' => [
+                'title' => 'UNMC College of Nursing',
+                'abbr' => 'Nursing',
+                'directory_id' => '3162',
+            ],
+        ];
+
+        if (isset($colleges[$college])) {
+            $college = $colleges[$college];
+
+            if (isset($college['org_unit_number'])) {
+                if ($org = UNL_Officefinder_Department::getByorg_unit($college['org_unit_number'])) {
+                    $college['link'] = $org->getURL();
+                }
+            } elseif (isset($college['directory_id'])) {
+                if ($org = UNL_Officefinder_Department::getByID($college['directory_id'])) {
+                    $college['link'] = $org->getURL();
+                }
+            }
+        }
+
+        return $college;
     }
 
     public function isPrimarilyStudent()
