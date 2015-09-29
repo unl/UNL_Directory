@@ -61,11 +61,21 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
 
     public function __construct($options = [])
     {
-        if (isset($options['uid']) && $options['peoplefinder']) {
-            $remoteRecord = $options['peoplefinder']->getUID($options['uid']);
+        if (isset($options['uid'])) {
+            $cache = $this->getCache();
+            $cacheKey = 'UNL_Peoplefinder_Record-uid-' . $options['uid'];
+
+            $remoteRecord = $cache->get($cacheKey);
+            if (!$remoteRecord) {
+                $peoplefinder = isset($options['peoplefinder']) ? $options['peoplefinder'] : UNL_Peoplefinder::getInstance();
+                $remoteRecord = $peoplefinder->getUID($options['uid']);
+            }
+
             foreach (get_object_vars($remoteRecord) as $var => $value) {
                 $this->$var = $value;
             }
+
+            $cache->set($cacheKey, $this);
         }
 
         $this->options = $options;
@@ -346,7 +356,20 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
 
     public function getRoles()
     {
-        return UNL_Peoplefinder::getInstance()->getRoles($this->dn);
+        $cache = $this->getCache();
+        $cacheKey = 'UNL_Peoplefinder_Record_Roles-uid-' . $this->uid;
+
+        $roles = $cache->get($cacheKey);
+
+        if (!$roles) {
+            $roles = UNL_Peoplefinder::getInstance()->getRoles($this->dn);
+
+            if ($roles) {
+                $cache->set($cacheKey, $roles);
+            }
+        }
+
+        return $roles;
     }
 
     public function getKnowledge()
