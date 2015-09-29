@@ -87,7 +87,7 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
             $remoteRecord = $peoplefinder->getUID($uid);
 
             if ($remoteRecord) {
-                $cache->set($key, $remoteRecord);
+                $cache->set($cacheKey, $remoteRecord);
             }
         }
 
