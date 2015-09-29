@@ -53,7 +53,7 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
     public $unlSISMinor;
     public $unlEmailAlias;
 
-    protected $knowledge;
+    protected $knowledge = false;
 
     private $cache;
 
@@ -351,7 +351,7 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
 
     public function getKnowledge()
     {
-        if ($this->knowledge) {
+        if ($this->knowledge !== false) {
             return $this->knowledge;
         }
 
