@@ -60,7 +60,7 @@
 
 <?php if ($context->performances) { ?>
     <div class="directory-knowledge-section directory-knowledge-section-grants">
-        <h3 class="wdn-brand"><img src="images/icons/business-chart-2.svg" alt="">Artistic &amp; Professional Performances &amp; Exhibitions</h3>
+        <h3 class="wdn-brand"><img src="images/icons/column.svg" alt="">Artistic &amp; Professional Performances &amp; Exhibitions</h3>
         <ul class="directory-knowledge-section-inner">
             <?php foreach ($context->performances as $performance) { ?>
                 <li class="directory-knowledge-item">
