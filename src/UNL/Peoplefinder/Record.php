@@ -62,23 +62,36 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
     public function __construct($options = [])
     {
         if (isset($options['uid'])) {
-            $cache = $this->getCache();
-            $cacheKey = 'UNL_Peoplefinder_Record-uid-' . $options['uid'];
-
-            $remoteRecord = $cache->get($cacheKey);
-            if (!$remoteRecord) {
-                $peoplefinder = isset($options['peoplefinder']) ? $options['peoplefinder'] : UNL_Peoplefinder::getInstance();
-                $remoteRecord = $peoplefinder->getUID($options['uid']);
-            }
+            $peoplefinder = isset($options['peoplefinder']) ? $options['peoplefinder'] : UNL_Peoplefinder::getInstance();
+            $remoteRecord = self::factory($options['uid'], $peoplefinder);
 
             foreach (get_object_vars($remoteRecord) as $var => $value) {
                 $this->$var = $value;
             }
-
-            $cache->set($cacheKey, $this);
         }
 
         $this->options = $options;
+    }
+
+    public static function factory($uid, $peoplefinder = null)
+    {
+        if (!$peoplefinder) {
+            $peoplefinder = UNL_Peoplefinder::getInstance();
+        }
+
+        $cache = UNL_Peoplefinder_Cache::factory();
+        $cacheKey = 'UNL_Peoplefinder_Record-uid-' . $uid;
+
+        $remoteRecord = $cache->get($cacheKey);
+        if (!$remoteRecord) {
+            $remoteRecord = $peoplefinder->getUID($uid);
+
+            if ($remoteRecord) {
+                $cache->set($key, $remoteRecord);
+            }
+        }
+
+        return $remoteRecord;
     }
 
     protected function getCache()

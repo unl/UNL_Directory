@@ -23,13 +23,13 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
         if ($options instanceof UNL_Peoplefinder_Record) {
             $this->record = $options;
             $this->options = [];
-        } elseif (isset($options['uid']) && $options['peoplefinder']) {
-            $this->record = $options['peoplefinder']->getUID($options['uid']);
+        } elseif (isset($options['uid'])) {
+            $this->record = UNL_Peoplefinder_Record::factory($options['uid']);
             $this->options = $options;
         }
 
         if (!$this->record instanceof UNL_Peoplefinder_Record) {
-            throw new Exception('Bad object constructions', 500);
+            throw new Exception('Bad object construction', 500);
         }
     }
 
