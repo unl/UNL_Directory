@@ -13,34 +13,54 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
 
     public static $service_pass;
 
-    public static $cache;
+    protected static $cache;
+
     public static $memcache_host;
+
     public static $memcache_port;
-    public static $key_prefix = 'UNL_Directory_FacultyData_';
+
+    protected static $key_prefix = 'UNL_Directory_FacultyData_';
+
     public static $cache_length = 86400; //default to one day
 
-    function __construct($options = array())
+    protected $recordsMap;
+
+    public function __construct($options = array())
     {
         if (isset($options['service_url'])) {
             $this->service_url = $options['service_url'];
         }
 
-        self::$cache = new Memcached;
-        self::$cache->addServer(self::$memcache_host, self::$memcache_port);
+        self::$cache = UNL_Peoplefinder_Cache::factory([
+            'memcache_host' => self::$memcache_host,
+            'memcache_port' => self::$memcache_port,
+            'fast_lifetime' => self::$cache_length,
+        ]);
+
+        $this->recordsMap = [
+            'bio' => 'BIO',
+            'courses' => 'SCHTEACH',
+            'education' => 'EDUCATION',
+            'grants' => 'CONGRANT',
+            'honors' => 'AWARDHONOR',
+            'papers' => 'INTELLCONT',
+            'presentations' => 'PRESENT',
+            'performances' => 'PERFORM_EXHIBIT',
+        ];
     }
 
-    function getFromCache($key)
+    protected function getFromCache($key)
     {
         return self::$cache->get($key);
     }
 
-    function cache($key, $object)
+    protected function cache($key, $object)
     {
         # cache for the given time
         self::$cache->set($key, $object, time() + self::$cache_length);
     }
 
-    function getCategory($category, $uid)
+    protected function getCategory($category, $uid)
     {
         # check the cache for this
         $key = self::$key_prefix . $category . '_' . $uid;
@@ -52,7 +72,7 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
         } catch (Exception $e) {
             error_log($e->message);
         }
-        
+
         # if that doesn't work, curl the API
         $curl = curl_init();
 
@@ -66,21 +86,29 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
 
         $responseData = curl_exec($curl);
 
-        if (curl_errno($curl)) {
-            $errorMessage = curl_error($curl);
-        } else {
+        if (!curl_errno($curl)) {
             $statusCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
             if ($statusCode === 200) {
-                $xml = simplexml_load_string($responseData, "SimpleXMLElement", LIBXML_NOCDATA);
-                $json = json_encode($xml);
-                $array = json_decode($json,TRUE);
+                // type juggle XML to JSON
+                $array = json_decode(json_encode(simplexml_load_string($responseData, "SimpleXMLElement", LIBXML_NOCDATA)), true);
+                $result = isset($array['Record'][$category]) ? $array['Record'][$category] : null;
             }
         }
 
         curl_close($curl);
 
-        $result = isset($array['Record'][$category]) ? $array['Record'][$category] : null;
+        if (empty($result)) {
+            $result = self::$cache->getSlow($key);
+
+            if ($result) {
+                return $result;
+            }
+        }
+
+        if (empty($result)) {
+            return $result;
+        }
 
         try {
             $this->cache($key, $result);
@@ -90,48 +118,38 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
         return $result;
     }
 
-    function getRecords($uid)
+    public function getRecords($uid)
     {
-        $records = new UNL_Knowledge();
+        $data = $this->getCategory('PUBLIC_WEB', $uid);
 
-        $records->public_web = $this->getCategory('PUBLIC_WEB', $uid);
+        if ($data) {
+            $records = new UNL_Knowledge_Records();
+            foreach ($this->recordsMap as $var => $dataKey) {
+                $records->$var = $this->cleanRecords($data[$dataKey]);
+            }
 
-        if ($records->public_web) {
-            $records->bio           = $this->cleanRecords($records->public_web['BIO']);
-            $records->courses       = $this->cleanRecords($records->public_web['SCHTEACH']);
-            $records->education     = $this->cleanRecords($records->public_web['EDUCATION']);
-            $records->grants        = $this->cleanRecords($records->public_web['CONGRANT']);
-            $records->honors        = $this->cleanRecords($records->public_web['AWARDHONOR']);
-            $records->papers        = $this->cleanRecords($records->public_web['INTELLCONT']);
-            $records->presentations = $this->cleanRecords($records->public_web['PRESENT']);
-            $records->performances  = $this->cleanRecords($records->public_web['PERFORM_EXHIBIT']);
+            return $records;
         }
 
-        return $records;
+        return null;
     }
 
-    function cleanRecords($records)
+    protected function cleanRecords($records)
     {
         if (is_array($records)) {
-            foreach ($records as $key => $value) {
-                if (isset($value['REF']) && $value['REF'] == false) {
-                    // Clear empty record within an array that has a blank REF value
-                    unset($records[$key]);
-                }
-            }
+            // Clear empty record within an array that has a blank REF value
+            $records = array_filter($records, function($value) {
+                return !(isset($value['REF']) && $value['REF'] == false);
+            });
 
             if (isset($records['REF']) && $records['REF'] == false) {
                 // Clear empty record that has a blank REF value
                 $records = null;
             } else if (isset($records['REF'])) {
                 // Convert single record to indexed array at key 0
-                $temp = $records;
-                $records = array();
-                $records[0] = $temp;
+                $records = [$records];
             }
         }
-
-
 
         return $records;
     }

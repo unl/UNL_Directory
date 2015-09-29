@@ -8,18 +8,32 @@ $itemtype = 'Person';
 if ($isOrg) {
     $itemtype = 'Organization';
 }
+
+$displayEmail = false;
+$encodedEmail = '';
+if (isset($context->mail) && !$context->isPrimarilyStudent()) {
+    $displayEmail = true;
+    // attempt to curb lazy email harvesting bots
+    $encodedEmail = htmlentities($context->getRaw('mail'), ENT_QUOTES | ENT_HTML5);
+}
+
+$showKnowledge = $context->shouldShowKnowledge();
 ?>
-<div class="vcard <?php echo $context->eduPersonPrimaryAffiliation ?> card" itemscope itemtype="http://schema.org/<?php echo $itemtype ?>">
+<?php if ($showKnowledge): ?>
+<section class="wdn-grid-set">
+    <div class="bp2-wdn-col-two-sevenths">
+<?php endif; ?>
+
+
+<div class="vcard <?php if (!$showKnowledge): ?>card <?php endif; ?><?php echo $context->eduPersonPrimaryAffiliation ?>" itemscope itemtype="http://schema.org/<?php echo $itemtype ?>">
     <a class="card-profile" href="<?php echo $context->getProfileUrl() ?>" title="PlanetRed profile for <?php echo $preferredName ?>"><img class="photo" src="<?php echo $context->getImageURL(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_LARGE) ?>" alt="Avatar for <?php echo $preferredName ?>" /></a>
 
-    <div class="vcardInfo card-content">
-        <?php
-        $displayEmail = false;
-        if (isset($context->mail) && !$context->isPrimarilyStudent()) {
-            $displayEmail = true;
-        }
-        ?>
+    <div class="vcardInfo<?php if (!$showKnowledge): ?> card-content<?php endif; ?>">
+    <?php if ($showKnowledge): ?>
+        <h1 class="headline">
+    <?php else: ?>
         <div class="headline">
+    <?php endif; ?>
         <?php if (!$isOrg): ?>
             <a class="permalink" href="<?php echo $context->getUrl() ?>">
         <?php endif; ?>
@@ -36,7 +50,11 @@ if ($isOrg) {
         <?php if (!$isOrg): ?>
             <span class="icon-link"></span></a>
         <?php endif; ?>
+    <?php if (!$showKnowledge): ?>
         </div>
+    <?php else: ?>
+        </h1>
+    <?php endif; ?>
 
     <?php
     $affiliations = $context->formatAffiliations();
@@ -113,7 +131,7 @@ if ($isOrg) {
 
     <?php if ($displayEmail): ?>
         <div class="icon-email itemprop">
-            <a class="email" href="mailto:<?php echo $context->mail ?>" itemprop="email"> <?php echo $context->mail ?></a>
+            <a class="email" href="mailto:<?php echo $encodedEmail ?>" itemprop="email"> <?php echo $encodedEmail ?></a>
         </div>
     <?php endif; ?>
     </div>
@@ -125,3 +143,15 @@ if ($isOrg) {
         <div title="Leave notes on the listing for <?php echo $preferredName ?>" class="wdn_annotate" id="directory_<?php echo $context->uid ?>"></div>
     </div>
 </div>
+
+<?php if ($showKnowledge): ?>
+    </div>
+    <div class="bp2-wdn-col-five-sevenths">
+        <div class="card">
+            <div class="card-content">
+                <?php echo $savvy->render($context->getKnowledge()) ?>
+            </div>
+        </div>
+    </div>
+</section>
+<?php endif; ?>
