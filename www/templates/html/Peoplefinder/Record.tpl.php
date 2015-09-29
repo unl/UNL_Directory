@@ -64,7 +64,7 @@ $showKnowledge = $context->shouldShowKnowledge();
     <?php endif; ?>
 
     <?php if ($context->hasStudentInformation()): ?>
-        <span class="title">
+        <div class="sis-title">
         <?php if (isset($context->unlSISClassLevel)): ?>
             <span class="grade"><?php echo $context->formatClassLevel() ?></span>
         <?php endif; ?>
@@ -79,9 +79,24 @@ $showKnowledge = $context->shouldShowKnowledge();
             <?php endforeach; ?>
         <?php endif; ?>
             <?php foreach ($context->getRawObject()->unlSISCollege as $college): ?>
-                <span class="college">College of <?php echo $context->formatCollege((string) $college) ?></span>
+                <?php
+                $college = $context->formatCollege($college);
+                ?>
+                <?php if (is_string($college)): ?>
+                    <span class="icon-building college"><?php echo $college ?></span>
+                <?php else: ?>
+                    <span class="icon-building college">
+                        <?php if (isset($college['link'])): ?>
+                            <a href="<?php echo $college['link'] ?>">
+                        <?php endif; ?>
+                        <abbr title="<?php echo $college['title'] ?>"><?php echo $college['abbr'] ?></abbr>
+                        <?php if (isset($college['org_unit_number'])): ?>
+                            </a>
+                        <?php endif; ?>
+                    </span>
+                <?php endif; ?>
             <?php endforeach; ?>
-        </span>
+        </div>
     <?php endif; ?>
 
     <?php if (isset($context->unlHROrgUnitNumber)): ?>
