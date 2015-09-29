@@ -85,6 +85,7 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
         ));
 
         $responseData = curl_exec($curl);
+        $isAPIError = false;
 
         if (!curl_errno($curl)) {
             $statusCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
@@ -93,21 +94,22 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
                 // type juggle XML to JSON
                 $array = json_decode(json_encode(simplexml_load_string($responseData, "SimpleXMLElement", LIBXML_NOCDATA)), true);
                 $result = isset($array['Record'][$category]) ? $array['Record'][$category] : null;
+            } else {
+                // Server returns 500 errors for not found
+                $result = null;
             }
+        } else {
+            $isAPIError = true;
         }
 
         curl_close($curl);
 
-        if (empty($result)) {
+        if ($isAPIError) {
             $result = self::$cache->getSlow($key);
 
             if ($result) {
                 return $result;
             }
-        }
-
-        if (empty($result)) {
-            return $result;
         }
 
         try {
