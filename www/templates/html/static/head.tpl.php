@@ -26,10 +26,6 @@ require(['jquery', 'idm'], function($, idm) {
 	});
 });
 
-require(['modernizr'], function(Modernizr) {
-	Modernizr.addTest('objectfit',!!Modernizr.prefixed('objectFit'), {aliases: ['object-fit']});
-});
-
 <?php if (isset($_GET['print'])): ?>
 require(['jquery'], function() {
 	$(window).load(function() {
