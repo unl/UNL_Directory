@@ -82,7 +82,7 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
 
     protected function getBuildings() {
         $cache = $this->getCache();
-        $cacheKey = 'UNL buildings';
+        $cacheKey = 'UNL-buildings';
         $bldgs = $cache->get($cacheKey);
 
         if (!$bldgs) {
@@ -227,8 +227,8 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
     public function formatMajor($subject)
     {
         $cache = $this->getCache();
-        $cacheKey = 'catalog majors';
-        $majors = $cache->get('catalog majors');
+        $cacheKey = 'UNL-catalog-majors';
+        $majors = $cache->get($cacheKey);
 
         if (!$majors) {
             if ($majors = file_get_contents('https://bulletin.unl.edu/undergraduate/majors/lookup/?format=json')) {
