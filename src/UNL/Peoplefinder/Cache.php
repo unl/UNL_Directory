@@ -24,6 +24,8 @@ class UNL_Peoplefinder_Cache
 
         $slowCache = new UNL_Cache_Lite([
             'cacheDir' => $options['slow_storage'],
+            'hashedDirectoryLevel' => 2,
+            'hashedDirectoryUmask' => 0770,
             'automaticSerialization' => true,
             'lifeTime' => null, // forever
         ]);
