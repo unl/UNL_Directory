@@ -20,7 +20,7 @@ if (isset($context->mail) && !$context->isPrimarilyStudent()) {
 $showKnowledge = $context->shouldShowKnowledge();
 ?>
 <?php if ($showKnowledge): ?>
-<section class="wdn-grid-set">
+<section class="wdn-grid-set knowledge-grid">
     <div class="bp2-wdn-col-two-sevenths">
 <?php endif; ?>
 
