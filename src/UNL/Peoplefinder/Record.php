@@ -53,10 +53,13 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
     public $unlSISMinor;
     public $unlEmailAlias;
 
-    private $cache;
-    private $permanentCache;
+    protected $knowledge;
 
-    public function __construct($options = array())
+    private $cache;
+
+    protected $options;
+
+    public function __construct($options = [])
     {
         if (isset($options['uid']) && $options['peoplefinder']) {
             $remoteRecord = $options['peoplefinder']->getUID($options['uid']);
@@ -64,47 +67,46 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
                 $this->$var = $value;
             }
         }
+
+        $this->options = $options;
     }
 
-    protected function getCache($permanent = false)
+    protected function getCache()
     {
-        if ($permanent) {
-            if (!$this->permanentCache instanceof UNL_Cache_Lite) {
-                $this->permanentCache = new UNL_Cache_Lite(array(
-                    'cacheDir' => realpath(__DIR__ . '/../../..') . '/tmp/permanent/',
-                    'memoryCaching' => true,
-                    'lifeTime' => null // forever
-                ));
-            }
-
-            return $this->permanentCache;
-        } else {
-            if (!$this->cache instanceof UNL_Cache_Lite) {
-                $this->cache = new UNL_Cache_Lite(array(
-                    'cacheDir' => realpath(__DIR__ . '/../../..') . '/tmp/',
-                    'memoryCaching' => true,
-                    'lifeTime' => 30 * 24 * 60 * 60, // 30 days
-                ));
-            }
-
-            return $this->cache;
+        if (!$this->cache) {
+            $this->cache = UNL_Peoplefinder_Cache::factory();
         }
+
+        return $this->cache;
     }
 
     protected function getBuildings() {
-        $c = $this->getCache();
-        $bldgs = $c->get('UNL buildings');
+        $cache = $this->getCache();
+        $cacheKey = 'UNL buildings';
+        $bldgs = $cache->get($cacheKey);
+
         if (!$bldgs) {
-            $bldgs = new UNL_Common_Building();
-            $bldgs = $bldgs->getAllCodes();
-            if ($bldgs) {
-                $c->save(serialize($bldgs));
+            try {
+                $bldgs = new UNL_Common_Building();
+                $bldgs = $bldgs->getAllCodes();
+
+                if ($bldgs) {
+                    $cache->set($cacheKey, $bldgs);
+                } else {
+                    throw new Exception('Could not load buildings from API');
+                }
+            } catch (Exception $e) {
+                $bldgs = $cache->getSlow($cacheKey);
             }
-        } else {
-            $bldgs = unserialize($bldgs);
         }
 
         return $bldgs;
+    }
+
+    public function shouldShowKnowledge()
+    {
+        $isShortFormat = (isset($this->options['format']) && $this->options['format'] === 'hcard');
+        return !$isShortFormat && !$this->isPrimarilyStudent() && null !== $this->getKnowledge();
     }
 
     /**
@@ -224,13 +226,14 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
      */
     public function formatMajor($subject)
     {
-        $c = $this->getCache();
-        $majors = $c->get('catalog majors');
+        $cache = $this->getCache();
+        $cacheKey = 'catalog majors';
+        $majors = $cache->get('catalog majors');
 
         if (!$majors) {
-            if ($majors = file_get_contents('https://ucommabel.unl.edu/workspace/UNL_UndergraduateBulletin/www/majors/lookup?format=json')) {
-                $c->save($majors);
-            } else {
+            if ($majors = file_get_contents('https://bulletin.unl.edu/undergraduate/majors/lookup/?format=json')) {
+                $cache->set($cacheKey, $majors);
+            } else if (!($majors = $cache->getSlow($cacheKey))) {
                 $majors = '[]';
             }
         }
@@ -344,6 +347,18 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
     public function getRoles()
     {
         return UNL_Peoplefinder::getInstance()->getRoles($this->dn);
+    }
+
+    public function getKnowledge()
+    {
+        if ($this->knowledge) {
+            return $this->knowledge;
+        }
+
+        $knowledgeDriver = new UNL_Knowledge();
+        $this->knowledge = $knowledgeDriver->getRecords((string) $this->uid);
+
+        return $this->knowledge;
     }
 
     public function getProfileUid()
