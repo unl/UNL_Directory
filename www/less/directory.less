@@ -58,39 +58,6 @@
 	    }
     }
 
-    .card-profile {
-    	background-color: @ui05;
-    	text-align: center;
-    	display: block;
-
-    	.photo {
-    		display: block;
-    		height: 200px;
-    		margin: 0 auto;
-    		width: auto;
-    	}
-    }
-
-    .headline {
-    	font-size: 2.618rem;
-
-    	a {
-    		color: inherit;
-    		.heading-font();
-    	}
-
-    	[class^="icon-"] {
-    		visibility: hidden;
-    		font-size: 0.5em;
-    	}
-
-    	&:hover {
-    		[class^="icon-"] {
-    			visibility: visible;
-    		}
-    	}
-    }
-
     &:hover {
         border-top: 5px solid @scarlet;
         background-color: #fff;
@@ -109,80 +76,160 @@
     	margin-bottom: 0;
     }
 
-    .itemprop {
-        .sans-serif-font();
-        font-size: 0.887rem;
-        padding-left: 1.7em;
-        text-indent: -1.7em;
-
-        * {
-        	text-indent: 0;
-        }
-
-        &:before {
-            color: @ui05;
-            text-indent: 0;
-        }
-    }
-
-    .adr {
-    	.type {
-    		display: block;
-    		margin-top: -1.8em;
-    	}
-
-    	.street-address {
-    		display: block;
-    	}
-
-    	.country-name {
-    		display: none;
-    	}
-    }
-
-    .roles {
-    	list-style: none;
-    	padding: 0;
-    	border-top: 1px solid @ui04;
-
-    	> * {
-    		padding: 0.5em 0 0.5em 1.7em;
-    		border-bottom: 1px solid @ui04;
-    	}
-
-    	.title {
-    		margin-left: -1.7em;
-    		font-weight: bold;
-    		display: block;
-    		border-bottom: 1px dotted @ui03;
-    	}
-
-    	.organization-unit {
-    		display: block;
-    	}
-
-    	.parent-unl {
-    		.organization-name {
-    			display: none;
-    		}
-    	}
-    }
-
     .description {
         margin: 1em 0 0;
         padding-top: 1em;
         border-top: 1px solid @ui04;
     }
-
-    &.vcard {
-    	max-width: 480px;
-    	margin: 0 auto;
-    }
 }
 
 .help-container,
 .results-container {
-	background-color: @ui02;
+    background-color: @ui02;
+}
+
+.results-container {
+    .vcard {
+    	max-width: 480px;
+    	margin: 0 auto;
+
+
+        .card-profile {
+            background-color: @ui05;
+            text-align: center;
+            display: block;
+
+            .photo {
+                display: block;
+                height: 200px;
+                margin: 0 auto;
+                width: auto;
+            }
+        }
+
+        .headline {
+            font-size: 2.618rem;
+
+            a {
+                color: inherit;
+                .heading-font();
+            }
+
+            [class^="icon-"] {
+                visibility: hidden;
+                font-size: 0.5em;
+            }
+
+            &:hover {
+                [class^="icon-"] {
+                    visibility: visible;
+                }
+            }
+        }
+
+        .itemprop {
+            .sans-serif-font();
+            font-size: 0.887rem;
+            padding-left: 1.7em;
+            text-indent: -1.7em;
+            margin-bottom: 0.618rem;
+
+            * {
+                text-indent: 0;
+            }
+
+            &:before {
+                text-indent: 0;
+            }
+        }
+
+        .adr {
+            .type {
+                display: none;
+            }
+
+            .street-address {
+                display: block;
+                margin-top: -1.8em;
+            }
+
+            .country-name {
+                display: none;
+            }
+        }
+
+        .tel {
+            .type {
+                display: none;
+            }
+
+            a.tel {
+                display: block;
+                margin-top: -1.8em;
+            }
+        }
+
+        .sis-title {
+            margin: 1em 0;
+            .sans-serif-font();
+            line-height: 1.333;
+            text-transform: uppercase;
+            color: @ui08;
+
+            .grade {
+                display: block;
+            }
+
+            .major, .college {
+                font-size: 0.786em;
+                display: block;
+            }
+        }
+
+        .roles {
+            list-style: none;
+            padding: 0;
+            border-bottom: 1px solid @ui04;
+
+
+            > .org {
+                margin: 1em 0;
+                .sans-serif-font();
+                line-height: 1.333;
+                text-transform: uppercase;
+                color: @ui08;
+            }
+
+            .title {
+                display: block;
+            }
+
+            .organization-unit {
+                display: block;
+                font-size: 0.786em;
+            }
+
+            .parent-unl {
+                .organization-name {
+                    display: none;
+                }
+            }
+        }
+
+        .eppa {
+            font-style: italic;
+        }
+
+        .fn, .n, .icon-link {
+            vertical-align: middle;
+        }
+
+        button {
+            border: 0;
+            background: none;
+            color: @brand;
+        }
+    }
 }
 
 .directory-head {
@@ -197,16 +244,6 @@
     text-align: center;
 }
 
-.wdn-main .vcard {
-	.eppa {
-		font-style: italic;
-	}
-
-	.fn, .n, .icon-link {
-		vertical-align: middle;
-	}
-}
-
 .vcard-tools {
 	display: flex;
 	text-align: center;
@@ -215,4 +252,30 @@
 		flex: 1 1 auto;
 		padding: 0.5em;
 	}
+}
+
+.directory-knowledge-section {
+    border-bottom: 1px solid @ui04;
+    padding-bottom: 2em;
+
+    &:last-child {
+        border-bottom: 0;
+    }
+
+    h2 img {
+        margin-right: 0.3em;
+        width: 0.75em;
+    }
+}
+
+.directory-knowledge-section-inner {
+    list-style: none;
+
+    li {
+        margin-bottom: 1em;
+    }
+}
+
+.knowledge-grid .vcard {
+    margin-bottom: 1em;
 }
