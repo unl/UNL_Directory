@@ -1,9 +1,13 @@
-<?php try { ?>
-<?php if (is_string($context->bio)) { ?>
-  <div class="directory-knowledge-section directory-knowledge-section-bio">
-      <?php echo $context->bio; ?>
-  </div>
+<?php if ($context->error) { ?>
+    <?php echo $context->error; ?>
 <?php } ?>
+
+<?php try { ?>
+    <?php if (is_string($context->bio)) { ?>
+      <div class="directory-knowledge-section directory-knowledge-section-bio">
+          <?php echo $context->bio; ?>
+      </div>
+    <?php } ?>
 <?php } catch (Exception $e) {
     # don't show this section
     error_log($e->message);
