@@ -22,6 +22,8 @@ class UNL_Knowledge
 
     public $public_web;
 
+    public $error;
+
     /**
      * Driver for data retrieval
      *

@@ -68,6 +68,8 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
 
         if (curl_errno($curl)) {
             $errorMessage = curl_error($curl);
+            error_log($errorMessage);
+            $result = 'Error retrieving Faculty CV Data.';
         } else {
             $statusCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
@@ -75,18 +77,21 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
                 $xml = simplexml_load_string($responseData, "SimpleXMLElement", LIBXML_NOCDATA);
                 $json = json_encode($xml);
                 $array = json_decode($json,TRUE);
+
+                $result = isset($array['Record'][$category]) ? $array['Record'][$category] : null;
+
+                try {
+                    $this->cache($key, $result);
+                } catch (Exception $e) {
+                    error_log($e->message);
+                }
+            } else {
+                $result = 'Error retrieving Faculty CV Data.';
             }
         }
 
         curl_close($curl);
 
-        $result = isset($array['Record'][$category]) ? $array['Record'][$category] : null;
-
-        try {
-            $this->cache($key, $result);
-        } catch (Exception $e) {
-            error_log($e->message);
-        }
         return $result;
     }
 
@@ -94,17 +99,29 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
     {
         $records = new UNL_Knowledge();
 
-        $records->public_web = $this->getCategory('PUBLIC_WEB', $uid);
+        $results = $this->getCategory('PUBLIC_WEB', $uid);
 
-        if ($records->public_web) {
-            $records->bio           = $this->cleanRecords($records->public_web['BIO']);
-            $records->courses       = $this->cleanRecords($records->public_web['SCHTEACH']);
-            $records->education     = $this->cleanRecords($records->public_web['EDUCATION']);
-            $records->grants        = $this->cleanRecords($records->public_web['CONGRANT']);
-            $records->honors        = $this->cleanRecords($records->public_web['AWARDHONOR']);
-            $records->papers        = $this->cleanRecords($records->public_web['INTELLCONT']);
-            $records->presentations = $this->cleanRecords($records->public_web['PRESENT']);
-            $records->performances  = $this->cleanRecords($records->public_web['PERFORM_EXHIBIT']);
+        if (is_array($results)) {
+            $records->public_web = $results;
+            $keys_map = array(
+                'BIO' => 'bio',
+                'SCHTEACH' => 'courses',
+                'EDUCATION' => 'education',
+                'CONGRANT' => 'grants',
+                'AWARDHONOR' => 'honors',
+                'INTELLCONT' => 'papers',
+                'PRESENT' => 'presentations',
+                'PERFORM_EXHIBIT' => 'performances'
+            );
+            foreach ($keys_map as $key => $value) {
+                if (array_key_exists($key, $records->public_web)) { 
+                    $records->$value = $this->cleanRecords($records->public_web[$key]);
+                } else {
+                    $records->$value = NULL;
+                }
+            }   
+        } else {
+            $records->error = $results;
         }
 
         return $records;
@@ -114,15 +131,15 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
     {
         if (is_array($records)) {
             foreach ($records as $key => $value) {
-                if (isset($value['REF']) && $value['REF'] == false) {
+                if (isset($value['REF']) && $value['REF'] == FALSE) {
                     // Clear empty record within an array that has a blank REF value
                     unset($records[$key]);
                 }
             }
 
-            if (isset($records['REF']) && $records['REF'] == false) {
+            if (isset($records['REF']) && $records['REF'] == FALSE) {
                 // Clear empty record that has a blank REF value
-                $records = null;
+                $records = NULL;
             } else if (isset($records['REF'])) {
                 // Convert single record to indexed array at key 0
                 $temp = $records;
@@ -130,8 +147,6 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
                 $records[0] = $temp;
             }
         }
-
-
 
         return $records;
     }
