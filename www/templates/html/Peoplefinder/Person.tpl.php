@@ -3,9 +3,6 @@
 // Staff/Student with no Knowledge data
 if (!$context->knowledge->public_web) {
     echo $savvy->render($context->record, 'Peoplefinder/Record.tpl.php');
-    if ($context->knowledge->error) {
-        echo '<br>' . $context->knowledge->error;
-    }
 }
 // Faculty member with Knowledge data
 else {
