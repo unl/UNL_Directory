@@ -8,7 +8,8 @@ module.exports = function (grunt) {
   var jsDir = 'www/js';
 
   var cssFiles = [
-    'directory'
+    'directory',
+    'directory-print',
   ];
 
   var jsFiles = [
@@ -20,6 +21,7 @@ module.exports = function (grunt) {
     'breakpoints.less',
     'colors.less',
     'fonts.less',
+    'vars.less',
   ];
   var allMixinsExist = every(wdnMixins, function(value) {
     return fs.existsSync(lessVendorDir + '/' + value);
@@ -76,7 +78,14 @@ module.exports = function (grunt) {
       less: {
   			files: lessDir + '/**/*.less',
   			tasks: ['less']
-  		}
+  		},
+      js: {
+        files: [
+          jsDir + '/**/*.js',
+          '!' + jsDir + '/**/*.min.js'
+        ],
+        tasks: ['uglify']
+      }
     }
   });
 
