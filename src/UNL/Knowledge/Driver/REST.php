@@ -127,7 +127,9 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
         if ($data) {
             $records = new UNL_Knowledge_Records();
             foreach ($this->recordsMap as $var => $dataKey) {
-                $records->$var = $this->cleanRecords($data[$dataKey]);
+                if (isset($data[$dataKey])) {
+                    $records->$var = $this->cleanRecords($data[$dataKey]);
+                }
             }
 
             return $records;
