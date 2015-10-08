@@ -54,6 +54,7 @@ switch($peoplefinder->options['format']) {
         break;
     case 'partial':
     case 'hcard':
+        Savvy_ClassToTemplateMapper::$output_template['UNL_Officefinder'] = 'Peoplefinder-partial';
         Savvy_ClassToTemplateMapper::$output_template['UNL_Peoplefinder'] = 'Peoplefinder-partial';
         // intentional no break
     case 'html':
