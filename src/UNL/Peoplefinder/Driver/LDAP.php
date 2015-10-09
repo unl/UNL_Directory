@@ -392,6 +392,10 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
 
         foreach (array_keys(get_object_vars($r)) as $var) {
             if (isset($entry[$var])) {
+                if ($var === 'mail' && $entry[$var] == UNL_Peoplefinder_Record::BAD_SAP_MAIL_PLACEHOLDER) {
+                    continue;
+                }
+
                 $r->$var = $entry[$var];
             }
         }

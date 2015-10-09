@@ -14,6 +14,8 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
 {
     const PLANETRED_BASE_URL = 'https://planetred.unl.edu/pg/';
 
+    const BAD_SAP_MAIL_PLACEHOLDER = 'none@none.none';
+
     const SERIALIZE_VERSION_SAFE = 1;
     const SERIALIZE_VERSION_SAFE_MULTIVALUE = 2;
     const SERIALIZE_VERSION_FULL = 3;
@@ -66,6 +68,10 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
             $remoteRecord = self::factory($options['uid'], $peoplefinder);
 
             foreach (get_object_vars($remoteRecord) as $var => $value) {
+                if ($var === 'mail' && $value == UNL_Peoplefinder_Record::BAD_SAP_MAIL_PLACEHOLDER) {
+                    continue;
+                }
+
                 $this->$var = $value;
             }
         }
@@ -591,9 +597,19 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
         foreach (array_keys($this->getPublicProperties()) as $var) {
             if (isset($data[$var])) {
                 $value = $data[$var];
+
+
                 if (is_array($value)) {
+                    if ($var === 'mail' && in_array(self::BAD_SAP_MAIL_PLACEHOLDER, $value)) {
+                        continue;
+                    }
+
                     $this->$var = new UNL_Peoplefinder_Driver_LDAP_Multivalue($value);
                 } else {
+                    if ($var === 'mail' && $value == UNL_Peoplefinder_Record::BAD_SAP_MAIL_PLACEHOLDER) {
+                        continue;
+                    }
+
                     $this->$var = $value;
                 }
             }
