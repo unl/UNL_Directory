@@ -22,6 +22,17 @@ if ($context->options['format'] != 'partial') {
     <?php
 }
 
+    if (count($context->results) >= UNL_Peoplefinder::$resultLimit) {
+        echo "<p>Your search could only return a subset of the results. ";
+        if (isset($context->options['adv'])
+            && $context->options['adv'] != 'y') {
+            echo "Would you like to <a href='".UNL_Peoplefinder::getURL()."?adv=y' title='Click here to perform a detailed Peoplefinder search'>try a Detailed Search?</a>\n";
+        } else {
+            echo 'Try refining your search.';
+        }
+        echo '</p>';
+    }
+
 // The web view is special.
 
 // First, we group results by affiliation
