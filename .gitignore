@@ -18,6 +18,7 @@
 /www/config.inc.php
 /www/css*
 /www/faculty/all
+/www/js/*.min.*
 /www/less/lib
 /www/robots.txt
 /www/wdn
