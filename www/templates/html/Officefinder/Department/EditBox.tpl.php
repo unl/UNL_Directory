@@ -1,15 +1,14 @@
 <div id="editBox">
-    <div class="aliases">
-        <?php
-        // Display all aliases
-        echo $savvy->render($context->getAliases());
-        include dirname(__FILE__).'/../../../editing/Officefinder/Department/AddAliasForm.tpl.php';
-        ?>
-    </div>
-    <div class="users">
-        <?php 
-        echo $savvy->render($context->getUsers());
-        include dirname(__FILE__).'/../../../editing/Officefinder/Department/User/AddForm.tpl.php';
-        ?>
-    </div>
+	<div class="aliases">
+		<?php echo $savvy->render($context->getAliases()) ?>
+		<?php include __DIR__ . '/../../../editing/Officefinder/Department/Alias/AddForm.tpl.php'; ?>
+	</div>
+	<div class="users">
+		<?php echo $savvy->render($context->getUsers()) ?>
+		<?php include __DIR__ . '/../../../editing/Officefinder/Department/User/AddForm.tpl.php'; ?>
+	</div>
+	<div class="tools">
+		<?php include __DIR__ . '/../../../editing/Officefinder/Department/DeleteForm.tpl.php'; ?>
+		<?php include __DIR__ . '/../../../editing/Officefinder/Department.tpl.php'; ?>
+	</div>
 </div>
