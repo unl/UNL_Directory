@@ -9,6 +9,12 @@ if ($isOrg) {
     $itemtype = 'Organization';
 }
 
+if (isset($page)) {
+    // inject a prefix into the document title
+    $page = $page->getRawObject();
+    $page->doctitle = substr_replace($page->doctitle, $preferredName . ' | ', strlen('<title>'), 0);
+}
+
 $displayEmail = false;
 $encodedEmail = '';
 if (isset($context->mail) && !$context->isPrimarilyStudent()) {
@@ -25,11 +31,13 @@ $showKnowledge = $context->shouldShowKnowledge();
 <?php endif; ?>
 
 
-<div class="vcard <?php if (!$showKnowledge): ?>card <?php endif; ?><?php echo $context->eduPersonPrimaryAffiliation ?>" itemscope itemtype="http://schema.org/<?php echo $itemtype ?>">
-    <a class="card-profile" href="<?php echo $context->getProfileUrl() ?>" title="PlanetRed profile for <?php echo $preferredName ?>"><img class="photo" src="<?php echo $context->getImageURL(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_LARGE) ?>" alt="Avatar for <?php echo $preferredName ?>" /></a>
+<div class="vcard <?php if (!$showKnowledge): ?>card <?php endif; ?><?php echo $context->eduPersonPrimaryAffiliation ?>" data-uid="<?php echo $context->uid ?>" data-preferred-name="<?php echo $preferredName ?>" itemscope itemtype="http://schema.org/<?php echo $itemtype ?>">
+    <a class="card-profile" href="<?php echo $context->getProfileUrl() ?>" title="PlanetRed profile for <?php echo $preferredName ?>">
+        <img class="photo" src="<?php echo $context->getImageURL(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_LARGE) ?>" alt="Avatar for <?php echo $preferredName ?>" />
+    </a>
 
     <div class="vcardInfo<?php if (!$showKnowledge): ?> card-content<?php endif; ?>">
-    <?php if ($showKnowledge): ?>
+    <?php if (!$context->isHcardFormat()): ?>
         <h1 class="headline">
     <?php else: ?>
         <div class="headline">
@@ -50,7 +58,7 @@ $showKnowledge = $context->shouldShowKnowledge();
         <?php if (!$isOrg): ?>
             <span class="icon-link"></span></a>
         <?php endif; ?>
-    <?php if (!$showKnowledge): ?>
+    <?php if ($context->isHcardFormat()): ?>
         </div>
     <?php else: ?>
         </h1>
@@ -83,9 +91,9 @@ $showKnowledge = $context->shouldShowKnowledge();
                 $college = $context->formatCollege($college);
                 ?>
                 <?php if (is_string($college)): ?>
-                    <span class="icon-building college"><?php echo $college ?></span>
+                    <span class="icon-academic-cap college"><?php echo $college ?></span>
                 <?php else: ?>
-                    <span class="icon-building college">
+                    <span class="icon-academic-cap college">
                         <?php if (isset($college['link'])): ?>
                             <a href="<?php echo $college['link'] ?>">
                         <?php endif; ?>
@@ -102,10 +110,13 @@ $showKnowledge = $context->shouldShowKnowledge();
     <?php if (isset($context->unlHROrgUnitNumber)): ?>
         <?php
         $roles = $context->getRoles();
-        if (count($roles)) {
-            echo $savvy->render($roles);
-        }
+        $title = $context->formatTitle();
         ?>
+        <?php if (count($roles)): ?>
+            <?php echo $savvy->render($roles) ?>
+        <?php elseif ($title): ?>
+            <div class="title"><?php echo $title ?></div>
+        <?php endif; ?>
     <?php endif ?>
 
     <?php if (($address = $context->formatPostalAddress()) && count($address)): ?>
@@ -154,8 +165,7 @@ $showKnowledge = $context->shouldShowKnowledge();
     <div class="vcard-tools">
         <a href="<?php echo $context->getVcardUrl() ?>" class="icon-vcard"><span class="wdn-text-hidden">Download </span>vCard<span class="wdn-text-hidden"> for <?php echo $preferredName ?></span></a>
         <a href="<?php echo $context->getQRCodeUrl($savvy->render($context, 'templates/vcard/Peoplefinder/Record.tpl.php')) ?>" class="icon-qr-code">QR Code<span class="wdn-text-hidden"> vCard for <?php echo $preferredName ?></span></a>
-        <button class="icon-print">Print<span class="wdn-text-hidden"> listing for <?php echo $preferredName ?></span></a>
-        <div title="Leave notes on the listing for <?php echo $preferredName ?>" class="wdn_annotate" id="directory_<?php echo $context->uid ?>"></div>
+        <button class="icon-print">Print<span class="wdn-text-hidden"> listing for <?php echo $preferredName ?></span></button>
     </div>
 </div>
 
