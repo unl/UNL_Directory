@@ -1,5 +1,4 @@
 <?php
-require_once 'UNL/LDAP.php';
 /**
  * Class which represents a department.
  * 
