@@ -375,7 +375,30 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
     public function formatCollege($college)
     {
         // remove student level suffix
-        $college = str_replace(['-U', '-G'], '', $college);
+        $sisCollegeSuffixes = [
+            '-U', // undergrad
+            '-G', // grad
+            '-P', // professional
+            '-O', // other program
+            '-T', // ???
+        ];
+        $college = str_replace($sisCollegeSuffixes, '', $college);
+
+        // SIS values that shouldn't be displayed
+        $blacklist = [
+            'VST',
+            'UGRD',
+            'NCLAS',
+            'ET',
+            'NCT'
+        ];
+
+        // similar SIS college names
+        $translate = [
+            'DENT' => 'DNT',
+            'DENTH' => 'DNT',
+            'NURBS' => 'NUR',
+        ];
 
         $colleges = [
             'CBA' => [
@@ -421,7 +444,7 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
             'DNT' => [
                 'title' => 'UNMC College of Dentistry',
                 'abbr' => 'Dentistry',
-                'directory_id' => '1350',
+                'org_unit_number' => '50000719',
             ],
             'LAW' => [
                 'title' => 'Nebraska College of Law',
@@ -441,9 +464,42 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
             'NUR' => [
                 'title' => 'UNMC College of Nursing',
                 'abbr' => 'Nursing',
-                'directory_id' => '3162',
+                'org_unit_number' => '50000476',
+            ],
+            'IEP' => [
+                'title' => 'Programs in English as a Second Language',
+                'abbr' => 'ESL',
+                'org_unit_number' => '50008377',
+            ],
+            'PAC' => [
+                'title' => 'UNO College of Public Affairs and Community Service',
+                'abbr' => 'CPACS',
+                'org_unit_number' => '50000180',
+            ],
+            'DVM' => [
+                'title' => 'Iowa State University, College of Veterinary Medicine',
+                'abbr' => 'Veterinary Medicine Program',
+                'org_unit_number' => '50000845',
+            ],
+            'INT' => [
+                'title' => 'Intercampus',
+                'abbr' => 'Intercampus',
+            ],
+            'EEO' => [
+                'title' => 'Online & Distance Education',
+                'abbr' => 'ODE',
+                'org_unit_number' => '50000791',
+            ],
+            'AUD' => [
+                'title' => 'Audiology Program',
+                'abbr' => 'Audiology',
+                'org_unit_number' => '50001049',
             ],
         ];
+
+        if (isset($translate[$college])) {
+            $college = $translate[$college];
+        }
 
         if (isset($colleges[$college])) {
             $college = $colleges[$college];
@@ -452,11 +508,9 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
                 if ($org = UNL_Officefinder_Department::getByorg_unit($college['org_unit_number'])) {
                     $college['link'] = $org->getURL();
                 }
-            } elseif (isset($college['directory_id'])) {
-                if ($org = UNL_Officefinder_Department::getByID($college['directory_id'])) {
-                    $college['link'] = $org->getURL();
-                }
             }
+        } elseif (in_array($college, $blacklist)) {
+            return '';
         }
 
         return $college;
