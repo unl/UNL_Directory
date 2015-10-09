@@ -1,4 +1,4 @@
-<form action="<?php echo $context->getURL(); ?>" method="post">
+<form id="editdepartment_<?php echo $context->id; ?>" action="<?php echo $context->getURL(); ?>" class="edit" method="post">
     <input type="hidden" name="_type" value="department" />
     <?php if (isset($context->id)): ?>
     <input type="hidden" name="id" value="<?php echo $context->id; ?>" />
@@ -74,10 +74,3 @@
     </fieldset>
     <input type="submit" name="submit" value="Submit" />
 </form>
-<?php
-// Disable editing sublistings for now.
-//$listings = $context->getChildLeafNodes();
-//if (count($listings)) {
-//    echo $savvy->render($listings);
-//}
-?>
