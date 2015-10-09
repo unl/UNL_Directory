@@ -6,6 +6,8 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
 
     const GRAVATAR_BASE_URL = 'https://secure.gravatar.com/avatar/';
 
+    const CAMPUS_MAPS_BASE_URL = 'https://maps.unl.edu/';
+
     const AVATAR_SIZE_TOPBAR = 'topbar';
     const AVATAR_SIZE_TINY = 'tiny';
     const AVATAR_SIZE_SMALL = 'small';
@@ -18,17 +20,87 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
 
     protected $url;
 
+    public static function getBuildings()
+    {
+        $cache = UNL_Peoplefinder_Cache::factory();
+        $cacheKey = 'UNL-buildings';
+        $bldgs = $cache->get($cacheKey);
+
+        if (!$bldgs) {
+            try {
+                $bldgs = new UNL_Common_Building();
+                $bldgs = $bldgs->getAllCodes();
+
+                if ($bldgs) {
+                    $cache->set($cacheKey, $bldgs);
+                } else {
+                    throw new Exception('Could not load buildings from API');
+                }
+            } catch (Exception $e) {
+                $bldgs = $cache->getSlow($cacheKey);
+            }
+        }
+
+        return $bldgs;
+    }
+
+    public static function getUrlFromBuilding($building, $size = self::AVATAR_SIZE_MEDIUM)
+    {
+        $supportSizes = self::getAvatarSizes(true);
+        if (!isset($supportSizes[$size])) {
+            $size = self::AVATAR_SIZE_MEDIUM;
+        }
+
+        if ($building) {
+            $bldgs = self::getBuildings();
+        }
+
+        if (!$building || !isset($bldgs[$building])) {
+            $url = self::CAMPUS_MAPS_BASE_URL . 'images/building/icon_' . $supportSizes[$size] . '.png';
+        } else {
+            $url = self::CAMPUS_MAPS_BASE_URL . 'building/' . urlencode($building) . '/image/1/' . $supportSizes[$size];
+        }
+
+        return $url;
+    }
+
+    public static function getAvatarSizes($forBuilding = false)
+    {
+        $mapsSizeMap = [
+            self::AVATAR_SIZE_SMALL => 'sm',
+            self::AVATAR_SIZE_MEDIUM => 'md',
+            self::AVATAR_SIZE_LARGE => 'lg',
+        ];
+
+        $planetRedSizeMap = [
+            self::AVATAR_SIZE_LARGE => '200',
+            self::AVATAR_SIZE_MEDIUM => '100', //default
+            self::AVATAR_SIZE_SMALL => '40',
+            self::AVATAR_SIZE_TINY => '25',
+            self::AVATAR_SIZE_TOPBAR => '16',
+        ];
+
+        if ($forBuilding) {
+            return $mapsSizeMap;
+        }
+
+        return $planetRedSizeMap;
+    }
+
     public function __construct($options = [])
     {
-        if ($options instanceof UNL_Peoplefinder_Record) {
+        if ($options instanceof UNL_Peoplefinder_Record || $options instanceof UNL_Officefinder_Department) {
             $this->record = $options;
             $this->options = [];
         } elseif (isset($options['uid'])) {
             $this->record = UNL_Peoplefinder_Record::factory($options['uid']);
             $this->options = $options;
+        } elseif (isset($options['did'])) {
+            $this->record = new UNL_Officefinder_Department(['id' => $options['did']]);
+            $this->options = $options;
         }
 
-        if (!$this->record instanceof UNL_Peoplefinder_Record) {
+        if (!$this->record instanceof UNL_Peoplefinder_Record && !$this->record instanceof UNL_Officefinder_Department) {
             throw new Exception('Bad object construction', 500);
         }
     }
@@ -44,17 +116,6 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
         return $this->options;
     }
 
-    public function getAvatarSizes()
-    {
-        return [
-            self::AVATAR_SIZE_LARGE => '200',
-            self::AVATAR_SIZE_MEDIUM => '100', //default
-            self::AVATAR_SIZE_SMALL => '40',
-            self::AVATAR_SIZE_TINY => '25',
-            self::AVATAR_SIZE_TOPBAR => '16',
-        ];
-    }
-
     public function getUrl($options = [])
     {
         if ($this->url) {
@@ -66,19 +127,22 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
         if (!isset($options['s'])) {
             $options['s'] = self::AVATAR_SIZE_MEDIUM;
         }
-        $size = $options['s'];
-        $supportSizes = $this->getAvatarSizes();
-        if (!isset($supportSizes[$size])) {
-            $size = self::AVATAR_SIZE_MEDIUM;
+
+        if ($this->record instanceof UNL_Officefinder_Department || $this->record->ou == 'org') {
+            $this->url = $this->generateOrgUrl($options);
+        } else {
+            $this->url = $this->generatePersonUrl($options);
         }
 
-        if ($this->record->ou == 'org') {
-            $profileIconUrl = UNL_Peoplefinder::getURL() . 'images/organization';
-            if ($size !== self::AVATAR_SIZE_MEDIUM) {
-                $profileIconUrl .= $supportSizes[$size];
-            }
-            $profileIconUrl .= '.png';
-            return $profileIconUrl;
+        return $this->url;
+    }
+
+    protected function generatePersonUrl($options)
+    {
+        $size = $options['s'];
+        $supportSizes = self::getAvatarSizes();
+        if (!isset($supportSizes[$size])) {
+            $size = self::AVATAR_SIZE_MEDIUM;
         }
 
         $planetRedUid = $this->record->getProfileUid();
@@ -88,8 +152,7 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
         $response = $request->send();
 
         if ($response->getStatus() == 200) {
-            $this->url = $profileIconUrl;
-            return $this->url;
+            return $profileIconUrl;
         } elseif ($response->getStatus() == 302) {
             $fallbackUrl = $response->getHeader('Location');
         } else {
@@ -100,11 +163,45 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
             's' => $supportSizes[$size],
             'd' => $fallbackUrl,
         ];
-        $gravatarHash = md5($this->record->eduPersonPrincipalName);
+
+        if ($this->record->mail) {
+            $gravatarHash = md5($this->record->mail);
+        } else {
+            $gravatarHash = md5($this->record->eduPersonPrincipalName);
+        }
+
         $profileIconUrl = self::GRAVATAR_BASE_URL . $gravatarHash . '?' . http_build_query($gravatarParams);
 
-        $this->url = $profileIconUrl;
-        return $this->url;
+        return $profileIconUrl;
+    }
+
+    protected function generateOrgUrl($options)
+    {
+        $size = $options['s'];
+        $supportSizes = self::getAvatarSizes();
+        if (!isset($supportSizes[$size])) {
+            $size = self::AVATAR_SIZE_MEDIUM;
+        }
+
+        if ($this->record instanceof UNL_Officefinder_Department) {
+            $fallbackUrl = self::getUrlFromBuilding($this->record->building, $size);
+
+            if (!$this->record->email) {
+                return $fallbackUrl;
+            }
+
+            $gravatarHash = trim($this->record->email);
+            $gravatarParams = [
+                's' => $supportSizes[$size],
+                'd' => $fallbackUrl,
+            ];
+
+            $profileIconUrl = self::GRAVATAR_BASE_URL . $gravatarHash . '?' . http_build_query($gravatarParams);
+
+            return $profileIconUrl;
+        } else {
+            return self::getUrlFromBuilding(null, $size);
+        }
     }
 
     public function send()
