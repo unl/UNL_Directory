@@ -321,14 +321,18 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
     public function hasStudentInformation()
     {
         $studentInfomationFields = [
-            'unlSISClassLevel',
-            'unlSISCollege',
-            'unlSISMajor',
-            'unlSISMinor',
+            'unlSISClassLevel' => ['NST'],
+            'unlSISCollege' => ['NON-O'],
+            'unlSISMajor' => [],
+            'unlSISMinor' => [],
         ];
 
-        foreach ($studentInfomationFields as $var) {
-            if (isset($this->$var)) {
+        foreach ($studentInfomationFields as $var => $blacklist) {
+            if (!empty($this->$var)) {
+                if (!empty($blacklist) && in_array($this->$var, $blacklist)) {
+                    return false;
+                }
+
                 return true;
             }
         }
