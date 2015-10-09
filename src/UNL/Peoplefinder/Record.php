@@ -110,26 +110,7 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
     }
 
     protected function getBuildings() {
-        $cache = $this->getCache();
-        $cacheKey = 'UNL-buildings';
-        $bldgs = $cache->get($cacheKey);
-
-        if (!$bldgs) {
-            try {
-                $bldgs = new UNL_Common_Building();
-                $bldgs = $bldgs->getAllCodes();
-
-                if ($bldgs) {
-                    $cache->set($cacheKey, $bldgs);
-                } else {
-                    throw new Exception('Could not load buildings from API');
-                }
-            } catch (Exception $e) {
-                $bldgs = $cache->getSlow($cacheKey);
-            }
-        }
-
-        return $bldgs;
+        return UNL_Peoplefinder_Record_Avatar::getBuildings();
     }
 
     public function shouldShowKnowledge()
