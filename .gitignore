@@ -2,6 +2,7 @@
 /.cache
 /.project
 /.settings
+/.idea
 /*.tar
 /*.tgz
 /*.zip
