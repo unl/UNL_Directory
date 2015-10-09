@@ -1,10 +1,10 @@
+<?php
+$baseUrl = UNL_Peoplefinder::getURL();
+?>
+
 <section class="wdn-band search-band">
     <div class="wdn-inner-wrapper wdn-inner-padding-sm">
-        <?php if (isset($context->options['adv'])): ?>
-            <?php echo $savvy->render($context, 'Peoplefinder/AdvancedForm.tpl.php') ?>
-        <?php else: ?>
-            <?php echo $savvy->render($context, 'Peoplefinder/StandardForm.tpl.php') ?>
-        <?php endif; ?>
+        <?php echo $savvy->render($context, 'Peoplefinder/StandardForm.tpl.php') ?>
     </div>
 </section>
 
@@ -14,7 +14,7 @@
         <div class="wdn-grid-set">
             <div class="bp2-wdn-col-one-half" id="instructions_people">
                 <div class="card">
-                    <img class="hero-img" src="<?php echo UNL_Peoplefinder::getURL(); ?>images/130912_Herbie_104.jpg" alt="Profile view of mascot Herbie Husker" />
+                    <img class="hero-img" src="<?php echo $baseUrl ?>images/130912_Herbie_104.jpg" alt="Profile view of mascot Herbie Husker" />
                     <div class="card-content">
                         <h2><span class="wdn-subhead">Search</span>
                         People</h2>
@@ -30,7 +30,7 @@
             </div>
             <div class="bp2-wdn-col-one-half" id="instructions_departments">
                 <div class="card">
-                    <img class="hero-img" src="<?php echo UNL_Peoplefinder::getURL(); ?>images/110606_Canfield_S_3.jpg" alt="Panoramic view of Canfield Administration Building" />
+                    <img class="hero-img" src="<?php echo $baseUrl ?>images/110606_Canfield_S_3.jpg" alt="Panoramic view of Canfield Administration Building" />
                     <div class="card-content">
                         <h2><span class="wdn-subhead">Search</span>
                         Departments</h2>
@@ -54,11 +54,16 @@
 
 <section class="wdn-band results-container">
     <div class="wdn-inner-wrapper wdn-inner-padding-sm">
+        <div id="search-notice"></div>
         <div class="wdn-grid-set">
-            <div class="bp2-wdn-col-one-fourth">
+            <div class="bp2-wdn-col-one-fourth result-filters">
                 <?php echo $savvy->render(null, 'Peoplefinder/SearchResults/Filters.tpl.php'); ?>
             </div>
-            <div id="results" tabindex="-1" class="bp2-wdn-col-three-fourths"></div>
+            <div id="results" tabindex="-1" class="bp2-wdn-col-three-fourths wdn-pull-right" aria-live="polite"></div>
         </div>
     </div>
+</section>
+
+<section class="wdn-band record-container">
+    <div class="wdn-inner-wrapper wdn-inner-padding-sm record-single"></div>
 </section>
