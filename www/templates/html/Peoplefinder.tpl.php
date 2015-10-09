@@ -38,7 +38,7 @@ $page->head .='<link href="'.UNL_Peoplefinder::getURL().'css/all_peoplefinder.cs
 
 
 if ($context->getRawObject() instanceof UNL_Officefinder) {
-    $login_url = UNL_Officefinder::getURL(null, $context->getRaw('options'));
+    $login_url = UNL_Officefinder::getURL();
 
     if (strpos($login_url, '//') === 0) {
         $login_url = 'https:'.$login_url;

@@ -114,11 +114,11 @@ var directory = function() {
 				WDN.jQuery("#searchNotice").slideUp();
 				if (WDN.jQuery('#'+this.id+' input.q').val().length || WDN.jQuery('#'+this.id+' input.q:gt(0)').val().length) {
 					if((WDN.jQuery('#cn').length > 0) || (WDN.jQuery('#sn').length > 0)){
-						window.location.hash = '#q/' + WDN.jQuery('#cn').val() + '/' + WDN.jQuery('#sn').val();
+						window.location.hash = '#q/' + encodeURIComponent(WDN.jQuery('#cn').val()) + '/' + encodeURIComponent(WDN.jQuery('#sn').val());
 						originalSearch = WDN.jQuery('#cn').val() + ' ' + WDN.jQuery('#sn').val();
 						WDN.jQuery('#cn').focus().select();
 					} else {
-						window.location.hash = '#q/' + WDN.jQuery('#'+this.id+' input.q').val(); //triggering a hash change will run through the searching function
+						window.location.hash = '#q/' + encodeURIComponent(WDN.jQuery('#'+this.id+' input.q').val()); //triggering a hash change will run through the searching function
 						WDN.jQuery('#q').focus().select();
 						originalSearch = WDN.jQuery('#'+this.id+' input.q').val();
 					}
@@ -227,7 +227,7 @@ var directory = function() {
                         title : false,
                         onOpen : function() {
                             if (!(WDN.jQuery(this).hasClass('pf_record'))){
-                                WDN.jQuery(this).siblings('.commentProblem').children('form').children('input[name="page_address"]').val(window.location);
+                                WDN.jQuery(this).siblings('.commentProblem').children('form').children('input[name="initial_url"]').val(window.location);
                             }
                         }
                     });
@@ -274,11 +274,11 @@ WDN.jQuery(document).ready(function() {
 					splitName = false;
 					if(hash.length >= 3){ // if 3, then we're looking for first and last name individually.
 						splitName = true;
-						cn = unescape(hash[1]);
-						sn = unescape(hash[2]);
+						cn = decodeURI(hash[1]);
+						sn = decodeURI(hash[2]);
 						directory.splitSearchBoxes(cn, sn);
 					} else { // it's all one search term.
-						query = unescape(hash[1]);
+						query = decodeURI(hash[1]);
 						if (WDN.jQuery('#cn').length){
 							directory.combineSearchBoxes();
 						}
@@ -321,8 +321,11 @@ WDN.jQuery(document).ready(function() {
 				alert('Please enter more information.');
 				return false;
 			}
+
+			WDN.jQuery('.wdn_feedback_comments2 input[name="initial_url"]').val(window.location.href);
+			
 			WDN.post(
-				'http://www1.unl.edu/comments/',
+				'http://ucommchat.unl.edu/clientLogin',
 				WDN.jQuery(this).serialize(),
 				function () {
 				}

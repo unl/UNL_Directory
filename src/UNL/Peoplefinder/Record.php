@@ -63,9 +63,25 @@ class UNL_Peoplefinder_Record
         ));
     }
 
+    protected function getBuildings() {
+        $c = $this->getCache();
+        $bldgs = $c->get('UNL buildings');
+        if (!$bldgs) {
+            $bldgs = new UNL_Common_Building();
+            $bldgs = $bldgs->getAllCodes();
+            if ($bldgs) {
+                $c->save(serialize($bldgs));
+            }
+        } else {
+            $bldgs = unserialize($bldgs);
+        }
+
+        return $bldgs;
+    }
+
     /**
      * Takes in a string from the LDAP directory, usually formatted like:
-     *    ___ ### UNL 68588-####
+     *    ___ ###, UNL, 68588-####
      *    Where ### is the room number, ___ = Building Abbreviation, #### zip extension
      *
      * @param string
@@ -86,6 +102,8 @@ class UNL_Peoplefinder_Record
         $parts = explode(',', $postalAddress);
         $part = trim(array_shift($parts));
 
+        $bldgs = $this->getBuildings();
+
         // Set up defaults:
         $address = array();
         $address['street-address'] = $part;
@@ -93,27 +111,29 @@ class UNL_Peoplefinder_Record
         $address['region']         = '';
         $address['postal-code']    = '';
 
-        $c = $this->getCache();
-        $bldgs = $c->get('UNL buildings');
-        if (!$bldgs) {
-            $bldgs = new UNL_Common_Building();
-            $bldgs = $bldgs->getAllCodes();
-            if ($bldgs) {
-                $c->save(serialize($bldgs));
-            }
-        } else {
-            $bldgs = unserialize($bldgs);
-        }
-
         $streetParts = explode(' ', $part);
         
         // Extension workers have this prefix
-        if ($streetParts[0] == 'Extension') {
+        if (strtolower($streetParts[0]) == 'extension') {
             $address['street-address'] = implode(' ', array_slice($streetParts, 1));
         }
         
         // check for a building code + room number
-        if (isset($bldgs[$streetParts[0]])) {
+        if (array_key_exists($streetParts[0], $bldgs) && array_key_exists($streetParts[1], $bldgs)) {
+            // oh no, both are building codes! check if one is strictly numeric
+            // if so, assume that is the room number
+            if (preg_match('/^[\d]*$/', $streetParts[0]) && !preg_match('/^[\d]*$/', $streetParts[1])) {
+                // legacy format (room number first)
+                $address['unlBuildingCode'] = $streetParts[1];
+                $address['roomNumber'] = $streetParts[0];
+            } else {
+                // assume the first one is building code, as this is the new standard
+                $address['unlBuildingCode'] = $streetParts[0];
+                if (isset($streetParts[1])) {
+                    $address['roomNumber'] = $streetParts[1];
+                }
+            }
+        } else if (isset($bldgs[$streetParts[0]])) {
             $address['unlBuildingCode'] = $streetParts[0];
             if (isset($streetParts[1])) {
                 $address['roomNumber'] = $streetParts[1];
