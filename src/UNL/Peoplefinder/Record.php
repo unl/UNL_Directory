@@ -115,8 +115,12 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
 
     public function shouldShowKnowledge()
     {
-        $isShortFormat = (isset($this->options['format']) && $this->options['format'] === 'hcard');
-        return !$isShortFormat && !$this->isPrimarilyStudent() && null !== $this->getKnowledge();
+        return !$this->isHcardFormat() && !$this->isPrimarilyStudent() && null !== $this->getKnowledge();
+    }
+
+    public function isHcardFormat()
+    {
+        return (isset($this->options['format']) && $this->options['format'] === 'hcard');
     }
 
     /**
