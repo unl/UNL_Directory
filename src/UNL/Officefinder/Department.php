@@ -1,65 +1,51 @@
 <?php
-/**
- * @Entity
- * @Table(name="departments")
- */
+
 class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjacencyList
 {
-    /** 
-     * @Id @Column(type="integer")
-     * @GeneratedValue
-     */
     public $id;
-    /** @Column(length=50) */
+
     public $name;
-    /** @Column(length=50) */
+
     public $org_unit;
-    /** @Column(length=50) */
+
     public $building;
-    /** @Column(length=50) */
+
     public $room;
-    /** @Column(length=50) */
+
     public $city;
-    /** @Column(length=50) */
+
     public $state;
-    /** @Column(length=50) */
+
     public $postal_code;
-    /** @Column(length=50) */
+
     public $address;
-    /** @Column(length=250) */
+
     public $phone;
-    /** @Column(length=50) */
+
     public $fax;
-    /** @Column(length=50) */
+
     public $email;
-    /** @Column(length=45) */
+
     public $website;
 
-    /** @Column(type="integer") */
     public $academic;
 
-    /** @Column(type="integer") */
     public $suppress;
 
-    public $lft;
-    public $rgt;
-    public $level;
-
-    public $parent_id;
-    public $sort_order;
-
-    /** @Column(length=45) */
     public $uid;
-    /** @Column(length=255) */
+
     public $uidlastupdated;
+
+    protected $internal = [];
 
     /**
      * Construct a new listing
-     * 
+     *
      * @param $options = array([id])
      */
-    function __construct($options = array())
+    public function __construct($options = array())
     {
+        $this->nonPersistentFields[] = 'internal';
         $this->options = $options;
         if (!empty($options['id'])) {
             $record = self::getByID($options['id']);
@@ -81,16 +67,16 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
         }
     }
 
-    function getTable()
+    public function getTable()
     {
         return 'departments';
     }
 
     /**
      * Retrieve a department
-     * 
+     *
      * @param int $id
-     * 
+     *
      * @return UNL_Officefinder_Department
      */
     public static function getByID($id)
@@ -105,9 +91,9 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
 
     /**
      * Retrieve a department
-     * 
+     *
      * @param int $id
-     * 
+     *
      * @return UNL_Officefinder_Department
      */
     public static function getByorg_unit($id)
@@ -129,17 +115,7 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
         return $names[$id];
     }
 
-    /**
-     * Get office sub-listings
-     * 
-     * @return UNL_Officefinder_Department_Listings
-     */
-    public function getListings()
-    {
-        return new UNL_Officefinder_Department_Listings(array('department_id'=>$this->id));
-    }
-
-    function getHRDepartment()
+    public function getHRDepartment()
     {
         if (!isset($this->org_unit)) {
             return false;
@@ -150,7 +126,7 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
         return UNL_Peoplefinder_Department::getById($this->org_unit, $this->options);
     }
 
-    function hasOfficialChildDepartments()
+    public function hasOfficialChildDepartments()
     {
         $children = $this->_getChildren('org_unit IS NOT NULL');
         if ($children && count($children) > 0) {
@@ -159,12 +135,12 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
         return false;
     }
 
-    function getOfficialChildDepartments($orderBy = 'name ASC')
+    public function getOfficialChildDepartments($orderBy = 'name ASC')
     {
         return $this->_getChildren('org_unit IS NOT NULL', $orderBy);
     }
 
-    function hasUnofficialChildDepartments()
+    public function hasUnofficialChildDepartments()
     {
         $children = $this->_getChildren('org_unit IS NULL');
         if ($children && count($children) > 0) {
@@ -173,12 +149,12 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
         return false;
     }
 
-    function getUnofficialChildDepartments($orderBy = 'sort_order')
+    public function getUnofficialChildDepartments($orderBy = 'sort_order')
     {
         return $this->_getChildren('org_unit IS NULL', $orderBy);
     }
 
-    function addAlias($name)
+    public function addAlias($name)
     {
         if (!UNL_Officefinder_Department_Alias::getById($this->id, $name)) {
             $alias                = new UNL_Officefinder_Department_Alias();
@@ -189,19 +165,17 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
         return true;
     }
 
-    function userCanEdit($user)
+    public function userCanEdit($user)
     {
         if (in_array($user, UNL_Officefinder::$admins)) {
             return true;
         }
 
-        if (isset($this->id)
-            && (bool)UNL_Officefinder_Department_Permission::getById($this->id, $user)) {
+        if (isset($this->id) && (bool) UNL_Officefinder_Department_Permission::getById($this->id, $user)) {
             return true;
         }
 
-        if (isset($this->parent_id)
-            && true === UNL_Officefinder_Department::getByID($this->parent_id)->userCanEdit($user)) {
+        if (isset($this->parent_id) && true === UNL_Officefinder_Department::getByID($this->parent_id)->userCanEdit($user)) {
             return true;
         }
 
@@ -209,12 +183,12 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
     }
 
     /**
-     * 
+     *
      * @param string $user
-     * 
+     *
      * @return bool
      */
-    function addUser($user)
+    public function addUser($user)
     {
         $user = strtolower(trim($user));
         if (false === UNL_Officefinder_Department_Permission::getById($this->id, $user)) {
@@ -226,12 +200,12 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
         return true;
     }
 
-    function isOfficialDepartment()
+    public function isOfficialDepartment()
     {
-        return !empty($this->org_unit);
+        return !empty($this->org_unit) && $this->org_unit[0] != '_';
     }
 
-    function save()
+    public function save()
     {
         if (!empty($this->website)
             && !preg_match('/^https?\:\/\/.*/', $this->website)) {
@@ -252,7 +226,7 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
             // Default suppression to false
             $this->suppress = 0;
         }
-        
+
         if (empty($this->academic)) {
             $this->academic = 0;
         }
@@ -260,7 +234,7 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
         return parent::save();
     }
 
-    function update()
+    public function update()
     {
         if ($user = UNL_Officefinder::getUser()) {
             $this->uidlastupdated = $user;
@@ -270,10 +244,10 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
 
     /**
      * get the parent of the current element
-     * 
+     *
      * @return UNL_Officefinder_Department
      */
-    function getParent()
+    public function getParent()
     {
         if (empty($this->parent_id)) {
             return false;
