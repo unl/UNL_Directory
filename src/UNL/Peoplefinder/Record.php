@@ -340,27 +340,29 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
 
     public function formatClassLevel()
     {
-        switch ($this->unlSISClassLevel) {
-            case 'FR':
-                $class = 'Freshman';
-                break;
-            case 'SR':
-                $class = 'Senior';
-                break;
-            case 'SO':
-                $class = 'Sophomore';
-                break;
-            case 'JR':
-                $class = 'Junior';
-                break;
-            case 'GR':
-                $class = 'Graduate Student';
-                break;
-            default:
-                $class = $this->unlSISClassLevel;
+        $classLevel = (string) $this->unlSISClassLevel;
+
+        $classLevelMap = [
+            'NST' => 'Non-Student',
+            '2ND' => 'Second Degree Student',
+            'FR' => 'Freshman',
+            'SO' => 'Sophomore',
+            'JR' => 'Junior',
+            'SR' => 'Senior',
+            'GR' => 'Graduate Student',
+            'P1' => 'Professional Student Year 1',
+            'P2' => 'Professional Student Year 2',
+            'P3' => 'Professional Student Year 3',
+            'P4' => 'Professional Student Year 4',
+            '03' => 'Program Student Year 3',
+            '04' => 'Program Student Year 4',
+        ];
+
+        if (isset($classLevelMap[$classLevel])) {
+            return $classLevelMap[$classLevel];
         }
 
-        return $class;
+        return $classLevel;
     }
 
     /**
