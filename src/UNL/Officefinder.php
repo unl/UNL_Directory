@@ -1,18 +1,5 @@
 <?php
 /**
- * Main controller for Officefinder/Yellow pages of the online directory
- *
- * PHP version 5
- *
- * @category  Services
- * @package   UNL_Peoplefinder
- * @author    Brett Bieber <brett.bieber@gmail.com>
- * @copyright 2010 Regents of the University of Nebraska
- * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
- * @link      http://peoplefinder.unl.edu/
- */
-
-/**
  * Peoplefinder class for UNL's online directory.
  *
  * PHP version 5
@@ -29,9 +16,12 @@ class UNL_Officefinder
     /**
      * Options for this use.
      */
-    public $options = array('view'   => 'instructions',
-                            'format' => 'html',
-                            'q'      => '');
+    public $options = [
+        'view'   => 'instructions',
+        'format' => 'html',
+        'q'      => '',
+        'render' => '',
+    ];
 
     /**
      * The results of the search
@@ -40,20 +30,19 @@ class UNL_Officefinder
      */
     public $output;
 
-    public $view_map = array('instructions'   => 'UNL_Peoplefinder_Instructions',
-                             //'search'       => 'UNL_Peoplefinder_Department_Search',
-                             'tree'           => 'UNL_Officefinder_TreeView',
-                             'search'         => 'UNL_Officefinder_DepartmentList_NameSearch',
-                             'buildingsearch' => 'UNL_Officefinder_DepartmentList_BuildingSearch',
-                             'department'     => 'UNL_Officefinder_Department',
-                             'deptsummary'    => 'UNL_Officefinder_Department_Summary',
-                             'deptlistings'   => 'UNL_Peoplefinder_Department_Personnel',
-                             'personnelsubtree' => 'UNL_Peoplefinder_Department_PersonnelSubtree',
-                             'record'         => 'UNL_Peoplefinder_Department',
-                             'alphalisting'   => 'UNL_Officefinder_DepartmentList_AlphaListing_LoginRequired',
-                             'mydepts'        => 'UNL_Officefinder_User_Departments',
-                             'academicdepts'  => 'UNL_Officefinder_DepartmentList_AcademicDepartments',
-    );
+    public $view_map = [
+        'tree' => 'UNL_Officefinder_TreeView',
+        'search' => 'UNL_Officefinder_DepartmentList_NameSearch',
+        'buildingsearch' => 'UNL_Officefinder_DepartmentList_BuildingSearch',
+        'department' => 'UNL_Officefinder_Department',
+        'deptsummary' => 'UNL_Officefinder_Department_Summary',
+        'deptlistings' => 'UNL_Peoplefinder_Department_Personnel',
+        'personnelsubtree' => 'UNL_Peoplefinder_Department_PersonnelSubtree',
+        'record' => 'UNL_Peoplefinder_Department',
+        'alphalisting' => 'UNL_Officefinder_DepartmentList_AlphaListing_LoginRequired',
+        'mydepts' => 'UNL_Officefinder_User_Departments',
+        'academicdepts' => 'UNL_Officefinder_DepartmentList_AcademicDepartments',
+    ];
 
     /**
      * Singleton authentication adapter/client
@@ -62,7 +51,7 @@ class UNL_Officefinder
      */
     protected static $auth;
 
-    public static $admins = array();
+    public static $admins = [];
 
     /**
      * The currently logged in user.
@@ -74,9 +63,9 @@ class UNL_Officefinder
     public static $db_user = 'officefinder';
 
     public static $db_pass = 'officefinder';
-    
+
     public static $db_name = 'officefinder';
-  
+
     public static $db_host = 'localhost';
 
     /**
@@ -84,16 +73,21 @@ class UNL_Officefinder
      *
      * @param array $options Associative array of options
      */
-    function __construct($options = array())
+    public function __construct($options = [])
     {
         $this->options = $options + $this->options;
 
         self::checkLogout();
 
-        if ($this->options['format'] == 'html') {
+        if ($this->options['format'] === 'html') {
             if (isset($_COOKIE['unl_sso'])) {
                 self::authenticate(true);
             }
+        }
+
+        // prevent unauthenticated edit rendering
+        if ($this->options['render'] === 'editing') {
+            self::authenticate();
         }
 
         if (!empty($_POST)) {
@@ -166,7 +160,7 @@ class UNL_Officefinder
         if ($gateway) {
             $auth->gatewayAuthentication();
         } else {
-            $auth->login();
+            $auth->forceAuthentication();
             if (!$auth->isLoggedIn()) {
                 throw new Exception('You must log in to view this resource!');
                 exit();
@@ -211,62 +205,63 @@ class UNL_Officefinder
      *
      * @return void
      */
-    function handlePost()
+    public function handlePost()
     {
         if (!isset($_POST['_type'])) {
-            // Nothing to do here
-            return;
+            // bad post request
+            $this->redirect(UNL_Peoplefinder::getURL());
         }
+
         $redirect = false;
+
         switch($_POST['_type']) {
-        case 'department':
-            $record = $this->handlePostDBRecord('UNL_Officefinder_Department');
-            if (isset($_POST['parent_id'])) {
-                $redirect = self::getURL().$record->parent_id;
-            } else {
+            case 'department':
+                $record = $this->handlePostDBRecord('UNL_Officefinder_Department');
+                if (isset($_POST['parent_id'])) {
+                    $redirect = self::getURL().$record->parent_id;
+                } else {
+                    $redirect = $record->getURL();
+                }
+                break;
+            case 'delete_department':
+                $record = $this->getPostedDepartment();
+                $parent = $record->getParent();
+                $record->delete();
+                $redirect = $parent->getURL();
+                break;
+            case 'add_dept_user':
+                $record = $this->getPostedDepartment();
+                if (empty($_POST['uid'])) {
+                    throw new Exception('You must enter a username before adding a user.');
+                }
+                $peoplefinder = new UNL_Peoplefinder(['driver' => $this->options['driver']]);
+                $user = $peoplefinder->getUID($_POST['uid']);
+                $record->addUser($user->uid);
                 $redirect = $record->getURL();
-            }
-            break;
-        case 'delete_department':
-            $record = $this->getPostedDepartment();
-            $parent = $record->getParent();
-            $record->delete();
-            $redirect = $parent->getURL();
-            break;
-        case 'add_dept_user':
-            $record = $this->getPostedDepartment();
-            if (empty($_POST['uid'])) {
-                throw new Exception('You must enter a username before adding a user.');
-            }
-            $peoplefinder = new UNL_Peoplefinder(array('driver'=>$this->options['driver']));
-            $user         = $peoplefinder->getUID($_POST['uid']);
-            $record->addUser($user->uid);
-            $redirect = $record->getURL();
-            break;
-        case 'delete_dept_user':
-            $record = $this->getPostedDepartment();
-            $user   = UNL_Officefinder_Department_User::getById($record->id, $_POST['uid']);
-            $user->delete();
-            $redirect = $record->getURL();
-            break;
-        case 'add_dept_alias':
-            $record = $this->getPostedDepartment();
-            if (empty($_POST['name'])) {
-                throw new Exception('You must enter the alias before submitting the form.');
-            }
-            $record->addAlias($_POST['name']);
-            $redirect = $record->getURL();
-            break;
-        case 'delete_dept_alias':
-            $record = $this->getPostedDepartment();
-            $alias  = UNL_Officefinder_Department_Alias::getById($record->id, $_POST['name']);
-            $alias->delete();
-            $redirect = $record->getURL();
-            break;
+                break;
+            case 'delete_dept_user':
+                $record = $this->getPostedDepartment();
+                $user   = UNL_Officefinder_Department_User::getById($record->id, $_POST['uid']);
+                $user->delete();
+                $redirect = $record->getURL();
+                break;
+            case 'add_dept_alias':
+                $record = $this->getPostedDepartment();
+                if (empty($_POST['name'])) {
+                    throw new Exception('You must enter the alias before submitting the form.');
+                }
+                $record->addAlias($_POST['name']);
+                $redirect = $record->getURL();
+                break;
+            case 'delete_dept_alias':
+                $record = $this->getPostedDepartment();
+                $alias  = UNL_Officefinder_Department_Alias::getById($record->id, $_POST['name']);
+                $alias->delete();
+                $redirect = $record->getURL();
+                break;
         }
-        if ($redirect
-            && !(isset($this->options['redirect'])
-                 && $this->options['redirect'] == '0')) {
+
+        if ($redirect && !(isset($this->options['redirect']) && $this->options['redirect'] == '0')) {
             $this->redirect($redirect);
         }
     }
@@ -286,8 +281,7 @@ class UNL_Officefinder
         if (!$record) {
             throw new Exception('No department with that ID was found');
         }
-        if (true === $checkUserPermissions
-            && false === $record->userCanEdit(self::getUser(true))) {
+        if ($checkUserPermissions && !$record->userCanEdit(self::getUser(true))) {
             throw new Exception('You have no edit permissions for that record');
         }
         return $record;
@@ -301,7 +295,7 @@ class UNL_Officefinder
      *
      * @return string
      */
-    public static function getURL($mixed = null, $additional_params = array())
+    public static function getURL($mixed = null, $additional_params = [])
     {
 
         $url = UNL_Peoplefinder::$url.'departments/';
@@ -323,10 +317,10 @@ class UNL_Officefinder
      *
      * @return UNL_Officefinder_Record
      */
-    function handlePostDBRecord($type)
+    public function handlePostDBRecord($type)
     {
         if (!empty($_POST['id'])) {
-            if (!($record = call_user_func(array($type, 'getByID'), $_POST['id']))) {
+            if (!($record = call_user_func([$type, 'getByID'], $_POST['id']))) {
                 throw new Exception('The record could not be retrieved', 404);
             }
         } else {
@@ -355,7 +349,7 @@ class UNL_Officefinder
      *
      * @return void
      */
-    function filterPostValues()
+    public function filterPostValues()
     {
         unset($_POST['id']);
     }
@@ -383,13 +377,34 @@ class UNL_Officefinder
      *
      * @return void
      */
-    function run()
+    public function run()
     {
         $this->determineView();
+
+        if ($this->options['view'] === 'instructions') {
+            header('Location: ' . UNL_Peoplefinder::getURL());
+            exit();
+        }
+
         if (!isset($this->view_map[$this->options['view']])) {
             throw new Exception('Un-registered view', 404);
         }
-        $this->output = new $this->view_map[$this->options['view']]($this->options);
+
+        $view = new $this->view_map[$this->options['view']]($this->options);
+
+        if ($this->options['view'] === 'department' && $this->options['render'] === 'editing') {
+            if (empty($view->id)) {
+                if (isset($this->options['parent_id'])) {
+                    $view->parent_id = $this->options['parent_id'];
+                }
+            }
+
+            if (!$view->userCanEdit(self::getUser(true))) {
+                throw new Exception('You cannot edit that record.', 401);
+            }
+        }
+
+        $this->output = $view;
     }
 
     /**
@@ -428,6 +443,9 @@ class UNL_Officefinder
         }
         foreach (get_object_vars($object) as $key=>$default_value) {
             if (isset($values[$key]) && !empty($values[$key])) {
+                if (is_string($values[$key])) {
+                    $values[$key] = trim($values[$key]);
+                }
                 $object->$key = $values[$key];
             } elseif (isset($object->$key)                  // The object has the var set
                       && !empty($object->$key)              // The object has a value
@@ -450,7 +468,7 @@ class UNL_Officefinder
      *
      * @return void
      */
-    static function redirect($url, $exit = true)
+    public static function redirect($url, $exit = true)
     {
         header('Location: '.$url);
         if (false !== $exit) {
