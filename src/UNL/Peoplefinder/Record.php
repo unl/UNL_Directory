@@ -296,6 +296,28 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
         return implode(', ', $affiliations);
     }
 
+    public function formatTitle()
+    {
+        if (!$this->title) {
+            return false;
+        }
+
+        $haystack = strtolower($this->title);
+
+        $stopWords = [
+            'retiree',
+            'royalty',
+        ];
+
+        foreach ($stopWords as $needle) {
+            if (strpos($haystack, $needle) !== false) {
+                return false;
+            }
+        }
+
+        return $this->title;
+    }
+
     public function hasStudentInformation()
     {
         $studentInfomationFields = [
