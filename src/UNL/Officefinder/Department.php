@@ -252,40 +252,80 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
         if (empty($this->parent_id)) {
             return false;
         }
-        return self::getById($this->parent_id);
-    }
 
-    function getOfficialParent()
-    {
-        $query = sprintf('SELECT * FROM %s '.
-                            'WHERE %s %s <= %s AND %s >= %s '.
-                            ' AND org_unit IS NOT NULL '.
-                            'ORDER BY %s DESC LIMIT 1',
-                            // set the FROM %s
-                            $this->getTable(),
-                            // set the additional where add on
-                            $this->_getWhereAddOn(),
-                            // render 'left<=curLeft'
-                            'lft',  $this->lft,
-                            // render right>=curRight'
-                            'rgt', $this->rgt,
-                            // set the order column
-                            'lft');
-
-        $res = self::getDB()->query($query);
-
-        if ($res->num_rows == 0) {
-            throw new Exception('Should never happen!');
+        if (!isset($this->internal['parent'])) {
+            $this->internal['parent'] = self::getById($this->parent_id);
         }
 
-        $obj = new self();
-        $obj->synchronizeWithArray($res->fetch_assoc());
-        return $obj;
+        return $this->internal['parent'];
+    }
+
+    public function getOfficialParent()
+    {
+        if (isset($this->internal['hr_parent'])) {
+            return $this->internal['hr_parent'];
+        }
+
+        $parent = $this->getParent();
+
+        if (!$parent) {
+            return false;
+        } else if ($parent->isOfficialDepartment()) {
+            return $parent;
+        }
+
+        $ancestor = $parent;
+
+        while ($ancestor && $ancestor->parent_id) {
+            $ancestor = self::getByID($ancestor->parent_id);
+
+            if ($ancestor && $ancestor->isOfficialDepartment()) {
+                $this->internal['hr_parent'] = $ancestor;
+                return $ancestor;
+            }
+        }
+
+        return false;
+    }
+
+    public function getImageURL($size = UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_MEDIUM)
+    {
+        $avatar = new UNL_Peoplefinder_Record_Avatar($this);
+        return $avatar->getUrl(['s' => $size]);
+    }
+
+    public function hasAddress()
+    {
+        $addressFields = [
+            'building',
+            'address',
+            'city',
+            'state',
+            'postal_code',
+        ];
+
+        foreach ($addressFields as $var) {
+            if (!empty($this->$var)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function isSummaryView()
+    {
+        return (isset($this->options['view']) && $this->options['view'] === 'deptsummary');
     }
 
     public function getURL()
     {
         return UNL_Officefinder::getURL().$this->id;
+    }
+
+    public function getNewChildURL()
+    {
+        return $this->getURL() . '/new';
     }
 
     /**
