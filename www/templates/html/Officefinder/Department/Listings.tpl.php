@@ -1,25 +1,24 @@
 <?php
 $class = 'listings';
-if ($parent->context instanceof UNL_Officefinder_Department
-    && $parent->context->userCanEdit(UNL_Officefinder::getUser())) {
+if ($parent->context instanceof UNL_Officefinder_Department && $parent->context->userCanEdit(UNL_Officefinder::getUser())) {
     $class .= ' sortable';
 }
 ?>
-
 <ul class="<?php echo $class; ?>">
-<?php
-foreach ($context as $listing) {
-    if (isset($listing->org_unit)) {
-        continue;
-    }
-    echo '<li class="listing" id="listing_'.$listing->id.'">'.$savvy->render($listing, 'Officefinder/Department/Listing.tpl.php');
-    if ($listing->hasChildren()) {
-        $children = $listing->getChildren();
-        if (count($children)) {
-            echo $savvy->render($children, 'Officefinder/Department/Listings.tpl.php');
+    <?php foreach ($context as $listing): ?>
+        <?php
+        if (isset($listing->org_unit)) {
+            continue;
         }
-    }
-    echo '</li>'.PHP_EOL;
-}
-?>
+        ?>
+        <li class="listing" id="listing_<?php echo $listing->id ?>">
+            <?php echo $savvy->render($listing, 'Officefinder/Department/Listing.tpl.php') ?>
+            <?php
+            $children = $listing->getChildren();
+            ?>
+            <?php if (count($children)): ?>
+                <?php echo $savvy->render($children, 'Officefinder/Department/Listings.tpl.php') ?>
+            <?php endif; ?>
+        </li>
+    <?php endforeach; ?>
 </ul>
