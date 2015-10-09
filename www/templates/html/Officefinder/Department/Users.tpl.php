@@ -1,9 +1,11 @@
-<?php
-echo '<h5><a href="#" class="tooltip" title="Give others permission to edit this entry and ALL children.">Users</a></h5>';
-if (count($context)) {
-    echo '<ul class="dept_users">';
-    foreach ($context as $user) {
-        echo $savvy->render($user);
-    }
-    echo '</ul>';
-}
+<h2 class="wdn-brand">
+	Editors
+	<span class="icon-help" title="Give others permission to edit this entry and ALL children."></span>
+</h2>
+<?php if (count($context)): ?>
+	<ul class="dept_users">
+		<?php foreach ($context as $user): ?>
+			<?php echo $savvy->render($user) ?>
+		<?php endforeach; ?>
+	</ul>
+<?php endif; ?>
