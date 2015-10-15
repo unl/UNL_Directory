@@ -418,7 +418,7 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
             ],
             'EHS' => [
                 'title' => 'College of Education and Human Sciences',
-                'abbr' => 'HLCFPA',
+                'abbr' => 'CEHS',
                 'org_unit_number' => '50000910',
             ],
             'JMC' => [
