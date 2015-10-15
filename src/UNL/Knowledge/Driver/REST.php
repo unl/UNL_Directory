@@ -66,7 +66,7 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
         $key = self::$key_prefix . $category . '_' . $uid;
 
         try {
-            if (($result = $this->getFromCache($key)) !== FALSE) {
+            if (($result = $this->getFromCache($key)) !== false) {
                 return $result;
             }
         } catch (Exception $e) {
@@ -99,6 +99,8 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
                 $result = null;
             }
         } else {
+            curl_error($curl);
+            error_log($errorMessage);
             $isAPIError = true;
         }
 

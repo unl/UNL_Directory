@@ -50,9 +50,13 @@ class UNL_Peoplefinder_Cache
 		return $this->slowCache->get($key);
 	}
 
-	public function set($key, $value)
+	public function set($key, $value, $expires = false)
 	{
-		$this->fastCache->set($key, $value, time() + $this->fastLifetime);
+		if (!$expires) {
+			$expires = time() + $this->fastLifetime;
+		}
+
+		$this->fastCache->set($key, $value, $expires);
 		$this->slowCache->save($value, $key);
 	}
 }

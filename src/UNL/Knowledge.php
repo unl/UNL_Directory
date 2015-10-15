@@ -32,7 +32,7 @@ class UNL_Knowledge
      *
      * @return mixed
      */
-    function __call($method, $args)
+    public function __call($method, $args)
     {
         return call_user_func_array(array($this->driver, $method), $args);
     }
