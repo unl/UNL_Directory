@@ -1,2 +1,2 @@
 language: php
-script: phpunit --verbose --bootstrap lib/php/UNL/Autoload.php tests
+script: phpunit --verbose --bootstrap www/config-sample.inc.php tests

@@ -2,7 +2,7 @@
 ini_set('display_errors', true);
 error_reporting(E_ALL|E_STRICT);
 
-require_once '../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 // Set the main URL for the site
 UNL_Peoplefinder::$url = '/';
