@@ -69,6 +69,7 @@ class UNL_Peoplefinder
 
     public $view_map = [
         'instructions' => 'UNL_Peoplefinder_Instructions',
+        'help' => 'UNL_Peoplefinder_Help',
         'search' => 'UNL_Peoplefinder_SearchController',
         'record' => 'UNL_Peoplefinder_Record',
         'avatar' => 'UNL_Peoplefinder_Record_Avatar',
