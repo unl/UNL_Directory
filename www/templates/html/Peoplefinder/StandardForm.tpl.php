@@ -16,11 +16,7 @@
         </span>
     </div>
 </form>
-<p><a href="<?php echo UNL_Peoplefinder::getURL() ?>help/" class="wdn-button" target="_blank">Help</a></p>
-
-<script id="annotateTemplate" type="text/x-jsrender">
-<div title="Leave notes on the listing for {{:preferredName}}" class="wdn_annotate" id="directory_{{:uid}}"></div>
-</script>
+<p><a href="<?php echo UNL_Peoplefinder::getURL() ?>help/" class="wdn-button">Help</a></p>
 
 <script id="noticeTemplate" type="text/x-jsrender">
 <div class="wdn_notice">
