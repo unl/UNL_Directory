@@ -2,6 +2,7 @@ define([
 	'jquery',
 	'wdn',
 	'notice',
+	'tooltip',
 	'./vendor/jsrender.js'
 ], function($, WDN) {
 	var serviceURL = 'https://directory.unl.edu/';
@@ -19,15 +20,15 @@ define([
 	var genericErrorSelector = '#genericErrorTemplate';
 	var lengthErrorSelector = '#queryLengthTemplate';
 	var mainSelector = '#maincontent';
-	var mainStates = ['searching', 'single'];
+	var mainStates = ['searching', 'single', 'single-dept'];
 	var $searcher;
 	var $results;
 	var $filters;
 	var departments = [];
 	var affiliations = [];
 	var modalReady = false;
-	var annotateReady = false;
-	var currentMainState = '';
+	var initialMainState;
+	var currentMainState;
 	var documentTitleSuffix = '';
 
 	var filters = {
@@ -223,6 +224,9 @@ define([
 
 	var setMainState = function(state) {
 		currentMainState = state;
+		if (typeof state !== 'undefined') {
+			state = mainStates[state];
+		}
 		var $main = $(mainSelector);
 		$main.removeClass(mainStates.join(' '));
 		if (state) {
@@ -231,25 +235,22 @@ define([
 	};
 
 	var displayOnlyRecord = function($vcard) {
-		$('.record-single').empty().append($vcard).show();
+		$('.record-single').empty().append($vcard);
 	};
 
 	var addAnnotateTool = function(uid, $vcard) {
 		var tmpl = $.templates('#annotateTemplate');
-		$(tmpl.render({
-			preferredName: $vcard.data('preferred-name'),
-			uid: uid
-		})).appendTo($('.vcard-tools', $vcard));
+		var params = {
+			view: 'annotation',
+			sitekey: 'directory',
+			fieldname: uid
+		};
+		var annotateUrl = annotateServiceURL + '?' + $.param(params);
 
-		if (!annotateReady) {
-			WDN.loadJS(annotateServiceURL + 'scripts/annotate_functions.js', function() {
-				annotateReady = true;
-				annotate.path = annotateServiceURL + '?view=annotation';
-				annotate.initialize();
-			});
-		} else {
-			annotate.initialize();
-		}
+		$(tmpl.render({
+			annotateUrl: annotateUrl,
+			preferredName: $vcard.data('preferred-name'),
+		})).appendTo($('.vcard-tools', $vcard));
 	};
 
 	var loadOnlyRecord = function(uid, preferredName, $vcard) {
@@ -257,13 +258,12 @@ define([
 			window.history.pushState({uid: uid}, preferredName, serviceURL + 'people/' + uid);
 		}
 
-		setMainState(mainStates[1]);
+		setMainState(1);
 		displayOnlyRecord($vcard);
 	};
 
 	var displaySearch = function() {
 		setMainState();
-		$('.record-single').hide();
 	};
 
 	var fetchRecord = function(recordType, recordId) {
@@ -350,6 +350,152 @@ define([
 		});
 	};
 
+	var restoreRecordToResult = function() {
+		var $vcard = $('.record-single .vcard');
+
+		if (!$vcard.length) {
+			return;
+		}
+
+		var $candidateResults = $('.ppl_Sresult.selected').filter(function() {
+			if ($('.vcard', this).length) {
+				return false;
+			} else if ($(this).data('uid') == $vcard.data('uid')) {
+				return true;
+			}
+
+			return false;
+		});
+
+		if ($candidateResults.length) {
+			$candidateResults.append($vcard);
+		}
+	};
+
+	var bindResultsListeners = function($container) {
+		// listen for people result clicks
+		$container.on('click', '.ppl_Sresult', function(e) {
+			var $target = $(e.target);
+
+			if ($target.closest('.vcard').length || ($target.is('a') && !$target.closest('.fn').length)) {
+				// allow vCard and non-name link clicks to bubble
+				return;
+			}
+
+			loadFullRecord('person', $(this));
+			return false;
+		});
+
+		// listen for enter key on focused person
+		$container.on('keydown', '.ppl_Sresult', function(e) {
+			if (this !== e.target || e.which !== 13) {
+				// allow keyboard to bubble
+				return;
+			}
+
+			loadFullRecord('person', $(this));
+		});
+	};
+
+	var bindDeptResultsListeners = function($container) {
+		// listen for department result clicks
+		$container.on('click', '.dep_result', function(e) {
+			var $target = $(e.target);
+
+			if ($target.closest('.vcard').length || ($target.is('a') && !$target.closest('.fn').length)) {
+				// allow vCard and non-name link clicks to bubble
+				return;
+			}
+
+			loadFullRecord('org', $(this));
+			return false;
+		});
+
+		// listen for enter key on focused department
+		$container.on('keydown', '.dep_result', function(e) {
+			if (this !== e.target || e.which !== 13) {
+				// allow keyboard to bubble
+				return;
+			}
+
+			loadFullRecord('org', $(this));
+		});
+	};
+
+	var bindRecordListeners = function ($container) {
+		$container.on('click', 'button.icon-print', function(e) {
+			if (currentMainState === 1) {
+				// allow the event to bubble to the printer
+				return;
+			}
+
+			var $vcard = $(this).closest('.vcard');
+
+			if (!$vcard.length) {
+				// don't allow this to bubble to printer
+				return false;
+			}
+
+			var uid = $vcard.data('uid');
+			var preferredName = $vcard.data('preferred-name');
+
+			loadOnlyRecord(uid, preferredName, $vcard);
+		});
+
+		$container.on('click', '.icon-qr-code', function() {
+			var self = this;
+			var onReady = function() {
+				modalReady = true;
+				$(self).colorbox({open:true, photo:true});
+			};
+
+			if (modalReady) {
+				onReady();
+			} else {
+				WDN.initializePlugin('modal', [onReady]);
+			}
+
+			return false;
+		});
+
+		$container.on('click', '.wdn_annotate', function(e) {
+			var $this = $(this);
+
+			e.preventDefault();
+
+			$this.qtip({
+				overwrite: false,
+				content: {
+					text: $('<iframe>', {
+						src: this.href,
+						scrolling: 'no',
+						"class": 'wdn_annotate_note',
+						title: 'Your notes'
+					})
+				},
+				position: {
+					my: 'top right',
+					at: 'bottom right'
+				},
+				show: {
+					event: e.type,
+					ready: true
+				},
+				hide: 'unfocus'
+			}, e);
+
+			return;
+		});
+	};
+
+	var isQueryHash = function(hash) {
+		return (hash && hash.match(/^q\//));
+	};
+
+	var getCleanHash = function() {
+		return window.location.hash.replace('#', '').trim();
+	};
+
 	var plugin = {
 		queuePFRequest : function(q, resultsdiv, chooser, cn, sn) {
 			var data = {format:'partial'};
@@ -428,8 +574,7 @@ define([
 							$results.html(data);
 							// remove DOM-0 event listeners
 							$('ul.pfResult li', $results).each(function(){
-								//onClick = $(this).find('.cInfo').attr('onclick');
-								$('.cInfo, .fn a', this).removeAttr('onclick');
+								$('.fn a', this).removeAttr('onclick');
 							});
 
 							$("#search-notice").slideDown(transitionTime);
@@ -487,86 +632,9 @@ define([
 				eventObject.preventDefault();
 			});
 
-			$results.on('click', 'button.icon-print', function(e) {
-				var $vcard = $(this).closest('.vcard');
-
-				if (!$vcard.length) {
-					// don't allow this to bubble to printer
-					return false;
-				}
-
-				var uid = $vcard.data('uid');
-				var preferredName = $vcard.data('preferred-name');
-
-				loadOnlyRecord(uid, preferredName, $vcard);
-				// allow the event to bubble to the printer
-			});
-
-			// listen for people result clicks
-			$results.on('click', '.ppl_Sresult', function(e) {
-				var $target = $(e.target);
-
-				if ($target.closest('.vcard').length) {
-					// allow vCard clicks to bubble
-					return;
-				}
-
-				if ($target.is('a') && (!$target.closest('.fn').length)) {
-					// allow links that are not the "More Info" or record name to bubble
-					return;
-				}
-
-				loadFullRecord('person', $(this));
-				return false;
-			});
-
-			// listen for enter key on focused person
-			$results.on('keydown', '.ppl_Sresult', function(e) {
-				if (this !== e.target || e.which !== 13) {
-					// allow keyboard to bubble
-					return;
-				}
-
-				loadFullRecord('person', $(this));
-			});
-
-			// listen for department result clicks
-			$results.on('click', '.dep_result', function(e) {
-				var $target = $(e.target);
-
-				if ($target.is('a') && (!$target.closest('.fn').length)) {
-					return;
-				}
-
-				loadFullRecord('org', $(this));
-				return false;
-			});
-
-			// listen for enter key on focused department
-			$results.on('keydown', '.dep_result', function(e) {
-				if (this !== e.target || e.which !== 13) {
-					// allow keyboard to bubble
-					return;
-				}
-
-				loadFullRecord('org', $(this));
-			});
-
-			$results.add('.record-container').on('click', '.icon-qr-code', function() {
-				var self = this;
-				var onReady = function() {
-					modalReady = true;
-					$(self).colorbox({open:true, photo:true});
-				};
-
-				if (modalReady) {
-					onReady();
-				} else {
-					WDN.initializePlugin('modal', [onReady]);
-				}
-
-				return false;
-			});
+			bindRecordListeners($results.add('.record-container'));
+			bindResultsListeners($results);
+			bindDeptResultsListeners($results);
 
 			$filters.on('click', 'button', function (e) {
 				var $header = $(this);
@@ -601,11 +669,11 @@ define([
 
 				// listen for hash change
 				$(window).on('hashchange', function(eventObject){
-					var hash = window.location.hash.replace('#', '').trim();
-					if (hash && !hash.match(/^q\//)) {
+					var hash = getCleanHash();
+					if (hash && !isQueryHash(hash)) {
 						return;
 					} else if (!hash) {
-						if (currentMainState === mainStates[0]) {
+						if (currentMainState === 0) {
 							setMainState();
 						}
 						return;
@@ -629,7 +697,7 @@ define([
 
 					$q.val(query);
 
-					setMainState(mainStates[0]);
+					setMainState(0);
 
 					if (!splitName) {
 						plugin.queuePFRequest(query, 'results');
@@ -641,6 +709,7 @@ define([
 					return false;
 				});
 
+				// listen for state pops
 				$(window).on('popstate', function(e) {
 					var oEvent = e.originalEvent;
 
@@ -653,25 +722,29 @@ define([
 
 								var $card = $(data);
 								addAnnotateTool(oEvent.state.uid, $card);
-								setMainState(mainStates[1]);
+								setMainState(1);
 								displayOnlyRecord($card);
-
-								//todo events
 							}, function() {
-								setMainState(mainStates[0]);
+								setMainState(0);
 								var tmpl = $.templates(genericErrorSelector);
 								$results.empty().append(tmpl.render());
 							});
 						} else {
 							setMainState();
 						}
+					} else if (initialMainState === 2) {
+						restoreRecordToResult();
+						setMainState(initialMainState);
 					} else {
-						if (window.location.hash.replace('#', '')) {
-							// $(window).trigger('hashchange');
+						// if we are returning to a search
+						var hash = getCleanHash();
+						if (hash && isQueryHash(hash)) {
+							restoreRecordToResult();
+							setMainState(0);
 							return;
 						}
 
-						if (currentMainState !== mainStates[0]) {
+						if (currentMainState !== 0) {
 							return;
 						}
 
@@ -694,8 +767,8 @@ define([
 					}
 				});
 
+				//trigger a hash change if a hash has been provided on load
 				if (window.location.hash.replace('#', '')) {
-					//trigger a hash change if a hash has been provided on load
 					$(window).trigger('hashchange');
 				}
 
@@ -706,12 +779,20 @@ define([
 				});
 
 				if ($('#peoplefinder').length) {
+					// default, help/search state loaded
 					documentTitleSuffix = ' | ' + document.title;
 					plugin.startFromSearch();
-				} else if ($('.record-container .department-summary').length) {
-					setMainState(mainStates[1]);
+				} else if ($('.record-container .summary').length) {
+					// single department record state loaded
 					var $modal = $('#modal_edit_form');
 					var $employees = $('#all_employees');
+
+					initialMainState = 2;
+					setMainState(initialMainState);
+					bindResultsListeners($employees);
+					bindRecordListeners($employees);
+
+					// edit related handlers
 
 					$(document).on('click', function(e) {
 						if (!$(e.target).closest('.modal-content').length) {
@@ -734,39 +815,13 @@ define([
 							$('#editBox .delete').submit();
 						}
 					});
-
-					// todo: people annotation loading and single print
-
-					// listen for people result clicks
-					$employees.on('click', '.ppl_Sresult', function(e) {
-						var $target = $(e.target);
-
-						if ($target.closest('.vcard').length) {
-							// allow vCard clicks to bubble
-							return;
-						}
-
-						if ($target.is('a') && (!$target.closest('.fn').length)) {
-							// allow links that are not the "More Info" or record name to bubble
-							return;
-						}
-
-						loadFullRecord('person', $(this));
-						return false;
-					});
-
-					// listen for enter key on focused person
-					$employees.on('keydown', '.ppl_Sresult', function(e) {
-						if (this !== e.target || e.which !== 13) {
-							// allow keyboard to bubble
-							return;
-						}
-
-						loadFullRecord('person', $(this));
-					});
 				} else if ($('.record-container .vcard').length) {
-					// todo: initalize person stuff
-					setMainState(mainStates[1]);
+					// single person record state loaded
+					initialMainState = 1;
+					setMainState(initialMainState);
+					var $vcard = $('.record-container .vcard');
+					addAnnotateTool($vcard.data('uid'), $vcard);
+					bindRecordListeners($('.record-container'));
 				}
 			});
 		}
