@@ -1,1 +1,1 @@
-© <?php echo date('Y') ?> University of Nebraska–Lincoln · Lincoln, NE 68588 · 402-472-7211 · <a href="http://www1.unl.edu/wdn/wiki/About_Peoplefinder" onclick="window.open(this.href); return false;">About Directory</a>
+© <?php echo date('Y') ?> University of Nebraska–Lincoln · Lincoln, NE 68588 · 402-472-7211

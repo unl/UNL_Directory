@@ -44,7 +44,7 @@ if ($isOutputError) {
     $outputTemplate = 'Exception.tpl.php';
 }
 
-if (in_array($context->options['view'], array('instructions', 'search'))) {
+if (in_array($context->options['view'], ['instructions', 'help', 'search'])) {
     //Don't wrap the home page, because we want it to use bands
     $page->maincontentarea = $savvy->render($context->output, $outputTemplate);
 } else {
@@ -57,7 +57,8 @@ $page->maincontentarea .= $savvy->render(null, 'static/after-main.tpl.php');
 
 $page->contactinfo = $savvy->render(null, 'static/contact-info.tpl.php');
 
-$page->leftcollinks = $savvy->render(null, 'static/op-footer.tpl.php');
+$page->leftcollinks = '';
+$page->optionalfooter = $savvy->render(null, 'static/op-footer.tpl.php');
 
 $page->footercontent = $savvy->render(null, 'static/footer.tpl.php');
 
