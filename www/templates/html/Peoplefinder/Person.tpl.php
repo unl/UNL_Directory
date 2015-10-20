@@ -1,7 +1,7 @@
 <?php
 
 // Staff/Student with no Knowledge data
-if (!$context->knowledge->public_web) {
+if ((isset($context->options['format']) && $context->options['format'] === 'hcard')|| !$context->knowledge->public_web) {
     echo $savvy->render($context->record, 'Peoplefinder/Record.tpl.php');
 }
 // Faculty member with Knowledge data
