@@ -15,9 +15,17 @@ if (isset($page)) {
 	$page->doctitle = substr_replace($page->doctitle, $titleName . ' | ', strlen('<title>'), 0);
 }
 
-if (isset($context->options['render']) && $context->options['render'] === 'editing') {
-	include __DIR__ . '/../../editing/Officefinder/Department.tpl.php';
-	return;
+if (isset($context->options['render'])) {
+	if ($context->options['render'] === 'editing') {
+		echo $savvy->render($context, 'Officefinder/Department/EditForm.tpl.php');
+		return;
+	} elseif ($context->options['render'] === 'listing') {
+		echo $savvy->render($context, 'Officefinder/Department/ListingItem.tpl.php');
+		return;
+	} elseif ($context->options['render'] === 'summary') {
+		echo $savvy->render($context, 'Officefinder/Department/Summary.tpl.php');
+		return;
+	}
 }
 
 // Get the official org unit if possible
