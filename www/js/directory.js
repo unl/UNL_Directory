@@ -1,10 +1,11 @@
 define([
 	'jquery',
 	'wdn',
+	'require',
 	'notice',
 	'tooltip',
 	'./vendor/jsrender.js'
-], function($, WDN) {
+], function($, WDN, require) {
 	var serviceURL = 'https://directory.unl.edu/';
 	var annotateServiceURL = 'https://annotate.unl.edu/';
 	var originalSearch = '';
@@ -20,6 +21,7 @@ define([
 	var genericErrorSelector = '#genericErrorTemplate';
 	var lengthErrorSelector = '#queryLengthTemplate';
 	var mainSelector = '#maincontent';
+	var annotateSelector = '#annotateTemplate';
 	var mainStates = ['searching', 'single', 'single-dept'];
 	var $searcher;
 	var $results;
@@ -239,7 +241,7 @@ define([
 	};
 
 	var addAnnotateTool = function(uid, $vcard) {
-		var tmpl = $.templates('#annotateTemplate');
+		var tmpl = $.templates(annotateSelector);
 		var params = {
 			view: 'annotation',
 			sitekey: 'directory',
@@ -376,8 +378,10 @@ define([
 		// listen for people result clicks
 		$container.on('click', '.ppl_Sresult', function(e) {
 			var $target = $(e.target);
+			var $anchor = $target.closest('a');
+			var $fn = $anchor.closest('.fn');
 
-			if ($target.closest('.vcard').length || ($target.is('a') && !$target.closest('.fn').length)) {
+			if ($anchor.length && !$fn.length) {
 				// allow vCard and non-name link clicks to bubble
 				return;
 			}
@@ -401,8 +405,10 @@ define([
 		// listen for department result clicks
 		$container.on('click', '.dep_result', function(e) {
 			var $target = $(e.target);
+			var $anchor = $target.closest('a');
+			var $fn = $anchor.closest('.fn');
 
-			if ($target.closest('.vcard').length || ($target.is('a') && !$target.closest('.fn').length)) {
+			if ($anchor.length && !$fn.length) {
 				// allow vCard and non-name link clicks to bubble
 				return;
 			}
@@ -494,6 +500,182 @@ define([
 
 	var getCleanHash = function() {
 		return window.location.hash.replace('#', '').trim();
+	};
+
+	var startFromSearch = function() {
+		$searcher = $('#peoplefinder');
+		$results = $('#results');
+		$filters = $('#filters');
+
+		//on submit of the search form, redirect to hashchange
+		$searcher.submit(function(eventObject) {
+			$("#search-notice").slideUp(function() {
+				$(this).empty();
+			});
+
+			var query = $('#q').val().trim();
+
+			if (query.length) {
+				var newHash = '#q/' + encodeURIComponent(query);
+				//triggering a hash change will run through the searching function
+				window.location.hash = newHash;
+				originalSearch = query;
+			}
+
+			// give focus to the results
+			$results.focus();
+
+			// don't submit to the browser
+			eventObject.preventDefault();
+		});
+
+		bindRecordListeners($results.add('.record-container'));
+		bindResultsListeners($results);
+		bindDeptResultsListeners($results);
+
+		$filters.on('click', 'button', function (e) {
+			var $header = $(this);
+			var $container = $header.next();
+			var $toggle = $('.toggle', $header);
+
+			$container.slideToggle(100, function () {
+				if ($container.is(":visible")) {
+					//Expanded
+					$toggle.text("(Collapse)");
+					$container.attr('aria-expanded', 'true');
+					$container.focus();
+				} else {
+					//Collapsed
+					$toggle.text("(Expand)");
+					$container.attr('aria-expanded', 'false');
+				}
+			});
+		});
+
+		$filters.on('click', 'input', function(e) {
+			filters.action($(this));
+		});
+	};
+
+	var showOrLoadInitialState = function(forcedState) {
+		if (!$('.help-container').length) {
+			$.ajax({
+				url: serviceURL,
+				data: {format:'partial'},
+				success: function(data) {
+					setMainState(forcedState);
+					$(mainSelector).empty().html(data);
+					startFromSearch();
+
+					if (getCleanHash()) {
+						$(window).trigger('hashchange');
+					}
+				},
+				error: function() {
+					$(mainSelector).prepend('<p>Something went wrong. Please try again later.</p>');
+				}
+			});
+		} else {
+			setMainState(forcedState);
+		}
+	};
+
+	var $modal;
+	var $modalClose;
+	var modalContentSelector = '.modal-content';
+	var $modalContentRestoreContext = null;
+	var $modalRestoreFocus = null;
+
+	var showModalForm = function($context, formSelector, fromFocus) {
+		var $modalContent = $(modalContentSelector, $modal);
+		var $form = $(formSelector, $context);
+		var $oldForm;
+
+		if (!$modalClose) {
+			$modalClose = $('<button>', {"class": 'icon-close'})
+				.click(function() {
+					closeModalAndRestoreContent();
+				})
+				.append($('<span>', {"class": 'wdn-text-hidden'}).text('Close'));
+		} else {
+			$modalClose.detach();
+		}
+
+		$oldForm = $modalContent.children();
+		$modalClose.appendTo($modalContent);
+
+		if ($modalContentRestoreContext && $oldForm.length) {
+			$modalContentRestoreContext.append($oldForm);
+		}
+
+		$modalContentRestoreContext = $context;
+		$modalRestoreFocus = $(fromFocus);
+
+		$form.appendTo($modalContent);
+
+		$('html').css('overflow', 'hidden');
+		$modal.attr('aria-expanded', 'true');
+		$modal.addClass('show');
+		setTimeout(function() {
+			$modalContent.focus();
+		}, 400);
+	};
+
+	var closeModalAndRestoreContent = function() {
+		var $modalContent = $(modalContentSelector, $modal);
+		var $oldForm;
+
+		if (!$modal.hasClass('show')) {
+			return;
+		}
+
+		if ($modalClose) {
+			$modalClose.detach();
+		}
+		$oldForm = $modalContent.children();
+
+		if ($modalContentRestoreContext) {
+			$modalContentRestoreContext.append($oldForm);
+			$modalContentRestoreContext = null;
+		}
+
+		$('html').css('overflow', '');
+		$modal.attr('aria-expanded', 'false');
+		$modal.removeClass('show');
+
+		if ($modalRestoreFocus) {
+			$modalRestoreFocus.focus();
+			$modalRestoreFocus = null;
+		}
+	};
+
+	var ajaxSubmitToDepartmentList = function(form, context, listClass, tmpl, data) {
+		$.post(form.action + '?' + $.param({redirect: 0}), $(form).serialize(), function() {
+			var $newItem = $(tmpl.render(data)).hide();
+			var $list = $('.' + listClass, context);
+
+			if (!$list.length) {
+				$('<ul>', {
+					"class": listClass,
+					"aria-live": "polite"
+				}).insertBefore($('form.add', context));
+			}
+
+			$list.append($newItem);
+			$newItem.fadeIn();
+			form.reset();
+		});
+	};
+
+	var ajaxSubmitRemoveDepartmentList = function(form) {
+		var $form = $(form);
+
+		$.post(form.action + '?' + $.param({redirect: 0}), $form.serialize(), function() {
+			$form.closest('li').slideUp(function() {
+				$(this).remove();
+				$('#listings .ui-sortable').nestedSortable('refresh');
+			});
+		});
 	};
 
 	var plugin = {
@@ -605,67 +787,21 @@ define([
 			return false;
 		},
 
-		startFromSearch: function() {
-			$searcher = $('#peoplefinder');
-			$results = $('#results');
-			$filters = $('#filters');
-
-			//on submit of the search form, redirect to hashchange
-			$searcher.submit(function(eventObject) {
-				$("#search-notice").slideUp(function() {
-					$(this).empty();
-				});
-
-				var query = $('#q').val().trim();
-
-				if (query.length) {
-					var newHash = '#q/' + encodeURIComponent(query);
-					//triggering a hash change will run through the searching function
-					window.location.hash = newHash;
-					originalSearch = query;
-				}
-
-				// give focus to the results
-				$results.focus();
-
-				// don't submit to the browser
-				eventObject.preventDefault();
-			});
-
-			bindRecordListeners($results.add('.record-container'));
-			bindResultsListeners($results);
-			bindDeptResultsListeners($results);
-
-			$filters.on('click', 'button', function (e) {
-				var $header = $(this);
-				var $container = $header.next();
-				var $toggle = $('.toggle', $header);
-
-				$container.slideToggle(100, function () {
-					if ($container.is(":visible")) {
-						//Expanded
-						$toggle.text("(Collapse)");
-						$container.attr('aria-expanded', 'true');
-						$container.focus();
-					} else {
-						//Collapsed
-						$toggle.text("(Expand)");
-						$container.attr('aria-expanded', 'false');
-					}
-				});
-			});
-
-			$filters.on('click', 'input', function(e) {
-				filters.action($(this));
-			});
-		},
-
 		initialize: function(baseURL, annotateURL) {
+			plugin.initialize = $.noop;
 			serviceURL = baseURL;
 			annotateServiceURL = annotateURL;
 
+			// separate the document title into components and use the last 2 for title generation
+			var titleSeparator = ' | ';
+			documentTitleSuffix = titleSeparator + document.title.split(titleSeparator).slice(-2).join(titleSeparator);
+
 			$(function() {
 				WDN.initializePlugin('notice');
+
+				// entry script element cleanup
+				$('#main-entry').remove();
+				$(annotateSelector).appendTo('body');
 
 				// listen for hash change
 				$(window).on('hashchange', function(eventObject){
@@ -740,7 +876,7 @@ define([
 						var hash = getCleanHash();
 						if (hash && isQueryHash(hash)) {
 							restoreRecordToResult();
-							setMainState(0);
+							showOrLoadInitialState(0);
 							return;
 						}
 
@@ -748,27 +884,12 @@ define([
 							return;
 						}
 
-						if (!$('.help-container').length) {
-							$.ajax({
-								url: serviceURL,
-								data: {format:'partial'},
-								success: function(data) {
-									setMainState();
-									$(mainSelector).empty().html(data);
-									startFromSearch();
-								},
-								error: function() {
-									$(mainSelector).prepend('<p>Something went wrong. Please try again later.</p>');
-								}
-							});
-						} else {
-							setMainState();
-						}
+						showOrLoadInitialState();
 					}
 				});
 
 				//trigger a hash change if a hash has been provided on load
-				if (window.location.hash.replace('#', '')) {
+				if (getCleanHash()) {
 					$(window).trigger('hashchange');
 				}
 
@@ -780,41 +901,184 @@ define([
 
 				if ($('#peoplefinder').length) {
 					// default, help/search state loaded
-					documentTitleSuffix = ' | ' + document.title;
-					plugin.startFromSearch();
-				} else if ($('.record-container .summary').length) {
+					startFromSearch();
+				} else if ($('.record-container .department-summary').length) {
 					// single department record state loaded
-					var $modal = $('#modal_edit_form');
+					var $summarySection = $('.record-container .department-summary');
+					var $editBox = $('#editBox');
 					var $employees = $('#all_employees');
+					var $listings = $('#listings');
+					var $editableListings = $('.editing > ol.listings', $listings);
+					var deleteDepartmentWarning = 'Are you sure? This will permanently delete this department and all its children.';
 
 					initialMainState = 2;
 					setMainState(initialMainState);
 					bindResultsListeners($employees);
 					bindRecordListeners($employees);
 
-					// edit related handlers
+					$modal = $('#modal_edit_form');
+					$modal.on('keydown', function(e) {
+						if (e.which === 27) {
+							closeModalAndRestoreContent();
+						}
+					}).on('submit', 'form.edit', function(e) {
+						var $forms = $(this).closest('.forms');
+
+						e.preventDefault();
+
+						// todo: check for "add" form
+
+						if ($forms.data('department-id')) {
+							console.log('editing root department');
+							// todo: ajax submit and reload partial summary render
+						} else {
+							console.log('editing listing');
+							// todo: ajax submit and reload partial listing render
+						}
+
+						closeModalAndRestoreContent();
+					}).on('submit', 'form.delete', function(e) {
+						var $forms = $(this).closest('.forms');
+
+						e.preventDefault();
+
+						if ($forms.data('department-id')) {
+							console.log('deleting root department');
+							// todo: restore default (this will need to redirect to parent) -- should never happen
+						} else {
+							ajaxSubmitRemoveDepartmentList(this);
+						}
+
+						closeModalAndRestoreContent();
+					});
 
 					$(document).on('click', function(e) {
-						if (!$(e.target).closest('.modal-content').length) {
-							$modal.removeClass('show');
-							$('html').css('overflow', '');
+						if (!$(e.target).closest(modalContentSelector).length) {
+							closeModalAndRestoreContent();
 						}
 					});
 
-					$('.vcard-tools .icon-pencil').on('click', function(e) {
-						$('#editBox .edit').appendTo($('.modal-content', $modal));
-						$('html').css('overflow', 'hidden');
-						$modal.addClass('show');
-
+					$summarySection.on('click', '.vcard-tools .icon-pencil', function(e) {
+						showModalForm($editBox, '.forms', this);
 						return false;
+					}).on('click', '.vcard-tools .icon-trash', function(e) {
+						if (!confirm(deleteDepartmentWarning)) {
+							return false;
+						}
+					}).on('click', '.aliases .icon-trash', function() {
+						if (!confirm('Are you sure? This will delete the alias.')) {
+							return false;
+						}
+					}).on('submit', '.aliases form.add', function(e) {
+						var self = this;
+						var tmpl = $.templates('#deparmentAliasTemplate');
+						var $name = $('[name="name"]', this);
+						var data = {
+							url: this.action,
+							name: $name.val(),
+							department: $editBox.data('department-id')
+						};
+
+						e.preventDefault();
+						ajaxSubmitToDepartmentList(this, e.delegateTarget, 'dept_aliases', tmpl, data);
+					}).on('submit', '.aliases form.delete', function(e) {
+						e.preventDefault();
+						ajaxSubmitRemoveDepartmentList(this);
+					}).on('click', '.users .icon-trash', function() {
+						if (!confirm('Are you sure? This will remove editing access for this user.')) {
+							return false;
+						}
+					}).on('submit', '.users form.add', function(e) {
+						var tmpl = $.templates('#departmentUserTemplate');
+						var $name = $('[name="uid"]', this);
+						var data = {
+							url: this.action,
+							userUrl: baseURL + 'people/' + $name.val(),
+							uid: $name.val(),
+							department: $editBox.data('department-id')
+						};
+
+						e.preventDefault();
+						ajaxSubmitToDepartmentList(this, e.delegateTarget, 'dept_users', tmpl, data);
+					}).on('submit', '.users form.delete', function(e) {
+						e.preventDefault();
+						ajaxSubmitRemoveDepartmentList(this);
 					});
 
-					$('.vcard-tools .icon-trash').on('click', function(e) {
-						e.preventDefault();
-						if (confirm('Are you sure? This will permanently delete this department and all its children.')) {
-							$('#editBox .delete').submit();
-						}
-					});
+					if ($editableListings.length) {
+						WDN.initializePlugin('jqueryui', [function() {
+							require(['./vendor/jquery.ui.touch-punch.js', './vendor/jquery.mjs.nestedSortable.js'], function() {
+								var $sortform = $('.edit-tools form.sortform', $listings);
+								$sortform.on('submit', function(e) {
+									e.preventDefault();
+									$.post(this.action + '?' + $.param({redirect: 0}), $(this).serialize());
+								});
+
+								$editableListings.nestedSortable({
+									revert: false,
+									scroll: true,
+									delay: 100,
+									opacity: 0.45,
+									tolerance: 'pointer',
+									helper: 'clone',
+									update: function(event, ui){
+										var sortJson = JSON.stringify($editableListings.nestedSortable('toHierarchy'));
+										$('[name="sort_json"]', $sortform).val(sortJson);
+										$sortform.submit();
+									},
+									items: 'li',
+									handle: 'div',
+									forcePlaceholderSize: true,
+									placeholder: 'ui-placeholder',
+									toleranceElement: '> div'
+								});
+							});
+						}]);
+
+						$editableListings.on('click', '.icon-pencil', function(e) {
+							var self = this;
+							var loadedSelector = '.edit';
+							var contentSelector = '.forms';
+							var $contextForModal = $(this).closest('.tools');
+							var $loadTo = $contextForModal.find('.form');
+
+							if (!$loadTo.find(loadedSelector).length) {
+								$loadTo.load(this.href + '?' + $.param({format: 'partial'}), function() {
+									showModalForm($contextForModal, contentSelector, self);
+								});
+							} else {
+								showModalForm($contextForModal, contentSelector, self);
+							}
+
+							return false;
+						});
+
+						// todo: add child listing add form support
+
+						$listings.on('click', '.listing-add', function(e) {
+							var self = this;
+							var loadedSelector = '.edit';
+							var contentSelector = '.forms';
+							var $contextForModal = $(this).closest('.edit-tools');
+							var $loadTo = $contextForModal.find('.form');
+
+							if (!$loadTo.find(loadedSelector).length) {
+								$loadTo.load(this.href + '?' + $.param({format: 'partial'}), function() {
+									showModalForm($contextForModal, contentSelector, self);
+								});
+							} else {
+								showModalForm($contextForModal, contentSelector, self);
+							}
+
+							return false;
+						});
+
+						$modal.on('click.listings', '.icon-trash', function(e) {
+							if (!confirm(deleteDepartmentWarning)) {
+								return false;
+							}
+						});
+					}
 				} else if ($('.record-container .vcard').length) {
 					// single person record state loaded
 					initialMainState = 1;
