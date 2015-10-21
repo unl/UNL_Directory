@@ -44,7 +44,7 @@ class UNL_Officefinder_Record
     protected function prepareUpdateSQL(&$sql)
     {
         $sql    = 'UPDATE '.$this->getTable().' ';
-        $fields = get_class_vars(get_class($this));
+        $fields = array_diff_key(get_object_vars($this), array_fill_keys($this->nonPersistentFields, 0));
 
         $sql .= 'SET `'.implode('`=?,`', array_keys($fields)).'`=? ';
 
@@ -55,7 +55,6 @@ class UNL_Officefinder_Record
 
         $sql = substr($sql, 0, -4);
 
-        $fields = array_intersect($fields, get_object_vars($this));
         return $fields;
     }
 
@@ -66,9 +65,7 @@ class UNL_Officefinder_Record
      */
     function keys()
     {
-        return array(
-            'id',
-        );
+        return ['id'];
     }
 
     /**
@@ -103,7 +100,7 @@ class UNL_Officefinder_Record
     {
         $sql      = '';
         $fields   = $this->prepareInsertSQL($sql);
-        $values   = array();
+        $values   = [];
         $values[] = $this->getTypeString(array_keys($fields));
         foreach ($fields as $key=>$value) {
             $values[] =& $this->$key;
@@ -120,7 +117,7 @@ class UNL_Officefinder_Record
     {
         $sql      = '';
         $fields   = $this->prepareUpdateSQL($sql);
-        $values   = array();
+        $values   = [];
         $values[] = $this->getTypeString(array_keys($fields));
         foreach ($fields as $key=>$value) {
             $values[] =& $this->$key;
@@ -151,7 +148,7 @@ class UNL_Officefinder_Record
             throw new Exception('Error preparing database statement! '.$mysqli->error, 500);
         }
 
-        call_user_func_array(array($stmt, 'bind_param'), $values);
+        call_user_func_array([$stmt, 'bind_param'], $values);
         if ($stmt->execute() === false) {
             throw new Exception($stmt->error, 500);
         }
@@ -246,7 +243,7 @@ class UNL_Officefinder_Record
                                     400);
             }
             $value = $this->$key;
-            if ($this->getTypeString(array($key)) == 's') {
+            if ($this->getTypeString([$key]) == 's') {
                 $value = '"'.$mysqli->escape_string($value).'"';
             }
             $sql .= $key.'='.$value.' AND ';
