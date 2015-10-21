@@ -32,7 +32,7 @@ $showKnowledge = $context->shouldShowKnowledge();
 
 
 <div class="vcard <?php if (!$showKnowledge): ?>card <?php endif; ?><?php echo $context->eduPersonPrimaryAffiliation ?>" data-uid="<?php echo $context->uid ?>" data-preferred-name="<?php echo $preferredName ?>" itemscope itemtype="http://schema.org/<?php echo $itemtype ?>">
-    <a class="card-profile" href="<?php echo $context->getProfileUrl() ?>" title="PlanetRed profile for <?php echo $preferredName ?>">
+    <a class="card-profile" href="<?php echo $context->getProfileUrl() ?>" title="Planet Red profile for <?php echo $preferredName ?>">
         <img class="photo" src="<?php echo $context->getImageURL(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_LARGE) ?>" alt="Avatar for <?php echo $preferredName ?>" />
     </a>
 
