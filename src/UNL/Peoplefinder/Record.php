@@ -438,7 +438,7 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
             ],
             'ARH' => [
                 'title' => 'College of Architecture',
-                'abbr' => 'Architecture',
+                'abbr' => 'CoArch',
                 'org_unit_number' => '50000896',
             ],
             'DNT' => [
