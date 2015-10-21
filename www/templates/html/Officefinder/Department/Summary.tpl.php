@@ -7,7 +7,7 @@ if ($controller->options['view'] != 'alphalisting') {
     $userCanDelete = empty($context->org_unit) || UNL_Officefinder::isAdmin(UNL_Officefinder::getUser());
 }
 
-$officialParent = $context->getOfficialParent();
+$parent = $context->getParent();
 
 $encodedEmail = '';
 if (!empty($context->email)) {
@@ -39,7 +39,7 @@ $onlySummary = $context->isSummaryView();
             <?php endif; ?>
 
             <?php if (!$context->isOfficialDepartment()): ?>
-                 <div class="title"><?php echo $officialParent->name ?></div>
+                 <div class="title"><?php echo $parent->name ?></div>
             <?php endif; ?>
 
             <?php if ($context->hasAddress()): ?>
@@ -105,7 +105,7 @@ $onlySummary = $context->isSummaryView();
                 <div class="vcard-tools">
                     <a href="<?php echo $context->getURL() . '/edit' ?>" class="icon-pencil">Edit</a>
                     <?php if ($userCanDelete): ?>
-                        <button class="icon-trash">Delete</button>
+                        <button type="submit" class="icon-trash" form="deletedepartment_<?php echo $context->id ?>">Delete</button>
                     <?php endif; ?>
                 </div>
             <?php endif; ?>
