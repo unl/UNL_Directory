@@ -7,7 +7,7 @@ $savvy->addGlobal('page', $page);
 $page->doctitle = '<title>Directory | University of Nebraska–Lincoln</title>';
 $page->titlegraphic = 'Directory';
 
-$classes = ['hide-navigation', 'hide-breadcrumbs'];
+$classes = ['hide-navigation', 'hide-breadcrumbs', 'hide-wdn_footer_related'];
 
 $page->__params['class']['value'] = implode(' ', $classes);
 
