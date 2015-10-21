@@ -1,14 +1,14 @@
-<div id="editBox">
+<div id="editBox" data-department-id="<?php echo $context->id ?>">
 	<div class="aliases">
 		<?php echo $savvy->render($context->getAliases()) ?>
-		<?php include __DIR__ . '/../../../editing/Officefinder/Department/Alias/AddForm.tpl.php'; ?>
+		<?php echo $savvy->render($context, 'Officefinder/Department/Alias/AddForm.tpl.php') ?>
 	</div>
 	<div class="users">
 		<?php echo $savvy->render($context->getUsers()) ?>
-		<?php include __DIR__ . '/../../../editing/Officefinder/Department/User/AddForm.tpl.php'; ?>
+		<?php echo $savvy->render($context, 'Officefinder/Department/User/AddForm.tpl.php') ?>
 	</div>
-	<div class="tools">
-		<?php include __DIR__ . '/../../../editing/Officefinder/Department/DeleteForm.tpl.php'; ?>
-		<?php include __DIR__ . '/../../../editing/Officefinder/Department.tpl.php'; ?>
+	<div class="forms" data-department-id="<?php echo $context->id ?>">
+		<?php echo $savvy->render($context, 'Officefinder/Department/DeleteForm.tpl.php') ?>
+		<?php echo $savvy->render($context, 'Officefinder/Department/EditForm.tpl.php') ?>
 	</div>
 </div>
