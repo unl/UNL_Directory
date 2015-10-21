@@ -167,19 +167,25 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
 
     public function userCanEdit($user)
     {
-        if (in_array($user, UNL_Officefinder::$admins)) {
+        if (!$user) {
+            return false;
+        } elseif (in_array($user, UNL_Officefinder::$admins)) {
             return true;
         }
 
-        if (isset($this->id) && (bool) UNL_Officefinder_Department_Permission::getById($this->id, $user)) {
-            return true;
+        if (!isset($this->internal['canEdit'])) {
+            if (isset($this->id) && (bool) UNL_Officefinder_Department_Permission::getById($this->id, $user)) {
+                $this->internal['canEdit'] = true;
+            }
+
+            if (isset($this->parent_id) && true === UNL_Officefinder_Department::getByID($this->parent_id)->userCanEdit($user)) {
+                $this->internal['canEdit'] = true;
+            }
+
+            $this->internal['canEdit'] = false;
         }
 
-        if (isset($this->parent_id) && true === UNL_Officefinder_Department::getByID($this->parent_id)->userCanEdit($user)) {
-            return true;
-        }
-
-        return false;
+        return $this->internal['canEdit'];
     }
 
     /**
