@@ -79,8 +79,8 @@ class UNL_Officefinder
 
         self::checkLogout();
 
-        if ($this->options['format'] === 'html') {
-            if (isset($_COOKIE['unl_sso'])) {
+        if (isset($_COOKIE['unl_sso'])) {
+            if (in_array($this->options['format'], ['html', 'partial'])) {
                 self::authenticate(true);
             }
         }
@@ -213,26 +213,40 @@ class UNL_Officefinder
         }
 
         $redirect = false;
+        $noRender = empty($this->options['render']);
 
         switch($_POST['_type']) {
             case 'department':
                 $record = $this->handlePostDBRecord('UNL_Officefinder_Department');
-                if (isset($_POST['parent_id'])) {
-                    $redirect = self::getURL().$record->parent_id;
-                } else {
+                if ($record->isOfficialDepartment()) {
                     $redirect = $record->getURL();
+                } else {
+                    $redirect = $record->getOfficialParent()->getURL();
                 }
                 break;
             case 'delete_department':
                 $record = $this->getPostedDepartment();
-                $parent = $record->getParent();
+                $parent = $record->getOfficialParent();
                 $record->delete();
                 $redirect = $parent->getURL();
+                $noRender = true;
+                break;
+            case 'sort_departments':
+                $record = $this->getPostedDepartment();
+                if (empty($_POST['sort_json'])) {
+                    throw new Exception('You must provide a valid JSON sort array', 400);
+                }
+                $sortJson = json_decode($_POST['sort_json'], true);
+                if (!$sortJson) {
+                    throw new Exception('You must provide a valid JSON sort array', 400);
+                }
+                $this->reorderDepartments($record, $sortJson);
+                $redirect = $record->getURL();
                 break;
             case 'add_dept_user':
                 $record = $this->getPostedDepartment();
                 if (empty($_POST['uid'])) {
-                    throw new Exception('You must enter a username before adding a user.');
+                    throw new Exception('You must enter a username before adding a user.', 400);
                 }
                 $peoplefinder = new UNL_Peoplefinder(['driver' => $this->options['driver']]);
                 $user = $peoplefinder->getUID($_POST['uid']);
@@ -263,6 +277,8 @@ class UNL_Officefinder
 
         if ($redirect && !(isset($this->options['redirect']) && $this->options['redirect'] == '0')) {
             $this->redirect($redirect);
+        } elseif ($noRender) {
+            exit();
         }
     }
 
@@ -279,12 +295,34 @@ class UNL_Officefinder
     {
         $record = UNL_Officefinder_Department::getByID($_POST['department_id']);
         if (!$record) {
-            throw new Exception('No department with that ID was found');
+            throw new Exception('No department with that ID was found', 404);
         }
         if ($checkUserPermissions && !$record->userCanEdit(self::getUser(true))) {
-            throw new Exception('You have no edit permissions for that record');
+            throw new Exception('You have no edit permissions for that record', 403);
         }
         return $record;
+    }
+
+    protected function reorderDepartments($rootDepartment, $sortChildren)
+    {
+        foreach ($sortChildren as $i => $sortChild) {
+            $sortOrder = $i + 1;
+            $record = UNL_Officefinder_Department::getByID($sortChild['id']);
+            if (!$record) {
+                throw new Exception('No department with that ID was found', 404);
+            }
+            if (!$record->userCanEdit(self::getUser(true))) {
+                throw new Exception('You have no edit permissions for that record', 403);
+            }
+
+            $record->parent_id = $rootDepartment->id;
+            $record->sort_order = $sortOrder;
+            $record->save();
+
+            if (isset($sortChild['children'])) {
+                $this->reorderDepartments($record, $sortChild['children']);
+            }
+        }
     }
 
     /**
@@ -332,7 +370,7 @@ class UNL_Officefinder
         self::setObjectFromArray($record, $_POST);
 
         if (!$record->userCanEdit(self::getUser(true))) {
-            throw new Exception('You cannot edit that record.', 401);
+            throw new Exception('You cannot edit that record.', 403);
         }
 
         if (!$record->save()) {
@@ -352,6 +390,7 @@ class UNL_Officefinder
     public function filterPostValues()
     {
         unset($_POST['id']);
+        unset($_POST['org_unit']);
     }
 
     /**
