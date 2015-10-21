@@ -38,10 +38,14 @@ if (!empty($context->email)) {
 
     <?php if ($userCanEdit): ?>
         <div class="tools">
-            <button class="wdn-button wdn-button-triad icon-pencil"></button>
-            <div class="form"></div>
-            <?php echo $savvy->render($context, 'Officefinder/Department/Listing/SortForm.tpl.php') ?>
-            <?php include dirname(__FILE__).'/../../../editing/Officefinder/Department/DeleteForm.tpl.php'; ?>
+            <a href="<?php echo $context->getURL() . '/edit' ?>" class="wdn-button wdn-button-triad icon-pencil"></a>
+            <div class="forms" data-listing-id="<?php echo $context->id ?>">
+                <a class="wdn-button wdn-button-triad listing-add" href="<?php echo $context->getNewChildURL() ?>">Add<span class="wdn-text-hidden"> a new child listing</span></a>
+                <div class="form"></div>
+                <div class="add-form"></div>
+                <?php echo $savvy->render($context, 'Officefinder/Department/DeleteForm.tpl.php') ?>
+                <button type="submit" class="wdn-button wdn-button-brand icon-trash" form="deletedepartment_<?php echo $context->id ?>">Delete</button>
+            </div>
         </div>
     <?php endif; ?>
 </div>
