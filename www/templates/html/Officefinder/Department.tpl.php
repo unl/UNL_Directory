@@ -48,14 +48,24 @@ $hasOfficialChildDepartments = count($officialChildren);
 		<?php endif ;?>
 	</div>
 	<div class="bp2-wdn-col-two-thirds">
-		<div class="card">
-			<div class="card-content<?php if ($userCanEdit): ?> editing<?php endif; ?>" id="listings">
-				<h2 class="wdn-brand icon-phone-book">Listings</h2>
+		<div class="card" id="listings" data-department-id="<?php echo $context->id ?>">
+			<div class="card-content<?php if ($userCanEdit): ?> editing<?php endif; ?>">
+				<h2 class="wdn-brand icon-phone-book">Yellow Pages</h2>
 				<?php if (count($listings)): ?>
 					<?php echo $savvy->render($listings, 'Officefinder/Department/Listings.tpl.php') ?>
 				<?php endif; ?>
 				<?php if ($userCanEdit): ?>
-					<a class="wdn-button wdn-button-triad" href="<?php echo $context->getNewChildURL() ?>">Add<span class="wdn-text-hidden"> a new child listing</span></a>
+					<div class="edit-tools">
+						<a class="wdn-button wdn-button-triad listing-add" href="<?php echo $context->getNewChildURL() ?>">Add<span class="wdn-text-hidden"> a new child listing</span></a>
+						<div class="forms">
+							<div class="form"></div>
+							<form method="post" action="<?php echo $context->getURL() ?>" class="sortform">
+							    <input type="hidden" name="_type" value="sort_departments" />
+							    <input type="hidden" name="department_id" value="<?php echo $context->id; ?>" />
+							    <input type="hidden" name="sort_json" value="" />
+							</form>
+						</div>
+					</div>
 				<?php endif; ?>
 			</div>
 		</div>
