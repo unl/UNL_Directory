@@ -7,7 +7,7 @@ if (isset($page)) {
     $page->doctitle = substr_replace($page->doctitle, 'Help | ', strlen('<title>'), 0);
 }
 ?>
-<section class="wdn-band" id="data">
+<section class="wdn-band wdn-light-neutral-band" id="data">
     <div class="wdn-inner-wrapper">
         <h1 class="wdn-center clear-top">Finding Your Way Around the UNL Directory</h1>
         <div class="bp2-wdn-grid-set-halves">
@@ -34,7 +34,7 @@ if (isset($page)) {
                     <li>campus address</li>
                     <li>campus phone number</li>
                     <li>campus email address</li>
-                    <li>nickname or "known as" name</li>
+                    <li>nickname or &ldquo;known as&rdquo; name</li>
                 </ul>
                 <p>
                     <em>Department/Listing</em> directory data is sourced from UNL's administrative and finance system, SAP, and augmented with information provided by departmental HR coordinators.
@@ -42,28 +42,24 @@ if (isset($page)) {
             </div>
             <div class="wdn-col">
                 <h2 class="wdn-brand">Updating your information</h2>
-                <h3 class="wdn-brand">Students</h3>
                 <p>
-                    You may request that your information not be listed in the directory by contacting the <a href="http://registrar.unl.edu/">Office of the University Registrar</a> to set a privacy flag on your account.
+                    As a <em>student</em>, you may request that your information not be listed in the directory by contacting the <a href="http://registrar.unl.edu/">Office of the University Registrar</a> to set a privacy flag on your account.
                     If any information is displayed incorrectly, please consult your academic advisor.
                 </p>
-                <h3 class="wdn-brand">Faculty/Staff</h3>
                 <p>
-                    You may update your preferred <code>&commat;unl&period;edu</code> address by visiting the <a href="http://its.unl.edu/emailhome/activation">email activation site</a>.
+                    As a <em>faculty/staff</em> member, you may update your preferred <code>&commat;unl&period;edu</code> address by visiting the <a href="http://its.unl.edu/emailhome/activation">email activation site</a>.
                     If you are also registered as a student, you will need to contact the <a href="http://registrar.unl.edu/">Office of the University Registrar</a> to set a privacy flag on your account to remove your student information from the directory.
                     For all other data changes, contact your HR representitive or departmental SAP support staff.
                 </p>
-                <h3 class="wdn-brand">Retirees</h3>
                 <p>
-                    If you have no current HR representative, you should contact the <a href="http://hr.unl.edu/benefits/">Benefits Office</a>.
+                    As a <em>retiree</em>, if you have no current HR representative, you should contact the <a href="http://hr.unl.edu/benefits/">Benefits Office</a>.
                 </p>
-
-                <h3 class="wdn-brand">Departments/Listings</h3>
                 <p>
-                    These listings can be modified by authorized users by emailing <a href="mailto:operator&commat;unl&period;edu">operator&commat;unl&period;edu</a> with the directory URL of the listing and the information you'd like to update.
+                    For <em>department (yellow pages) listings</em>, authorized users can make modifications by emailing <a href="mailto:operator&commat;unl&period;edu">operator&commat;unl&period;edu</a> with the directory URL of the listing and the information you'd like to update.
                 </p>
             </div>
-
+        </div>
+        <div class="bp2-wdn-grid-set-halves">
             <div class="wdn-col centered">
                 <h2 class="wdn-brand" id="photo">Adding your photo</h2>
                 <p>
@@ -73,7 +69,7 @@ if (isset($page)) {
                     If you don't currently use either of these services, getting started is pretty simple.
                 </p>
                 <p>As a member of the UNL community, we've got a <a href="https://planetred.unl.edu/">Planet Red</a> profile waiting for you to upload a photo to. All you need to do is fill out a little profile information and we'll automatically pull your photo from there.</p>
-                <p>If you'd prefer not to create a Planet Red profile and you are a UNL faculty or staff member that has been issued a campus email address, you can use that address to create a <a href="http://en.gravatar.com/">Gravatar</a> profile. Once you've got your profile loaded with an avatar, we'll autoamtically pull your photo from there.</p>
+                <p>If you'd prefer not to create a Planet Red profile and you are a UNL faculty or staff member that has been issued a campus email address, you can use that address to create a <a href="http://en.gravatar.com/">Gravatar</a> profile. Once you've got your profile loaded with an avatar, we'll automatically pull your photo from there.</p>
                 <p>Department listings may use the email address entered in the directory with the Gravatar service. If an email address is not provided or a Gravatar profile is not found for it, a photo of the building the listing is in will be used.</p>
             </div>
         </div>
