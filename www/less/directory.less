@@ -7,6 +7,8 @@
 
 @import "directory-icon-embedded.less";
 
+@inner-band-margin: percentage(-1 * @mobile-pad / (100% - 2 * @mobile-pad));
+
 .search-band {
 	text-align: center;
 	background: #38431b url(../images/050419.jpg) 50% 50% no-repeat;
@@ -131,7 +133,7 @@
 			border-style: solid;
 			border-width: 1px 0 0;
 			background: #fff;
-			margin: 1em percentage(-1 * @mobile-pad / (100% - 2 * @mobile-pad)); // push the list to the page edge
+			margin: 1em @inner-band-margin; // push the list to the page edge
 
 			@media @bp2 {
 				margin-left: 0;
@@ -219,6 +221,10 @@
 		display: none !important;
 	}
 
+	.record-single {
+		display: none;
+	}
+
 	.single & {
 		display: block !important;
 
@@ -226,6 +232,7 @@
 			display: none;
 		}
 
+		.knowledge-grid,
 		.record-single {
 			display: block;
 		}
@@ -312,16 +319,17 @@
 			a {
 				color: inherit;
 				.heading-font();
-			}
 
-			[class^="icon-"] {
-				visibility: hidden;
-				font-size: 0.5em;
-			}
+				&:hover,
+				&:focus {
+					.icon-link {
+						visibility: visible;
+					}
+				}
 
-			&:hover {
-				[class^="icon-"] {
-					visibility: visible;
+				.icon-link {
+					visibility: hidden;
+					font-size: 0.5em;
 				}
 			}
 
@@ -541,17 +549,24 @@
 		}
 	}
 
-	.tools {
+	.forms {
 		display: none;
 	}
 }
 
 #listings {
-	&.editing {
+	margin: 1em @inner-band-margin;
+
+	@media @bp2 {
+		margin: 0;
+	}
+
+	.editing {
 		li {
 			position: relative;
 
 			.listingDetails {
+				min-height: 2.313em; // ensure the positioned edit button has clearance
 				margin-right: 4em;
 			}
 
@@ -561,25 +576,41 @@
 				right: 0;
 			}
 		}
+
+		.forms {
+			display: none;
+		}
 	}
 
-	ul {
+	.ui-sortable {
+		li > div {
+			cursor: move;
+		}
+	}
+
+	> ol > li:first-child {
+		padding-top: 0;
+	}
+
+	ol {
 		list-style: none;
 		padding: 0;
 
 		li {
 			border-bottom: 1px dotted @ui04;
+			padding: 0.5em 0;
 		}
 
-		ul {
+		ol {
 			padding-left: 1.5em;
 
 			li {
 				border-left: 1px dotted @ui04;
-				padding: 0 0 0.5em 0.5em;
+				padding: 0.5em 0 0.5em 0.5em;
 
 				&:last-child {
 					border-bottom: 0;
+					margin-bottom: -0.5em;
 				}
 			}
 		}
@@ -604,7 +635,7 @@
 	top: 0px;
 	width: 100%;
 	height: 100%;
-	transition: opacity 1s, visibility 1s;
+	transition: opacity 400ms, visibility 400ms;
 
 	&.show {
 		visibility: visible;
@@ -620,6 +651,20 @@
 		overflow-x: hidden;
 		margin: auto;
 		box-shadow: 0 0 1px 1px fadeout(@ui14, 80%);
+
+		.icon-close {
+		    display: block;
+		    position: absolute;
+		    top: 1em;
+		    right: 0.618em;
+		    width: 1em;
+		    height: 1em;
+		    border: 0px none;
+		}
+
+		.icon-trash {
+			margin: 1em 0;
+		}
 	}
 }
 
