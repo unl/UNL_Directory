@@ -11,10 +11,6 @@
         },
         {
             "type": "vcs",
-            "url": "https://github.com/saltybeagle/Savvy_Turbo.git"
-        },
-        {
-            "type": "vcs",
             "url": "https://github.com/unlpear/UNL_Cache_Lite.git"
         },
         {
@@ -40,12 +36,12 @@
     ],
     "require": {
         "saltybeagle/savvy": "dev-master",
-        "saltybeagle/savvy_turbo": "0.1.*",
         "unl/unl_cache_lite": "0.1.*",
         "unl/common": "0.6.*",
         "unl/php-dwt-parser": "0.9.*",
         "unl/php-unl-templates": "1.4.*",
         "pear-pear/HTTP_Request2": "*",
-        "simple-cas/simple-cas": "dev-master"
+        "simple-cas/simple-cas": "dev-master",
+        "zaininnari/html-minifier": "*"
     }
 }

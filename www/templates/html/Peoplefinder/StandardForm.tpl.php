@@ -18,24 +18,17 @@
 </form>
 <p><a href="<?php echo UNL_Peoplefinder::getURL() ?>help/" class="wdn-button">Help</a></p>
 
-<script id="noticeTemplate" type="text/x-jsrender">
-<div class="wdn_notice">
-    <div class="close">
-        <a href="#" title="Close this notice">Close this notice</a>
-    </div>
-    <div class="message">
-        <p class="title">We automatically tried some other searches for you.</p>
-        <p>
-            Your original search for <span>{{:originalSearch}}</span> did not return any results.
-            So we tried a few more advanced searches and below is what we found for <span>First Name: {{:firstName}} AND Last Name: {{:lastName}}</span>.</p>
-    </div>
-</div>
-</script>
+<?php echo $savvy->render((object) [
+    'id' => 'noticeTemplate',
+    'template' => 'Search/NoticeTemplate.tpl.php',
+], 'jsrender.tpl.php') ?>
 
-<script id="genericErrorTemplate" type="text/x-jsrender">
-<p class="error">Something went wrong. Please try again later.</p>
-</script>
+<?php echo $savvy->render((object) [
+    'id' => 'genericErrorTemplate',
+    'template' => 'Search/GenericErrorTemplate.tpl.php',
+], 'jsrender.tpl.php') ?>
 
-<script id="queryLengthTemplate" type="text/x-jsrender">
-<p>Please enter more information, your query must be at least 3 characters long.</p>
-</script>
+<?php echo $savvy->render((object) [
+    'id' => 'queryLengthTemplate',
+    'template' => 'Search/QueryLengthTemplate.tpl.php',
+], 'jsrender.tpl.php') ?>

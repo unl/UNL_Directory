@@ -16,31 +16,27 @@
     </div>
 </div>
 
-<script id="filterOptionListTempalte" type="text/x-jsrender">
-<ol>
-    <li>
-        <input id="filterAll{{:type}}" class="filterAll" type="checkbox" checked/>
-        <label for="filterAll{{:type}}">All<span class="wdn-text-hidden"> {{:type}}</label>
-    </li>
-</ol>
-</script>
+<?php echo $savvy->render((object) [
+    'id' => 'filterOptionListTempalte',
+    'template' => 'SearchResults/OptionListTemplate.tpl.php',
+], 'jsrender.tpl.php') ?>
 
-<script id="filterOptionTemplate" type="text/x-jsrender">
-<li>
-    <input id="filter{{:type}}" value="{{:type}}" type="checkbox"/>
-    <label for="filter{{:type}}">{{:label}}</label>
-</li>
-</script>
+<?php echo $savvy->render((object) [
+    'id' => 'filterOptionTemplate',
+    'template' => 'SearchResults/OptionTemplate.tpl.php',
+], 'jsrender.tpl.php') ?>
 
-<script id="summaryTemplate" type="text/x-jsrender">
-<p class="summary" area-live="polite">Displaying People: </p>
-</script>
+<?php echo $savvy->render((object) [
+    'id' => 'summaryTemplate',
+    'template' => 'SearchResults/SummaryTemplate.tpl.php',
+], 'jsrender.tpl.php') ?>
 
-<script id="summaryAllTemplate" type="text/x-jsrender">
-<span class="all selected-options">All Options</span>
-</script>
+<?php echo $savvy->render((object) [
+    'id' => 'summaryAllTemplate',
+    'template' => 'SearchResults/SummaryAllTemplate.tpl.php',
+], 'jsrender.tpl.php') ?>
 
-<script id="summaryFilterTemplate" type="text/x-jsrender">
-    <span class="{{:filterValue}} selected-options"><span class="group">{{:filterType}}</span>{{:filterLabel}}</span> <span class="operator">OR</span>
-
-</script>
+<?php echo $savvy->render((object) [
+    'id' => 'summaryFilterTemplate',
+    'template' => 'SearchResults/SummaryFilterTemplate.tpl.php',
+], 'jsrender.tpl.php') ?>

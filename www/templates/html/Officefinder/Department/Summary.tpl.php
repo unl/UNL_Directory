@@ -68,19 +68,23 @@ $onlySummary = $context->isSummaryView();
             <?php endif; ?>
 
             <?php if (!empty($context->phone)): ?>
-            <div class="tel work icon-phone itemprop">
-                <span class="voice">
-                    <span class="type">Phone:</span>
-                    <?php echo $savvy->render($context->phone, 'Peoplefinder/Record/TelephoneNumber.tpl.php') ?>
-                </span>
+            <div class="tel work icon-phone attribute">
+                <span class="type">Phone:</span>
+                <span class="value"><?php echo $savvy->render((object) [
+                    'number' => $context->phone,
+                    'itemprop' => 'telephone',
+                ], 'Peoplefinder/Record/NumberItemprop.tpl.php') ?></span>
+                <?php echo $savvy->render($context->phone, 'Peoplefinder/Record/CampusNumber.tpl.php') ?>
             </div>
             <?php endif; ?>
             <?php if (!empty($context->fax)): ?>
-            <div class="tel work icon-print itemprop">
-                <span class="fax">
-                    <span class="type">Fax:</span>
-                    <?php echo $savvy->render($context->fax, 'Peoplefinder/Record/TelephoneNumber.tpl.php'); ?>
-                </span>
+            <div class="tel work fax icon-print attribute">
+                <span class="type">Fax:</span>
+                <span class="value"><?php echo $savvy->render((object) [
+                    'number' => $context->fax,
+                    'itemprop' => 'faxNumber',
+                ], 'Peoplefinder/Record/NumberItemprop.tpl.php') ?></span>
+                <?php echo $savvy->render($context->phone, 'Peoplefinder/Record/CampusNumber.tpl.php') ?>
             </div>
             <?php endif; ?>
             <?php if ($encodedEmail): ?>

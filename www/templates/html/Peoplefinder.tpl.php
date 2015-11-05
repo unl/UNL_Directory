@@ -62,4 +62,17 @@ $page->optionalfooter = $savvy->render(null, 'static/op-footer.tpl.php');
 
 $page->footercontent = $savvy->render(null, 'static/footer.tpl.php');
 
-echo $page;
+if (UNL_Peoplefinder::$minifyHtml) {
+    echo zz\Html\HTMLMinify::minify($page->toHtml(), [
+        'optimizationLevel' => zz\Html\HTMLMinify::OPTIMIZATION_ADVANCED,
+        'excludeComment' => [
+            '/<!--\s+Membership and regular participation .*?-->/s',
+            '/<!-- (?:Instance|Template)Begin template="[^"]+" codeOutsideHTMLIsLocked="false" -->/',
+            '/<!-- (?:Instance|Template)BeginEditable name="[^"]+" -->/',
+            '/<!-- (?:Instance|Template)EndEditable -->/',
+            '/<!-- (?:Instance|Template)Param name="[^"]+" type="[^"]+" value="[^"]*" -->/',
+        ]
+    ]);
+} else {
+    echo $page;
+}

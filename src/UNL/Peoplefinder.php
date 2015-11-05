@@ -38,6 +38,8 @@ class UNL_Peoplefinder
 
     static public $staticFileVersion = '4.0';
 
+    static public $minifyHtml = true;
+
     static protected $instance;
 
     /**

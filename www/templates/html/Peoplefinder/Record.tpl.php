@@ -1,7 +1,6 @@
 <?php
 $preferredFirstName = $context->getPreferredFirstName();
 $preferredName = $preferredFirstName . ' ' . $context->sn;
-$telephonePartial = 'Peoplefinder/Record/TelephoneNumber.tpl.php';
 
 $isOrg = $context->ou == 'org';
 $itemtype = 'Person';
@@ -138,20 +137,24 @@ $showKnowledge = $context->shouldShowKnowledge();
     <?php endif; ?>
 
     <?php if (isset($context->telephoneNumber)): ?>
-        <div class="tel work icon-phone itemprop">
-            <span class="voice">
-                <span class="type">Work</span>
-                <span class="value"><?php echo $savvy->render($context->telephoneNumber, $telephonePartial) ?></span>
-            </span>
+        <div class="tel work icon-phone attribute">
+            <span class="type">Work</span>
+            <span class="value"><?php echo $savvy->render((object) [
+                'number' => $context->telephoneNumber,
+                'itemprop' => 'telephone',
+            ], 'Peoplefinder/Record/NumberItemprop.tpl.php') ?></span>
+            <?php echo $savvy->render($context->telephoneNumber, 'Peoplefinder/Record/CampusNumber.tpl.php') ?>
         </div>
     <?php endif; ?>
 
     <?php if (isset($context->unlSISLocalPhone)): ?>
         <div class="tel home">
-            <span class="voice">
-                <span class="type">Phone</span>
-                <span class="value"><?php echo $savvy->render($context->unlSISLocalPhone, $telephonePartial) ?></span>
-            </span>
+            <span class="type">Phone</span>
+            <span class="value"><?php echo $savvy->render((object) [
+                'number' => $context->unlSISLocalPhone,
+                'itemprop' => 'telephone',
+            ], 'Peoplefinder/Record/NumberItemprop.tpl.php') ?></span>
+            <?php echo $savvy->render($context->unlSISLocalPhone, 'Peoplefinder/Record/CampusNumber.tpl.php') ?>
         </div>
     <?php endif; ?>
 

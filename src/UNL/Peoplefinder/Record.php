@@ -100,6 +100,55 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
         return $remoteRecord;
     }
 
+    public static function getCleanPhoneNumber($phone)
+    {
+        return str_replace(array('(', ')', '-', ' '), '', $phone);
+    }
+
+    /**
+     * Some numbers can be dialed without dialing off-campus.
+     *
+     * This is especially important for extension offices which would normally
+     * be charged long-distance rates.
+     *
+     * Here is the list of rules for converting 10 digit telephone numbers to their
+     * 5 digit equivalents that are dialable from UNL On Campus Phones.
+     *
+     * 402-472-XXXX 2-XXXX UNL
+     * 402-584-38XX 7-38XX HAL (Concord, NE)
+     * 402-624-80XX 7-80XX ARDC (Mead, NE)
+     * 402-370-40XX 7-40XX NEREC (Norfolk, NE)
+     * 308-696-67XX 7-67XX WCREC (North Platte, NE)
+     * 308-367-52XX 7-52XX NCTA
+     */
+    public static function getCampusPhoneNumber($phone)
+    {
+        $clean_number = self::getCleanPhoneNumber($phone);
+
+        switch (true) {
+            case preg_match('/^(402)?472([\d]{4})$/', $clean_number, $matches):
+                return '2-' . $matches[2];
+            case preg_match('/^(402)?58438([\d]{2})$/', $clean_number, $matches):
+                return '7-38' . $matches[2];
+            case preg_match('/^(402)?62480([\d]{2})$/', $clean_number, $matches):
+                return '7-80' . $matches[2];
+            case preg_match('/^(402)?37040([\d]{2})$/', $clean_number, $matches):
+                return '7-40' . $matches[2];
+            case preg_match('/^(308)?69667([\d]{2})$/', $clean_number, $matches):
+                return '7-67' . $matches[2];
+            case preg_match('/^(308)?36752([\d]{2})$/', $clean_number, $matches):
+                return '7-52' . $matches[2];
+        }
+
+        return false;
+    }
+
+    public static function getFormattedPhoneNumber($phone)
+    {
+        $clean_number = self::getCleanPhoneNumber($phone);
+        return preg_replace('/([\d]{3})([\d]{3})([\d]{4})/', '$1-$2-$3', $clean_number);
+    }
+
     protected function getCache()
     {
         if (!$this->cache) {
