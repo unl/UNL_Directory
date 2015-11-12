@@ -35,6 +35,8 @@ define([
 	var initialMainState;
 	var currentMainState;
 	var documentTitleSuffix = '';
+	var resultsContainerSelector = '.results-container';
+	var emptyFilterClass = 'empty-filters';
 
 	var filters = {
 		initialize : function() {
@@ -45,18 +47,16 @@ define([
 			var $total = $('.ppl_Sresult', $results);
 
 			if (!$resultLists.length || !$total.length) {
-				$filters.hide();
-				$summary.hide();
+				$filters.closest(resultsContainerSelector).addClass(emptyFilterClass);
 				return;
 			}
 
 			$filterContainer.addClass('loading');
-			$filters.show();
-			$summary.show();
+			$filters.closest(resultsContainerSelector).removeClass(emptyFilterClass);
 
 			$('.results', $results).each(function() {
 				if (!$(this).hasClass('departments')) {
-					$(this).find('.organization-unit').each(function() {
+					$('.organization-unit', this).each(function() {
 						//find the departments from the people records
 						var refDepartment = $(this).text();
 						var cleanValue = filters.scrubDept(refDepartment.toLowerCase());
@@ -653,20 +653,66 @@ define([
 		}
 	};
 
+	var attachListingsEditing = function($editableListings) {
+		WDN.initializePlugin('jqueryui', [function() {
+			require(['./vendor/jquery.ui.touch-punch.js', './vendor/jquery.mjs.nestedSortable.js'], function() {
+				var $sortform = $editableListings.closest('#listings').find('form.sortform');
+
+				$editableListings.nestedSortable({
+					revert: false,
+					scroll: true,
+					delay: 100,
+					opacity: 0.45,
+					tolerance: 'pointer',
+					helper: 'clone',
+					update: function(event, ui){
+						var sortJson = JSON.stringify($editableListings.nestedSortable('toHierarchy'));
+						$('[name="sort_json"]', $sortform).val(sortJson);
+						$sortform.submit();
+					},
+					items: 'li.listing',
+					handle: '.listingDetails',
+					forcePlaceholderSize: true,
+					placeholder: 'ui-placeholder',
+					toleranceElement: '.listingDetails'
+				});
+			});
+		}]);
+
+		$editableListings.on('click', '.icon-pencil', function(e) {
+			var self = this;
+			var loadedSelector = '.edit';
+			var contentSelector = '.forms';
+			var $contextForModal = $(this).closest('.tools');
+			var $loadTo = $('.form', $contextForModal);
+
+			$(contentSelector, $contextForModal).removeClass('show-add');
+
+			if (!$(loadedSelector, $loadTo).length) {
+				$loadTo.load(this.href + '?' + $.param({format: 'partial'}), function() {
+					showModalForm($contextForModal, contentSelector, self);
+				});
+			} else {
+				showModalForm($contextForModal, contentSelector, self);
+			}
+
+			return false;
+		});
+	};
+
 	var ajaxSubmitToDepartmentList = function(form, context, listClass, tmpl, data) {
-		$.post(form.action + '?' + $.param({redirect: 0}), $(form).serialize(), function() {
+		$.post(form.action + '?' + $.param({redirect: '0'}), $(form).serialize(), function() {
 			var $newItem = $(tmpl.render(data)).hide();
 			var $list = $('.' + listClass, context);
 
 			if (!$list.length) {
-				$('<ul>', {
-					"class": listClass,
-					"aria-live": "polite"
-				}).insertBefore($('form.add', context));
+				$list = $('<ul>', {"class": listClass}).insertBefore(form);
 			}
 
 			$list.append($newItem);
-			$newItem.fadeIn();
+			$newItem.fadeIn(function() {
+				$(document.body).trigger('sticky_kit:recalc');
+			});
 			form.reset();
 		});
 	};
@@ -674,11 +720,63 @@ define([
 	var ajaxSubmitRemoveDepartmentList = function(form) {
 		var $form = $(form);
 
-		$.post(form.action + '?' + $.param({redirect: 0}), $form.serialize(), function() {
+		$.post(form.action + '?' + $.param({redirect: '0'}), $form.serialize(), function() {
 			$form.closest('li').slideUp(function() {
+				var $sortable = $(this).closest('.ui-sortable');
+
 				$(this).remove();
-				$('#listings .ui-sortable').nestedSortable('refresh');
+				$(document.body).trigger('sticky_kit:recalc');
+
+				if ($sortable.length) {
+					$sortable.nestedSortable('refresh');
+				}
 			});
+		});
+	};
+
+	var ajaxSubmitRefreshDepartment = function(form) {
+		var $form = $(form);
+		var options = {
+			redirect: '0',
+			render: 'summary',
+			format: 'partial'
+		};
+
+		$.post(form.action + '?' + $.param(options), $form.serialize(), function(data) {
+			$form.closest('.department-summary').find('.departmentInfo').replaceWith(data);
+			$(document.body).trigger('sticky_kit:recalc');
+			$(mainSelector).focus();
+		});
+	};
+
+	var ajaxSubmitRefreshListing = function(form, redirect) {
+		var $form = $(form);
+		var options = {
+			redirect: redirect || '0',
+			render: 'listing',
+			format: 'partial'
+		};
+
+		$.post(form.action + '?' + $.param(options), $form.serialize(), function(data) {
+			var $listing = $form.closest('.listing');
+			var $listings = $('#listings');
+			var $list = $('.editing > ol.listings', $listings);
+
+			if (!$listing.length) {
+				$listing = $(data);
+
+				if (!$list.length) {
+					$list = $('<ol>', {"class": "listings"}).insertBefore($form.closest('.edit-tools'));
+					$listing.appendTo($list);
+					attachListingsEditing($list);
+				} else {
+					$listing.hide().appendTo($list).fadeIn();
+					$listing.closest('.ui-sortable').nestedSortable('refresh');
+				}
+			} else {
+				$listing.replaceWith(data);
+				$listing.closest('.ui-sortable').nestedSortable('refresh');
+			}
 		});
 	};
 
@@ -943,31 +1041,25 @@ define([
 						var $forms = $(this).closest('.forms');
 
 						e.preventDefault();
-
-						// todo: check for "add" form
+						closeModalAndRestoreContent();
 
 						if ($forms.data('department-id')) {
-							console.log('editing root department');
-							// todo: ajax submit and reload partial summary render
+							ajaxSubmitRefreshDepartment(this);
+						} else if ($forms.data('listing-id')) {
+							ajaxSubmitRefreshListing(this);
 						} else {
-							console.log('editing listing');
-							// todo: ajax submit and reload partial listing render
+							ajaxSubmitRefreshListing(this, '2');
 						}
-
-						closeModalAndRestoreContent();
 					}).on('submit', 'form.delete', function(e) {
 						var $forms = $(this).closest('.forms');
 
 						e.preventDefault();
+						closeModalAndRestoreContent();
 
-						if ($forms.data('department-id')) {
-							console.log('deleting root department');
-							// todo: restore default (this will need to redirect to parent) -- should never happen
-						} else {
+						// this should ONLY occur for listings
+						if (!$forms.data('department-id')) {
 							ajaxSubmitRemoveDepartmentList(this);
 						}
-
-						closeModalAndRestoreContent();
 					});
 
 					$(document).on('click', function(e) {
@@ -1024,79 +1116,46 @@ define([
 					});
 
 					if ($editableListings.length) {
-						WDN.initializePlugin('jqueryui', [function() {
-							require(['./vendor/jquery.ui.touch-punch.js', './vendor/jquery.mjs.nestedSortable.js'], function() {
-								var $sortform = $('.edit-tools form.sortform', $listings);
-								$sortform.on('submit', function(e) {
-									e.preventDefault();
-									$.post(this.action + '?' + $.param({redirect: 0}), $(this).serialize());
-								});
-
-								$editableListings.nestedSortable({
-									revert: false,
-									scroll: true,
-									delay: 100,
-									opacity: 0.45,
-									tolerance: 'pointer',
-									helper: 'clone',
-									update: function(event, ui){
-										var sortJson = JSON.stringify($editableListings.nestedSortable('toHierarchy'));
-										$('[name="sort_json"]', $sortform).val(sortJson);
-										$sortform.submit();
-									},
-									items: 'li',
-									handle: 'div',
-									forcePlaceholderSize: true,
-									placeholder: 'ui-placeholder',
-									toleranceElement: '> div'
-								});
-							});
-						}]);
-
-						$editableListings.on('click', '.icon-pencil', function(e) {
-							var self = this;
-							var loadedSelector = '.edit';
-							var contentSelector = '.forms';
-							var $contextForModal = $(this).closest('.tools');
-							var $loadTo = $contextForModal.find('.form');
-
-							if (!$loadTo.find(loadedSelector).length) {
-								$loadTo.load(this.href + '?' + $.param({format: 'partial'}), function() {
-									showModalForm($contextForModal, contentSelector, self);
-								});
-							} else {
-								showModalForm($contextForModal, contentSelector, self);
-							}
-
-							return false;
-						});
-
-						// todo: add child listing add form support
-
-						$listings.on('click', '.listing-add', function(e) {
-							var self = this;
-							var loadedSelector = '.edit';
-							var contentSelector = '.forms';
-							var $contextForModal = $(this).closest('.edit-tools');
-							var $loadTo = $contextForModal.find('.form');
-
-							if (!$loadTo.find(loadedSelector).length) {
-								$loadTo.load(this.href + '?' + $.param({format: 'partial'}), function() {
-									showModalForm($contextForModal, contentSelector, self);
-								});
-							} else {
-								showModalForm($contextForModal, contentSelector, self);
-							}
-
-							return false;
-						});
-
-						$modal.on('click.listings', '.icon-trash', function(e) {
-							if (!confirm(deleteDepartmentWarning)) {
-								return false;
-							}
-						});
+						attachListingsEditing($editableListings);
 					}
+
+					$listings.on('click', '.listing-add', function(e) {
+						var self = this;
+						var loadedSelector = '.edit';
+						var contentSelector = '.forms';
+						var $contextForModal = $(this).closest('.edit-tools');
+						var $loadTo = $('.form', $contextForModal);
+
+						if (!$(loadedSelector, $loadTo).length) {
+							$loadTo.load(this.href + '?' + $.param({format: 'partial'}), function() {
+								showModalForm($contextForModal, contentSelector, self);
+							});
+						} else {
+							showModalForm($contextForModal, contentSelector, self);
+						}
+
+						return false;
+					}).on('submit', 'form.sortform', function(e) {
+						e.preventDefault();
+						$.post(this.action + '?' + $.param({redirect: 0}), $(this).serialize());
+					});
+
+					$modal.on('click.listings', '.icon-trash', function(e) {
+						if (!confirm(deleteDepartmentWarning)) {
+							return false;
+						}
+					}).on('click.listings', '.listing-add', function(e) {
+						var self = this;
+						var $contextForModal = $(this).closest('.forms');
+						var $loadTo = $('.add-form', $contextForModal);
+
+						$loadTo.load(this.href + '?' + $.param({format: 'partial'}), function() {
+							$contextForModal.addClass('show-add');
+							$('input:visible', this).first().focus();
+						});
+
+						return false;
+					});
 				} else if ($('.record-container .vcard').length) {
 					// single person record state loaded
 					initialMainState = 1;
