@@ -4,8 +4,8 @@ class UNL_Officefinder_DepartmentList_AlphaListing_LoginRequired
     public $options;
     public $user;
     public $output;
-    
-    function __construct($options = array())
+
+    public function __construct($options = array())
     {
         $this->options = $options;
 
@@ -14,5 +14,6 @@ class UNL_Officefinder_DepartmentList_AlphaListing_LoginRequired
 
         // Build the alpha listing
         $this->output = new UNL_Officefinder_DepartmentList_AlphaListing($options);
+        session_commit();
     }
 }
