@@ -1,11 +1,14 @@
 define([
 	'jquery',
 	'wdn',
+	'modernizr',
 	'require',
 	'notice',
 	'tooltip',
 	'./vendor/jsrender.js'
-], function($, WDN, require) {
+], function($, WDN, Modernizr, require) {
+	"use strict";
+
 	var serviceURL = 'https://directory.unl.edu/';
 	var annotateServiceURL = 'https://annotate.unl.edu/';
 	var originalSearch = '';
@@ -269,6 +272,8 @@ define([
 	};
 
 	var fetchRecord = function(recordType, recordId) {
+		var url;
+
 		if (recordType === 'org') {
 			url = recordId + '/summary?format=partial';
 		} else {
@@ -282,7 +287,6 @@ define([
 		var slidingSelector = '.vcard';
 		var overviewSelector = '.overflow';
 		var infoData;
-		var url;
 
 		// remove any previous errors
 		$('.error', liRecord).remove();
@@ -915,6 +919,20 @@ define([
 					setMainState(initialMainState);
 					bindResultsListeners($employees);
 					bindRecordListeners($employees);
+
+					require(['./vendor/jquery.sticky-kit.js'], function() {
+						var checkSticky = function() {
+							$(document.body).trigger('sticky_kit:recalc');
+
+							if (Modernizr.mq('only screen and (min-width: 768px)')) {
+								$summarySection.stick_in_parent({spacer:false});
+							} else {
+								$summarySection.trigger('sticky_kit:detach');
+							}
+						};
+						$(window).on('resize', checkSticky);
+						checkSticky();
+					});
 
 					$modal = $('#modal_edit_form');
 					$modal.on('keydown', function(e) {
