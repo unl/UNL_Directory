@@ -31,7 +31,7 @@ if (strtolower($_SERVER['REQUEST_METHOD']) == 'options') {
 }
 
 Savvy_ClassToTemplateMapper::$classname_replacement = 'UNL_';
-$savvy = new Savvy();
+$savvy = new UNL_Peoplefinder_Savvy();
 $savvy->setTemplatePath(__DIR__.'/templates/html');
 
 switch($peoplefinder->options['format']) {
