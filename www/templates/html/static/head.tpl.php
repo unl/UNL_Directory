@@ -2,7 +2,7 @@
 $baseUrl = UNL_Peoplefinder::getURL();
 $version = UNL_Peoplefinder::$staticFileVersion;
 
-$loginService = UNL_Officefinder::getURL();
+$loginService = UNL_Officefinder::getURL() . 'editor';
 if (strpos($loginService, '//') === 0) {
     $loginService = 'https:' . $loginService;
 }
@@ -17,10 +17,8 @@ $logoutUrl = 'https://login.unl.edu/cas/logout?url=' . urlencode($loginService);
 <link rel="stylesheet" type="text/css" media="all" href="<?php echo $baseUrl ?>css/directory.css?v=<?php echo $version ?>"/>
 <link rel="stylesheet" type="text/css" media="print" href="<?php echo $baseUrl ?>css/directory-print.css?v=<?php echo $version ?>"/>
 <script>
-require(['jquery', 'idm'], function($, idm) {
-	$(function() {
-		idm.setLoginURL('<?php echo $loginUrl ?>');
-		idm.setLogoutURL('<?php echo $logoutUrl ?>');
-	});
+require(['wdn'], function(WDN) {
+	WDN.setPluginParam('idm', 'login', '<?php echo $loginUrl ?>');
+	WDN.setPluginParam('idm', 'logout', '<?php echo $logoutUrl ?>');
 });
 </script>
