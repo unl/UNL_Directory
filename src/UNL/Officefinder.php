@@ -17,10 +17,11 @@ class UNL_Officefinder
      * Options for this use.
      */
     public $options = [
-        'view'   => 'instructions',
+        'view' => 'instructions',
         'format' => 'html',
-        'q'      => '',
+        'q' => '',
         'render' => '',
+        'redirect' => '',
     ];
 
     /**
@@ -213,12 +214,14 @@ class UNL_Officefinder
         }
 
         $redirect = false;
+        $noRedirect = $this->options['redirect'] === '0';
         $noRender = empty($this->options['render']);
+        $redirectAndRender = $this->options['redirect'] === '2';
 
         switch($_POST['_type']) {
             case 'department':
                 $record = $this->handlePostDBRecord('UNL_Officefinder_Department');
-                if ($record->isOfficialDepartment()) {
+                if ($redirectAndRender || $record->isOfficialDepartment()) {
                     $redirect = $record->getURL();
                 } else {
                     $redirect = $record->getOfficialParent()->getURL();
@@ -275,7 +278,16 @@ class UNL_Officefinder
                 break;
         }
 
-        if ($redirect && !(isset($this->options['redirect']) && $this->options['redirect'] == '0')) {
+        if ($redirect && !$noRedirect) {
+            if ($redirectAndRender) {
+                $params = [
+                    'render' => $this->options['render'],
+                    'format' => $this->options['format'],
+                ];
+
+                $redirect .= '?' . http_build_query($params);
+            }
+
             $this->redirect($redirect);
         } elseif ($noRender) {
             exit();
@@ -444,6 +456,11 @@ class UNL_Officefinder
         }
 
         $this->output = $view;
+
+        if ($view instanceof UNL_Officefinder_DepartmentList_AlphaListing_LoginRequired) {
+            // output will be way too big to try to minify
+            UNL_Peoplefinder::$minifyHtml = false;
+        }
     }
 
     /**
