@@ -107,7 +107,7 @@ if (isset($page)) {
                 </ul>
             </div>
             <div class="wdn-col">
-                <h3 class="wdn-brand">Other directory-related Information</h3>
+                <h3 class="wdn-brand">Other Directory-Related Information</h3>
                 <ul>
                     <li><a href="http://www.whitepages.com/maps">United States dialing area codes</a></li>
                     <li><a href="https://countrycode.org/">Country dialing codes</a></li>
