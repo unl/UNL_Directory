@@ -6,6 +6,7 @@
         continue;
     }
 
+    $renderLinks = $context->isRenderLinks();
     $dept_url = $org->getURL();
     $parentClass = 'unl';
     $parent_name = 'University of Nebraska–Lincoln';
@@ -17,7 +18,15 @@
     <li class="org parent-<?php echo $parentClass ?>">
         <span class="title" itemprop="jobTitle"><?php echo $role->description ?></span>
         <span itemprop="worksFor" itemscope itemtype="http://schema.org/Organization">
-            <span class="organization-unit"><a href="<?php echo $dept_url ?>" itemprop="url"><span itemprop="name"><?php echo $org->name ?></span></a></span>
+            <span class="organization-unit">
+                <?php if ($renderLinks): ?>
+                    <a href="<?php echo $dept_url ?>" itemprop="url">
+                <?php endif; ?>
+                <span itemprop="name"><?php echo $org->name ?></span>
+                <?php if ($renderLinks): ?>
+                    </a>
+                <?php endif; ?>
+            </span>
             <span class="organization-name" itemprop="parentOrganization" itemscope itemtype="http://schema.org/Organization"><span itemprop="name"><?php echo $parent_name ?></span></span>
         </span>
     </li>

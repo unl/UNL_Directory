@@ -24,26 +24,27 @@ $title = $context->formatTitle();
 ?>
 
 <li class="<?php echo $class ?>" tabindex="0" data-href="<?php echo $context->getUrl() ?>" data-uid="<?php echo $context->uid ?>">
-    <div class="overflow">
+    <div class="overflow" itemscope itemtype="http://schema.org/Person">
         <?php if ($controller->options['view'] != 'alphalisting'): ?>
             <div class="profile_pic">
-                <img class="photo" src="<?php echo $context->getImageUrl(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_SMALL) ?>" alt="Avatar for <?php echo $context->displayName ?>" />
+                <img class="photo" itemprop="image" src="<?php echo $context->getImageUrl(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_SMALL) ?>" alt="Avatar for <?php echo $context->displayName ?>" />
             </div>
         <?php endif; ?>
 
         <div class="recordDetails">
-            <div class="fn"><a href="<?php echo $context->getUrl() ?>"<?php echo $onclick ?>><?php echo $name ?></a></div>
+            <div class="fn" itemprop="name"><a itemprop="url" href="<?php echo $context->getUrl() ?>"<?php echo $onclick ?>><?php echo $name ?></a></div>
             <?php if (isset($context->unlHROrgUnitNumber)): ?>
-                <?php foreach ($context->unlHROrgUnitNumber as $orgUnit): ?>
-                    <?php if ($name = UNL_Officefinder_Department::getNameByOrgUnit($orgUnit)): ?>
-                        <div class="organization-unit"><?php echo $name ?></div>
-                    <?php endif; ?>
-                <?php endforeach; ?>
+                <?php
+                $roles = $context->getRoles();
+                $roles->enableRenderLinks(false);
+                $title = $context->formatTitle();
+                ?>
+                <?php if (count($roles)): ?>
+                    <?php echo $savvy->render($roles) ?>
+                <?php elseif ($title): ?>
+                    <div class="title" itemprop="jobTitle"><?php echo $title ?></div>
+                <?php endif; ?>
             <?php endif; ?>
-
-        <?php if ($title): ?>
-            <div class="title"><?php echo $title ?></div>
-        <?php endif; ?>
 
         <?php if (!empty($context->telephoneNumber)): ?>
             <div class="tel"><?php echo $savvy->render($context->telephoneNumber, 'Peoplefinder/Record/TelephoneNumber.tpl.php') ?></div>

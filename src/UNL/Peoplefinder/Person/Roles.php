@@ -1,6 +1,8 @@
 <?php
 class UNL_Peoplefinder_Person_Roles extends IteratorIterator implements Countable, Serializable
 {
+    protected $renderLinks = true;
+
     public function __construct($options = array())
     {
         if (isset($options['iterator']) && $options['iterator'] instanceof Iterator) {
@@ -23,6 +25,17 @@ class UNL_Peoplefinder_Person_Roles extends IteratorIterator implements Countabl
     {
         $iterator = unserialize($serialized);
         parent::__construct($iterator);
+    }
+
+    public function isRenderLinks()
+    {
+        return $this->renderLinks;
+    }
+
+    public function enableRenderLinks($enable = true)
+    {
+        $this->renderLinks = (bool) $enable;
+        return $this;
     }
 
     /**
