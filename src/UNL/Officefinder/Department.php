@@ -237,6 +237,10 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
             $this->academic = 0;
         }
 
+        if (empty($this->sort_order) && !$this->isRoot()) {
+            $this->sort_order = count($this->getParent()->getChildren()) + 1;
+        }
+
         return parent::save();
     }
 
