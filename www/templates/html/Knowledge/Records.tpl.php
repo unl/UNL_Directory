@@ -9,7 +9,7 @@ $baseUrl = UNL_Peoplefinder::getURL();
 
 <?php if ($context->education): ?>
     <div class="directory-knowledge-section directory-knowledge-section-education">
-        <h2 class="wdn-brand"><img src="<?php echo $baseUrl ?>images/icons/academic-cap.svg" alt="">Education</h2>
+        <h2 class="wdn-brand icon-academic-cap">Education</h2>
         <ul class="directory-knowledge-section-inner">
             <?php foreach ($context->education as $degree): ?>
                 <li class="directory-knowledge-item">
@@ -22,7 +22,7 @@ $baseUrl = UNL_Peoplefinder::getURL();
 
 <?php if ($context->courses): ?>
     <div class="directory-knowledge-section directory-knowledge-section-courses">
-        <h2 class="wdn-brand"><img src="<?php echo $baseUrl ?>images/icons/chat-4.svg" alt="">Courses</h2>
+        <h2 class="wdn-brand icon-chat-user">Courses</h2>
         <ul class="directory-knowledge-section-inner">
             <?php foreach ($context->courses as $course) { ?>
                 <li class="directory-knowledge-item">
@@ -35,7 +35,7 @@ $baseUrl = UNL_Peoplefinder::getURL();
 
 <?php if ($context->papers): ?>
     <div class="directory-knowledge-section directory-knowledge-section-papers">
-        <h2 class="wdn-brand"><img src="<?php echo $baseUrl ?>images/icons/document-1.svg" alt="">Publications and Other Intellectual Contributions</h2>
+        <h2 class="wdn-brand icon-document">Publications and Other Intellectual Contributions</h2>
         <ul class="directory-knowledge-section-inner">
             <?php foreach ($context->papers as $paper): ?>
                 <li class="directory-knowledge-item">
@@ -48,7 +48,7 @@ $baseUrl = UNL_Peoplefinder::getURL();
 
 <?php if ($context->grants): ?>
     <div class="directory-knowledge-section directory-knowledge-section-grants">
-        <h2 class="wdn-brand"><img src="<?php echo $baseUrl ?>images/icons/business-chart-2.svg" alt="">Research &amp; Grants</h2>
+        <h2 class="wdn-brand icon-business-chart">Research &amp; Grants</h2>
         <ul class="directory-knowledge-section-inner">
             <?php foreach ($context->grants as $grant): ?>
                 <?php if ($grant['CONGRANT']['STATUS'] != 'Declined'): ?>
@@ -63,7 +63,7 @@ $baseUrl = UNL_Peoplefinder::getURL();
 
 <?php if ($context->performances): ?>
     <div class="directory-knowledge-section directory-knowledge-section-grants">
-        <h2 class="wdn-brand"><img src="<?php echo $baseUrl ?>images/icons/column.svg" alt="">Artistic &amp; Professional Performances &amp; Exhibitions</h2>
+        <h2 class="wdn-brand icon-column">Artistic &amp; Professional Performances &amp; Exhibitions</h2>
         <ul class="directory-knowledge-section-inner">
             <?php foreach ($context->performances as $performance): ?>
                 <li class="directory-knowledge-item">
@@ -76,7 +76,7 @@ $baseUrl = UNL_Peoplefinder::getURL();
 
 <?php if ($context->presentations): ?>
     <div class="directory-knowledge-section directory-knowledge-section-presentations">
-        <h2 class="wdn-brand"><img src="<?php echo $baseUrl ?>images/icons/keynote.svg" alt="">Presentations</h2>
+        <h2 class="wdn-brand icon-keynote">Presentations</h2>
         <ul class="directory-knowledge-section-inner">
             <?php foreach ($context->presentations as $presentation): ?>
                 <li class="directory-knowledge-item">
@@ -89,7 +89,7 @@ $baseUrl = UNL_Peoplefinder::getURL();
 
 <?php if ($context->honors): ?>
     <div class="directory-knowledge-section directory-knowledge-section-honors">
-        <h2 class="wdn-brand"><img src="<?php echo $baseUrl ?>images/icons/star-5.svg" alt="">Awards &amp; Honors</h2>
+        <h2 class="wdn-brand icon-bookmark-star">Awards &amp; Honors</h2>
         <ul class="directory-knowledge-section-inner">
             <?php foreach ($context->honors as $honor): ?>
                 <li class="directory-knowledge-item">
