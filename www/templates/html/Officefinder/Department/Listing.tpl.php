@@ -18,16 +18,10 @@ if (!empty($context->email)) {
     <span class="email icon-email"><a href="mailto:<?php echo $encodedEmail ?>"><?php echo $encodedEmail ?></a></span>
     <?php endif; ?>
     <?php if (!empty($context->phone)): ?>
-    <span class="phone icon-phone"><?php echo $savvy->render((object) [
-        'number' => $context->phone,
-        'itemprop' => 'telephone',
-    ], 'Peoplefinder/Record/CampusNumberItemprop.tpl.php') ?></span>
+    <span class="phone icon-phone"><?php echo $savvy->render($context->phone, 'Peoplefinder/Record/TelephoneNumber.tpl.php') ?></span>
     <?php endif; ?>
     <?php if (!empty($context->fax)): ?>
-    <span class="phone icon-print"><?php echo $savvy->render((object) [
-        'number' => $context->fax,
-        'itemprop' => 'faxNumber',
-    ], 'Peoplefinder/Record/CampusNumberItemprop.tpl.php') ?></span>
+    <span class="phone icon-print"><?php echo $savvy->render($context->fax, 'Peoplefinder/Record/TelephoneNumber.tpl.php') ?></span>
     <?php endif; ?>
     <?php if (isset($context->building)): ?>
     <span class="room icon-map-pin"><a class="location mapurl" href="https://maps.unl.edu/<?php echo $context->building ?>"><?php echo $context->building ?></a> <?php echo $context->room ?></span>

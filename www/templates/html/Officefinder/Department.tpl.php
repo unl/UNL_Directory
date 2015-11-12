@@ -93,7 +93,9 @@ $hasOfficialChildDepartments = count($officialChildren);
 								<?php foreach ($officialChildren as $child): ?>
 									<li><a href="<?php echo $child->getURL(); ?>">
 										<?php echo $child->name; ?>
-										<span class="org-unit">(<?php echo $child->org_unit ?>)</span>
+										<?php if ($child->isOfficialDepartment()): ?>
+											<span class="org-unit">(<?php echo $child->org_unit ?>)</span>
+										<?php endif; ?>
 									</a></li>
 								<?php endforeach; ?>
 							</ul>
