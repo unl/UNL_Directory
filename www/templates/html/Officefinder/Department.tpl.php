@@ -38,7 +38,7 @@ $officialChildren = new UNL_Officefinder_DepartmentList_Filter_Suppressed($conte
 $hasOfficialChildDepartments = count($officialChildren);
 ?>
 <section class="summary wdn-grid-set">
-	<div class="bp2-wdn-col-one-third department-summary">
+	<div class="bp2-wdn-col-one-third department-summary" aria-live="polite">
 		<?php echo $savvy->render($context, 'Officefinder/Department/Summary.tpl.php') ?>
 		<?php if ($department): ?>
 			<p><a href="#all_employees">Jump to employees</a></p>
@@ -47,10 +47,10 @@ $hasOfficialChildDepartments = count($officialChildren);
 			<?php echo $savvy->render($context, 'Officefinder/Department/EditBox.tpl.php') ?>
 		<?php endif ;?>
 	</div>
-	<div class="bp2-wdn-col-two-thirds">
+	<div class="bp2-wdn-col-two-thirds wdn-pull-right">
 		<div class="card" id="listings" data-department-id="<?php echo $context->id ?>">
+			<h2 class="wdn-brand icon-phone-book">Yellow Pages</h2>
 			<div class="card-content<?php if ($userCanEdit): ?> editing<?php endif; ?>">
-				<h2 class="wdn-brand icon-phone-book">Yellow Pages</h2>
 				<?php if (count($listings)): ?>
 					<?php echo $savvy->render($listings, 'Officefinder/Department/Listings.tpl.php') ?>
 				<?php endif; ?>
@@ -69,41 +69,46 @@ $hasOfficialChildDepartments = count($officialChildren);
 				<?php endif; ?>
 			</div>
 		</div>
-	</div>
-</section>
-<?php if ($department): ?>
-	<section class="wdn-grid-set hr">
-		<div class="bp2-wdn-col-two-thirds" id="all_employees">
-			<h2 class="wdn-brand icon-employees">All Employees</h2>
-			<?php echo $savvy->render($department) ?>
-		</div>
-		<div class="bp2-wdn-col-one-third wdn-pull-right" id="orgChart">
-			<h2 class="wdn-brand icon-hierarchy">HR Organization Chart</h2>
-			<?php if (!$context->isRoot()): ?>
-				<ul>
-					<li><a href="<?php echo $hrParent->getURL() ?>"><?php echo $hrParent->name ?></a>
-			<?php endif; ?>
 
-			<ul<?php if (!$context->isRoot()): ?> class="icon-down-arrow"<?php endif; ?>>
-				<li>
-					<strong><?php echo $context->name; ?></strong>
-					<?php if ($hasOfficialChildDepartments): ?>
-						<ul class="icon-down-arrow">
-							<?php foreach ($officialChildren as $child): ?>
-								<li><a href="<?php echo $child->getURL(); ?>"><?php echo $child->name; ?></a></li>
-							<?php endforeach; ?>
-						</ul>
-					<?php endif; ?>
-				</li>
-			</ul>
+		<?php if ($department): ?>
+			<div id="all_employees">
+				<h2 class="wdn-brand icon-employees">All Employees</h2>
+				<?php echo $savvy->render($department) ?>
+			</div>
+			<div id="orgChart">
+				<h2 class="wdn-brand icon-hierarchy">HR Organization Chart</h2>
+				<?php if (!$context->isRoot()): ?>
+					<ul>
+						<li><a href="<?php echo $hrParent->getURL() ?>">
+							<?php echo $hrParent->name ?>
+							<span class="org-unit">(<?php echo $hrParent->org_unit ?>)</span>
+						</a>
+				<?php endif; ?>
 
-			<?php if (!$context->isRoot()): ?>
+				<ul<?php if (!$context->isRoot()): ?> class="icon-down-arrow"<?php endif; ?>>
+					<li>
+						<strong><?php echo $context->name; ?></strong>
+						<?php if ($hasOfficialChildDepartments): ?>
+							<ul class="icon-down-arrow">
+								<?php foreach ($officialChildren as $child): ?>
+									<li><a href="<?php echo $child->getURL(); ?>">
+										<?php echo $child->name; ?>
+										<span class="org-unit">(<?php echo $child->org_unit ?>)</span>
+									</a></li>
+								<?php endforeach; ?>
+							</ul>
+						<?php endif; ?>
 					</li>
 				</ul>
-			<?php endif; ?>
-		</div>
-	</section>
-<?php endif; ?>
+
+				<?php if (!$context->isRoot()): ?>
+						</li>
+					</ul>
+				<?php endif; ?>
+			</div>
+		<?php endif; ?>
+	</div>
+</section>
 
 <section class="record-single"></section>
 
