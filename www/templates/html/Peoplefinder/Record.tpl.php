@@ -31,8 +31,8 @@ $showKnowledge = $context->shouldShowKnowledge();
 
 
 <div class="vcard <?php if (!$showKnowledge): ?>card <?php endif; ?><?php echo $context->eduPersonPrimaryAffiliation ?>" data-uid="<?php echo $context->uid ?>" data-preferred-name="<?php echo $preferredName ?>" itemscope itemtype="http://schema.org/<?php echo $itemtype ?>">
-    <a class="card-profile" href="<?php echo $context->getProfileUrl() ?>" title="Planet Red profile for <?php echo $preferredName ?>">
-        <img class="photo" src="<?php echo $context->getImageURL(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_LARGE) ?>" alt="Avatar for <?php echo $preferredName ?>" />
+    <a class="card-profile planetred_profile" href="<?php echo $context->getProfileUrl() ?>" title="Planet Red profile for <?php echo $preferredName ?>" itemprop="url">
+        <img class="photo profile_pic" itemprop="image" src="<?php echo $context->getImageURL(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_LARGE) ?>" alt="Avatar for <?php echo $preferredName ?>" />
     </a>
 
     <div class="vcardInfo<?php if (!$showKnowledge): ?> card-content<?php endif; ?>">
@@ -42,17 +42,17 @@ $showKnowledge = $context->shouldShowKnowledge();
         <div class="headline">
     <?php endif; ?>
         <?php if (!$isOrg): ?>
-            <a class="permalink" href="<?php echo $context->getUrl() ?>">
+            <a class="permalink" href="<?php echo $context->getUrl() ?>" itemprop="url">
         <?php endif; ?>
         <?php if ($isOrg): ?>
-            <span class="cn"><?php echo $context->cn ?></span>
+            <span class="cn" itemprop="name"><?php echo $context->cn ?></span>
         <?php else: ?>
-            <span class="fn"><?php echo $preferredName ?></span>
-            <span class="n">
+            <span class="fn" itemprop="name"><?php echo $preferredName ?></span>
             <?php if ($context->hasNickname()): ?>
-                <span class="givenName"><?php echo $context->givenName ?></span>
-            <?php endif; ?>
+            <span class="n">
+                <span class="given-name" itemprop="givenName"><?php echo $context->givenName ?></span>
             </span>
+            <?php endif; ?>
         <?php endif; ?>
         <?php if (!$isOrg): ?>
             <span class="icon-link"></span></a>
@@ -114,25 +114,28 @@ $showKnowledge = $context->shouldShowKnowledge();
         <?php if (count($roles)): ?>
             <?php echo $savvy->render($roles) ?>
         <?php elseif ($title): ?>
-            <div class="title"><?php echo $title ?></div>
+            <div class="title" itemprop="jobTitle"><?php echo $title ?></div>
         <?php endif; ?>
     <?php endif ?>
 
     <?php if (($address = $context->formatPostalAddress()) && count($address)): ?>
-        <div class="adr work itemprop icon-map-pin">
+        <div class="adr work attribute icon-map-pin" itemprop="workLocation" itemscope itemtype="http://schema.org/Place">
             <span class="type">Work</span>
-        <?php if (!empty($address['unlBuildingCode'])): ?>
-            <span class="street-address">
-                <a href="https://maps.unl.edu/<?php echo $address['unlBuildingCode'] ?>"><?php echo $address['unlBuildingCode'] ?></a>
-                <?php echo str_replace($address['unlBuildingCode'], '', $address['street-address']) ?>
-            </span>
-        <?php else: ?>
-            <span class="street-address"><?php echo $address['street-address'] ?></span>
-        <?php endif; ?>
-             <span class="locality"><?php echo $address['locality'] ?></span>
-             <?php echo $savvy->render($address['region'], 'Peoplefinder/Record/Region.tpl.php') ?>
-             <span class="postal-code"><?php echo $address['postal-code'] ?></span>
-             <div class="country-name">USA</div>
+            <?php if (!empty($address['unlBuildingCode'])): ?>
+                <span class="street-address">
+                    <a href="https://maps.unl.edu/<?php echo $address['unlBuildingCode'] ?>" itemprop="hasMap"><?php echo $address['unlBuildingCode'] ?></a>
+                    <?php echo str_replace($address['unlBuildingCode'], '', $address['street-address']) ?>
+                </span>
+            <?php endif; ?>
+            <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                <?php if (empty($address['unlBuildingCode'])): ?>
+                    <span class="street-address" itemprop="streetAddress"><?php echo $address['street-address'] ?></span>
+                <?php endif; ?>
+                <span class="locality" itemprop="addressLocality"><?php echo $address['locality'] ?></span>
+                <?php echo $savvy->render($address['region'], 'Peoplefinder/Record/Region.tpl.php') ?>
+                <span class="postal-code" itemprop="postalCode"><?php echo $address['postal-code'] ?></span>
+                <div class="country-name" itemprop="addressCountry">US</div>
+            </div>
         </div>
     <?php endif; ?>
 
@@ -159,13 +162,13 @@ $showKnowledge = $context->shouldShowKnowledge();
     <?php endif; ?>
 
     <?php if ($displayEmail): ?>
-        <div class="icon-email itemprop">
+        <div class="icon-email attribute">
             <a class="email" href="mailto:<?php echo $encodedEmail ?>" itemprop="email"> <?php echo $encodedEmail ?></a>
         </div>
     <?php endif; ?>
     </div>
 
-    <div class="vcard-tools">
+    <div class="vcard-tools wdn_vcardTools">
         <a href="<?php echo $context->getVcardUrl() ?>" class="icon-vcard"><span class="wdn-text-hidden">Download </span>vCard<span class="wdn-text-hidden"> for <?php echo $preferredName ?></span></a>
         <a href="<?php echo $context->getQRCodeUrl($savvy->render($context, 'templates/vcard/Peoplefinder/Record.tpl.php')) ?>" class="icon-qr-code">QR Code<span class="wdn-text-hidden"> vCard for <?php echo $preferredName ?></span></a>
         <button class="icon-print">Print<span class="wdn-text-hidden"> listing for <?php echo $preferredName ?></span></button>

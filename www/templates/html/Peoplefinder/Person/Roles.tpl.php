@@ -15,9 +15,11 @@
     }
     ?>
     <li class="org parent-<?php echo $parentClass ?>">
-        <span class="title"><?php echo $role->description ?></span>
-        <span class="organization-unit"><a href="<?php echo $dept_url ?>"><?php echo $org->name ?></a></span>
-        <span class="organization-name"><?php echo $parent_name ?></span>
+        <span class="title" itemprop="jobTitle"><?php echo $role->description ?></span>
+        <span itemprop="worksFor" itemscope itemtype="http://schema.org/Organization">
+            <span class="organization-unit"><a href="<?php echo $dept_url ?>" itemprop="url"><span itemprop="name"><?php echo $org->name ?></span></a></span>
+            <span class="organization-name" itemprop="parentOrganization" itemscope itemtype="http://schema.org/Organization"><span itemprop="name"><?php echo $parent_name ?></span></span>
+        </span>
     </li>
     <?php endforeach; ?>
 </ul>

@@ -17,10 +17,10 @@ if (!empty($context->email)) {
 
 $onlySummary = $context->isSummaryView();
 ?>
-<div class="departmentInfo">
+<div class="departmentInfo"<?php if ($onlySummary): ?> itemscope itemtype="http://schema.org/Organization"<?php endif; ?>>
     <div class="vcard office<?php if($onlySummary): ?> card<?php endif; ?>">
         <div class="card-profile">
-            <img alt="Building Image" src="<?php echo $context->getImageURL(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_LARGE); ?>" class="photo" />
+            <img alt="Building Image" itemprop="image" src="<?php echo $context->getImageURL(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_LARGE); ?>" class="photo" />
         </div>
         <div class="vcardInfo<?php if($onlySummary): ?> card-content<?php endif; ?>">
             <?php if (!$onlySummary): ?>
@@ -28,8 +28,8 @@ $onlySummary = $context->isSummaryView();
             <?php else: ?>
                 <div class="headline">
             <?php endif; ?>
-                <a class="permalink" href="<?php echo $context->getURL() ?>">
-                    <span class="fn org"><?php echo $context->name ?></span>
+                <a class="permalink" href="<?php echo $context->getURL() ?>" itemprop="url">
+                    <span class="fn org" itemprop="name"><?php echo $context->name ?></span>
                     <span class="icon-link"></span>
                 </a>
             <?php if ($onlySummary): ?>
@@ -39,31 +39,33 @@ $onlySummary = $context->isSummaryView();
             <?php endif; ?>
 
             <?php if (!$context->isOfficialDepartment()): ?>
-                 <div class="title"><?php echo $parent->name ?></div>
+                 <div class="title" itemprop="parentOrganization" itemscope itemtype="http://schema.org/Organization"><span itemprop="name"><?php echo $parent->name ?></span></div>
             <?php endif; ?>
 
             <?php if ($context->hasAddress()): ?>
-                <div class="adr work itemprop icon-map-pin">
+                <div class="adr work attribute icon-map-pin" itemprop="location" itemscope itemtype="http://schema.org/Place">
                     <span class="type">Address</span>
                     <?php if ($context->building): ?>
                         <span class="room">
-                            <a href="https://maps.unl.edu/<?php echo $context->building ?>"><?php echo $context->building ?></a>
+                            <a href="https://maps.unl.edu/<?php echo $context->building ?>" itemprop="hasMap"><?php echo $context->building ?></a>
                             <?php echo $context->room ?>
                         </span>
                     <?php endif; ?>
-                    <?php if (!empty($context->address)): ?>
-                        <span class="street-address"><?php echo $context->address ?></span>
-                    <?php endif; ?>
-                    <?php if (!empty($context->city)): ?>
-                        <span class='locality'><?php echo $context->city ?></span>
-                    <?php endif; ?>
-                    <?php if (!empty($context->state)): ?>
-                        <?php echo $savvy->render($context->state, 'Peoplefinder/Record/Region.tpl.php') ?>
-                    <?php endif; ?>
-                    <?php if (!empty($context->postal_code)): ?>
-                        <span class='postal-code'><?php echo $context->postal_code ?></span>
-                    <?php endif; ?>
-                    <div class="country-name">USA</div>
+                    <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                        <?php if (!empty($context->address)): ?>
+                            <span class="street-address" itemprop="streetAddress"><?php echo $context->address ?></span>
+                        <?php endif; ?>
+                        <?php if (!empty($context->city)): ?>
+                            <span class="locality" itemprop="addressLocality"><?php echo $context->city ?></span>
+                        <?php endif; ?>
+                        <?php if (!empty($context->state)): ?>
+                            <?php echo $savvy->render($context->state, 'Peoplefinder/Record/Region.tpl.php') ?>
+                        <?php endif; ?>
+                        <?php if (!empty($context->postal_code)): ?>
+                            <span class="postal-code" itemprop="postalCode"><?php echo $context->postal_code ?></span>
+                        <?php endif; ?>
+                        <div class="country-name" itemprop="addressCountry">US</div>
+                    </div>
                 </div>
             <?php endif; ?>
 
@@ -88,24 +90,24 @@ $onlySummary = $context->isSummaryView();
             </div>
             <?php endif; ?>
             <?php if ($encodedEmail): ?>
-            <div class="icon-email itemprop">
+            <div class="icon-email attribute">
                    <a class="email" href="mailto:<?php echo $encodedEmail ?>" itemprop="email"><?php echo $encodedEmail ?></a>
             </div>
             <?php endif; ?>
 
             <?php if (!empty($context->website)): ?>
-            <div class="icon-website itemprop">
+            <div class="icon-website attribute">
                 <a class="url" href="<?php echo $context->website; ?>"><?php echo $context->website; ?></a>
             </div>
             <?php endif; ?>
 
             <?php if ($context->isOfficialDepartment()): ?>
-                <div class="icon-hierarchy itemprop">
-                    <?php echo $context->org_unit ?>
+                <div class="icon-hierarchy attribute">
+                    Unit #<?php echo $context->org_unit ?>
                 </div>
             <?php endif; ?>
 
-            <?php if ($userCanEdit): ?>
+            <?php if (!$onlySummary && $userCanEdit): ?>
                 <div class="vcard-tools">
                     <a href="<?php echo $context->getURL() . '/edit' ?>" class="icon-pencil">Edit</a>
                     <?php if ($userCanDelete): ?>

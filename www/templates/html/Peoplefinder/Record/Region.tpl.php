@@ -1,5 +1,5 @@
 <?php if ($context == 'NE'): ?>
-	<abbr class="region" title="Nebraska"><?php echo $context ?></abbr>
+	<abbr class="region" title="Nebraska" itemprop="addressRegion"><?php echo $context ?></abbr>
 <?php else: ?>
-	<span class="region"><?php echo $context ?></span>
+	<span class="region" itemprop="addressRegion"><?php echo $context ?></span>
 <?php endif; ?>
