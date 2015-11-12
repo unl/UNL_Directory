@@ -80,7 +80,7 @@
 		padding: 0 1.425rem 1.777em;
 
 		> *:last-child,
-		> .itemprop:last-child {
+		> .attribute:last-child {
 			margin-bottom: 0;
 		}
 
@@ -195,6 +195,17 @@
 
 .results-container {
 	display: none !important;
+
+	&.empty-filters {
+		#filters,
+		.summary {
+			display: none;
+		}
+
+		#results {
+			width: 100%;
+		}
+	}
 
 	.searching & {
 		display: block !important;
@@ -338,7 +349,7 @@
 			}
 		}
 
-		.itemprop {
+		.attribute {
 			.sans-serif-font();
 			font-size: 0.887rem;
 			padding-left: 1.7em;
@@ -357,11 +368,11 @@
 		.adr {
 			.type {
 				display: none;
-			}
 
-			:nth-child(2) {
-				margin-top: -1.8em;
-				display: block;
+				+ * {
+					margin-top: -1.8em;
+					display: block;
+				}
 			}
 
 			.street-address {
@@ -557,6 +568,12 @@
 #listings {
 	margin: 1em @inner-band-margin;
 
+	h2 {
+		background-color: #FFFFCC;
+		margin: 0;
+		padding: 1em 1.899rem 1rem;
+	}
+
 	@media @bp2 {
 		margin: 0;
 	}
@@ -618,7 +635,10 @@
 
 	.phone,
 	.website,
-	.email {
+	.email,
+	.room,
+	.adr,
+	.postal-code {
 		display: block;
 	}
 }
@@ -665,6 +685,22 @@
 		.icon-trash {
 			margin: 1em 0;
 		}
+
+		.forms {
+			.add-form {
+				display: none;
+			}
+
+			&.show-add {
+				> * {
+					display: none;
+				}
+
+				.add-form {
+					display: block;
+				}
+			}
+		}
 	}
 }
 
@@ -676,11 +712,18 @@
 		padding: 0;
 
 		li {
-
+			margin-bottom: 0.618rem;
 		}
 
 		&:before {
 			font-size: 1.435em;
 		}
+	}
+
+	.org-unit {
+		display: block;
+		font-style: italic;
+		font-size: 0.786em;
+		color: @ui10;
 	}
 }
