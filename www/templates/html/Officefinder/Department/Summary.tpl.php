@@ -39,7 +39,7 @@ $onlySummary = $context->isSummaryView();
             <?php endif; ?>
 
             <?php if (!$context->isOfficialDepartment()): ?>
-                 <div class="title" itemprop="parentOrganization" itemscope itemtype="http://schema.org/Organization"><span itemprop="name"><?php echo $parent->name ?></span></div>
+                 <div class="title" itemprop="parentOrganization" itemscope itemtype="http://schema.org/Organization"><a href="<?php echo $parent->getURL() ?>"><span itemprop="name"><?php echo $parent->name ?></span></a></div>
             <?php endif; ?>
 
             <?php if ($context->hasAddress()): ?>
