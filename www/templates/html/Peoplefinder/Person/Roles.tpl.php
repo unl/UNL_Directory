@@ -16,7 +16,9 @@
     }
     ?>
     <li class="org parent-<?php echo $parentClass ?>">
-        <span class="title" itemprop="jobTitle"><?php echo $role->description ?></span>
+        <?php if (isset($role->description)): ?>
+            <span class="title" itemprop="jobTitle"><?php echo $role->description ?></span>
+        <?php endif; ?>
         <span itemprop="worksFor" itemscope itemtype="http://schema.org/Organization">
             <span class="organization-unit">
                 <?php if ($renderLinks): ?>
