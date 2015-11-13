@@ -690,11 +690,14 @@
 	&.show {
 		visibility: visible;
 		opacity: 1;
+		transition: opacity 400ms, visibility 0s;
 	}
 
 	.modal-content {
-		width: 70%;
-		padding: 8% 7.1%;
+		width: 90%;
+		max-width: 780px;
+		max-height: 70vh;
+		padding: 0 7.1%;
 		background-color: #FFF;
 		position: relative;
 		overflow-y: auto;
@@ -702,14 +705,20 @@
 		margin: auto;
 		box-shadow: 0 0 1px 1px fadeout(@ui14, 80%);
 
-		.icon-close {
+		&:focus {
+			outline: 0;
+		}
+
+		.wdn-icon-cancel {
 		    display: block;
 		    position: absolute;
 		    top: 1em;
 		    right: 0.618em;
-		    width: 1em;
-		    height: 1em;
 		    border: 0px none;
+
+		    &:before {
+		    	margin: 0;
+		    }
 		}
 
 		.icon-trash {
@@ -717,6 +726,8 @@
 		}
 
 		.forms {
+			margin: 8% 0;
+
 			.add-form {
 				display: none;
 			}

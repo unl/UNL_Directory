@@ -596,7 +596,7 @@ define([
 		var $oldForm;
 
 		if (!$modalClose) {
-			$modalClose = $('<button>', {"class": 'icon-close'})
+			$modalClose = $('<button>', {"class": 'wdn-icon-cancel'})
 				.click(function() {
 					closeModalAndRestoreContent();
 				})
