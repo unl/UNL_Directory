@@ -22,7 +22,7 @@ class UNL_Officefinder_DepartmentList_OrgUnitSearch extends UNL_Officefinder_Dep
         $query = (int)$this->options['q'];
 
         $mysqli = UNL_Officefinder::getDB();
-        $sql = 'SELECT id FROM departments
+        $sql = 'SELECT id, name FROM departments
                 WHERE org_unit = '.$query.'
                 ORDER BY name';
         return $sql;

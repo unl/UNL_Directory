@@ -8,7 +8,7 @@ class UNL_Officefinder_DepartmentList_BuildingSearch extends UNL_Officefinder_De
         $this->options = $options + $this->options;
         $records = array();
         $mysqli = UNL_Officefinder::getDB();
-        $sql = 'SELECT DISTINCT d1.id
+        $sql = 'SELECT DISTINCT d1.id, d1.name
                 FROM departments d1 ';
         if ((bool)$this->options['parent_orgs'] === true) {
             // Preorder Tree model

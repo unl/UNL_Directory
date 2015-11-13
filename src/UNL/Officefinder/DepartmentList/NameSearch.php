@@ -27,7 +27,7 @@ class UNL_Officefinder_DepartmentList_NameSearch extends UNL_Officefinder_Depart
         $query = preg_replace('/(\w+)\s+(\w+)/', '$1% $2', $query);
 
         $mysqli = UNL_Officefinder::getDB();
-        $sql = 'SELECT DISTINCT d1.id
+        $sql = 'SELECT DISTINCT d1.id, d1.name
                 FROM departments d1 ';
         if ((bool)$this->options['parent_orgs'] === true) {
             // Preorder Tree model
