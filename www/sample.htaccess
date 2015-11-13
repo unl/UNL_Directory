@@ -26,7 +26,7 @@ RewriteRule ^departments/([\d]+)/summary$ index.php?view=deptsummary&id=$1 [QSA]
 RewriteRule ^departments/tree$ index.php?view=tree [QSA]
 RewriteRule ^departments/academic$ index.php?view=academicdepts [QSA]
 RewriteRule ^departments/yellow-pages$ index.php?view=alphalisting [QSA]
-RewriteRule ^departments/editor index.php?view=mydepts
+RewriteRule ^departments/editor index.php?view=mydepts [QSA]
 RewriteRule ^departments/$ index.php [QSA]
 
 # Faculty page
