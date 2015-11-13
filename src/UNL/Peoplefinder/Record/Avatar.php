@@ -2,8 +2,6 @@
 
 class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, UNL_Peoplefinder_Routable
 {
-    const PLANETRED_BASE_URL = UNL_Peoplefinder_Record::PLANETRED_BASE_URL . 'icon/';
-
     const GRAVATAR_BASE_URL = 'https://secure.gravatar.com/avatar/';
 
     const CAMPUS_MAPS_BASE_URL = 'https://maps.unl.edu/';
@@ -146,7 +144,7 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
         }
 
         $planetRedUid = $this->record->getProfileUid();
-        $profileIconUrl = self::PLANETRED_BASE_URL . 'unl_' . $planetRedUid . '/' . $size . '/';
+        $profileIconUrl = UNL_Peoplefinder_Record::PLANETRED_BASE_URL . 'icon/' . 'unl_' . $planetRedUid . '/' . $size . '/';
 
         $request = new HTTP_Request2($profileIconUrl, HTTP_Request2::METHOD_HEAD);
         $response = $request->send();
