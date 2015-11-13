@@ -450,6 +450,8 @@ define([
 			var preferredName = $vcard.data('preferred-name');
 
 			loadOnlyRecord(uid, preferredName, $vcard);
+			window.print();
+			e.preventDefault();
 		});
 
 		$container.on('click', '.icon-qr-code', function() {
@@ -997,7 +999,7 @@ define([
 
 				// listen for print button clicks
 				$(document).on('click', 'button.icon-print', function(e) {
-					setTimeout(window.print, 250);
+					setTimeout(window.print, 10);
 					e.preventDefault();
 				});
 
