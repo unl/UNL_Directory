@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1cac7003afcca3023f243fa754225c4d",
-    "content-hash": "7dd04e3ca8f025fe96416e7acd3cec53",
+    "hash": "c742f428186cea8ce9911b6361f87955",
+    "content-hash": "d7a32c777c125075ebfd85be2af8b008",
     "packages": [
         {
             "name": "pear-pear.php.net/Archive_Tar",
@@ -249,33 +249,6 @@
                 "issues": "https://github.com/saltybeagle/Savvy/issues"
             },
             "time": "2015-08-25 15:57:26"
-        },
-        {
-            "name": "saltybeagle/savvy_turbo",
-            "version": "v0.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/saltybeagle/Savvy_Turbo.git",
-                "reference": "f613c2774cf3822f836b41407af798e04c682acf"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/saltybeagle/Savvy_Turbo/zipball/f613c2774cf3822f836b41407af798e04c682acf",
-                "reference": "f613c2774cf3822f836b41407af798e04c682acf",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Savvy_Turbo": "src/"
-                }
-            },
-            "description": "a simple caching library for Savvy",
-            "support": {
-                "source": "https://github.com/saltybeagle/Savvy_Turbo/tree/v0.1.1",
-                "issues": "https://github.com/saltybeagle/Savvy_Turbo/issues"
-            },
-            "time": "2014-04-30 21:38:24"
         },
         {
             "name": "simple-cas/simple-cas",
