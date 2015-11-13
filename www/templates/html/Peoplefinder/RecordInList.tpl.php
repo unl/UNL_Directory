@@ -10,7 +10,7 @@ if ($context->ou == 'org') {
     $name = $context->sn . ',&nbsp;'. $preferredFirstName;
     if (!empty($context->eduPersonNickname)
         && $context->eduPersonNickname != ' ') {
-        $name .= ' <span class="givenName">'.$context->givenName.'</span>';
+        $name .= ' <span class="given-name">'.$context->givenName.'</span>';
     }
 }
 $class .= ' '.$context->eduPersonPrimaryAffiliation;
