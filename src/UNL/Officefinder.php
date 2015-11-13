@@ -119,6 +119,9 @@ class UNL_Officefinder
                 'hostname' => 'login.unl.edu',
                 'port' => 443,
                 'uri' => 'cas',
+                'request' => new HTTP_Request2(null, null, [
+                    'adapter' => 'HTTP_Request2_Adapter_Curl'
+                ]),
             ]);
             $cacheDriver = new \Stash\Driver\FileSystem();
             $cacheDriver->setOptions([
