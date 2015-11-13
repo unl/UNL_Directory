@@ -146,7 +146,9 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
         $planetRedUid = $this->record->getProfileUid();
         $profileIconUrl = UNL_Peoplefinder_Record::PLANETRED_BASE_URL . 'icon/' . 'unl_' . $planetRedUid . '/' . $size . '/';
 
-        $request = new HTTP_Request2($profileIconUrl, HTTP_Request2::METHOD_HEAD);
+        $request = new HTTP_Request2($profileIconUrl, HTTP_Request2::METHOD_HEAD, [
+            'adapter' => 'HTTP_Request2_Adapter_Curl',
+        ]);
         $response = $request->send();
 
         if ($response->getStatus() == 200) {
