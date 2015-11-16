@@ -70,6 +70,18 @@ $showKnowledge = $context->shouldShowKnowledge();
         <div class="eppa">(<?php echo $affiliations ?>)</div>
     <?php endif; ?>
 
+    <?php if (isset($context->unlHROrgUnitNumber)): ?>
+        <?php
+        $roles = $context->getRoles();
+        $title = $context->formatTitle();
+        ?>
+        <?php if (count($roles)): ?>
+            <?php echo $savvy->render($roles) ?>
+        <?php elseif ($title): ?>
+            <div class="title" itemprop="jobTitle"><?php echo $title ?></div>
+        <?php endif; ?>
+    <?php endif ?>
+
     <?php if ($context->hasStudentInformation()): ?>
         <div class="sis-title">
         <?php if (isset($context->unlSISClassLevel)): ?>
@@ -105,18 +117,6 @@ $showKnowledge = $context->shouldShowKnowledge();
             <?php endforeach; ?>
         </div>
     <?php endif; ?>
-
-    <?php if (isset($context->unlHROrgUnitNumber)): ?>
-        <?php
-        $roles = $context->getRoles();
-        $title = $context->formatTitle();
-        ?>
-        <?php if (count($roles)): ?>
-            <?php echo $savvy->render($roles) ?>
-        <?php elseif ($title): ?>
-            <div class="title" itemprop="jobTitle"><?php echo $title ?></div>
-        <?php endif; ?>
-    <?php endif ?>
 
     <?php if (($address = $context->formatPostalAddress()) && count($address)): ?>
         <div class="adr work attribute icon-map-pin" itemprop="workLocation" itemscope itemtype="http://schema.org/Place">
