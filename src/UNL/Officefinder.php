@@ -81,7 +81,7 @@ class UNL_Officefinder
         self::checkLogout();
 
         if (isset($_COOKIE['unl_sso'])) {
-            if (in_array($this->options['format'], ['html', 'partial'])) {
+            if (in_array($this->options['format'], ['html'])) {
                 self::authenticate(true);
             }
         }
