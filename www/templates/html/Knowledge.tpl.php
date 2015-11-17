@@ -19,7 +19,7 @@
         <ul class="directory-knowledge-section-inner">
             <?php foreach ($context->education as $degree) { ?>
                 <li class="directory-knowledge-item">
-                    <?php echo $degree['EDUCATION']['DEG']; ?> <?php echo $degree['EDUCATION']['YR_COMP']; ?> <?php echo $degree['EDUCATION']['SCHOOL']; ?>
+                    <?php echo is_string($degree['EDUCATION']['DEG']) ? $degree['EDUCATION']['DEG'] . ',' : ''; ?> <?php echo is_string($degree['EDUCATION']['SCHOOL']) ? $degree['EDUCATION']['SCHOOL'] . ',' : ''; ?> <?php echo is_string($degree['EDUCATION']['YR_COMP']) ? $degree['EDUCATION']['YR_COMP'] : ''; ?>
                 </li>
             <?php } ?>
         </ul>
@@ -32,7 +32,7 @@
         <ul class="directory-knowledge-section-inner">
             <?php foreach ($context->courses as $course) { ?>
                 <li class="directory-knowledge-item">
-                    <?php echo $course['SCHTEACH']['COURSEPRE']; ?> <?php echo $course['SCHTEACH']['COURSENUM']; ?> (<?php echo $course['SCHTEACH']['TYT_TERM']; ?> <?php echo $course['SCHTEACH']['TYY_TERM']; ?>): <?php echo $course['SCHTEACH']['TITLE']; ?>
+                    <?php echo is_string($course['SCHTEACH']['COURSEPRE']) ? $course['SCHTEACH']['COURSEPRE'] : ''; ?> <?php echo is_string($course['SCHTEACH']['COURSENUM']) ? $course['SCHTEACH']['COURSENUM'] . ',' : ''; ?> <?php echo is_string($course['SCHTEACH']['TITLE']) ? $course['SCHTEACH']['TITLE'] . ',' : ''; ?> <?php echo is_string($course['SCHTEACH']['TYT_TERM']) ? $course['SCHTEACH']['TYT_TERM'] : ''; ?> <?php echo is_string($course['SCHTEACH']['TYY_TERM']) ? $course['SCHTEACH']['TYY_TERM'] : ''; ?>
                 </li>
             <?php } ?>
         </ul>
@@ -45,7 +45,7 @@
         <ul class="directory-knowledge-section-inner">
             <?php foreach ($context->papers as $paper) { ?>
                 <li class="directory-knowledge-item">
-                    <?php echo $paper['INTELLCONT']['TITLE']; ?>
+                    <?php echo is_string($paper['INTELLCONT']['TITLE']) ? $paper['INTELLCONT']['TITLE'] . ',' : '' ; ?> <?php echo is_string($paper['INTELLCONT']['JOURNAL_NAME']) ? $paper['INTELLCONT']['JOURNAL_NAME'] . ',' : ''; ?> <?php echo is_string($paper['INTELLCONT']['BOOK_TITLE']) ? $paper['INTELLCONT']['BOOK_TITLE'] . ',' : ''; ?> <?php echo is_string($paper['INTELLCONT']['DTM_PUB']) ? explode(' ', $paper['INTELLCONT']['DTM_PUB'])[0] : ''; ?> <?php echo is_string($paper['INTELLCONT']['DTY_PUB']) ? $paper['INTELLCONT']['DTY_PUB'] : ''; ?>
                 </li>
             <?php } ?>
         </ul>
@@ -99,7 +99,7 @@
         <ul class="directory-knowledge-section-inner">
             <?php foreach ($context->honors as $honor) { ?>
                 <li class="directory-knowledge-item">
-                    <?php echo $honor['AWARDHONOR']['NAME']; ?> &ndash; <em><?php echo $honor['AWARDHONOR']['ORG']; ?></em>
+                    <?php echo $honor['AWARDHONOR']['NAME']; ?> &ndash; <em><?php echo $honor['AWARDHONOR']['ORG']; ?></em>, <?php echo $honor['AWARDHONOR']['DTY_DATE']; ?>
                 </li>
             <?php } ?>
         </ul>
