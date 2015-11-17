@@ -6,6 +6,8 @@ class UNL_Peoplefinder_Person
 
     public $knowledge;
 
+    public $options = [];
+
     function __construct($options = array())
     {
         if (isset($options['uid'])
@@ -17,5 +19,7 @@ class UNL_Peoplefinder_Person
             $this->knowledge = new UNL_Knowledge();
             $this->knowledge = $this->knowledge->getRecords($options['uid']);
         }
+
+        $this->options = $options;
     }
 }
