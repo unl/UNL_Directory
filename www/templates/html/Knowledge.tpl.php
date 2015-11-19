@@ -2,6 +2,16 @@
     <?php echo $context->error; ?>
 <?php } ?>
 
+<?php 
+    function getKey($item, $section, $tag) {
+        if (is_array($item) && is_array($item[$section]) && array_key_exists($tag, $item[$section]) && (is_string($item[$section][$tag]) || is_numeric($item[$section][$tag]))) {
+            return $item[$section][$tag];
+        } else {
+            return FALSE;
+        }
+    }
+?>
+
 <?php try { ?>
     <?php if (is_string($context->bio)) { ?>
       <div class="directory-knowledge-section directory-knowledge-section-bio">
@@ -19,7 +29,14 @@
         <ul class="directory-knowledge-section-inner">
             <?php foreach ($context->education as $degree) { ?>
                 <li class="directory-knowledge-item">
-                    <?php echo is_string($degree['EDUCATION']['DEG']) ? $degree['EDUCATION']['DEG'] . ',' : ''; ?> <?php echo is_string($degree['EDUCATION']['SCHOOL']) ? $degree['EDUCATION']['SCHOOL'] . ',' : ''; ?> <?php echo is_string($degree['EDUCATION']['YR_COMP']) ? $degree['EDUCATION']['YR_COMP'] : ''; ?>
+                    <?php 
+                        $deg = array(
+                            getKey($degree, 'EDUCATION', 'DEG'),
+                            getKey($degree, 'EDUCATION', 'SCHOOL'),
+                            getKey($degree, 'EDUCATION', 'YR_COMP')
+                        );
+                        echo implode(', ', array_filter($deg));
+                    ?>
                 </li>
             <?php } ?>
         </ul>
@@ -32,7 +49,17 @@
         <ul class="directory-knowledge-section-inner">
             <?php foreach ($context->courses as $course) { ?>
                 <li class="directory-knowledge-item">
-                    <?php echo is_string($course['SCHTEACH']['COURSEPRE']) ? $course['SCHTEACH']['COURSEPRE'] : ''; ?> <?php echo is_string($course['SCHTEACH']['COURSENUM']) ? $course['SCHTEACH']['COURSENUM'] . ',' : ''; ?> <?php echo is_string($course['SCHTEACH']['TITLE']) ? $course['SCHTEACH']['TITLE'] . ',' : ''; ?> <?php echo is_string($course['SCHTEACH']['TYT_TERM']) ? $course['SCHTEACH']['TYT_TERM'] : ''; ?> <?php echo is_string($course['SCHTEACH']['TYY_TERM']) ? $course['SCHTEACH']['TYY_TERM'] : ''; ?>
+                    <?php
+                        $course_nums = getKey($course, 'SCHTEACH', 'COURSEPRE') == FALSE && getKey($course, 'SCHTEACH', 'COURSENUM') == FALSE ? FALSE : getKey($course, 'SCHTEACH', 'COURSEPRE') . ' ' . getKey($course, 'SCHTEACH', 'COURSENUM');
+                        $course_date = getKey($course, 'SCHTEACH', 'TYT_TERM') == FALSE && getKey($course, 'SCHTEACH', 'TYY_TERM') == FALSE ? FALSE : getKey($course, 'SCHTEACH', 'TYT_TERM') . ' ' . getKey($course, 'SCHTEACH', 'TYY_TERM');
+
+                        $cou = array(
+                            $course_nums,
+                            getKey($course, 'SCHTEACH', 'TITLE'),
+                            $course_date
+                        );
+                        echo implode(', ', array_filter($cou));
+                    ?>
                 </li>
             <?php } ?>
         </ul>
@@ -45,7 +72,17 @@
         <ul class="directory-knowledge-section-inner">
             <?php foreach ($context->papers as $paper) { ?>
                 <li class="directory-knowledge-item">
-                    <?php echo is_string($paper['INTELLCONT']['TITLE']) ? $paper['INTELLCONT']['TITLE'] . ',' : '' ; ?> <?php echo is_string($paper['INTELLCONT']['JOURNAL_NAME']) ? $paper['INTELLCONT']['JOURNAL_NAME'] . ',' : ''; ?> <?php echo is_string($paper['INTELLCONT']['BOOK_TITLE']) ? $paper['INTELLCONT']['BOOK_TITLE'] . ',' : ''; ?> <?php echo is_string($paper['INTELLCONT']['DTM_PUB']) ? explode(' ', $paper['INTELLCONT']['DTM_PUB'])[0] : ''; ?> <?php echo is_string($paper['INTELLCONT']['DTY_PUB']) ? $paper['INTELLCONT']['DTY_PUB'] : ''; ?>
+                    <?php
+                        $date = getKey($paper, 'INTELLCONT', 'DTM_PUB') == FALSE && getKey($paper, 'INTELLCONT', 'DTY_PUB') == FALSE ? FALSE : getKey($paper, 'INTELLCONT', 'DTM_PUB') . ' ' . getKey($paper, 'INTELLCONT', 'DTY_PUB');
+
+                        $pap = array(
+                            getKey($paper, 'INTELLCONT', 'TITLE'),
+                            getKey($paper, 'INTELLCONT', 'JOURNAL_NAME'),
+                            getKey($paper, 'INTELLCONT', 'BOOK_TITLE'),
+                            $date
+                        );
+                        echo implode(', ', array_filter($pap));
+                    ?>
                 </li>
             <?php } ?>
         </ul>
@@ -59,7 +96,17 @@
             <?php foreach ($context->grants as $grant) { ;?>
                 <?php if ($grant['CONGRANT']['STATUS'] != 'Declined') { ?>
                     <li class="directory-knowledge-item">
-                        <?php echo $grant['CONGRANT']['TITLE']; ?>
+                        <?php
+                            $date = getKey($grant, 'CONGRANT', 'DTM_START') == FALSE && getKey($grant, 'CONGRANT', 'DTY_START') == FALSE ? FALSE : getKey($grant, 'CONGRANT', 'DTM_START') . ' ' . getKey($grant, 'CONGRANT', 'DTY_START');
+
+                            $gran = array(
+                                getKey($grant, 'CONGRANT', 'TITLE'),
+                                getKey($grant, 'CONGRANT', 'SPONORG'),
+                                getKey($grant, 'CONGRANT', 'CONGRANT_INVEST')[0]['ROLE'],
+                                $date
+                            );
+                            echo implode(', ', array_filter($gran));
+                        ?>
                     </li>
                 <?php } ?>
             <?php } ?>
@@ -73,7 +120,16 @@
         <ul class="directory-knowledge-section-inner">
             <?php foreach ($context->performances as $performance) { ?>
                 <li class="directory-knowledge-item">
-                    <?php echo $performance['PERFORM_EXHIBIT']['TITLE']; ?> &ndash; <em><?php echo $performance['PERFORM_EXHIBIT']['LOCATION']; ?></em> &ndash; <?php echo $performance['PERFORM_EXHIBIT']['DTM_START']; ?> <?php echo $performance['PERFORM_EXHIBIT']['DTD_START']; ?>, <?php echo $performance['PERFORM_EXHIBIT']['DTY_START']; ?>
+                    <?php
+                        $date = getKey($performance, 'PERFORM_EXHIBIT', 'DTM_START') == FALSE && getKey($performance, 'PERFORM_EXHIBIT', 'DTY_START') == FALSE ? FALSE : getKey($performance, 'PERFORM_EXHIBIT', 'DTM_START') . ' ' . getKey($performance, 'PERFORM_EXHIBIT', 'DTY_START');
+
+                        $perf = array(
+                            getKey($performance, 'PERFORM_EXHIBIT', 'TITLE'),
+                            getKey($performance, 'PERFORM_EXHIBIT', 'LOCATION'),
+                            $date
+                        );
+                        echo implode(', ', array_filter($perf));
+                    ?>
                 </li>
             <?php } ?>
         </ul>
@@ -86,7 +142,17 @@
         <ul class="directory-knowledge-section-inner">
             <?php foreach ($context->presentations as $presentation) { ?>
                 <li class="directory-knowledge-item">
-                    <?php echo $presentation['PRESENT']['TITLE']; ?> &ndash; <em><?php echo $presentation['PRESENT']['ORG']; ?>, <?php echo $presentation['PRESENT']['LOCATION']; ?></em> &ndash; <?php echo $presentation['PRESENT']['DTM_DATE']; ?> <?php echo $presentation['PRESENT']['DTD_DATE']; ?>, <?php echo $presentation['PRESENT']['DTY_DATE']; ?>
+                    <?php
+                        $date = getKey($presentation, 'PRESENT', 'DTM_START') == FALSE && getKey($presentation, 'PRESENT', 'DTY_START') == FALSE ? FALSE : getKey($presentation, 'PRESENT', 'DTM_START') . ' ' . getKey($presentation, 'PRESENT', 'DTY_START');
+
+                        $pres = array(
+                            getKey($presentation, 'PRESENT', 'TITLE'),
+                            getKey($presentation, 'PRESENT', 'ORG'),
+                            getKey($presentation, 'PRESENT', 'LOCATION'),
+                            $date
+                        );
+                        echo implode(', ', array_filter($pres));
+                    ?>
                 </li>
             <?php } ?>
         </ul>
@@ -99,7 +165,15 @@
         <ul class="directory-knowledge-section-inner">
             <?php foreach ($context->honors as $honor) { ?>
                 <li class="directory-knowledge-item">
-                    <?php echo $honor['AWARDHONOR']['NAME']; ?> &ndash; <em><?php echo $honor['AWARDHONOR']['ORG']; ?></em>, <?php echo $honor['AWARDHONOR']['DTY_DATE']; ?>
+                    <?php
+                        $award = array(
+                            getKey($honor, 'AWARDHONOR', 'NAME'),
+                            getKey($honor, 'AWARDHONOR', 'ORG'),
+                            getKey($honor, 'AWARDHONOR', 'DTY_DATE'),
+                            $date
+                        );
+                        echo implode(', ', array_filter($award));
+                    ?>
                 </li>
             <?php } ?>
         </ul>
