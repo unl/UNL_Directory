@@ -79,6 +79,16 @@ class UNL_Peoplefinder_Record
         return $bldgs;
     }
 
+    function getUNLBuildingCode()
+    {
+        $formatted = $this->formatPostalAddress();
+        if (array_key_exists('unlBuildingCode', $formatted)) {
+            return $formatted['unlBuildingCode'];
+        } else {
+            return FALSE;
+        }
+    }
+
     /**
      * Takes in a string from the LDAP directory, usually formatted like:
      *    ___ ###, UNL, 68588-####
