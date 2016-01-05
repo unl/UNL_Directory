@@ -2,8 +2,7 @@
 
 use UNL\Templates\Templates;
 
-
-
+Templates::setCachingService(new UNL\Templates\CachingService\NullService());
 $page = Templates::factory('Fixed', Templates::VERSION_4_1);
 $wdnIncludePath = dirname(dirname(__DIR__));
 
