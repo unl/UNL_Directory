@@ -172,6 +172,16 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
         return (isset($this->options['format']) && $this->options['format'] === 'hcard');
     }
 
+    function getUNLBuildingCode()
+    {
+        $formatted = $this->formatPostalAddress();
+        if (isset($formatted['unlBuildingCode'])) {
+            return $formatted['unlBuildingCode'];
+        } else {
+            return false;
+        }
+    }
+
     /**
      * Takes in a string from the LDAP directory, usually formatted like:
      *    ___ ###, UNL, 68588-####
