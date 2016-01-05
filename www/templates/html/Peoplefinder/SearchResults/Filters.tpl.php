@@ -7,7 +7,7 @@
     <div class="filters" aria-controls="results">
         <div class="affiliation">
             <button aria-controls="filters_affiliation">By Affiliation <span class="toggle">(Expand)</span></button>
-            <div class="filter-options" id="filters_affiliation" data="" role="region" tabindex="-1" aria-expanded="false" aria-live="polite"></div>
+            <div class="filter-options" id="filters_affiliation" role="region" tabindex="-1" aria-expanded="false" aria-live="polite"></div>
         </div>
         <div class="department">
             <button aria-controls="filters_department">By Department <span class="toggle">(Expand)</span></button>
