@@ -365,16 +365,16 @@
         },
         {
             "name": "unl/php-dwt-parser",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/unl/phpdwtparser.git",
-                "reference": "0b49f94c19fb21299fe768ada2ac64989b7c6fbb"
+                "reference": "1de8770c4d8675771d1529c2f81d96e0aa51931f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/unl/phpdwtparser/zipball/0b49f94c19fb21299fe768ada2ac64989b7c6fbb",
-                "reference": "0b49f94c19fb21299fe768ada2ac64989b7c6fbb",
+                "url": "https://api.github.com/repos/unl/phpdwtparser/zipball/1de8770c4d8675771d1529c2f81d96e0aa51931f",
+                "reference": "1de8770c4d8675771d1529c2f81d96e0aa51931f",
                 "shasum": ""
             },
             "require": {
@@ -412,7 +412,7 @@
             ],
             "description": "A PHP library for parsing DWT files and turning them into PHP classes",
             "homepage": "http://wdn.unl.edu/",
-            "time": "2015-12-14 23:51:40"
+            "time": "2016-01-05 21:35:46"
         },
         {
             "name": "unl/php-wdn-templates",
