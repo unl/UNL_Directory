@@ -23,8 +23,6 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
 
     public static $cache_length = 900; //default to 15 minutes
 
-    protected $recordsMap;
-
     public function __construct($options = array())
     {
         if (isset($options['service_url'])) {
@@ -36,17 +34,6 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
             'memcache_port' => self::$memcache_port,
             'fast_lifetime' => self::$cache_length,
         ]);
-
-        $this->recordsMap = [
-            'bio' => 'BIO',
-            'courses' => 'SCHTEACH',
-            'education' => 'EDUCATION',
-            'grants' => 'CONGRANT',
-            'honors' => 'AWARDHONOR',
-            'papers' => 'INTELLCONT',
-            'presentations' => 'PRESENT',
-            'performances' => 'PERFORM_EXHIBIT',
-        ];
     }
 
     protected function getFromCache($key)
@@ -128,7 +115,7 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
 
         if ($data) {
             $records = new UNL_Knowledge_Records();
-            foreach ($this->recordsMap as $var => $dataKey) {
+            foreach ($records->getRecordsMap() as $var => $dataKey) {
                 if (isset($data[$dataKey])) {
                     $records->$var = $this->cleanRecords($data[$dataKey]);
                 }
