@@ -63,6 +63,7 @@ $hasOfficialChildDepartments = count($officialChildren);
 							    <input type="hidden" name="_type" value="sort_departments" />
 							    <input type="hidden" name="department_id" value="<?php echo $context->id; ?>" />
 							    <input type="hidden" name="sort_json" value="" />
+							    <input type="submit" value="Save order" />
 							</form>
 						</div>
 					</div>

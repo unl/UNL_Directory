@@ -14,10 +14,7 @@ $savvy->addGlobal('page', $page);
 
 $page->doctitle = '<title>Directory | University of Nebraska–Lincoln</title>';
 $page->titlegraphic = 'Directory';
-
-$classes = ['hide-navigation', 'hide-breadcrumbs', 'hide-wdn_footer_related'];
-
-$page->setParam('class', implode(' ', $classes));
+$page->setParam('class', implode(' ', ['hide-navigation', 'hide-breadcrumbs', 'hide-wdn_footer_related']));
 
 $page->head .= $savvy->render(null, 'static/head.tpl.php');
 

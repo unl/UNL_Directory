@@ -2,7 +2,7 @@
     <input type="hidden" name="_type" value="add_dept_user" />
     <input type="hidden" name="department_id" value="<?php echo $context->id; ?>" />
     <div class="wdn-input-group">
-    	<input type="text" name="uid" />
+        <input type="text" name="uid" aria-label="Editor username" />
     	<span class="wdn-input-group-btn">
     		<input type="submit" value="Add" />
     	</span>

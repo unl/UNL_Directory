@@ -38,7 +38,7 @@ if (!empty($context->email)) {
 
     <?php if ($userCanEdit): ?>
         <div class="tools">
-            <a href="<?php echo $context->getURL() . '/edit' ?>" class="wdn-button wdn-button-triad icon-pencil"></a>
+            <a href="<?php echo $context->getURL() . '/edit' ?>" class="wdn-button wdn-button-triad icon-pencil"><span class="wdn-text-hidden">edit listing for <?php echo $context->name ?></span></a>
             <div class="forms" data-listing-id="<?php echo $context->id ?>">
                 <a class="wdn-button wdn-button-triad listing-add" href="<?php echo $context->getNewChildURL() ?>">Add<span class="wdn-text-hidden"> a new child listing</span></a>
                 <div class="form"></div>
