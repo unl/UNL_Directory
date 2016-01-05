@@ -10,7 +10,7 @@ if (isset($page)) {
 <section class="wdn-band wdn-light-neutral-band" id="data">
     <div class="wdn-inner-wrapper">
         <h1 class="wdn-center clear-top">Finding Your Way Around the UNL Directory</h1>
-        <div class="bp2-wdn-grid-set-halves">
+        <div class="bp960-wdn-grid-set-thirds">
             <div class="wdn-col">
                 <h2 class="wdn-brand">About the data</h2>
                 <p>
@@ -58,9 +58,7 @@ if (isset($page)) {
                     For <em>department (yellow pages) listings</em>, authorized users can make modifications by emailing <a href="mailto:operator&commat;unl&period;edu">operator&commat;unl&period;edu</a> with the directory URL of the listing and the information you'd like to update.
                 </p>
             </div>
-        </div>
-        <div class="bp2-wdn-grid-set-halves">
-            <div class="wdn-col centered">
+            <div class="wdn-col">
                 <h2 class="wdn-brand" id="photo">Adding your photo</h2>
                 <p>
                     <img class="frame" src="<?php echo $baseUrl ?>images/130912_Herbie_104.jpg" alt="Profile view of mascot Herbie Husker" />

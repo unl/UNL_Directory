@@ -1,9 +1,16 @@
 <?php
 
-UNL_Templates::setCachingService(new UNL_Templates_CachingService_Null());
-UNL_Templates::$options['version'] = 4.0;
+use UNL\Templates\Templates;
 
-$page = UNL_Templates::factory('Fixed');
+
+
+$page = Templates::factory('Fixed', Templates::VERSION_4_1);
+$wdnIncludePath = dirname(dirname(__DIR__));
+
+if (file_exists($wdnIncludePath . '/wdn/templates_4.1')) {
+    $page->setLocalIncludePath($wdnIncludePath);
+}
+
 $savvy->addGlobal('page', $page);
 
 $page->doctitle = '<title>Directory | University of Nebraska–Lincoln</title>';
@@ -11,7 +18,7 @@ $page->titlegraphic = 'Directory';
 
 $classes = ['hide-navigation', 'hide-breadcrumbs', 'hide-wdn_footer_related'];
 
-$page->__params['class']['value'] = implode(' ', $classes);
+$page->setParam('class', implode(' ', $classes));
 
 $page->head .= $savvy->render(null, 'static/head.tpl.php');
 
@@ -21,6 +28,7 @@ if (isset($context->options['q']) || isset($context->options['cn']) || isset($co
 }
 
 $page->breadcrumbs = $savvy->render(null, 'static/breadcrumbs.tpl.php');
+$page->affiliation = '';
 $page->navlinks = '';
 $page->pagetitle = '';
 $page->leftcollinks = '';
@@ -44,8 +52,6 @@ $savvy->removeGlobal('page');
 // add entry-point scripts
 $page->maincontentarea .= $savvy->render(null, 'static/after-main.tpl.php');
 $page->contactinfo = $savvy->render(null, 'static/contact-info.tpl.php');
-$page->optionalfooter = $savvy->render(null, 'static/op-footer.tpl.php');
-$page->footercontent = $savvy->render(null, 'static/footer.tpl.php');
 
 $html = $page->toHtml();
 unset($page);
