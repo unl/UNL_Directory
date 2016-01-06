@@ -26,7 +26,7 @@ $showKnowledge = $context->shouldShowKnowledge();
 ?>
 <?php if ($showKnowledge): ?>
 <section class="wdn-grid-set knowledge-grid">
-    <div class="bp2-wdn-col-two-sevenths">
+    <div class="bp2-wdn-col-two-sevenths directory-knowledge-summary">
 <?php endif; ?>
 
 
@@ -177,7 +177,7 @@ $showKnowledge = $context->shouldShowKnowledge();
 
 <?php if ($showKnowledge): ?>
     </div>
-    <div class="bp2-wdn-col-five-sevenths">
+    <div class="bp2-wdn-col-five-sevenths wdn-pull-right">
         <div class="card">
             <div class="card-content">
                 <?php echo $savvy->render($context->getKnowledge()) ?>

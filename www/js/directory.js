@@ -782,6 +782,22 @@ define([
 		});
 	};
 
+	var createStickyKit = function($sidebar) {
+		require(['./vendor/jquery.sticky-kit.js'], function() {
+			var checkSticky = function() {
+				$(document.body).trigger('sticky_kit:recalc');
+
+				if (Modernizr.mq('only screen and (min-width: 768px)')) {
+					$sidebar.stick_in_parent({spacer:false});
+				} else {
+					$sidebar.trigger('sticky_kit:detach');
+				}
+			};
+			$(window).on('resize', checkSticky);
+			checkSticky();
+		});
+	};
+
 	var plugin = {
 		queuePFRequest : function(q, resultsdiv, chooser, cn, sn) {
 			var data = {format:'partial'};
@@ -1019,20 +1035,7 @@ define([
 					setMainState(initialMainState);
 					bindResultsListeners($employees);
 					bindRecordListeners($employees);
-
-					require(['./vendor/jquery.sticky-kit.js'], function() {
-						var checkSticky = function() {
-							$(document.body).trigger('sticky_kit:recalc');
-
-							if (Modernizr.mq('only screen and (min-width: 768px)')) {
-								$summarySection.stick_in_parent({spacer:false});
-							} else {
-								$summarySection.trigger('sticky_kit:detach');
-							}
-						};
-						$(window).on('resize', checkSticky);
-						checkSticky();
-					});
+					createStickyKit($summarySection);
 
 					$modal = $('#modal_edit_form');
 					$modal.on('keydown', function(e) {
@@ -1165,6 +1168,12 @@ define([
 					var $vcard = $('.record-container .vcard');
 					addAnnotateTool($vcard.data('uid'), $vcard);
 					bindRecordListeners($('.record-container'));
+
+					var $knowledgeSummary = $('.record-container .directory-knowledge-summary');
+
+					if ($knowledgeSummary.length) {
+						createStickyKit($knowledgeSummary);
+					}
 				}
 			});
 		}
