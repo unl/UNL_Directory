@@ -1,10 +1,11 @@
 <?php
-class UNL_Peoplefinder_Person_Roles extends IteratorIterator implements Countable
+class UNL_Peoplefinder_Person_Roles extends IteratorIterator implements Countable, Serializable
 {
-    function __construct($options = array())
+    protected $renderLinks = true;
+
+    public function __construct($options = array())
     {
-        if (isset($options['iterator'])
-            && $options['iterator'] instanceof Iterator) {
+        if (isset($options['iterator']) && $options['iterator'] instanceof Iterator) {
             $iterator = $options['iterator'];
         } else {
             if (empty($options['dn'])) {
@@ -13,6 +14,28 @@ class UNL_Peoplefinder_Person_Roles extends IteratorIterator implements Countabl
             $iterator = $options['peoplefinder']->getRoles($options['dn']);
         }
         parent::__construct($iterator);
+    }
+
+    public function serialize()
+    {
+        return serialize($this->getInnerIterator());
+    }
+
+    public function unserialize($serialized)
+    {
+        $iterator = unserialize($serialized);
+        parent::__construct($iterator);
+    }
+
+    public function isRenderLinks()
+    {
+        return $this->renderLinks;
+    }
+
+    public function enableRenderLinks($enable = true)
+    {
+        $this->renderLinks = (bool) $enable;
+        return $this;
     }
 
     /**

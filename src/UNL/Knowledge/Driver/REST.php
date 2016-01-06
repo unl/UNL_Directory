@@ -13,46 +13,53 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
 
     public static $service_pass;
 
-    public static $cache;
+    protected static $cache;
+
     public static $memcache_host;
+
     public static $memcache_port;
-    public static $key_prefix = 'UNL_Directory_FacultyData_';
+
+    protected static $key_prefix = 'UNL_Directory_FacultyData_';
+
     public static $cache_length = 900; //default to 15 minutes
 
-    function __construct($options = array())
+    public function __construct($options = array())
     {
         if (isset($options['service_url'])) {
             $this->service_url = $options['service_url'];
         }
 
-        self::$cache = new Memcached;
-        self::$cache->addServer(self::$memcache_host, self::$memcache_port);
+        self::$cache = UNL_Peoplefinder_Cache::factory([
+            'memcache_host' => self::$memcache_host,
+            'memcache_port' => self::$memcache_port,
+            'fast_lifetime' => self::$cache_length,
+        ]);
     }
 
-    function getFromCache($key)
+    protected function getFromCache($key)
     {
         return self::$cache->get($key);
     }
 
-    function cache($key, $object)
+    protected function cache($key, $object)
     {
         # cache for the given time
         self::$cache->set($key, $object, time() + self::$cache_length);
     }
 
-    function getCategory($category, $uid)
+    protected function getCategory($category, $uid)
     {
         # check the cache for this
         $key = self::$key_prefix . $category . '_' . $uid;
 
         try {
-            if (($result = $this->getFromCache($key)) !== FALSE) {
+            if (($result = $this->getFromCache($key)) !== false) {
                 return $result;
             }
         } catch (Exception $e) {
             error_log($e->message);
         }
-        
+
         # if that doesn't work, curl the API
         $curl = curl_init();
 
@@ -65,86 +72,75 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
         ));
 
         $responseData = curl_exec($curl);
+        $isAPIError = false;
 
-        if (curl_errno($curl)) {
-            $errorMessage = curl_error($curl);
-            error_log($errorMessage);
-            $result = 'Error retrieving Faculty CV Data.';
-        } else {
+        if (!curl_errno($curl)) {
             $statusCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
             if ($statusCode === 200) {
-                $xml = simplexml_load_string($responseData, "SimpleXMLElement", LIBXML_NOCDATA);
-                $json = json_encode($xml);
-                $array = json_decode($json,TRUE);
-
+                // type juggle XML to JSON
+                $array = json_decode(json_encode(simplexml_load_string($responseData, "SimpleXMLElement", LIBXML_NOCDATA)), true);
                 $result = isset($array['Record'][$category]) ? $array['Record'][$category] : null;
-
-                try {
-                    $this->cache($key, $result);
-                } catch (Exception $e) {
-                    error_log($e->message);
-                }
             } else {
-                $result = 'Error retrieving Faculty CV Data.';
+                // Server returns 500 errors for not found
+                $result = null;
             }
+        } else {
+            curl_error($curl);
+            error_log($errorMessage);
+            $isAPIError = true;
         }
 
         curl_close($curl);
 
+        if ($isAPIError) {
+            $result = self::$cache->getSlow($key);
+
+            if ($result) {
+                return $result;
+            }
+        }
+
+        try {
+            $this->cache($key, $result);
+        } catch (Exception $e) {
+            error_log($e->message);
+        }
         return $result;
     }
 
-    function getRecords($uid)
+    public function getRecords($uid)
     {
-        $records = new UNL_Knowledge();
+        $data = $this->getCategory('PUBLIC_WEB', $uid);
 
-        $results = $this->getCategory('PUBLIC_WEB', $uid);
-
-        if (is_array($results)) {
-            $records->public_web = $results;
-            $keys_map = array(
-                'BIO' => 'bio',
-                'SCHTEACH' => 'courses',
-                'EDUCATION' => 'education',
-                'CONGRANT' => 'grants',
-                'AWARDHONOR' => 'honors',
-                'INTELLCONT' => 'papers',
-                'PRESENT' => 'presentations',
-                'PERFORM_EXHIBIT' => 'performances'
-            );
-            foreach ($keys_map as $key => $value) {
-                if (array_key_exists($key, $records->public_web)) { 
-                    $records->$value = $this->cleanRecords($records->public_web[$key]);
-                } else {
-                    $records->$value = NULL;
-                }
-            }   
-        } else {
-            $records->error = $results;
-        }
-
-        return $records;
-    }
-
-    function cleanRecords($records)
-    {
-        if (is_array($records)) {
-            foreach ($records as $key => $value) {
-                if (isset($value['REF']) && $value['REF'] == FALSE) {
-                    // Clear empty record within an array that has a blank REF value
-                    unset($records[$key]);
+        if ($data) {
+            $records = new UNL_Knowledge_Records();
+            foreach ($records->getRecordsMap() as $var => $dataKey) {
+                if (isset($data[$dataKey])) {
+                    $records->$var = $this->cleanRecords($data[$dataKey]);
                 }
             }
 
-            if (isset($records['REF']) && $records['REF'] == FALSE) {
+            return $records;
+        }
+
+        return null;
+    }
+
+    protected function cleanRecords($records)
+    {
+        if (is_array($records)) {
+            // Clear empty record within an array that has a blank REF value
+            $records = array_filter($records, function($value) {
+                return !(isset($value['REF']) && $value['REF'] == false);
+            });
+
+            if (isset($records['REF']) && $records['REF'] == false) {
                 // Clear empty record that has a blank REF value
-                $records = NULL;
+                $records = null;
             } else if (isset($records['REF'])) {
                 // Convert single record to indexed array at key 0
-                $temp = $records;
-                $records = array();
-                $records[0] = $temp;
+                $records = [$records];
             }
         }
 

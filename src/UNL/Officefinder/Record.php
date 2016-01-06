@@ -1,23 +1,9 @@
 <?php
 /**
- * Simple Active Record implementation for Officefinder/Yellow pages of the
- * online directory
- * 
- * PHP version 5
- * 
- * @category  Services
- * @package   UNL_Peoplefinder
- * @author    Brett Bieber <brett.bieber@gmail.com>
- * @copyright 2010 Regents of the University of Nebraska
- * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
- * @link      http://peoplefinder.unl.edu/
- */
-
-/**
  * Simple active record implementation for UNL's online directory.
- * 
+ *
  * PHP version 5
- * 
+ *
  * @category  Services
  * @package   UNL_Peoplefinder
  * @author    Brett Bieber <brett.bieber@gmail.com>
@@ -27,20 +13,22 @@
  */
 class UNL_Officefinder_Record
 {
+    protected $nonPersistentFields = [
+        'nonPersistentFields',
+        'options',
+    ];
+
     /**
      * Prepare the insert SQL for this record
      *
      * @param string &$sql The INSERT SQL query to prepare
-     * 
+     *
      * @return array Associative array of field value pairs
      */
     protected function prepareInsertSQL(&$sql)
     {
         $sql    = 'INSERT INTO '.$this->getTable();
-        $fields = get_object_vars($this);
-        if (isset($fields['options'])) {
-            unset($fields['options']);
-        }
+        $fields = array_diff_key(get_object_vars($this), array_fill_keys($this->nonPersistentFields, 0));
         $sql .= '(`'.implode('`,`', array_keys($fields)).'`)';
         $sql .= ' VALUES ('.str_repeat('?,', count($fields)-1).'?)';
         return $fields;
@@ -48,7 +36,7 @@ class UNL_Officefinder_Record
 
     /**
      * Prepare the update SQL for this record
-     * 
+     *
      * @param string &$sql The UPDATE SQL query to prepare
      *
      * @return array Associative array of field value pairs
@@ -56,7 +44,7 @@ class UNL_Officefinder_Record
     protected function prepareUpdateSQL(&$sql)
     {
         $sql    = 'UPDATE '.$this->getTable().' ';
-        $fields = get_class_vars(get_class($this));
+        $fields = array_diff_key(get_object_vars($this), array_fill_keys($this->nonPersistentFields, 0));
 
         $sql .= 'SET `'.implode('`=?,`', array_keys($fields)).'`=? ';
 
@@ -67,7 +55,6 @@ class UNL_Officefinder_Record
 
         $sql = substr($sql, 0, -4);
 
-        $fields = array_intersect($fields, get_object_vars($this));
         return $fields;
     }
 
@@ -78,15 +65,13 @@ class UNL_Officefinder_Record
      */
     function keys()
     {
-        return array(
-            'id',
-        );
+        return ['id'];
     }
-    
+
     /**
      * Save the record. This automatically determines if insert or update
      * should be used, based on the primary keys.
-     * 
+     *
      * @return bool
      */
     function save()
@@ -115,7 +100,7 @@ class UNL_Officefinder_Record
     {
         $sql      = '';
         $fields   = $this->prepareInsertSQL($sql);
-        $values   = array();
+        $values   = [];
         $values[] = $this->getTypeString(array_keys($fields));
         foreach ($fields as $key=>$value) {
             $values[] =& $this->$key;
@@ -132,7 +117,7 @@ class UNL_Officefinder_Record
     {
         $sql      = '';
         $fields   = $this->prepareUpdateSQL($sql);
-        $values   = array();
+        $values   = [];
         $values[] = $this->getTypeString(array_keys($fields));
         foreach ($fields as $key=>$value) {
             $values[] =& $this->$key;
@@ -147,12 +132,12 @@ class UNL_Officefinder_Record
 
     /**
      * Prepare the SQL statement and execute the query
-     * 
+     *
      * @param string $sql    The SQL query to execute
      * @param array  $values Values used in the query
-     * 
+     *
      * @throws Exception
-     * 
+     *
      * @return true
      */
     protected function prepareAndExecute($sql, $values)
@@ -163,7 +148,7 @@ class UNL_Officefinder_Record
             throw new Exception('Error preparing database statement! '.$mysqli->error, 500);
         }
 
-        call_user_func_array(array($stmt, 'bind_param'), $values);
+        call_user_func_array([$stmt, 'bind_param'], $values);
         if ($stmt->execute() === false) {
             throw new Exception($stmt->error, 500);
         }
@@ -180,7 +165,7 @@ class UNL_Officefinder_Record
      * Get the type string used with prepared statements for the fields given
      *
      * @param array $fields Array of field names
-     * 
+     *
      * @return string
      */
     function getTypeString($fields)
@@ -205,7 +190,7 @@ class UNL_Officefinder_Record
      * Convert the string given into a usable date for the RDBMS
      *
      * @param string $str A textual description of the date
-     * 
+     *
      * @return string|false
      */
     function getDate($str)
@@ -228,7 +213,7 @@ class UNL_Officefinder_Record
      * @param string $table Table to retrieve record from
      * @param int    $id    The primary key/ID value
      * @param string $field The field that holds the primary key
-     * 
+     *
      * @return false | UNL_Officefinder_Record
      */
     public static function getRecordByID($table, $id, $field = 'id')
@@ -238,7 +223,7 @@ class UNL_Officefinder_Record
         if ($result = $mysqli->query($sql)) {
             return $result->fetch_assoc();
         }
-        
+
         return false;
     }
 
@@ -258,7 +243,7 @@ class UNL_Officefinder_Record
                                     400);
             }
             $value = $this->$key;
-            if ($this->getTypeString(array($key)) == 's') {
+            if ($this->getTypeString([$key]) == 's') {
                 $value = '"'.$mysqli->escape_string($value).'"';
             }
             $sql .= $key.'='.$value.' AND ';
@@ -276,11 +261,11 @@ class UNL_Officefinder_Record
      *
      * @param string $method Method called
      * @param array  $args   Array of arguments passed to the method
-     * 
+     *
      * @method getBy[FIELD NAME]
-     * 
+     *
      * @throws Exception
-     * 
+     *
      * @return mixed
      */
     public static function __callStatic($method, $args)
@@ -294,7 +279,7 @@ class UNL_Officefinder_Record
                 $whereAdd = $args[1];
             }
             return self::getByAnyField($class, $field, $args[0], $whereAdd);
-            
+
         }
         throw new Exception('Invalid static method called.');
     }
@@ -326,7 +311,7 @@ class UNL_Officefinder_Record
 
     /**
      * Get the DB
-     * 
+     *
      * @return mysqli
      */
     public static function getDB()
@@ -336,12 +321,12 @@ class UNL_Officefinder_Record
 
     /**
      * Synchronize member variables with the values in the array
-     * 
+     *
      * @param array $data Associative array of field=>value pairs
-     * 
+     *
      * @return void
      */
-    function synchronizeWithArray($data)
+    public function synchronizeWithArray($data)
     {
         foreach ($data as $key=>$value) {
             $this->$key = $value;
@@ -350,10 +335,10 @@ class UNL_Officefinder_Record
 
     /**
      * Reload data from the database and refresh member variables
-     * 
+     *
      * @return void
      */
-    function reload()
+    public function reload()
     {
         $record = self::getById($this->id);
         $this->synchronizeWithArray($record->toArray());
@@ -364,7 +349,7 @@ class UNL_Officefinder_Record
      *
      * @return array
      */
-    function toArray()
+    public function toArray()
     {
         return get_object_vars($this);
     }

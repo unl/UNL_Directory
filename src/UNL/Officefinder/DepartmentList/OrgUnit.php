@@ -8,7 +8,7 @@ class UNL_Officefinder_DepartmentList_OrgUnit extends UNL_Officefinder_Departmen
         $this->options = $options + $this->options;
         $records = array();
         $mysqli = UNL_Officefinder::getDB();
-        $sql = 'SELECT id FROM departments ';
+        $sql = 'SELECT id, name FROM departments ';
         $sql .= 'WHERE org_unit = "'.$mysqli->escape_string($this->options['q']).'"'
              . ' ORDER BY name';
         if ($result = $mysqli->query($sql)) {

@@ -12,5 +12,5 @@ interface UNL_Knowledge_DriverInterface
      *
      * @param string $uid The unique user id eg: erasmussen2
      */
-    function getRecords($uid);
+    public function getRecords($uid);
 }

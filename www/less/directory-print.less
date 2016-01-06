@@ -1,0 +1,31 @@
+// hide things that shouldn't print
+.qtip,
+.vcard-tools,
+#visitorChat,
+script {
+	display: none !important;
+}
+
+a.permalink,
+a.card-profile,
+a.email,
+.tel a,
+.street-address a,
+.organization-unit a {
+	&::after {
+		display: none !important;
+	}
+}
+
+#maincontent {
+	a.tel,
+	a.card-profile,
+	a.permalink {
+		border: 0;
+		text-decoration: none;
+	}
+}
+
+.record-container .vcard .card-profile .photo {
+	height: 100px
+}

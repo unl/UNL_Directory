@@ -6,54 +6,53 @@ if ($context->ou == 'org') {
     $class = 'ppl_Sresult';
 
     $preferredFirstName = $context->getPreferredFirstName();
-    
+
     $name = $context->sn . ',&nbsp;'. $preferredFirstName;
     if (!empty($context->eduPersonNickname)
         && $context->eduPersonNickname != ' ') {
-        $name .= ' <span class="givenName">'.$context->givenName.'</span>';
+        $name .= ' <span class="given-name">'.$context->givenName.'</span>';
     }
 }
 $class .= ' '.$context->eduPersonPrimaryAffiliation;
-echo '<li class="'.$class.'">'.PHP_EOL;
-echo '    <div class="overflow">'.PHP_EOL;
+
 $onclick = '';
-if (isset($parent->parent->context->options, $parent->parent->context->options['onclick'])) {
-    $onclick .= ' onclick="return '.htmlentities($parent->parent->context->options['onclick'], ENT_QUOTES).'(\''.addslashes($context->uid).'\');"';
-}
-if ($controller->options['view'] != 'alphalisting') {
-    echo '    <img class="profile_pic small photo planetred_profile" src="https://planetred.unl.edu/pg/icon/unl_'.str_replace("-", "_", $context->uid).'/small"  alt="Photo of '.$context->displayName.'" />'.PHP_EOL;
-}
-echo '    <div class="recordDetails">'.PHP_EOL;
-echo '        <div class="fn"><a href="'.UNL_Peoplefinder::getURL().'?uid='.$context->uid.'" '.$onclick.'>'.$name.'</a></div>'.PHP_EOL;
-if (isset($context->eduPersonPrimaryAffiliation)) {
-    echo '        <div class="eppa">('.$context->eduPersonPrimaryAffiliation.')</div>'.PHP_EOL;
-}
-if (isset($context->unlHROrgUnitNumber)) {
-    foreach ($context->unlHROrgUnitNumber as $orgUnit) {
-        if ($name = UNL_Officefinder_Department::getNameByOrgUnit($orgUnit)) {
-            echo '        <div class="organization-unit">'.$name.'</div>'.PHP_EOL;
-        }
-    }
+if (isset($controller->options, $controller->options['onclick'])) {
+    $onclick .= ' onclick="return ' . $controller->options['onclick'] . "('" . addslashes($context->uid) . '\');"';
 }
 
-if (isset($context->title)
-    && !(
-        isset($orgUnit, $parent->parent, $parent->parent->parent, $parent->parent->parent->parent)
-        && $controller->options['view'] == 'department'
-        && $orgUnit != $parent->parent->parent->parent->context->org_unit
-        )
-    && false === strpos(strtolower($context->title), 'retiree') // Let's not share retiree or disabled retiree status
-    && false === strpos(strtolower($context->title), 'royalty') // Do not show royalty recipients
-    ) {
-    echo '        <div class="title">'.$context->title.'</div>'.PHP_EOL;
-}
-if (isset($context->telephoneNumber)) {
-    echo '        <div class="tel">'.$savvy->render($context->telephoneNumber, 'Peoplefinder/Record/TelephoneNumber.tpl.php').'</div>'.PHP_EOL;
-}
+$title = $context->formatTitle();
+?>
 
-echo '    </div>'.PHP_EOL;
-echo '    <a href="'.UNL_Peoplefinder::getURL().'?uid='.$context->uid.'" class="cInfo" '.$onclick.'>Contact '.$preferredFirstName.'</a>'.PHP_EOL;
-if (isset($parent->parent->context->options['chooser'])) {
-    echo '    <div class="pfchooser"><a href="#" onclick="return pfCatchUID(\''.$context->uid.'\');">Choose this person</a></div>'.PHP_EOL;
-}
-echo '</div></li>';
+<li class="<?php echo $class ?>" tabindex="0" data-href="<?php echo $context->getUrl() ?>" data-uid="<?php echo $context->uid ?>">
+    <div class="overflow" itemscope itemtype="http://schema.org/Person">
+        <?php if ($controller->options['view'] != 'alphalisting'): ?>
+            <div class="profile_pic">
+                <img class="photo" itemprop="image" src="<?php echo $context->getImageUrl(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_SMALL) ?>" alt="Avatar for <?php echo $context->displayName ?>" />
+            </div>
+        <?php endif; ?>
+
+        <div class="recordDetails">
+            <div class="fn" itemprop="name"><a itemprop="url" href="<?php echo $context->getUrl() ?>"<?php echo $onclick ?>><?php echo $name ?></a></div>
+            <?php if (isset($context->unlHROrgUnitNumber)): ?>
+                <?php
+                $roles = $context->getRoles();
+                $roles->enableRenderLinks(false);
+                $title = $context->formatTitle();
+                ?>
+                <?php if (count($roles)): ?>
+                    <?php echo $savvy->render($roles) ?>
+                <?php elseif ($title): ?>
+                    <div class="title" itemprop="jobTitle"><?php echo $title ?></div>
+                <?php endif; ?>
+            <?php endif; ?>
+
+        <?php if (!empty($context->telephoneNumber)): ?>
+            <div class="tel"><?php echo $savvy->render($context->telephoneNumber, 'Peoplefinder/Record/TelephoneNumber.tpl.php') ?></div>
+        <?php endif; ?>
+
+        </div>
+    <?php if (isset($controller->options['chooser'])): ?>
+        <div class="pfchooser"><a href="#" onclick="return pfCatchUID('<?php echo $context->uid ?>');">Choose this person</a></div>
+    <?php endif; ?>
+    </div>
+</li>

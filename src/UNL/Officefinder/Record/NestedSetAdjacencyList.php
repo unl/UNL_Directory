@@ -4,18 +4,18 @@ class UNL_Officefinder_Record_NestedSetAdjacencyList extends UNL_Officefinder_Re
     public $parent_id;
     public $sort_order;
 
-    function setAsRoot($moveTreeUnder = true)
+    public function setAsRoot($moveTreeUnder = true)
     {
         $this->parent_id = 0;
         return $this->update();
     }
 
-    function isRoot()
+    public function isRoot()
     {
         return $this->parent_id == 0;
     }
 
-    function addChild(UNL_Officefinder_Record_NestedSet $newChild, $insertAsLastChild = true)
+    public function addChild(UNL_Officefinder_Record_NestedSet $newChild, $insertAsLastChild = true)
     {
         $newChild->parent_id = $this->id;
         if ($insertAsLastChild) {
@@ -24,7 +24,7 @@ class UNL_Officefinder_Record_NestedSetAdjacencyList extends UNL_Officefinder_Re
         $newChild->update();
     }
 
-    function move(UNL_Officefinder_Record_NestedSet $newParent, UNL_Officefinder_Record_NestedSet $newPrevious = null)
+    public function move(UNL_Officefinder_Record_NestedSet $newParent, UNL_Officefinder_Record_NestedSet $newPrevious = null)
     {
         $this->parent_id = $newParent->id;
         return $this->update();
@@ -32,10 +32,10 @@ class UNL_Officefinder_Record_NestedSetAdjacencyList extends UNL_Officefinder_Re
 
     /**
      * get the parent of the current element
-     * 
+     *
      * @return UNL_Officefinder_Record_NestedSet
      */
-    function getParent()
+    public function getParent()
     {
         if (empty($this->parent_id)) {
             return false;
@@ -45,11 +45,11 @@ class UNL_Officefinder_Record_NestedSetAdjacencyList extends UNL_Officefinder_Re
 
     /**
      * get the children of the given element or if the parameter is an array.
-     * 
+     *
      * @return     mixed   the array with the data of all children
      *                     or false, if there are none
      */
-    function getChildren($orderBy = 'sort_order, id')
+    public function getChildren($orderBy = 'sort_order, id')
     {
         return $this->_getChildren(null, $orderBy);
     }
@@ -61,7 +61,7 @@ class UNL_Officefinder_Record_NestedSetAdjacencyList extends UNL_Officefinder_Re
         }
 
         $query = sprintf('SELECT DISTINCT
-                                id
+                                id, name, sort_order
                             FROM
                                 %s
                             WHERE
@@ -71,9 +71,6 @@ class UNL_Officefinder_Record_NestedSetAdjacencyList extends UNL_Officefinder_Re
                             $this->getTable(),
                             $whereAdd,
                             $this->id,
-                            // order by left, so we have it in the order
-                            // as it is in the tree if no 'order'-option
-                            // is given
                             $orderBy
                    );
 
@@ -82,7 +79,7 @@ class UNL_Officefinder_Record_NestedSetAdjacencyList extends UNL_Officefinder_Re
         return $this->_prepareResult($res);
     }
 
-    function isChildOf(UNL_Officefinder_Record_NestedSet $parent)
+    public function isChildOf(UNL_Officefinder_Record_NestedSet $parent)
     {
         if ($this->parent_id == $parent->id) {
             return true;
@@ -90,7 +87,7 @@ class UNL_Officefinder_Record_NestedSetAdjacencyList extends UNL_Officefinder_Re
         return false;
     }
 
-    function hasChildren()
+    public function hasChildren()
     {
         return count($this->getChildren());
     }
@@ -103,7 +100,7 @@ class UNL_Officefinder_Record_NestedSetAdjacencyList extends UNL_Officefinder_Re
      * @access     public
      * @return     boolean returns either true or throws an error
      */
-    function delete()
+    public function delete()
     {
 
         foreach ($this->getChildren() as $child) {

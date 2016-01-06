@@ -1,0 +1,772 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "68ddc7de9cb4471211e2492cc84f857c",
+    "content-hash": "532bc119b73435be5ed6c066a0775a93",
+    "packages": [
+        {
+            "name": "pear-pear.php.net/Archive_Tar",
+            "version": "1.4.0",
+            "dist": {
+                "type": "file",
+                "url": "http://pear.php.net/get/Archive_Tar-1.4.0.tgz",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "php": ">=5.2.0.0"
+            },
+            "replace": {
+                "pear-pear/archive_tar": "== 1.4.0.0"
+            },
+            "type": "pear-library",
+            "autoload": {
+                "classmap": [
+                    ""
+                ]
+            },
+            "include-path": [
+                "/"
+            ],
+            "license": [
+                "New BSD License"
+            ],
+            "description": "This class provides handling of tar files in PHP.\nIt supports creating, listing, extracting and adding to tar files.\nGzip support is available if PHP has the zlib extension built-in or\nloaded. Bz2 compression is also supported with the bz2 extension loaded."
+        },
+        {
+            "name": "pear-pear.php.net/Console_Getopt",
+            "version": "1.4.1",
+            "dist": {
+                "type": "file",
+                "url": "http://pear.php.net/get/Console_Getopt-1.4.1.tgz",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "php": ">=5.4.0.0"
+            },
+            "replace": {
+                "pear-pear/console_getopt": "== 1.4.1.0"
+            },
+            "type": "pear-library",
+            "autoload": {
+                "classmap": [
+                    ""
+                ]
+            },
+            "include-path": [
+                "/"
+            ],
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "description": "This is a PHP implementation of \"getopt\" supporting both\nshort and long options."
+        },
+        {
+            "name": "pear-pear.php.net/HTTP_Request2",
+            "version": "2.2.1",
+            "dist": {
+                "type": "file",
+                "url": "http://pear.php.net/get/HTTP_Request2-2.2.1.tgz",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "pear-pear.php.net/net_url2": ">=2.0.0.0",
+                "pear-pear.php.net/pear": ">=1.9.2.0",
+                "php": ">=5.2.0.0"
+            },
+            "replace": {
+                "pear-pear/http_request2": "== 2.2.1.0"
+            },
+            "type": "pear-library",
+            "autoload": {
+                "classmap": [
+                    ""
+                ]
+            },
+            "include-path": [
+                "/"
+            ],
+            "license": [
+                "BSD License"
+            ],
+            "description": "PHP5 rewrite of HTTP_Request package (with parts of HTTP_Client). Provides\ncleaner API and pluggable Adapters:\n  * Socket adapter, based on old HTTP_Request code,\n  * Curl adapter, wraps around PHP's cURL extension,\n  * Mock adapter, to use for testing packages dependent on HTTP_Request2.\nSupports POST requests with data and file uploads, basic and digest\nauthentication, cookies, managing cookies across requests, proxies, gzip and\ndeflate encodings, redirects, monitoring the request progress with Observers..."
+        },
+        {
+            "name": "pear-pear.php.net/Net_URL2",
+            "version": "2.2.0",
+            "dist": {
+                "type": "file",
+                "url": "http://pear.php.net/get/Net_URL2-2.2.0.tgz",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "php": ">=5.1.4.0"
+            },
+            "replace": {
+                "pear-pear/net_url2": "== 2.2.0.0"
+            },
+            "type": "pear-library",
+            "autoload": {
+                "classmap": [
+                    ""
+                ]
+            },
+            "include-path": [
+                "/"
+            ],
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Provides parsing of URLs into their constituent parts (scheme, host, path etc.), URL generation, and resolving of\n    relative URLs."
+        },
+        {
+            "name": "pear-pear.php.net/PEAR",
+            "version": "1.10.1",
+            "dist": {
+                "type": "file",
+                "url": "http://pear.php.net/get/PEAR-1.10.1.tgz",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "ext-pcre": "*",
+                "ext-xml": "*",
+                "pear-pear.php.net/archive_tar": ">=1.4.0.0",
+                "pear-pear.php.net/console_getopt": ">=1.4.1.0",
+                "pear-pear.php.net/structures_graph": ">=1.1.0.0",
+                "pear-pear.php.net/xml_util": ">=1.3.0.0",
+                "php": ">=5.4.0.0"
+            },
+            "conflict": {
+                "pear-pear.php.net/pear_frontend_gtk": "<0.4.0.0",
+                "pear-pear.php.net/pear_frontend_web": "<=0.4.0.0"
+            },
+            "replace": {
+                "pear-pear/pear": "== 1.10.1.0"
+            },
+            "type": "pear-library",
+            "autoload": {
+                "classmap": [
+                    ""
+                ]
+            },
+            "include-path": [
+                "/"
+            ],
+            "license": [
+                "New BSD License"
+            ],
+            "description": "The PEAR package contains:\n * the PEAR installer, for creating, distributing\n   and installing packages\n * the PEAR_Exception PHP5 error handling mechanism\n * the PEAR_ErrorStack advanced error handling mechanism\n * the PEAR_Error error handling mechanism\n * the OS_Guess class for retrieving info about the OS\n   where PHP is running on\n * the System class for quick handling of common operations\n   with files and directories\n * the PEAR base class\n  Features in a nutshell:\n  * full support for channels\n  * pre-download dependency validation\n  * new package.xml 2.0 format allows tremendous flexibility while maintaining BC\n  * support for optional dependency groups and limited support for sub-packaging\n  * robust dependency support\n  * full dependency validation on uninstall\n  * remote install for hosts with only ftp access - no more problems with\n    restricted host installation\n  * full support for mirroring\n  * support for bundling several packages into a single tarball\n  * support for static dependencies on a url-based package\n  * support for custom file roles and installation tasks"
+        },
+        {
+            "name": "pear-pear.php.net/Structures_Graph",
+            "version": "1.1.1",
+            "dist": {
+                "type": "file",
+                "url": "http://pear.php.net/get/Structures_Graph-1.1.1.tgz",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "php": ">=5.3.0.0"
+            },
+            "replace": {
+                "pear-pear/structures_graph": "== 1.1.1.0"
+            },
+            "type": "pear-library",
+            "autoload": {
+                "classmap": [
+                    ""
+                ]
+            },
+            "include-path": [
+                "/"
+            ],
+            "license": [
+                "LGPL-3.0+"
+            ],
+            "description": "Structures_Graph is a package for creating and manipulating graph datastructures. It allows building of directed\nand undirected graphs, with data and metadata stored in nodes. The library provides functions for graph traversing\nas well as for characteristic extraction from the graph topology."
+        },
+        {
+            "name": "pear-pear.php.net/XML_Util",
+            "version": "1.3.0",
+            "dist": {
+                "type": "file",
+                "url": "http://pear.php.net/get/XML_Util-1.3.0.tgz",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "ext-pcre": "*",
+                "php": ">=5.3.0.0"
+            },
+            "replace": {
+                "pear-pear/xml_util": "== 1.3.0.0"
+            },
+            "type": "pear-library",
+            "autoload": {
+                "classmap": [
+                    ""
+                ]
+            },
+            "include-path": [
+                "/"
+            ],
+            "license": [
+                "BSD License"
+            ],
+            "description": "Selection of methods that are often needed when working with XML documents.  Functionality includes creating of attribute lists from arrays, creation of tags, validation of XML names and more."
+        },
+        {
+            "name": "saltybeagle/savvy",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/saltybeagle/Savvy.git",
+                "reference": "ff0d7f5b0c18b8b63d3c8c7fb30c68ec7f828074"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/saltybeagle/Savvy/zipball/ff0d7f5b0c18b8b63d3c8c7fb30c68ec7f828074",
+                "reference": "ff0d7f5b0c18b8b63d3c8c7fb30c68ec7f828074",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Savvy": "src/"
+                }
+            },
+            "description": "Savvy is a powerful but lightweight object-oriented template system for PHP.",
+            "support": {
+                "source": "https://github.com/saltybeagle/Savvy/tree/master",
+                "issues": "https://github.com/saltybeagle/Savvy/issues"
+            },
+            "time": "2015-08-25 15:57:26"
+        },
+        {
+            "name": "simple-cas/simple-cas",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/saltybeagle/SimpleCAS.git",
+                "reference": "53fc488295b2de02e6352ea8e1ddf462e6eca441"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/saltybeagle/SimpleCAS/zipball/53fc488295b2de02e6352ea8e1ddf462e6eca441",
+                "reference": "53fc488295b2de02e6352ea8e1ddf462e6eca441",
+                "shasum": ""
+            },
+            "require": {
+                "pear-pear.php.net/http_request2": "*",
+                "tedivm/stash": "0.12.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "": "src/"
+                }
+            },
+            "support": {
+                "source": "https://github.com/saltybeagle/SimpleCAS/tree/v0.8.2",
+                "issues": "https://github.com/saltybeagle/SimpleCAS/issues"
+            },
+            "time": "2015-01-29 14:13:41"
+        },
+        {
+            "name": "tedivm/stash",
+            "version": "v0.12.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tedious/Stash.git",
+                "reference": "5b830f6a0e4626e5cd02c862d37721ca16820a13"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tedious/Stash/zipball/5b830f6a0e4626e5cd02c862d37721ca16820a13",
+                "reference": "5b830f6a0e4626e5cd02c862d37721ca16820a13",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "fabpot/php-cs-fixer": "1.1.*",
+                "phpunit/phpunit": "4.3.*",
+                "satooshi/php-coveralls": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Stash\\": "src/Stash/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Robert Hafner",
+                    "email": "tedivm@tedivm.com"
+                },
+                {
+                    "name": "Josh Hall-Bachner",
+                    "email": "charlequin@gmail.com"
+                }
+            ],
+            "description": "The place to keep your cache.",
+            "homepage": "http://github.com/tedious/Stash",
+            "keywords": [
+                "apc",
+                "cache",
+                "caching",
+                "memcached",
+                "redis",
+                "sessions"
+            ],
+            "time": "2015-01-17 07:51:57"
+        },
+        {
+            "name": "unl/common",
+            "version": "v0.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/unlpear/UNL_Common.git",
+                "reference": "11ee3276c06c1b94119be44f5497e8a1ff03ed08"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/unlpear/UNL_Common/zipball/11ee3276c06c1b94119be44f5497e8a1ff03ed08",
+                "reference": "11ee3276c06c1b94119be44f5497e8a1ff03ed08",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "": "src/"
+                }
+            },
+            "include-path": [
+                "src"
+            ],
+            "support": {
+                "source": "https://github.com/unlpear/UNL_Common/tree/v0.6.1",
+                "issues": "https://github.com/unlpear/UNL_Common/issues"
+            },
+            "time": "2015-09-22 18:25:29"
+        },
+        {
+            "name": "unl/php-dwt-parser",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/unl/phpdwtparser.git",
+                "reference": "1de8770c4d8675771d1529c2f81d96e0aa51931f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/unl/phpdwtparser/zipball/1de8770c4d8675771d1529c2f81d96e0aa51931f",
+                "reference": "1de8770c4d8675771d1529c2f81d96e0aa51931f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5",
+                "zaininnari/html-minifier": "*",
+                "zendframework/zend-code": "^2.5"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "bin": [
+                "bin/createTemplates.php"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "UNL\\DWT\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kevin Abel (kabel)",
+                    "email": "kabel2@unl.edu",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Brett Bieber (saltybeagle)",
+                    "email": "brett.bieber@gmail.com",
+                    "role": "Retired Developer"
+                }
+            ],
+            "description": "A PHP library for parsing DWT files and turning them into PHP classes",
+            "homepage": "http://wdn.unl.edu/",
+            "time": "2016-01-05 21:35:46"
+        },
+        {
+            "name": "unl/php-wdn-templates",
+            "version": "v4.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/unl/phpunltemplates.git",
+                "reference": "ddece80fce8611c22fa674a0f36eac3ddf4ca423"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/unl/phpunltemplates/zipball/ddece80fce8611c22fa674a0f36eac3ddf4ca423",
+                "reference": "ddece80fce8611c22fa674a0f36eac3ddf4ca423",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5",
+                "unl/php-dwt-parser": "1.0.*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0",
+                "satooshi/php-coveralls": "^0.7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "UNL\\Templates\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kevin Abel (kabel)",
+                    "email": "kabel2@unl.edu",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Brett Bieber (saltybeagle)",
+                    "email": "brett.bieber@gmail.com",
+                    "role": "Retired Developer"
+                },
+                {
+                    "name": "Ned Hummel (nhummel2)",
+                    "email": "nhummel2@math.unl.edu",
+                    "role": "Retired Developer"
+                }
+            ],
+            "description": "A PHP library for rendering the UNL templates",
+            "homepage": "http://wdn.unl.edu/",
+            "time": "2015-12-15 00:14:04"
+        },
+        {
+            "name": "unl/unl_cache_lite",
+            "version": "v0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/unlpear/UNL_Cache_Lite.git",
+                "reference": "ead1a59700a52f84250de2820d650e207ee7d698"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/unlpear/UNL_Cache_Lite/zipball/ead1a59700a52f84250de2820d650e207ee7d698",
+                "reference": "ead1a59700a52f84250de2820d650e207ee7d698",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "UNL_Cache_Lite": ""
+                }
+            },
+            "description": "a speedy and safe caching library",
+            "support": {
+                "source": "https://github.com/unlpear/UNL_Cache_Lite/tree/v0.1.1",
+                "issues": "https://github.com/unlpear/UNL_Cache_Lite/issues"
+            },
+            "time": "2014-08-25 20:13:04"
+        },
+        {
+            "name": "zaininnari/html-minifier",
+            "version": "0.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zaininnari/html-minifier.git",
+                "reference": "5b94d85705626f9bb33b7c667bc4400088ed4ece"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zaininnari/html-minifier/zipball/5b94d85705626f9bb33b7c667bc4400088ed4ece",
+                "reference": "5b94d85705626f9bb33b7c667bc4400088ed4ece",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "satooshi/php-coveralls": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "zz": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "The BSD 3-Clause License"
+            ],
+            "authors": [
+                {
+                    "name": "Google inc",
+                    "homepage": "http://www.chromium.org/blink",
+                    "role": "Author"
+                },
+                {
+                    "name": "zaininnari",
+                    "homepage": "https://github.com/zaininnari/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "The Blink HTMLTokenizer ported to PHP.",
+            "homepage": "https://github.com/zaininnari/html-minifier",
+            "keywords": [
+                "Blink",
+                "HTML minify",
+                "php"
+            ],
+            "time": "2015-08-18 14:10:55"
+        },
+        {
+            "name": "zendframework/zend-code",
+            "version": "2.6.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/zend-code.git",
+                "reference": "c4e8f976a772cfb14b47dabd69b5245a423082b4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/zend-code/zipball/c4e8f976a772cfb14b47dabd69b5245a423082b4",
+                "reference": "c4e8f976a772cfb14b47dabd69b5245a423082b4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5",
+                "zendframework/zend-eventmanager": "^2.6|^3.0"
+            },
+            "require-dev": {
+                "doctrine/annotations": "~1.0",
+                "fabpot/php-cs-fixer": "1.7.*",
+                "phpunit/phpunit": "~4.0",
+                "zendframework/zend-stdlib": "~2.7"
+            },
+            "suggest": {
+                "doctrine/annotations": "Doctrine\\Common\\Annotations >=1.0 for annotation features",
+                "zendframework/zend-stdlib": "Zend\\Stdlib component"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.6-dev",
+                    "dev-develop": "2.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Zend\\Code\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "provides facilities to generate arbitrary code using an object oriented interface",
+            "homepage": "https://github.com/zendframework/zend-code",
+            "keywords": [
+                "code",
+                "zf2"
+            ],
+            "time": "2016-01-05 05:58:37"
+        },
+        {
+            "name": "zendframework/zend-eventmanager",
+            "version": "2.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/zend-eventmanager.git",
+                "reference": "a03de810b99b0302059ab744c535d464b8dc4721"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/zend-eventmanager/zipball/a03de810b99b0302059ab744c535d464b8dc4721",
+                "reference": "a03de810b99b0302059ab744c535d464b8dc4721",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5",
+                "zendframework/zend-stdlib": "~2.5"
+            },
+            "require-dev": {
+                "athletic/athletic": "dev-master",
+                "fabpot/php-cs-fixer": "1.7.*",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.6-dev",
+                    "dev-develop": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Zend\\EventManager\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "homepage": "https://github.com/zendframework/zend-eventmanager",
+            "keywords": [
+                "eventmanager",
+                "zf2"
+            ],
+            "time": "2015-10-06 11:53:40"
+        },
+        {
+            "name": "zendframework/zend-hydrator",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/zend-hydrator.git",
+                "reference": "f3ed8b833355140350bbed98d8a7b8b66875903f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/zend-hydrator/zipball/f3ed8b833355140350bbed98d8a7b8b66875903f",
+                "reference": "f3ed8b833355140350bbed98d8a7b8b66875903f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5",
+                "zendframework/zend-stdlib": "^2.5.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0",
+                "squizlabs/php_codesniffer": "^2.0@dev",
+                "zendframework/zend-eventmanager": "^2.5.1",
+                "zendframework/zend-filter": "^2.5.1",
+                "zendframework/zend-inputfilter": "^2.5.1",
+                "zendframework/zend-serializer": "^2.5.1",
+                "zendframework/zend-servicemanager": "^2.5.1"
+            },
+            "suggest": {
+                "zendframework/zend-eventmanager": "^2.5.1, to support aggregate hydrator usage",
+                "zendframework/zend-filter": "^2.5.1, to support naming strategy hydrator usage",
+                "zendframework/zend-serializer": "^2.5.1, to use the SerializableStrategy",
+                "zendframework/zend-servicemanager": "^2.5.1, to support hydrator plugin manager usage"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev",
+                    "dev-develop": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Zend\\Hydrator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "homepage": "https://github.com/zendframework/zend-hydrator",
+            "keywords": [
+                "hydrator",
+                "zf2"
+            ],
+            "time": "2015-09-17 14:06:43"
+        },
+        {
+            "name": "zendframework/zend-stdlib",
+            "version": "2.7.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/zend-stdlib.git",
+                "reference": "cae029346a33663b998507f94962eb27de060683"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/zend-stdlib/zipball/cae029346a33663b998507f94962eb27de060683",
+                "reference": "cae029346a33663b998507f94962eb27de060683",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5",
+                "zendframework/zend-hydrator": "~1.0"
+            },
+            "require-dev": {
+                "athletic/athletic": "~0.1",
+                "fabpot/php-cs-fixer": "1.7.*",
+                "phpunit/phpunit": "~4.0",
+                "zendframework/zend-config": "~2.5",
+                "zendframework/zend-eventmanager": "~2.5",
+                "zendframework/zend-filter": "~2.5",
+                "zendframework/zend-inputfilter": "~2.5",
+                "zendframework/zend-serializer": "~2.5",
+                "zendframework/zend-servicemanager": "~2.5"
+            },
+            "suggest": {
+                "zendframework/zend-eventmanager": "To support aggregate hydrator usage",
+                "zendframework/zend-filter": "To support naming strategy hydrator usage",
+                "zendframework/zend-serializer": "Zend\\Serializer component",
+                "zendframework/zend-servicemanager": "To support hydrator plugin manager usage"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.7-dev",
+                    "dev-develop": "2.8-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Zend\\Stdlib\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "homepage": "https://github.com/zendframework/zend-stdlib",
+            "keywords": [
+                "stdlib",
+                "zf2"
+            ],
+            "time": "2015-10-15 15:57:32"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "saltybeagle/savvy": 20,
+        "simple-cas/simple-cas": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

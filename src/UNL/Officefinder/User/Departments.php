@@ -20,7 +20,7 @@ class UNL_Officefinder_User_Departments extends UNL_Officefinder_DepartmentList
 
         $records = array();
         $mysqli = UNL_Officefinder::getDB();
-        $sql = 'SELECT DISTINCT departments.id FROM departments, department_permissions
+        $sql = 'SELECT DISTINCT departments.id, departments.name FROM departments, department_permissions
                 WHERE
                     departments.id = department_permissions.department_id
                     AND department_permissions.uid = "'.$mysqli->escape_string($this->options['uid']).'"';

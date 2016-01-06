@@ -1,105 +1,68 @@
 <?php
-UNL_Templates::setCachingService(new UNL_Templates_CachingService_Null());
 
-UNL_Templates::$options['version'] = 4.0;
+use UNL\Templates\Templates;
 
-$template = 'Fixed';
+Templates::setCachingService(new UNL\Templates\CachingService\NullService());
+$page = Templates::factory('Fixed', Templates::VERSION_4_1);
+$wdnIncludePath = dirname(dirname(__DIR__));
 
-$page = UNL_Templates::factory($template);
+if (file_exists($wdnIncludePath . '/wdn/templates_4.1')) {
+    $page->setLocalIncludePath($wdnIncludePath);
+}
 
 $savvy->addGlobal('page', $page);
 
-$page->doctitle     = '<title>Directory | UNL</title>';
-$page->titlegraphic = '<a href="' . UNL_Peoplefinder::getURL() . '">Directory</a>';
+$page->doctitle = '<title>Directory | University of Nebraska–Lincoln</title>';
+$page->titlegraphic = 'Directory';
+$page->setParam('class', implode(' ', ['hide-navigation', 'hide-breadcrumbs', 'hide-wdn_footer_related']));
 
-$classes = array('terminal');
+$page->head .= $savvy->render(null, 'static/head.tpl.php');
 
-if (in_array($controller->options['view'], array('instructions', 'search'))) {
-    $classes[] = 'hide-pagetitle';
-}
-$page->__params['class']['value'] = implode(' ', $classes);
-
-$page->head .= '
-<meta name="description" content="UNL Directory is the Faculty, Staff and Student online directory for the University. Information obtained from this directory may not be used to provide addresses for mailings to students, faculty or staff. Any solicitation of business, information, contributions or other response from individuals listed in this publication by mail, telephone or other means is forbidden." />
-<meta name="keywords" content="university of nebraska-lincoln student faculty staff directory vcard" />
-<meta name="author" content="Brett Bieber, UNL Office of University Communications" />
-';
-
-
-$page->head .='<link href="'.UNL_Peoplefinder::getURL().'css/all_peoplefinder.css?v=4.0" type="text/css" rel="stylesheet" />
-            <!--[if IE]>
-            <link rel="stylesheet" type="text/css" media="screen" href="'.UNL_Peoplefinder::getURL().'css/ie.css?v=4.0" />
-            <![endif]-->
-            <link rel="stylesheet" type="text/css" media="print" href="'.UNL_Peoplefinder::getURL().'css/print.css?v=4.0" />
-            <link rel="stylesheet" type="text/css" href="'.UNL_Peoplefinder::getURL().'css/vcard.css?v=4.0" />
-            <script type="text/javascript">var PF_URL = "'.UNL_Peoplefinder::getURL().'", ANNOTATE_URL = "'.UNL_Peoplefinder::$annotateUrl.'";</script>
-            <script type="text/javascript" src="'.UNL_Peoplefinder::getURL().'scripts/toolbar_peoplefinder.js"></script>
-            <script type="text/javascript" src="'.UNL_Peoplefinder::getURL().'scripts/peoplefinder.js"></script>';
-
-
-if ($context->getRawObject() instanceof UNL_Officefinder) {
-    $login_url = UNL_Officefinder::getURL();
-
-    if (strpos($login_url, '//') === 0) {
-        $login_url = 'https:'.$login_url;
-    }
-
-    $page->head .= '<link rel="login" href="https://login.unl.edu/cas/login?service='.urlencode($login_url).'" />';
-}
-
-if (isset($context->options['print'])) {
-    $page->head .= '<script type="text/javascript">WDN.jQuery(document).ready(function(){window.print()});</script>';
-}
-
-
-if ($context->options['view'] != 'alphalisting'
-    && UNL_Officefinder::getUser()
-    && 
-        (
-        UNL_Officefinder::isAdmin(UNL_Officefinder::getUser())
-        || count(new UNL_Officefinder_User_Departments(array('uid'=>UNL_Officefinder::getUser())))
-        )
-    ) {
-    $page->head .= '
-    <script type="text/javascript">
-        WDN.initializePlugin("jqueryui", [function () {
-            WDN.loadJS("'.UNL_Peoplefinder::getURL().'scripts/edit_functions.js");
-            WDN.loadCSS("'.UNL_Peoplefinder::getURL().'css/editing.css?v=4.0");
-        }]);
-    </script>';
-    $page->titlegraphic .= '<div id="userDepts"><a class="mydepts" href="'.UNL_Officefinder::getURL().'?view=mydepts">My Departments</a></div>';
-}
-
-if (isset($context->options['q']) 
-    || isset($context->options['uid'])
-    || isset($context->options['cn'])
-    || isset($context->options['sn'])) {
+if (isset($context->options['q']) || isset($context->options['cn']) || isset($context->options['sn'])) {
     // Don't let search engines index these pages
-    $page->head .= '<meta name="robots" content="NOINDEX, NOFOLLOW" />';
+    $page->head .= $savvy->render(null, 'static/meta-robots.tpl.php');
 }
 
-$page->breadcrumbs = '
-<ul>
-    <li><a href="http://www.unl.edu/" title="University of Nebraska&ndash;Lincoln">UNL</a></li>
-    <li><a href="'.UNL_Peoplefinder::getURL().'">Directory</a></li>
-    <li>Search</li>
-</ul>';
+$page->breadcrumbs = $savvy->render(null, 'static/breadcrumbs.tpl.php');
+$page->affiliation = '';
+$page->navlinks = '';
+$page->pagetitle = '';
+$page->leftcollinks = '';
 
+$outputTemplate = null;
+$isOutputError = $context->getRaw('output') instanceof Exception;
+if ($isOutputError) {
+    $outputTemplate = 'Exception.tpl.php';
+}
 
-$page->pagetitle = '<h1>Search the Directory</h1>';
-
-if (in_array($context->options['view'], array('instructions', 'search'))) {
+if (in_array($context->options['view'], ['instructions', 'help', 'search'])) {
     //Don't wrap the home page, because we want it to use bands
-    $page->maincontentarea = $savvy->render($context->output);
+    $page->maincontentarea = $savvy->render($context->output, $outputTemplate);
 } else {
     //Wrap everything else
-    $page->maincontentarea = '<div class="wdn-band"><div class="wdn-inner-wrapper wdn-inner-padding-sm">' . $savvy->render($context->output) . '</div></div>';
+    $page->maincontentarea = '<div class="wdn-band record-container"><div class="wdn-inner-wrapper wdn-inner-padding-sm">' . $savvy->render($context->output, $outputTemplate) . '</div></div>';
 }
 
+$savvy->removeGlobal('page');
 
+// add entry-point scripts
+$page->maincontentarea .= $savvy->render(null, 'static/after-main.tpl.php');
+$page->contactinfo = $savvy->render(null, 'static/contact-info.tpl.php');
 
-$page->footercontent = 'UNL | Office of University Communications | <a href="http://www1.unl.edu/wdn/wiki/About_Peoplefinder" onclick="window.open(this.href); return false;">About Directory</a> | <a href="http://www1.unl.edu/comments/" title="Click here to direct your comments and questions" class="dir_correctionRequest">comments?</a>';
-$page->footercontent .= $savvy->render($context, 'CorrectionForm.tpl.php');
-$page->footercontent .= '<br /><br />Information obtained from this directory may not be used to provide addresses for mailings to students, faculty or staff.<br />Any solicitation of business, information, contributions or other response from individuals listed in this publication by mail, telephone or other means is forbidden.<br />';
+$html = $page->toHtml();
+unset($page);
 
-echo $page;
+if (UNL_Peoplefinder::$minifyHtml) {
+    echo zz\Html\HTMLMinify::minify($html, [
+        // 'optimizationLevel' => zz\Html\HTMLMinify::OPTIMIZATION_ADVANCED,
+        'excludeComment' => [
+            '/<!--\s+Membership and regular participation .*?-->/s',
+            '/<!-- (?:Instance|Template)Begin template="[^"]+" codeOutsideHTMLIsLocked="false" -->/',
+            '/<!-- (?:Instance|Template)BeginEditable name="[^"]+" -->/',
+            '/<!-- (?:Instance|Template)EndEditable -->/',
+            '/<!-- (?:Instance|Template)Param name="[^"]+" type="[^"]+" value="[^"]*" -->/',
+        ]
+    ]);
+} else {
+    echo $html;
+}

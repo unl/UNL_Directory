@@ -3,12 +3,12 @@
  * LDAP utilities for building search filters
  *
  * PHP version 5
- * 
- * @category  Default 
+ *
+ * @category  Default
  * @package   UNL_Peoplefinder
  * @link      http://peoplefinder.unl.edu/
  */
-class UNL_Peoplefinder_Driver_LDAP_Util
+abstract class UNL_Peoplefinder_Driver_LDAP_Util
 {
     /**
     * Escapes the given VALUES according to RFC 2254 so that they can be safely used in LDAP filters.
@@ -74,33 +74,21 @@ class UNL_Peoplefinder_Driver_LDAP_Util
         }
         return $string;
     }
-    
-    /**
-     * sort a multidimensional array
-     *
-     * @return array
-     */
-    public static function array_csort()
+
+    public static function filterArrayByKeys($array, $callback)
     {
-        $args   = func_get_args();
-        $marray = array_shift($args);
-        
-        $msortline = "return(array_multisort(";
-        foreach ($args as $arg) {
-            @$i++;
-            if (is_string($arg)) {
-                foreach ($marray as $row) {
-                    $sortarr[$i][] = $row[$arg];
+        if (defined('ARRAY_FILTER_USE_KEY')) {
+            return array_filter($array, $callback, ARRAY_FILTER_USE_KEY);
+        } else {
+            $result = [];
+            foreach (array_keys($array) as $key) {
+                if ($callback($key)) {
+                    $result[$key] = $array[$key];
                 }
-            } else {
-                $sortarr[$i] = $arg;
             }
-            $msortline .= "\$sortarr[".$i."],";
+
+            return $result;
         }
-        $msortline .= "\$marray));";
-        
-        eval($msortline);
-        return $marray;
     }
 
     /**
@@ -110,7 +98,7 @@ class UNL_Peoplefinder_Driver_LDAP_Util
      */
     public static function wrapGlobalExclusions($filter)
     {
-        return 
+        return
             '(&'
             . $filter
             . '(!(eduPersonPrimaryAffiliation=guest))' .

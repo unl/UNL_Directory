@@ -1,0 +1,38 @@
+{
+	"autoload": {
+		"psr-0": {
+			"UNL": "src/"
+		}
+	},
+	"repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/saltybeagle/Savvy.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/unlpear/UNL_Cache_Lite.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/unlpear/UNL_Common.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/saltybeagle/SimpleCAS.git"
+        },
+        {
+            "type": "pear",
+            "url": "http://pear.php.net"
+        }
+    ],
+    "require": {
+        "saltybeagle/savvy": "dev-master",
+        "unl/unl_cache_lite": "0.1.*",
+        "unl/common": "0.6.*",
+        "unl/php-wdn-templates": "~4.1",
+        "pear-pear/HTTP_Request2": "*",
+        "simple-cas/simple-cas": "dev-master",
+        "zaininnari/html-minifier": "*"
+    }
+}

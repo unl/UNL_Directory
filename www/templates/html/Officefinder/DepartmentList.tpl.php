@@ -1,14 +1,13 @@
 <?php
-if (count($context)) {
-    echo '<div class="result_head">'.count($context).' result(s) found</div>';
-    echo '<ul class="pfResult departments">';
-    foreach ($context as $department) {
-
-        echo $savvy->render($department, 'Officefinder/DepartmentList/ListItem.tpl.php');
-
-    }
-    echo '</ul>';
-} else {
-    echo "No results could be found";
-}
+$end = count($context);
 ?>
+<?php if ($end): ?>
+	<div class="result_head"><?php echo $end ?> result<?php echo $end > 1 ? 's' : '' ?> found</div>
+	<ul class="pfResult departments">
+		<?php foreach ($context as $department): ?>
+			<?php echo $savvy->render($department, 'Officefinder/DepartmentList/ListItem.tpl.php') ?>
+		<?php endforeach; ?>
+	</ul>
+<?php else: ?>
+	<div class="result_head">No results</div>
+<?php endif; ?>

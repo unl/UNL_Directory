@@ -4,26 +4,6 @@ class UNL_Knowledge
 {
     public $options = array();
 
-    public $bio;
-
-    public $courses;
-
-    public $education;
-
-    public $grants;
-
-    public $honors;
-
-    public $papers;
-
-    public $presentations;
-
-    public $performances;
-
-    public $public_web;
-
-    public $error;
-
     /**
      * Driver for data retrieval
      *
@@ -31,9 +11,9 @@ class UNL_Knowledge
      */
     public $driver;
 
-    function __construct($options = array())
+    public function __construct($options = array())
     {
-        if (!isset($options['driver'])) {
+        if (!isset($options['driver']) || !$options['driver'] instanceof UNL_Knowledge_DriverInterface) {
             $options['driver'] = new UNL_Knowledge_Driver_REST();
         }
 
@@ -52,7 +32,7 @@ class UNL_Knowledge
      *
      * @return mixed
      */
-    function __call($method, $args)
+    public function __call($method, $args)
     {
         return call_user_func_array(array($this->driver, $method), $args);
     }

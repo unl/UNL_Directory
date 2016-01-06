@@ -1,2 +1,0 @@
-<?php echo $context->getMessage(); ?>
-<p>Please enter more information or <a href='<?php echo UNL_Peoplefinder::getURL(); ?>?adv=y' title='Click here to perform a detailed Peoplefinder search'>try a Detailed Search.</a></p>

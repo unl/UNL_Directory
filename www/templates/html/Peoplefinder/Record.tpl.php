@@ -1,136 +1,188 @@
 <?php
-$permalink = UNL_Peoplefinder::getURL().'?uid='.$context->uid;
-
 $preferredFirstName = $context->getPreferredFirstName();
+$preferredName = $preferredFirstName . ' ' . $context->sn;
 
-UNL_Peoplefinder::setReplacementData('pagetitle', '<h1>'.$context->displayName.'</h1>');
+$isOrg = $context->ou == 'org';
+$itemtype = 'Person';
+if ($isOrg) {
+    $itemtype = 'Organization';
+}
 
-echo "<div class='vcard {$context->eduPersonPrimaryAffiliation}'>\n";
-echo '<a class="planetred_profile" href="http://planetred.unl.edu/pg/profile/unl_'.str_replace("-", "_", $context->uid).'" title="Planet Red Profile for '.$context->cn.'"><img class="profile_pic medium photo" src="'.htmlspecialchars($context->getImageURL()).'"  alt="Photo of '.$context->displayName.'" /></a> ';
-echo '<div class="wdn_vcardTools">';
-echo '<a href="'.UNL_Peoplefinder::getURL().'vcards/'.$context->uid.'" title="Download V-Card for '.$preferredFirstName.' '.$context->sn.'" class="text-vcard">vCard</a> ';
-echo '<a title="QR Code vCard" href="http://chart.apis.google.com/chart?chs=400x400&amp;cht=qr&amp;chl=' . rawurlencode($savvy->render($context, 'templates/vcard/Peoplefinder/Record.tpl.php')) . '&amp;chld=L%7C1&amp;.png" class="img-qrcode">QR Code</a> ';
-echo '<a title="Print this listing" href="'.$permalink.'&amp;print" class="print">Print</a> ';
+if (isset($page)) {
+    // inject a prefix into the document title
+    $page = $page->getRawObject();
+    $page->doctitle = substr_replace($page->doctitle, $preferredName . ' | ', strlen('<title>'), 0);
+}
 
-echo '<div class="wdn_annotate" id="directory_'.$context->uid.'"></div>';
-echo '</div>'; //Close the tools div.
-
-echo '<div class="vcardInfo">'.PHP_EOL;
 $displayEmail = false;
-if (isset($context->mail)
-    && ($context->eduPersonPrimaryAffiliation != 'student')) {
+$encodedEmail = '';
+if (isset($context->mail) && !$context->isPrimarilyStudent()) {
     $displayEmail = true;
-}
-if ($displayEmail) {
-    echo "<a class='email' href='mailto:{$context->mail}'>";
-}
-if ($context->ou == 'org') {
-    echo '<span class="cn">'.$context->cn.'</span>';
-} else {
-    echo '<span class="fn">'.$preferredFirstName.' '.$context->sn.'</span>';
-    if (!empty($context->eduPersonNickname)
-        && $context->eduPersonNickname != ' ') {
-        echo ' <span class="givenName">'.$context->givenName.'</span>';
-    }
-}
-if ($displayEmail) {
-    echo "</a>\n";
-}
-if ($context->ou != 'org') {
-    echo ' <a class="permalink" href="'.$permalink.'" title="Permalink for '.$context->displayName.'">link</a>';
+    // attempt to curb lazy email harvesting bots
+    $encodedEmail = htmlentities($context->getRaw('mail'), ENT_QUOTES | ENT_HTML5);
 }
 
-if (isset($context->eduPersonAffiliation)) {
-    $affiliations = array_intersect(UNL_Peoplefinder::$displayedAffiliations, $context->getRaw('eduPersonAffiliation')->getArrayCopy());
-    echo '<span class="eppa">('.implode(', ', $affiliations).')</span>';
-}
+$showKnowledge = $context->shouldShowKnowledge();
+?>
+<?php if ($showKnowledge): ?>
+<section class="wdn-grid-set knowledge-grid">
+    <div class="bp2-wdn-col-two-sevenths">
+<?php endif; ?>
 
-if (isset($context->unlSISClassLevel)) {
-    switch ($context->unlSISClassLevel) {
-        case 'FR':
-            $class = 'Freshman';
-            break;
-        case 'SR':
-            $class = 'Senior';
-            break;
-        case 'SO':
-            $class = 'Sophomore';
-            break;
-        case 'JR':
-            $class = 'Junior';
-            break;
-        case 'GR':
-            $class = 'Graduate Student';
-            break;
-        default:
-            $class = $context->unlSISClassLevel;
-    }
-    echo '<span class="title"><span class="grade">'.$class.'</span> ';
-    if (isset($context->unlSISMajor)) {
-        foreach ($context->unlSISMajor as $major) {
-            echo '<span class="major">'.$context->formatMajor($major).'</span> ';// <span class="college">'.$context->formatCollege((string) $context->unlSISCollege).'</span>';
-        }
-    }
-    if (isset($context->unlSISMinor)) {
-        foreach ($context->unlSISMinor as $minor) {
-            echo '<span class="minor">'.$context->formatMajor($minor).'</span> ';
-        }
-    }
-    echo '</span>';
-}
 
-if (isset($context->unlHROrgUnitNumber)) {
-    if (!$parent->parent) {
-        // Viewing a Record (hcard, search result)
-        $roles = $parent->context->getRoles($context->dn);
-    } else {
-        // Viewing a Person (full webpage)
-        $roles = $parent->parent->context->getRoles($context->dn);
-    }
-    
-    if (count($roles)) {
-        echo $savvy->render($roles);
-    }
+<div class="vcard <?php if (!$showKnowledge): ?>card <?php endif; ?><?php echo $context->eduPersonPrimaryAffiliation ?>" data-uid="<?php echo $context->uid ?>" data-preferred-name="<?php echo $preferredName ?>" itemscope itemtype="http://schema.org/<?php echo $itemtype ?>">
+    <a class="card-profile planetred_profile" href="<?php echo $context->getProfileUrl() ?>" title="Planet Red profile for <?php echo $preferredName ?>" itemprop="url">
+        <img class="photo profile_pic" itemprop="image" src="<?php echo $context->getImageURL(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_LARGE) ?>" alt="Avatar for <?php echo $preferredName ?>" />
+    </a>
 
-}
+    <div class="vcardInfo<?php if (!$showKnowledge): ?> card-content<?php endif; ?>">
+    <?php if (!$context->isHcardFormat()): ?>
+        <h1 class="headline">
+    <?php else: ?>
+        <div class="headline">
+    <?php endif; ?>
+        <?php if (!$isOrg): ?>
+            <a class="permalink" href="<?php echo $context->getUrl() ?>" itemprop="url">
+        <?php endif; ?>
+        <?php if ($isOrg): ?>
+            <span class="cn" itemprop="name"><?php echo $context->cn ?></span>
+        <?php else: ?>
+            <span class="fn" itemprop="name"><?php echo $preferredName ?></span>
+            <?php if ($context->hasNickname()): ?>
+            <span class="n">
+                <span class="given-name" itemprop="givenName"><?php echo $context->givenName ?></span>
+            </span>
+            <?php endif; ?>
+        <?php endif; ?>
+        <?php if (!$isOrg): ?>
+            <span class="icon-link"></span></a>
+        <?php endif; ?>
+    <?php if ($context->isHcardFormat()): ?>
+        </div>
+    <?php else: ?>
+        </h1>
+    <?php endif; ?>
 
-if (($address = $context->formatPostalAddress()) && count($address)) {
-    echo '<div class="adr workAdr">
-         <span class="type">Work</span>';
-        if (!empty($address['unlBuildingCode'])) {
-            echo '<span class="street-address">'. str_replace($address['unlBuildingCode'], '<a class="location mapurl" href="http://maps.unl.edu/'.$address['unlBuildingCode'].'">'.$address['unlBuildingCode'].'</a>', $address['street-address']) . '</span>';
-        } else {
-            echo '<span class="street-address">'. $address['street-address'] . '</span>';
-        }
-        echo '
-         <span class="locality">' . $address['locality'] . '</span>
-         <span class="region">' . $address['region'] . '</span>
-         <span class="postal-code">' . $address['postal-code'] . '</span>
-         <div class="country-name">USA</div>
-        </div>'.PHP_EOL;
-}
+    <?php
+    $affiliations = $context->formatAffiliations();
+    ?>
+    <?php if ($affiliations): ?>
+        <div class="eppa">(<?php echo $affiliations ?>)</div>
+    <?php endif; ?>
 
-if (isset($context->telephoneNumber)) {
+    <?php if (isset($context->unlHROrgUnitNumber)): ?>
+        <?php
+        $roles = $context->getRoles();
+        $title = $context->formatTitle();
+        ?>
+        <?php if (count($roles)): ?>
+            <?php echo $savvy->render($roles) ?>
+        <?php elseif ($title): ?>
+            <div class="title" itemprop="jobTitle"><?php echo $title ?></div>
+        <?php endif; ?>
+    <?php endif ?>
 
-    echo '<div class="tel workTel">
-             <span class="voice">
-             <span class="type">Work</span>
-             <span class="value">'.$savvy->render($context->telephoneNumber, 'Peoplefinder/Record/TelephoneNumber.tpl.php').'</span>
-             </span>
-            </div>'.PHP_EOL;
-}
+    <?php if ($context->hasStudentInformation()): ?>
+        <div class="sis-title">
+        <?php if (isset($context->unlSISClassLevel)): ?>
+            <span class="grade"><?php echo $context->formatClassLevel() ?></span>
+        <?php endif; ?>
+        <?php if (isset($context->unlSISMajor)): ?>
+            <?php foreach ($context->getRawObject()->unlSISMajor as $major): ?>
+                <span class="major"><?php echo $context->formatMajor($major) ?></span>
+            <?php endforeach; ?>
+        <?php endif; ?>
+        <?php if (isset($context->unlSISMinor)): ?>
+            <?php foreach ($context->getRawObject()->unlSISMinor as $minor): ?>
+                <span class="minor"><?php echo $context->formatMajor($minor) ?></span>
+            <?php endforeach; ?>
+        <?php endif; ?>
+            <?php foreach ($context->getRawObject()->unlSISCollege as $college): ?>
+                <?php
+                $college = $context->formatCollege($college);
+                ?>
+                <?php if (is_string($college)): ?>
+                    <span class="icon-academic-cap college"><?php echo $college ?></span>
+                <?php else: ?>
+                    <span class="icon-academic-cap college">
+                        <?php if (isset($college['link'])): ?>
+                            <a href="<?php echo $college['link'] ?>">
+                        <?php endif; ?>
+                        <abbr title="<?php echo $college['title'] ?>"><?php echo $college['abbr'] ?></abbr>
+                        <?php if (isset($college['org_unit_number'])): ?>
+                            </a>
+                        <?php endif; ?>
+                    </span>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
 
-if (isset($context->unlSISLocalPhone)) {
-    echo '<div class="tel homeTel">
-             <span class="voice">
-             <span class="type">Phone</span>
-             <span class="value">'.$savvy->render($context->unlSISLocalPhone, 'Peoplefinder/Record/TelephoneNumber.tpl.php').'</span>
-             </span>
-            </div>'.PHP_EOL;
-}
+    <?php if (($address = $context->formatPostalAddress()) && count($address)): ?>
+        <div class="adr work attribute icon-map-pin" itemprop="workLocation" itemscope itemtype="http://schema.org/Place">
+            <span class="type">Work</span>
+            <?php if (!empty($address['unlBuildingCode'])): ?>
+                <span class="street-address">
+                    <a href="https://maps.unl.edu/<?php echo $address['unlBuildingCode'] ?>" itemprop="hasMap"><?php echo $address['unlBuildingCode'] ?></a>
+                    <?php echo str_replace($address['unlBuildingCode'], '', $address['street-address']) ?>
+                </span>
+            <?php endif; ?>
+            <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                <?php if (empty($address['unlBuildingCode'])): ?>
+                    <span class="street-address" itemprop="streetAddress"><?php echo $address['street-address'] ?></span>
+                <?php endif; ?>
+                <span class="locality" itemprop="addressLocality"><?php echo $address['locality'] ?></span>
+                <?php echo $savvy->render($address['region'], 'Peoplefinder/Record/Region.tpl.php') ?>
+                <span class="postal-code" itemprop="postalCode"><?php echo $address['postal-code'] ?></span>
+                <div class="country-name" itemprop="addressCountry">US</div>
+            </div>
+        </div>
+    <?php endif; ?>
 
-if ($displayEmail) {
-    echo "<span class='email'><a class='email' href='mailto:{$context->mail}'>{$context->mail}</a></span>\n";
-}
-echo '</div>'.PHP_EOL.'</div>'.PHP_EOL;
+    <?php if (isset($context->telephoneNumber)): ?>
+        <div class="tel work icon-phone attribute">
+            <span class="type">Work</span>
+            <span class="value"><?php echo $savvy->render((object) [
+                'number' => $context->telephoneNumber,
+                'itemprop' => 'telephone',
+            ], 'Peoplefinder/Record/NumberItemprop.tpl.php') ?></span>
+            <?php echo $savvy->render($context->telephoneNumber, 'Peoplefinder/Record/CampusNumber.tpl.php') ?>
+        </div>
+    <?php endif; ?>
 
+    <?php if (isset($context->unlSISLocalPhone)): ?>
+        <div class="tel home">
+            <span class="type">Phone</span>
+            <span class="value"><?php echo $savvy->render((object) [
+                'number' => $context->unlSISLocalPhone,
+                'itemprop' => 'telephone',
+            ], 'Peoplefinder/Record/NumberItemprop.tpl.php') ?></span>
+            <?php echo $savvy->render($context->unlSISLocalPhone, 'Peoplefinder/Record/CampusNumber.tpl.php') ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($displayEmail): ?>
+        <div class="icon-email attribute">
+            <a class="email" href="mailto:<?php echo $encodedEmail ?>" itemprop="email"> <?php echo $encodedEmail ?></a>
+        </div>
+    <?php endif; ?>
+    </div>
+
+    <div class="vcard-tools wdn_vcardTools">
+        <a href="<?php echo $context->getVcardUrl() ?>" class="icon-vcard"><span class="wdn-text-hidden">Download </span>vCard<span class="wdn-text-hidden"> for <?php echo $preferredName ?></span></a>
+        <a href="<?php echo $context->getQRCodeUrl($savvy->render($context, 'templates/vcard/Peoplefinder/Record.tpl.php')) ?>" class="icon-qr-code">QR Code<span class="wdn-text-hidden"> vCard for <?php echo $preferredName ?></span></a>
+        <button class="icon-print">Print<span class="wdn-text-hidden"> listing for <?php echo $preferredName ?></span></button>
+    </div>
+</div>
+
+<?php if ($showKnowledge): ?>
+    </div>
+    <div class="bp2-wdn-col-five-sevenths">
+        <div class="card">
+            <div class="card-content">
+                <?php echo $savvy->render($context->getKnowledge()) ?>
+            </div>
+        </div>
+    </div>
+</section>
+<?php endif; ?>

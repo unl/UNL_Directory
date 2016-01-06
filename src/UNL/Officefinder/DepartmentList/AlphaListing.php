@@ -1,5 +1,5 @@
 <?php
-class UNL_Officefinder_DepartmentList_AlphaListing extends FilterIterator implements Savvy_Turbo_CacheableInterface
+class UNL_Officefinder_DepartmentList_AlphaListing extends FilterIterator
 {
     public $options = array('q'=>'');
 
@@ -37,22 +37,7 @@ class UNL_Officefinder_DepartmentList_AlphaListing extends FilterIterator implem
         return $sql;
     }
 
-    function preRun($cached)
-    {
-        // void
-    }
-
-    function run()
-    {
-        // void, all the processing is in the template output
-    }
-
-    function getCacheKey()
-    {
-        return false;
-    }
-
-    function accept()
+    public function accept()
     {
         if ($this->current()->department->hasChildren()
             || isset($this->current()->department->phone)) {
@@ -61,7 +46,7 @@ class UNL_Officefinder_DepartmentList_AlphaListing extends FilterIterator implem
         return false;
     }
 
-    function current()
+    public function current()
     {
         $row = parent::current();
         return new UNL_Officefinder_DepartmentList_AlphaListing_Department($row[1],

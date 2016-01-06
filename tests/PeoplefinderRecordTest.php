@@ -1,5 +1,4 @@
 <?php
-require_once dirname(__FILE__) . '/../src/UNL/Peoplefinder/Record.php';
 
 class PeoplefinderRecordTest extends \PHPUnit_Framework_TestCase {
     protected $record;

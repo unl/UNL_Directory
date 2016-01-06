@@ -1,25 +1,23 @@
-<div id="searchform" class="wdn-band wdn-light-neutral-band search-container">
-    <div class="wdn-inner-wrapper wdn-inner-padding-sm">
-        <?php
-        if (isset($context->options['adv'])) {
-            echo $savvy->render($context, 'Peoplefinder/AdvancedForm.tpl.php');
-        } else {
-            echo $savvy->render($context, 'Peoplefinder/StandardForm.tpl.php');
-        }
-        ?>
-    </div>
-</div>
+<?php
+$baseUrl = UNL_Peoplefinder::getURL();
+?>
 
-<div class="wdn-band help-container">
+<section class="wdn-band search-band">
+    <div class="wdn-inner-wrapper wdn-inner-padding-sm">
+        <?php echo $savvy->render($context, 'Peoplefinder/StandardForm.tpl.php') ?>
+    </div>
+</section>
+
+<section class="wdn-band help-container">
     <div class="wdn-inner-wrapper">
-        <section class="wdn-grid-set">
-            <div class="bp2-wdn-col-one-half"  id="instructions_people">
-                <div class="intro">
-                    <img width="100" height ="100" class="profile_pic medium planetred_profile" src="<?php echo UNL_Peoplefinder::getURL(); ?>images/peopleHerbie.png" alt="sample people results" />
-                    <h3 class="recordDetails">
-                        Search <span class="search_context">People</span>
-                    </h3>
-                    <div class="intro_support clear">
+        <h1 class="heading-block wdn-center">Welcome to the University of Nebraska–Lincoln Directory</h1>
+        <div class="wdn-grid-set">
+            <div class="bp2-wdn-col-one-half" id="instructions_people">
+                <div class="card">
+                    <img class="hero-img" src="<?php echo $baseUrl ?>images/130912_Herbie_104.jpg" alt="Profile view of mascot Herbie Husker" />
+                    <div class="card-content">
+                        <h2><span class="wdn-subhead">Search</span>
+                        People</h2>
                         <p>Find contact information for faculty, staff and students. Search by:</p>
                         <ul>
                             <li>First name</li>
@@ -31,12 +29,11 @@
                 </div>
             </div>
             <div class="bp2-wdn-col-one-half" id="instructions_departments">
-                <div class="intro">
-                    <img width="100" height ="100" class="profile_pic medium planetred_profile" src="<?php echo UNL_Peoplefinder::getURL(); ?>images/organizationVC.png" alt="sample department results" />
-                    <h3 class="recordDetails">
-                        Search <span class="search_context">Departments</span>
-                    </h3>
-                    <div class="intro_support clear">
+                <div class="card">
+                    <img class="hero-img" src="<?php echo $baseUrl ?>images/110606_Canfield_S_3.jpg" alt="Panoramic view of Canfield Administration Building" />
+                    <div class="card-content">
+                        <h2><span class="wdn-subhead">Search</span>
+                        Departments</h2>
                         <p>Find UNL departments by entering a full or partial department name. Information available:</p>
                         <ul>
                             <li>Department contact information and location on campus</li>
@@ -46,21 +43,27 @@
                     </div>
                 </div>
             </div>
-        </section>
-        
-        <div class="first footer">
-            <a href="<?php echo UNL_Officefinder::getURL(); ?>?view=alphalisting">Log in and view the printer-friendly Yellow Page Directory</a>
+        </div>
+
+        <div class="directory-foot">
+            <p>A printer-friendly version of the Yellow Page Directory is available to university users only.<br/>Please be aware this is a very large document and may take some time to fully load.</p>
+            <p><a class="wdn-button wdn-button-brand" href="<?php echo UNL_Officefinder::getURL(); ?>yellow-pages">Print yellow pages</a></p>
         </div>
     </div>
-</div>
+</section>
 
-<div class="wdn-band results-container">
+<section class="wdn-band results-container">
     <div class="wdn-inner-wrapper wdn-inner-padding-sm">
+        <div id="search-notice"></div>
         <div class="wdn-grid-set">
-            <div class="bp2-wdn-col-one-fourth">
+            <div class="bp2-wdn-col-one-fourth result-filters">
                 <?php echo $savvy->render(null, 'Peoplefinder/SearchResults/Filters.tpl.php'); ?>
             </div>
-            <div id="results" tabindex="-1" class="bp2-wdn-col-three-fourths"></div>
+            <div id="results" tabindex="-1" class="bp2-wdn-col-three-fourths wdn-pull-right" aria-live="polite"></div>
         </div>
     </div>
-</div>
+</section>
+
+<section class="wdn-band record-container">
+    <div class="wdn-inner-wrapper wdn-inner-padding-sm record-single"></div>
+</section>

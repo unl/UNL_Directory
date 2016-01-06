@@ -1,11 +1,11 @@
-<?php
-echo '<div id="results_'.$context->affiliation.'" class="results affiliation '.$context->affiliation.'">';
-echo '<h3>'.ucfirst($context->affiliation).'</h3>';
-echo $savvy->render(new UNL_Peoplefinder_SearchResults(array('results'=>$context->getRaw('results'), 'options'=>$context->options )));
-if (count($context->like_results)) {
-    echo '<div class="likeResults">';
-    echo '<h3>similar '.$context->affiliation.' results</h3>';
-    echo $savvy->render(new UNL_Peoplefinder_SearchResults(array('results'=>$context->getRaw('like_results'), 'options'=>$context->options)));
-    echo '</div>';
-}
-echo '</div>';
+
+<div id="results_<?php echo $context->affiliation ?>" class="results affiliation <?php echo $context->affiliation ?>">
+	<h2 class="wdn-brand"><?php echo ucfirst($context->affiliation) ?></h2>
+	<?php echo $savvy->render(new UNL_Peoplefinder_SearchResults(array('results'=>$context->getRaw('results'), 'options'=>$context->options ))); ?>
+	<?php if (count($context->like_results)): ?>
+		<div class="likeResults">
+			<h3><span class="wdn-subhead">similar <?php echo $context->affiliation ?> results</h3>
+			<?php echo $savvy->render(new UNL_Peoplefinder_SearchResults(array('results'=>$context->getRaw('like_results'), 'options'=>$context->options))); ?>
+		</div>
+	<?php endif; ?>
+</div>
