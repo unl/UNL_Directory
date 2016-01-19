@@ -708,6 +708,11 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
             $data['unlDirectoryAddress'] = $address;
         }
 
+        if ($this->shouldShowKnowledge()) {
+            $knowledge = $this->getKnowledge();
+            $data['knowledge'] = $knowledge->jsonSerialize();
+        }
+
         // for backwards compatibliity (safe), cast to object
         if ($version === self::SERIALIZE_VERSION_SAFE || $version === self::SERIALIZE_VERSION_SAFE_MULTIVALUE) {
             $data = (object) $data;
@@ -754,6 +759,11 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
 
         if ($address = $this->formatPostalAddress()) {
             $data['unlDirectoryAddress'] = $address;
+        }
+
+        if ($this->shouldShowKnowledge()) {
+            $knowledge = $this->getKnowledge();
+            $data['knowledge'] = $knowledge->jsonSerialize();
         }
 
         return $data;
