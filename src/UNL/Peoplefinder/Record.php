@@ -701,11 +701,18 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
             }
         }
 
-        // inject methods as properties
-        $data['imageURL'] = $this->getImageURL();
+        if ($this->uid) {
+            // inject methods as properties
+            $data['imageURL'] = $this->getImageURL();
 
-        if ($address = $this->formatPostalAddress()) {
-            $data['unlDirectoryAddress'] = $address;
+            if ($address = $this->formatPostalAddress()) {
+                $data['unlDirectoryAddress'] = $address;
+            }
+
+            if ($this->shouldShowKnowledge()) {
+                $knowledge = $this->getKnowledge();
+                $data['knowledge'] = $knowledge->jsonSerialize();
+            }
         }
 
         // for backwards compatibliity (safe), cast to object
@@ -746,6 +753,10 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
     {
         $data = $this->getPublicProperties();
 
+        if (!$this->uid) {
+            return $data;
+        }
+
         //force uid to be a single value
         $data['uid'] = (string) $this->uid;
 
@@ -754,6 +765,11 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
 
         if ($address = $this->formatPostalAddress()) {
             $data['unlDirectoryAddress'] = $address;
+        }
+
+        if ($this->shouldShowKnowledge()) {
+            $knowledge = $this->getKnowledge();
+            $data['knowledge'] = $knowledge->jsonSerialize();
         }
 
         return $data;
