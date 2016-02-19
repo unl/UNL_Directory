@@ -1,7 +1,7 @@
 <?php
 /**
  * Class builds a pretty good LDAP filter for searching for people.
- * 
+ *
  * <code>
  * <?php
  * $filter = new UNL_Peoplefinder_StandardFilter('brett bieber','|',false);
@@ -11,8 +11,8 @@
  * </code>
  *
  * PHP version 5
- * 
- * @category  Default 
+ *
+ * @category  Default
  * @package   UNL_Peoplefinder
  * @author    Brett Bieber <brett.bieber@gmail.com>
  * @copyright 2007 Regents of the University of Nebraska
@@ -22,7 +22,7 @@
 class UNL_Peoplefinder_Driver_LDAP_StandardFilter
 {
     protected $_filter;
-    
+
     protected $_excludeRecords = array();
 
     public static $searchFields = array(
@@ -32,7 +32,7 @@ class UNL_Peoplefinder_Driver_LDAP_StandardFilter
             'sn',
             'eduPersonNickname'
         );
-    
+
     /**
      * Construct a standard filter.
      *
@@ -99,7 +99,7 @@ class UNL_Peoplefinder_Driver_LDAP_StandardFilter
             $this->_excludeRecords = $records;
         }
     }
-    
+
     protected function addExcludedRecords()
     {
         if (count($this->_excludeRecords)) {
@@ -110,7 +110,7 @@ class UNL_Peoplefinder_Driver_LDAP_StandardFilter
             $this->_filter = '(&'.$this->_filter.'(!(|'.$excludeFilter.')))';
         }
     }
-    
+
     function __toString()
     {
         $this->addExcludedRecords();
