@@ -48,9 +48,13 @@ class UNL_Peoplefinder_Driver_LDAP_StandardFilter
 
             //escape query
             $inquery = UNL_Peoplefinder_Driver_LDAP_Util::escape_filter_value($inquery);
-            
+
             //put the query into an array of words
             $query = preg_split('/\s+/', $inquery, 4);
+            if (count($query) > 1) {
+                //add the original multi-word query as a search term
+                $query[] = $inquery;
+            }
 
             if ($operator != '&') {
                 $operator = '|';
@@ -78,22 +82,10 @@ class UNL_Peoplefinder_Driver_LDAP_StandardFilter
                 $filter .= ")";
             }
             $filter .= ")";
-
-            //determine if a wildcard should be used
-            if ($wild) {
-                $inquery = "*$inquery*";
-            }
-
-            //and search for the string as entered
-            $as_entered = '';
-            foreach(self::$searchFields as $field) {
-                $as_entered .= "($field=$inquery)";
-            }
-            $filter = "(|(|$as_entered)$filter)";
         }
         $this->_filter = $filter;
     }
-    
+
     /**
      * Allows you to exclude specific records from a result set.
      *
