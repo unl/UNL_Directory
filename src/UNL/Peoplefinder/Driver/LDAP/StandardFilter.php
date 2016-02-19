@@ -4,10 +4,10 @@
  *
  * <code>
  * <?php
- * $filter = new UNL_Peoplefinder_StandardFilter('brett bieber','|',false);
+ * $filter = new UNL_Peoplefinder_Driver_LDAP_StandardFilter('brett bieber','|',false);
  * echo $filter;
  * ?>
- * (|(sn=brett bieber)(cn=brett bieber)(&(| (givenname=brett) (sn=brett) (mail=brett) (unlemailnickname=brett) (unlemailalias=brett))(| (givenname=bieber) (sn=bieber) (mail=bieber) (unlemailnickname=bieber) (unlemailalias=bieber))))
+ * (|(|(mail=brett)(cn=brett)(givenName=brett)(sn=brett)(eduPersonNickname=brett)(sn=brett-*)(sn=*brett))(|(mail=bieber)(cn=bieber)(givenName=bieber)(sn=bieber)(eduPersonNickname=bieber)(sn=bieber-*)(sn=*bieber))(|(mail=brett bieber)(cn=brett bieber)(givenName=brett bieber)(sn=brett bieber)(eduPersonNickname=brett bieber)(sn=brett bieber-*)(sn=*brett bieber)))
  * </code>
  *
  * PHP version 5
