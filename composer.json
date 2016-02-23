@@ -7,10 +7,6 @@
 	"repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/saltybeagle/Savvy.git"
-        },
-        {
-            "type": "vcs",
             "url": "https://github.com/unlpear/UNL_Cache_Lite.git"
         },
         {
@@ -27,7 +23,7 @@
         }
     ],
     "require": {
-        "saltybeagle/savvy": "dev-master",
+        "saltybeagle/savvy": "^0.9.0",
         "unl/unl_cache_lite": "0.1.*",
         "unl/common": "0.6.*",
         "unl/php-wdn-templates": "~4.1",
