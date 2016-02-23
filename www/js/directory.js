@@ -826,7 +826,7 @@ define([
 			var tmpl = $.templates(lengthErrorSelector);
 			var $results = $('#' + resultsdiv);
 
-			if (rawQuery.length > 2) {
+			if (rawQuery.length > 3) {
 				filters.clear();
 				$results.empty().append($progress);
 				requestTimeout = setTimeout(function() {
