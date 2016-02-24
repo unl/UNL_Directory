@@ -25,6 +25,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
     static public $bindPW             = 'putyourpasswordhere';
     static public $baseDN             = 'ou=people,dc=unl,dc=edu';
     static public $ldapTimeout        = 10;
+    static public $cacheTimeout       = 28800; //8 hours
 
     /**
      * Attribute arrays
@@ -99,6 +100,9 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
 
     public function __construct()
     {
+        $this->cache = UNL_Peoplefinder_Cache::factory([
+            'fast_lifetime' => self::$cacheTimeout,
+        ]);
     }
 
     /**
@@ -169,6 +173,23 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
         if (!$dn) {
             $dn = self::$baseDN;
         }
+        
+        $cache_key = $filter . '-' . implode(',', $attributes) . '-' . $setResult . '-' . $dn;
+        //Our key will most likely exceed the memcached key length limit, so reduce it
+        $cache_key = 'ldap-'.md5($cache_key);
+        
+        if ($result = $this->cache->get($cache_key)) {
+            $result = unserialize($result);
+
+            if ($setResult) {
+                $this->lastResult = $this->caseInsensitiveSortLDAPResults($result);
+            }
+            
+            return $result;
+        }
+
+        //Prevent cache stampede (return empty results until the first one finishes)
+        $this->cache->set($cache_key, serialize([]));
 
         $limit = UNL_Peoplefinder::$resultLimit;
         $timeout = self::$ldapTimeout;
@@ -200,6 +221,8 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
         }
 
         ldap_free_result($sr);
+       
+        $this->cache->set($cache_key, serialize($result));
 
         return $result;
     }
