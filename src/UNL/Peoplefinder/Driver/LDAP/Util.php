@@ -94,14 +94,13 @@ abstract class UNL_Peoplefinder_Driver_LDAP_Util
     /**
      * This is used to wrap filters in global exclusion clauses.
      *
+     * If you want to quickly exclude someone:
+     * return "(&$filter(!(uid=bbieber2)))";
+     *
      * @param $filter
      */
     public static function wrapGlobalExclusions($filter)
     {
-        return
-            '(&'
-            . $filter
-            . '(!(eduPersonPrimaryAffiliation=guest))' .
-            ')';
+        return $filter;
     }
 }
