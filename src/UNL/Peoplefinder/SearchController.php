@@ -81,7 +81,7 @@ class UNL_Peoplefinder_SearchController
             $search_method = $this->options['method'];
         }
 
-        if (!is_array($this->options['q']) && strlen($this->options['q']) <= 3) {
+        if (!is_array($this->options['q']) && strlen($this->options['q']) <= 2) {
             throw new UNL_Peoplefinder_InvalidArgumentException('Too few characters were entered.');
         }
 
