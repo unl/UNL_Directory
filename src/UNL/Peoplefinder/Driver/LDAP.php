@@ -196,7 +196,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
         $this->lastQuery = $filter;
 
         $tries = 1;
-        $maxTries = 10;
+        $maxTries = 5;
 
         do {
             $retry = false;
