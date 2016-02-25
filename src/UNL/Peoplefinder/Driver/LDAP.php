@@ -198,11 +198,31 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
         $tries = 1;
         $maxTries = 5;
 
+        //Try several times in case of a connection error
         do {
             $retry = false;
             $this->bind();
             $sr = @ldap_search($this->linkID, $dn, $filter, $attributes, 0, $limit, $timeout);
             if (!$sr) {
+                //log error
+                $errno = ldap_errno($this->linkID);
+                $error = ldap_error($this->linkID);
+                
+                $ldap_error_file = UNL_Peoplefinder::getTmpDir() . '/ldap_error.log';
+
+                if (!file_exists($ldap_error_file)) {
+                    touch($ldap_error_file);
+                }
+                
+                $error_str = date('c') . ' - ' . $errno . ' - ' . $error . ' - ' . $filter . PHP_EOL;
+                file_put_contents($ldap_error_file, $error_str, FILE_APPEND);
+                
+                if (3 == $errno) {
+                    //Time limit exceeded, don't retry again and cache the empty result
+                    break;
+                }
+ 
+                //Otherwise, retry.
                 $this->unbind();
                 $retry = $tries++ < $maxTries;
 
