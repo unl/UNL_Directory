@@ -4,10 +4,10 @@
  *
  * <code>
  * <?php
- * $filter = new UNL_Peoplefinder_StandardFilter('brett bieber','|',false);
+ * $filter = new UNL_Peoplefinder_Driver_LDAP_StandardFilter('brett bieber','|',false);
  * echo $filter;
  * ?>
- * (|(sn=brett bieber)(cn=brett bieber)(&(| (givenname=brett) (sn=brett) (mail=brett) (unlemailnickname=brett) (unlemailalias=brett))(| (givenname=bieber) (sn=bieber) (mail=bieber) (unlemailnickname=bieber) (unlemailalias=bieber))))
+ * (|(|(mail=brett bieber)(cn=brett bieber)(givenName=brett bieber)(sn=brett bieber)(eduPersonNickname=brett bieber))(|(|(mail=brett)(cn=brett)(givenName=brett)(sn=brett)(eduPersonNickname=brett)(sn=brett-*)(sn=*brett))(|(mail=bieber)(cn=bieber)(givenName=bieber)(sn=bieber)(eduPersonNickname=bieber)(sn=bieber-*)(sn=*bieber))))
  * </code>
  *
  * PHP version 5
@@ -48,10 +48,10 @@ class UNL_Peoplefinder_Driver_LDAP_StandardFilter
 
             //escape query
             $inquery = UNL_Peoplefinder_Driver_LDAP_Util::escape_filter_value($inquery);
-            
+
             //put the query into an array of words
             $query = preg_split('/\s+/', $inquery, 4);
-            
+
             //remove empty parts
             $query = array_filter($query, function($value) {
                 return !empty($value);
@@ -84,21 +84,23 @@ class UNL_Peoplefinder_Driver_LDAP_StandardFilter
             }
             $filter .= ")";
 
-            //determine if a wildcard should be used
-            if ($wild) {
-                $inquery = "*$inquery*";
-            }
+            if (count($query) > 1) {
+                //determine if a wildcard should be used
+                if ($wild) {
+                    $inquery = "*$inquery*";
+                }
 
-            //and search for the string as entered
-            $as_entered = '';
-            foreach(self::$searchFields as $field) {
-                $as_entered .= "($field=$inquery)";
+                //and search for the string as entered
+                $as_entered = '';
+                foreach(self::$searchFields as $field) {
+                    $as_entered .= "($field=$inquery)";
+                }
+                $filter = "(|(|$as_entered)$filter)";
             }
-            $filter = "(|(|$as_entered)$filter)";
         }
         $this->_filter = $filter;
     }
-    
+
     /**
      * Allows you to exclude specific records from a result set.
      *
