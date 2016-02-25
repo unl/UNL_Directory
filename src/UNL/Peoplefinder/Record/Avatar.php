@@ -148,15 +148,26 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
 
         $request = new HTTP_Request2($profileIconUrl, HTTP_Request2::METHOD_HEAD, [
             'adapter' => 'HTTP_Request2_Adapter_Curl',
+            'follow_redirects' => true,
+            'strict_redirects' => true,
         ]);
         $response = $request->send();
 
-        if ($response->getStatus() == 200) {
-            return $profileIconUrl;
-        } elseif ($response->getStatus() == 302) {
-            $fallbackUrl = $response->getHeader('Location');
-        } else {
+        $effectiveUrl = $response->getEffectiveUrl();
+        //check if it redirects to the default image
+        if ($effectiveUrl == $profileIconUrl && $response->getStatus() == 200) {
+            //The old version of planetred is in use and will return a 200 response for images.
+            return $effectiveUrl;
+        } else if ($effectiveUrl == $profileIconUrl) {
+            //request to planet red failed (404 or 500 like error) however
+            //if a user has not registered with planetred, it should still redirect to the default image
             $fallbackUrl = 'mm';
+        } else if (false === strpos($effectiveUrl, 'user/default') && false === strpos($effectiveUrl, 'mod/profile/graphics/default')) {
+            //looks like it isn't the default image. Serve this this one up.
+            return $effectiveUrl;
+        } else {
+            //default image again.
+            $fallbackUrl = $effectiveUrl;
         }
 
         $gravatarParams = [
