@@ -164,7 +164,7 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
             //request to planet red failed (404 or 500 like error) however
             //if a user has not registered with planetred, it should still redirect to the default image
             $fallbackUrl = 'mm';
-        } else if (false === strpos($effectiveUrl, 'user/default') && false === strpos($effectiveUrl, 'mod/profile/graphics/default')) {
+        } elseif (false === strpos($effectiveUrl, 'user/default') && false === strpos($effectiveUrl, 'mod/profile/graphics/default')) {
             //looks like it isn't the default image. Serve this this one up.
             return $effectiveUrl;
         } else {
