@@ -155,10 +155,12 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
 
         $effectiveUrl = $response->getEffectiveUrl();
         //check if it redirects to the default image
-        if ($effectiveUrl == $profileIconUrl && $response->getStatus() == 200) {
-            //The old version of planetred is in use and will return a 200 response for images.
-            return $effectiveUrl;
-        } else if ($effectiveUrl == $profileIconUrl) {
+        if ($effectiveUrl == $profileIconUrl) {
+            if ($response->getStatus() == 200) {
+                //The old version of planetred is in use and will return a 200 response for images.
+                return $effectiveUrl;
+            }
+            
             //request to planet red failed (404 or 500 like error) however
             //if a user has not registered with planetred, it should still redirect to the default image
             $fallbackUrl = 'mm';
