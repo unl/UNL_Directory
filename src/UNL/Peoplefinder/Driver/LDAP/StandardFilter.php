@@ -51,6 +51,11 @@ class UNL_Peoplefinder_Driver_LDAP_StandardFilter
             
             //put the query into an array of words
             $query = preg_split('/\s+/', $inquery, 4);
+            
+            //remove empty parts
+            $query = array_filter($query, function($value) {
+                return !empty($value);
+            });
 
             if ($operator != '&') {
                 $operator = '|';
