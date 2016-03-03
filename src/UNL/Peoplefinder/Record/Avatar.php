@@ -158,7 +158,7 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
         if ($effectiveUrl == $profileIconUrl) {
             if ($response->getStatus() == 200) {
                 //The old version of planetred is in use and will return a 200 response for images.
-                return $effectiveUrl;
+                return $profileIconUrl;
             }
             
             //request to planet red failed (404 or 500 like error) however
@@ -166,10 +166,10 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
             $fallbackUrl = 'mm';
         } elseif (false === strpos($effectiveUrl, 'user/default') && false === strpos($effectiveUrl, 'mod/profile/graphics/default')) {
             //looks like it isn't the default image. Serve this this one up.
-            return $effectiveUrl;
+            return $profileIconUrl;
         } else {
             //default image again.
-            $fallbackUrl = $effectiveUrl;
+            $fallbackUrl = $profileIconUrl;
         }
 
         $gravatarParams = [
