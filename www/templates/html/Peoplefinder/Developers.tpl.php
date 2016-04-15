@@ -25,26 +25,16 @@
         list-style:none;
     }
 
-    a.resources
-    {
-        float:right;
-        font-size:12px
-    }
 </style>
 
-<script type="text/javascript">jQuery = $ = WDN.jQuery;</script>
-
-<script type="text/javascript" src="scripts/jquery.beautyOfCode.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized-dark.min.css"/>
 
 <script type="text/javascript">
-    $.beautyOfCode.init({
-        theme: "RDark",
-        brushes: ['Xml', 'JScript', 'CSharp', 'Plain', 'Php', "Java", "JavaFX"],
-        ready: function() {
-            $.beautyOfCode.beautifyAll();
-
-        }
-    });
+    require(['jquery', 'https://cdn.jsdelivr.net/highlight.js/9.2.0/highlight.min.js'], function($, hljs) {
+        $('.resource pre.code code').each(function() {
+            hljs.highlightBlock(this);
+        })
+    })
 </script>
 
 <div class="three_col left">
@@ -126,6 +116,9 @@
                                     switch($format) {
                                         case "json":
                                             $code = 'javascript';
+                                            //Pretty print it
+                                            $result = json_decode($result);
+                                            $result = json_encode($result, JSON_PRETTY_PRINT);
                                             break;
                                         case "xml":
                                             $code = "xml";
