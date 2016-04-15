@@ -2,10 +2,10 @@
 class UNL_Peoplefinder_Developers
 {
     public $resources = array(
-        'Record',
-        'Search',
-        'Department',
-        'Department_Personnel',
+        'Record' => 'Person Record',
+        'Search' => 'Search',
+        'Department' => 'Department Record',
+        'Department_Personnel' => 'Department Personnel',
     );
 
     public $resource;
@@ -15,10 +15,10 @@ class UNL_Peoplefinder_Developers
     function __construct($options = array())
     {
         $this->options  = $options;
-        $this->resource = $this->resources[0];
+        $this->resource = key($this->resources);
 
         if (isset($this->options['resource']) ) {
-            if (in_array($this->options['resource'], $this->resources)) {
+            if (array_key_exists($this->options['resource'], $this->resources)) {
                 $this->resource = $this->options['resource'];
             }
         }

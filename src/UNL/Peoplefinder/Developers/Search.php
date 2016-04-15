@@ -1,17 +1,17 @@
 <?php
 class UNL_PeopleFinder_Developers_Search
 {
-    public $title       = "Peoplefinder Record";
+    public $title       = 'Search';
     
-    public $uri         = "service.php?q={query}";
+    public $uri         = 'service.php?q={query}';
     
-    public $exampleURI  = "service.php?q=fairchild";
+    public $exampleURI  = 'service.php?q=fairchild';
     
     public $properties  = array(
-                                array("{records}", "A list of all the <a href='?view=developers&resource=Record'>Peoplefinder Records</a> for the givien query.", true, true),
-                                );
+        array('{records}', 'An array of all the <a href="?view=developers&resource=Record">Peoplefinder Records</a> for the givien query.', true, true),
+    );
                                 
-    public $formats     = array("json", "xml", "partial");
+    public $formats     = array('json', 'xml', 'partial');
     
     function __construct()
     {

@@ -133,8 +133,8 @@
             <h2>Directory API</h2>
             <p>The following is a list of resources for Directory.</p>
             <ul>
-                <?php foreach ($context->resources as $resource): ?>
-                    <li><a href='?view=developers&resource=<?php echo $resource?>'><?php echo $resource ?></a></li>
+                <?php foreach ($context->resources as $resource=>$name): ?>
+                    <li><a href='?view=developers&resource=<?php echo $resource?>'><?php echo $name ?></a></li>
                 <?php endforeach ?>
             </ul>
         </nav>
