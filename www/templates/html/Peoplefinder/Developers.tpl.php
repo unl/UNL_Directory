@@ -46,10 +46,9 @@
         ?>
         <div class="resource">
             <h1 id="instance" class="sec_main"><?php echo $resource->title; ?> Resource</h1>
-            <h3>Details</h3>
             <ul>
                 <li>
-                    <h4 id="instance-uri"><a href="#instance-uri">Resource URI</a></h4>
+                    <h2 id="instance-uri"><a href="#instance-uri">Resource URI</a></h2>
                     <blockquote>
                         <?php
                         $uri = $resource->uri;
@@ -61,7 +60,7 @@
                     </blockquote>
                 </li>
                 <li>
-                    <h4 id="instance-properties"><a href="#instance-properties">Resource Properties</a></h4>
+                    <h2 id="instance-properties"><a href="#instance-properties">Resource Properties</a></h2>
                     <table class="zentable neutral">
                     <thead><tr><th>Property</th><th>Description</th><th>JSON</th><th>XML</th></tr></thead>
                         <tbody>
@@ -77,11 +76,11 @@
                     </table>
                 </li>
                 <li>
-                    <h4 id="instance-get"><a href="#instance-get">HTTP GET</a></h4>
+                    <h2 id="instance-get"><a href="#instance-get">HTTP GET</a></h2>
                     <p>Returns a representation of the resource, including the properties above.</p>
                 </li>
                 <li>
-                    <h4 id="instance-get-example-1"><a href="#instance-get-example-1">Example</a></h4>
+                    <h2 id="instance-get-example-1"><a href="#instance-get-example-1">Example</a></h2>
                     <ul class="wdn_tabs">
                     <?php
                     foreach ($resource->formats as $format) {
@@ -139,17 +138,17 @@
         </div>
     </div>
     <div class="wdn-col-one-fourth">
-        <div id='resources' class="zenbox primary" style="width:200px">
-            <h3>Directory API</h3>
+        <nav id='resources' aria-label="API Navigation" class="zenbox primary">
+            <h2>Directory API</h2>
             <p>The following is a list of resources for Directory.</p>
             <ul>
                 <?php foreach ($context->resources as $resource): ?>
                     <li><a href='?view=developers&resource=<?php echo $resource?>'><?php echo $resource ?></a></li>
                 <?php endforeach ?>
             </ul>
-        </div>
+        </nav>
         <div class="zenbox neutral">
-            <h3>Format Information</h3>
+            <h2>Format Information</h2>
             <p>The following is a list of formats used in Directory.</p>
             <ul>
                 <li><a href='http://www.json.org/'>JSON (JavaScript Object Notation)</a></li>
