@@ -10,8 +10,8 @@ class UNL_PeopleFinder_Developers_Department
     public $properties  = array(
         array('parent', '(String) ID for the parent department (if not root)', false, true),
         array('id', '(String) Unique ID for this record', false, true),
-        array('name', '(String) Name of this deparmtnet/unit', false, true),
-        array('org_unit', '(String) Official org unit ID from SAP', false, true),
+        array('name', '(String) Name of this deparmtnet/unit', true, true),
+        array('org_unit', '(String) Official org unit ID from SAP', true, true),
         array('building', '(String) Building code', false, true),
         array('room', '(String) Room', false, true),
         array('city', '(String) City', false, true),
