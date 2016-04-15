@@ -39,7 +39,7 @@
 
 
 <div class="wdn-grid-set">
-    <div class="wdn-col-three-fourths">
+    <div class="bp3-wdn-col-three-fourths">
         <?php
         $resource = "UNL_Peoplefinder_Developers_" . $context->resource;
         $resource = new $resource;
@@ -97,39 +97,30 @@
                          }
                          ?>
                          <div id="<?php echo $format; ?>">
-                              <ul>
-                                  <li>
-                                      Calling this:
-                                      <blockquote>
-                                          <p>GET <?php echo $url; ?></p>
-                                      </blockquote>
-                                  </li>
-                                  <li>
-                                      Provides this:
-                                      <?php
-                                      //Get the output.
-                                      if (!$result = file_get_contents($url)) {
-                                          $result = "Error getting file contents.";
-                                      }
-                                      switch ($format) {
-                                          case "json":
-                                              $code = 'javascript';
-                                              //Pretty print it
-                                              $result = json_decode($result);
-                                              $result = json_encode($result, JSON_PRETTY_PRINT);
-                                              break;
-                                          case "xml":
-                                              $code = "xml";
-                                              break;
-                                          default:
-                                              $code = "html";
-                                      }
-                                      ?>
-                                      <pre class="code">
-                                          <code class="<?php echo $code; ?>"><?php echo htmlentities($result); ?></code>
-                                      </pre>
-                                  </li>
-                              </ul>
+                              <pre><code>GET <?php echo $url; ?></code></pre>
+                              <h3>Response</h3>
+                              <?php
+                              //Get the output.
+                              if (!$result = file_get_contents($url)) {
+                                  $result = "Error getting file contents.";
+                              }
+                              switch ($format) {
+                                  case "json":
+                                      $code = 'javascript';
+                                      //Pretty print it
+                                      $result = json_decode($result);
+                                      $result = json_encode($result, JSON_PRETTY_PRINT);
+                                      break;
+                                  case "xml":
+                                      $code = "xml";
+                                      break;
+                                  default:
+                                      $code = "html";
+                              }
+                              ?>
+                              <pre class="code">
+                                  <code class="<?php echo $code; ?>"><?php echo htmlentities($result); ?></code>
+                              </pre>
                          </div>
                      <?php endforeach; ?>
                     </div>
@@ -137,7 +128,7 @@
             </ul>
         </div>
     </div>
-    <div class="wdn-col-one-fourth">
+    <div class="bp3-wdn-col-one-fourth">
         <nav id='resources' aria-label="API Navigation" class="zenbox primary">
             <h2>Directory API</h2>
             <p>The following is a list of resources for Directory.</p>
