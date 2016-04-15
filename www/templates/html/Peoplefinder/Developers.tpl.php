@@ -37,131 +37,125 @@
     })
 </script>
 
-<div class="three_col left">
 
-    <?php
+<div class="wdn-grid-set">
+    <div class="wdn-col-three-fourths">
+        <?php
         $resource = "UNL_Peoplefinder_Developers_" . $context->resource;
         $resource = new $resource;
         ?>
         <div class="resource">
-        <h1 id="instance" class="sec_main"><?php echo $resource->title; ?> Resource</h1>
-        <h3>Details</h3>
-        <ul>
-            <li>
-                <h4 id="instance-uri"><a href="#instance-uri">Resource URI</a></h4>
-                <blockquote>
+            <h1 id="instance" class="sec_main"><?php echo $resource->title; ?> Resource</h1>
+            <h3>Details</h3>
+            <ul>
+                <li>
+                    <h4 id="instance-uri"><a href="#instance-uri">Resource URI</a></h4>
+                    <blockquote>
+                        <?php
+                        $uri = $resource->uri;
+                        if (substr($uri, 0, 2) == '//') {
+                            $uri = 'http:' . $uri;
+                        }
+                        ?>
+                        <p><?php echo $uri; ?></p>
+                    </blockquote>
+                </li>
+                <li>
+                    <h4 id="instance-properties"><a href="#instance-properties">Resource Properties</a></h4>
+                    <table class="zentable neutral">
+                    <thead><tr><th>Property</th><th>Description</th><th>JSON</th><th>XML</th></tr></thead>
+                        <tbody>
+                        <?php foreach ($resource->properties as $property): ?>
+                            <tr>
+                              <td><?php echo $property[0] ?></td>
+                              <td><?php echo $property[1] ?></td>
+                              <td><?php echo $property[2] ?></td>
+                              <td><?php echo $property[3] ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </li>
+                <li>
+                    <h4 id="instance-get"><a href="#instance-get">HTTP GET</a></h4>
+                    <p>Returns a representation of the resource, including the properties above.</p>
+                </li>
+                <li>
+                    <h4 id="instance-get-example-1"><a href="#instance-get-example-1">Example</a></h4>
+                    <ul class="wdn_tabs">
                     <?php
-                    $uri = $resource->uri;
-                    if (substr($uri, 0, 2) == '//') {
-                        $uri = 'http:' . $uri;
+                    foreach ($resource->formats as $format) {
+                        echo "<li><a href='#$format'>$format</a></li>";
                     }
                     ?>
-                    <p><?php echo $uri; ?></p>
-                </blockquote>
-            </li>
-            <li>
-                <h4 id="instance-properties"><a href="#instance-properties">Resource Properties</a></h4>
-                <table class="zentable neutral">
-                <thead><tr><th>Property</th><th>Description</th><th>JSON</th><th>XML</th></tr></thead>
-                  <tbody>
-                  <?php
-                    foreach ($resource->properties as $property) {
-                      echo "<tr>
-                                <td>$property[0]</td>
-                                <td>$property[1]</td>
-                                <td>$property[2]</td>
-                                <td>$property[3]</td>
-                            </tr>";
-                    }
-                  ?>
-                  </tbody>
-                </table>
-            </li>
-            <li>
-                <h4 id="instance-get"><a href="#instance-get">HTTP GET</a></h4>
-                <p>Returns a representation of the resource, including the properties above.</p>
-            </li>
-            <li>
-                <h4 id="instance-get-example-1"><a href="#instance-get-example-1">Example</a></h4>
-                <ul class="wdn_tabs">
-                <?php
-                 foreach ($resource->formats as $format) {
-                     echo "<li><a href='#$format'>$format</a></li>";
-                 }
-                ?>
-                </ul>
-                <div class="wdn_tabs_content">
-                     <?php
-                     foreach ($resource->formats as $format) {
+                    </ul>
+                    <div class="wdn_tabs_content">
+                     <?php foreach ($resource->formats as $format): ?>
+                        <?php
                          $url = UNL_Peoplefinder::addURLParams($resource->exampleURI, array('format' => $format));
                          if (substr($url, 0, 2) == '//') {
-                            $url = 'http:' . $url;
+                             $url = 'http:' . $url;
                          }
                          ?>
                          <div id="<?php echo $format; ?>">
-                            <ul>
-                                <li>
-                                    Calling this:
-                                    <blockquote>
-                                        <p>GET <?php echo $url; ?></p>
-                                    </blockquote>
-                                </li>
-                                <li>
-                                    Provides this:
-                                    <?php
-                                    //Get the output.
-                                    if (!$result = file_get_contents($url)) {
-                                        $result = "Error getting file contents.";
-                                    }
-                                    switch($format) {
-                                        case "json":
-                                            $code = 'javascript';
-                                            //Pretty print it
-                                            $result = json_decode($result);
-                                            $result = json_encode($result, JSON_PRETTY_PRINT);
-                                            break;
-                                        case "xml":
-                                            $code = "xml";
-                                            break;
-                                        default:
-                                            $code = "html";
-                                    }
-                                    ?>
-                                    <pre class="code">
-                                        <code class="<?php echo $code; ?>"><?php echo htmlentities($result); ?></code>
-                                    </pre>
-                                </li>
-                            </ul>
-                        </div>
-                         <?php
-                     }
-                     ?>
-
-                </div>
-            </li>
-        </ul>
+                              <ul>
+                                  <li>
+                                      Calling this:
+                                      <blockquote>
+                                          <p>GET <?php echo $url; ?></p>
+                                      </blockquote>
+                                  </li>
+                                  <li>
+                                      Provides this:
+                                      <?php
+                                      //Get the output.
+                                      if (!$result = file_get_contents($url)) {
+                                          $result = "Error getting file contents.";
+                                      }
+                                      switch ($format) {
+                                          case "json":
+                                              $code = 'javascript';
+                                              //Pretty print it
+                                              $result = json_decode($result);
+                                              $result = json_encode($result, JSON_PRETTY_PRINT);
+                                              break;
+                                          case "xml":
+                                              $code = "xml";
+                                              break;
+                                          default:
+                                              $code = "html";
+                                      }
+                                      ?>
+                                      <pre class="code">
+                                          <code class="<?php echo $code; ?>"><?php echo htmlentities($result); ?></code>
+                                      </pre>
+                                  </li>
+                              </ul>
+                         </div>
+                     <?php endforeach; ?>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
-
-</div>
-<div class="col right">
-    <div id='resources' class="zenbox primary" style="width:200px">
-        <h3>Directory API</h3>
-        <p>The following is a list of resources for Directory.</p>
-        <ul>
-            <?php
-            foreach ($context->resources as $resource) {
-                echo "<li><a href='?view=developers&resource=$resource'>$resource</a></li>";
-            }
-            ?>
-        </ul>
-    </div>
-    <div class="zenbox neutral" style="width:200px">
-        <h3>Format Information</h3>
-        <p>The following is a list of formats used in Directory.</p>
-        <ul>
-            <li><a href='http://www.json.org/'>JSON (JavaScript Object Notation)</a></li>
-            <li><a href='http://en.wikipedia.org/wiki/XML'>XML (Extensible Markup Language)</a></li>
-            <li>Partial - The un-themed main content area of the page.</li>
-        </ul>
+    <div class="wdn-col-one-fourth">
+        <div id='resources' class="zenbox primary" style="width:200px">
+            <h3>Directory API</h3>
+            <p>The following is a list of resources for Directory.</p>
+            <ul>
+                <?php foreach ($context->resources as $resource): ?>
+                    <li><a href='?view=developers&resource=<?php echo $resource?>'><?php echo $resource ?></a></li>
+                <?php endforeach ?>
+            </ul>
+        </div>
+        <div class="zenbox neutral">
+            <h3>Format Information</h3>
+            <p>The following is a list of formats used in Directory.</p>
+            <ul>
+                <li><a href='http://www.json.org/'>JSON (JavaScript Object Notation)</a></li>
+                <li><a href='http://en.wikipedia.org/wiki/XML'>XML (Extensible Markup Language)</a></li>
+                <li>Partial - The un-themed main content area of the page.</li>
+            </ul>
+        </div>
     </div>
 </div>
