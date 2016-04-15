@@ -5,7 +5,7 @@ class UNL_PeopleFinder_Developers_Record
     
     public $uri         = 'service.php?uid={uid}';
     
-    public $exampleURI  = 'service.php?uid=s-mfairch4';
+    public $exampleURI  = 'service.php?uid=lperez1';
     
     public $properties  = array(
         array('dn', '(String) Distinguished name', true, true),
@@ -30,7 +30,9 @@ class UNL_PeopleFinder_Developers_Record
         array('unlSISMajor', '(Array(String)) Majors', true, true),
         array('unlSISMinor', '(Array(String)) Minors', true, true),
         array('unlEmailAlias', '(Array(String)) Email Alias', true, true),
-        array('imageURL', '(URL) The url to the person\'s picture.', true, true)
+        array('imageURL', '(URL) The url to the person\'s picture.', true, true),
+        array('unlDirectoryAddress', '(Object) UNL address with street-address, locality, region, postal-code, unlBuildingCode and roomNumber fields.', true, true),
+        array('knowledge', '(Object) Detailed information about a faculty member including a bio, courses, education, grants, honors, papers, presentations, and performances. This information is only available for faculty.', true, true),
     );
                                 
     public $formats     = array('json', 'xml', 'partial');
