@@ -1,18 +1,18 @@
 <?php
 /**
  * Class builds a pretty good LDAP filter for searching for people.
- * 
+ *
  * <code>
  * <?php
- * $filter = new UNL_Peoplefinder_StandardFilter('brett bieber','|',false);
+ * $filter = new UNL_Peoplefinder_Driver_LDAP_StandardFilter('brett bieber','|',false);
  * echo $filter;
  * ?>
- * (|(sn=brett bieber)(cn=brett bieber)(&(| (givenname=brett) (sn=brett) (mail=brett) (unlemailnickname=brett) (unlemailalias=brett))(| (givenname=bieber) (sn=bieber) (mail=bieber) (unlemailnickname=bieber) (unlemailalias=bieber))))
+ * (|(|(mail=brett bieber)(cn=brett bieber)(givenName=brett bieber)(sn=brett bieber)(eduPersonNickname=brett bieber))(|(|(mail=brett)(cn=brett)(givenName=brett)(sn=brett)(eduPersonNickname=brett)(sn=brett-*)(sn=*brett))(|(mail=bieber)(cn=bieber)(givenName=bieber)(sn=bieber)(eduPersonNickname=bieber)(sn=bieber-*)(sn=*bieber))))
  * </code>
  *
  * PHP version 5
- * 
- * @category  Default 
+ *
+ * @category  Default
  * @package   UNL_Peoplefinder
  * @author    Brett Bieber <brett.bieber@gmail.com>
  * @copyright 2007 Regents of the University of Nebraska
@@ -22,7 +22,7 @@
 class UNL_Peoplefinder_Driver_LDAP_StandardFilter
 {
     protected $_filter;
-    
+
     protected $_excludeRecords = array();
 
     public static $searchFields = array(
@@ -32,7 +32,7 @@ class UNL_Peoplefinder_Driver_LDAP_StandardFilter
             'sn',
             'eduPersonNickname'
         );
-    
+
     /**
      * Construct a standard filter.
      *
@@ -48,10 +48,10 @@ class UNL_Peoplefinder_Driver_LDAP_StandardFilter
 
             //escape query
             $inquery = UNL_Peoplefinder_Driver_LDAP_Util::escape_filter_value($inquery);
-            
+
             //put the query into an array of words
             $query = preg_split('/\s+/', $inquery, 4);
-            
+
             //remove empty parts
             $query = array_filter($query, function($value) {
                 return !empty($value);
@@ -84,21 +84,23 @@ class UNL_Peoplefinder_Driver_LDAP_StandardFilter
             }
             $filter .= ")";
 
-            //determine if a wildcard should be used
-            if ($wild) {
-                $inquery = "*$inquery*";
-            }
+            if (count($query) > 1) {
+                //determine if a wildcard should be used
+                if ($wild) {
+                    $inquery = "*$inquery*";
+                }
 
-            //and search for the string as entered
-            $as_entered = '';
-            foreach(self::$searchFields as $field) {
-                $as_entered .= "($field=$inquery)";
+                //and search for the string as entered
+                $as_entered = '';
+                foreach(self::$searchFields as $field) {
+                    $as_entered .= "($field=$inquery)";
+                }
+                $filter = "(|(|$as_entered)$filter)";
             }
-            $filter = "(|(|$as_entered)$filter)";
         }
         $this->_filter = $filter;
     }
-    
+
     /**
      * Allows you to exclude specific records from a result set.
      *
@@ -112,7 +114,7 @@ class UNL_Peoplefinder_Driver_LDAP_StandardFilter
             $this->_excludeRecords = $records;
         }
     }
-    
+
     protected function addExcludedRecords()
     {
         if (count($this->_excludeRecords)) {
@@ -123,7 +125,7 @@ class UNL_Peoplefinder_Driver_LDAP_StandardFilter
             $this->_filter = '(&'.$this->_filter.'(!(|'.$excludeFilter.')))';
         }
     }
-    
+
     function __toString()
     {
         $this->addExcludedRecords();
