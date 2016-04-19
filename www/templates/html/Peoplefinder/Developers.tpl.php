@@ -3,8 +3,8 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
 ?>
 
 <script type="text/javascript">
-    require(['jquery', 'https://cdn.jsdelivr.net/highlight.js/9.2.0/highlight.min.js'], function($, hljs) {
-        $('.resource pre.code code').each(function() {
+    require(['jquery', 'https://cdn.jsdelivr.net/highlight.js/9.2.0/highlight.min.js'], function ($, hljs) {
+        $('.resource pre.code code').each(function () {
             hljs.highlightBlock(this);
         })
     })
@@ -17,81 +17,83 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
         $resource = new $resource;
         ?>
         <div class="resource">
-            <h1 id="instance" class="sec_main">API: <?php echo $resource->title; ?> Resource</h1>
+            <h1 id="instance" class="sec_main">API: <?php echo $resource->getTitle(); ?> Resource</h1>
 
             <h2 id="instance-uri"><a href="#instance-uri">Resource URI</a></h2>
             <blockquote>
                 <?php
-                $uri = $resource->uri;
+                $uri = $resource->getURI();
                 if (substr($uri, 0, 2) == '//') {
                     $uri = 'http:' . $uri;
                 }
                 ?>
                 <p><?php echo $uri; ?></p>
             </blockquote>
-
-            <h2 id="instance-properties"><a href="#instance-properties">Resource Properties</a></h2>
-            <table class="zentable neutral">
-            <thead><tr><th>Property</th><th>Description</th><th>JSON</th><th>XML</th></tr></thead>
-                <tbody>
-                <?php foreach ($resource->properties as $property): ?>
-                    <tr>
-                      <td><?php echo $property[0] ?></td>
-                      <td><?php echo $property[1] ?></td>
-                      <td><?php echo $property[2] ?></td>
-                      <td><?php echo $property[3] ?></td>
-                    </tr>
-                <?php endforeach; ?>
-                </tbody>
-            </table>
-
-            <h2 id="instance-get"><a href="#instance-get">HTTP GET</a></h2>
-            <p>Returns a representation of the resource, including the properties above.</p>
+            
+            <p><?php echo $resource->getDescription() ?></p>
             
             <h2 id="instance-get-example-1"><a href="#instance-get-example-1">Example</a></h2>
             <ul class="wdn_tabs">
-            <?php
-            foreach ($resource->formats as $format) {
-                echo "<li><a href='#$format'>$format</a></li>";
-            }
-            ?>
+                <?php
+                foreach ($resource->getAvailableFormats() as $format) {
+                    echo "<li><a href='#$format'>$format</a></li>";
+                }
+                ?>
             </ul>
             <div class="wdn_tabs_content">
-             <?php foreach ($resource->formats as $format): ?>
-                <?php
-                 $url = UNL_Peoplefinder::addURLParams($resource->exampleURI, array('format' => $format));
-                 if (substr($url, 0, 2) == '//') {
-                     $url = 'http:' . $url;
-                 }
-                 ?>
-                 <div id="<?php echo $format; ?>">
+                <?php foreach ($resource->getAvailableFormats() as $format): ?>
+
+                    <?php
+                    $url = UNL_Peoplefinder::addURLParams($resource->getExampleURI(), array('format' => $format));
+                    if (substr($url, 0, 2) == '//') {
+                        $url = 'http:' . $url;
+                    }
+                    $method_name = 'get' . ucfirst($format) . 'Properties';
+                    ?>
+                    <div id="<?php echo $format; ?>">
                       <pre><code>GET <?php echo $url; ?></code></pre>
-                      <h3>Response</h3>
-                      <?php
-                      //Get the output.
-                      if (!$result = file_get_contents($url)) {
-                          $result = "Error getting file contents.";
-                      }
-                      switch ($format) {
-                          case "json":
-                              $code = 'javascript';
-                              //Pretty print it
-                              $result = json_decode($result);
-                              $result = json_encode($result, JSON_PRETTY_PRINT);
-                              break;
-                          case "xml":
-                              $code = "xml";
-                              break;
-                          default:
-                              $code = "html";
-                      }
-                      ?>
-                      <pre class="code">
-                          <code class="<?php echo $code; ?>"><?php echo htmlentities($result); ?></code>
-                      </pre>
+                     
+                        <?php if (count($resource->$method_name())): ?>
+                       <h2>Resource Properties</h2>
+                        <table class="zentable neutral">
+                        <thead><tr><th>Property</th><th>Description</th></tr></thead>
+                            <tbody>
+                            
+                            <?php foreach ($resource->$method_name() as $property => $description): ?>
+                                <tr>
+                                  <td><?php echo $property ?></td>
+                                  <td><?php echo $description ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                        <?php endif; ?>
+                        <h3>Response</h3>
+                        <?php
+                        //Get the output.
+                        if (!$result = file_get_contents($url)) {
+                            $result = "Error getting file contents.";
+                        }
+                        switch ($format) {
+                            case "json":
+                                $code = 'javascript';
+                                //Pretty print it
+                                $result = json_decode($result);
+                                $result = json_encode($result, JSON_PRETTY_PRINT);
+                                break;
+                            case "xml":
+                                $code = "xml";
+                                break;
+                            default:
+                                $code = "html";
+                        }
+                        ?>
+                        <pre class="code">
+                            <code class="<?php echo $code; ?>"><?php echo htmlentities($result); ?></code>
+                        </pre>
                  </div>
-             <?php endforeach; ?>
-            </div>
+                <?php endforeach; ?>
+             </div>
         </div>
     </div>
     <div class="bp3-wdn-col-one-fourth">
@@ -99,8 +101,8 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
             <h2>Directory API</h2>
             <p>The following is a list of resources for Directory.</p>
             <ul>
-                <?php foreach ($context->resources as $resource=>$name): ?>
-                    <li><a href='?view=developers&resource=<?php echo $resource?>'><?php echo $name ?></a></li>
+                <?php foreach ($context->resources as $resource => $name): ?>
+                    <li><a href='?view=developers&resource=<?php echo $resource ?>'><?php echo $name ?></a></li>
                 <?php endforeach ?>
             </ul>
         </nav>
