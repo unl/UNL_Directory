@@ -19,7 +19,7 @@
         },
         {
             "type": "pear",
-            "url": "http://pear.php.net"
+            "url": "https://pear.php.net"
         }
     ],
     "require": {
@@ -30,9 +30,5 @@
         "pear-pear/HTTP_Request2": "*",
         "simple-cas/simple-cas": "dev-master",
         "zaininnari/html-minifier": "*"
-    },
-    "config": {
-      "secure-http": false
     }
-    
 }
