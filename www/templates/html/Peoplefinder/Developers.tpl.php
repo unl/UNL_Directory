@@ -12,15 +12,17 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
             <h1 id="instance" class="sec_main">API: <?php echo $resource->getTitle(); ?> Resource</h1>
 
             <h2 id="instance-uri"><a href="#instance-uri">Resource URI</a></h2>
-            <blockquote>
+            <p>
+                <code>
                 <?php
                 $uri = $resource->getURI();
                 if (substr($uri, 0, 2) == '//') {
                     $uri = 'http:' . $uri;
                 }
+                echo $uri;
                 ?>
-                <p><?php echo $uri; ?></p>
-            </blockquote>
+                </code>
+            </p>
             
             <p><?php echo $resource->getDescription() ?></p>
             
