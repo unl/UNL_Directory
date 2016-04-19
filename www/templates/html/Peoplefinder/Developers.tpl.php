@@ -11,7 +11,7 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
         <div class="resource">
             <h1 id="instance" class="sec_main">API: <?php echo $resource->getTitle(); ?> Resource</h1>
 
-            <h2 id="instance-uri"><a href="#instance-uri">Resource URI</a></h2>
+            <h2 id="instance-uri">Resource URI</h2>
             <p>
                 <code>
                     <?php
@@ -26,7 +26,7 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
 
             <p><?php echo $resource->getDescription() ?></p>
 
-            <h2 id="instance-get-example-1"><a href="#instance-get-example-1">Example</a></h2>
+            <h2 id="instance-get-example-1">Example</h2>
             <ul class="wdn_tabs">
                 <?php
                 foreach ($resource->getAvailableFormats() as $format) {
