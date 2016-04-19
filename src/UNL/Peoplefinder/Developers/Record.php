@@ -14,7 +14,7 @@ class UNL_PeopleFinder_Developers_Record extends UNL_PeopleFinder_Developers_Abs
      */
     public function getDescription()
     {
-        return 'Get detailed information about an individual person';
+        return 'Get detailed information about an individual person. For the most part, these fields are pulled directly from LDAP. For more information on specific fields, <a href="http://idm.unl.edu/ldap-misc-fields">see the IDM site</a>. All fields are from LDAP unless otherwise noted.';
     }
 
     /**
@@ -54,9 +54,9 @@ class UNL_PeopleFinder_Developers_Record extends UNL_PeopleFinder_Developers_Abs
             'unlSISMajor' => '(Array) An array of majors that the student is working toward',
             'unlSISMinor' => '(Array) An array of minors that the student is working toward',
             'unlEmailAlias' => '(Array) An array of email aliases',
-            'imageURL' => '(Array) A URL to the person\'s profile picture',
-            'unlDirectoryAddress' => '(Object) UNL address with street-address, locality, region, postal-code, unlBuildingCode and roomNumber fields.',
-            'knowledge' => '(Object) Detailed information about a faculty member including a bio, courses, education, grants, honors, papers, presentations, and performances. This information is only available for faculty.',
+            'imageURL' => '(Array, local) A URL to the person\'s profile picture',
+            'unlDirectoryAddress' => '(Object, local) UNL address with street-address, locality, region, postal-code, unlBuildingCode and roomNumber fields.',
+            'knowledge' => '(Object, from Digital Measures) Detailed information about a faculty member including a bio, courses, education, grants, honors, papers, presentations, and performances. This information is only available for faculty.',
         );
     }
 
@@ -88,9 +88,9 @@ class UNL_PeopleFinder_Developers_Record extends UNL_PeopleFinder_Developers_Abs
             'unlSISMajor' => 'major that the student is working toward (there can be multiples of these)',
             'unlSISMinor' => 'minor that the student is working toward (there can be multiples of these)',
             'unlEmailAlias' => 'email alias (there can be multiples of these)',
-            'imageURL' => 'A URL to the person\'s profile picture',
-            'unlDirectoryAddress' => 'UNL address with street-address, locality, region, postal-code, unlBuildingCode and roomNumber child elements.',
-            'knowledge' => 'Detailed information about a faculty member including a bio, courses, education, grants, honors, papers, presentations, and performances. This information is only available for faculty.',
+            'imageURL' => '(local) A URL to the person\'s profile picture',
+            'unlDirectoryAddress' => '(local) UNL address with street-address, locality, region, postal-code, unlBuildingCode and roomNumber child elements.',
+            'knowledge' => '(from Digital Measures) Detailed information about a faculty member including a bio, courses, education, grants, honors, papers, presentations, and performances. This information is only available for faculty.',
         );
     }
 
