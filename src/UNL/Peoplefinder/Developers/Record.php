@@ -22,7 +22,7 @@ class UNL_PeopleFinder_Developers_Record extends UNL_PeopleFinder_Developers_Abs
      */
     public function getAvailableFormats()
     {
-        return array(self::FORMAT_JSON, self::FORMAT_XML, self::FORMAT_PARTIAL);
+        return [self::FORMAT_JSON, self::FORMAT_XML, self::FORMAT_PARTIAL];
     }
 
     /**
@@ -30,7 +30,7 @@ class UNL_PeopleFinder_Developers_Record extends UNL_PeopleFinder_Developers_Abs
      */
     public function getJsonProperties()
     {
-        return array(
+        return [
             'dn' => '(String) Distinguished name, a combination of uid, ou and dc',
             'cn' => '(Array) An array of common names',
             'ou' => '(Array) An array of organizational units that this person is part of',
@@ -57,7 +57,7 @@ class UNL_PeopleFinder_Developers_Record extends UNL_PeopleFinder_Developers_Abs
             'imageURL' => '(Array, local) A URL to the person\'s profile picture',
             'unlDirectoryAddress' => '(Object, local) UNL address with street-address, locality, region, postal-code, unlBuildingCode and roomNumber fields.',
             'knowledge' => '(Object, from Digital Measures) Detailed information about a faculty member including a bio, courses, education, grants, honors, papers, presentations, and performances. This information is only available for faculty.',
-        );
+        ];
     }
 
     /**
@@ -65,7 +65,7 @@ class UNL_PeopleFinder_Developers_Record extends UNL_PeopleFinder_Developers_Abs
      */
     public function getXmlProperties()
     {
-        return array(
+        return [
             'dn' => 'Distinguished name, a combination of uid, ou and dc',
             'cn' => 'Common name (there can be multiples of these)',
             'ou' => 'organizational unit name that this person is part of (there can be multiples of these)',
@@ -91,7 +91,7 @@ class UNL_PeopleFinder_Developers_Record extends UNL_PeopleFinder_Developers_Abs
             'imageURL' => '(local) A URL to the person\'s profile picture',
             'unlDirectoryAddress' => '(local) UNL address with street-address, locality, region, postal-code, unlBuildingCode and roomNumber child elements.',
             'knowledge' => '(from Digital Measures) Detailed information about a faculty member including a bio, courses, education, grants, honors, papers, presentations, and performances. This information is only available for faculty.',
-        );
+        ];
     }
 
     /**

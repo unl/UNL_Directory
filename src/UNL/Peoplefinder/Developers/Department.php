@@ -16,29 +16,29 @@ class UNL_PeopleFinder_Developers_Department extends UNL_PeopleFinder_Developers
     
     public function getAvailableFormats()
     {
-        return array(self::FORMAT_JSON, self::FORMAT_XML, self::FORMAT_PARTIAL);
+        return [self::FORMAT_JSON, self::FORMAT_XML, self::FORMAT_PARTIAL];
     }
     
     public function getJsonProperties()
     {
-        return array(
+        return [
             'name' => 'Name of this deparmtnet/unit',
             'org_unit' => 'Official org unit ID from SAP',
-        );
+        ];
     }
     
     public function getXmlProperties()
     {
-        return array(
+        return [
             'department' => 'The department element, which contains \'parent\' and \'child\' children elements.',
             'parent' => 'A link to the parent department the link is available in the xlink:href attribute',
             'child' => 'A link to the child department, the link is available in the xlink:href attribute (there can be many of these)',
-        );
+        ];
     }
     
     public function getPartialProperties()
     {
-        return array();
+        return [];
     }
 
     /**

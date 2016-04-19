@@ -38,7 +38,7 @@ abstract class UNL_PeopleFinder_Developers_AbstractResource
      */
     public function getPartialProperties()
     {
-        return array();
+        return [];
     }
 
     /**

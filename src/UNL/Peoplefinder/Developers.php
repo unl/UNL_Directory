@@ -1,18 +1,18 @@
 <?php
 class UNL_Peoplefinder_Developers
 {
-    public $resources = array(
+    public $resources = [
         'Record' => 'Person Record',
         'Search' => 'Search',
         'Department' => 'Department Record',
         'Department_Personnel' => 'Department Personnel',
-    );
+    ];
 
     public $resource;
 
-    public $options = array();
+    public $options = [];
 
-    function __construct($options = array())
+    function __construct($options = [])
     {
         $this->options  = $options;
         $this->resource = key($this->resources);

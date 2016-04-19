@@ -38,7 +38,7 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
                 <?php foreach ($resource->getAvailableFormats() as $format): ?>
 
                     <?php
-                    $url = UNL_Peoplefinder::addURLParams($resource->getExampleURI(), array('format' => $format));
+                    $url = UNL_Peoplefinder::addURLParams($resource->getExampleURI(), ['format' => $format]);
                     if (substr($url, 0, 2) == '//') {
                         $url = 'http:' . $url;
                     }
@@ -66,6 +66,7 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
                         if (!$result = file_get_contents($url)) {
                             $result = "Error getting file contents.";
                         }
+
                         switch ($format) {
                             case "json":
                                 $code = 'javascript';

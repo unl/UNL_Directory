@@ -22,7 +22,7 @@ class UNL_PeopleFinder_Developers_Department_Personnel extends UNL_PeopleFinder_
      */
     public function getAvailableFormats()
     {
-        return array(self::FORMAT_JSON, self::FORMAT_XML, self::FORMAT_PARTIAL);
+        return [self::FORMAT_JSON, self::FORMAT_XML, self::FORMAT_PARTIAL];
     }
 
     /**
@@ -30,7 +30,7 @@ class UNL_PeopleFinder_Developers_Department_Personnel extends UNL_PeopleFinder_
      */
     public function getJsonProperties()
     {
-        return array('person' => '(Array) Array of <a href="?view=developers&resource=Record">person records</a>');
+        return ['person' => '(Array) Array of <a href="?view=developers&resource=Record">person records</a>'];
     }
 
     /**
@@ -38,7 +38,7 @@ class UNL_PeopleFinder_Developers_Department_Personnel extends UNL_PeopleFinder_
      */
     public function getXmlProperties()
     {
-        return array('person' => 'A list of <a href="?view=developers&resource=Record">person records</a>');
+        return ['person' => 'A list of <a href="?view=developers&resource=Record">person records</a>'];
     }
 
     /**
