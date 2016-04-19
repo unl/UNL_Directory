@@ -14,18 +14,18 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
             <h2 id="instance-uri"><a href="#instance-uri">Resource URI</a></h2>
             <p>
                 <code>
-                <?php
-                $uri = $resource->getURI();
-                if (substr($uri, 0, 2) == '//') {
-                    $uri = 'http:' . $uri;
-                }
-                echo $uri;
-                ?>
+                    <?php
+                    $uri = $resource->getURI();
+                    if (substr($uri, 0, 2) == '//') {
+                        $uri = 'http:' . $uri;
+                    }
+                    echo $uri;
+                    ?>
                 </code>
             </p>
-            
+
             <p><?php echo $resource->getDescription() ?></p>
-            
+
             <h2 id="instance-get-example-1"><a href="#instance-get-example-1">Example</a></h2>
             <ul class="wdn_tabs">
                 <?php
@@ -45,20 +45,18 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
                     $method_name = 'get' . ucfirst($format) . 'Properties';
                     ?>
                     <div id="<?php echo $format; ?>">
-                      <pre><code>GET <?php echo $url; ?></code></pre>
-                     
+                        <pre><code>GET <?php echo $url; ?></code></pre>
                         <?php if (count($resource->$method_name())): ?>
-                       <h2>Resource Properties</h2>
-                        <table class="zentable neutral">
-                        <thead><tr><th>Property</th><th>Description</th></tr></thead>
+                            <h2>Resource Properties</h2>
+                            <table class="zentable neutral">
+                            <thead><tr><th>Property</th><th>Description</th></tr></thead>
                             <tbody>
-                            
-                            <?php foreach ($resource->$method_name() as $property => $description): ?>
-                                <tr>
-                                  <td><?php echo $property ?></td>
-                                  <td><?php echo $description ?></td>
-                                </tr>
-                            <?php endforeach; ?>
+                                <?php foreach ($resource->$method_name() as $property => $description): ?>
+                                    <tr>
+                                      <td><?php echo $property ?></td>
+                                      <td><?php echo $description ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                         <?php endif; ?>
@@ -85,9 +83,9 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
                         <pre class="code">
                             <code class="<?php echo $code; ?>"><?php echo htmlentities($result); ?></code>
                         </pre>
-                 </div>
+                    </div>
                 <?php endforeach; ?>
-             </div>
+            </div>
         </div>
     </div>
     <div class="bp3-wdn-col-one-fourth">
