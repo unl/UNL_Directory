@@ -96,7 +96,7 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
             <p>The following is a list of resources for Directory.</p>
             <ul>
                 <?php foreach ($context->resources as $resource => $name): ?>
-                    <li><a href='?view=developers&resource=<?php echo $resource ?>'><?php echo $name ?></a></li>
+                    <li><a href='<?php echo UNL_Peoplefinder::$url ?>developers/?resource=<?php echo $resource ?>'><?php echo $name ?></a></li>
                 <?php endforeach ?>
             </ul>
         </nav>
