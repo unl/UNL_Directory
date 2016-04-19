@@ -60,7 +60,7 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
                             </tbody>
                         </table>
                         <?php endif; ?>
-                        <h3>Response</h3>
+                        <h2>Response</h2>
                         <?php
                         //Get the output.
                         if (!$result = file_get_contents($url)) {
