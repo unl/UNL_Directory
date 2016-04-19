@@ -2,14 +2,6 @@
 $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized-dark.min.css', 'stylesheet');
 ?>
 
-<script type="text/javascript">
-    require(['jquery', 'https://cdn.jsdelivr.net/highlight.js/9.2.0/highlight.min.js'], function ($, hljs) {
-        $('.resource pre.code code').each(function () {
-            hljs.highlightBlock(this);
-        })
-    })
-</script>
-
 <div class="wdn-grid-set">
     <div class="bp3-wdn-col-three-fourths">
         <?php
@@ -117,3 +109,11 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
         </div>
     </div>
 </div>
+
+<script>
+    require(['jquery', 'https://cdn.jsdelivr.net/highlight.js/9.2.0/highlight.min.js'], function ($, hljs) {
+        $('.resource pre.code code').each(function () {
+            hljs.highlightBlock(this);
+        })
+    })
+</script>
