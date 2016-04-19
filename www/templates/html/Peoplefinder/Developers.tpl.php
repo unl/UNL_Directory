@@ -30,7 +30,7 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
             <ul class="wdn_tabs">
                 <?php
                 foreach ($resource->getAvailableFormats() as $format) {
-                    echo "<li><a href='#$format'>$format</a></li>";
+                    echo '<li><a href="#'.$format.'">'.$format.'</a></li>';
                 }
                 ?>
             </ul>
@@ -89,12 +89,12 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
         </div>
     </div>
     <div class="bp3-wdn-col-one-fourth">
-        <nav id='resources' aria-label="API Navigation" class="zenbox primary">
+        <nav id="resources" aria-label="API Navigation" class="zenbox primary">
             <h2>Directory API</h2>
             <p>The following is a list of resources for Directory.</p>
             <ul>
                 <?php foreach ($context->resources as $resource => $name): ?>
-                    <li><a href='<?php echo UNL_Peoplefinder::$url ?>developers/?resource=<?php echo $resource ?>'><?php echo $name ?></a></li>
+                    <li><a href="<?php echo UNL_Peoplefinder::$url ?>developers/?resource=<?php echo $resource ?>"><?php echo $name ?></a></li>
                 <?php endforeach ?>
             </ul>
         </nav>
