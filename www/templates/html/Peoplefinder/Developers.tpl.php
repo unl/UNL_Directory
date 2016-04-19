@@ -64,7 +64,7 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
                         <?php
                         //Get the output.
                         if (!$result = file_get_contents($url)) {
-                            $result = "Error getting file contents.";
+                            $result = "Sorry, we could not get a sample for you.";
                         }
 
                         switch ($format) {
