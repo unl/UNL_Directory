@@ -38,10 +38,8 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
                 <?php foreach ($resource->getAvailableFormats() as $format): ?>
 
                     <?php
-                    $url = UNL_Peoplefinder::addURLParams($resource->getExampleURI(), ['format' => $format]);
-                    if (substr($url, 0, 2) == '//') {
-                        $url = 'http:' . $url;
-                    }
+                    $url = str_replace('{format}', $format, $resource->getExampleURI());
+                    
                     $method_name = 'get' . ucfirst($format) . 'Properties';
                     ?>
                     <div id="<?php echo $format; ?>">

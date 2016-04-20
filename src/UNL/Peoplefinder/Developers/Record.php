@@ -99,7 +99,7 @@ class UNL_PeopleFinder_Developers_Record extends UNL_PeopleFinder_Developers_Abs
      */
     public function getURI()
     {
-        return UNL_Peoplefinder::$url . 'service.php?uid={uid}';
+        return UNL_Peoplefinder::$url . 'people/{uid}.{format}';
     }
 
     /**
@@ -107,6 +107,6 @@ class UNL_PeopleFinder_Developers_Record extends UNL_PeopleFinder_Developers_Abs
      */
     public function getExampleURI()
     {
-        return UNL_Peoplefinder::$url . 'service.php?uid=lperez1';
+        return UNL_Peoplefinder::$url . 'people/lperez1.{format}';
     }
 }

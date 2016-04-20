@@ -46,7 +46,7 @@ class UNL_PeopleFinder_Developers_Department extends UNL_PeopleFinder_Developers
      */
     public function getURI()
     {
-        return UNL_Officefinder::getURL() . '{id}|{org_unit}';
+        return UNL_Officefinder::getURL() . '{id}|{org_unit}?format={format}';
     }
 
     /**
@@ -54,6 +54,6 @@ class UNL_PeopleFinder_Developers_Department extends UNL_PeopleFinder_Developers
      */
     public function getExampleURI()
     {
-        return UNL_Officefinder::getURL()  . '362';
+        return UNL_Officefinder::getURL()  . '362?format={format}';
     }
 }
