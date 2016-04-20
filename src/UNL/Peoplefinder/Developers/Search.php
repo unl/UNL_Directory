@@ -46,7 +46,7 @@ class UNL_PeopleFinder_Developers_Search extends UNL_PeopleFinder_Developers_Abs
      */
     public function getURI()
     {
-        return $this->uri = UNL_Peoplefinder::$url . 'service.php?q={query}&format={format}';
+        return $this->uri = UNL_Peoplefinder::$url . '?q={query}&format={format}';
     }
 
     /**
@@ -54,6 +54,6 @@ class UNL_PeopleFinder_Developers_Search extends UNL_PeopleFinder_Developers_Abs
      */
     public function getExampleURI()
     {
-        return UNL_Peoplefinder::$url . 'service.php?q=fairchild&format={format}';
+        return UNL_Peoplefinder::$url . '?q=fairchild&format={format}';
     }
 }
