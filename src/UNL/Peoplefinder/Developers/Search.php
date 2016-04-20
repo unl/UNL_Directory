@@ -1,21 +1,59 @@
 <?php
-class UNL_PeopleFinder_Developers_Search
+class UNL_PeopleFinder_Developers_Search extends UNL_PeopleFinder_Developers_AbstractResource
 {
-    public $title       = "Peoplefinder Record";
-    
-    public $uri         = "service.php?q={query}";
-    
-    public $exampleURI  = "service.php?q=fairchild";
-    
-    public $properties  = array(
-                                array("{records}", "A list of all the <a href='?view=developers&resource=Record'>Peoplefinder Records</a> for the givien query.", true, true),
-                                );
-                                
-    public $formats     = array("json", "xml", "partial");
-    
-    function __construct()
+    /**
+     * @return string - a brief description of the resource
+     */
+    public function getTitle()
     {
-        $this->uri = UNL_Peoplefinder::$url . $this->uri;
-        $this->exampleURI  = UNL_Peoplefinder::$url . $this->exampleURI;
+        return 'Search';
+    }
+
+    /**
+     * @return string - a brief description of the resource
+     */
+    public function getDescription()
+    {
+        return 'The the results of a search in different formats';
+    }
+
+    /**
+     * @return mixed - an associative array of property=>description
+     */
+    public function getAvailableFormats()
+    {
+        return [self::FORMAT_JSON, self::FORMAT_XML, self::FORMAT_PARTIAL];
+    }
+
+    /**
+     * @return array - an associative array of property=>description
+     */
+    public function getJsonProperties()
+    {
+        ['{records}' => 'An array of all the <a href="?view=developers&resource=Record">person records</a> for the given query'];
+    }
+
+    /**
+     * @return array - an associative array of property=>description
+     */
+    public function getXmlProperties()
+    {
+        ['{records}' => 'A list of all the <a href="?view=developers&resource=Record">person records</a> for the given query'];
+    }
+
+    /**
+     * @return string - the absolute URL for the resource with placeholders
+     */
+    public function getURI()
+    {
+        return $this->uri = UNL_Peoplefinder::$url . '?q={query}&format={format}';
+    }
+
+    /**
+     * @return string - the absolute URL for the resource with placeholders filled in
+     */
+    public function getExampleURI()
+    {
+        return UNL_Peoplefinder::$url . '?q=fairchild&format={format}';
     }
 }

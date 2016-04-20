@@ -1,35 +1,59 @@
 <?php
-class UNL_PeopleFinder_Developers_Department
+class UNL_PeopleFinder_Developers_Department extends UNL_PeopleFinder_Developers_AbstractResource
 {
-    public $title       = "Department Record";
-
-    public $uri         = "{id}|{org_unit}";
-
-    public $exampleURI  = "362";
-
-    public $properties  = array(
-                                array("parent", "(String) ID for the parent department (if not root)", false, true),
-                                array("id", "(String) Unique ID for this record", false, true),
-                                array("name", "(String) Name of this deparmtnet/unit", false, true),
-                                array("org_unit", "(String) Official org unit ID from SAP", false, true),
-                                array("building", "(String) Building code", false, true),
-                                array("room", "(String) Room", false, true),
-                                array("city", "(String) City", false, true),
-                                array("state", "(String) State", false, true),
-                                array("postal_code", "(String) Zip code", false, true),
-                                array("address", "(String) Postal address", false, true),
-                                array("phone", "(String) Phone number", false, true),
-                                array("fax", "(String) Fax number", false, true),
-                                array("email", "(String) Email address", false, true),
-                                array("website", "(String) URL to the department website.", false, true),
-                                array("parent_id", "(String) ID for the parent department.", false, true)
-                                );
-                                
-    public $formats = array("xml", "partial");
-    
-    function __construct()
+    /**
+     * @return string - a brief description of the resource
+     */
+    public function getTitle()
     {
-        $this->uri = UNL_Officefinder::getURL() . $this->uri;
-        $this->exampleURI  = UNL_Officefinder::getURL() . $this->exampleURI;
+        return 'Department Record';
+    }
+    
+    public function getDescription()
+    {
+        return 'Get details about a department';
+    }
+    
+    public function getAvailableFormats()
+    {
+        return [self::FORMAT_JSON, self::FORMAT_XML, self::FORMAT_PARTIAL];
+    }
+    
+    public function getJsonProperties()
+    {
+        return [
+            'name' => 'Name of this deparmtnet/unit',
+            'org_unit' => 'Official org unit ID from SAP',
+        ];
+    }
+    
+    public function getXmlProperties()
+    {
+        return [
+            'department' => 'The department element, which contains \'parent\' and \'child\' children elements.',
+            'parent' => 'A link to the parent department the link is available in the xlink:href attribute',
+            'child' => 'A link to the child department, the link is available in the xlink:href attribute (there can be many of these)',
+        ];
+    }
+    
+    public function getPartialProperties()
+    {
+        return [];
+    }
+
+    /**
+     * @return string - the absolute URL for the resource with placeholders
+     */
+    public function getURI()
+    {
+        return UNL_Officefinder::getURL() . '{id}|{org_unit}?format={format}';
+    }
+
+    /**
+     * @return string - the absolute URL for the resource with placeholders filled in
+     */
+    public function getExampleURI()
+    {
+        return UNL_Officefinder::getURL()  . '362?format={format}';
     }
 }

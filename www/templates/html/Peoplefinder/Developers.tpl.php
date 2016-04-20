@@ -1,174 +1,118 @@
-<style type="text/css">
-    blockquote {
-         background: none repeat scroll 0pt 0pt rgb(240, 240, 240);
-         margin: 15px 0pt;
-         padding: 10px;
-         width: auto;
-    }
+<?php
+$page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized-dark.min.css', 'stylesheet');
+?>
 
-    blockquote > p {
-         clear: none;
-         margin: 0pt;
-         padding: 0pt;
-    }
-
-    div.resource {
-         border-bottom: #F0F0F0 5px solid;
-         margin-bottom: 20px;
-    }
-
-    #maincontent div.resource > ul {
-        padding-left:0;
-    }
-
-    div.resource > ul > li {
-        list-style:none;
-    }
-
-    a.resources
-    {
-        float:right;
-        font-size:12px
-    }
-</style>
-
-<script type="text/javascript">jQuery = $ = WDN.jQuery;</script>
-
-<script type="text/javascript" src="scripts/jquery.beautyOfCode.js"></script>
-
-<script type="text/javascript">
-    $.beautyOfCode.init({
-        theme: "RDark",
-        brushes: ['Xml', 'JScript', 'CSharp', 'Plain', 'Php', "Java", "JavaFX"],
-        ready: function() {
-            $.beautyOfCode.beautifyAll();
-
-        }
-    });
-</script>
-
-<div class="three_col left">
-
-    <?php
+<div class="wdn-grid-set">
+    <div class="bp3-wdn-col-three-fourths">
+        <?php
         $resource = "UNL_Peoplefinder_Developers_" . $context->resource;
         $resource = new $resource;
         ?>
         <div class="resource">
-        <h1 id="instance" class="sec_main"><?php echo $resource->title; ?> Resource</h1>
-        <h3>Details</h3>
-        <ul>
-            <li>
-                <h4 id="instance-uri"><a href="#instance-uri">Resource URI</a></h4>
-                <blockquote>
+            <h1 id="instance" class="sec_main">API: <?php echo $resource->getTitle(); ?> Resource</h1>
+
+            <h2 id="instance-uri">Resource URI</h2>
+            <p>
+                <code>
                     <?php
-                    $uri = $resource->uri;
+                    $uri = $resource->getURI();
                     if (substr($uri, 0, 2) == '//') {
                         $uri = 'http:' . $uri;
                     }
+                    echo $uri;
                     ?>
-                    <p><?php echo $uri; ?></p>
-                </blockquote>
-            </li>
-            <li>
-                <h4 id="instance-properties"><a href="#instance-properties">Resource Properties</a></h4>
-                <table class="zentable neutral">
-                <thead><tr><th>Property</th><th>Description</th><th>JSON</th><th>XML</th></tr></thead>
-                  <tbody>
-                  <?php
-                    foreach ($resource->properties as $property) {
-                      echo "<tr>
-                                <td>$property[0]</td>
-                                <td>$property[1]</td>
-                                <td>$property[2]</td>
-                                <td>$property[3]</td>
-                            </tr>";
-                    }
-                  ?>
-                  </tbody>
-                </table>
-            </li>
-            <li>
-                <h4 id="instance-get"><a href="#instance-get">HTTP GET</a></h4>
-                <p>Returns a representation of the resource, including the properties above.</p>
-            </li>
-            <li>
-                <h4 id="instance-get-example-1"><a href="#instance-get-example-1">Example</a></h4>
-                <ul class="wdn_tabs">
+                </code>
+            </p>
+
+            <p><?php echo $resource->getDescription() ?></p>
+
+            <h2 id="instance-get-example-1">Example</h2>
+            <ul class="wdn_tabs">
                 <?php
-                 foreach ($resource->formats as $format) {
-                     echo "<li><a href='#$format'>$format</a></li>";
-                 }
+                foreach ($resource->getAvailableFormats() as $format) {
+                    echo '<li><a href="#'.$format.'">'.$format.'</a></li>';
+                }
                 ?>
-                </ul>
-                <div class="wdn_tabs_content">
-                     <?php
-                     foreach ($resource->formats as $format) {
-                         $url = UNL_Peoplefinder::addURLParams($resource->exampleURI, array('format' => $format));
-                         if (substr($url, 0, 2) == '//') {
-                            $url = 'http:' . $url;
-                         }
-                         ?>
-                         <div id="<?php echo $format; ?>">
-                            <ul>
-                                <li>
-                                    Calling this:
-                                    <blockquote>
-                                        <p>GET <?php echo $url; ?></p>
-                                    </blockquote>
-                                </li>
-                                <li>
-                                    Provides this:
-                                    <?php
-                                    //Get the output.
-                                    if (!$result = file_get_contents($url)) {
-                                        $result = "Error getting file contents.";
-                                    }
-                                    switch($format) {
-                                        case "json":
-                                            $code = 'javascript';
-                                            break;
-                                        case "xml":
-                                            $code = "xml";
-                                            break;
-                                        default:
-                                            $code = "html";
-                                    }
-                                    ?>
-                                    <pre class="code">
-                                        <code class="<?php echo $code; ?>"><?php echo htmlentities($result); ?></code>
-                                    </pre>
-                                </li>
-                            </ul>
-                        </div>
-                         <?php
-                     }
-                     ?>
+            </ul>
+            <div class="wdn_tabs_content">
+                <?php foreach ($resource->getAvailableFormats() as $format): ?>
 
-                </div>
-            </li>
-        </ul>
-    </div>
+                    <?php
+                    $url = str_replace('{format}', $format, $resource->getExampleURI());
+                    
+                    $method_name = 'get' . ucfirst($format) . 'Properties';
+                    ?>
+                    <div id="<?php echo $format; ?>">
+                        <pre><code>GET <?php echo $url; ?></code></pre>
+                        <?php if (count($resource->$method_name())): ?>
+                            <h2>Resource Properties</h2>
+                            <table class="zentable neutral">
+                            <thead><tr><th>Property</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <?php foreach ($resource->$method_name() as $property => $description): ?>
+                                    <tr>
+                                      <td><?php echo $property ?></td>
+                                      <td><?php echo $description ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                        <?php endif; ?>
+                        <h2>Response</h2>
+                        <?php
+                        //Get the output.
+                        if (!$result = file_get_contents($url)) {
+                            $result = "Sorry, we could not get a sample for you.";
+                        }
 
-</div>
-<div class="col right">
-    <div id='resources' class="zenbox primary" style="width:200px">
-        <h3>Directory API</h3>
-        <p>The following is a list of resources for Directory.</p>
-        <ul>
-            <?php
-            foreach ($context->resources as $resource) {
-                echo "<li><a href='?view=developers&resource=$resource'>$resource</a></li>";
-            }
-            ?>
-        </ul>
+                        switch ($format) {
+                            case "json":
+                                $code = 'javascript';
+                                //Pretty print it
+                                $result = json_decode($result);
+                                $result = json_encode($result, JSON_PRETTY_PRINT);
+                                break;
+                            case "xml":
+                                $code = "xml";
+                                break;
+                            default:
+                                $code = "html";
+                        }
+                        ?>
+                        <pre class="code">
+                            <code class="<?php echo $code; ?>"><?php echo htmlentities($result); ?></code>
+                        </pre>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
     </div>
-    <div class="zenbox neutral" style="width:200px">
-        <h3>Format Information</h3>
-        <p>The following is a list of formats used in Directory.</p>
-        <ul>
-            <li><a href='http://www.json.org/'>JSON (JavaScript Object Notation)</a></li>
-            <li><a href='http://en.wikipedia.org/wiki/XML'>XML (Extensible Markup Language)</a></li>
-            <li>Partial - The un-themed main content area of the page.</li>
-        </ul>
+    <div class="bp3-wdn-col-one-fourth">
+        <nav id="resources" aria-label="API Navigation" class="zenbox primary">
+            <h2>Directory API</h2>
+            <p>The following is a list of resources for Directory.</p>
+            <ul>
+                <?php foreach ($context->resources as $resource => $name): ?>
+                    <li><a href="<?php echo UNL_Peoplefinder::$url ?>developers/?resource=<?php echo $resource ?>"><?php echo $name ?></a></li>
+                <?php endforeach ?>
+            </ul>
+        </nav>
+        <div class="zenbox neutral">
+            <h2>Format Information</h2>
+            <p>The following is a list of formats used in Directory.</p>
+            <ul>
+                <li><a href="http://www.json.org/">JSON (JavaScript Object Notation)</a></li>
+                <li><a href="http://en.wikipedia.org/wiki/XML">XML (Extensible Markup Language)</a></li>
+                <li>Partial - The un-themed main content area of the page.</li>
+            </ul>
+        </div>
     </div>
 </div>
+
+<script>
+    require(['jquery', 'https://cdn.jsdelivr.net/highlight.js/9.2.0/highlight.min.js'], function ($, hljs) {
+        $('.resource pre.code code').each(function () {
+            hljs.highlightBlock(this);
+        })
+    })
+</script>
