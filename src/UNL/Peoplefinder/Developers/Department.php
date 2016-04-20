@@ -1,5 +1,5 @@
 <?php
-class UNL_PeopleFinder_Developers_Department extends UNL_PeopleFinder_Developers_AbstractResource
+class UNL_Peoplefinder_Developers_Department extends UNL_Peoplefinder_Developers_AbstractResource
 {
     /**
      * @return string - a brief description of the resource
@@ -8,17 +8,17 @@ class UNL_PeopleFinder_Developers_Department extends UNL_PeopleFinder_Developers
     {
         return 'Department Record';
     }
-    
+
     public function getDescription()
     {
         return 'Get details about a department';
     }
-    
+
     public function getAvailableFormats()
     {
         return [self::FORMAT_JSON, self::FORMAT_XML, self::FORMAT_PARTIAL];
     }
-    
+
     public function getJsonProperties()
     {
         return [
@@ -26,7 +26,7 @@ class UNL_PeopleFinder_Developers_Department extends UNL_PeopleFinder_Developers
             'org_unit' => 'Official org unit ID from SAP',
         ];
     }
-    
+
     public function getXmlProperties()
     {
         return [
@@ -35,7 +35,7 @@ class UNL_PeopleFinder_Developers_Department extends UNL_PeopleFinder_Developers
             'child' => 'A link to the child department, the link is available in the xlink:href attribute (there can be many of these)',
         ];
     }
-    
+
     public function getPartialProperties()
     {
         return [];

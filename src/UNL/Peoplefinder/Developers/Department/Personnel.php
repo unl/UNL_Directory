@@ -1,5 +1,5 @@
 <?php
-class UNL_PeopleFinder_Developers_Department_Personnel extends UNL_PeopleFinder_Developers_AbstractResource
+class UNL_Peoplefinder_Developers_Department_Personnel extends UNL_Peoplefinder_Developers_AbstractResource
 {
     /**
      * @return string - a brief description of the resource

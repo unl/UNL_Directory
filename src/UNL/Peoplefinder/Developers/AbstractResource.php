@@ -1,15 +1,15 @@
 <?php
-abstract class UNL_PeopleFinder_Developers_AbstractResource
+abstract class UNL_Peoplefinder_Developers_AbstractResource
 {
     const FORMAT_JSON = 'json';
     const FORMAT_XML = 'xml';
     const FORMAT_PARTIAL = 'partial';
-    
+
     /**
      * @return string - a brief description of the resource
      */
     abstract public function getTitle();
-    
+
     /**
      * @return string - a brief description of the resource
      */
@@ -32,7 +32,7 @@ abstract class UNL_PeopleFinder_Developers_AbstractResource
 
     /**
      * @return array - an associative array of property=>description
-     * 
+     *
      * The default for partial is to not provide any properties as it is HTML
      * However, it might be helpful to provide some additional information for some resources
      */
