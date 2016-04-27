@@ -91,7 +91,16 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
             $this->record = $options;
             $this->options = [];
         } elseif (isset($options['uid'])) {
-            $this->record = UNL_Peoplefinder_Record::factory($options['uid']);
+            try {
+                $this->record = UNL_Peoplefinder_Record::factory($options['uid']);
+            } catch (Exception $e) {
+                if ($e->getCode() !== 404) {
+                    throw $e;
+                }
+
+                $this->record = new UNL_Peoplefinder_Record();
+                $this->record->uid = $options['uid'];
+            }
             $this->options = $options;
         } elseif (isset($options['did'])) {
             $this->record = new UNL_Officefinder_Department(['id' => $options['did']]);
@@ -160,7 +169,7 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
                 //The old version of planetred is in use and will return a 200 response for images.
                 return $effectiveUrl;
             }
-            
+
             //request to planet red failed (404 or 500 like error) however
             //if a user has not registered with planetred, it should still redirect to the default image
             $fallbackUrl = 'mm';
