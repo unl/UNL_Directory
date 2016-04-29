@@ -1,12 +1,15 @@
 <?php
 class UNL_Officefinder_DepartmentList_NameSearch extends UNL_Officefinder_DepartmentList
 {
-    public $options = array('q'=>'', 'parent_orgs' => true);
+    public $options = [
+        'q' => '',
+        'parent_orgs' => true,
+    ];
 
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         $this->options = $options + $this->options;
-        $records = array();
+        $records = [];
         $mysqli = UNL_Officefinder::getDB();
         $sql = $this->getSQL();
         if ($result = $mysqli->query($sql)) {
