@@ -59,4 +59,10 @@ class UNL_Peoplefinder_Cache
 		$this->fastCache->set($key, $value, $expires);
 		$this->slowCache->save($value, $key);
 	}
+
+	public function remove($key)
+	{
+		$this->fastCache->delete($key);
+		$this->slowCache->remove($key, 'default', true);
+	}
 }
