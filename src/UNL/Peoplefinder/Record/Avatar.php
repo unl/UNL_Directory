@@ -1,5 +1,11 @@
 <?php
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\UriInterface;
+
 class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, UNL_Peoplefinder_Routable
 {
     const GRAVATAR_BASE_URL = 'https://secure.gravatar.com/avatar/';
@@ -155,17 +161,26 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
         $planetRedUid = $this->record->getProfileUid();
         $profileIconUrl = UNL_Peoplefinder_Record::PLANETRED_BASE_URL . 'icon/' . 'unl_' . $planetRedUid . '/' . $size . '/';
 
-        $request = new HTTP_Request2($profileIconUrl, HTTP_Request2::METHOD_HEAD, [
-            'adapter' => 'HTTP_Request2_Adapter_Curl',
-            'follow_redirects' => true,
-            'strict_redirects' => true,
+        $effectiveUrl = $profileIconUrl;
+        $onRedirect = function(
+            RequestInterface $request,
+            ResponseInterface $response,
+            UriInterface $uri
+        ) use (&$effectiveUrl) {
+            $effectiveUrl = (string) $uri;
+        };
+        $client = new Client([
+            'allow_redirects' => [
+                'on_redirect' => $onRedirect
+            ],
+            'http_errors' => false,
         ]);
-        $response = $request->send();
+        $request = new Request('HEAD', $profileIconUrl);
+        $response = $client->send($request);
 
-        $effectiveUrl = $response->getEffectiveUrl();
         //check if it redirects to the default image
         if ($effectiveUrl == $profileIconUrl) {
-            if ($response->getStatus() == 200) {
+            if ($response->getStatusCode() == 200) {
                 //The old version of planetred is in use and will return a 200 response for images.
                 return $effectiveUrl;
             }
@@ -179,6 +194,11 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
         } else {
             //default image again.
             $fallbackUrl = $effectiveUrl;
+        }
+
+        // Do we have something Gravatar can use?
+        if (!$this->record->mail || !$this->record->eduPersonPrincipalName) {
+            return $effectiveUrl;
         }
 
         $gravatarParams = [
