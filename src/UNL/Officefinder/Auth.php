@@ -4,6 +4,9 @@ class UNL_Officefinder_Auth
 {
     const SESSION_MAP_CACHE_PREFIX = 'unl_cas_map_';
 
+    /**
+     * @var UNL_Peoplefinder_Cache
+     */
     protected $cache;
 
     public function __construct()
@@ -18,41 +21,68 @@ class UNL_Officefinder_Auth
         phpCAS::setCasServerCACert(GuzzleHttp\default_ca_bundle());
     }
 
+    /**
+     * Handle a request that may match a backchannel SLO request from the CAS server
+     */
     public function handleSingleLogOut()
     {
         phpCAS::handleLogoutRequests(false);
     }
 
+    /**
+     * Checks if CAS authentication was previously done or has an active ticket
+     * @return boolean [description]
+     */
     public function isAuthenticated()
     {
         return phpCAS::isAuthenticated();
     }
 
+    /**
+     * Get the Username from a successful CAS session
+     */
     public function getUsername()
     {
         return phpCAS::getUser();
     }
 
+    /**
+     * Transparently redirect to the CAS Server to check for an SSO session
+     */
     public function gatewayAuthentication()
     {
         return phpCAS::checkAuthentication();
     }
 
+    /**
+     * Redirect to the CAS Server to start the authentication flow
+     */
     public function forceAuthentication()
     {
         return phpCAS::forceAuthentication();
     }
 
-    public function logout($url = '')
+    /**
+     * Destroy the CAS session and redirect to SLO on CAS server
+     */
+    public function logout()
     {
         return phpCAS::logout();
     }
 
-    public function getLogoutUrl($url = '')
+    /**
+     * Get the CAS Server SLO URL
+     * @return string
+     */
+    public function getLogoutUrl()
     {
         return phpCAS::getServerLogoutURL();
     }
 
+    /**
+     * Lazy-loads a caching controller
+     * @return UNL_Peoplefinder_Cache
+     */
     protected function getCache()
     {
         if (!$this->cache) {
@@ -62,6 +92,11 @@ class UNL_Officefinder_Auth
         return $this->cache;
     }
 
+    /**
+     * A callback for when the CAS library receives a valid service ticket
+     * @param  string $ticket [description]
+     * @return [type]         [description]
+     */
     public function handleLoginTicket($ticket)
     {
         $key = $this->getCacheKeyFromTicket($ticket);
@@ -70,12 +105,20 @@ class UNL_Officefinder_Auth
         return $this;
     }
 
+    /**
+     * A callback for when the CAS library receives a valid logout request
+     * @param  string $ticket
+     */
     public function handleLogoutTicket($ticket)
     {
         $sessionId = $this->getSessionFromCache($ticket);
         if (!$sessionId) {
             return;
         }
+
+        $this->removeSessionFromCache($ticket);
+
+        // destroy the mapped session
 
         if (session_id() !== "") {
             session_unset();
@@ -90,11 +133,19 @@ class UNL_Officefinder_Auth
         session_destroy();
     }
 
+    /**
+     * @param  string $ticket
+     * @return string
+     */
     protected function getCacheKeyFromTicket($ticket)
     {
         return self::SESSION_MAP_CACHE_PREFIX . sha1($ticket);
     }
 
+    /**
+     * @param  string $ticket
+     * @return string|false
+     */
     protected function getSessionFromCache($ticket)
     {
         $cache = $this->getCache();
@@ -110,10 +161,13 @@ class UNL_Officefinder_Auth
             return false;
         }
 
-        $this->removeSessionFromCache($ticket);
         return $sessionId;
     }
 
+    /**
+     * @param  string $ticket
+     * @return self
+     */
     protected function removeSessionFromCache($ticket)
     {
         $key = $this->getCacheKeyFromTicket($ticket);

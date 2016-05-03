@@ -40,16 +40,32 @@ class UNL_Peoplefinder_Cache
 		$this->slowCache = $slowCache;
 	}
 
+	/**
+	 * Return the cached value from the fast cache
+	 * @param  string $key
+	 * @return mixed
+	 */
 	public function get($key)
 	{
 		return $this->fastCache->get($key);
 	}
 
+	/**
+	 * Return the cached value from the slow cache
+	 * @param  string $key
+	 * @return mixed
+	 */
 	public function getSlow($key)
 	{
 		return $this->slowCache->get($key);
 	}
 
+	/**
+	 * Saves the given value in both the fast and slow cache with the given key
+	 * @param string  $key
+	 * @param string  $value
+	 * @param int|false $expires When this key expires in the fast cache or false for the default
+	 */
 	public function set($key, $value, $expires = false)
 	{
 		if (!$expires) {
@@ -60,6 +76,10 @@ class UNL_Peoplefinder_Cache
 		$this->slowCache->save($value, $key);
 	}
 
+	/**
+	 * Removes the cache values in both fast and slow cache with given key
+	 * @param  string $key
+	 */
 	public function remove($key)
 	{
 		$this->fastCache->delete($key);
