@@ -31,7 +31,7 @@ class UNL_Officefinder_Auth
 
     /**
      * Checks if CAS authentication was previously done or has an active ticket
-     * @return boolean [description]
+     * @return boolean
      */
     public function isAuthenticated()
     {
@@ -94,8 +94,8 @@ class UNL_Officefinder_Auth
 
     /**
      * A callback for when the CAS library receives a valid service ticket
-     * @param  string $ticket [description]
-     * @return [type]         [description]
+     * @param  string $ticket
+     * @return self
      */
     public function handleLoginTicket($ticket)
     {
