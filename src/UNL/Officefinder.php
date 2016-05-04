@@ -48,7 +48,7 @@ class UNL_Officefinder
     /**
      * Singleton authentication adapter/client
      *
-     * @var SimpleCAS
+     * @var UNL_Officefinder_Auth
      */
     protected static $auth;
 
@@ -104,7 +104,6 @@ class UNL_Officefinder
         } catch(Exception $e) {
             $this->output = $e;
         }
-
     }
 
     /**
@@ -115,22 +114,7 @@ class UNL_Officefinder
     protected static function _getAuth()
     {
         if (!self::$auth) {
-            $protocol = new SimpleCAS_Protocol_Version2([
-                'hostname' => 'login.unl.edu',
-                'port' => 443,
-                'uri' => 'cas',
-                'request' => new HTTP_Request2(null, null, [
-                    'adapter' => 'HTTP_Request2_Adapter_Curl'
-                ]),
-            ]);
-            $cacheDriver = new \Stash\Driver\FileSystem();
-            $cacheDriver->setOptions([
-                'path' => realpath(__DIR__ . '/../..') . '/tmp/simpleCAS_map',
-            ]);
-            $sessionMap = new SimpleCAS_SLOMap($cacheDriver);
-            $protocol->setSessionMap($sessionMap);
-
-            self::$auth = SimpleCAS::client($protocol);
+            self::$auth = new UNL_Officefinder_Auth();
         }
 
         return self::$auth;
@@ -177,12 +161,17 @@ class UNL_Officefinder
      *
      * @param bool $forceAuth Whether to force authentication or not
      *
-     * @return UNL_Peoplefinder_Record
+     * @return string
      */
     public static function getUser($forceAuth = false)
     {
         if (self::$user) {
             return self::$user;
+        }
+
+        $auth = self::_getAuth();
+        if ($auth->isAuthenticated()) {
+            return self::$user = $auth->getUsername();
         }
 
         if ($forceAuth) {
