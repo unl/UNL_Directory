@@ -32,6 +32,7 @@ class UNL_Officefinder_DepartmentList_NameSearch extends UNL_Officefinder_Depart
         $mysqli = UNL_Officefinder::getDB();
         $esapedQuery = "'%" . $mysqli->escape_string($query) . "%'";
         $where = ['d1.name LIKE ' . $esapedQuery . ' OR ds.name LIKE ' . $esapedQuery];
+        $where[] = 'd1.suppress = 0';
         $sql = 'SELECT DISTINCT d1.id, d1.name FROM departments d1 ';
 
         if ((bool)$this->options['parent_orgs'] === true) {
