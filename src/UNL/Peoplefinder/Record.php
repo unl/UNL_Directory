@@ -85,19 +85,7 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
             $peoplefinder = UNL_Peoplefinder::getInstance();
         }
 
-        $cache = UNL_Peoplefinder_Cache::factory();
-        $cacheKey = 'UNL_Peoplefinder_Record-uid-' . $uid;
-
-        $remoteRecord = $cache->get($cacheKey);
-        if (!$remoteRecord) {
-            $remoteRecord = $peoplefinder->getUID($uid);
-
-            if ($remoteRecord) {
-                $cache->set($cacheKey, $remoteRecord);
-            }
-        }
-
-        return $remoteRecord;
+        return $peoplefinder->getUID($uid);
     }
 
     public static function getCleanPhoneNumber($phone)
