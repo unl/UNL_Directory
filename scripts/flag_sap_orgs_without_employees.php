@@ -5,16 +5,16 @@
  */
 require_once dirname(__FILE__).'/../www/config.inc.php';
 
+// seed the peoplefinder instance with configured driver
+UNL_Peoplefinder::getInstance(isset($driver) ? ['driver' => $driver] : []);
+
 // Step 1.) Reset suppress flag on all departments to false (0)
 $db = UNL_Officefinder::getDB();
 $db->query('UPDATE departments SET suppress = 0;');
 
 
 // Step 2.) Suppress all departments with (no children AND no hr personnel)
-$departments = new UNL_Officefinder_DepartmentList_OfficialOrgUnits();
-
-$departments_without_children = new UNL_Officefinder_DepartmentList_Filter_HasNoChildren($departments);
-
+$departments = new UNL_Officefinder_DepartmentList_OfficialOrgUnitsNoChildren();
 $departments_with_nohrpersonnel = new UNL_Officefinder_DepartmentList_Filter_HasNoHRPersonnel($departments_without_children);
 
 foreach ($departments_with_nohrpersonnel as $department) {
