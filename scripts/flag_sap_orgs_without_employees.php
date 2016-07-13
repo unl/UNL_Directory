@@ -15,7 +15,7 @@ $db->query('UPDATE departments SET suppress = 0;');
 
 // Step 2.) Suppress all departments with (no children AND no hr personnel)
 $departments = new UNL_Officefinder_DepartmentList_OfficialOrgUnitsNoChildren();
-$departments_with_nohrpersonnel = new UNL_Officefinder_DepartmentList_Filter_HasNoHRPersonnel($departments_without_children);
+$departments_with_nohrpersonnel = new UNL_Officefinder_DepartmentList_Filter_HasNoHRPersonnel($departments);
 
 foreach ($departments_with_nohrpersonnel as $department) {
     /* @var $department UNL_Officefinder_Department */
