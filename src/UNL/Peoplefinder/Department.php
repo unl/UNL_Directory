@@ -1,10 +1,10 @@
 <?php
 /**
  * Class which represents a department.
- * 
+ *
  * The departments are pulled from an xml file, generated from SAP data.
  * hr_tree.xml using TreeML schema
- * 
+ *
  * The object also allows iterating over all the members of the department.
  */
 class UNL_Peoplefinder_Department implements Countable, Iterator
@@ -15,7 +15,7 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
      * @var string
      */
     public $name;
-    
+
     /**
      * The organizational unit number.
      *
@@ -26,49 +26,49 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
     /**
      * Organization abbreviation
      *
-     * @var string 
+     * @var string
      */
     public $org_abbr;
-    
+
     /**
      * Building the department main office is in.
      *
      * @var string
      */
     public $building;
-    
+
     /**
      * Room
      *
      * @var string
      */
     public $room;
-    
+
     /**
      * City
      *
      * @var string
      */
     public $city;
-    
+
     /**
      * State
      *
      * @var string
      */
     public $state;
-    
+
     /**
      * zip code
      *
      * @var string
      */
     public $postal_code;
-    
+
     protected $_ldap;
 
     protected $_results;
-    
+
     /**
      * SimpleXMLElement of the HR Tree file
      *
@@ -80,9 +80,9 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
      * @var string Prefix added to all xpath queries
      */
     protected static $_xpath_base = '//attribute[@name="org_unit"][@value="50000003"]/..';
-    
+
     public $options = array();
-    
+
     /**
      * construct a department
      *
@@ -105,13 +105,13 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
         $result = false;
 
         if (isset($options['xml'])) {
-            $result = $options['xml'];    
+            $result = $options['xml'];
         } elseif (isset($options['org_unit'])) {
             $result = self::getXMLById($options['org_unit']);
         } elseif (isset($options['d'])) {
             $result = self::getXMLByName($options['d']);
         }
-    
+
         if (!$result) {
             throw new Exception('Invalid department', 404);
         }
@@ -127,7 +127,7 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
             }
         }
     }
-    
+
     /**
      * Get the XML for the HR Tree
      *
@@ -140,7 +140,7 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
         }
         return self::$_xml;
     }
-    
+
     /**
      * Retrieves people records from the LDAP directory
      *
@@ -155,7 +155,7 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
         }
         return $this->_results;
     }
-    
+
     /**
      * returns the count of employees
      *
@@ -165,12 +165,12 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
     {
         return count($this->getLDAPResults());
     }
-    
+
     function rewind()
     {
         $this->getLDAPResults()->rewind();
     }
-    
+
     /**
      * Get the current record in the iteration
      *
@@ -180,28 +180,28 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
     {
         return $this->getLDAPResults()->current();
     }
-    
+
     function key()
     {
         return $this->getLDAPResults()->key();
     }
-    
+
     function next()
     {
         $this->getLDAPResults()->next();
     }
-    
+
     function valid()
     {
         return $this->getLDAPResults()->valid();
     }
-    
+
     function hasChildren()
     {
         $results = self::getXML()->xpath(self::$_xpath_base.'//attribute[@name="org_unit"][@value="'.$this->org_unit.'"]/../branch');
         return count($results)?true:false;
     }
-    
+
     function getChildren()
     {
         $children = array();
@@ -221,7 +221,7 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
 
     /**
      * Retrieve an official SAP Org entry by ID
-     * 
+     *
      * @param int $id ID, such as 5000XXXX
      */
     public static function getById($id, $options = array())
