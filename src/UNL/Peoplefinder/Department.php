@@ -65,8 +65,6 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
      */
     public $postal_code;
 
-    protected $_ldap;
-
     protected $_results;
 
     /**
@@ -81,14 +79,14 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
      */
     protected static $_xpath_base = '//attribute[@name="org_unit"][@value="50000003"]/..';
 
-    public $options = array();
+    public $options = [];
 
     /**
      * construct a department
      *
      * @param string $name Name of the department
      */
-    function __construct($options = array())
+    public function __construct($options = [])
     {
         if (!(
                 isset($options['d'])
@@ -146,7 +144,7 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
      *
      * @return resource
      */
-    function getLDAPResults()
+    public function getLDAPResults()
     {
         if (!isset($this->_results)) {
             UNL_Peoplefinder::$resultLimit = 500;
@@ -161,12 +159,12 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
      *
      * @return int
      */
-    function count()
+    public function count()
     {
         return count($this->getLDAPResults());
     }
 
-    function rewind()
+    public function rewind()
     {
         $this->getLDAPResults()->rewind();
     }
@@ -176,35 +174,35 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
      *
      * @return UNL_Peoplefinder_Record
      */
-    function current()
+    public function current()
     {
         return $this->getLDAPResults()->current();
     }
 
-    function key()
+    public function key()
     {
         return $this->getLDAPResults()->key();
     }
 
-    function next()
+    public function next()
     {
         $this->getLDAPResults()->next();
     }
 
-    function valid()
+    public function valid()
     {
         return $this->getLDAPResults()->valid();
     }
 
-    function hasChildren()
+    public function hasChildren()
     {
         $results = self::getXML()->xpath(self::$_xpath_base.'//attribute[@name="org_unit"][@value="'.$this->org_unit.'"]/../branch');
         return count($results)?true:false;
     }
 
-    function getChildren()
+    public function getChildren()
     {
-        $children = array();
+        $children = [];
         $results = self::getXML()->xpath(self::$_xpath_base.'//attribute[@name="org_unit"][@value="'.$this->org_unit.'"]/../branch');
         foreach ($results as $result) {
             foreach ($result[0] as $attribute) {
@@ -224,7 +222,7 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
      *
      * @param int $id ID, such as 5000XXXX
      */
-    public static function getById($id, $options = array())
+    public static function getById($id, $options = [])
     {
         if ($result = self::getXMLById($id)) {
             $options['xml'] = $result;
