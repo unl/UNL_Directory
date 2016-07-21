@@ -3,5 +3,5 @@ be sure your UNL_Cache_Lite can write to tmp directory
 
 run `php scripts/cache_knowledge.php`
 telnet into memcached `telnet localhost 11211`
-in telnet, do `get lperez1` you should see data
+in telnet, do `get UNL_Directory_FacultyData_PUBLIC_WEB_lperez1` you should see data
 `quit` to exit
