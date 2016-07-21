@@ -1,21 +1,59 @@
 <?php
-class UNL_PeopleFinder_Developers_Department_Personnel
+class UNL_Peoplefinder_Developers_Department_Personnel extends UNL_Peoplefinder_Developers_AbstractResource
 {
-    public $title       = "Department Personnel";
-
-    public $uri         = "{id}|{org_unit}/personnel";
-
-    public $exampleURI  = "362/personnel";
-
-    public $properties  = array(
-                                array("person", "(Array) Array of person objects", true, true),
-                                );
-                                
-    public $formats = array("xml", "partial");
-    
-    function __construct()
+    /**
+     * @return string - a brief description of the resource
+     */
+    public function getTitle()
     {
-        $this->uri = UNL_Officefinder::getURL() . $this->uri;
-        $this->exampleURI  = UNL_Officefinder::getURL() . $this->exampleURI;
+        return 'Department Personnel';
+    }
+
+    /**
+     * @return string - a brief description of the resource
+     */
+    public function getDescription()
+    {
+        return 'This resource returns personnel information for a given department';
+    }
+
+    /**
+     * @return mixed - an associative array of property=>description
+     */
+    public function getAvailableFormats()
+    {
+        return [self::FORMAT_JSON, self::FORMAT_XML, self::FORMAT_PARTIAL];
+    }
+
+    /**
+     * @return array - an associative array of property=>description
+     */
+    public function getJsonProperties()
+    {
+        return ['person' => '(Array) Array of <a href="?view=developers&resource=Record">person records</a>'];
+    }
+
+    /**
+     * @return array - an associative array of property=>description
+     */
+    public function getXmlProperties()
+    {
+        return ['person' => 'A list of <a href="?view=developers&resource=Record">person records</a>'];
+    }
+
+    /**
+     * @return string - the absolute URL for the resource with placeholders
+     */
+    public function getURI()
+    {
+        return UNL_Officefinder::getURL() . '{id}|{org_unit}/personnel?format={format}';
+    }
+
+    /**
+     * @return string - the absolute URL for the resource with placeholders filled in
+     */
+    public function getExampleURI()
+    {
+        return UNL_Officefinder::getURL() . '362/personnel?format={format}';
     }
 }

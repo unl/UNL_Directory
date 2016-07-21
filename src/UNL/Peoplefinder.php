@@ -273,6 +273,16 @@ class UNL_Peoplefinder
         return dirname(__FILE__).'/../../data';
     }
 
+    /**
+     * Get the path to the tmp directory for this project
+     *
+     * @return string
+     */
+    public static function getTmpDir()
+    {
+        return dirname(__FILE__).'/../../tmp';
+    }
+
     public static function setReplacementData($field, $data)
     {
         self::$replacement_data[$field] = $data;

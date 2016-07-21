@@ -25,6 +25,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
     static public $bindPW             = 'putyourpasswordhere';
     static public $baseDN             = 'ou=people,dc=unl,dc=edu';
     static public $ldapTimeout        = 10;
+    static public $cacheTimeout       = 28800; //8 hours
 
     /**
      * Attribute arrays
@@ -170,19 +171,58 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
             $dn = self::$baseDN;
         }
 
+        $cache = $this->getCache();
+        
+        $cache_key = $filter . '-' . implode(',', $attributes) . '-' . $setResult . '-' . $dn;
+        //Our key will most likely exceed the memcached key length limit, so reduce it
+        $cache_key = 'ldap-'.md5($cache_key);
+        
+        if ($result = $cache->get($cache_key)) {
+            $result = unserialize($result);
+
+            if ($setResult) {
+                $this->lastResult = $this->caseInsensitiveSortLDAPResults($result);
+            }
+            
+            return $result;
+        }
+
+        //Prevent cache stampede (return empty results until the first one finishes)
+        $cache->set($cache_key, serialize([]));
+
         $limit = UNL_Peoplefinder::$resultLimit;
         $timeout = self::$ldapTimeout;
 
         $this->lastQuery = $filter;
 
         $tries = 1;
-        $maxTries = 10;
+        $maxTries = 5;
 
+        //Try several times in case of a connection error
         do {
             $retry = false;
             $this->bind();
             $sr = @ldap_search($this->linkID, $dn, $filter, $attributes, 0, $limit, $timeout);
             if (!$sr) {
+                //log error
+                $errno = ldap_errno($this->linkID);
+                $error = ldap_error($this->linkID);
+                
+                $ldap_error_file = UNL_Peoplefinder::getTmpDir() . '/ldap_error.log';
+
+                if (!file_exists($ldap_error_file)) {
+                    touch($ldap_error_file);
+                }
+                
+                $error_str = date('c') . ' - ' . $errno . ' - ' . $error . ' - ' . $filter . PHP_EOL;
+                file_put_contents($ldap_error_file, $error_str, FILE_APPEND);
+                
+                if (3 == $errno) {
+                    //Time limit exceeded, don't retry again and cache the empty result
+                    break;
+                }
+ 
+                //Otherwise, retry.
                 $this->unbind();
                 $retry = $tries++ < $maxTries;
 
@@ -200,8 +240,28 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
         }
 
         ldap_free_result($sr);
+       
+        $cache->set($cache_key, serialize($result));
 
         return $result;
+    }
+
+    /**
+     * @return UNL_Peoplefinder_Cache
+     */
+    protected function getCache()
+    {
+        static $cache;
+        
+        if ($cache) {
+            return $cache;
+        }
+        
+        $cache = UNL_Peoplefinder_Cache::factory([
+            'fast_lifetime' => self::$cacheTimeout,
+        ]);
+        
+        return $cache;
     }
 
     protected function caseInsensitiveSortLDAPResults($result)

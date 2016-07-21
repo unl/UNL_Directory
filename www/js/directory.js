@@ -58,7 +58,7 @@ define([
 				if (!$(this).hasClass('departments')) {
 					$('.organization-unit', this).each(function() {
 						//find the departments from the people records
-						var refDepartment = $(this).text();
+						var refDepartment = $(this).text().trim();
 						var cleanValue = filters.scrubDept(refDepartment.toLowerCase());
 
 						if ($.inArray(refDepartment, departments) < 0) {

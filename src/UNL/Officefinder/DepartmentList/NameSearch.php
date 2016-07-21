@@ -1,12 +1,15 @@
 <?php
 class UNL_Officefinder_DepartmentList_NameSearch extends UNL_Officefinder_DepartmentList
 {
-    public $options = array('q'=>'', 'parent_orgs' => true);
+    public $options = [
+        'q' => '',
+        'parent_orgs' => true,
+    ];
 
-    function __construct($options = array())
+    public function __construct($options = [])
     {
         $this->options = $options + $this->options;
-        $records = array();
+        $records = [];
         $mysqli = UNL_Officefinder::getDB();
         $sql = $this->getSQL();
         if ($result = $mysqli->query($sql)) {
@@ -17,7 +20,7 @@ class UNL_Officefinder_DepartmentList_NameSearch extends UNL_Officefinder_Depart
         parent::__construct($records);
     }
 
-    function getSQL()
+    public function getSQL()
     {
         $query = $this->options['q'];
 
@@ -27,22 +30,19 @@ class UNL_Officefinder_DepartmentList_NameSearch extends UNL_Officefinder_Depart
         $query = preg_replace('/(\w+)\s+(\w+)/', '$1% $2', $query);
 
         $mysqli = UNL_Officefinder::getDB();
-        $sql = 'SELECT DISTINCT d1.id, d1.name
-                FROM departments d1 ';
+        $esapedQuery = "'%" . $mysqli->escape_string($query) . "%'";
+        $where = ['d1.name LIKE ' . $esapedQuery . ' OR ds.name LIKE ' . $esapedQuery];
+        $where[] = 'd1.suppress = 0';
+        $sql = 'SELECT DISTINCT d1.id, d1.name FROM departments d1 ';
+
         if ((bool)$this->options['parent_orgs'] === true) {
-            // Preorder Tree model
-            // $sql .= ' AND (departments.rgt != departments.lft+1 OR departments.org_unit IS NOT NULL) ';
-            $sql .= 'INNER JOIN departments d2 ON d2.parent_id = d1.id ';
+            $sql .= 'LEFT JOIN (SELECT parent_id FROM departments WHERE parent_id IS NOT NULL GROUP BY parent_id) d2 ON d2.parent_id = d1.id ';
+            $where[] = 'd2.parent_id IS NOT NULL OR d1.org_unit IS NOT NULL';
         }
-        $sql .= '
-                LEFT JOIN department_aliases ds ON ds.department_id = d1.id
-                WHERE (
-                d1.name LIKE "%'.$mysqli->escape_string($query).'%"
-                OR
-                ds.name LIKE "%'.$mysqli->escape_string($query).'%"
-                )
-                ORDER BY d1.name';
+
+        $sql .= 'LEFT JOIN department_aliases ds ON ds.department_id = d1.id ';
+        $sql .= 'WHERE (' . implode(') AND (', $where) . ') ';
+        $sql .= 'ORDER BY d1.name';
         return $sql;
     }
-
 }

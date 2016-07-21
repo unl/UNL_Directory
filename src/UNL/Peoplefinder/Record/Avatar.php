@@ -1,5 +1,11 @@
 <?php
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\UriInterface;
+
 class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, UNL_Peoplefinder_Routable
 {
     const GRAVATAR_BASE_URL = 'https://secure.gravatar.com/avatar/';
@@ -91,7 +97,16 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
             $this->record = $options;
             $this->options = [];
         } elseif (isset($options['uid'])) {
-            $this->record = UNL_Peoplefinder_Record::factory($options['uid']);
+            try {
+                $this->record = UNL_Peoplefinder_Record::factory($options['uid']);
+            } catch (Exception $e) {
+                if ($e->getCode() !== 404) {
+                    throw $e;
+                }
+
+                $this->record = new UNL_Peoplefinder_Record();
+                $this->record->uid = $options['uid'];
+            }
             $this->options = $options;
         } elseif (isset($options['did'])) {
             $this->record = new UNL_Officefinder_Department(['id' => $options['did']]);
@@ -146,17 +161,44 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
         $planetRedUid = $this->record->getProfileUid();
         $profileIconUrl = UNL_Peoplefinder_Record::PLANETRED_BASE_URL . 'icon/' . 'unl_' . $planetRedUid . '/' . $size . '/';
 
-        $request = new HTTP_Request2($profileIconUrl, HTTP_Request2::METHOD_HEAD, [
-            'adapter' => 'HTTP_Request2_Adapter_Curl',
+        $effectiveUrl = $profileIconUrl;
+        $onRedirect = function(
+            RequestInterface $request,
+            ResponseInterface $response,
+            UriInterface $uri
+        ) use (&$effectiveUrl) {
+            $effectiveUrl = (string) $uri;
+        };
+        $client = new Client([
+            'allow_redirects' => [
+                'on_redirect' => $onRedirect
+            ],
+            'http_errors' => false,
         ]);
-        $response = $request->send();
+        $request = new Request('HEAD', $profileIconUrl);
+        $response = $client->send($request);
 
-        if ($response->getStatus() == 200) {
-            return $profileIconUrl;
-        } elseif ($response->getStatus() == 302) {
-            $fallbackUrl = $response->getHeader('Location');
-        } else {
+        //check if it redirects to the default image
+        if ($effectiveUrl == $profileIconUrl) {
+            if ($response->getStatusCode() == 200) {
+                //The old version of planetred is in use and will return a 200 response for images.
+                return $effectiveUrl;
+            }
+
+            //request to planet red failed (404 or 500 like error) however
+            //if a user has not registered with planetred, it should still redirect to the default image
             $fallbackUrl = 'mm';
+        } elseif (false === strpos($effectiveUrl, 'user/default') && false === strpos($effectiveUrl, 'mod/profile/graphics/default')) {
+            //looks like it isn't the default image. Serve this this one up.
+            return $effectiveUrl;
+        } else {
+            //default image again.
+            $fallbackUrl = $effectiveUrl;
+        }
+
+        // Do we have something Gravatar can use?
+        if (!$this->record->mail || !$this->record->eduPersonPrincipalName) {
+            return $effectiveUrl;
         }
 
         $gravatarParams = [
