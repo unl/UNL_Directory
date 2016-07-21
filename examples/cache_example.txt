@@ -1,0 +1,7 @@
+start memcached on your local machine
+be sure your UNL_Cache_Lite can write to tmp directory
+
+run `php scripts/cache_knowledge.php`
+telnet into memcached `telnet localhost 11211`
+in telnet, do `get lperez1` you should see data
+`quit` to exit

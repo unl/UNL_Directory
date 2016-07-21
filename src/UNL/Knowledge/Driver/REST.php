@@ -21,7 +21,7 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
 
     protected static $key_prefix = 'UNL_Directory_FacultyData_';
 
-    public static $cache_length = 14400; //default to 15 minutes, temporarily set at 4 hours to mitigate digital signage problems.
+    public static $cache_length = 1200; //default to 20 minutes
 
     public function __construct($options = array())
     {
@@ -57,7 +57,7 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
                 return $result;
             }
         } catch (Exception $e) {
-            error_log($e->message);
+            error_log($e);
         }
 
         # if that doesn't work, curl the API
@@ -77,6 +77,7 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
 
         $responseData = curl_exec($curl);
         $isAPIError = false;
+        $error_message = '';
 
         if (!curl_errno($curl)) {
             $statusCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
@@ -90,8 +91,8 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
                 $result = null;
             }
         } else {
-            curl_error($curl);
-            error_log($errorMessage);
+            $error_message = curl_error($curl);
+            error_log($error_message);
             $isAPIError = true;
         }
 
@@ -108,9 +109,67 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
         try {
             $this->cache($key, $result);
         } catch (Exception $e) {
-            error_log($e->message);
+            error_log($e);
         }
         return $result;
+    }
+
+    protected function getCategoryForAll($category)
+    {
+        $full_result = array();
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL             => $this->service_url . $category,
+            CURLOPT_USERPWD         => UNL_Knowledge_Driver_REST::$service_user . ':' . UNL_Knowledge_Driver_REST::$service_pass,
+            CURLOPT_ENCODING        => 'gzip',
+            CURLOPT_FOLLOWLOCATION  => true,
+            CURLOPT_RETURNTRANSFER  => true,
+            CURLOPT_CONNECTTIMEOUT  => 5,
+            CURLOPT_TIMEOUT         => 5,
+        ));
+
+        $responseData = curl_exec($curl);
+        $isAPIError = false;
+        $error_message = '';
+
+        if (!curl_errno($curl)) {
+            $statusCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+            if ($statusCode === 200) {
+                // type juggle XML to JSON
+                $array = json_decode(json_encode(simplexml_load_string($responseData, "SimpleXMLElement", LIBXML_NOCDATA)), true);
+                
+                # this query gives an array of records under teh "Record" key
+                foreach ($array['Record'] as $record) {
+                    $result = isset($record[$category]) ? $record[$category] : null;
+                    $key = self::$key_prefix . $category . '_' . $record['@attributes']['username'];
+                    try {
+                        $this->cache($key, $result);
+                    } catch (Exception $e) {
+                        error_log($e);
+                    }
+                    $full_result[] = $result;
+                }
+            } else {
+                // Server returns 500 errors for not found
+                $full_result = null;
+            }
+        } else {
+            $error_message = curl_error($curl);
+            error_log($error_message);
+            $isAPIError = true;
+        }
+
+        curl_close($curl);
+
+        if ($isAPIError) {
+            $full_result = 'ERROR: ' . $error_message ;
+            return $full_result;
+        }
+
+        return $full_result;
     }
 
     public function getRecords($uid)
@@ -129,6 +188,32 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
         }
 
         return null;
+    }
+
+    public function getAllRecords()
+    {
+        $full_result = $this->getCategoryForAll('PUBLIC_WEB');
+
+        if (is_array($full_result)) {
+            $full_records = array();
+
+            foreach ($full_result as $data) {
+                $records = new UNL_Knowledge_Records();
+                foreach ($records->getRecordsMap() as $var => $dataKey) {
+                    if (isset($data[$dataKey])) {
+                        $records->$var = $this->cleanRecords($data[$dataKey]);
+                    }
+                }
+
+                $full_records[] = $records;
+            }
+
+            return $full_records;
+        } else if (is_string($full_result)) {
+            return $full_result;
+        }
+
+        return null;       
     }
 
     protected function cleanRecords($records)
