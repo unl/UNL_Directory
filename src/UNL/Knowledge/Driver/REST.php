@@ -55,63 +55,18 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
         try {
             if (($result = $this->getFromCache($key)) !== false) {
                 return $result;
-            }
-        } catch (Exception $e) {
-            error_log($e);
-        }
+            } 
 
-        # if that doesn't work, curl the API
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL             => $this->service_url . 'USERNAME:' . $uid . '/' . $category,
-            CURLOPT_USERPWD         => UNL_Knowledge_Driver_REST::$service_user . ':' . UNL_Knowledge_Driver_REST::$service_pass,
-            CURLOPT_ENCODING        => 'gzip',
-            CURLOPT_FOLLOWLOCATION  => true,
-            CURLOPT_RETURNTRANSFER  => true,
-            CURLOPT_CONNECTTIMEOUT  => 5,
-            CURLOPT_TIMEOUT         => 5,
-        ));
-
-        echo $this->service_url . 'USERNAME:' . $uid . '/' . $category;
-
-        $responseData = curl_exec($curl);
-        $isAPIError = false;
-        $error_message = '';
-
-        if (!curl_errno($curl)) {
-            $statusCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-
-            if ($statusCode === 200) {
-                // type juggle XML to JSON
-                $array = json_decode(json_encode(simplexml_load_string($responseData, "SimpleXMLElement", LIBXML_NOCDATA)), true);
-                $result = isset($array['Record'][$category]) ? $array['Record'][$category] : null;
-            } else {
-                // Server returns 500 errors for not found
-                $result = null;
-            }
-        } else {
-            $error_message = curl_error($curl);
-            error_log($error_message);
-            $isAPIError = true;
-        }
-
-        curl_close($curl);
-
-        if ($isAPIError) {
+            # if it's not there, for whatever reason, hit the slow cache
             $result = self::$cache->getSlow($key);
 
             if ($result) {
                 return $result;
             }
-        }
-
-        try {
-            $this->cache($key, $result);
         } catch (Exception $e) {
             error_log($e);
         }
-        return $result;
+        return null;
     }
 
     protected function getCategoryForAll($category)
