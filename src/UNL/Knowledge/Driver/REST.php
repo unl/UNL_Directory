@@ -21,7 +21,7 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
 
     protected static $key_prefix = 'UNL_Directory_FacultyData_';
 
-    public static $cache_length = 4*60*60; //default to 15 minutes, temporarily set at 4 hours to mitigate digital signage problems.
+    public static $cache_length = 14400; //default to 15 minutes, temporarily set at 4 hours to mitigate digital signage problems.
 
     public function __construct($options = array())
     {
