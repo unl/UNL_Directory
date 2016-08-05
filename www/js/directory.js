@@ -943,12 +943,12 @@ define([
 					if (hash.length >= 3){
 						// if 3, then we're looking for first and last name individually.
 						splitName = true;
-						cn = decodeURI(hash[1]);
-						sn = decodeURI(hash[2]);
+						cn = decodeURIComponent(hash[1]);
+						sn = decodeURIComponent(hash[2]);
 						query = cn + ' ' + sn;
 					} else {
 						// it's all one search term.
-						query = decodeURI(hash[1]);
+						query = decodeURIComponent(hash[1]);
 					}
 
 					$q.val(query);
