@@ -856,6 +856,7 @@ define([
 									//user did a simple search with a space, so try an advanced search
 									splitQuery = originalSearch.split(' ',2);
 									nextAttempt(splitQuery[0], splitQuery[1].substring(0,1));
+									return; //We started a new attempt, so stop here
 								} else if (splitName) {
 									//user did an adavanced search, let's try first letter first name, whole last name
 									if (attempts === 2) {
@@ -867,9 +868,8 @@ define([
 										splitQuery = originalSearch.split(' ',2);
 										nextAttempt(splitQuery[0] ,splitQuery[1].substring(0,1));
 									}
+									return; //We started a new attempt, so stop here
 								}
-
-								return;
 							}
 
 							//we finally have results, or else we've abandonded the search options
