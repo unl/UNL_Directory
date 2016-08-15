@@ -3,10 +3,11 @@ define([
 	'wdn',
 	'modernizr',
 	'require',
+	'idm',
 	'notice',
 	'tooltip',
 	'./vendor/jsrender.js'
-], function($, WDN, Modernizr, require) {
+], function($, WDN, Modernizr, require, idm) {
 	"use strict";
 
 	var serviceURL = 'https://directory.unl.edu/';
@@ -25,6 +26,7 @@ define([
 	var lengthErrorSelector = '#queryLengthTemplate';
 	var mainSelector = '#maincontent';
 	var annotateSelector = '#annotateTemplate';
+	var correctionButtonSelector = '#correctionButtonTemplate';
 	var mainStates = ['searching', 'single', 'single-dept'];
 	var $searcher;
 	var $results;
@@ -255,7 +257,18 @@ define([
 		$(tmpl.render({
 			annotateUrl: annotateUrl,
 			preferredName: $vcard.data('preferred-name'),
-		})).appendTo($('.vcard-tools', $vcard));
+		})).appendTo($('.vcard-tools.primary', $vcard));
+	};
+
+	var addCorrectionTool = function(uid, $vcard) {
+		var tmpl = $.templates(correctionButtonSelector);
+		
+		var $html = $(tmpl.render({
+			preferredName: $vcard.data('preferred-name')
+		}));
+		
+		$vcard.find('.vcard-tools').after($html);
+		
 	};
 
 	var loadOnlyRecord = function(uid, preferredName, $vcard) {
@@ -342,6 +355,7 @@ define([
 			// load annotation tool for people records
 			if (recordType !== 'org') {
 				addAnnotateTool(infoData, $card);
+				addCorrectionTool(infoData, $card);
 			}
 
 			$overview.slideUp();
@@ -387,6 +401,12 @@ define([
 
 			if ($anchor.length && !$fn.length) {
 				// allow vCard and non-name link clicks to bubble
+				return;
+			}
+			
+			if ($target.closest('.correction').length !== 0) {
+				//Launch the correction modal
+				launchCorrectionModal($target);
 				return;
 			}
 
@@ -797,6 +817,39 @@ define([
 			checkSticky();
 		});
 	};
+	
+	var launchCorrectionModal = function($target) {
+		var correctionFormSelector = '.correction-form';
+		var $vcard = $target.closest('.vcard');
+		var $context = $('.corrections-template');
+		var $form = $('.corrections-template form');
+		var name =  idm.getUserId() || '';
+		var email =  idm.getEmailAddress() || '';
+		
+		//Initialize values
+		$(correctionFormSelector + ' input[name="name"]').val(name);
+		$(correctionFormSelector + ' input[name="email"]').val(email);
+		$(correctionFormSelector + ' textarea[name="message"]').val('');
+		$(correctionFormSelector + ' input[name="initial_url"]').val($('.permalink', $vcard).attr('href'));
+
+		//Initialize states
+		$context.find('form').removeClass('hidden');
+		$context.find('.success').addClass('hidden');
+		
+		$form.on('submit', function(e) {
+			e.preventDefault();
+
+			$.post(this.action, $(this).serialize());
+
+			var $container = $(this).closest('.correction-form');
+
+			$container.find('form').addClass('hidden');
+			$container.find('.success').removeClass('hidden');
+		});
+		
+		//Show that modal!
+		showModalForm($context, '.correction-form', $vcard);
+	};
 
 	var plugin = {
 		queuePFRequest : function(q, resultsdiv, chooser, cn, sn) {
@@ -978,6 +1031,7 @@ define([
 
 								var $card = $(data);
 								addAnnotateTool(oEvent.state.uid, $card);
+								addCorrectionTool(oEvent.state.uid, $card);
 								setMainState(1);
 								displayOnlyRecord($card);
 							}, function() {
@@ -1019,6 +1073,37 @@ define([
 					e.preventDefault();
 				});
 
+				$modal = $('#modal_edit_form');
+
+				$modal.on('keydown', function(e) {
+					if (e.which === 27) {
+						closeModalAndRestoreContent();
+					}
+				}).on('submit', 'form.edit', function(e) {
+					var $forms = $(this).closest('.forms');
+
+					e.preventDefault();
+					closeModalAndRestoreContent();
+
+					if ($forms.data('department-id')) {
+						ajaxSubmitRefreshDepartment(this);
+					} else if ($forms.data('listing-id')) {
+						ajaxSubmitRefreshListing(this);
+					} else {
+						ajaxSubmitRefreshListing(this, '2');
+					}
+				}).on('submit', 'form.delete', function(e) {
+					var $forms = $(this).closest('.forms');
+
+					e.preventDefault();
+					closeModalAndRestoreContent();
+
+					// this should ONLY occur for listings
+					if (!$forms.data('department-id')) {
+						ajaxSubmitRemoveDepartmentList(this);
+					}
+				});
+				
 				if ($('#peoplefinder').length) {
 					// default, help/search state loaded
 					startFromSearch();
@@ -1036,42 +1121,6 @@ define([
 					bindResultsListeners($employees);
 					bindRecordListeners($employees);
 					createStickyKit($summarySection);
-
-					$modal = $('#modal_edit_form');
-					$modal.on('keydown', function(e) {
-						if (e.which === 27) {
-							closeModalAndRestoreContent();
-						}
-					}).on('submit', 'form.edit', function(e) {
-						var $forms = $(this).closest('.forms');
-
-						e.preventDefault();
-						closeModalAndRestoreContent();
-
-						if ($forms.data('department-id')) {
-							ajaxSubmitRefreshDepartment(this);
-						} else if ($forms.data('listing-id')) {
-							ajaxSubmitRefreshListing(this);
-						} else {
-							ajaxSubmitRefreshListing(this, '2');
-						}
-					}).on('submit', 'form.delete', function(e) {
-						var $forms = $(this).closest('.forms');
-
-						e.preventDefault();
-						closeModalAndRestoreContent();
-
-						// this should ONLY occur for listings
-						if (!$forms.data('department-id')) {
-							ajaxSubmitRemoveDepartmentList(this);
-						}
-					});
-
-					$(document).on('click', function(e) {
-						if (!$(e.target).closest(modalContentSelector).length) {
-							closeModalAndRestoreContent();
-						}
-					});
 
 					$summarySection.on('click', '.vcard-tools .icon-pencil', function(e) {
 						showModalForm($editBox, '.forms', this);
@@ -1167,6 +1216,7 @@ define([
 					setMainState(initialMainState);
 					var $vcard = $('.record-container .vcard');
 					addAnnotateTool($vcard.data('uid'), $vcard);
+					addCorrectionTool($vcard.data('uid'), $vcard);
 					bindRecordListeners($('.record-container'));
 
 					var $knowledgeSummary = $('.record-container .directory-knowledge-summary');
@@ -1175,6 +1225,10 @@ define([
 						createStickyKit($knowledgeSummary);
 					}
 				}
+
+				$('button.correction').click(function(e){
+					launchCorrectionModal($(e.target));
+				});
 			});
 		}
 	};

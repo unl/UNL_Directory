@@ -30,7 +30,7 @@ $showKnowledge = $context->shouldShowKnowledge();
 <?php endif; ?>
 
 
-<div class="vcard <?php if (!$showKnowledge): ?>card <?php endif; ?><?php echo $context->eduPersonPrimaryAffiliation ?>" data-uid="<?php echo $context->uid ?>" data-preferred-name="<?php echo $preferredName ?>" itemscope itemtype="http://schema.org/<?php echo $itemtype ?>">
+<div class="vcard <?php if (!$showKnowledge): ?>card <?php endif; ?><?php echo $context->eduPersonPrimaryAffiliation ?>" data-uid="<?php echo $context->uid ?>" data-preferred-name="<?php echo $preferredName ?>" itemscope itemtype="http://schema.org/<?php echo $itemtype ?>" tabindex="-1">
     <a class="card-profile planetred_profile" href="<?php echo $context->getProfileUrl() ?>" title="Planet Red profile for <?php echo $preferredName ?>" itemprop="url">
         <img class="photo profile_pic" itemprop="image" src="<?php echo $context->getImageURL(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_LARGE) ?>" alt="Avatar for <?php echo $preferredName ?>" />
     </a>
@@ -168,7 +168,7 @@ $showKnowledge = $context->shouldShowKnowledge();
     <?php endif; ?>
     </div>
 
-    <div class="vcard-tools wdn_vcardTools">
+    <div class="vcard-tools wdn_vcardTools primary">
         <a href="<?php echo $context->getVcardUrl() ?>" class="icon-vcard"><span class="wdn-text-hidden">Download </span>vCard<span class="wdn-text-hidden"> for <?php echo $preferredName ?></span></a>
         <a href="<?php echo $context->getQRCodeUrl($savvy->render($context, 'templates/vcard/Peoplefinder/Record.tpl.php')) ?>" class="icon-qr-code">QR Code<span class="wdn-text-hidden"> vCard for <?php echo $preferredName ?></span></a>
         <button class="icon-print">Print<span class="wdn-text-hidden"> listing for <?php echo $preferredName ?></span></button>

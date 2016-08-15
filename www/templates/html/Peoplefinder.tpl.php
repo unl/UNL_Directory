@@ -38,10 +38,14 @@ if ($isOutputError) {
 if (in_array($context->options['view'], ['instructions', 'help', 'search'])) {
     //Don't wrap the home page, because we want it to use bands
     $page->maincontentarea = $savvy->render($context->output, $outputTemplate);
+    
 } else {
     //Wrap everything else
-    $page->maincontentarea = '<div class="wdn-band record-container"><div class="wdn-inner-wrapper wdn-inner-padding-sm">' . $savvy->render($context->output, $outputTemplate) . '</div></div>';
+    $page->maincontentarea = '<div class="wdn-band record-container"><div class="wdn-inner-wrapper wdn-inner-padding-sm">' . $savvy->render($context->output, $outputTemplate);
 }
+
+$page->maincontentarea .= '<div class="wdn-band"><section id="modal_edit_form" class="modal-overlay" role="dialog" aria-expanded="false">
+	<div tabindex="-1" class="modal-content"></div></div>';
 
 $savvy->removeGlobal('page');
 
