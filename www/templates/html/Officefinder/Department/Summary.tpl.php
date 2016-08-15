@@ -114,6 +114,8 @@ $onlySummary = $context->isSummaryView();
                         <button type="submit" class="icon-trash" form="deletedepartment_<?php echo $context->id ?>">Delete</button>
                     <?php endif; ?>
                 </div>
+            <?php else: ?>
+                <div class="department-correction"></div>
             <?php endif; ?>
         </div>
     </div>

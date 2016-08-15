@@ -260,15 +260,19 @@ define([
 		})).appendTo($('.vcard-tools.primary', $vcard));
 	};
 
-	var addCorrectionTool = function(uid, $vcard) {
+	var addCorrectionTool = function(uid, name, $vcard) {
 		var tmpl = $.templates(correctionButtonSelector);
 		
 		var $html = $(tmpl.render({
-			preferredName: $vcard.data('preferred-name')
+			preferredName: name
 		}));
 		
-		$vcard.find('.vcard-tools').after($html);
-		
+		if ($vcard.hasClass('office') && $vcard.find('.department-correction').length) {
+			$vcard.find('.department-correction').after($html);
+		} else {
+			//person record
+			$vcard.find('.vcard-tools').after($html);
+		}
 	};
 
 	var loadOnlyRecord = function(uid, preferredName, $vcard) {
@@ -355,7 +359,7 @@ define([
 			// load annotation tool for people records
 			if (recordType !== 'org') {
 				addAnnotateTool(infoData, $card);
-				addCorrectionTool(infoData, $card);
+				addCorrectionTool(infoData, $card.data('preferred-name'), $card);
 			}
 
 			$overview.slideUp();
@@ -1031,7 +1035,7 @@ define([
 
 								var $card = $(data);
 								addAnnotateTool(oEvent.state.uid, $card);
-								addCorrectionTool(oEvent.state.uid, $card);
+								addCorrectionTool(oEvent.state.uid, $card.data('preferred-name'), $card);
 								setMainState(1);
 								displayOnlyRecord($card);
 							}, function() {
@@ -1210,13 +1214,21 @@ define([
 
 						return false;
 					});
+
+					//Add the department correction tool
+					if ($('.department-correction').length) {
+						//This div only exists if the user does not have permission to edit already
+						var $vcard = $summarySection.find('.vcard');
+						var name = $vcard.find('.fn.org').text();
+						addCorrectionTool(name, name, $vcard);
+					}
 				} else if ($('.record-container .vcard').length) {
 					// single person record state loaded
 					initialMainState = 1;
 					setMainState(initialMainState);
 					var $vcard = $('.record-container .vcard');
 					addAnnotateTool($vcard.data('uid'), $vcard);
-					addCorrectionTool($vcard.data('uid'), $vcard);
+					addCorrectionTool($vcard.data('uid'), $vcard.data('preferred-name'), $vcard);
 					bindRecordListeners($('.record-container'));
 
 					var $knowledgeSummary = $('.record-container .directory-knowledge-summary');
