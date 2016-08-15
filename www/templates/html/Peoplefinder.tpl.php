@@ -41,7 +41,7 @@ if (in_array($context->options['view'], ['instructions', 'help', 'search'])) {
     
 } else {
     //Wrap everything else
-    $page->maincontentarea = '<div class="wdn-band record-container"><div class="wdn-inner-wrapper wdn-inner-padding-sm">' . $savvy->render($context->output, $outputTemplate);
+    $page->maincontentarea = '<div class="wdn-band record-container"><div class="wdn-inner-wrapper wdn-inner-padding-sm">' . $savvy->render($context->output, $outputTemplate) . '</div></div>';
 }
 
 $page->maincontentarea .=  $savvy->render(null, 'static/modal.tpl.php');;
