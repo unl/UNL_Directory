@@ -18,7 +18,7 @@ if (!empty($context->email)) {
 $onlySummary = $context->isSummaryView();
 ?>
 <div class="departmentInfo"<?php if ($onlySummary): ?> itemscope itemtype="http://schema.org/Organization"<?php endif; ?>>
-    <div class="vcard office<?php if($onlySummary): ?> card<?php endif; ?>">
+    <div class="vcard office<?php if($onlySummary): ?> card<?php endif; ?>" tabindex="-1">
         <div class="card-profile">
             <img alt="Building Image" itemprop="image" src="<?php echo $context->getImageURL(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_LARGE); ?>" class="photo" />
         </div>
@@ -114,6 +114,8 @@ $onlySummary = $context->isSummaryView();
                         <button type="submit" class="icon-trash" form="deletedepartment_<?php echo $context->id ?>">Delete</button>
                     <?php endif; ?>
                 </div>
+            <?php else: ?>
+                <div class="department-correction"></div>
             <?php endif; ?>
         </div>
     </div>

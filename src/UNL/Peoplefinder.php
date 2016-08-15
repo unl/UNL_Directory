@@ -36,7 +36,7 @@ class UNL_Peoplefinder
 
     static public $annotateUrl = 'http://annotate.unl.edu/';
 
-    static public $staticFileVersion = '4.0';
+    static public $staticFileVersion = '4.1';
 
     static public $minifyHtml = true;
 
