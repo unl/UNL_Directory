@@ -114,9 +114,3 @@ $hasOfficialChildDepartments = count($officialChildren);
 </section>
 
 <section class="record-single"></section>
-
-<?php if ($userCanEdit): ?>
-<section id="modal_edit_form" class="modal-overlay" role="dialog" aria-expanded="false">
-	<div tabindex="-1" class="modal-content"></div>
-</section>
-<?php endif; ?>
