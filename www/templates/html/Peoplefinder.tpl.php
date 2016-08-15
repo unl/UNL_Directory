@@ -44,8 +44,7 @@ if (in_array($context->options['view'], ['instructions', 'help', 'search'])) {
     $page->maincontentarea = '<div class="wdn-band record-container"><div class="wdn-inner-wrapper wdn-inner-padding-sm">' . $savvy->render($context->output, $outputTemplate);
 }
 
-$page->maincontentarea .= '<div class="wdn-band"><section id="modal_edit_form" class="modal-overlay" role="dialog" aria-expanded="false">
-	<div tabindex="-1" class="modal-content"></div></div>';
+$page->maincontentarea .=  $savvy->render(null, 'static/modal.tpl.php');;
 
 $savvy->removeGlobal('page');
 
