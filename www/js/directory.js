@@ -823,20 +823,20 @@ define([
 	};
 	
 	var launchCorrectionModal = function($target) {
-		var correctionFormSelector = '.correction-form';
 		var $vcard = $target.closest('.vcard');
 		var $context = $('.corrections-template');
+		var $form = $('form', $context);
 		var name =  idm.getUserId() || '';
 		var email =  idm.getEmailAddress() || '';
 		
 		//Initialize values
-		$(correctionFormSelector + ' input[name="name"]').val(name);
-		$(correctionFormSelector + ' input[name="email"]').val(email);
-		$(correctionFormSelector + ' textarea[name="message"]').val('');
-		$(correctionFormSelector + ' input[name="initial_url"]').val($('.permalink', $vcard).attr('href'));
+		$('input[name="name"]', $form).val(name);
+		$('input[name="email"]', $form).val(email);
+		$('textarea[name="message"]', $form).val('');
+		$('input[name="initial_url"]', $form).val($('.permalink', $vcard).attr('href'));
 
 		//Initialize states
-		$context.find('form').removeClass('hidden');
+		$form.removeClass('hidden');
 		$context.find('.success').addClass('hidden');
 		
 		//Show that modal!
