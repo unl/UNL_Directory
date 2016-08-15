@@ -33,26 +33,3 @@
     </form>
     <p class="success hidden">Thank you for your correction.</p>
 </div>
-<!--
-<?php if (isset($context->options['uid'])) : ?>
-<script type="text/javascript">
-WDN.jQuery("document").ready(function(){
-    require(['idm'], function(idm) {
-        if (idm.getEmailAddress()) {
-            WDN.jQuery('.commentProblem input[name="email"]').val(idm.getEmailAddress());
-        }
-        if (idm.getUserId()) {
-            WDN.jQuery('.commentProblem input[name="name"]').val(idm.getUserId());
-        }
-    })
-	
-	correctionHTML = 
-		'<a href="http://www1.unl.edu/comments/" class="dir_correctionRequest pf_record noprint">Have a correction?</a>';
-	WDN.jQuery(".vcardInfo").append(correctionHTML);
-    
-    //Initialize the new correction form link
-    directory.initializeCorrectionForms();
-});
-</script>
-<?php endif; ?>
--->
