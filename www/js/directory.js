@@ -826,7 +826,6 @@ define([
 		var correctionFormSelector = '.correction-form';
 		var $vcard = $target.closest('.vcard');
 		var $context = $('.corrections-template');
-		var $form = $('.corrections-template form');
 		var name =  idm.getUserId() || '';
 		var email =  idm.getEmailAddress() || '';
 		
@@ -839,17 +838,6 @@ define([
 		//Initialize states
 		$context.find('form').removeClass('hidden');
 		$context.find('.success').addClass('hidden');
-		
-		$form.on('submit', function(e) {
-			e.preventDefault();
-
-			$.post(this.action, $(this).serialize());
-
-			var $container = $(this).closest('.correction-form');
-
-			$container.find('form').addClass('hidden');
-			$container.find('.success').removeClass('hidden');
-		});
 		
 		//Show that modal!
 		showModalForm($context, '.correction-form', $vcard);
@@ -1240,6 +1228,17 @@ define([
 
 				$('button.correction').click(function(e){
 					launchCorrectionModal($(e.target));
+				});
+
+				$('.corrections-template form').on('submit', function(e) {
+					e.preventDefault();
+
+					$.post(this.action, $(this).serialize());
+
+					var $container = $(this).closest('.correction-form');
+
+					$container.find('form').addClass('hidden');
+					$container.find('.success').removeClass('hidden');
 				});
 			});
 		}
