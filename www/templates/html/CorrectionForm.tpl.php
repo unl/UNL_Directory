@@ -2,7 +2,7 @@
     <h3>Have a correction?</h3>
     <p>If you'd like to correct your own entry, contact your UNL departmental HR liaison.<br />
     For corrections to another person's contact information, use the form below.<br /><br /></p>
-    <form class="wdn_feedback_comments2" method="post" action="http://ucommchat.unl.edu/clientLogin">
+    <form class="wdn_feedback_comments2" method="post" action="https://ucommchat.unl.edu/clientLogin">
         <ul>
             <li>
                   <label>
