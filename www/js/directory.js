@@ -840,7 +840,7 @@ define([
 		$context.find('.success').addClass('hidden');
 		
 		//Show that modal!
-		showModalForm($context, '.correction-form', $vcard);
+		showModalForm($context, '.correction-form', $target);
 	};
 
 	var plugin = {
