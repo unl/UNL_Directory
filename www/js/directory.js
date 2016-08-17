@@ -1067,6 +1067,14 @@ define([
 
 				$modal = $('#modal_edit_form');
 
+				//Trap keyboard focus to the modal while it is open
+				document.addEventListener('focus', function( event ) {
+					if ($modal.hasClass('show') && !$.contains($modal.get(0), event.target)) {
+						event.stopPropagation();
+						$modal.focus();
+					}
+				}, true);
+
 				$modal.on('keydown', function(e) {
 					if (e.which === 27) {
 						closeModalAndRestoreContent();
