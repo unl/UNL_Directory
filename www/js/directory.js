@@ -1238,7 +1238,7 @@ define([
 					var $container = $(this).closest('.correction-form');
 
 					$container.find('form').addClass('hidden');
-					$container.find('.success').removeClass('hidden');
+					$container.find('.success').removeClass('hidden').focus();
 				});
 			});
 		}
