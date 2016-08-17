@@ -6,20 +6,20 @@
         <ul>
             <li>
                   <label>
-                    Name:
-                    <input type="text" name="name" value="" />
+                    Name: (required)
+                    <input type="text" name="name" value="" required />
                 </label>
             </li>
             <li>
                 <label>
-                    Email:
-                    <input type="text" name="email" value="" />
+                    Email: (required)
+                    <input type="text" name="email" value="" required />
                 </label>
             </li>
             <li>
                 <label>
-                    What is your correction?
-                    <textarea name="message"></textarea>
+                    What is your correction? (required)
+                    <textarea name="message" required></textarea>
                 </label>
             </li>
             <li>
