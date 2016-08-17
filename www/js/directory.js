@@ -1233,12 +1233,17 @@ define([
 				$('.corrections-template form').on('submit', function(e) {
 					e.preventDefault();
 
-					$.post(this.action, $(this).serialize());
-
 					var $container = $(this).closest('.correction-form');
-
 					$container.find('form').addClass('hidden');
-					$container.find('.success').removeClass('hidden').focus();
+					var $success = $container.find('.success');
+					$success.text('Submitting...').removeClass('hidden').focus();
+
+					$.post(this.action, $(this).serialize()).done(function() {
+						$success.text('Thank you for your correction.').focus();
+					}).fail(function(){
+						$success.text('There was an error submitting the correction, please try again later.').focus();
+					});
+					
 				});
 			});
 		}

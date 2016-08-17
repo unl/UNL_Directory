@@ -31,5 +31,5 @@
         <input type="hidden" name="initial_pagetitle" value="UNL Directory" />
         <input type="hidden" name="initial_url" value="" />
     </form>
-    <p class="success hidden" tabindex="-1">Thank you for your correction.</p>
+    <p class="success hidden" tabindex="-1"></p>
 </div>
