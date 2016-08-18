@@ -622,10 +622,11 @@ define([
 		var $oldForm;
 
 		if (!$modalClose) {
-			$modalClose = $('<button>', {"class": 'wdn-icon-cancel'})
+			$modalClose = $('<button>', {"class": 'cancel wdn-button'})
 				.click(function() {
 					closeModalAndRestoreContent();
 				})
+				.append($('<span>', {"class": 'wdn-icon-cancel', 'aria-hidden': 'true'}))
 				.append($('<span>', {"class": 'wdn-text-hidden'}).text('Close'));
 		} else {
 			$modalClose.detach();
