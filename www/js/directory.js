@@ -622,10 +622,11 @@ define([
 		var $oldForm;
 
 		if (!$modalClose) {
-			$modalClose = $('<button>', {"class": 'wdn-icon-cancel'})
+			$modalClose = $('<button>', {"class": 'cancel wdn-button'})
 				.click(function() {
 					closeModalAndRestoreContent();
 				})
+				.append($('<span>', {"class": 'wdn-icon-cancel', 'aria-hidden': 'true'}))
 				.append($('<span>', {"class": 'wdn-text-hidden'}).text('Close'));
 		} else {
 			$modalClose.detach();
@@ -840,7 +841,7 @@ define([
 		$context.find('.success').addClass('hidden');
 		
 		//Show that modal!
-		showModalForm($context, '.correction-form', $vcard);
+		showModalForm($context, '.correction-form', $target);
 	};
 
 	var plugin = {
@@ -1067,6 +1068,15 @@ define([
 
 				$modal = $('#modal_edit_form');
 
+				//Trap keyboard focus to the modal while it is open
+				$(document).on('focusin', function(event) {
+					var modal = $modal.get(0);
+					if ($modal.hasClass('show') && !$.contains(modal, event.target) && modal != event.target) {
+						event.stopPropagation();
+						$modal.focus();
+					}
+				});
+
 				$modal.on('keydown', function(e) {
 					if (e.which === 27) {
 						closeModalAndRestoreContent();
@@ -1233,12 +1243,17 @@ define([
 				$('.corrections-template form').on('submit', function(e) {
 					e.preventDefault();
 
-					$.post(this.action, $(this).serialize());
-
 					var $container = $(this).closest('.correction-form');
-
 					$container.find('form').addClass('hidden');
-					$container.find('.success').removeClass('hidden');
+					var $success = $container.find('.success');
+					$success.text('Submitting...').removeClass('hidden').focus();
+
+					$.post(this.action, $(this).serialize()).done(function() {
+						$success.text('Thank you for your correction.').focus();
+					}).fail(function(){
+						$success.text('There was an error submitting the correction, please try again later.').focus();
+					});
+					
 				});
 			});
 		}
