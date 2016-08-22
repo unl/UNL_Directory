@@ -23,6 +23,8 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
     protected $record;
 
     protected $url;
+    
+    protected $cache;
 
     public static function getBuildings()
     {
@@ -93,6 +95,8 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
 
     public function __construct($options = [])
     {
+        $this->cache = UNL_Peoplefinder_Cache::factory();
+        
         if ($options instanceof UNL_Peoplefinder_Record || $options instanceof UNL_Officefinder_Department) {
             $this->record = $options;
             $this->options = [];
@@ -160,40 +164,53 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
 
         $planetRedUid = $this->record->getProfileUid();
         $profileIconUrl = UNL_Peoplefinder_Record::PLANETRED_BASE_URL . 'icon/' . 'unl_' . $planetRedUid . '/' . $size . '/';
+        
+        //check if we have the default profile icon used
+        //this is being cached to reduce the number of requests being sent to planetred when directory is under high load
+        $cachedFallbackURL = $this->cache->get($profileIconUrl);
+        
+        if (!$cachedFallbackURL) {
+            //no fallback URL was found, so we need a new request
+            $effectiveUrl = $profileIconUrl;
+            $onRedirect = function(
+                RequestInterface $request,
+                ResponseInterface $response,
+                UriInterface $uri
+            ) use (&$effectiveUrl) {
+                $effectiveUrl = (string) $uri;
+            };
+            $client = new Client([
+                'allow_redirects' => [
+                    'on_redirect' => $onRedirect
+                ],
+                'http_errors' => false,
+            ]);
+            $request = new Request('HEAD', $profileIconUrl);
+            $response = $client->send($request);
 
-        $effectiveUrl = $profileIconUrl;
-        $onRedirect = function(
-            RequestInterface $request,
-            ResponseInterface $response,
-            UriInterface $uri
-        ) use (&$effectiveUrl) {
-            $effectiveUrl = (string) $uri;
-        };
-        $client = new Client([
-            'allow_redirects' => [
-                'on_redirect' => $onRedirect
-            ],
-            'http_errors' => false,
-        ]);
-        $request = new Request('HEAD', $profileIconUrl);
-        $response = $client->send($request);
+            //check if it redirects to the default image
+            if ($effectiveUrl == $profileIconUrl) {
+                if ($response->getStatusCode() == 200) {
+                    //The old version of planetred is in use and will return a 200 response for images.
+                    return $effectiveUrl;
+                }
 
-        //check if it redirects to the default image
-        if ($effectiveUrl == $profileIconUrl) {
-            if ($response->getStatusCode() == 200) {
-                //The old version of planetred is in use and will return a 200 response for images.
+                //request to planet red failed (404 or 500 like error) however
+                //if a user has not registered with planetred, it should still redirect to the default image
+                $fallbackUrl = 'mm';
+            } elseif (false === strpos($effectiveUrl, 'user/default') && false === strpos($effectiveUrl, 'mod/profile/graphics/default')) {
+                //looks like it isn't the default image. Serve this this one up.
                 return $effectiveUrl;
+            } else {
+                //default image again.
+                $fallbackUrl = $effectiveUrl;
+                
+                //Cache this for a bit
+                $this->cache->set($profileIconUrl, $fallbackUrl, 3600);
             }
-
-            //request to planet red failed (404 or 500 like error) however
-            //if a user has not registered with planetred, it should still redirect to the default image
-            $fallbackUrl = 'mm';
-        } elseif (false === strpos($effectiveUrl, 'user/default') && false === strpos($effectiveUrl, 'mod/profile/graphics/default')) {
-            //looks like it isn't the default image. Serve this this one up.
-            return $effectiveUrl;
         } else {
-            //default image again.
-            $fallbackUrl = $effectiveUrl;
+            $fallbackUrl = $cachedFallbackURL;
+            $effectiveUrl = $cachedFallbackURL;
         }
 
         // Do we have something Gravatar can use?
