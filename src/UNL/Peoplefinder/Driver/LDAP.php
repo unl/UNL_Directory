@@ -172,18 +172,18 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
         }
 
         $cache = $this->getCache();
-        
+
         $cache_key = $filter . '-' . implode(',', $attributes) . '-' . $setResult . '-' . $dn;
         //Our key will most likely exceed the memcached key length limit, so reduce it
         $cache_key = 'ldap-'.md5($cache_key);
-        
+
         if ($result = $cache->get($cache_key)) {
             $result = unserialize($result);
 
             if ($setResult) {
                 $this->lastResult = $this->caseInsensitiveSortLDAPResults($result);
             }
-            
+
             return $result;
         }
 
@@ -207,21 +207,21 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
                 //log error
                 $errno = ldap_errno($this->linkID);
                 $error = ldap_error($this->linkID);
-                
+
                 $ldap_error_file = UNL_Peoplefinder::getTmpDir() . '/ldap_error.log';
 
                 if (!file_exists($ldap_error_file)) {
                     touch($ldap_error_file);
                 }
-                
+
                 $error_str = date('c') . ' - ' . $errno . ' - ' . $error . ' - ' . $filter . PHP_EOL;
                 file_put_contents($ldap_error_file, $error_str, FILE_APPEND);
-                
+
                 if (3 == $errno) {
                     //Time limit exceeded, don't retry again and cache the empty result
                     break;
                 }
- 
+
                 //Otherwise, retry.
                 $this->unbind();
                 $retry = $tries++ < $maxTries;
@@ -240,7 +240,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
         }
 
         ldap_free_result($sr);
-       
+
         $cache->set($cache_key, serialize($result));
 
         return $result;
@@ -252,15 +252,15 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
     protected function getCache()
     {
         static $cache;
-        
+
         if ($cache) {
             return $cache;
         }
-        
+
         $cache = UNL_Peoplefinder_Cache::factory([
             'fast_lifetime' => self::$cacheTimeout,
         ]);
-        
+
         return $cache;
     }
 
