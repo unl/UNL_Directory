@@ -101,6 +101,21 @@ abstract class UNL_Peoplefinder_Driver_LDAP_Util
      */
     public static function wrapGlobalExclusions($filter)
     {
+        $uidFile = UNL_Peoplefinder::getDataDir() . '/suppress_uids.txt';
+        $uidFilters = [];
+
+        if (file_exists($uidFile)) {
+            $uids = file($uidFile, FILE_IGNORE_NEW_LINES|FILE_SKIP_EMPTY_LINES);
+
+            foreach ($uids as $uid) {
+                $uidFilters[] = "(uid={$uid})";
+            }
+        }
+
+        if ($uidFilters) {
+            return sprintf('(&%s(!(|%s)))', $filter, implode('', $uidFilters));
+        }
+
         return $filter;
     }
 }

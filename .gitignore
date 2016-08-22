@@ -9,6 +9,7 @@
 /*.tar
 /*.tgz
 /*.zip
+/data/suppress_uids.txt
 /data/hr_tree.xml
 /data/faculty_education.csv
 /node_modules/
