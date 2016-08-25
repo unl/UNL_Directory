@@ -86,7 +86,7 @@ $onlySummary = $context->isSummaryView();
                     'number' => $context->fax,
                     'itemprop' => 'faxNumber',
                 ], 'Peoplefinder/Record/NumberItemprop.tpl.php') ?></span>
-                <?php echo $savvy->render($context->phone, 'Peoplefinder/Record/CampusNumber.tpl.php') ?>
+                <?php echo $savvy->render($context->fax, 'Peoplefinder/Record/CampusNumber.tpl.php') ?>
             </div>
             <?php endif; ?>
             <?php if ($encodedEmail): ?>
