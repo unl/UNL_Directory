@@ -81,8 +81,8 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
             CURLOPT_ENCODING        => 'gzip',
             CURLOPT_FOLLOWLOCATION  => true,
             CURLOPT_RETURNTRANSFER  => true,
-            CURLOPT_CONNECTTIMEOUT  => 5,
-            CURLOPT_TIMEOUT         => 5,
+            CURLOPT_CONNECTTIMEOUT  => 15,
+            CURLOPT_TIMEOUT         => 15,
         ));
 
         $responseData = curl_exec($curl);
