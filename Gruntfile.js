@@ -1,4 +1,4 @@
-var every = require('lodash/collection/every');
+var every = require('lodash.every');
 var fs = require('fs');
 
 module.exports = function (grunt) {
