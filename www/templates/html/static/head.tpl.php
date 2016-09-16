@@ -15,7 +15,6 @@ $logoutUrl = 'https://login.unl.edu/cas/logout?url=' . urlencode($loginService);
 
 <link rel="home" href="<?php echo $baseUrl ?>"/>
 <link rel="stylesheet" type="text/css" media="all" href="<?php echo $baseUrl ?>css/directory.css?v=<?php echo $version ?>"/>
-<link rel="stylesheet" type="text/css" media="print" href="<?php echo $baseUrl ?>css/directory-print.css?v=<?php echo $version ?>"/>
 <script>
 require(['wdn'], function(WDN) {
 	WDN.setPluginParam('idm', 'login', '<?php echo $loginUrl ?>');
