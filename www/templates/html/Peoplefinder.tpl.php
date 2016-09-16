@@ -14,7 +14,7 @@ $savvy->addGlobal('page', $page);
 
 $page->doctitle = '<title>Directory | University of Nebraska–Lincoln</title>';
 $page->titlegraphic = 'Directory';
-$page->setParam('class', implode(' ', ['hide-navigation', 'hide-breadcrumbs', 'hide-wdn_footer_related']));
+$page->setParam('class', implode(' ', ['hide-wdn_navigation_wrapper', 'hide-breadcrumbs', 'hide-wdn_footer_related']));
 
 $page->head .= $savvy->render(null, 'static/head.tpl.php');
 
@@ -38,7 +38,6 @@ if ($isOutputError) {
 if (in_array($context->options['view'], ['instructions', 'help', 'search'])) {
     //Don't wrap the home page, because we want it to use bands
     $page->maincontentarea = $savvy->render($context->output, $outputTemplate);
-    
 } else {
     //Wrap everything else
     $page->maincontentarea = '<div class="wdn-band record-container"><div class="wdn-inner-wrapper wdn-inner-padding-sm">' . $savvy->render($context->output, $outputTemplate) . '</div></div>';
