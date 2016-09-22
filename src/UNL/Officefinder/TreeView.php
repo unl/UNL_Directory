@@ -1,7 +1,7 @@
 <?php
 class UNL_Officefinder_TreeView extends FilterIterator
 {
-    function __construct($options = array())
+    public function __construct($options = array())
     {
         // retrieve the left and right value of the $root node  
         $root = UNL_Officefinder_Department::getByname('University of Nebraska-Lincoln');
@@ -11,7 +11,7 @@ class UNL_Officefinder_TreeView extends FilterIterator
         parent::__construct(new RecursiveIteratorIterator($iterator, RecursiveIteratorIterator::SELF_FIRST));
     }
 
-    function accept()
+    public function accept()
     {
         if ($this->getInnerIterator()->current()->isOfficialDepartment()
             && strlen($this->getInnerIterator()->current()->org_unit) == 8) {
@@ -19,5 +19,4 @@ class UNL_Officefinder_TreeView extends FilterIterator
         }
         return false;
     }
-    
 }
