@@ -3,12 +3,13 @@ class UNL_Peoplefinder_Driver_LDAP_UIDFilter
 {
     protected $_filter;
 
-    function __construct($uid, $affiliation = null)
+    public function __construct($uid, $affiliation = null)
     {
+        $uid = UNL_Peoplefinder_Driver_LDAP_Util::escape_filter_value($uid);
         $this->_filter = "(&(uid=$uid))";
     }
 
-    function __toString()
+    public function __toString()
     {
         $this->_filter = UNL_Peoplefinder_Driver_LDAP_Util::wrapGlobalExclusions($this->_filter);
         return $this->_filter;

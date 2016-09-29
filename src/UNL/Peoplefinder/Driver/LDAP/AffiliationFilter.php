@@ -2,8 +2,8 @@
 class UNL_Peoplefinder_Driver_LDAP_AffiliationFilter extends UNL_Peoplefinder_Driver_LDAP_StandardFilter
 {
     protected $affiliation = 'staff';
-    
-    function __construct($query, $affiliation, $operator = '&', $wild = false)
+
+    public function __construct($query, $affiliation, $operator = '&', $wild = false)
     {
         switch($affiliation) {
             case 'student':
@@ -15,8 +15,8 @@ class UNL_Peoplefinder_Driver_LDAP_AffiliationFilter extends UNL_Peoplefinder_Dr
         }
         parent::__construct($query, $operator, $wild);
     }
-    
-    function __toString()
+
+    public function __toString()
     {
         $this->addExcludedRecords();
         $this->_filter = '(&'.$this->_filter.'(eduPersonAffiliation='.$this->affiliation.'))';

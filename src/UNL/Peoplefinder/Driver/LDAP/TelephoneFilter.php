@@ -3,7 +3,7 @@
  * Builds a simple telephone filter for searching for records.
  *
  * PHP version 5
- * 
+ *
  * @category  Default
  * @package   UNL_Peoplefinder
  * @author    Brett Bieber <brett.bieber@gmail.com>
@@ -14,15 +14,16 @@
 class UNL_Peoplefinder_Driver_LDAP_TelephoneFilter
 {
     private $_filter;
-    
+
     protected $affiliation;
-    
-    function __construct($q, $affiliation = null)
+
+    public function __construct($q, $affiliation = null)
     {
         if (!empty($q)) {
-            $this->_filter = '(telephoneNumber=*'.str_replace('-','*',$q).')';
+            $q = preg_replace('/\D/', '', $q);
+            $this->_filter = '(telephoneNumber=*'.$q.')';
         }
-        
+
         switch ($affiliation) {
             case 'faculty':
             case 'staff':
@@ -31,8 +32,8 @@ class UNL_Peoplefinder_Driver_LDAP_TelephoneFilter
                 break;
         }
     }
-    
-    function __toString()
+
+    public function __toString()
     {
         if ($this->affiliation) {
             $this->_filter = '(&'.$this->_filter.'(eduPersonAffiliation='.$this->affiliation.'))';
