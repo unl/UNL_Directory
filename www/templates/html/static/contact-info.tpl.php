@@ -5,7 +5,7 @@
             <p>Information obtained from this directory may not be used to provide addresses for mailings to students, faculty or staff.<br />
 				Any solicitation of business, information, contributions or other response from individuals listed in this publication by mail, telephone or other means is forbidden.</p>
 			<p><a href="<?php echo UNL_Peoplefinder::getURL() . 'help/' ?>">More About Directory</a> - <a href="http://wdn.unl.edu/documentation/unl-directory">Developer Documentation</a></p>
-			<p>This application is developed and maintained by <a href="http://iim.unl.edu/">Internet and Interactive Media</a> (IIM), which is a partnership with University Communications and Information Technology Services.</p>
+			<p>This application is developed and maintained by <a href="http://iim.unl.edu/">Internet and Interactive Media</a> (IIM), which is a partnership with University Communication and Information Technology Services.</p>
 			<p>This website is protected against malicious content robots and abusive web browsers. If you experience an issue or receive an error/blocked message while browsing, please immediately report the problem to the <a href="http://its.unl.edu/helpcenter">ITS Help Center</a>.</p>
 		</div>
 	</div>
