@@ -773,4 +773,20 @@
 	display: none;
 }
 
+/**
+TODO: remove once fixed in framework
+Temp fix for mobile rendering of nav items. New updates do not work so well with framework hide classes.
+This is a bandage until the issue is addressed in the framework
+**/
+@media (max-width: 699px) {
+	.hide-wdn_navigation_wrapper #wdn-main-share-button {
+		margin-left: 6em;
+		height: 40px;
+	}
+
+	.hide-wdn_navigation_wrapper .wdn-menu-trigger {
+		height: 40px;
+	}
+}
+
 @import "directory-print.less";
