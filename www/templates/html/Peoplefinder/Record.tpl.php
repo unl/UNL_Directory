@@ -55,7 +55,7 @@ $showKnowledge = $context->shouldShowKnowledge();
             <?php endif; ?>
         <?php endif; ?>
         <?php if (!$isOrg): ?>
-            <span class="icon-link"></span></a>
+            </a>
         <?php endif; ?>
     <?php if ($context->isHcardFormat()): ?>
         </div>
