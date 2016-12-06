@@ -30,7 +30,6 @@ $onlySummary = $context->isSummaryView();
             <?php endif; ?>
                 <a class="permalink" href="<?php echo $context->getURL() ?>" itemprop="url">
                     <span class="fn org" itemprop="name"><?php echo $context->name ?></span>
-                    <span class="icon-link"></span>
                 </a>
             <?php if ($onlySummary): ?>
                 </div>

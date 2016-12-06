@@ -267,6 +267,10 @@
 			display: block;
 		}
 	}
+
+	.vcard .headline a {
+		color: inherit;
+	}
 }
 
 
@@ -347,20 +351,7 @@
 			margin-bottom: 1rem;
 
 			a {
-				color: inherit;
 				.heading-font();
-
-				&:hover,
-				&:focus {
-					.icon-link {
-						visibility: visible;
-					}
-				}
-
-				.icon-link {
-					visibility: hidden;
-					font-size: 0.5em;
-				}
 			}
 
 			+ .title {
