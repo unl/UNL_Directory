@@ -262,6 +262,13 @@ class UNL_Officefinder
                 $alias->delete();
                 $redirect = $record->getURL();
                 break;
+            case 'correction':
+                $record = $this->getPostedEntity();
+                if (empty($record) || empty($_POST['name']) || empty($_POST['email']) || empty($_POST['message'])) {
+                    throw new Exception('Bad correction request.', 400);
+                }
+                UNL_Officefinder_CorrectionEmail::send($record, $_POST['name'], $_POST['email'], $_POST['message'], $_POST['source']);
+                break;
         }
 
         if ($redirect && !$noRedirect) {
@@ -298,6 +305,24 @@ class UNL_Officefinder
         if ($checkUserPermissions && !$record->userCanEdit(self::getUser(true))) {
             throw new Exception('You have no edit permissions for that record', 403);
         }
+        return $record;
+    }
+
+    protected function getPostedEntity()
+    {
+        $record = null;
+        switch ($_POST['kind']) {
+            case 'office':
+                $record = UNL_Officefinder_Department::getByID($_POST['id']);
+                if (!$record) {
+                    throw new Exception('No department with that ID was found', 404);
+                }
+                break;
+            case 'person':
+                $record = new UNL_Peoplefinder_Record(['uid' => $_POST['id']]);
+                break;
+        }
+
         return $record;
     }
 

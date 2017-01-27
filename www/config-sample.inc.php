@@ -21,6 +21,7 @@ $driver = new UNL_Peoplefinder_Driver_WebService();
 // Database connection info for officefinder portions
 UNL_Officefinder::$db_user = 'officefinder';
 UNL_Officefinder::$db_pass = 'officefinder';
+UNL_Officefinder_CorrectionEmail::$defaultRecipient = 'nobody@unl.edu';
 
 // Officefinder editing admins
 UNL_Officefinder::$admins = array();
