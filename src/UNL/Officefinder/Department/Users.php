@@ -3,7 +3,7 @@ class UNL_Officefinder_Department_Users extends UNL_Officefinder_UserList
 {
     public $department_id;
 
-    function __construct($options = array())
+    public function __construct($options = array())
     {
 
         if (!isset($options['department_id'])) {

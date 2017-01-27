@@ -4,12 +4,12 @@ class UNL_Officefinder_Department_User extends UNL_Officefinder_Record
     public $department_id;
     public $uid;
 
-    function getTable()
+    public function getTable()
     {
         return 'department_permissions';
     }
 
-    function keys()
+    public function keys()
     {
         return array('department_id', 'uid');
     }
