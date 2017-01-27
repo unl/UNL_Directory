@@ -89,15 +89,11 @@ class UNL_Officefinder
             self::authenticate();
         }
 
-        if (!empty($_POST)) {
-            try {
-                $this->handlePost();
-            } catch(Exception $e) {
-                $this->output = $e;
-            }
-        }
-
         try {
+            if (!empty($_POST)) {
+                $this->handlePost();
+            }
+
             $this->run();
         } catch(Exception $e) {
             $this->output = $e;
@@ -255,7 +251,7 @@ class UNL_Officefinder
             case 'add_dept_alias':
                 $record = $this->getPostedDepartment();
                 if (empty($_POST['name'])) {
-                    throw new Exception('You must enter the alias before submitting the form.');
+                    throw new Exception('You must enter the alias before submitting the form.', 400);
                 }
                 $record->addAlias($_POST['name']);
                 $redirect = $record->getURL();
