@@ -749,6 +749,10 @@ define([
 				$(document.body).trigger('sticky_kit:recalc');
 			});
 			form.reset();
+		}).fail(function() {
+			alert('Your request failed. Please check your input and try again.')
+		}).always(function() {
+			form.reset();
 		});
 	};
 
