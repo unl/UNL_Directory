@@ -21,8 +21,7 @@ class UNL_Peoplefinder_Department_PersonnelSubtree extends ArrayIterator
             $orgUnits[] = $department->org_unit;
             $this->getChildOrgUnits($department, $orgUnits);
 
-            $peoplefinder = new UNL_Peoplefinder(array('driver'=>$this->options['driver']));
-            $mixed = $peoplefinder->getHROrgUnitNumbersMatches($orgUnits);
+            $mixed = UNL_Peoplefinder::getInstance()->getHROrgUnitNumbersMatches($orgUnits);
         }
         parent::__construct($mixed);
     }

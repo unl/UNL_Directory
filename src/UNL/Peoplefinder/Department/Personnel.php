@@ -8,8 +8,7 @@ class UNL_Peoplefinder_Department_Personnel extends ArrayIterator
         if (is_array($mixed)) {
             if (!empty($mixed['org_unit'])) {
                 $this->options = $mixed;
-                $peoplefinder  = new UNL_Peoplefinder(array('driver'=>$this->options['driver']));
-                $mixed = $peoplefinder->getHROrgUnitNumberMatches($this->options['org_unit']);
+                $mixed = UNL_Peoplefinder::getInstance()->getHROrgUnitNumberMatches($this->options['org_unit']);
             } elseif (isset($mixed['id'])) {
                 $this->options = $mixed;
                 $department = UNL_Officefinder_Department::getById($mixed['id']);

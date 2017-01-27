@@ -570,20 +570,7 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
 
     public function getRoles()
     {
-        $cache = $this->getCache();
-        $cacheKey = 'UNL_Peoplefinder_Record_Roles-uid-' . $this->uid;
-
-        $roles = $cache->get($cacheKey);
-
-        if (!$roles) {
-            $roles = UNL_Peoplefinder::getInstance()->getRoles($this->dn);
-
-            if ($roles) {
-                $cache->set($cacheKey, $roles);
-            }
-        }
-
-        return $roles;
+        return UNL_Peoplefinder::getInstance()->getRoles($this->dn);
     }
 
     public function getKnowledge()

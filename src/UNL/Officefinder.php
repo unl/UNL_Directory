@@ -77,6 +77,7 @@ class UNL_Officefinder
     public function __construct($options = [])
     {
         $this->options = $options + $this->options;
+        UNL_Peoplefinder::getInstance($this->options);
 
         self::checkLogout();
 
@@ -237,8 +238,7 @@ class UNL_Officefinder
                 if (empty($_POST['uid'])) {
                     throw new Exception('You must enter a username before adding a user.', 400);
                 }
-                $peoplefinder = new UNL_Peoplefinder(['driver' => $this->options['driver']]);
-                $user = $peoplefinder->getUID($_POST['uid']);
+                $user = UNL_Peoplefinder::getInstance()->getUID($_POST['uid']);
                 $record->addUser($user->uid);
                 $redirect = $record->getURL();
                 break;

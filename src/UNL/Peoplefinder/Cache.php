@@ -57,7 +57,12 @@ class UNL_Peoplefinder_Cache
 	 */
 	public function getSlow($key)
 	{
-		return $this->slowCache->get($key);
+		try {
+			return $this->slowCache->get($key);
+		} catch (Exception $e) {
+			//todo: log?
+			return false;
+		}
 	}
 
 	/**
@@ -73,7 +78,11 @@ class UNL_Peoplefinder_Cache
 		}
 
 		$this->fastCache->set($key, $value, $expires);
-		$this->slowCache->save($value, $key);
+		try {
+			$this->slowCache->save($value, $key);
+		} catch (Exception $e) {
+			//todo: log?
+		}
 	}
 
 	/**
