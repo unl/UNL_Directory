@@ -26,11 +26,33 @@ class UNL_Officefinder_Department_Users extends UNL_Officefinder_UserList
         parent::__construct($users);
     }
 
-    function current()
+    public function current()
     {
         $user = new UNL_Officefinder_Department_User();
         $user->department_id = $this->department_id;
         $user->uid = parent::current();
         return $user;
+    }
+
+    public function getUniqueOrganizations()
+    {
+        $orgs = [];
+        foreach ($this as $user) {
+            $person = $user->getPerson();
+            if (!$person) {
+                continue;
+            }
+
+            $primaryHrOrg = $person->getHRPrimaryDepartment();
+            if (!$primaryHrOrg) {
+                continue;
+            }
+
+            if (!isset($orgs[$primaryHrOrg->id])) {
+                $orgs[$primaryHrOrg->id] = $primaryHrOrg;
+            }
+        }
+
+        return $orgs;
     }
 }

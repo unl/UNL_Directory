@@ -27,8 +27,17 @@ class UNL_Officefinder_Department_User extends UNL_Officefinder_Record
         return false;
     }
 
-    function __toString()
+    public function __toString()
     {
         return $this->uid;
+    }
+
+    public function getPerson()
+    {
+        try {
+            return new UNL_Peoplefinder_Record(['uid' => $this->uid]);
+        } catch (Exception $e) {
+            return null;
+        }
     }
 }

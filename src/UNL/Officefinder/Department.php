@@ -189,6 +189,29 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
         return $this->internal['canEdit'];
     }
 
+    public function getEditors()
+    {
+        UNL_Peoplefinder::getInstance($this->options);
+        if (!isset($this->internal['editors'])) {
+
+            $this->internal['editors'] = [];
+
+            if (isset($this->id)) {
+                $users = $this->getUsers();
+                if (count($users)) {
+                    $this->internal['editors'] = $users;
+                    return $users;
+                }
+            }
+
+            if (isset($this->parent_id)) {
+                $this->internal['editors'] = self::getByID($this->parent_id)->getEditors();
+            }
+        }
+
+        return $this->internal['editors'];
+    }
+
     /**
      *
      * @param string $user
