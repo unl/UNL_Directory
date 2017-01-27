@@ -18,7 +18,7 @@ if (!empty($context->email)) {
 $onlySummary = $context->isSummaryView();
 ?>
 <div class="departmentInfo"<?php if ($onlySummary): ?> itemscope itemtype="http://schema.org/Organization"<?php endif; ?>>
-    <div class="vcard office<?php if($onlySummary): ?> card<?php endif; ?>">
+    <div class="vcard office<?php if($onlySummary): ?> card<?php endif; ?>" data-listing-id="<?php echo $context->id ?>" data-preferred-name="<?php echo $context->name ?>">
         <div class="card-profile">
             <img alt="Building Image" itemprop="image" src="<?php echo $context->getImageURL(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_LARGE); ?>" class="photo" />
         </div>
@@ -105,8 +105,9 @@ $onlySummary = $context->isSummaryView();
                     Unit #<?php echo $context->org_unit ?>
                 </div>
             <?php endif; ?>
-
-            <?php if (!$onlySummary && $userCanEdit): ?>
+        </div>
+        <?php if (!$onlySummary): ?>
+            <?php if ($userCanEdit): ?>
                 <div class="vcard-tools">
                     <a href="<?php echo $context->getURL() . '/edit' ?>" class="icon-pencil">Edit</a>
                     <?php if ($userCanDelete): ?>
@@ -114,8 +115,12 @@ $onlySummary = $context->isSummaryView();
                     <?php endif; ?>
                 </div>
             <?php else: ?>
-                <div class="department-correction"></div>
+                <div class="department-correction">
+                    <?php echo $savvy->render($context->getEditors(), 'Officefinder/Department/UsersOrganizations.tpl.php') ?>
+                </div>
             <?php endif; ?>
-        </div>
+        <?php elseif (!$userCanEdit): ?>
+            <div class="department-correction"></div>
+        <?php endif; ?>
     </div>
 </div>
