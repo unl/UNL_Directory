@@ -1270,7 +1270,7 @@ define([
 					var $success = $container.find('.success');
 					$success.text('Submitting...').removeClass('hidden').focus();
 
-					$.post(this.action, $(this).serialize()).done(function() {
+					$.post(this.action + '?' + $.param({format: 'json'}), $(this).serialize()).done(function() {
 						$success.text('Thank you for your correction.').focus();
 					}).fail(function(){
 						$success.text('There was an error submitting the correction, please try again later.').focus();
