@@ -43,4 +43,20 @@ class UNL_Peoplefinder_Savvy extends Savvy
 
 	    echo '<' . $nodeName . '>' . $nodeValue . '</' . $nodeName . '>';
 	}
+
+    protected function fetch($mixed, $template = null)
+    {
+        if (!$template) {
+            $object = $mixed;
+            if ($mixed instanceof Savvy_ObjectProxy) {
+                $object = $mixed->getRawObject();
+            }
+
+            if ($object instanceof Exception) {
+                $template = $this->getClassToTemplateMapper()->map('Exception');
+            }
+        }
+
+        return parent::fetch($mixed, $template);
+    }
 }

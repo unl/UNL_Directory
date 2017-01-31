@@ -29,15 +29,9 @@ $page->navlinks = '';
 $page->pagetitle = '';
 $page->leftcollinks = '';
 
-$outputTemplate = null;
-$isOutputError = $context->getRaw('output') instanceof Exception;
-if ($isOutputError) {
-    $outputTemplate = 'Exception.tpl.php';
-}
-
 if (in_array($context->options['view'], ['instructions', 'help', 'search'])) {
     //Don't wrap the home page, because we want it to use bands
-    $page->maincontentarea = $savvy->render($context->output, $outputTemplate);
+    $page->maincontentarea = $savvy->render($context->output);
 } else {
     //Wrap everything else
     $page->maincontentarea = '<div class="wdn-band record-container"><div class="wdn-inner-wrapper wdn-inner-padding-sm">' . $savvy->render($context->output, $outputTemplate) . '</div></div>';
