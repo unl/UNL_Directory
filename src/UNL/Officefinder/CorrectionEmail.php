@@ -102,7 +102,7 @@ EOD;
         }
 
         if (!$recipients) {
-            return self::$failover;
+            return self::$defaultRecipient;
         }
 
         return $recipients;
