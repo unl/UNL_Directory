@@ -97,6 +97,9 @@ class UNL_Officefinder
 
             $this->run();
         } catch(Exception $e) {
+            if (!$e->getCode()) {
+                $e = new Exception('Something went wrong.', 500, $e);
+            }
             $this->output = $e;
         }
     }
