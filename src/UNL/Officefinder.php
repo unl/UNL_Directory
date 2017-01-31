@@ -77,6 +77,7 @@ class UNL_Officefinder
     public function __construct($options = [])
     {
         $this->options = $options + $this->options;
+        UNL_Peoplefinder::getInstance($this->options);
 
         self::checkLogout();
 
@@ -89,17 +90,16 @@ class UNL_Officefinder
             self::authenticate();
         }
 
-        if (!empty($_POST)) {
-            try {
-                $this->handlePost();
-            } catch(Exception $e) {
-                $this->output = $e;
-            }
-        }
-
         try {
+            if (!empty($_POST)) {
+                $this->handlePost();
+            }
+
             $this->run();
         } catch(Exception $e) {
+            if (!$e->getCode()) {
+                $e = new Exception('Something went wrong.', 500, $e);
+            }
             $this->output = $e;
         }
     }
@@ -241,8 +241,7 @@ class UNL_Officefinder
                 if (empty($_POST['uid'])) {
                     throw new Exception('You must enter a username before adding a user.', 400);
                 }
-                $peoplefinder = new UNL_Peoplefinder(['driver' => $this->options['driver']]);
-                $user = $peoplefinder->getUID($_POST['uid']);
+                $user = UNL_Peoplefinder::getInstance()->getUID($_POST['uid']);
                 $record->addUser($user->uid);
                 $redirect = $record->getURL();
                 break;
@@ -255,7 +254,7 @@ class UNL_Officefinder
             case 'add_dept_alias':
                 $record = $this->getPostedDepartment();
                 if (empty($_POST['name'])) {
-                    throw new Exception('You must enter the alias before submitting the form.');
+                    throw new Exception('You must enter the alias before submitting the form.', 400);
                 }
                 $record->addAlias($_POST['name']);
                 $redirect = $record->getURL();
@@ -265,6 +264,13 @@ class UNL_Officefinder
                 $alias  = UNL_Officefinder_Department_Alias::getById($record->id, $_POST['name']);
                 $alias->delete();
                 $redirect = $record->getURL();
+                break;
+            case 'correction':
+                $record = $this->getPostedEntity();
+                if (empty($record) || empty($_POST['name']) || empty($_POST['email']) || empty($_POST['message'])) {
+                    throw new Exception('Bad correction request.', 400);
+                }
+                UNL_Officefinder_CorrectionEmail::send($record, $_POST['name'], $_POST['email'], $_POST['message'], $_POST['source']);
                 break;
         }
 
@@ -302,6 +308,24 @@ class UNL_Officefinder
         if ($checkUserPermissions && !$record->userCanEdit(self::getUser(true))) {
             throw new Exception('You have no edit permissions for that record', 403);
         }
+        return $record;
+    }
+
+    protected function getPostedEntity()
+    {
+        $record = null;
+        switch ($_POST['kind']) {
+            case 'office':
+                $record = UNL_Officefinder_Department::getByID($_POST['id']);
+                if (!$record) {
+                    throw new Exception('No department with that ID was found', 404);
+                }
+                break;
+            case 'person':
+                $record = new UNL_Peoplefinder_Record(['uid' => $_POST['id']]);
+                break;
+        }
+
         return $record;
     }
 

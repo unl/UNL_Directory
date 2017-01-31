@@ -176,7 +176,7 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
         if (!isset($this->internal['canEdit'])) {
             //default to false
             $this->internal['canEdit'] = false;
-            
+
             if (isset($this->id) && (bool) UNL_Officefinder_Department_Permission::getById($this->id, $user)) {
                 $this->internal['canEdit'] = true;
             }
@@ -187,6 +187,29 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
         }
 
         return $this->internal['canEdit'];
+    }
+
+    public function getEditors()
+    {
+        UNL_Peoplefinder::getInstance($this->options);
+        if (!isset($this->internal['editors'])) {
+
+            $this->internal['editors'] = [];
+
+            if (isset($this->id)) {
+                $users = $this->getUsers();
+                if (count($users)) {
+                    $this->internal['editors'] = $users;
+                    return $users;
+                }
+            }
+
+            if (isset($this->parent_id)) {
+                $this->internal['editors'] = self::getByID($this->parent_id)->getEditors();
+            }
+        }
+
+        return $this->internal['editors'];
     }
 
     /**
@@ -356,7 +379,6 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
      */
     public function getUsers()
     {
-        UNL_Officefinder_UserList::setPeoplefinder(new UNL_Peoplefinder($this->options));
         return new UNL_Officefinder_Department_Users(array('department_id'=>$this->id));
     }
 }

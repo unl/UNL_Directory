@@ -260,13 +260,13 @@ define([
 		})).appendTo($('.vcard-tools.primary', $vcard));
 	};
 
-	var addCorrectionTool = function(uid, name, $vcard) {
+	var addCorrectionTool = function(name, $vcard) {
 		var tmpl = $.templates(correctionButtonSelector);
-		
+
 		var $html = $(tmpl.render({
 			preferredName: name
 		}));
-		
+
 		if ($vcard.hasClass('office') && $vcard.find('.department-correction').length) {
 			$vcard.find('.department-correction').after($html);
 		} else {
@@ -359,7 +359,9 @@ define([
 			// load annotation tool for people records
 			if (recordType !== 'org') {
 				addAnnotateTool(infoData, $card);
-				addCorrectionTool(infoData, $card.data('preferred-name'), $card);
+				addCorrectionTool($card.data('preferred-name'), $card);
+			} else if ($('.department-correction', $card).length) {
+				addCorrectionTool($card.data('preferred-name'), $card.find('.vcard'));
 			}
 
 			$overview.slideUp();
@@ -407,8 +409,8 @@ define([
 				// allow vCard and non-name link clicks to bubble
 				return;
 			}
-			
-			if ($target.closest('.correction').length !== 0) {
+
+			if ($target.closest('.correction').length) {
 				//Launch the correction modal
 				launchCorrectionModal($target);
 				return;
@@ -438,6 +440,12 @@ define([
 
 			if ($anchor.length && !$fn.length) {
 				// allow vCard and non-name link clicks to bubble
+				return;
+			}
+
+			if ($target.closest('.correction').length) {
+				//Launch the correction modal
+				launchCorrectionModal($target);
 				return;
 			}
 
@@ -741,6 +749,10 @@ define([
 				$(document.body).trigger('sticky_kit:recalc');
 			});
 			form.reset();
+		}).fail(function() {
+			alert('Your request failed. Please check your input and try again.')
+		}).always(function() {
+			form.reset();
 		});
 	};
 
@@ -822,24 +834,35 @@ define([
 			checkSticky();
 		});
 	};
-	
+
 	var launchCorrectionModal = function($target) {
 		var $vcard = $target.closest('.vcard');
 		var $context = $('.corrections-template');
 		var $form = $('form', $context);
-		var name =  idm.getUserId() || '';
+		var name =  idm.getDisplayName() || '';
 		var email =  idm.getEmailAddress() || '';
-		
+
 		//Initialize values
-		$('input[name="name"]', $form).val(name);
-		$('input[name="email"]', $form).val(email);
-		$('textarea[name="message"]', $form).val('');
-		$('input[name="initial_url"]', $form).val($('.permalink', $vcard).attr('href'));
+		$form[0].reset();
+		if (name) {
+			$('input[name="name"]', $form).val(name);
+		}
+		if (email) {
+			$('input[name="email"]', $form).val(email);
+		}
+		$('input[name="source"]', $form).val($('.permalink', $vcard).attr('href'));
+		if ($vcard.hasClass('office')) {
+			$('input[name="kind"]', $form).val('office');
+			$('input[name="id"]', $form).val($vcard.data('listing-id'));
+		} else {
+			$('input[name="kind"]', $form).val('person');
+			$('input[name="id"]', $form).val($vcard.data('uid'));
+		}
 
 		//Initialize states
 		$form.removeClass('hidden');
 		$context.find('.success').addClass('hidden');
-		
+
 		//Show that modal!
 		showModalForm($context, '.correction-form', $target);
 	};
@@ -1024,7 +1047,7 @@ define([
 
 								var $card = $(data);
 								addAnnotateTool(oEvent.state.uid, $card);
-								addCorrectionTool(oEvent.state.uid, $card.data('preferred-name'), $card);
+								addCorrectionTool($card.data('preferred-name'), $card);
 								setMainState(1);
 								displayOnlyRecord($card);
 							}, function() {
@@ -1105,7 +1128,7 @@ define([
 						ajaxSubmitRemoveDepartmentList(this);
 					}
 				});
-				
+
 				if ($('#peoplefinder').length) {
 					// default, help/search state loaded
 					startFromSearch();
@@ -1217,8 +1240,7 @@ define([
 					if ($('.department-correction').length) {
 						//This div only exists if the user does not have permission to edit already
 						var $vcard = $summarySection.find('.vcard');
-						var name = $vcard.find('.fn.org').text();
-						addCorrectionTool(name, name, $vcard);
+						addCorrectionTool($vcard.data('preferred-name'), $vcard);
 					}
 				} else if ($('.record-container .vcard').length) {
 					// single person record state loaded
@@ -1248,12 +1270,11 @@ define([
 					var $success = $container.find('.success');
 					$success.text('Submitting...').removeClass('hidden').focus();
 
-					$.post(this.action, $(this).serialize()).done(function() {
+					$.post(this.action + '?' + $.param({format: 'json'}), $(this).serialize()).done(function() {
 						$success.text('Thank you for your correction.').focus();
 					}).fail(function(){
 						$success.text('There was an error submitting the correction, please try again later.').focus();
 					});
-					
 				});
 			});
 		}

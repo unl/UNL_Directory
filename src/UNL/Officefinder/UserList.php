@@ -28,7 +28,7 @@ class UNL_Officefinder_UserList extends ArrayIterator
     public static function getPeoplefinder()
     {
         if (!isset(self::$peoplefinder)) {
-            self::setPeoplefinder(new UNL_Peoplefinder());
+            self::setPeoplefinder(UNL_Peoplefinder::getInstance());
         }
 
         return self::$peoplefinder;

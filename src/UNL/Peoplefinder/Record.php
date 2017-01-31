@@ -570,20 +570,7 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
 
     public function getRoles()
     {
-        $cache = $this->getCache();
-        $cacheKey = 'UNL_Peoplefinder_Record_Roles-uid-' . $this->uid;
-
-        $roles = $cache->get($cacheKey);
-
-        if (!$roles) {
-            $roles = UNL_Peoplefinder::getInstance()->getRoles($this->dn);
-
-            if ($roles) {
-                $cache->set($cacheKey, $roles);
-            }
-        }
-
-        return $roles;
+        return UNL_Peoplefinder::getInstance()->getRoles($this->dn);
     }
 
     public function getKnowledge()
@@ -662,6 +649,47 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
             'chld' => 'L|1',
         ];
         return 'https://chart.googleapis.com/chart?' . http_build_query($options);
+    }
+
+    public function getHRPrimaryDepartment()
+    {
+        if (!$this->unlHROrgUnitNumber) {
+            return null;
+        }
+
+        $primaryOrgUnit = '';
+        UNL_Peoplefinder_Department::setXPathBase('');
+        foreach ($this->unlHROrgUnitNumber as $orgUnit) {
+            try {
+                $hrDepartment =  UNL_Peoplefinder_Department::getById($orgUnit);
+                if (!$hrDepartment) {
+                    continue;
+                }
+
+                if ($hrDepartment->name === $this->unlHRPrimaryDepartment) {
+                    $primaryOrgUnit = $orgUnit;
+                    break;
+                }
+            } catch (Exception $e) {
+                //ignore
+            }
+        }
+
+        if (!$primaryOrgUnit) {
+            $primaryOrgUnit = current($this->unlHROrgUnitNumber);
+        }
+
+        return UNL_Officefinder_Department::getByorg_unit($primaryOrgUnit) ?: null;
+    }
+
+    public function getEditors()
+    {
+        $editorDepartment = $this->getHRPrimaryDepartment();
+        if (!$editorDepartment) {
+            return [];
+        }
+
+        return $editorDepartment->getEditors();
     }
 
     protected function getPublicProperties()
