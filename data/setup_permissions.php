@@ -1,5 +1,5 @@
 <?php
-require_once dirname(__FILE__).'/../www/config.inc.php';
+require_once __DIR__ . '/../www/config.inc.php';
 error_reporting(E_ALL | E_STRICT);
 
 ini_set("auto_detect_line_endings", true);
@@ -8,7 +8,7 @@ ini_set("auto_detect_line_endings", true);
  * Export the UNL HR contact list (go.unl.edu/hrcontacts) to CSV using the
  * same format as the hr_contacts_sample.csv 
  */
-$permissions = new SplFileObject(dirname(__FILE__).'/UNL Org Units with Contacts for Help Desk-Updated 4-2012.csv');
+$permissions = new SplFileObject(__DIR__ . '/paf.csv');
 $permissions->setFlags(SplFileObject::READ_CSV);
 
 foreach ($permissions as $row) {
