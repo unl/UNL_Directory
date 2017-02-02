@@ -1,14 +1,4 @@
 <?php
-UNL_Peoplefinder::$displayResultLimit -= count($context->results);
-
-$like_records = array();
-if (!($context->options['q'] instanceof ArrayAccess)
-    && !isset($context->options['method'])
-    && UNL_Peoplefinder::$displayResultLimit) {
-    // More room to display like results
-        
-    $like_records = $context->options['peoplefinder']->getLikeMatches($context->options['q'], null, $context->results);
-}
 
 $all_results = array();
 
@@ -17,10 +7,8 @@ foreach ($context->results as $result) {
 }
 
 
-foreach ($like_records as $result) {
+foreach ($context->likeResults as $result) {
     $all_results[] = $savvy->render($result);
 }
 
 echo '['.implode(',', $all_results).']';
-
-?>

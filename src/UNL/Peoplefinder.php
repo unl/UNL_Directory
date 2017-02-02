@@ -11,8 +11,6 @@
  * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
  * @link      http://peoplefinder.unl.edu/
  */
-define('UNL_PF_DISPLAY_LIMIT', 30);
-define('UNL_PF_RESULT_LIMIT', 100);
 
 /**
  * Peoplefinder class for UNL's online directory.
@@ -28,9 +26,7 @@ define('UNL_PF_RESULT_LIMIT', 100);
  */
 class UNL_Peoplefinder
 {
-    static public $resultLimit = UNL_PF_RESULT_LIMIT;
-
-    static public $displayResultLimit = UNL_PF_DISPLAY_LIMIT;
+    static public $resultLimit = 250;
 
     static public $url = '';
 
