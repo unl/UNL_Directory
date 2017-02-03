@@ -1248,7 +1248,7 @@ define([
 					setMainState(initialMainState);
 					var $vcard = $('.record-container .vcard');
 					addAnnotateTool($vcard.data('uid'), $vcard);
-					addCorrectionTool($vcard.data('uid'), $vcard.data('preferred-name'), $vcard);
+					addCorrectionTool($vcard.data('preferred-name'), $vcard);
 					bindRecordListeners($('.record-container'));
 
 					var $knowledgeSummary = $('.record-container .directory-knowledge-summary');
