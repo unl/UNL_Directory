@@ -169,9 +169,9 @@ $showKnowledge = $context->shouldShowKnowledge();
     </div>
 
     <div class="vcard-tools wdn_vcardTools primary">
-        <a href="<?php echo $context->getVcardUrl() ?>" class="icon-vcard"><span class="wdn-text-hidden">Download </span>vCard<span class="wdn-text-hidden"> for <?php echo $preferredName ?></span></a>
-        <a href="<?php echo $context->getQRCodeUrl($savvy->render($context, 'templates/vcard/Peoplefinder/Record.tpl.php')) ?>" class="icon-qr-code">QR Code<span class="wdn-text-hidden"> vCard for <?php echo $preferredName ?></span></a>
-        <button class="icon-print">Print<span class="wdn-text-hidden"> listing for <?php echo $preferredName ?></span></button>
+        <a href="<?php echo $context->getVcardUrl() ?>"><span class="icon-vcard" aria-hidden="true"></span><span class="wdn-text-hidden">v-card icon </span><span class="wdn-text-hidden">Download </span>vCard<span class="wdn-text-hidden"> for <?php echo $preferredName ?></span></a>
+        <a href="<?php echo $context->getQRCodeUrl($savvy->render($context, 'templates/vcard/Peoplefinder/Record.tpl.php')) ?>"><span class="icon-qr-code" aria-hidden="true"></span><span class="wdn-text-hidden">Q R code icon </span>QR Code<span class="wdn-text-hidden"> vCard for <?php echo $preferredName ?></span></a>
+        <button><span class="icon-print" aria-hidden="true"></span><span class="wdn-text-hidden">printer icon </span>Print<span class="wdn-text-hidden"> listing for <?php echo $preferredName ?></span></button>
     </div>
 </div>
 
