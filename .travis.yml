@@ -9,4 +9,5 @@ services:
 before_script:
   - echo "extension = memcached.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - composer install
+  - phpunit --version
 script: phpunit --verbose --bootstrap www/config-sample.inc.php tests
