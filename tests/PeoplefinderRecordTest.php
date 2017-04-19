@@ -1,6 +1,6 @@
 <?php
 
-class PeoplefinderRecordTest extends \PHPUnit_Framework_TestCase {
+class PeoplefinderRecordTest extends \PHPUnit\Framework\TestCase {
     protected $record;
 
     protected function setUp() {
@@ -19,6 +19,7 @@ class PeoplefinderRecordTest extends \PHPUnit_Framework_TestCase {
     public function testFormatterDoesNotThrowError() {
         $this->record->postalAddress = '420 112, UNL, 68588-0684';
         $this->record->formatPostalAddress();
+        $this->assertEquals(1,1);
     }
 
     public function testFormatStandardPostalAddress() {
