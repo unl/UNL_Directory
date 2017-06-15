@@ -540,12 +540,21 @@
 }
 
 .directory-knowledge-section {
-	border-bottom: 1px solid @ui04;
-	padding-bottom: 2em;
 
-	&:last-child {
-		border-bottom: 0;
+	& + & {
+    	margin-top: 2.369em;
+    	border-top: 1px solid @ui04;
 	}
+
+    h2 {
+        position: relative;
+        padding-left: 3.157rem;
+
+        > span[class*='icon-'] {
+            position: absolute;
+            left: 0;
+        }
+    }
 }
 
 .directory-knowledge-section-bio {
@@ -553,10 +562,12 @@
 }
 
 .directory-knowledge-section-inner {
+    margin: 1.333em 0;
+    padding-left: 3.157rem;
 	list-style: none;
 
-	li {
-		margin-bottom: 1em;
+	li + li {
+		margin-top: 1em;
 	}
 }
 
