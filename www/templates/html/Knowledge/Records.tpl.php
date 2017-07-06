@@ -25,7 +25,7 @@ $sectionClassMap = [
     <?php if ($formattedData[$section]): ?>
         <div class="directory-knowledge-section directory-knowledge-section-<?php echo $section ?>">
             <?php if ($sectionLabel): ?>
-                <h2 class="wdn-brand <?php echo $sectionClassMap[$section] ?>"><?php echo $savvy->escape($sectionLabel) ?></h2>
+                <h2 class="wdn-brand"><span class="<?php echo $sectionClassMap[$section] ?>" aria-hidden="true"></span><span class="wdn-text-hidden"><?php echo $sectionClassMap[$section] ?></span><?php echo $savvy->escape($sectionLabel) ?></h2>
             <?php endif; ?>
             <?php if ($formattedData[$section] instanceof Traversable): ?>
                 <ul class="directory-knowledge-section-inner">

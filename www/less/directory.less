@@ -29,6 +29,7 @@
 }
 
 #directory-disclaim {
+
     a {
     	color: @ui03;
         text-decoration: none;
@@ -48,11 +49,6 @@
 	text-transform: uppercase;
 	color: #fff;
 	background-color: mix(@ui09, @page-background, 95%);
-
-	@media @bp2 {
-		padding: 1.069em 1.899rem 1em;
-		font-size: 0.802rem;
-	}
 
 	a {
 		float: right;
@@ -74,10 +70,6 @@
 		> *:last-child,
 		> .attribute:last-child {
 			margin-bottom: 0;
-		}
-
-		@media @bp2 {
-			padding: 0 1.899rem 2.369em;
 		}
 	}
 
@@ -127,12 +119,6 @@
 	border-width: 1px 0 0;
 	background: #fff;
 	margin: 1em @inner-band-margin; // push the list to the page edge
-
-	@media @bp2 {
-		margin-left: 0;
-		margin-right: 0;
-		border-width: 1px 1px 0;
-	}
 
 	> li {
 		padding: 1em;
@@ -191,7 +177,6 @@
 				display: none;
 			}
 		}
-
 	}
 
 	.fn {
@@ -209,6 +194,7 @@
 }
 
 #all_employees ~ .pfResult {
+
 	.overflow {
 		.organization-unit {
 			display: none;
@@ -220,6 +206,7 @@
 	display: none !important;
 
 	&.empty-filters {
+
 		#filters,
 		.summary {
 			display: none;
@@ -242,14 +229,15 @@
 	}
 
 	.dep_result {
+
 		.title {
 			font-style: italic;
 		}
 	}
-
 }
 
 .record-container {
+
 	.results-container ~ &,
 	.searching & {
 		display: none !important;
@@ -276,12 +264,14 @@
 
 #results,
 .filter-options {
+
 	&:focus {
 		outline: none;
 	}
 }
 
 #filters {
+
 	h2 {
 		margin-top: 0;
 	}
@@ -319,6 +309,7 @@
 }
 
 #results {
+
 	> *:first-child {
 		margin-top: 0;
 	}
@@ -326,6 +317,7 @@
 
 .results-container,
 .record-container {
+
 	.vcard {
 		max-width: 480px;
 		margin: 0 auto;
@@ -361,7 +353,7 @@
 
 		.attribute {
 			.sans-serif-font();
-			font-size: 0.887rem;
+			font-size: 0.935rem;
 			padding-left: 1.7em;
 			text-indent: -1.7em;
 			margin-bottom: 0.618rem;
@@ -376,6 +368,7 @@
 		}
 
 		.adr {
+
 			.type {
 				display: none;
 
@@ -395,6 +388,7 @@
 		}
 
 		.tel {
+
 			.type {
 				display: none;
 			}
@@ -416,7 +410,8 @@
 				display: block;
 			}
 
-			.major, .college {
+			.major,
+			.college {
 				font-size: 0.786em;
 				display: block;
 			}
@@ -427,7 +422,6 @@
 			padding: 0;
 			margin: 1em 0;
 			border-bottom: 1px solid @ui04;
-
 
 			> .org {
 				margin: 1em 0;
@@ -447,6 +441,7 @@
 			}
 
 			.parent-unl {
+
 				.organization-name {
 					display: none;
 				}
@@ -458,7 +453,9 @@
 			margin: 1em 0;
 		}
 
-		.fn, .given-name, .icon-link {
+		.fn,
+		.given-name,
+		.icon-link {
 			vertical-align: middle;
 		}
 
@@ -507,18 +504,19 @@
 
 .vcard-tools {
 	display: flex;
+    padding-top: 1em;
+    padding-bottom: 1em;
 	text-align: center;
-	border-top: 1px solid @ui03;
+	font-size: 0.935rem;
+	border-top: 1px solid @ui04;
 
-	> * {
+	a,
+	button {
 		flex: 1 1 auto;
-		color: @brand;
-
-	}
-
-	a, button {
-		padding: 0.5em;
 		display: block;
+		padding: 0;
+		line-height: 1.333;
+		color: @brand;
 	}
 
 	a:visited,
@@ -526,19 +524,37 @@
 		color: @brand;
 	}
 
-	:before {
-		font-size: 1.618em;
-		vertical-align: middle;
-	}
+    &.primary {
+        .sans-serif-font();
+        flex-flow: row wrap;
+
+        span[class^='icon-'] {
+            display: block;
+            font-size: 1.618rem;
+
+        	&:before {
+                margin-right: 0;
+            }
+        }
+    }
 }
 
 .directory-knowledge-section {
-	border-bottom: 1px solid @ui04;
-	padding-bottom: 2em;
 
-	&:last-child {
-		border-bottom: 0;
+	& + & {
+    	margin-top: 2.369em;
+    	border-top: 1px solid @ui04;
 	}
+
+    h2 {
+        position: relative;
+        padding-left: 3.157rem;
+
+        > span[class*='icon-'] {
+            position: absolute;
+            left: 0;
+        }
+    }
 }
 
 .directory-knowledge-section-bio {
@@ -546,10 +562,12 @@
 }
 
 .directory-knowledge-section-inner {
+    margin: 1.333em 0;
+    padding-left: 3.157rem;
 	list-style: none;
 
-	li {
-		margin-bottom: 1em;
+	li + li {
+		margin-top: 1em;
 	}
 }
 
@@ -558,6 +576,7 @@
 }
 
 #editBox {
+
 	.icon-help:before {
 		font-size: 1rem;
 		vertical-align: middle;
@@ -594,10 +613,6 @@
 		background-color: #FFFFCC;
 		margin: 0;
 		padding: 1em 1.899rem 1rem;
-	}
-
-	@media @bp2 {
-		margin: 0;
 	}
 
 	.editing {
@@ -779,7 +794,8 @@ TODO: remove once fixed in framework
 Temp fix for mobile rendering of nav items. New updates do not work so well with framework hide classes.
 This is a bandage until the issue is addressed in the framework
 **/
-@media (max-width: 699px) {
+@media @bp-nav-hidden {
+
 	.hide-wdn_navigation_wrapper #wdn-main-share-button {
 		margin-left: 6em;
 		height: 40px;
@@ -788,6 +804,61 @@ This is a bandage until the issue is addressed in the framework
 	.hide-wdn_navigation_wrapper .wdn-menu-trigger {
 		height: 40px;
 	}
+}
+
+@media @bp768 {
+
+    .heading-block {
+		padding: 1.069em 1.899rem 1em;
+		font-size: 0.802rem;
+	}
+
+    .card {
+
+	    .card-content {
+			padding: 0 1.899rem 2.369em;
+		}
+	}
+
+    .pfResult {
+		margin-left: 0;
+		margin-right: 0;
+		border-width: 1px 1px 0;
+	}
+
+    .results-container,
+    .record-container {
+
+        .vcard {
+
+            .attribute {
+                font-size: .8rem;
+            }
+        }
+    }
+
+    .vcard-tools {
+        font-size: .75rem;
+    }
+
+    #listings {
+		margin: 0;
+	}
+}
+
+@media (min-width: 48em) and (max-width: 80em) {
+
+    .vcard-tools.primary {
+
+        a,
+        button {
+            flex: 1 1 50%;
+
+            &:nth-child(-n+2) {
+                margin-bottom: .75em;
+            }
+        }
+    }
 }
 
 @import "directory-print.less";
