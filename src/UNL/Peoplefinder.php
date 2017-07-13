@@ -266,6 +266,10 @@ class UNL_Peoplefinder
         return $this->oracle_driver->getRoles($uid);
     }
 
+    public function getHROrgUnitNumberMatches($uid) {
+        return $this->oracle_driver->getHROrgUnitNumberMatches($uid);
+    }
+
     /**
      * Get the path to the data directory for this project
      *
