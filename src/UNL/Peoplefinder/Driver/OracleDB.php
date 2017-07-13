@@ -75,6 +75,11 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
         return new UNL_Peoplefinder_Person_Roles(['iterator' => new ArrayIterator($final_res)]);
     }
 
+    public function getHROrgUnitNumberMatches($query, $affiliation = null)
+    {
+        // Michael: TODO: implement a query here to get all peoples via orgunit #
+    }
+
     function getAdvancedSearchMatches($query, $affiliation = null)
     {
         return array();
@@ -104,10 +109,4 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
     {
         return array();
     }
-
-    public function getHROrgUnitNumberMatches($query, $affiliation = null)
-    {
-        
-    }
-
 }
