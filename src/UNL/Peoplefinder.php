@@ -53,6 +53,8 @@ class UNL_Peoplefinder
      */
     public $driver;
 
+    public $oracle_driver;
+
     /**
      * The results of the search
      *
@@ -119,6 +121,7 @@ class UNL_Peoplefinder
         }
 
         $this->driver = $options['driver'];
+        $this->oracle_driver = new UNL_Peoplefinder_Driver_OracleDB();
 
         $this->options = $options + $this->options;
 
@@ -261,6 +264,10 @@ class UNL_Peoplefinder
     function __call($method, $args)
     {
         return call_user_func_array(array($this->driver, $method), $args);
+    }
+
+    public function getRoles($uid) {
+        return $this->oracle_driver->getRoles($uid);
     }
 
     /**
