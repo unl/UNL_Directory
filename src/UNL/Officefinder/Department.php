@@ -1,6 +1,6 @@
 <?php
 
-class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjacencyList
+class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjacencyList implements JsonSerializable
 {
     public $id;
 
@@ -380,5 +380,48 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
     public function getUsers()
     {
         return new UNL_Officefinder_Department_Users(array('department_id'=>$this->id));
+    }
+
+    protected function getPublicProperties()
+    {
+        $self = $this;
+        $getPublicProperties = function() use ($self) {
+            return get_object_vars($self);
+        };
+        $getPublicProperties = $getPublicProperties->bindTo(null, null);
+
+        $properties = $getPublicProperties();
+        
+        unset($properties['options']);
+        
+        return $properties;
+    }
+    
+    /**
+     * Specify data which should be serialized to JSON
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     * @since 5.4.0
+     */
+    function jsonSerialize()
+    {
+        $data = $this->getPublicProperties();
+        $data['children'] = [];
+        $data['unofficial_children'] = [];
+
+        if ($this->hasOfficialChildDepartments()) {
+            foreach ($this->getOfficialChildDepartments() as $child) {
+                $data['children'][] = $child->jsonSerialize();
+            }
+        }
+
+        if ($this->hasUnofficialChildDepartments()) {
+            foreach ($this->getUnofficialChildDepartments() as $child) {
+                $data['unofficial_children'][] = $child->jsonSerialize();
+            }
+        }
+
+        return $data;
     }
 }
