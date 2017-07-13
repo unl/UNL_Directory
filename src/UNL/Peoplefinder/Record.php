@@ -570,7 +570,7 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
 
     public function getRoles()
     {
-        return UNL_Peoplefinder::getInstance()->getRoles($this->dn);
+        return UNL_Peoplefinder::getInstance()->getRoles((string) $this->uid);
     }
 
     public function getKnowledge()

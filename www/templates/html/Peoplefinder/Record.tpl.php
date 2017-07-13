@@ -1,4 +1,5 @@
 <?php
+
 $preferredFirstName = $context->getPreferredFirstName();
 $preferredName = $preferredFirstName . ' ' . $context->sn;
 
