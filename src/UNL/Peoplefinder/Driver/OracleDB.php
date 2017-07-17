@@ -59,9 +59,9 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
 
 	public function getRoles($uid)
     {
-        $results = $this->query("SELECT * FROM unl_appointments appointments, unl_campus_relationship campus_relationship1 WHERE
-		    campus_relationship1.biodemo_id = appointments.biodemo_id 
-		    AND campus_relationship1.netid = :user_identification_string 
+        $results = $this->query("SELECT * FROM unl_appointments appointments, unl_biodemo biodemo WHERE
+		    biodemo.biodemo_id = appointments.biodemo_id 
+		    AND biodemo.netid = :user_identification_string 
 		    AND appointments.end_date >= '" . date('Y-m-d') . "'", 
         	array(
         		'user_identification_string' => $uid, 
