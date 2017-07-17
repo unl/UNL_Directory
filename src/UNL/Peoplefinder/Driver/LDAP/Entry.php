@@ -13,17 +13,17 @@ class UNL_Peoplefinder_Driver_LDAP_Entry extends ArrayObject
         'faculty/executive' => 'faculty',
         'administrative' => 'staff',
     );
-    
-	public function __construct(array $entry)
-	{
-		$entry = self::normalizeEntry($entry);
-		parent::__construct($entry, ArrayObject::ARRAY_AS_PROPS);
-	}
 
-	protected static function normalizeEntry(array $entry)
-	{
-	    $entry = self::fix2017LdapChanges($entry);
-		$entry = UNL_Peoplefinder_Driver_LDAP_Util::filterArrayByKeys($entry, 'is_string');
+    public function __construct(array $entry)
+    {
+        $entry = self::normalizeEntry($entry);
+        parent::__construct($entry, ArrayObject::ARRAY_AS_PROPS);
+    }
+
+    protected static function normalizeEntry(array $entry)
+    {
+        $entry = self::fix2017LdapChanges($entry);
+        $entry = UNL_Peoplefinder_Driver_LDAP_Util::filterArrayByKeys($entry, 'is_string');
         unset($entry['count']);
         foreach ($entry as $attribute => $value) {
             if (is_array($value)) {
@@ -33,7 +33,7 @@ class UNL_Peoplefinder_Driver_LDAP_Entry extends ArrayObject
         }
 
         return $entry;
-	}
+    }
 
     /**
      * @param array $entry
@@ -42,18 +42,18 @@ class UNL_Peoplefinder_Driver_LDAP_Entry extends ArrayObject
     protected static function fix2017LdapChanges(array $entry)
     {
         if (!isset($entry['uid'])) {
-            //This is likely an objecttype role entry, not a person.
+            //This is likely an objecttype=role entry, not a person.
             return $entry;
         }
 
         if (isset($entry['edupersonnickname']) && $entry['edupersonnickname'] == $entry['cn']) {
             $entry['edupersonnickname'] = null;
         }
-        
+
         if (!isset($entry['edupersonprimaryaffiliation'])) {
             //print_r($entry);exit();
         }
-        
+
         if (isset($entry['edupersonprimaryaffiliation'])) {
             //Some records appear to not have this attribute.
             foreach ($entry['edupersonprimaryaffiliation'] as $key => $value) {
@@ -79,7 +79,7 @@ class UNL_Peoplefinder_Driver_LDAP_Entry extends ArrayObject
                 }
             }
         }
-        
+
         if (isset($entry['edupersonaffiliation'])) {
             //Some records appear to not have this attribute.
             foreach ($entry['edupersonaffiliation'] as $key => $value) {
@@ -108,38 +108,38 @@ class UNL_Peoplefinder_Driver_LDAP_Entry extends ArrayObject
         return $entry;
     }
 
-	public function append($value)
-	{
-		throw new Exception('Unimplemented');
-	}
+    public function append($value)
+    {
+        throw new Exception('Unimplemented');
+    }
 
-	public function exchangeArray($input)
-	{
-		$input = self::normalizeEntry($input);
-		return parent::exchangeArray($input);
-	}
+    public function exchangeArray($input)
+    {
+        $input = self::normalizeEntry($input);
+        return parent::exchangeArray($input);
+    }
 
-	public function offsetExists($index)
-	{
-		$index = strtolower($index);
-		return parent::offsetExists($index);
-	}
+    public function offsetExists($index)
+    {
+        $index = strtolower($index);
+        return parent::offsetExists($index);
+    }
 
-	public function offsetGet($index)
-	{
-		$index = strtolower($index);
-		return parent::offsetGet($index);
-	}
+    public function offsetGet($index)
+    {
+        $index = strtolower($index);
+        return parent::offsetGet($index);
+    }
 
-	public function offsetSet($index, $newval)
-	{
-		$index = strtolower($index);
-		return parent::offsetSet($index, $newval);
-	}
+    public function offsetSet($index, $newval)
+    {
+        $index = strtolower($index);
+        return parent::offsetSet($index, $newval);
+    }
 
-	public function offsetUnset($index)
-	{
-		$index = strtolower($index);
-		return parent::offsetUnset($index);
-	}
+    public function offsetUnset($index)
+    {
+        $index = strtolower($index);
+        return parent::offsetUnset($index);
+    }
 }
