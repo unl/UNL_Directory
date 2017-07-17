@@ -59,18 +59,22 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
 
 	public function getRoles($uid)
     {
-        $results = $this->query("SELECT * FROM campus_sync.appointments, campus_sync.campus_relationship campus_relationship1 WHERE
-    campus_relationship1.biodemo_id = campus_sync.appointments.campus_relationship_biodemo_id 
-    AND campus_relationship1.netid = :user_identification_string", 
-        	array('user_identification_string' => $uid));
+        $results = $this->query("SELECT * FROM unl_appointments appointments, unl_campus_relationship campus_relationship1 WHERE
+		    campus_relationship1.biodemo_id = appointments.biodemo_id 
+		    AND campus_relationship1.netid = :user_identification_string 
+		    AND appointments.end_date >= '" . date('Y-m-d') . "'", 
+        	array(
+        		'user_identification_string' => $uid, 
+        	));
 
         $final_res = array();
+
         foreach($results as $result) {
         	$res = new \stdClass;
         	$res->unlRoleHROrgUnitNumber = $result['ORG_UNIT'];
         	$res->description = $result['TITLE'];
         	$final_res[] = $res;
-        }	
+        }
 
         return new UNL_Peoplefinder_Person_Roles(['iterator' => new ArrayIterator($final_res)]);
     }
