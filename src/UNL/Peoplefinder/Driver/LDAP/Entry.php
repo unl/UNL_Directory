@@ -2,6 +2,18 @@
 
 class UNL_Peoplefinder_Driver_LDAP_Entry extends ArrayObject
 {
+    /**
+     * Affiliation Mapping
+     * Some new affiliations were incorrectly introduced in the 2017 update to LDAP.
+     *
+     * @var array
+     */
+    public static $affiliationMapping = array(
+        't' => 'faculty',
+        'faculty/executive' => 'faculty',
+        'administrative' => 'staff',
+    );
+    
 	public function __construct(array $entry)
 	{
 		$entry = self::normalizeEntry($entry);
@@ -10,6 +22,7 @@ class UNL_Peoplefinder_Driver_LDAP_Entry extends ArrayObject
 
 	protected static function normalizeEntry(array $entry)
 	{
+	    $entry = self::fix2017LdapChanges($entry);
 		$entry = UNL_Peoplefinder_Driver_LDAP_Util::filterArrayByKeys($entry, 'is_string');
         unset($entry['count']);
         foreach ($entry as $attribute => $value) {
@@ -21,6 +34,79 @@ class UNL_Peoplefinder_Driver_LDAP_Entry extends ArrayObject
 
         return $entry;
 	}
+
+    /**
+     * @param array $entry
+     * @return array
+     */
+    protected static function fix2017LdapChanges(array $entry)
+    {
+        if (!isset($entry['uid'])) {
+            //This is likely an objecttype role entry, not a person.
+            return $entry;
+        }
+
+        if (isset($entry['edupersonnickname']) && $entry['edupersonnickname'] == $entry['cn']) {
+            $entry['edupersonnickname'] = null;
+        }
+        
+        if (!isset($entry['edupersonprimaryaffiliation'])) {
+            //print_r($entry);exit();
+        }
+        
+        if (isset($entry['edupersonprimaryaffiliation'])) {
+            //Some records appear to not have this attribute.
+            foreach ($entry['edupersonprimaryaffiliation'] as $key => $value) {
+
+                if (is_string($key)) {
+                    //Skip keys like 'count'
+                    continue;
+                }
+
+                if (!isset(self::$affiliationMapping[$value])) {
+                    //Nothing to map, so skip
+                    continue;
+                }
+
+                $newValue = self::$affiliationMapping[$value];
+
+                if (in_array($newValue, $entry['edupersonprimaryaffiliation'])) {
+                    //This affiliation is already in the data, so don't add it again.
+                    unset($entry['edupersonprimaryaffiliation'][$key]);
+                } else {
+                    //Change the affiliation
+                    $entry['edupersonprimaryaffiliation'][$key] = self::$affiliationMapping[$value];
+                }
+            }
+        }
+        
+        if (isset($entry['edupersonaffiliation'])) {
+            //Some records appear to not have this attribute.
+            foreach ($entry['edupersonaffiliation'] as $key => $value) {
+                if (is_string($key)) {
+                    //Skip keys like 'count'
+                    continue;
+                }
+
+                if (!isset(self::$affiliationMapping[$value])) {
+                    //Nothing to map, so skip
+                    continue;
+                }
+
+                $newValue = self::$affiliationMapping[$value];
+
+                if (in_array($newValue, $entry['edupersonaffiliation'])) {
+                    //This affiliation is already in the data, so don't add it again.
+                    unset($entry['edupersonaffiliation'][$key]);
+                } else {
+                    //Change the affiliation
+                    $entry['edupersonaffiliation'][$key] = self::$affiliationMapping[$value];
+                }
+            }
+        }
+
+        return $entry;
+    }
 
 	public function append($value)
 	{

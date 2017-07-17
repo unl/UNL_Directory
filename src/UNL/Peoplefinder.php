@@ -97,10 +97,6 @@ class UNL_Peoplefinder
 //        'rif',
 //        'override',  // (will exist in guest ou)
 //        'sponsored', // (will exist in guest ou)
-         //The following are the result of July 2017 LDAP changes, will be changed in the future.
-         'administrative', 
-         'faculty/executive',
-         't', //Tenure
         );
 
     protected static $replacement_data = array();
