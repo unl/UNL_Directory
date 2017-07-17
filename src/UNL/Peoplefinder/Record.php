@@ -314,7 +314,7 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
             return false;
         }
         
-        if ($this->eduPersonNickname != ' ') {
+        if ($this->eduPersonNickname == ' ') {
             return false;
         }
         
