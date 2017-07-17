@@ -243,8 +243,13 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
         // postal code should be at the end
         if (count($parts)) {
             $part = trim(array_pop($parts));
-             if (preg_match('/^([\d]{5})(\-[\d]{4})?$/', $part)) {
-                $address['postal-code'] = $part;
+             if (preg_match('/^([\d]{5})(\-?[\d]{4})?$/', $part)) {
+                 if (strlen($part) == 9) {
+                     //This is a zip code formatted without a dash after the 5 digit zip code. Add it.
+                     $part = substr_replace($part, '-', 5, 0);
+                 }
+                 
+                 $address['postal-code'] = $part;
             }
         }
 
