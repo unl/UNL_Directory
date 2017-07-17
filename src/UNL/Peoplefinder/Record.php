@@ -310,7 +310,20 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
 
     public function hasNickname()
     {
-        return !empty($this->eduPersonNickname) && $this->eduPersonNickname != ' ';
+        if (empty($this->eduPersonNickname)) {
+            return false;
+        }
+        
+        if ($this->eduPersonNickname != ' ') {
+            return false;
+        }
+        
+        if ($this->eduPersonNickname == $this->cn) {
+            //Its the same as the common name :(
+            return false;
+        }
+        
+        return true;
     }
 
     /**
