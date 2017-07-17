@@ -71,7 +71,7 @@ class UNL_Peoplefinder_Driver_LDAP_Entry extends ArrayObject
                     unset($entry['edupersonprimaryaffiliation'][$key]);
                 } else {
                     //Change the affiliation
-                    $entry['edupersonprimaryaffiliation'][$key] = self::$affiliationMapping[$value];
+                    $entry['edupersonprimaryaffiliation'][$key] = $newValue;
                 }
             }
         }
@@ -96,7 +96,7 @@ class UNL_Peoplefinder_Driver_LDAP_Entry extends ArrayObject
                     unset($entry['edupersonaffiliation'][$key]);
                 } else {
                     //Change the affiliation
-                    $entry['edupersonaffiliation'][$key] = self::$affiliationMapping[$value];
+                    $entry['edupersonaffiliation'][$key] = $newValue;
                 }
             }
         }
