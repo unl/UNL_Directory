@@ -100,7 +100,7 @@ class UNL_Peoplefinder
          //The following are the result of July 2017 LDAP changes, will be changed in the future.
          'administrative', 
          'faculty/executive',
-         't',
+         't', //Tenure
         );
 
     protected static $replacement_data = array();
