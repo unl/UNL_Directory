@@ -31,6 +31,18 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
 
 	public function query($statement, $params = array())
 	{
+	    $cache = $this->getCache();
+	    
+	    //Use md5 so we don't exceed the memcached key length
+	    $cache_key = 'oracle_query_' .  md5($statement) . '--' . md5(serialize($params));
+
+        if ($result = $cache->get($cache_key)) {
+            $result = unserialize($result);
+            return $result;
+        }
+
+        $cache->set($cache_key, serialize([]));
+	    
 		$this->connect();
 		// Prepare the statement
 		$stid = oci_parse($this->conn, $statement);
@@ -54,6 +66,9 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
 		    $arr[] = $row;
 		}
 		$this->closeConnection();
+
+        $cache->set($cache_key, serialize($arr));
+		
 		return $arr;
 	}
 
@@ -151,5 +166,24 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
     function getHRPrimaryDepartmentMatches($query, $affiliation = null)
     {
         return array();
+    }
+
+    /**
+     * @return UNL_Peoplefinder_Cache
+     */
+    protected function getCache()
+    {
+        static $cache;
+
+        if ($cache) {
+            return $cache;
+        }
+
+        $cache = UNL_Peoplefinder_Cache::factory([
+            //make it the same timeout as the LDAP driver
+            'fast_lifetime' => UNL_Peoplefinder_Driver_LDAP::$cacheTimeout,
+        ]);
+
+        return $cache;
     }
 }
