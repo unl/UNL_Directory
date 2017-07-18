@@ -59,25 +59,42 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
 
 	public function getRoles($uid)
     {
-        $results = $this->query("SELECT * FROM campus_sync.appointments, campus_sync.campus_relationship campus_relationship1 WHERE
-    campus_relationship1.biodemo_id = campus_sync.appointments.campus_relationship_biodemo_id 
-    AND campus_relationship1.netid = :user_identification_string", 
-        	array('user_identification_string' => $uid));
+        $results = $this->query("SELECT * FROM unl_appointments appointments, unl_biodemo biodemo WHERE
+		    biodemo.biodemo_id = appointments.biodemo_id 
+		    AND biodemo.netid = :user_identification_string 
+		    AND appointments.end_date >= '" . date('Y-m-d') . "'", 
+        	array(
+        		'user_identification_string' => $uid, 
+        	));
 
         $final_res = array();
+
         foreach($results as $result) {
         	$res = new \stdClass;
         	$res->unlRoleHROrgUnitNumber = $result['ORG_UNIT'];
         	$res->description = $result['TITLE'];
         	$final_res[] = $res;
-        }	
 
+        }	
         return new UNL_Peoplefinder_Person_Roles(['iterator' => new ArrayIterator($final_res)]);
     }
 
     public function getHROrgUnitNumberMatches($query, $affiliation = null)
     {
-        // Michael: TODO: implement a query here to get all peoples via orgunit #
+        $results = $this->query("SELECT DISTINCT biodemo.netid FROM unl_appointments appointments, unl_biodemo biodemo WHERE
+            biodemo.biodemo_id = appointments.biodemo_id 
+            AND appointments.org_unit = :org_unit
+            AND appointments.end_date >= '" . date('Y-m-d') . "'", 
+            array(
+                'org_unit' => $query, 
+            ));
+
+        $uids = array();
+        foreach ($results as $result) {
+            $uids[] = $result['NETID'];
+        }
+
+        return $uids;
     }
 
     function getAdvancedSearchMatches($query, $affiliation = null)
