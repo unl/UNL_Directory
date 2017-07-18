@@ -74,8 +74,8 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
         	$res->unlRoleHROrgUnitNumber = $result['ORG_UNIT'];
         	$res->description = $result['TITLE'];
         	$final_res[] = $res;
-        }
 
+        }	
         return new UNL_Peoplefinder_Person_Roles(['iterator' => new ArrayIterator($final_res)]);
     }
 
