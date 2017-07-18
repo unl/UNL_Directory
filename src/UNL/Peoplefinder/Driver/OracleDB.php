@@ -18,7 +18,7 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
 			self::$connection_host . ':' . self::$connection_port . '/' . self::$connection_service);
 		if (!$connec) {
 		    $e = oci_error();
-		    trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
+		    throw new Exception($e['message'], 500);
 		}
 
 		$this->conn = $connec;
@@ -36,7 +36,7 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
 		$stid = oci_parse($this->conn, $statement);
 		if (!$stid) {
 		    $e = oci_error($this->conn);
-		    trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
+		    throw new Exception($e['message'], 500);
 		}
 		foreach ($params as $key => $value) {
             oci_bind_by_name($stid, ":" . $key, $params[$key]);
@@ -46,7 +46,7 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
 		$r = oci_execute($stid);
 		if (!$r) {
 		    $e = oci_error($stid);
-		    trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
+		    throw new Exception($e['message'], 500);
 		}
 
 		$arr = array();
