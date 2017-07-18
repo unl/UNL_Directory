@@ -270,8 +270,9 @@ class UNL_Peoplefinder
         return $this->oracle_driver->getRoles($uid);
     }
 
-    public function getHROrgUnitNumberMatches($uid) {
-        return $this->oracle_driver->getHROrgUnitNumberMatches($uid);
+    public function getHROrgUnitNumberMatches($org_unit) {
+        $uids = $this->oracle_driver->getHROrgUnitNumberMatches($org_unit);
+        return $this->driver->getUIDSForDepartment($uids);
     }
 
     /**
