@@ -39,7 +39,7 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
 		    trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
 		}
 		foreach ($params as $key => $value) {
-			oci_bind_by_name($stid, ":" . $key, $value);
+            oci_bind_by_name($stid, ":" . $key, $params[$key]);
 		}
 
 		// Perform the logic of the query
@@ -88,6 +88,32 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
             array(
                 'org_unit' => $query, 
             ));
+
+        $uids = array();
+        foreach ($results as $result) {
+            $uids[] = $result['NETID'];
+        }
+
+        return $uids;
+    }
+
+    public function getHROrgUnitNumbersMatches($query, $affiliation = null)
+    {
+        # construct a binding list and array
+        $binding_array = array();
+        $binding_list = array();
+        for ($i = 0; $i < count($query); $i++) {
+            $key = ":org_unit_" . $i;
+            $binding_list[] = $key;
+            $key = substr($key, 1);
+            $binding_array[$key] = $query[$i];
+        }
+
+        $results = $this->query("SELECT DISTINCT biodemo.netid FROM unl_appointments appointments, unl_biodemo biodemo WHERE
+            biodemo.biodemo_id = appointments.biodemo_id 
+            AND appointments.org_unit IN (" . implode(', ', $binding_list) . ")
+            AND appointments.end_date >= '" . date('Y-m-d') . "'", 
+            $binding_array);
 
         $uids = array();
         foreach ($results as $result) {
