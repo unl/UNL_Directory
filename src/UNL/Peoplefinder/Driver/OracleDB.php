@@ -43,7 +43,10 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
 
         $cache->set($cache_key, serialize([]));
 	    
-		$this->connect();
+		if (empty($this->conn)) {
+            $this->connect();
+        }
+        
 		// Prepare the statement
 		$stid = oci_parse($this->conn, $statement);
 		if (!$stid) {
@@ -65,7 +68,6 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
 		while (($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)) != false) {
 		    $arr[] = $row;
 		}
-		$this->closeConnection();
 
         $cache->set($cache_key, serialize($arr));
 		
