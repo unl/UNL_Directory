@@ -27,11 +27,11 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
     public $eduPersonNickname;
     public $eduPersonPrimaryAffiliation;
     public $eduPersonPrincipalName;
-    public $givenName;
+    public $givenName; // first name
     public $displayName;
     public $mail;
     public $postalAddress;
-    public $sn;
+    public $sn; //surname (last name)
     public $telephoneNumber;
     public $title;
     public $uid;
@@ -583,7 +583,7 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
 
     public function getRoles()
     {
-        return UNL_Peoplefinder::getInstance()->getRoles($this->dn);
+        return UNL_Peoplefinder::getInstance()->getRoles((string) $this->uid);
     }
 
     public function getKnowledge()
