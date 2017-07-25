@@ -268,12 +268,12 @@ class UNL_Peoplefinder
 
     public function getHROrgUnitNumberMatches($org_unit) {
         $uids = $this->oracle_driver->getHROrgUnitNumberMatches($org_unit);
-        return $this->driver->getUIDSForDepartment($uids);
+        return $this->driver->getUIDSForDepartment($uids, FALSE);
     }
 
     public function getHROrgUnitNumbersMatches($org_units) {
         $uids = $this->oracle_driver->getHROrgUnitNumbersMatches($org_units);
-        return $this->driver->getUIDSForDepartment($uids);
+        return $this->driver->getUIDSForDepartment($uids, FALSE);
     }
 
     /**
