@@ -50,6 +50,18 @@ class UNL_Peoplefinder_Driver_LDAP_Entry extends ArrayObject
             $entry['edupersonnickname'] = null;
         }
 
+        if (isset($entry['mail'])) {
+            foreach ($entry['mail'] as $key => $value) {
+
+                if (is_string($key)) {
+                  //Skip keys like 'count'
+                  continue;
+                }
+
+                $entry['mail'][$key] = strtolower($value);
+            }
+        }
+
         if (isset($entry['edupersonprimaryaffiliation'])) {
             //Some records appear to not have this attribute.
             foreach ($entry['edupersonprimaryaffiliation'] as $key => $value) {
