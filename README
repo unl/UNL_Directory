@@ -34,4 +34,12 @@ The script `scripts/flag_sap_orgs_without_employees.php` runs nightly to mark
 units which have no employees or child units and hide them from the directory.
 
 
+INSTALL
 
+1) Run: 'npm install; grunt; composer install'
+2) Copy www/config-sample.inc.php to www/config.inc.php and add your LDAP credentials or uncomment the webservice driver line
+
+
+CLEAR LDAP CACHE
+
+echo 'flush_all' | nc localhost 11211
