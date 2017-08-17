@@ -10,21 +10,24 @@ UNL_Peoplefinder::$url = '/';
 //Set the annotation service's URL
 UNL_Peoplefinder::$annotateUrl = 'http://annotate.unl.edu/';
 
+UNL_Peoplefinder::$staticFileVersion = '81a5098';
+
 // If you have LDAP access credentials, best to use this driver, using your credentials
 UNL_Peoplefinder_Driver_LDAP::$bindDN = 'uid=giggidy,ou=service,dc=unl,dc=edu';
 UNL_Peoplefinder_Driver_LDAP::$bindPW = 'flibbertygibberty';
 $driver = new UNL_Peoplefinder_Driver_LDAP();
 
 // Otherwise, use the webservice driver
-$driver = new UNL_Peoplefinder_Driver_WebService();
+//$driver = new UNL_Peoplefinder_Driver_WebService();
 
 // Database connection info for officefinder portions
+UNL_Officefinder::$db_host = 'localhost';
 UNL_Officefinder::$db_user = 'officefinder';
 UNL_Officefinder::$db_pass = 'officefinder';
 UNL_Officefinder_CorrectionEmail::$defaultRecipient = 'nobody@unl.edu';
 
 // Officefinder editing admins
-UNL_Officefinder::$admins = array();
+UNL_Officefinder::$admins = array('hhusker1');
 
 UNL_Knowledge_Driver_REST::$service_user = 'unl/web_service_unlwebcv';
 UNL_Knowledge_Driver_REST::$service_pass = 'examplepassword';
@@ -32,3 +35,9 @@ UNL_Knowledge_Driver_REST::$service_pass = 'examplepassword';
 # set the memcache host and port
 UNL_Knowledge_Driver_REST::$memcache_host = 'localhost';
 UNL_Knowledge_Driver_REST::$memcache_port = 11211;
+
+UNL_Peoplefinder_Driver_OracleDB::$connection_username = 'USER';
+UNL_Peoplefinder_Driver_OracleDB::$connection_password = 'PASS';
+UNL_Peoplefinder_Driver_OracleDB::$connection_host = '1.2.3.4';
+UNL_Peoplefinder_Driver_OracleDB::$connection_port = 1234;
+UNL_Peoplefinder_Driver_OracleDB::$connection_service = "SAPTPRD";
