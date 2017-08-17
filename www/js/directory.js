@@ -487,7 +487,9 @@ define([
 		});
 
 		$container.on('click', '.icon-qr-code', function() {
-			var self = this;
+			//Grab the closest 'a' element, because a child of the a element likely triggered this event.
+			var self = $(this).closest('a');
+			
 			var onReady = function() {
 				modalReady = true;
 				$(self).colorbox({open:true, photo:true});
