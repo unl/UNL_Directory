@@ -10,7 +10,7 @@ $baseUrl = UNL_Peoplefinder::getURL();
 
 <section class="wdn-band help-container">
     <div class="wdn-inner-wrapper">
-        <h1 class="heading-block wdn-center">Welcome to the University of Nebraska–Lincoln Directory</h1>
+        <h1 class="wdn-text-hidden">Welcome to the University of Nebraska–Lincoln Directory</h1>
         <div class="wdn-grid-set">
             <div class="bp2-wdn-col-one-half" id="instructions_people">
                 <div class="card">
