@@ -229,6 +229,11 @@ define([
 		}
 	};
 
+	/**
+	 * [0:'searching', 1:'single', 2:'single-dept']
+	 * 
+	 * @param state
+	 */
 	var setMainState = function(state) {
 		currentMainState = state;
 		if (typeof state !== 'undefined') {
@@ -465,9 +470,11 @@ define([
 	};
 
 	var bindRecordListeners = function ($container) {
-		$container.on('click', 'button.icon-print', function(e) {
+		$container.on('click', '.icon-print', function(e) {
+			
 			if (currentMainState === 1) {
 				// allow the event to bubble to the printer
+				window.print();
 				return;
 			}
 
@@ -477,7 +484,7 @@ define([
 				// don't allow this to bubble to printer
 				return false;
 			}
-
+			
 			var uid = $vcard.data('uid');
 			var preferredName = $vcard.data('preferred-name');
 
