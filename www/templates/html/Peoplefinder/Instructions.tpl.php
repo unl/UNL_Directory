@@ -46,8 +46,7 @@ $baseUrl = UNL_Peoplefinder::getURL();
         </div>
 
         <div class="directory-foot">
-            <p>A printer-friendly version of the Yellow Page Directory is available to university users only.<br/>Please be aware this is a very large document and may take some time to fully load.</p>
-            <p><a class="wdn-button wdn-button-brand" href="<?php echo UNL_Officefinder::getURL(); ?>yellow-pages">Print yellow pages</a></p>
+            <p>A <a href="<?php echo UNL_Officefinder::getURL(); ?>yellow-pages">printer-friendly version</a> of the Yellow Page Directory is available to university users only.<br/>Please be aware this is a very large document and may take some time to fully load.</p>
         </div>
     </div>
 </section>
