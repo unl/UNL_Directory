@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>UNL Directory Prepared for <?php echo $context->user; ?> on <?php echo date('F jS, Y'); ?></title>
+    <title>University of Nebraska–Lincoln Directory</title>
     <style>
         html {
             font-size: 12px;
@@ -33,5 +33,5 @@
     </style>
 </head>
 <body>
-<h2>University of Nebraska–Lincoln Directory (Prepared for <?php echo $context->user; ?> on <?php echo date('F jS, Y'); ?>)</h2>
+<h3>University of Nebraska–Lincoln Directory<br>Prepared for <?php echo $context->user; ?> on <?php echo date('F jS, Y'); ?></h3>
 <?php echo $savvy->render($context->output); ?>
