@@ -24,6 +24,10 @@
             text-decoration: none;
         }
 
+        .phone.icon-print:before {
+            content: 'Fax: ';
+        }
+
         .on-campus-dialing + a {
             display: none;
         }
