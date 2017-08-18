@@ -3,7 +3,7 @@ $page->doctitle  = '<title>Faculty Educational Credentials | University of Nebra
 $page->pagetitle = '<h1>Faculty Educational Credentials</h1>';
 $page->head      = $page->getRaw('head').'<link rel="stylesheet" type="text/css" media="screen" href="//directory.unl.edu/wdn/templates_3.0/css/content/pagination.css" />';
 ?>
-<p>The following is a list of UNL faculty educational credentials as of <?php echo $context->getDateLastUpdated(); ?></p>
+<p>The following is a list of faculty educational credentials as of <?php echo $context->getDateLastUpdated(); ?></p>
 <div class="wdn-grid-set">
     <div class="wdn-col-one-fourth">
         <?php echo $savvy->render(null, 'Peoplefinder/SearchResults/Filters.tpl.php'); ?>

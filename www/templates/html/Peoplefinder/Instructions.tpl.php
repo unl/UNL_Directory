@@ -34,7 +34,7 @@ $baseUrl = UNL_Peoplefinder::getURL();
                     <div class="card-content">
                         <h2><span class="wdn-subhead">Search</span>
                         Departments</h2>
-                        <p>Find UNL departments by entering a full or partial department name. Information available:</p>
+                        <p>Find departments by entering a full or partial department name. Information available:</p>
                         <ul>
                             <li>Department contact information and location on campus</li>
                             <li>Complete list of department employees</li>

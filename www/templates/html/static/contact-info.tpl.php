@@ -1,7 +1,7 @@
 <div class="wdn-grid-set">
     <div class="bp960-wdn-col-two-thirds">
         <div class="wdn-footer-module">
-            <span role="heading" class="wdn-footer-heading">About UNL Directory</span>
+            <span role="heading" class="wdn-footer-heading">About the Directory</span>
             <p style="float:left;margin-right:2em;" class="wdn-icon-info" aria-hidden="true"><span class="wdn-text-hidden">info icon</span><a href="<?php echo UNL_Peoplefinder::getURL() . 'help/' ?>">Directory Help</a></p>
             <p style="float:left" class="wdn-icon-rocket" aria-hidden="true"><span class="wdn-text-hidden">rocket icon</span><a href="http://wdn.unl.edu/documentation/unl-directory">Developer Documentation</a></p>
             <p style="clear:left">Information obtained from this directory may not be used to provide addresses for mailings to students, faculty or staff. Any solicitation of business, information, contributions or other response from individuals listed in this publication by mail, telephone or other means is forbidden.</p>
