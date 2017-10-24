@@ -10,7 +10,7 @@
     }
     ?>
     <div class="wdn-input-group">
-        <input tabindex="0" type="text" autofocus placeholder="Herbie Husker" value="<?php echo $default; ?>" id="q" name="q" title="Enter a name to begin your search" />
+        <input tabindex="0" type="text" autofocus placeholder="Herbie Husker" value="<?php echo $default; ?>" id="q" name="q" aria-label="Enter a name to begin your search" />
         <span class="wdn-input-group-btn">
             <button name="submitbutton" type="submit" value="Search" class="button"><span class="wdn-icon-search" aria-hidden="true"></span><span class="wdn-text-hidden">Search</span></button>
         </span>
