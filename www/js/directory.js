@@ -229,11 +229,30 @@ define([
 				$summary.append(summaryOptions);
 				$('.operator:last-child', $summary).remove();
 			}
+
+			updateNumResults();
 		},
 
 		scrubDept : function(string) {
 			return string.split(' ').join('').replace(/&|,/gi, '');
 		}
+	};
+	
+	var updateNumResults = function() {
+		var $summary = $('.summary', $results);
+		
+		//Remove the old container if it exists
+		$('.num-results', $summary).remove();
+		
+		//Always append the number of results
+		var numResultText = $('div.results ul li:visible').length;
+		if (numResultText === 1) {
+			numResultText += ' result';
+		} else {
+			numResultText += ' results';
+		}
+
+		$summary.append($('<span>', {class: 'num-results'}).text(' - ' + numResultText));
 	};
 
 	/**
@@ -959,6 +978,7 @@ define([
 
 							//we finally have results, or else we've abandonded the search options
 							$results.html(data);
+							
 							// remove DOM-0 event listeners
 							$('ul.pfResult li', $results).each(function(){
 								$('.fn a', this).removeAttr('onclick');
@@ -968,6 +988,7 @@ define([
 							attempts = 1;
 
 							filters.initialize();
+							updateNumResults();
 						},
 						error: function(jqXHR, textStatus) {
 							if (textStatus === 'abort') {
