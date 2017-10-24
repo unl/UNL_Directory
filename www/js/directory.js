@@ -108,6 +108,13 @@ define([
 			} else {
 				$filters.addClass('many-results');
 			}
+			
+			$('.skipnav a', $filters).on('click', function() {
+				$('#results').focus();
+				
+				//Stop the default action and don't propagate. Changing the page hash will remove results
+				return false;
+			});
 		},
 
 		clear: function() {
