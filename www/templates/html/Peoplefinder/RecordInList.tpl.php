@@ -23,7 +23,7 @@ if (isset($controller->options, $controller->options['onclick'])) {
 $title = $context->formatTitle();
 ?>
 
-<li class="<?php echo $class ?>" tabindex="0" data-href="<?php echo $context->getUrl() ?>" data-uid="<?php echo $context->uid ?>">
+<li class="<?php echo $class ?>" data-href="<?php echo $context->getUrl() ?>" data-uid="<?php echo $context->uid ?>">
     <div class="overflow" itemscope itemtype="http://schema.org/Person">
         <?php if ($controller->options['view'] != 'alphalisting'): ?>
             <div class="profile_pic">
