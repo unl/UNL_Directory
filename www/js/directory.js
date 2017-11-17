@@ -350,7 +350,8 @@ define([
 			$overview.slideDown();
 			$loadedChild.slideUp();
 			liRecord.removeClass('selected');
-
+			//Send focus to the result for accessibility
+			$('a:first', $overview).focus();
 			return;
 		}
 
@@ -388,6 +389,20 @@ define([
 
 			var $card = $(data).hide();
 			liRecord.append($card);
+			
+			//Add a close button
+			var closeButton = $('<button>', {
+				'class': 'close-full-record',
+				'aria-label': 'close this record'
+			});
+			closeButton.click(function() {
+				//close
+				loadFullRecord(recordType, liRecord);
+				return false;
+			});
+			closeButton.text('X');
+			
+			$card.prepend(closeButton);
 
 			// load annotation tool for people records
 			if (recordType !== 'org') {
