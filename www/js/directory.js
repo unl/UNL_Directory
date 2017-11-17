@@ -401,8 +401,8 @@ define([
 				return false;
 			});
 			closeButton.text('X');
-			
-			$card.prepend(closeButton);
+
+			$card.parent().find('.vcard:first').prepend(closeButton);
 
 			// load annotation tool for people records
 			if (recordType !== 'org') {
