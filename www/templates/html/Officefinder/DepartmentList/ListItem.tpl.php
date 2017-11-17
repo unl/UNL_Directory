@@ -11,7 +11,7 @@ if ($parent) {
     }
 }
 ?>
-<li class="<?php echo $li_class ?>" tabindex="0" data-href="<?php echo $context->getURL() ?>">
+<li class="<?php echo $li_class ?>" data-href="<?php echo $context->getURL() ?>">
     <div class="overflow">
         <div class="profile_pic" href="<?php echo $context->getURL() ?>">
             <img alt="Building Image" src="<?php echo $context->getImageUrl(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_SMALL) ?>" class="photo" />
