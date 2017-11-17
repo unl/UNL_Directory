@@ -362,6 +362,8 @@ define([
 			// we already loaded the record
 			$overview.slideUp();
 			$loadedChild.slideDown();
+			//Send focus to the result for accessibility
+			$('a:first', $loadedChild).focus();
 			return;
 		}
 
@@ -397,6 +399,8 @@ define([
 
 			$overview.slideUp();
 			$card.slideDown();
+			//Send focus to the result for accessibility
+			$('a:first', $card).focus();
 			clearTimeout(loadIndicatorTimeout);
 			liRecord.children('.loading').remove();
 		}, function() {
