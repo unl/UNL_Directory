@@ -351,7 +351,7 @@ define([
 			$loadedChild.slideUp();
 			liRecord.removeClass('selected');
 			//Send focus to the result for accessibility
-			$('a:first', $overview).focus();
+			$('a:first', $overview).addClass('programmatically-focused').focus();
 			return;
 		}
 
@@ -364,7 +364,7 @@ define([
 			$overview.slideUp();
 			$loadedChild.slideDown();
 			//Send focus to the result for accessibility
-			$('a:first', $loadedChild).focus();
+			$('a:first', $loadedChild).addClass('programmatically-focused').focus();
 			return;
 		}
 
@@ -415,7 +415,7 @@ define([
 			$overview.slideUp();
 			$card.slideDown();
 			//Send focus to the result for accessibility
-			$('a:first', $card).focus();
+			$('a:first', $card).addClass('programmatically-focused').focus();
 			clearTimeout(loadIndicatorTimeout);
 			liRecord.children('.loading').remove();
 		}, function() {
@@ -1331,6 +1331,13 @@ define([
 					}).fail(function(){
 						$success.text('There was an error submitting the correction, please try again later.').focus();
 					});
+				});
+				
+				$('body').on('focusout', function(e) {
+					var $target = $(e.target);
+					if ($target.hasClass('programmatically-focused')) {
+						$target.removeClass('programmatically-focused');
+					}
 				});
 			});
 		}
