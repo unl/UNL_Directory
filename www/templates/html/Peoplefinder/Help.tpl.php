@@ -9,7 +9,7 @@ if (isset($page)) {
 ?>
 <section class="wdn-band wdn-light-neutral-band" id="data">
     <div class="wdn-inner-wrapper">
-        <h1 class="wdn-center clear-top">Finding Your Way Around the UNL Directory</h1>
+        <h1 class="wdn-center clear-top">Finding Your Way Around the Directory</h1>
         <div class="bp960-wdn-grid-set-thirds">
             <div class="wdn-col">
                 <h2 class="wdn-brand">About the data</h2>

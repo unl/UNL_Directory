@@ -1,8 +1,8 @@
 <?php 
-UNL_Officefinder::setReplacementData('doctitle', 'Academic Departments | Directory | UNL');
+UNL_Officefinder::setReplacementData('doctitle', 'Academic Departments | Directory | University of Nebraska&ndash;Lincoln');
 UNL_Officefinder::setReplacementData('breadcrumbs', '
     <ul>
-        <li><a href="http://www.unl.edu/" title="University of Nebraska&ndash;Lincoln">UNL</a></li>
+        <li><a href="http://www.unl.edu/" title="University of Nebraska&ndash;Lincoln">Nebraska</a></li>
         <li><a href="'.UNL_Peoplefinder::getURL().'">Directory</a></li>
         <li>Academic Departments</li>
     </ul>');
