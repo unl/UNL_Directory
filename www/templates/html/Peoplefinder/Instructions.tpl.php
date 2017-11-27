@@ -10,7 +10,7 @@ $baseUrl = UNL_Peoplefinder::getURL();
 
 <section class="wdn-band help-container">
     <div class="wdn-inner-wrapper">
-        <h1 class="heading-block wdn-center">Welcome to the University of Nebraska–Lincoln Directory</h1>
+        <h1 class="wdn-text-hidden">Welcome to the University of Nebraska–Lincoln Directory</h1>
         <div class="wdn-grid-set">
             <div class="bp2-wdn-col-one-half" id="instructions_people">
                 <div class="card">
@@ -34,7 +34,7 @@ $baseUrl = UNL_Peoplefinder::getURL();
                     <div class="card-content">
                         <h2><span class="wdn-subhead">Search</span>
                         Departments</h2>
-                        <p>Find UNL departments by entering a full or partial department name. Information available:</p>
+                        <p>Find departments by entering a full or partial department name. Information available:</p>
                         <ul>
                             <li>Department contact information and location on campus</li>
                             <li>Complete list of department employees</li>
@@ -46,8 +46,7 @@ $baseUrl = UNL_Peoplefinder::getURL();
         </div>
 
         <div class="directory-foot">
-            <p>A printer-friendly version of the Yellow Page Directory is available to university users only.<br/>Please be aware this is a very large document and may take some time to fully load.</p>
-            <p><a class="wdn-button wdn-button-brand" href="<?php echo UNL_Officefinder::getURL(); ?>yellow-pages">Print yellow pages</a></p>
+            <p>A <a href="<?php echo UNL_Officefinder::getURL(); ?>yellow-pages">printer-friendly version</a> of the Yellow Page Directory is available to university users only.<br/>Please be aware this is a very large document and may take some time to fully load.</p>
         </div>
     </div>
 </section>
