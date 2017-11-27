@@ -21,10 +21,23 @@
 
 	p {
 		margin-bottom: 0;
+		text-align: right;
+		margin: 1.5em auto 0;
+
+		a {
+			color: white;
+			font-size: 0.8em;
+		}
 	}
 
 	.single & {
 		display: none !important;
+	}
+}
+
+@media @bp-under768w {
+	#q {
+		font-size: 16px;
 	}
 }
 
@@ -514,7 +527,8 @@
 	margin: 1.777em 0;
 	padding-top: 0.75em;
 	border-top: 1px solid @ui04;
-	text-align: center;
+	font-size:.8em;
+	text-align: right;
 }
 
 .department-correction {

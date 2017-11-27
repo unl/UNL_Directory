@@ -1,6 +1,6 @@
 <div class="correction-form noprint forms">
     <h2 class="wdn-brand wdn-center">Have a correction?</h2>
-    <p>If you'd like to correct your own entry, contact your UNL departmental HR liaison.
+    <p>If you'd like to correct your own entry, contact your departmental HR liaison.
     For corrections to another person's contact information or yellow pages, use the form below.</p>
     <form method="post" action="<?php echo UNL_Officefinder::getURL() ?>">
         <ul>
