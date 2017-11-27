@@ -1,5 +1,11 @@
 <?php
 
+// For the printer-friendly version, display without the UNL template.
+if (in_array($context->options['view'], ['alphalisting'])) {
+  echo $savvy->render($context->output);
+  return;
+}
+
 use UNL\Templates\Templates;
 
 Templates::setCachingService(new UNL\Templates\CachingService\NullService());
