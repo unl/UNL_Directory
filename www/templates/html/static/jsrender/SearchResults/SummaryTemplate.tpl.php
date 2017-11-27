@@ -1,1 +1,1 @@
-<p class="summary" area-live="polite">Displaying People:</p>
+<p class="summary" aria-live="polite" aria-atomic="true">Displaying People:</p>

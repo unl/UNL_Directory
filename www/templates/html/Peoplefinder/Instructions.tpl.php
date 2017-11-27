@@ -58,7 +58,7 @@ $baseUrl = UNL_Peoplefinder::getURL();
             <div class="bp2-wdn-col-one-fourth result-filters">
                 <?php echo $savvy->render(null, 'Peoplefinder/SearchResults/Filters.tpl.php'); ?>
             </div>
-            <div id="results" tabindex="-1" class="bp2-wdn-col-three-fourths wdn-pull-right" aria-live="polite"></div>
+            <div id="results" tabindex="-1" class="bp2-wdn-col-three-fourths wdn-pull-right"></div>
         </div>
     </div>
 </section>

@@ -108,6 +108,13 @@ define([
 			} else {
 				$filters.addClass('many-results');
 			}
+			
+			$('.skipnav a', $filters).on('click', function() {
+				$('#results').focus();
+				
+				//Stop the default action and don't propagate. Changing the page hash will remove results
+				return false;
+			});
 		},
 
 		clear: function() {
@@ -222,11 +229,30 @@ define([
 				$summary.append(summaryOptions);
 				$('.operator:last-child', $summary).remove();
 			}
+
+			updateNumResults();
 		},
 
 		scrubDept : function(string) {
 			return string.split(' ').join('').replace(/&|,/gi, '');
 		}
+	};
+	
+	var updateNumResults = function() {
+		var $summary = $('.summary', $results);
+		
+		//Remove the old container if it exists
+		$('.num-results', $summary).remove();
+		
+		//Always append the number of results
+		var numResultText = $('div.results ul li:visible').length;
+		if (numResultText === 1) {
+			numResultText += ' result';
+		} else {
+			numResultText += ' results';
+		}
+
+		$summary.append($('<span>', {class: 'num-results'}).text(' - ' + numResultText));
 	};
 
 	/**
@@ -324,7 +350,8 @@ define([
 			$overview.slideDown();
 			$loadedChild.slideUp();
 			liRecord.removeClass('selected');
-
+			//Send focus to the result for accessibility
+			$('a:first', $overview).addClass('programmatically-focused').focus();
 			return;
 		}
 
@@ -336,6 +363,8 @@ define([
 			// we already loaded the record
 			$overview.slideUp();
 			$loadedChild.slideDown();
+			//Send focus to the result for accessibility
+			$('a:first', $loadedChild).addClass('programmatically-focused').focus();
 			return;
 		}
 
@@ -360,6 +389,20 @@ define([
 
 			var $card = $(data).hide();
 			liRecord.append($card);
+			
+			//Add a close button
+			var closeButton = $('<button>', {
+				'class': 'close-full-record',
+				'aria-label': 'close this record'
+			});
+			closeButton.click(function() {
+				//close
+				loadFullRecord(recordType, liRecord);
+				return false;
+			});
+			closeButton.text('X');
+
+			$card.parent().find('.vcard:first').prepend(closeButton);
 
 			// load annotation tool for people records
 			if (recordType !== 'org') {
@@ -371,6 +414,8 @@ define([
 
 			$overview.slideUp();
 			$card.slideDown();
+			//Send focus to the result for accessibility
+			$('a:first', $card).addClass('programmatically-focused').focus();
 			clearTimeout(loadIndicatorTimeout);
 			liRecord.children('.loading').remove();
 		}, function() {
@@ -952,6 +997,7 @@ define([
 
 							//we finally have results, or else we've abandonded the search options
 							$results.html(data);
+							
 							// remove DOM-0 event listeners
 							$('ul.pfResult li', $results).each(function(){
 								$('.fn a', this).removeAttr('onclick');
@@ -961,6 +1007,7 @@ define([
 							attempts = 1;
 
 							filters.initialize();
+							updateNumResults();
 						},
 						error: function(jqXHR, textStatus) {
 							if (textStatus === 'abort') {
@@ -1284,6 +1331,13 @@ define([
 					}).fail(function(){
 						$success.text('There was an error submitting the correction, please try again later.').focus();
 					});
+				});
+				
+				$('body').on('focusout', function(e) {
+					var $target = $(e.target);
+					if ($target.hasClass('programmatically-focused')) {
+						$target.removeClass('programmatically-focused');
+					}
 				});
 			});
 		}
