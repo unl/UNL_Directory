@@ -16,7 +16,6 @@
         </span>
     </div>
 </form>
-<p class="wdn-sans-serif"><a href="<?php echo UNL_Peoplefinder::getURL() ?>help/">Help</a></p>
 
 <?php echo $savvy->render((object) [
     'id' => 'noticeTemplate',
