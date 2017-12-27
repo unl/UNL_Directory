@@ -1,1 +1,1 @@
-<meta name="robots" content="NOINDEX, NOFOLLOW, NOARCHIVE" />
+<meta name="robots" content="NOINDEX, NOFOLLOW" />
