@@ -350,7 +350,8 @@ define([
 			$overview.slideDown();
 			$loadedChild.slideUp();
 			liRecord.removeClass('selected');
-
+			//Send focus to the result for accessibility
+			$('a:first', $overview).addClass('programmatically-focused').focus();
 			return;
 		}
 
@@ -362,6 +363,8 @@ define([
 			// we already loaded the record
 			$overview.slideUp();
 			$loadedChild.slideDown();
+			//Send focus to the result for accessibility
+			$('a:first', $loadedChild).addClass('programmatically-focused').focus();
 			return;
 		}
 
@@ -386,6 +389,20 @@ define([
 
 			var $card = $(data).hide();
 			liRecord.append($card);
+			
+			//Add a close button
+			var closeButton = $('<button>', {
+				'class': 'close-full-record',
+				'aria-label': 'close this record'
+			});
+			closeButton.click(function() {
+				//close
+				loadFullRecord(recordType, liRecord);
+				return false;
+			});
+			closeButton.text('X');
+
+			$card.parent().find('.vcard:first').prepend(closeButton);
 
 			// load annotation tool for people records
 			if (recordType !== 'org') {
@@ -397,6 +414,8 @@ define([
 
 			$overview.slideUp();
 			$card.slideDown();
+			//Send focus to the result for accessibility
+			$('a:first', $card).addClass('programmatically-focused').focus();
 			clearTimeout(loadIndicatorTimeout);
 			liRecord.children('.loading').remove();
 		}, function() {
@@ -1312,6 +1331,13 @@ define([
 					}).fail(function(){
 						$success.text('There was an error submitting the correction, please try again later.').focus();
 					});
+				});
+				
+				$('body').on('focusout', function(e) {
+					var $target = $(e.target);
+					if ($target.hasClass('programmatically-focused')) {
+						$target.removeClass('programmatically-focused');
+					}
 				});
 			});
 		}

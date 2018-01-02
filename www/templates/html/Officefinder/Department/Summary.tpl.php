@@ -42,7 +42,8 @@ $onlySummary = $context->isSummaryView();
             <?php endif; ?>
 
             <?php if ($context->hasAddress()): ?>
-                <div class="adr work attribute icon-map-pin" itemprop="location" itemscope itemtype="http://schema.org/Place">
+                <div class="adr work attribute" itemprop="location" itemscope itemtype="http://schema.org/Place">
+                    <span class="icon-map-pin" aria-hidden="true"></span>
                     <span class="type">Address</span>
                     <?php if ($context->building): ?>
                         <span class="room">
@@ -69,7 +70,8 @@ $onlySummary = $context->isSummaryView();
             <?php endif; ?>
 
             <?php if (!empty($context->phone)): ?>
-            <div class="tel work icon-phone attribute">
+            <div class="tel work attribute">
+                <span class="icon-phone" aria-hidden="true"></span>
                 <span class="type">Phone:</span>
                 <span class="value"><?php echo $savvy->render((object) [
                     'number' => $context->phone,
@@ -79,7 +81,8 @@ $onlySummary = $context->isSummaryView();
             </div>
             <?php endif; ?>
             <?php if (!empty($context->fax)): ?>
-            <div class="tel work fax icon-print attribute">
+            <div class="tel work fax attribute">
+                <span class="icon-print" aria-hidden="true"></span>
                 <span class="type">Fax:</span>
                 <span class="value"><?php echo $savvy->render((object) [
                     'number' => $context->fax,
@@ -89,19 +92,22 @@ $onlySummary = $context->isSummaryView();
             </div>
             <?php endif; ?>
             <?php if ($encodedEmail): ?>
-            <div class="icon-email attribute">
+            <div class="attribute">
+                   <span class="icon-email" aria-hidden="true"></span>
                    <a class="email" href="mailto:<?php echo $encodedEmail ?>" itemprop="email"><?php echo $encodedEmail ?></a>
             </div>
             <?php endif; ?>
 
             <?php if (!empty($context->website)): ?>
-            <div class="icon-website attribute">
+            <div class="attribute">
+                <span class="icon-website" aria-hidden="true"></span>
                 <a class="url" href="<?php echo $context->website; ?>"><?php echo $context->website; ?></a>
             </div>
             <?php endif; ?>
 
             <?php if ($context->isOfficialDepartment()): ?>
-                <div class="icon-hierarchy attribute">
+                <div class="attribute">
+                    <span class="icon-hierarchy" aria-hidden="true"></span>
                     Unit #<?php echo $context->org_unit ?>
                 </div>
             <?php endif; ?>
@@ -111,7 +117,7 @@ $onlySummary = $context->isSummaryView();
                 <div class="vcard-tools">
                     <a href="<?php echo $context->getURL() . '/edit' ?>" class="icon-pencil">Edit</a>
                     <?php if ($userCanDelete): ?>
-                        <button type="submit" class="icon-trash" form="deletedepartment_<?php echo $context->id ?>">Delete</button>
+                        <button type="submit" form="deletedepartment_<?php echo $context->id ?>"><span class="icon-trash" aria-hidden="true"></span>Delete</button>
                     <?php endif; ?>
                 </div>
             <?php else: ?>

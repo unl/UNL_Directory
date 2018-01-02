@@ -49,7 +49,7 @@ $hasOfficialChildDepartments = count($officialChildren);
 	</div>
 	<div class="bp2-wdn-col-two-thirds wdn-pull-right">
 		<div class="card" id="listings" data-department-id="<?php echo $context->id ?>">
-			<h2 class="wdn-brand icon-phone-book">Yellow Pages</h2>
+            <h2 class="wdn-brand"><span class="icon-phone-book" aria-hidden="true"></span>Yellow Pages</h2>
 			<div class="card-content<?php if ($userCanEdit): ?> editing<?php endif; ?>">
 				<?php if (count($listings)): ?>
 					<?php echo $savvy->render($listings, 'Officefinder/Department/Listings.tpl.php') ?>
@@ -73,11 +73,11 @@ $hasOfficialChildDepartments = count($officialChildren);
 
 		<?php if ($department): ?>
 			<div id="all_employees">
-				<h2 class="wdn-brand icon-employees">All Employees</h2>
+				<h2 class="wdn-brand"><span class="icon-employees" aria-hidden="true"></span>All Employees</h2>
 				<?php echo $savvy->render($department) ?>
 			</div>
 			<div id="orgChart">
-				<h2 class="wdn-brand icon-hierarchy">HR Organization Chart</h2>
+				<h2 class="wdn-brand"><span class="icon-hierarchy" aria-hidden="true"></span>HR Organization Chart</h2>
 				<?php if (!$context->isRoot()): ?>
 					<ul>
 						<li><a href="<?php echo $hrParent->getURL() ?>">
