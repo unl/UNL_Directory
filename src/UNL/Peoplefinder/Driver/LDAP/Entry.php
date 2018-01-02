@@ -66,9 +66,14 @@ class UNL_Peoplefinder_Driver_LDAP_Entry extends ArrayObject
             //Some records appear to not have this attribute.
             foreach ($entry['edupersonprimaryaffiliation'] as $key => $value) {
 
-                //Prevent student phone numbers from showing
+                //Prevent student phone numbers and other protected from showing (in case the upstream data source send them to us on accident)
                 if ($entry['edupersonprimaryaffiliation'][$key] == 'student') {
-                    unset($entry['telephonenumber']);
+                    unset(
+                        $entry['telephonenumber'],
+                        $entry['unlhraddress'],
+                        $entry['postaladdress'],
+                        $entry['mail']
+                    );
                 }
                 
                 if (is_string($key)) {
