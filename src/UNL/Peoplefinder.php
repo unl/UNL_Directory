@@ -36,6 +36,8 @@ class UNL_Peoplefinder
 
     static public $minifyHtml = true;
 
+    static public $use_oracle = TRUE;
+
     static protected $instance;
 
     /**
@@ -263,17 +265,29 @@ class UNL_Peoplefinder
     }
 
     public function getRoles($uid) {
-        return $this->oracle_driver->getRoles($uid);
+        if (self::$use_oracle) {
+            return $this->oracle_driver->getRoles($uid);
+        } else {
+            return $this->driver->getRoles($uid);
+        }
     }
 
     public function getHROrgUnitNumberMatches($org_unit) {
-        $uids = $this->oracle_driver->getHROrgUnitNumberMatches($org_unit);
-        return $this->driver->getUIDSForDepartment($uids, FALSE);
+        if (self::$use_oracle) {
+            $uids = $this->oracle_driver->getHROrgUnitNumberMatches($org_unit);
+            return $this->driver->getUIDSForDepartment($uids, FALSE);
+        } else {
+            return $this->driver->getHROrgUnitNumberMatches($org_unit);
+        }
     }
 
     public function getHROrgUnitNumbersMatches($org_units) {
-        $uids = $this->oracle_driver->getHROrgUnitNumbersMatches($org_units);
-        return $this->driver->getUIDSForDepartment($uids, FALSE);
+        if (self::$use_oracle) {
+            $uids = $this->oracle_driver->getHROrgUnitNumbersMatches($org_units);
+            return $this->driver->getUIDSForDepartment($uids, FALSE);
+        } else {
+            return $this->driver->getHROrgUnitNumbersMatches($org_units);
+        }
     }
 
     /**
