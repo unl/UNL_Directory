@@ -115,7 +115,7 @@ $onlySummary = $context->isSummaryView();
         <?php if (!$onlySummary): ?>
             <?php if ($userCanEdit): ?>
                 <div class="vcard-tools">
-                    <a href="<?php echo $context->getURL() . '/edit' ?>" class="icon-pencil">Edit</a>
+                    <a href="<?php echo $context->getURL() . '/edit' ?>" class="icon-pencil edit-button">Edit</a>
                     <?php if ($userCanDelete): ?>
                         <button type="submit" form="deletedepartment_<?php echo $context->id ?>"><span class="icon-trash" aria-hidden="true"></span>Delete</button>
                     <?php endif; ?>
