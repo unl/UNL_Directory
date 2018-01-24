@@ -768,7 +768,7 @@ define([
 			});
 		}]);
 
-		$editableListings.on('click', '.icon-pencil', function(e) {
+		$editableListings.on('click', '.edit-button', function(e) {
 			var self = this;
 			var loadedSelector = '.edit';
 			var contentSelector = '.forms';
