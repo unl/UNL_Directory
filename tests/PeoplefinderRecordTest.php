@@ -32,6 +32,7 @@ class PeoplefinderRecordTest extends \PHPUnit\Framework\TestCase {
             'region' => 'NE',
             'postal-code' => '68588-0429',
             'unlBuildingCode' => 'ADMS',
+            'unlBuildingName' => 'Canfield Administration Building South',
             'roomNumber' => '313'
         ), $formatted);
     }
@@ -47,6 +48,7 @@ class PeoplefinderRecordTest extends \PHPUnit\Framework\TestCase {
             'region' => 'NE',
             'postal-code' => '68588-0429',
             'unlBuildingCode' => 'ADMS',
+            'unlBuildingName' => 'Canfield Administration Building South',
             'roomNumber' => '313'
         ), $formatted);
     }
@@ -62,6 +64,7 @@ class PeoplefinderRecordTest extends \PHPUnit\Framework\TestCase {
             'region' => 'NE',
             'postal-code' => '68588-0429',
             'unlBuildingCode' => 'AVH',
+            'unlBuildingName' => 'Avery Hall',
             'roomNumber' => '420'
         ), $formatted);
     }
@@ -78,6 +81,7 @@ class PeoplefinderRecordTest extends \PHPUnit\Framework\TestCase {
             'region' => 'NE',
             'postal-code' => '68588-0429',
             'unlBuildingCode' => '420',
+            'unlBuildingName' => '420 University Terrace',
             'roomNumber' => '501'
         ), $formatted);
     }
@@ -105,7 +109,8 @@ class PeoplefinderRecordTest extends \PHPUnit\Framework\TestCase {
             'locality' => 'Lincoln',
             'region' => 'NE',
             'postal-code' => '68588-0634',
-            'unlBuildingCode' => '17PG'
+            'unlBuildingCode' => '17PG',
+            'unlBuildingName' => '17th and R Parking Garage',
         ), $formatted);
         $this->assertFalse(array_key_exists('roomNumber', $formatted));
     }
