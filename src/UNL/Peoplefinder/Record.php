@@ -210,7 +210,7 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
         }
 
         // check for a building code + room number
-        if (isset($streetParts[1], $bldgs[$streetParts[1]], $bldgs[$streetParts[0]])) {
+        if (isset($streetParts[1], $bldgs[strtoupper($streetParts[1])], $bldgs[strtoupper($streetParts[0])])) {
             // oh no, both are building codes! check if one is strictly numeric
             // if so, assume that is the room number
             if (preg_match('/^[\d]*$/', $streetParts[0]) && !preg_match('/^[\d]*$/', $streetParts[1])) {
@@ -224,12 +224,12 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
                     $address['roomNumber'] = $streetParts[1];
                 }
             }
-        } else if (isset($bldgs[$streetParts[0]])) {
+        } else if (isset($bldgs[strtoupper($streetParts[0])])) {
             $address['unlBuildingCode'] = $streetParts[0];
             if (isset($streetParts[1])) {
                 $address['roomNumber'] = $streetParts[1];
             }
-        } else if (isset($streetParts[1], $bldgs[$streetParts[1]])) {
+        } else if (isset($streetParts[1], $bldgs[strtoupper($streetParts[1])])) {
             // legacy format (room number first)
             $address['unlBuildingCode'] = $streetParts[1];
             $address['roomNumber'] = $streetParts[0];
@@ -251,6 +251,11 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
                  
                  $address['postal-code'] = $part;
             }
+        }
+        
+        //find the building name
+        if (isset($address['unlBuildingCode']) && isset($bldgs[strtoupper($address['unlBuildingCode'])])) {
+            $address['unlBuildingName'] = $bldgs[strtoupper($address['unlBuildingCode'])];
         }
 
         // next from the end should be locality
