@@ -86,12 +86,30 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
 
 		$final_res = array();
 
+		$title_mod_map = array(
+			'1' => 'Acting',
+			'2' => 'Interim',
+			'3' => 'Adjunct', 
+			'4' => 'Courtesy',
+			'5' => 'Visiting',
+			'6' => 'Emeritus',
+			'7' => 'Trainee',
+			'K' => 'Continuous',
+			'L' => 'Special',
+			'M' => 'Academic Administrative',
+			'N' => 'Administrative',
+			'T' => 'Tenure'
+		);
+
 		foreach($results as $result) {
 			$res = new \stdClass;
 			$res->unlRoleHROrgUnitNumber = $result['ORG_UNIT'];
 			$res->description = $result['TITLE'];
+			if (!empty($result['TITLE_MODIFIER']) && array_key_exists((string)$result['TITLE_MODIFIER'], $title_mod_map)) {
+				$res->description = $title_mod_map[(string)$result['TITLE_MODIFIER']] . ' ' . $result['TITLE'];
+			}
+			
 			$final_res[] = $res;
-
 		}	
 		return new UNL_Peoplefinder_Person_Roles(['iterator' => new ArrayIterator($final_res)]);
 	}
