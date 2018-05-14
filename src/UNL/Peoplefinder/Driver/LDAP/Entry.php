@@ -154,7 +154,7 @@ class UNL_Peoplefinder_Driver_LDAP_Entry extends ArrayObject
         if (isset($entry['departmentnumber'])) {
             $entry['unlhrorgunitnumber'] = $entry['departmentnumber'];
         }
-        //print_r($entry);exit();
+        
         return $entry;
     }
 

@@ -141,7 +141,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
 
         $this->connected = ldap_bind($this->linkID, self::$bindDN, self::$bindPW);
 
-        if (!$this->connected) {echo 'ldap_bind failed'; var_dump(ldap_error($this->linkID)); exit();
+        if (!$this->connected) {
             throw new Exception('ldap_bind failed! Could not connect to the LDAP directory.', 500);
         }
 
