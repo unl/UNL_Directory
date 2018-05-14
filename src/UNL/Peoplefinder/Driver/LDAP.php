@@ -39,56 +39,64 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
      * @var array
      */
     public $listAttributes = array(
-        'cn',
-        'eduPersonNickname',
-        'eduPersonAffiliation',
-        'eduPersonPrimaryAffiliation',
-        'givenName',
-        'postalAddress',
-        'sn',
-        'telephoneNumber',
-        'title',
-        'uid',
-        'unlHRAddress',
-        'unlHRPrimaryDepartment',
-        'unlHROrgUnitNumber');
+        'cn', //TODO: different values (ldap=display name, ad=uid)
+        'eduPersonNickname', //TODO check (can't find a user that has this)
+        'eduPersonAffiliation', // (same)
+        'eduPersonPrimaryAffiliation', // (same)
+        'givenName', // (same)
+        'postalAddress', // (same)
+        'sn', // (same)
+        'telephoneNumber', // (same)
+        'title', // (same)
+        'uid', // replaced by samaccountname
+        'sAMAccountName', // new
+        'unlHRAddress', // TODO check (doesn't appear to be used)
+        'unlHRPrimaryDepartment', // replaced with 'department'
+        'department', // new
+        'unlHROrgUnitNumber', // replaced with 'departmentNumber'
+        'departmentNumber', //new 
+    );
 
     /**
      * Details are for UID detail display only.
      * @var array
      */
     public $detailAttributes = array(
-        'ou',
-        'cn',
-        'eduPersonAffiliation',
-        'eduPersonNickname',
-        'eduPersonPrimaryAffiliation',
-        'eduPersonPrincipalName',
-        'givenName',
-        'displayName',
-        'mail',
-        'postalAddress',
-        'sn',
-        'telephoneNumber',
-        'title',
-        'uid',
-        'unlHROrgUnitNumber',
-        'unlHRPrimaryDepartment',
-        'unlHRAddress',
-        'unlSISClassLevel',
-        'unlSISCollege',
-        'unlSISLocalAddr1',
-        'unlSISLocalAddr2',
-        'unlSISLocalCity',
-        'unlSISLocalState',
-        'unlSISLocalZip',
-        'unlSISPermAddr1',
-        'unlSISPermAddr2',
-        'unlSISPermCity',
-        'unlSISPermState',
-        'unlSISPermZip',
-        'unlSISMajor',
-        'unlEmailAlias');
+        'ou', // (same)
+        'cn', //different values (ldap=display name, ad=uid)
+        'eduPersonAffiliation', // (same)
+        'eduPersonNickname', // TODO: check (can't find a user that has this)
+        'eduPersonPrimaryAffiliation', // (same)
+        'eduPersonPrincipalName', // (same)
+        'givenName', // (same)
+        'displayName', // (same)
+        'mail', //TODO: check (missing)
+        'postalAddress', // (same)
+        'sn', // (same)
+        'telephoneNumber', // (same)
+        'title', // (same)
+        'uid', //replaced by samaccountname
+        'sAMAccountName', // new
+        'unlHROrgUnitNumber', // replaced with 'departmentNumber'
+        'departmentNumber', //new 
+        'unlHRPrimaryDepartment', // replaced with 'department'
+        'department', // new
+        'unlHRAddress', //TODO: check (doesn't appear to be used)
+        'unlSISClassLevel', //missing //TODO: how should we handle students now?
+        'unlSISCollege', //missing
+        'unlSISLocalAddr1', //missing
+        'unlSISLocalAddr2', //missing
+        'unlSISLocalCity', //missing
+        'unlSISLocalState', //missing
+        'unlSISLocalZip', //missing
+        'unlSISPermAddr1', //missing
+        'unlSISPermAddr2', //missing
+        'unlSISPermCity', //missing
+        'unlSISPermState', //missing
+        'unlSISPermZip', //missing
+        'unlSISMajor', //missing
+        'unlEmailAlias', // not in mapping TODO: check (doesn't appear to be used)
+    );
 
     /** Connection details */
     public $connected = false;
@@ -133,7 +141,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
 
         $this->connected = ldap_bind($this->linkID, self::$bindDN, self::$bindPW);
 
-        if (!$this->connected) {
+        if (!$this->connected) {echo 'ldap_bind failed'; var_dump(ldap_error($this->linkID)); exit();
             throw new Exception('ldap_bind failed! Could not connect to the LDAP directory.', 500);
         }
 
