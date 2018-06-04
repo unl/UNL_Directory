@@ -128,7 +128,12 @@ $showKnowledge = $context->shouldShowKnowledge();
             <span class="type">Work</span>
             <?php if (!empty($address['unlBuildingCode'])): ?>
                 <span class="street-address">
-                    <a href="https://maps.unl.edu/<?php echo $address['unlBuildingCode'] ?>" itemprop="hasMap"><?php echo $address['unlBuildingCode'] ?></a>
+                    <?php if (isset($address['unlBuildingName'])) : ?>
+                        <a href="https://maps.unl.edu/<?php echo strtoupper($address['unlBuildingCode']) ?>" itemprop="hasMap"><?php echo $address['unlBuildingName'] ?></a> (<?php echo $address['unlBuildingCode'] ?>)
+                    <?php else: ?>
+                        <a href="https://maps.unl.edu/<?php echo strtoupper($address['unlBuildingCode']) ?>" itemprop="hasMap"><?php echo $address['unlBuildingCode'] ?></a>
+                    <?php endif; ?>
+                    
                     <?php echo str_replace($address['unlBuildingCode'], '', $address['street-address']) ?>
                 </span>
             <?php endif; ?>
