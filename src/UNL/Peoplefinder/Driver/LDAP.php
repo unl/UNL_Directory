@@ -39,22 +39,22 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
      * @var array
      */
     public $listAttributes = array(
-        'cn', //TODO: different values (ldap=display name, ad=uid)
-        'eduPersonNickname', //TODO check (can't find a user that has this)
-        'eduPersonAffiliation', // (same)
-        'eduPersonPrimaryAffiliation', // (same)
-        'givenName', // (same)
-        'postalAddress', // (same)
-        'sn', // (same)
-        'telephoneNumber', // (same)
-        'title', // (same)
-        'uid', // replaced by samaccountname
-        'sAMAccountName', // new
-        'unlHRAddress', // TODO check (doesn't appear to be used)
-        'unlHRPrimaryDepartment', // replaced with 'department'
-        'department', // new
-        'unlHROrgUnitNumber', // replaced with 'departmentNumber'
-        'departmentNumber', //new 
+        'cn', //this is the same value as the UID in active directory
+        'eduPersonNickname',
+        'eduPersonAffiliation',
+        'eduPersonPrimaryAffiliation',
+        'givenName',
+        'postalAddress',
+        'sn',
+        'telephoneNumber',
+        'title',
+        'uid',
+        'sAMAccountName',
+        'unlHRAddress',
+        'unlHRPrimaryDepartment',
+        'department',
+        'unlHROrgUnitNumber',
+        'departmentNumber',
     );
 
     /**
@@ -62,27 +62,27 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
      * @var array
      */
     public $detailAttributes = array(
-        'ou', // (same)
+        'ou',
         'cn', //different values (ldap=display name, ad=uid)
-        'eduPersonAffiliation', // (same)
-        'eduPersonNickname', // TODO: check (can't find a user that has this)
-        'eduPersonPrimaryAffiliation', // (same)
-        'eduPersonPrincipalName', // (same)
-        'givenName', // (same)
-        'displayName', // (same)
-        'mail', //TODO: check (missing)
-        'postalAddress', // (same)
-        'sn', // (same)
-        'telephoneNumber', // (same)
-        'title', // (same)
-        'uid', //replaced by samaccountname
-        'sAMAccountName', // new
-        'unlHROrgUnitNumber', // replaced with 'departmentNumber'
-        'departmentNumber', //new 
-        'unlHRPrimaryDepartment', // replaced with 'department'
-        'department', // new
-        'unlHRAddress', //TODO: check (doesn't appear to be used)
-        'unlSISClassLevel', //missing //TODO: how should we handle students now?
+        'eduPersonAffiliation',
+        'eduPersonNickname',
+        'eduPersonPrimaryAffiliation',
+        'eduPersonPrincipalName',
+        'givenName',
+        'displayName',
+        'mail',
+        'postalAddress',
+        'sn',
+        'telephoneNumber',
+        'title',
+        'uid',
+        'sAMAccountName',
+        'unlHROrgUnitNumber',
+        'departmentNumber',
+        'unlHRPrimaryDepartment',
+        'department',
+        'unlHRAddress',
+        'unlSISClassLevel', //missing
         'unlSISCollege', //missing
         'unlSISLocalAddr1', //missing
         'unlSISLocalAddr2', //missing
@@ -95,7 +95,6 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
         'unlSISPermState', //missing
         'unlSISPermZip', //missing
         'unlSISMajor', //missing
-        'unlEmailAlias', // not in mapping TODO: check (doesn't appear to be used)
     );
 
     /** Connection details */
