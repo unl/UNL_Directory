@@ -120,7 +120,7 @@ class UNL_Peoplefinder_Driver_LDAP_StandardFilter
         if (count($this->_excludeRecords)) {
             $excludeFilter = '';
             foreach ($this->_excludeRecords as $record) {
-                $excludeFilter .= '(uid='.$record->__toString().')';
+                $excludeFilter .= '(sAMAccountName='.$record->__toString().')';
             }
             $this->_filter = '(&'.$this->_filter.'(!(|'.$excludeFilter.')))';
         }
