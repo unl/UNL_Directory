@@ -67,7 +67,7 @@ class UNL_Peoplefinder_Driver_LDAP_StandardFilter
             foreach ($query as $arg) {
                 //determine if a wildcard should be used
                 if ($wild) {
-                    $arg = "*$arg*";
+                    $arg = "$arg*";
                 }
 
                 $filter .= '(|';
@@ -77,7 +77,7 @@ class UNL_Peoplefinder_Driver_LDAP_StandardFilter
 
                 //find hyphenated and multi-word surnames in the exact matches query
                 if (!$wild) {
-                    $filter .= "(sn=$arg-*)(sn=*$arg)";
+                    $filter .= "(sn=$arg-*)(sn=$arg*)";
                 }
 
                 $filter .= ")";
@@ -87,7 +87,7 @@ class UNL_Peoplefinder_Driver_LDAP_StandardFilter
             if (count($query) > 1) {
                 //determine if a wildcard should be used
                 if ($wild) {
-                    $inquery = "*$inquery*";
+                    $inquery = "$inquery*";
                 }
 
                 //and search for the string as entered
