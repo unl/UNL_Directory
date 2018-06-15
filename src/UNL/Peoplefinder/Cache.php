@@ -8,6 +8,12 @@ class UNL_Peoplefinder_Cache
 
 	protected $slowCache;
 
+	/**
+	* @var string 
+	* A unique string that uniquely identifies the current install. It is based on the file path of this file.
+	*/
+	protected $prefix;
+
 	public static function factory($options = [])
 	{
 		$defaultOptions = [
@@ -38,6 +44,12 @@ class UNL_Peoplefinder_Cache
 		$this->fastCache = $fastCache;
 		$this->fastLifetime = (int) $fastLifetime;
 		$this->slowCache = $slowCache;
+		$this->prefix = md5(__DIR__);
+	}
+	
+	protected function getPrefixedKey($key)
+	{
+		return $this->prefix . '-' . $key;
 	}
 
 	/**
@@ -47,7 +59,7 @@ class UNL_Peoplefinder_Cache
 	 */
 	public function get($key)
 	{
-		return $this->fastCache->get($key);
+		return $this->fastCache->get($this->getPrefixedKey($key));
 	}
 
 	/**
@@ -77,7 +89,7 @@ class UNL_Peoplefinder_Cache
 			$expires = time() + $this->fastLifetime;
 		}
 
-		$this->fastCache->set($key, $value, $expires);
+		$this->fastCache->set($this->getPrefixedKey($key), $value, $expires);
 		try {
 			$this->slowCache->save($value, $key);
 		} catch (Exception $e) {

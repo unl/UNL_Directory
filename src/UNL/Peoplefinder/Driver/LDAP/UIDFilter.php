@@ -6,7 +6,7 @@ class UNL_Peoplefinder_Driver_LDAP_UIDFilter
     public function __construct($uid, $affiliation = null)
     {
         $uid = UNL_Peoplefinder_Driver_LDAP_Util::escape_filter_value($uid);
-        $this->_filter = "(&(uid=$uid))";
+        $this->_filter = "(&(sAMAccountName=$uid))";
     }
 
     public function __toString()

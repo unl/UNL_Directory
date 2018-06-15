@@ -108,7 +108,7 @@ abstract class UNL_Peoplefinder_Driver_LDAP_Util
             $uids = file($uidFile, FILE_IGNORE_NEW_LINES|FILE_SKIP_EMPTY_LINES);
 
             foreach ($uids as $uid) {
-                $uidFilters[] = "(uid={$uid})";
+                $uidFilters[] = "(sAMAccountName={$uid})";
             }
         }
 

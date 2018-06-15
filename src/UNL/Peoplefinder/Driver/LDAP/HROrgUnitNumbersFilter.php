@@ -26,8 +26,8 @@ class UNL_Peoplefinder_Driver_LDAP_HROrgUnitNumbersFilter
             throw new Exception('Must set primary department.');
         }
 
-        $this->_filter = '(&(objectClass=person)(|(unlHROrgUnitNumber=';
-        $this->_filter .= implode(')(unlHROrgUnitNumber=', $orgUnits);
+        $this->_filter = '(&(objectClass=person)(|(departmentNumber=';
+        $this->_filter .= implode(')(departmentNumber=', $orgUnits);
         $this->_filter .= ')))';
     }
 
