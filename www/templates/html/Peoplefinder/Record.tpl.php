@@ -83,6 +83,10 @@ $showKnowledge = $context->shouldShowKnowledge();
         <?php endif; ?>
     <?php endif ?>
 
+    <?php if ($context->isPrimarilyStudent()): ?>
+        <p>Due to transitions in data systems, information pertaining to student rank, major., etc. is temporarily unavailable.</p>
+    <?php endif; ?>
+
     <?php if ($context->hasStudentInformation()): ?>
         <div class="sis-title">
         <?php if (isset($context->unlSISClassLevel)): ?>

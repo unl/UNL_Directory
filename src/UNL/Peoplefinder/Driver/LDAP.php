@@ -39,7 +39,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
      * @var array
      */
     public $listAttributes = array(
-        'cn',
+        'cn', //this is the same value as the UID in active directory
         'eduPersonNickname',
         'eduPersonAffiliation',
         'eduPersonPrimaryAffiliation',
@@ -49,9 +49,13 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
         'telephoneNumber',
         'title',
         'uid',
+        'sAMAccountName',
         'unlHRAddress',
         'unlHRPrimaryDepartment',
-        'unlHROrgUnitNumber');
+        'department',
+        'unlHROrgUnitNumber',
+        'departmentNumber',
+    );
 
     /**
      * Details are for UID detail display only.
@@ -59,7 +63,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
      */
     public $detailAttributes = array(
         'ou',
-        'cn',
+        'cn', //different values (ldap=display name, ad=uid)
         'eduPersonAffiliation',
         'eduPersonNickname',
         'eduPersonPrimaryAffiliation',
@@ -72,23 +76,26 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
         'telephoneNumber',
         'title',
         'uid',
+        'sAMAccountName',
         'unlHROrgUnitNumber',
+        'departmentNumber',
         'unlHRPrimaryDepartment',
+        'department',
         'unlHRAddress',
-        'unlSISClassLevel',
-        'unlSISCollege',
-        'unlSISLocalAddr1',
-        'unlSISLocalAddr2',
-        'unlSISLocalCity',
-        'unlSISLocalState',
-        'unlSISLocalZip',
-        'unlSISPermAddr1',
-        'unlSISPermAddr2',
-        'unlSISPermCity',
-        'unlSISPermState',
-        'unlSISPermZip',
-        'unlSISMajor',
-        'unlEmailAlias');
+        'unlSISClassLevel', //missing
+        'unlSISCollege', //missing
+        'unlSISLocalAddr1', //missing
+        'unlSISLocalAddr2', //missing
+        'unlSISLocalCity', //missing
+        'unlSISLocalState', //missing
+        'unlSISLocalZip', //missing
+        'unlSISPermAddr1', //missing
+        'unlSISPermAddr2', //missing
+        'unlSISPermCity', //missing
+        'unlSISPermState', //missing
+        'unlSISPermZip', //missing
+        'unlSISMajor', //missing
+    );
 
     /** Connection details */
     public $connected = false;

@@ -22,6 +22,7 @@ class UNL_Peoplefinder_Driver_LDAP_Entry extends ArrayObject
 
     protected static function normalizeEntry(array $entry)
     {
+        $entry = self::fix2018LdapToAdChanges($entry);
         $entry = self::fix2017LdapChanges($entry);
         $entry = UNL_Peoplefinder_Driver_LDAP_Util::filterArrayByKeys($entry, 'is_string');
         unset($entry['count']);
@@ -128,6 +129,37 @@ class UNL_Peoplefinder_Driver_LDAP_Entry extends ArrayObject
             }
         }
 
+        return $entry;
+    }
+
+    /**
+     * Attribute names (and possibly values) have changed.
+     * To continue to support downstream data from directory.unl.edu, map to our old values.
+     * 
+     * @param array $entry
+     * @return array
+     */
+    protected static function fix2018LdapToAdChanges(array $entry)
+    {
+        if (!isset($entry['samaccountname'])) {
+            //This is likely an objecttype=role entry, not a person.
+            //So fail early
+            return $entry;
+        }
+
+        //fix uid
+        if (isset($entry['samaccountname'])) {
+            $entry['uid'] = $entry['samaccountname'];
+        }
+        
+        if (isset($entry['department'])) {
+            $entry['unlhrprimarydepartment'] = $entry['department'];
+        }
+
+        if (isset($entry['departmentnumber'])) {
+            $entry['unlhrorgunitnumber'] = $entry['departmentnumber'];
+        }
+        
         return $entry;
     }
 

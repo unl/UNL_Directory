@@ -8,7 +8,7 @@ class UNL_Peoplefinder_Driver_LDAP_UIDSFilter
         $uids = array_map(function ($uid) {
             return UNL_Peoplefinder_Driver_LDAP_Util::escape_filter_value($uid);
         }, $uids);
-        $this->_filter = "(&(|(uid=" . implode(')(uid=', $uids) . ")))";
+        $this->_filter = "(&(|(sAMAccountName=" . implode(')(sAMAccountName=', $uids) . ")))";
     }
 
     public function __toString()
