@@ -178,9 +178,36 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
         return array();
     }
 
-    function getUID($uid)
+    /**
+     * Get a record for a specific uid eg:bbieber2.
+     * 
+     * This method is not fully implemented yet; only the mail attribute is being populated
+     *
+     * @param string $uid The unique ID for the user you want to get.
+     *
+     * @return UNL_Peoplefinder_Record
+     * @throws Exception
+     */
+    public function getUID($uid)
     {
-        return false;
+        //For now this only populates the mail attribute
+        $results = $this->query("SELECT UNL_EMAILS_UNCA.EMAIL as mail
+            FROM UNL_BIODEMO
+            JOIN UNL_EMAILS_UNCA ON UNL_BIODEMO.BIODEMO_ID = UNL_EMAILS_UNCA.BIODEMO_ID AND UNL_EMAILS_UNCA.TYPE = 'USERINFO'
+            WHERE UNL_BIODEMO.NETID = :net_id",
+            array(
+                'net_id' => $uid,
+            ));
+        
+        if (empty($results)) {
+            throw new Exception('Cannot find that UID.', 404);
+        }
+        
+        $record = new UNL_Peoplefinder_Record();
+        $record->uid = $uid;
+        $record->mail = strtolower($results[0]['MAIL']);
+        
+        return $record;
     }
 
     function getHRPrimaryDepartmentMatches($query, $affiliation = null)
