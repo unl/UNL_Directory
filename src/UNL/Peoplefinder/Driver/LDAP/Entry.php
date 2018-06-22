@@ -148,6 +148,19 @@ class UNL_Peoplefinder_Driver_LDAP_Entry extends ArrayObject
         }
         
         if (isset($entry['department'])) {
+            // Clean up the department value. It now appears to always and in a series of whitespace followed by UNL or IANR
+            // for example: 'College of Ag Sci & Nat Res         IANR'
+            foreach ($entry['department']  as $key=>$department) {
+                if (is_string($key)) {
+                    continue;
+                }
+                
+                $department = preg_replace('/UNL$/', '', $department);
+                $department = preg_replace('/IANR$/', '', $department);
+                $department = trim($department);
+                $entry['department'][$key] = $department;
+            }
+
             $entry['unlhrprimarydepartment'] = $entry['department'];
         }
 
