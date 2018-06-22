@@ -146,14 +146,6 @@ class UNL_Peoplefinder_Driver_LDAP_Entry extends ArrayObject
         if (isset($entry['samaccountname'])) {
             $entry['uid'] = $entry['samaccountname'];
         }
-
-        //AD doesn't give us the correct mail data, so we have to source it out of the Oracle DB
-        //TODO: A combination of LDAP filtering and Oracle data is not ideal. We should switch to Oracle.
-        if (isset($entry['uid'][0])) {
-            $oracle =  new UNL_Peoplefinder_Driver_OracleDB();
-            $oracle_record = $oracle->getUID($entry['uid'][0]);
-            $entry['mail'][0] = $oracle_record->mail;
-        }
         
         if (isset($entry['department'])) {
             $entry['unlhrprimarydepartment'] = $entry['department'];

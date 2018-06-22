@@ -177,37 +177,70 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
     {
         return array();
     }
-
-    /**
-     * Get a record for a specific uid eg:bbieber2.
-     * 
-     * This method is not fully implemented yet; only the mail attribute is being populated
-     *
-     * @param string $uid The unique ID for the user you want to get.
-     *
-     * @return UNL_Peoplefinder_Record
-     * @throws Exception
-     */
+    
     public function getUID($uid)
     {
-        //For now this only populates the mail attribute
-        $results = $this->query("SELECT UNL_EMAILS_UNCA.EMAIL as mail
-            FROM UNL_BIODEMO
-            JOIN UNL_EMAILS_UNCA ON UNL_BIODEMO.BIODEMO_ID = UNL_EMAILS_UNCA.BIODEMO_ID AND UNL_EMAILS_UNCA.TYPE = 'USERINFO'
-            WHERE UNL_BIODEMO.NETID = :net_id",
-            array(
-                'net_id' => $uid,
-            ));
-        
-        if (empty($results)) {
-            throw new Exception('Cannot find that UID.', 404);
+        // TODO: Implement getUID() method.
+    }
+
+    /**
+     * This function will attempt to fix LDAP entries with Oracle sourced attributes, such as `mail`
+     * The `mail` attribute is not accurate in AD
+     * 
+     * @param array $entries
+     * @return array
+     * @throws Exception
+     */
+    public function fixLDAPEntries(array $entries)
+    {
+        if (empty($entries)) {
+            return $entries;
         }
         
-        $record = new UNL_Peoplefinder_Record();
-        $record->uid = $uid;
-        $record->mail = strtolower($results[0]['MAIL']);
+        $uids = [];
+        $binding_array = array();
+        $binding_list = array();
+        $i=0;
         
-        return $record;
+        // Loop through each entry and build a binding array for the SQL query
+        // Also create a mapping array so that we can stitch the Oracle and LDAP results together
+        foreach ($entries as $key=>$entry) {
+            if (!isset($entry['uid']) || empty($entry['uid'])) {
+                // We have no UID to reference (odd... perhaps not a person object?)
+                continue;
+            }
+            // Create a mapping to stitch the results back together
+            $uids[$entry['uid'][0]] = $key;
+            
+            // Create binding arrays for the SQL query
+            $key = ":uid_" . $i;
+            $binding_list[] = $key;
+            $key = substr($key, 1);
+            $binding_array[$key] = $entry['uid'][0];
+            $i++;
+        }
+        
+        // UNL_EMAILS_UNCA.TYPE = 'USERINFO' is the work email address that we want
+        $query = "SELECT UNL_BIODEMO.NETID, UNL_EMAILS_UNCA.EMAIL as mail
+            FROM UNL_BIODEMO
+            LEFT JOIN UNL_EMAILS_UNCA ON UNL_BIODEMO.BIODEMO_ID = UNL_EMAILS_UNCA.BIODEMO_ID AND UNL_EMAILS_UNCA.TYPE = 'USERINFO'
+            WHERE UNL_BIODEMO.NETID IN (" . implode(', ', $binding_list) . ")";
+
+        $results = $this->query($query, $binding_array);
+        
+        // Now stitch everything back together
+        foreach ($results as $row) {
+            $key = $uids[$row['NETID']];
+            if (!empty($row['MAIL'])) {
+                $value = new UNL_Peoplefinder_Driver_LDAP_Multivalue(array(
+                    strtolower($row['MAIL'])
+                ));
+                
+                $entries[$key]['mail'] = $value;
+            }
+        }
+        
+        return $entries;
     }
 
     function getHRPrimaryDepartmentMatches($query, $affiliation = null)
