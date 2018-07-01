@@ -452,6 +452,10 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
             $results[$key] = new UNL_Peoplefinder_Driver_LDAP_Entry($entry);
         }
 
+        // Attempt to fix the data based on Oracle sourced information such as the `mail` attribute.
+        $oracle =  new UNL_Peoplefinder_Driver_OracleDB();
+        $results = $oracle->fixLDAPEntries($results);
+
         return $results;
     }
 
