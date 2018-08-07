@@ -202,6 +202,12 @@ class UNL_Officefinder
             // bad post request
             $this->redirect(UNL_Peoplefinder::getURL());
         }
+        
+        // Public forms don't require a user session nor csrf validation
+        $publicForms = array('correction');
+        if (!in_array($_POST['_type'], $publicForms) && !$this->validateCSRF()) {
+            throw new \Exception('Invalid security token provided. If you think this was an error, please retry the request.', 403);
+        }
 
         $redirect = false;
         $noRedirect = $this->options['redirect'] === '0';
@@ -566,5 +572,48 @@ class UNL_Officefinder
     public static function postRun($data)
     {
         return UNL_Peoplefinder::postRun($data);
+    }
+
+    /**
+     * Wrapper function to help with CSRF tokens
+     *
+     * @return \Slim\Csrf\Guard
+     */
+    public function getCSRFHelper()
+    {
+        static $csrf;
+
+        if (!$csrf) {
+            $null = null;
+            // Use persistent tokens due to AJAX functionality
+            $csrf = new \Slim\Csrf\Guard('csrf', $null, null, 200, 16, true);
+            $csrf->validateStorage();
+            $csrf->generateToken();
+        }
+
+        return $csrf;
+    }
+
+    /**
+     * Validate a POST request for CSRF
+     * 
+     * @return bool
+     */
+    public function validateCSRF()
+    {
+        $csrf = $this->getCSRFHelper();
+        
+        if (!isset($_POST[$csrf->getTokenNameKey()])) {
+            return false;
+        }
+
+        if (!isset($_POST[$csrf->getTokenValueKey()])) {
+            return false;
+        }
+        
+        $name = $_POST[$csrf->getTokenNameKey()];
+        $value = $_POST[$csrf->getTokenValueKey()];
+        
+        return $csrf->validateToken($name, $value);
     }
 }

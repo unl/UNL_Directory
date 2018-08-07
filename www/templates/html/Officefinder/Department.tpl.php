@@ -60,10 +60,12 @@ $hasOfficialChildDepartments = count($officialChildren);
 						<div class="forms">
 							<div class="form"></div>
 							<form method="post" action="<?php echo $context->getURL() ?>" class="sortform">
-							    <input type="hidden" name="_type" value="sort_departments" />
-							    <input type="hidden" name="department_id" value="<?php echo $context->id; ?>" />
-							    <input type="hidden" name="sort_json" value="" />
-							    <input type="submit" value="Save order" />
+                                <input type="hidden" name="_type" value="sort_departments" />
+                                <input type="hidden" name="department_id" value="<?php echo $context->id; ?>" />
+                                <input type="hidden" name="sort_json" value="" />
+                                <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
+                                <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
+                                <input type="submit" value="Save order" />
 							</form>
 						</div>
 					</div>

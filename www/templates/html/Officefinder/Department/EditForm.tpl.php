@@ -59,5 +59,7 @@ $fields = [
             </li>
         <?php endforeach; ?>
     </ol>
+    <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
+    <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
     <input type="submit" value="Submit" />
 </form>
