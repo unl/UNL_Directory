@@ -27,10 +27,11 @@ class UNL_Peoplefinder_Driver_LDAP_StandardFilter
 
     public static $searchFields = array(
             'mail',
-            'cn', //TODO: should we change this to displayName? should users be able to search by uid?
+            'cn',
             'givenName',
             'sn',
-            'eduPersonNickname'
+            'eduPersonNickname',
+            'displayName'
         );
 
     /**
