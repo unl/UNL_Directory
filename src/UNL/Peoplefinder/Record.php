@@ -54,6 +54,7 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
     public $unlSISMajor;
     public $unlSISMinor;
     public $unlEmailAlias;
+    public $unluncwid; // NUID
 
     protected $knowledge = false;
 

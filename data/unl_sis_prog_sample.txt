@@ -1,0 +1,4 @@
+"EMPLID","INSTITUTION","ACAD_PROG","PROG_DESCR","PLAN_DESCR","ACAD_PLAN_TYPE"
+"00000000","NEUNL","GRD-G","Graduate","Entomology","MAJ"
+"00000001","NEUNL","ARH-U","Architecture Undergraduate","Landscape Architecture","MAJ"
+"00000001","NEUNL","ASC-U","Arts & Sciences Undergraduate","Biological Sciences","MAJ"
