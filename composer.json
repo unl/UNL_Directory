@@ -1,31 +1,31 @@
 {
-	"autoload": {
-		"psr-0": {
-			"UNL": "src/"
-		}
-	},
-	"repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/unlpear/UNL_Cache_Lite.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/unlpear/UNL_Common.git"
-        }
-    ],
-    "require": {
-        "saltybeagle/savvy": "^0.9.0",
-        "unl/unl_cache_lite": "0.1.*",
-        "unl/common": "0.6.*",
-        "unl/php-wdn-templates": "~4.1",
-        "guzzlehttp/guzzle": "~6.0",
-        "jasig/phpcas": "1.3.x-dev",
-        "zaininnari/html-minifier": "*",
-		"swiftmailer/swiftmailer": "^5.4",
-		"slim/csrf": "^0.8.2"
+  "autoload": {
+    "psr-0": {
+      "UNL": "src/"
+    }
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/unlpear/UNL_Cache_Lite.git"
     },
-	"require-dev": {
-		"phpunit/phpunit": "5.7"
-	}
+    {
+      "type": "vcs",
+      "url": "https://github.com/unlpear/UNL_Common.git"
+    }
+  ],
+  "require": {
+    "saltybeagle/savvy": "^0.9.0",
+    "unl/unl_cache_lite": "0.1.*",
+    "unl/common": "0.6.*",
+    "unl/php-wdn-templates": "~4.1",
+    "guzzlehttp/guzzle": "~6.0",
+    "jasig/phpcas": "1.3.x-dev",
+    "zaininnari/html-minifier": "*",
+    "swiftmailer/swiftmailer": "^5.4",
+    "slim/csrf": "^0.8.2"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "5.7"
+  }
 }
