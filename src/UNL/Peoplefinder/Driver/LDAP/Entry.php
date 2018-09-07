@@ -178,7 +178,7 @@ class UNL_Peoplefinder_Driver_LDAP_Entry extends ArrayObject
         
         if (!isset($entry['unluncwid'][0])) {
             // No NUID provided
-            return;
+            return $entry;
         }
         
         $sis_data = $cache->get('unl_sis_'.$entry['unluncwid'][0]);
