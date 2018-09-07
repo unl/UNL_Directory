@@ -7,9 +7,10 @@ $cache = UNL_Peoplefinder_Cache::factory();
 $students = array();
 
 // First, load the bio info and create the initial structure
-$csv_bio_file = __DIR__.'/data/unl_sis_bio.txt';
+$csv_bio_file = __DIR__.'/../data/unl_sis_bio.txt';
 
 if (!file_exists($csv_bio_file)) {
+echo 'asdfad';
     // You must manually upload the file
     return;
 }
@@ -45,9 +46,9 @@ foreach ($csv_bio_rows as $row) {
 }
 
 // Second, load the college, major, and minor information and add it to the existing structure
-$csv_bio_file = __DIR__.'/data/unl_sis_prog.txt';
+$csv_prog_file = __DIR__.'/../data/unl_sis_prog.txt';
 
-if (!file_exists($csv_bio_file)) {
+if (!file_exists($csv_prog_file)) {
     // You must manually upload the file
     return;
 }
