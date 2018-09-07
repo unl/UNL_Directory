@@ -24,6 +24,7 @@ class UNL_Peoplefinder_Driver_LDAP_Entry extends ArrayObject
     {
         $entry = self::fix2018LdapToAdChanges($entry);
         $entry = self::fix2017LdapChanges($entry);
+        $entry = self::attachSISData($entry);
         $entry = UNL_Peoplefinder_Driver_LDAP_Util::filterArrayByKeys($entry, 'is_string');
         unset($entry['count']);
         foreach ($entry as $attribute => $value) {
@@ -166,6 +167,25 @@ class UNL_Peoplefinder_Driver_LDAP_Entry extends ArrayObject
 
         if (isset($entry['departmentnumber'])) {
             $entry['unlhrorgunitnumber'] = $entry['departmentnumber'];
+        }
+        
+        return $entry;
+    }
+    
+    protected static function attachSISData($entry)
+    {
+        $cache = UNL_Peoplefinder_Cache::factory();
+        
+        if (!isset($entry['unluncwid'][0])) {
+            // No NUID provided
+            return;
+        }
+        
+        $sis_data = $cache->get('unl_sis_'.$entry['unluncwid'][0]);
+        
+        if ($sis_data) {
+            $sis_data = unserialize($sis_data);
+            $entry = array_merge($entry, $sis_data);
         }
         
         return $entry;

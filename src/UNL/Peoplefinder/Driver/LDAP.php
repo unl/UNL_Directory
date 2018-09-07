@@ -55,6 +55,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
         'department',
         'unlHROrgUnitNumber',
         'departmentNumber',
+        'unluncwid', // the NUID
     );
 
     /**
@@ -95,6 +96,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
         'unlSISPermState', //missing
         'unlSISPermZip', //missing
         'unlSISMajor', //missing
+        'unluncwid', // the NUID
     );
 
     /** Connection details */
