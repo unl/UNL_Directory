@@ -15,7 +15,7 @@ class UNL_Officefinder_Auth
             return;
         }
 
-        phpCAS::client(CAS_VERSION_2_0, 'login.unl.edu', 443, 'cas', false);
+        phpCAS::client(CAS_VERSION_2_0, 'shib.unl.edu', 443, '/idp/profile/cas', false);
         phpCAS::setPostAuthenticateCallback([$this, 'handleLoginTicket']);
         phpCAS::setSingleSignoutCallback([$this, 'handleLogoutTicket']);
         phpCAS::setCasServerCACert(GuzzleHttp\default_ca_bundle());
