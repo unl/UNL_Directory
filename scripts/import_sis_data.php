@@ -82,6 +82,9 @@ foreach ($csv_prog_rows as $row) {
     }
 
     $students[$data[0]]['unlsiscollege'][] = $data[2];
+    // Make sure this element only contains unique values
+    // (otherwise the same college might appear twice and things will look broken)
+    $students[$data[0]]['unlsiscollege'] = array_unique($students[$data[0]]['unlsiscollege']);
     
     if (isset($data[5])) {
         $plan_type = strtolower(trim($data[5]));
