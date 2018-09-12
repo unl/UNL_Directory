@@ -82,18 +82,22 @@ class UNL_Peoplefinder_Cache
 	 * @param string  $key
 	 * @param string  $value
 	 * @param int|false $expires When this key expires in the fast cache or false for the default
+	 * @param bool $fastOnly Only set the fast cache (memcache). Defaults to false (both fast and slow).
 	 */
-	public function set($key, $value, $expires = false)
+	public function set($key, $value, $expires = false, $fastOnly = false)
 	{
 		if (!$expires) {
 			$expires = time() + $this->fastLifetime;
 		}
 
 		$this->fastCache->set($this->getPrefixedKey($key), $value, $expires);
-		try {
-			$this->slowCache->save($value, $key);
-		} catch (Exception $e) {
-			//todo: log?
+		
+		if (!$fastOnly) {
+			try {
+				$this->slowCache->save($value, $key);
+			} catch (Exception $e) {
+				//todo: log?
+			}
 		}
 	}
 
@@ -105,5 +109,13 @@ class UNL_Peoplefinder_Cache
 	{
 		$this->fastCache->delete($key);
 		$this->slowCache->remove($key, 'default', true);
+	}
+
+	/**
+	 * Flush the fast cache
+	*/
+	public function flush()
+	{
+		$this->fastCache->flush();
 	}
 }
