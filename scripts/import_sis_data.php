@@ -10,7 +10,6 @@ $students = array();
 $csv_bio_file = __DIR__.'/../data/unl_sis_bio.txt';
 
 if (!file_exists($csv_bio_file)) {
-echo 'asdfad';
     // You must manually upload the file
     return;
 }

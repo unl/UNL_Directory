@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__.'/../www/config.inc.php';
 
+ini_set('memory_limit','512M');
+
 $cache = UNL_Peoplefinder_Cache::factory();
 
 // Clear the existing cache
