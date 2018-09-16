@@ -6,8 +6,8 @@ $loginService = UNL_Officefinder::getURL() . 'editor';
 if (strpos($loginService, '//') === 0) {
     $loginService = 'https:' . $loginService;
 }
-$loginUrl = 'https://login.unl.edu/cas/login?service=' . urlencode($loginService);
-$logoutUrl = 'https://login.unl.edu/cas/logout?url=' . urlencode($loginService);
+$loginUrl = 'https://shib.unl.edu/idp/profile/cas/login?service=' . urlencode($loginService);
+$logoutUrl = 'https://shib.unl.edu/idp/profile/cas/logout?url=' . urlencode($loginService);
 ?>
 <meta name="robots" content="noarchive">
 <meta name="description" content="The Faculty, Staff and Student online directory for the University. Information obtained from this directory may not be used to provide addresses for mailings to students, faculty or staff. Any solicitation of business, information, contributions or other response from individuals listed in this publication by mail, telephone or other means is forbidden."/>
