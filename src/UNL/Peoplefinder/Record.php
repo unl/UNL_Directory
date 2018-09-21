@@ -362,6 +362,39 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
         return implode(', ', $affiliations);
     }
 
+    /**
+     * Determine if this person has an affiliation that is likely to contain an appointment
+     * This is mostly done to reduce the number of database queries (and might not be needed)
+     * 
+     * @return bool
+     */
+    public function affiliationMightIncludeAppointments()
+    {
+        if (!$this->eduPersonAffiliation) {
+            return false;
+        }
+        
+        $affiliationsWithAppointments = [
+            'staff',
+            'faculty',
+            'volunteer',
+            'affiliate'
+        ];
+
+        $affiliations = $this->eduPersonAffiliation;
+        if ($affiliations instanceof ArrayIterator) {
+            $affiliations = $affiliations->getArrayCopy();
+        }
+        
+        foreach ($affiliationsWithAppointments as $affiliation) {
+            if (in_array($affiliation, $affiliations)) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
     public function formatTitle()
     {
         if (!$this->title) {
