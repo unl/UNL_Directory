@@ -71,7 +71,7 @@ $showKnowledge = $context->shouldShowKnowledge();
         <div class="eppa">(<?php echo $affiliations ?>)</div>
     <?php endif; ?>
 
-    <?php if (isset($context->unlHROrgUnitNumber)): ?>
+    <?php if ($context->affiliationMightIncludeAppointments()): ?>
         <?php
         $roles = $context->getRoles();
         $title = $context->formatTitle();

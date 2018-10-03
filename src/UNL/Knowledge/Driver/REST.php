@@ -7,7 +7,7 @@ class UNL_Knowledge_Driver_REST implements UNL_Knowledge_DriverInterface
      *
      * @var string
      */
-    public $service_url = 'https://www.digitalmeasures.com/login/service/v4/SchemaData/INDIVIDUAL-ACTIVITIES-University/';
+    public $service_url = 'https://webservices.digitalmeasures.com/login/service/v4/SchemaData/INDIVIDUAL-ACTIVITIES-University/';
 
     public static $service_user;
 
