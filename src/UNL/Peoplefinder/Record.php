@@ -419,7 +419,8 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
 
     public function hasStudentInformation()
     {
-        if (!in_array('student', iterator_to_array($this->eduPersonAffiliation))) {
+        if ($this->eduPersonAffiliation instanceof ArrayIterator &&
+            !in_array('student', iterator_to_array($this->eduPersonAffiliation))) {
             return false;
         }
 
