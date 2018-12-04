@@ -37,8 +37,8 @@ $hrParent = $context->getOfficialParent();
 $officialChildren = new UNL_Officefinder_DepartmentList_Filter_Suppressed($context->getOfficialChildDepartments('name ASC'));
 $hasOfficialChildDepartments = count($officialChildren);
 ?>
-<section class="summary wdn-grid-set" itemscope itemtype="http://schema.org/Organization">
-	<div class="bp2-wdn-col-one-third department-summary" aria-live="polite">
+<section class="summary dcf-grid" itemscope itemtype="http://schema.org/Organization">
+	<div class="dcf-col-33%-start@md department-summary" aria-live="polite">
 		<?php echo $savvy->render($context, 'Officefinder/Department/Summary.tpl.php') ?>
 		<?php if ($department): ?>
 			<p><a href="#all_employees">Jump to employees</a></p>
@@ -47,7 +47,7 @@ $hasOfficialChildDepartments = count($officialChildren);
 			<?php echo $savvy->render($context, 'Officefinder/Department/EditBox.tpl.php') ?>
 		<?php endif ;?>
 	</div>
-	<div class="bp2-wdn-col-two-thirds wdn-pull-right">
+	<div class="dcf-col-67%-end@md dcf-float-right">
 		<div class="card" id="listings" data-department-id="<?php echo $context->id ?>">
             <h2 class="wdn-brand"><span class="icon-phone-book" aria-hidden="true"></span>Yellow Pages</h2>
 			<div class="card-content<?php if ($userCanEdit): ?> editing<?php endif; ?>">
@@ -56,7 +56,7 @@ $hasOfficialChildDepartments = count($officialChildren);
 				<?php endif; ?>
 				<?php if ($userCanEdit): ?>
 					<div class="edit-tools">
-						<a class="wdn-button wdn-button-triad listing-add" href="<?php echo $context->getNewChildURL() ?>">Add<span class="wdn-text-hidden"> a new child listing</span></a>
+						<a class="dcf-btn wdn-button-triad listing-add" href="<?php echo $context->getNewChildURL() ?>">Add<span class="dcf-sr-only"> a new child listing</span></a>
 						<div class="forms">
 							<div class="form"></div>
 							<form method="post" action="<?php echo $context->getURL() ?>" class="sortform">

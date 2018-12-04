@@ -9,18 +9,21 @@ if (in_array($context->options['view'], ['alphalisting'])) {
 use UNL\Templates\Templates;
 
 Templates::setCachingService(new UNL\Templates\CachingService\NullService());
-$page = Templates::factory('Fixed', Templates::VERSION_4_1);
+$page = Templates::factory('App', Templates::VERSION_5);
 $wdnIncludePath = dirname(dirname(__DIR__));
 
-if (file_exists($wdnIncludePath . '/wdn/templates_4.1')) {
+if (file_exists($wdnIncludePath . '/wdn/templates_5.0')) {
     $page->setLocalIncludePath($wdnIncludePath);
 }
 
 $savvy->addGlobal('page', $page);
 
+// no menu items, so hide mobile menu
+$page->addStyleDeclaration("#dcf-mobile-toggle-menu {display: none!important}");
+
 $page->doctitle = '<title>Directory | University of Nebraska–Lincoln</title>';
 $page->titlegraphic = 'Directory';
-$page->setParam('class', implode(' ', ['hide-wdn_navigation_wrapper', 'hide-breadcrumbs', 'hide-wdn_footer_related']));
+//$page->setParam('class', implode(' ', ['hide-wdn_navigation_wrapper', 'hide-breadcrumbs', 'hide-wdn_footer_related']));
 
 $page->head .= $savvy->render(null, 'static/head.tpl.php');
 
@@ -29,11 +32,10 @@ if (isset($context->options['q']) || isset($context->options['cn']) || isset($co
     $page->head .= $savvy->render(null, 'static/meta-robots.tpl.php');
 }
 
-$page->breadcrumbs = $savvy->render(null, 'static/breadcrumbs.tpl.php');
+//$page->breadcrumbs = $savvy->render(null, 'static/breadcrumbs.tpl.php');
 $page->affiliation = '';
-$page->navlinks = '';
-$page->pagetitle = '';
-$page->leftcollinks = '';
+//$page->navlinks = '';
+//$page->pagetitle = '';
 
 if (in_array($context->options['view'], ['instructions', 'help', 'search'])) {
     //Don't wrap the home page, because we want it to use bands
@@ -50,6 +52,23 @@ $savvy->removeGlobal('page');
 // add entry-point scripts
 $page->maincontentarea .= $savvy->render(null, 'static/after-main.tpl.php');
 $page->contactinfo = $savvy->render(null, 'static/contact-info.tpl.php');
+
+$baseUrl = UNL_Peoplefinder::getURL();
+$version = UNL_Peoplefinder::$staticFileVersion;
+$page->addScriptDeclaration("require(['" . $baseUrl . "js/directory.min.js?v=" . $version ."'], function(directory) {
+    directory.initialize('" . $baseUrl . "', '" . UNL_Peoplefinder::$annotateUrl . "');
+});");
+
+$loginService = UNL_Officefinder::getURL() . 'editor';
+if (strpos($loginService, '//') === 0) {
+    $loginService = 'https:' . $loginService;
+}
+$loginUrl = 'https://shib.unl.edu/idp/profile/cas/login?service=' . urlencode($loginService);
+$logoutUrl = 'https://shib.unl.edu/idp/profile/cas/logout?url=' . urlencode($loginService);
+$page->addScriptDeclaration("require(['wdn'], function(WDN) {
+	WDN.setPluginParam('idm', 'login', '" . $loginUrl ."');
+	WDN.setPluginParam('idm', 'logout', '" . $logoutUrl ."');
+});");
 
 $html = $page->toHtml();
 unset($page);

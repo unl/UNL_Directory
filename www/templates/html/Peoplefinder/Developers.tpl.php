@@ -2,8 +2,8 @@
 $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized-dark.min.css', 'stylesheet');
 ?>
 
-<div class="wdn-grid-set">
-    <div class="bp3-wdn-col-three-fourths">
+<div class="dcf-grid">
+    <div class="dcf-col-75%-start@md">
         <?php
         $resource = "UNL_Peoplefinder_Developers_" . $context->resource;
         $resource = new $resource;
@@ -87,7 +87,7 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
             </div>
         </div>
     </div>
-    <div class="bp3-wdn-col-one-fourth">
+    <div class="dcf-col-25%-end@md">
         <nav id="resources" aria-label="API Navigation" class="zenbox primary">
             <h2>Directory API</h2>
             <p>The following is a list of resources for Directory.</p>
@@ -109,10 +109,10 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
     </div>
 </div>
 
-<script>
-    require(['jquery', 'https://cdn.jsdelivr.net/highlight.js/9.2.0/highlight.min.js'], function ($, hljs) {
+<?php
+  $page->addScriptDeclaration("require(['jquery', 'https://cdn.jsdelivr.net/highlight.js/9.2.0/highlight.min.js'], function ($, hljs) {
         $('.resource pre.code code').each(function () {
             hljs.highlightBlock(this);
-        })
-    })
-</script>
+        });
+    })");
+?>

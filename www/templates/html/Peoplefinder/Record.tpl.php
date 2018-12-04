@@ -26,8 +26,8 @@ if (isset($context->mail) && !$context->isPrimarilyStudent()) {
 $showKnowledge = $context->shouldShowKnowledge();
 ?>
 <?php if ($showKnowledge): ?>
-<section class="wdn-grid-set knowledge-grid">
-    <div class="bp2-wdn-col-two-sevenths directory-knowledge-summary">
+<section class="dcf-grid knowledge-grid">
+    <div class="dcf-col-25%-start@md directory-knowledge-summary">
 <?php endif; ?>
 
 
@@ -175,15 +175,15 @@ $showKnowledge = $context->shouldShowKnowledge();
     </div>
 
     <div class="vcard-tools wdn_vcardTools primary">
-        <a href="<?php echo $context->getVcardUrl() ?>"><span class="icon-vcard" aria-hidden="true"></span><span class="wdn-text-hidden">v-card icon </span><span class="wdn-text-hidden">Download </span>vCard<span class="wdn-text-hidden"> for <?php echo $preferredName ?></span></a>
-        <a href="<?php echo $context->getQRCodeUrl($savvy->render($context, 'templates/vcard/Peoplefinder/Record.tpl.php')) ?>"><span class="icon-qr-code" aria-hidden="true"></span><span class="wdn-text-hidden">Q R code icon </span>QR Code<span class="wdn-text-hidden"> vCard for <?php echo $preferredName ?></span></a>
-        <button><span class="icon-print" aria-hidden="true"></span><span class="wdn-text-hidden">printer icon </span>Print<span class="wdn-text-hidden"> listing for <?php echo $preferredName ?></span></button>
+        <a href="<?php echo $context->getVcardUrl() ?>"><span class="icon-vcard" aria-hidden="true"></span><span class="dcf-sr-only">v-card icon </span><span class="dcf-sr-only">Download </span>vCard<span class="dcf-sr-only"> for <?php echo $preferredName ?></span></a>
+        <a href="<?php echo $context->getQRCodeUrl($savvy->render($context, 'templates/vcard/Peoplefinder/Record.tpl.php')) ?>"><span class="icon-qr-code" aria-hidden="true"></span><span class="dcf-sr-only">Q R code icon </span>QR Code<span class="dcf-sr-only"> vCard for <?php echo $preferredName ?></span></a>
+        <button><span class="icon-print" aria-hidden="true"></span><span class="dcf-sr-only">printer icon </span>Print<span class="dcf-sr-only"> listing for <?php echo $preferredName ?></span></button>
     </div>
 </div>
 
 <?php if ($showKnowledge): ?>
     </div>
-    <div class="bp2-wdn-col-five-sevenths wdn-pull-right">
+    <div class="dcf-col-75%-end@md dcf-float-right">
         <div class="card">
             <div class="card-content">
                 <?php echo $savvy->render($context->getKnowledge()) ?>

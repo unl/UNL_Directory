@@ -1,13 +1,12 @@
 define([
 	'jquery',
 	'wdn',
-	'modernizr',
 	'require',
 	'idm',
 	'notice',
 	'tooltip',
 	'./vendor/jsrender.js'
-], function($, WDN, Modernizr, require, idm) {
+], function($, WDN, require, idm) {
 	"use strict";
 
 	var serviceURL = 'https://directory.unl.edu/';
@@ -878,7 +877,7 @@ define([
 			var checkSticky = function() {
 				$(document.body).trigger('sticky_kit:recalc');
 
-				if (Modernizr.mq('only screen and (min-width: 768px)')) {
+				if (window.matchMedia('only screen and (min-width: 768px)')) {
 					$sidebar.stick_in_parent({spacer:false});
 				} else {
 					$sidebar.trigger('sticky_kit:detach');

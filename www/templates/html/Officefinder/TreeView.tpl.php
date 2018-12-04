@@ -33,8 +33,8 @@ UNL_Officefinder::setReplacementData('pagetitle', '<h1>Departmental Hierarchy</h
     text-decoration:line-through;
 }
 </style>
-<div class="wdn-grid-set">
-    <div class="wdn-col-three-fourths">
+<div class="dcf-grid">
+    <div class="dcf-col-75%-start@md">
         <ul class="tree">
             <?php
             $depth = 0;
@@ -68,7 +68,7 @@ UNL_Officefinder::setReplacementData('pagetitle', '<h1>Departmental Hierarchy</h
             </li>
         </ul>
     </div>
-    <div class="wdn-col-one-fourth">
+    <div class="dcf-col-25%-end@md">
         <ul>
         <li><span class="academic">Green</span> listings are shown on the <a href="academic">Academic Departments list</a></li>
         <li><span class="suppressed">Struck</span> listings have no SAP appointments or child listings, and are hidden from the public</li>

@@ -3,7 +3,7 @@
         <a href="#results">Skip filters</a>
     </nav>
 
-    <h2 class="wdn-brand">Filter Results</h2>
+    <h2>Filter Results</h2>
     <div class="filters" aria-controls="results">
         <div class="affiliation">
             <button aria-controls="filters_affiliation">By Affiliation <span class="toggle">(Expand)</span></button>

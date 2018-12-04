@@ -7,12 +7,12 @@ if (isset($page)) {
     $page->doctitle = substr_replace($page->doctitle, 'Help | ', strlen('<title>'), 0);
 }
 ?>
-<section class="wdn-band wdn-light-neutral-band" id="data">
-    <div class="wdn-inner-wrapper">
-        <h1 class="wdn-center clear-top">Finding Your Way Around the Directory</h1>
-        <div class="bp960-wdn-grid-set-thirds">
-            <div class="wdn-col">
-                <h2 class="wdn-brand">About the data</h2>
+<section class="dcf-bleed unl-bg-lightest-gray dcf-pt-6  dcf-pb-6" id="data">
+    <div class="dcf-wrapper">
+        <h2 class="dcf-txt-center clear-top">Finding Your Way Around the Directory</h2>
+        <div class="dcf-grid-thirds@md dcf-col-gap-3 dcf-row-gap-3 dcf-pt-3">
+            <div>
+                <h4>About the data</h4>
                 <p>
                     The data used to build the <a href="http://directory.unl.edu/">Directory</a> is maintained in several source databases.
                     Information obtained from the directory may <em>not</em> be used to provide addresses for mailings to students, faculty or staff.
@@ -40,8 +40,8 @@ if (isset($page)) {
                     <em>Department/Listing</em> directory data is sourced from the university administrative and finance system, SAP, and augmented with information provided by departmental HR coordinators.
                 </p>
             </div>
-            <div class="wdn-col">
-                <h2 class="wdn-brand">Updating your information</h2>
+            <div>
+                <h4>Updating your information</h4>
                 <p>
                     As a <em>student</em>, you may request that your information not be listed in the directory by contacting the <a href="http://registrar.unl.edu/">Office of the University Registrar</a> to set a privacy flag on your account.
                     If any information is displayed incorrectly, please consult your academic advisor.
@@ -58,8 +58,8 @@ if (isset($page)) {
                     For <em>department (yellow pages) listings</em>, authorized users can make modifications by emailing <a href="mailto:operator&commat;unl&period;edu">operator&commat;unl&period;edu</a> with the directory URL of the listing and the information you'd like to update.
                 </p>
             </div>
-            <div class="wdn-col">
-                <h2 class="wdn-brand" id="photo">Adding your photo</h2>
+            <div>
+                <h4 id="photo">Adding your photo</h4>
                 <p>
                     <img class="frame" src="<?php echo $baseUrl ?>images/130912_Herbie_104.jpg" alt="Profile view of mascot Herbie Husker" />
                     Want to show your photo on your Directory result instead of the default outline? We've got a couple of ways to do that.
