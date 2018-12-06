@@ -55,10 +55,10 @@ $baseUrl = UNL_Peoplefinder::getURL();
     <div class="dcf-wrapper dcf-pt-8 dcf-pb-8">
         <div id="search-notice"></div>
         <div class="dcf-grid">
-            <div class="dcf-col-25%-startd@md result-filters">
+            <div class="dcf-col-100% dcf-col-25%-startd@md result-filters">
                 <?php echo $savvy->render(null, 'Peoplefinder/SearchResults/Filters.tpl.php'); ?>
             </div>
-            <div id="results" tabindex="-1" class="dcf-col-75%-end@md dcf-float-right"></div>
+            <div id="results" tabindex="-1" class="dcf-col-100% dcf-col-75%-end@md dcf-float-right"></div>
         </div>
     </div>
 </section>

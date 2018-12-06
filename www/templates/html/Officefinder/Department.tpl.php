@@ -38,7 +38,7 @@ $officialChildren = new UNL_Officefinder_DepartmentList_Filter_Suppressed($conte
 $hasOfficialChildDepartments = count($officialChildren);
 ?>
 <section class="summary dcf-grid" itemscope itemtype="http://schema.org/Organization">
-	<div class="dcf-col-33%-start@md department-summary" aria-live="polite">
+	<div class="dcf-col-100% dcf-col-33%-start@md department-summary" aria-live="polite">
 		<?php echo $savvy->render($context, 'Officefinder/Department/Summary.tpl.php') ?>
 		<?php if ($department): ?>
 			<p><a href="#all_employees">Jump to employees</a></p>
@@ -47,7 +47,7 @@ $hasOfficialChildDepartments = count($officialChildren);
 			<?php echo $savvy->render($context, 'Officefinder/Department/EditBox.tpl.php') ?>
 		<?php endif ;?>
 	</div>
-	<div class="dcf-col-67%-end@md dcf-float-right">
+	<div class="dcf-col-100% dcf-col-67%-end@md dcf-float-right">
 		<div class="card" id="listings" data-department-id="<?php echo $context->id ?>">
             <h2 class="wdn-brand"><span class="icon-phone-book" aria-hidden="true"></span>Yellow Pages</h2>
 			<div class="card-content<?php if ($userCanEdit): ?> editing<?php endif; ?>">

@@ -27,7 +27,7 @@ $showKnowledge = $context->shouldShowKnowledge();
 ?>
 <?php if ($showKnowledge): ?>
 <section class="dcf-grid knowledge-grid">
-    <div class="dcf-col-25%-start@md directory-knowledge-summary">
+    <div class="dcf-col-100% dcf-col-25%-start@md directory-knowledge-summary">
 <?php endif; ?>
 
 
@@ -183,7 +183,7 @@ $showKnowledge = $context->shouldShowKnowledge();
 
 <?php if ($showKnowledge): ?>
     </div>
-    <div class="dcf-col-75%-end@md dcf-float-right">
+    <div class="dcf-col-100% dcf-col-75%-end@md dcf-float-right">
         <div class="card">
             <div class="card-content">
                 <?php echo $savvy->render($context->getKnowledge()) ?>

@@ -3,7 +3,7 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
 ?>
 
 <div class="dcf-grid">
-    <div class="dcf-col-75%-start@md">
+    <div class="dcf-col-100% dcf-col-75%-start@md">
         <?php
         $resource = "UNL_Peoplefinder_Developers_" . $context->resource;
         $resource = new $resource;
@@ -87,7 +87,7 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
             </div>
         </div>
     </div>
-    <div class="dcf-col-25%-end@md">
+    <div class="dcf-col-100% dcf-col-25%-end@md">
         <nav id="resources" aria-label="API Navigation" class="zenbox primary">
             <h2>Directory API</h2>
             <p>The following is a list of resources for Directory.</p>
