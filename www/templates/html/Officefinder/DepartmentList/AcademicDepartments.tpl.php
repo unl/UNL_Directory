@@ -14,7 +14,7 @@ $page->addScriptDeclaration("WDN.loadJS('../scripts/filters.js', function(){
 	filters.findClasses();
 });");
 ?>
-<div class="dcf-gridt">
+<div class="dcf-grid">
     <div id="filters" class="dcf-grid-fourths@md">
         <div class="wdn_filterset">
             <h4 class="formal">Filter Results</h4>
