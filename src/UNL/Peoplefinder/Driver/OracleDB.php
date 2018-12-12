@@ -110,7 +110,7 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
             }
             
             $final_res[] = $res;
-        }	
+        }
         return new UNL_Peoplefinder_Person_Roles(['iterator' => new ArrayIterator($final_res)]);
     }
 
@@ -221,7 +221,7 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
         }
         
         // UNL_EMAILS_UNCA.TYPE = 'USERINFO' is the work email address that we want
-        $query = "SELECT UNL_BIODEMO.NETID, UNL_EMAILS_UNCA.EMAIL as mail
+        $query = "SELECT UNL_BIODEMO.NETID, UNL_BIODEMO.NU_FERPA, UNL_EMAILS_UNCA.EMAIL as mail
             FROM UNL_BIODEMO
             LEFT JOIN UNL_EMAILS_UNCA ON UNL_BIODEMO.BIODEMO_ID = UNL_EMAILS_UNCA.BIODEMO_ID AND UNL_EMAILS_UNCA.TYPE = 'USERINFO'
             WHERE UNL_BIODEMO.NETID IN (" . implode(', ', $binding_list) . ")";
@@ -238,8 +238,16 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
                 
                 $entries[$key]['mail'] = $value;
             }
+            // Remove the student affiliation if the privacy flag is set
+            if (!empty($row['NU_FERPA'])) {
+                $value = new UNL_Peoplefinder_Driver_LDAP_Multivalue(
+                    array_diff(iterator_to_array($entries[$key]['edupersonaffiliation']), array('student'))
+                );
+
+                $entries[$key]['edupersonaffiliation'] = $value;
+            }
         }
-        
+
         return $entries;
     }
 
