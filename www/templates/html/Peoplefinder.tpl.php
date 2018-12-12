@@ -23,7 +23,6 @@ $page->addStyleDeclaration("#dcf-mobile-toggle-menu {display: none!important}");
 
 $page->doctitle = '<title>Directory | University of Nebraska–Lincoln</title>';
 $page->titlegraphic = 'Directory';
-//$page->setParam('class', implode(' ', ['hide-wdn_navigation_wrapper', 'hide-breadcrumbs', 'hide-wdn_footer_related']));
 
 $page->head .= $savvy->render(null, 'static/head.tpl.php');
 
@@ -32,17 +31,12 @@ if (isset($context->options['q']) || isset($context->options['cn']) || isset($co
     $page->head .= $savvy->render(null, 'static/meta-robots.tpl.php');
 }
 
-//$page->breadcrumbs = $savvy->render(null, 'static/breadcrumbs.tpl.php');
-$page->affiliation = '';
-//$page->navlinks = '';
-//$page->pagetitle = '';
-
 if (in_array($context->options['view'], ['instructions', 'help', 'search'])) {
     //Don't wrap the home page, because we want it to use bands
     $page->maincontentarea = $savvy->render($context->output);
 } else {
     //Wrap everything else
-    $page->maincontentarea = '<div class="wdn-band record-container"><div class="wdn-inner-wrapper wdn-inner-padding-sm">' . $savvy->render($context->output) . '</div></div>';
+    $page->maincontentarea = '<div class="dcf-bleed record-container"><div class="dcf-wrapper dcf-pt-8 dcf-pb-8">' . $savvy->render($context->output) . '</div></div>';
 }
 
 $page->maincontentarea .=  $savvy->render(null, 'static/modal.tpl.php');;
