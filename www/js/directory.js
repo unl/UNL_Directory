@@ -877,7 +877,7 @@ define([
 			var checkSticky = function() {
 				$(document.body).trigger('sticky_kit:recalc');
 
-				if (window.matchMedia('only screen and (min-width: 768px)')) {
+				if (window.matchMedia('only screen and (min-width: 768px)').matches) {
 					$sidebar.stick_in_parent({spacer:false});
 				} else {
 					$sidebar.trigger('sticky_kit:detach');
