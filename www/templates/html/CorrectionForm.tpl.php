@@ -3,27 +3,27 @@
     <p>If you'd like to correct your own entry, contact your departmental HR liaison.
     For corrections to another person's contact information or yellow pages, use the form below.</p>
     <form method="post" action="<?php echo UNL_Officefinder::getURL() ?>">
-        <ul>
+        <ul class="dcf-list-bare">
             <li>
-                  <label>
+                  <label class="dcf-label">
                     Your Name: (required)
-                    <input type="text" name="name" value="" required />
+                    <input class="dcf-input-text" type="text" name="name" value="" required />
                 </label>
             </li>
             <li>
-                <label>
+                <label class="dcf-label">
                     Your Email: (required)
-                    <input type="text" name="email" value="" required />
+                    <input class="dcf-input-text" type="text" name="email" value="" required />
                 </label>
             </li>
             <li>
-                <label>
+                <label class="dcf-label">
                     What is your correction? (required)
-                    <textarea name="message" required></textarea>
+                    <textarea class="dcf-input-text" name="message" required></textarea>
                 </label>
             </li>
             <li>
-                 <input type="submit" value="Submit" />
+                 <input class="dcf-btn" type="submit" value="Submit" />
             </li>
         </ul>
 
@@ -32,5 +32,5 @@
         <input type="hidden" name="kind" value="" />
         <input type="hidden" name="id" value="" />
     </form>
-    <p class="success hidden" tabindex="-1"></p>
+    <p class="success dcf-d-none" tabindex="-1"></p>
 </div>
