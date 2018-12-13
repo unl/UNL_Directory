@@ -3,14 +3,14 @@
         <a href="#results">Skip filters</a>
     </nav>
 
-    <h2>Filter Results</h2>
+    <h2 class="dcf-txt-h4">Filter Results</h2>
     <div class="filters" aria-controls="results">
         <div class="affiliation">
-            <button aria-controls="filters_affiliation">By Affiliation <span class="toggle">(Expand)</span></button>
+            <button class="dcf-btn" style="color: #424240;" aria-controls="filters_affiliation">By Affiliation <span class="toggle">(Expand)</span></button>
             <div class="filter-options" id="filters_affiliation" role="region" tabindex="-1" aria-expanded="false" ></div>
         </div>
         <div class="department">
-            <button aria-controls="filters_department">By Department <span class="toggle">(Expand)</span></button>
+            <button class="dcf-btn" style="color: #424240;" aria-controls="filters_department">By Department <span class="toggle">(Expand)</span></button>
             <div class="filter-options" id="filters_department" role="region" tabindex="-1" aria-expanded="false" ></div>
         </div>
     </div>
