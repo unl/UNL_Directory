@@ -12,7 +12,7 @@
     <div class="dcf-input-group">
         <input class="dcf-input-text" tabindex="0" type="text" autofocus placeholder="Herbie Husker" value="<?php echo $default; ?>" id="q" name="q" aria-label="Enter a name to begin your search" />
         <span class="wdn-input-group-btn">
-            <button name="submitbutton" type="submit" value="Search" class="dcf-btn"><span class="wdn-icon-search" aria-hidden="true"></span><span class="dcf-sr-only">Search</span></button>
+            <button name="submitbutton" type="submit" value="Search" class="dcf-btn button"><span class="wdn-icon-search" aria-hidden="true"></span><span class="dcf-sr-only">Search</span></button>
         </span>
     </div>
 </form>
