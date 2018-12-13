@@ -5,8 +5,9 @@ if (false == headers_sent()
     header('HTTP/1.1 '.$code.' '.$context->getMessage());
     header('Status: '.$code.' '.$context->getMessage());
 }
-
-$page->addScriptDeclaration("WDN.initializePlugin('notice');");
+if (isset($page)) {
+    $page->addScriptDeclaration("WDN.initializePlugin('notice');");
+}
 ?>
 
 <div class="wdn_notice alert">
