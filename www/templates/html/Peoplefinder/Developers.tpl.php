@@ -3,7 +3,7 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
 ?>
 
 <div class="dcf-grid dcf-col-gap-6">
-    <div class="dcf-col-100% dcf-col-75%-start@md">
+    <div class="dcf-col-100% dcf-col-75%-start@md dcf-pb-6">
         <?php
         $resource = "UNL_Peoplefinder_Developers_" . $context->resource;
         $resource = new $resource;
@@ -34,7 +34,7 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
                 }
                 ?>
             </ul>
-            <div class="wdn_tabs_content dcf-pb-6">
+            <div class="wdn_tabs_content">
                 <?php foreach ($resource->getAvailableFormats() as $format): ?>
 
                     <?php
