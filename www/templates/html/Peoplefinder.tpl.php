@@ -41,17 +41,11 @@ if (in_array($context->options['view'], ['instructions', 'help', 'search'])) {
 
 $page->maincontentarea .=  $savvy->render(null, 'static/modal.tpl.php');;
 
-$savvy->removeGlobal('page');
 
 // add entry-point scripts
 $page->maincontentarea .= $savvy->render(null, 'static/after-main.tpl.php');
 $page->contactinfo = $savvy->render(null, 'static/contact-info.tpl.php');
 
-$baseUrl = UNL_Peoplefinder::getURL();
-$version = UNL_Peoplefinder::$staticFileVersion;
-$page->addScriptDeclaration("require(['" . $baseUrl . "js/directory.min.js?v=" . $version ."'], function(directory) {
-    directory.initialize('" . $baseUrl . "', '" . UNL_Peoplefinder::$annotateUrl . "');
-});");
 
 $loginService = UNL_Officefinder::getURL() . 'editor';
 if (strpos($loginService, '//') === 0) {
@@ -67,6 +61,20 @@ $page->addScriptDeclaration("require(['wdn'], function(WDN) {
 $html = $page->toHtml();
 unset($page);
 
+// Hack to get script tag added to jsbody with an id
+// TODO: Update $page->addScriptDeclaration to handle setting of id (only excpects type currently)
+$baseUrl = UNL_Peoplefinder::getURL();
+$version = UNL_Peoplefinder::$staticFileVersion;
+$scriptTag = "
+<script id=\"main-entry\">
+require(['" . $baseUrl . "js/directory.min.js?v=" . $version ."'], function(directory) {
+  directory.initialize('" . $baseUrl . "', '" . UNL_Peoplefinder::$annotateUrl . "');
+ });
+ </script>";
+
+$jsBodyMarker = '<!-- InstanceBeginEditable name="jsbody" -->';
+$html = str_replace($jsBodyMarker, $jsBodyMarker . $scriptTag, $html);
+
 if (UNL_Peoplefinder::$minifyHtml) {
     echo zz\Html\HTMLMinify::minify($html, [
         // 'optimizationLevel' => zz\Html\HTMLMinify::OPTIMIZATION_ADVANCED,
@@ -81,3 +89,5 @@ if (UNL_Peoplefinder::$minifyHtml) {
 } else {
     echo $html;
 }
+
+$savvy->removeGlobal('page');

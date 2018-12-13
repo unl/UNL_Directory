@@ -23,7 +23,7 @@ define([
 	var searchNoticeSelector = '#noticeTemplate';
 	var genericErrorSelector = '#genericErrorTemplate';
 	var lengthErrorSelector = '#queryLengthTemplate';
-	var mainSelector = '#maincontent';
+	var mainSelector = '#dcf-main';
 	var annotateSelector = '#annotateTemplate';
 	var correctionButtonSelector = '#correctionButtonTemplate';
 	var mainStates = ['searching', 'single', 'single-dept'];
