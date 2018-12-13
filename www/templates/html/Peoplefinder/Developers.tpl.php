@@ -2,7 +2,7 @@
 $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized-dark.min.css', 'stylesheet');
 ?>
 
-<div class="dcf-grid dcf-col-gap-6">
+<div class="dcf-grid dcf-col-gap-6 dcf-pb-6">
     <div class="dcf-col-100% dcf-col-75%-start@md">
         <?php
         $resource = "UNL_Peoplefinder_Developers_" . $context->resource;
@@ -46,7 +46,7 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
                         <pre><code>GET <?php echo $url; ?></code></pre>
                         <?php if (count($resource->$method_name())): ?>
                             <h2>Resource Properties</h2>
-                            <table class="zentable neutral dcf-table">
+                            <table class="zentable neutral dcf-table dcf-txt-sm">
                             <thead><tr><th>Property</th><th>Description</th></tr></thead>
                             <tbody>
                                 <?php foreach ($resource->$method_name() as $property => $description): ?>
