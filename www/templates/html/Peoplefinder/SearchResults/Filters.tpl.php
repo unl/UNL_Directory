@@ -1,6 +1,6 @@
 <div id="filters">
-    <nav class="skipnav" >
-        <a href="#results">Skip filters</a>
+    <nav>
+        <a class="dcf-show-on-focus" href="#results">Skip filters</a>
     </nav>
 
     <h2 class="dcf-txt-h4">Filter Results</h2>
