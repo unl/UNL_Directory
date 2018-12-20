@@ -77,7 +77,7 @@ $html = str_replace($jsBodyMarker, $jsBodyMarker . $scriptTag, $html);
 
 if (UNL_Peoplefinder::$minifyHtml) {
     echo zz\Html\HTMLMinify::minify($html, [
-        // 'optimizationLevel' => zz\Html\HTMLMinify::OPTIMIZATION_ADVANCED,
+        'optimizationLevel' => zz\Html\HTMLMinify::OPTIMIZATION_SIMPLE,
         'excludeComment' => [
             '/<!--\s+Membership and regular participation .*?-->/s',
             '/<!-- (?:Instance|Template)Begin template="[^"]+" codeOutsideHTMLIsLocked="false" -->/',
