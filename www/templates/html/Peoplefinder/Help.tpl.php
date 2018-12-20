@@ -10,7 +10,7 @@ if (isset($page)) {
 <section class="dcf-bleed unl-bg-lightest-gray dcf-pt-6  dcf-pb-6" id="data">
     <div class="dcf-wrapper">
         <h2 class="dcf-txt-center clear-top">Finding Your Way Around the Directory</h2>
-        <div class="dcf-grid-thirds@md dcf-col-gap-3 dcf-row-gap-3 dcf-pt-3">
+        <div class="dcf-grid-thirds@md dcf-col-gap-vw dcf-row-gap-3 dcf-pt-3">
             <div>
                 <h4>About the data</h4>
                 <p>

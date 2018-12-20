@@ -37,7 +37,7 @@ $hrParent = $context->getOfficialParent();
 $officialChildren = new UNL_Officefinder_DepartmentList_Filter_Suppressed($context->getOfficialChildDepartments('name ASC'));
 $hasOfficialChildDepartments = count($officialChildren);
 ?>
-<section class="summary dcf-grid dcf-col-gap-4" itemscope itemtype="http://schema.org/Organization">
+<section class="summary dcf-grid dcf-col-gap-vw" itemscope itemtype="http://schema.org/Organization">
 	<div class="dcf-col-100% dcf-col-33%-start@md department-summary" aria-live="polite">
 		<?php echo $savvy->render($context, 'Officefinder/Department/Summary.tpl.php') ?>
 		<?php if ($department): ?>

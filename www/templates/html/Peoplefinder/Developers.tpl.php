@@ -2,7 +2,7 @@
 $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized-dark.min.css', 'stylesheet');
 ?>
 
-<div class="dcf-grid dcf-col-gap-6">
+<div class="dcf-grid dcf-col-gap-vw">
     <div class="dcf-col-100% dcf-col-75%-start@md dcf-pb-6">
         <?php
         $resource = "UNL_Peoplefinder_Developers_" . $context->resource;
