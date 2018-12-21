@@ -84,6 +84,9 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
                 'user_identification_string' => $uid, 
             ));
 
+        // Remove duplicates
+        $results = array_map("unserialize", array_unique(array_map("serialize", $results)));
+
         $final_res = array();
 
         $title_mod_map = array(
