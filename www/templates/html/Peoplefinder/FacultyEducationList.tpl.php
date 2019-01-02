@@ -4,11 +4,11 @@ $page->pagetitle = '<h1>Faculty Educational Credentials</h1>';
 $page->head      = $page->getRaw('head').'<link rel="stylesheet" type="text/css" media="screen" href="//directory.unl.edu/wdn/templates_3.0/css/content/pagination.css" />';
 ?>
 <p>The following is a list of faculty educational credentials as of <?php echo $context->getDateLastUpdated(); ?></p>
-<div class="wdn-grid-set">
-    <div class="wdn-col-one-fourth">
+<div class="dcf-grid">
+    <div class="dcf-col-100% dcf-col-25%-start@md">
         <?php echo $savvy->render(null, 'Peoplefinder/SearchResults/Filters.tpl.php'); ?>
     </div>
-    <div class="wdn-col-three-fourths">
+    <div class="dcf-col-100% dcf-col-75%-end@md">
         <div class="results affiliation faculty">
         <h3>Faculty</h3>
         <div class="result_head">Results 1 - <?php echo count($context); ?></div>
@@ -81,8 +81,6 @@ $page->head      = $page->getRaw('head').'<link rel="stylesheet" type="text/css"
         </div>
     </div>
 </div>
-<script type="text/javascript">
-WDN.loadJS('<?php echo $url; ?>scripts/filters.js', function(){
-	filters.initialize();
-});
-</script>
+<?php
+$page->addScriptDeclaration("WDN.loadJS('" . $url . "scripts/filters.js', function(){ filters.initialize(); });");
+?>

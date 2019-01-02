@@ -4,5 +4,5 @@
     <input type="hidden" name="name" value="<?php echo $context->name; ?>" />
     <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
     <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
-    <button class="wdn-button-brand" type="submit"><span class="icon-trash" aria-hidden="true"></span><span class="wdn-text-hidden">Delete</span></button>
+    <button class="dcf-btn dcf-btn-inverse-secondary" type="submit"><span class="icon-trash" aria-hidden="true"></span><span class="dcf-sr-only">Delete</span></button>
 </form>

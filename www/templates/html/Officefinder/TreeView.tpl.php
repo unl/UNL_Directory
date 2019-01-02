@@ -3,38 +3,43 @@ UNL_Officefinder::setReplacementData('pagetitle', '<h1>Departmental Hierarchy</h
 ?>
 <p>This view contains the departmental hierarchy found in SAP, the University's financial system.</p>
 <style>
-
-#maincontent ul.tree, #maincontent ul.tree ul {
+  #dcf-main ul.tree, #dcf-main ul.tree ul {
     list-style-type: none;
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAKAQMAAABPHKYJAAAAA1BMVEWIiIhYZW6zAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH1ggGExMZBky19AAAAAtJREFUCNdjYMAEAAAUAAHlhrBKAAAAAElFTkSuQmCC) repeat-y;
     margin: 0;
     padding: 0;
-}
-#maincontent ul.tree ul {
-    margin-left: 10px;
-}
-#maincontent ul.tree li {
+  }
+  #dcf-main ul.tree ul {
+      margin-left: 10px;
+  }
+  #dcf-main ul.tree li {
     margin: 0;
     padding: 0 12px;
     line-height: 20px;
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAUAQMAAACK1e4oAAAABlBMVEUAAwCIiIgd2JB2AAAAAXRSTlMAQObYZgAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9YIBhQIJYVaFGwAAAARSURBVAjXY2hgQIf%2FGTDFGgDSkwqATqpCHAAAAABJRU5ErkJggg%3D%3D) no-repeat;
-}
-#maincontent ul.tree li:last-child {
+  }
+  #dcf-main ul.tree li:last-child {
     background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAUAQMAAACK1e4oAAAABlBMVEUAAwCIiIgd2JB2AAAAAXRSTlMAQObYZgAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9YIBhQIIhs%2Bgc8AAAAQSURBVAjXY2hgQIf%2FGbAAAKCTBYBUjWvCAAAAAElFTkSuQmCC) no-repeat;
-}
-.academic {
-    background-color:#C2FFE0;
-}
-.org_unit {
-    font-size:75%;
-    color:black;
-}
-.suppressed {
-    text-decoration:line-through;
-}
+  }
+  .academic {
+      background-color:#C2FFE0;
+  }
+  .org_unit {
+      font-size:75%;
+      color:black;
+  }
+  .suppressed {
+      text-decoration:line-through;
+  }
 </style>
-<div class="wdn-grid-set">
-    <div class="wdn-col-three-fourths">
+<div class="dcf-grid">
+    <div class="dcf-col-100% dcf-col-25%-start@md">
+      <ul>
+        <li><span class="academic">Green</span> listings are shown on the <a href="academic">Academic Departments list</a></li>
+        <li><span class="suppressed">Struck</span> listings have no SAP appointments or child listings, and are hidden from the public</li>
+      </ul>
+    </div>
+    <div class="dcf-col-100% dcf-col-75%-end@md">
         <ul class="tree">
             <?php
             $depth = 0;
@@ -66,12 +71,6 @@ UNL_Officefinder::setReplacementData('pagetitle', '<h1>Departmental Hierarchy</h
             }
             ?>
             </li>
-        </ul>
-    </div>
-    <div class="wdn-col-one-fourth">
-        <ul>
-        <li><span class="academic">Green</span> listings are shown on the <a href="academic">Academic Departments list</a></li>
-        <li><span class="suppressed">Struck</span> listings have no SAP appointments or child listings, and are hidden from the public</li>
         </ul>
     </div>
 </div>

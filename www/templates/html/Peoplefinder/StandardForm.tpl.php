@@ -9,10 +9,10 @@
         $default = htmlentities((string)$context->options['q'], ENT_QUOTES);
     }
     ?>
-    <div class="wdn-input-group">
-        <input tabindex="0" type="text" autofocus placeholder="Herbie Husker" value="<?php echo $default; ?>" id="q" name="q" aria-label="Enter a name to begin your search" />
+    <div class="dcf-input-group">
+        <input class="dcf-input-text" tabindex="0" type="text" autofocus placeholder="Herbie Husker" value="<?php echo $default; ?>" id="q" name="q" aria-label="Enter a name to begin your search" />
         <span class="wdn-input-group-btn">
-            <button name="submitbutton" type="submit" value="Search" class="button"><span class="wdn-icon-search" aria-hidden="true"></span><span class="wdn-text-hidden">Search</span></button>
+            <button name="submitbutton" type="submit" value="Search" class="button"><span class="wdn-icon-search" aria-hidden="true"></span><span class="dcf-sr-only">Search</span></button>
         </span>
     </div>
 </form>

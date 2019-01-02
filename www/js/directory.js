@@ -1,13 +1,12 @@
 define([
 	'jquery',
 	'wdn',
-	'modernizr',
 	'require',
 	'idm',
 	'notice',
 	'tooltip',
 	'./vendor/jsrender.js'
-], function($, WDN, Modernizr, require, idm) {
+], function($, WDN, require, idm) {
 	"use strict";
 
 	var serviceURL = 'https://directory.unl.edu/';
@@ -24,7 +23,7 @@ define([
 	var searchNoticeSelector = '#noticeTemplate';
 	var genericErrorSelector = '#genericErrorTemplate';
 	var lengthErrorSelector = '#queryLengthTemplate';
-	var mainSelector = '#maincontent';
+	var mainSelector = '#dcf-main';
 	var annotateSelector = '#annotateTemplate';
 	var correctionButtonSelector = '#correctionButtonTemplate';
 	var mainStates = ['searching', 'single', 'single-dept'];
@@ -684,12 +683,12 @@ define([
 		var $oldForm;
 
 		if (!$modalClose) {
-			$modalClose = $('<button>', {"class": 'cancel wdn-button'})
+			$modalClose = $('<button>', {"class": 'cancel dcf-button'})
 				.click(function() {
 					closeModalAndRestoreContent();
 				})
 				.append($('<span>', {"class": 'wdn-icon-cancel', 'aria-hidden': 'true'}))
-				.append($('<span>', {"class": 'wdn-text-hidden'}).text('Close'));
+				.append($('<span>', {"class": 'dcf-sr-only'}).text('Close'));
 		} else {
 			$modalClose.detach();
 		}
@@ -878,7 +877,7 @@ define([
 			var checkSticky = function() {
 				$(document.body).trigger('sticky_kit:recalc');
 
-				if (Modernizr.mq('only screen and (min-width: 768px)')) {
+				if (window.matchMedia('only screen and (min-width: 768px)').matches) {
 					$sidebar.stick_in_parent({spacer:false});
 				} else {
 					$sidebar.trigger('sticky_kit:detach');
