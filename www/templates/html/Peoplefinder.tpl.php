@@ -22,7 +22,7 @@ $savvy->addGlobal('page', $page);
 $page->addStyleDeclaration("#dcf-mobile-toggle-menu {display: none!important}");
 
 $page->doctitle = '<title>Directory | University of Nebraska–Lincoln</title>';
-$page->titlegraphic = '<a class="dcf-txt-h5" href="/">Directory</a>';
+$page->titlegraphic = '<a class="dcf-txt-h5" href="' . UNL_Peoplefinder::getURL() . '">Directory</a>';
 
 $page->head .= $savvy->render(null, 'static/head.tpl.php');
 
