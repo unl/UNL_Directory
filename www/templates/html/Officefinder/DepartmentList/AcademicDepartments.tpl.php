@@ -1,4 +1,4 @@
-<?php 
+<?php
 UNL_Officefinder::setReplacementData('doctitle', 'Academic Departments | Directory | University of Nebraska&ndash;Lincoln');
 UNL_Officefinder::setReplacementData('breadcrumbs', '
     <ul>
@@ -35,7 +35,7 @@ $page->addScriptDeclaration("WDN.loadJS('../scripts/filters.js', function(){
                                 60  => 'Business Administration',
                                 144 => 'Education &amp; Human Sciences',
                                 121 => 'Engineering',
-                                70  => 'Fine &amp; Performing Arts', 
+                                70  => 'Fine &amp; Performing Arts',
                                 139 => 'Journalism &amp; Mass Communications',
                                 75  => 'Law',
                             ) as $college_id=>$college_name): ?>
@@ -64,7 +64,7 @@ $page->addScriptDeclaration("WDN.loadJS('../scripts/filters.js', function(){
                 if ($firstLetter != 'A') {
                     $department_lists .= '</ul>';
                 }
-                $department_lists .= '<h4 id="'.$firstLetter.'" class="section">'.$firstLetter.'<span><a href="#dir_nav">Back to the top</a></span></h4><ul class="pfResult departments">';
+                $department_lists .= '<h4 id="'.$firstLetter.'" class="section">'.$firstLetter.'<span><a href="#dir_nav">Back to the top</a></span></h4><ul class="pfResult departments dcf-list-bare dcf-m-0 dcf-bg-white dcf-b-1 dcf-b-solid unl-b-light-gray">';
             }
             $department_lists .= $savvy->render($listing, 'Officefinder/DepartmentList/ListItem.tpl.php');
         }

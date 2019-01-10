@@ -31,8 +31,10 @@ $title = $context->formatTitle();
             </div>
         <?php endif; ?>
 
-        <div class="recordDetails">
-            <div class="fn" itemprop="name"><a itemprop="url" href="<?php echo $context->getUrl() ?>"<?php echo $onclick ?> aria-label="Show more information about <?php echo $name ?>"><?php echo $name ?></a></div>
+        <div class="recordDetails unl-font-sans">
+            <div class="fn" itemprop="name">
+              <a class="dcf-txt-decor-hover" itemprop="url" href="<?php echo $context->getUrl() ?>"<?php echo $onclick ?> aria-label="Show more information about <?php echo $name ?>"><?php echo $name ?></a>
+            </div>
             <?php if (isset($context->unlHROrgUnitNumber)): ?>
                 <?php
                 $roles = $context->getRoles();

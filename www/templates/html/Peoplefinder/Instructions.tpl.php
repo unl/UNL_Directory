@@ -2,13 +2,13 @@
 $baseUrl = UNL_Peoplefinder::getURL();
 ?>
 
-<section class="dcf-bleed search-band">
-    <div class="dcf-wrapper dcf-pt-7 dcf-pb-7">
-        <?php echo $savvy->render($context, 'Peoplefinder/StandardForm.tpl.php') ?>
-    </div>
-</section>
+<div class="dcf-bleed search-band dcf-txt-center dcf-bg-cover">
+  <div class="dcf-wrapper dcf-pt-7 dcf-pb-7">
+    <?php echo $savvy->render($context, 'Peoplefinder/StandardForm.tpl.php') ?>
+  </div>
+</div>
 
-<section class="dcf-bleed help-container dcf-pb-8">
+<div class="dcf-bleed help-container dcf-pb-8 unl-bg-lightest-gray">
     <div class="dcf-wrapper">
         <h1 class="dcf-sr-only">Welcome to the University of Nebraska–Lincoln Directory</h1>
         <div class="dcf-grid-halves@md dcf-col-gap-vw dcf-row-gap-5 dcf-pt-8">
@@ -49,9 +49,9 @@ $baseUrl = UNL_Peoplefinder::getURL();
             <p>A <a href="<?php echo UNL_Officefinder::getURL(); ?>yellow-pages">printer-friendly version</a> of the Yellow Page Directory is available to university users only.<br/>Please be aware this is a very large document and may take some time to fully load.</p>
         </div>
     </div>
-</section>
+</div>
 
-<section class="dcf-bleed results-container">
+<div class="dcf-bleed results-container unl-bg-lightest-gray">
     <div class="dcf-wrapper dcf-pt-8 dcf-pb-8">
         <div id="search-notice"></div>
         <div class="dcf-grid dcf-col-gap-vw">
@@ -61,8 +61,8 @@ $baseUrl = UNL_Peoplefinder::getURL();
             <div id="results" tabindex="-1" class="dcf-col-100% dcf-col-75%-end@md"></div>
         </div>
     </div>
-</section>
+</div>
 
-<section class="dcf-bleed record-container">
+<div class="dcf-bleed record-container unl-bg-lightest-gray">
     <div class="dcf-wrapper dcf-pt-8 dcf-pb-8 record-single"></div>
-</section>
+</div>

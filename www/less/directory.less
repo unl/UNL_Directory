@@ -10,14 +10,7 @@
 @inner-band-margin: percentage(-1 * @mobile-pad / (100% - 2 * @mobile-pad));
 
 .search-band {
-	text-align: center;
 	background: #38431b url(../images/050419.jpg) 50% 50% no-repeat;
-	background-size: cover;
-
-	.dcf-input-group {
-		max-width: 30em!important;
-		margin: 0 auto;
-	}
 
 	p {
 		margin-bottom: 0;
@@ -32,12 +25,6 @@
 
 	.single & {
 		display: none !important;
-	}
-}
-
-@media @bp-under768w {
-	#q {
-		font-size: 16px;
 	}
 }
 
@@ -119,23 +106,11 @@
 	}
 }
 
-.result_head {
-	.sans-serif-font();
-	font-size: 0.697em;
-}
-
 .pfResult {
-	list-style: none;
-	padding: 0;
-	border-color: @ui04;
-	border-style: solid;
-	border-width: 1px 0 0;
-	background: #fff;
-	margin: 1em @inner-band-margin; // push the list to the page edge
 
 	> li {
 		padding: 1em;
-		border-bottom: 1px solid @ui04;
+		border-bottom: 1px solid #e3e3e2;
 		cursor: pointer;
 
 		&.selected {
@@ -192,6 +167,11 @@
 		}
 	}
 
+  > li:last-child {
+    border-bottom: 0;
+    margin-bottom: 0;
+  }
+
 	.fn {
 		font-size: 1.128em;
 		font-weight: bold;
@@ -215,7 +195,9 @@
 	}
 }
 
-.results, .pfResult {
+.results,
+.pfResult {
+
 	.vcard {
 		position: relative;
 
@@ -233,6 +215,10 @@
 			right: 0;
 		}
 	}
+}
+
+.results + .results {
+  margin-top: 2.37em;
 }
 
 .results-container {
@@ -305,28 +291,8 @@
 
 #filters {
 
-	h2 {
-		margin-top: 0;
-	}
-
-	.filters {
-		line-height: 1.425;
-		.sans-serif-font();
-	}
-
 	input {
 		margin-right: 0.2em;
-	}
-
-	button {
-		border: 0;
-		border-bottom: 1px solid @ui04;
-		padding: 0;
-		background: none;
-		text-transform: uppercase;
-		text-align: left;
-		display: block;
-		margin-bottom: 1em;
 	}
 
 	ol {
@@ -334,9 +300,6 @@
 		padding: 0;
 	}
 
-	li {
-		margin-bottom: 0.5em;
-	}
 }
 
 #results {
@@ -821,23 +784,6 @@
 	display: none;
 }
 
-/**
-TODO: remove once fixed in framework
-Temp fix for mobile rendering of nav items. New updates do not work so well with framework hide classes.
-This is a bandage until the issue is addressed in the framework
-**/
-@media @bp-nav-hidden {
-
-	.hide-wdn_navigation_wrapper #wdn-main-share-button {
-		margin-left: 6em;
-		height: 40px;
-	}
-
-	.hide-wdn_navigation_wrapper .wdn-menu-trigger {
-		height: 40px;
-	}
-}
-
 @media @bp768 {
 
     .heading-block {
@@ -850,12 +796,6 @@ This is a bandage until the issue is addressed in the framework
 	    .card-content {
 			padding: 0 1.899rem 2.369em;
 		}
-	}
-
-    .pfResult {
-		margin-left: 0;
-		margin-right: 0;
-		border-width: 1px 1px 0;
 	}
 
     .results-container,

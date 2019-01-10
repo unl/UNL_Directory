@@ -11,7 +11,7 @@ $page->head      = $page->getRaw('head').'<link rel="stylesheet" type="text/css"
     <div class="dcf-col-100% dcf-col-75%-end@md">
         <div class="results affiliation faculty">
         <h3>Faculty</h3>
-        <div class="result_head">Results 1 - <?php echo count($context); ?></div>
+        <p class="result_head dcf-txt-xs dcf-mt-1 unl-font-sans">Results 1 - <?php echo count($context); ?></p>
         <ul class="wdn_pagination">
         <?php foreach (range('A', 'Z') as $letter): ?>
             <li><a href="#<?php echo $letter; ?>"><?php echo $letter; ?></a></li>
@@ -26,7 +26,7 @@ $page->head      = $page->getRaw('head').'<link rel="stylesheet" type="text/css"
         <tbody>
         <?php
         $current_letter = false;
-        
+
         $limited = new LimitIterator($context, $context->options['offset'], $context->options['limit']);
         foreach ($limited as $faculty) {
             try {
@@ -34,14 +34,14 @@ $page->head      = $page->getRaw('head').'<link rel="stylesheet" type="text/css"
             } catch (Exception $e) {
                 $record = false;
             }
-        
+
             // If we're in a section with a new first letter, add the appropriate ID attribute
             $id = '';
             if (substr($faculty->employee_name, 0, 1) !== $current_letter) {
                 $current_letter = substr($faculty->employee_name, 0, 1);
                 $id = 'id="'.$current_letter.'"';
             }
-        
+
             echo '<tr class="ppl_Sresult faculty" '.$id.'>';
             echo '<td>';
             if ($record) {
