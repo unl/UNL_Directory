@@ -107,11 +107,14 @@
 }
 
 .pfResult {
+  background-color: #fff;
+  border: 1px solid #e3e3e2;
 
 	> li {
-		padding: 1em;
 		border-bottom: 1px solid #e3e3e2;
 		cursor: pointer;
+		margin-bottom: 0;
+		padding: 1.33em 1.77em;
 
 		&.selected {
 
@@ -143,17 +146,11 @@
 			height: 40px;
 			object-fit: cover;
 		}
+
 		.roles {
-			padding: 0;
-			margin: 0;
-			list-style: none;
 
-			li {
-				margin-bottom: 0.618rem;
-
-				&:last-child {
-					margin-bottom: 0;
-				}
+			li:last-child {
+				margin-bottom: 0;
 			}
 
 			.title,
@@ -171,11 +168,6 @@
     border-bottom: 0;
     margin-bottom: 0;
   }
-
-	.fn {
-		font-size: 1.128em;
-		font-weight: bold;
-	}
 
 	.given-name {
 		margin-left: 1em;
@@ -215,6 +207,10 @@
 			right: 0;
 		}
 	}
+}
+
+.affiliation-heading {
+  margin-bottom: 0;
 }
 
 .results + .results {

@@ -11,7 +11,7 @@ $page->head      = $page->getRaw('head').'<link rel="stylesheet" type="text/css"
     <div class="dcf-col-100% dcf-col-75%-end@md">
         <div class="results affiliation faculty">
         <h3>Faculty</h3>
-        <p class="result_head dcf-txt-xs dcf-mt-1 unl-font-sans">Results 1 - <?php echo count($context); ?></p>
+        <p class="result_head dcf-txt-xs dcf-mt-1 unl-font-sans unl-dark-gray">Results 1 - <?php echo count($context); ?></p>
         <ul class="wdn_pagination">
         <?php foreach (range('A', 'Z') as $letter): ?>
             <li><a href="#<?php echo $letter; ?>"><?php echo $letter; ?></a></li>

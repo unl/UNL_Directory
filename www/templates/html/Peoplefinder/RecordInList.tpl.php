@@ -32,7 +32,7 @@ $title = $context->formatTitle();
         <?php endif; ?>
 
         <div class="recordDetails unl-font-sans">
-            <div class="fn" itemprop="name">
+            <div class="fn dcf-txt-lg dcf-bold" itemprop="name">
               <a class="dcf-txt-decor-hover" itemprop="url" href="<?php echo $context->getUrl() ?>"<?php echo $onclick ?> aria-label="Show more information about <?php echo $name ?>"><?php echo $name ?></a>
             </div>
             <?php if (isset($context->unlHROrgUnitNumber)): ?>
@@ -44,12 +44,12 @@ $title = $context->formatTitle();
                 <?php if (count($roles)): ?>
                     <?php echo $savvy->render($roles) ?>
                 <?php elseif ($title): ?>
-                    <div class="title" itemprop="jobTitle"><?php echo $title ?></div>
+                    <div class="title dcf-txt-sm" itemprop="jobTitle"><?php echo $title ?></div>
                 <?php endif; ?>
             <?php endif; ?>
 
         <?php if (!empty($context->telephoneNumber)): ?>
-            <div class="tel"><?php echo $savvy->render($context->telephoneNumber, 'Peoplefinder/Record/TelephoneNumber.tpl.php') ?></div>
+            <div class="tel dcf-txt-sm"><?php echo $savvy->render($context->telephoneNumber, 'Peoplefinder/Record/TelephoneNumber.tpl.php') ?></div>
         <?php endif; ?>
 
         </div>
