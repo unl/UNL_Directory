@@ -8,7 +8,7 @@ $baseUrl = UNL_Peoplefinder::getURL();
     </div>
 </section>
 
-<section class="dcf-bleed help-container dcf-pb-8">
+<section class="dcf-bleed help-container dcf-pb-8 unl-bg-lightest-gray">
     <div class="dcf-wrapper">
         <h1 class="dcf-sr-only">Welcome to the University of Nebraska–Lincoln Directory</h1>
         <div class="dcf-grid-halves@md dcf-col-gap-vw dcf-row-gap-5 dcf-pt-8">
@@ -51,7 +51,7 @@ $baseUrl = UNL_Peoplefinder::getURL();
     </div>
 </section>
 
-<section class="dcf-bleed results-container">
+<section class="dcf-bleed results-container unl-bg-lightest-gray">
     <div class="dcf-wrapper dcf-pt-8 dcf-pb-8">
         <div id="search-notice"></div>
         <div class="dcf-grid dcf-col-gap-vw">
@@ -63,6 +63,6 @@ $baseUrl = UNL_Peoplefinder::getURL();
     </div>
 </section>
 
-<section class="dcf-bleed record-container">
+<section class="dcf-bleed record-container unl-bg-lightest-gray">
     <div class="dcf-wrapper dcf-pt-8 dcf-pb-8 record-single"></div>
 </section>
