@@ -16,7 +16,7 @@ if ($parent) {
         <div class="profile_pic" href="<?php echo $context->getURL() ?>">
             <img alt="Building Image" src="<?php echo $context->getImageUrl(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_SMALL) ?>" class="photo" />
         </div>
-        <div class="recordDetails">
+        <div class="recordDetails unl-font-sans">
             <div class="fn">
                 <a class="dcf-txt-decor-hover" href="<?php echo $context->getURL() ?>"><?php echo $context->name ?></a>
             </div>
