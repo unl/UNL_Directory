@@ -18,7 +18,7 @@ if ($parent) {
         </div>
         <div class="recordDetails">
             <div class="fn">
-                <a href="<?php echo $context->getURL() ?>"><?php echo $context->name ?></a>
+                <a class="dcf-txt-decor-hover" href="<?php echo $context->getURL() ?>"><?php echo $context->name ?></a>
             </div>
             <?php if ($title): ?>
                 <div class="title"><?php echo $title ?></div>

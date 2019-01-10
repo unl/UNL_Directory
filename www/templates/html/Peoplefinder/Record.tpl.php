@@ -43,7 +43,7 @@ $showKnowledge = $context->shouldShowKnowledge();
         <div class="headline">
     <?php endif; ?>
         <?php if (!$isOrg): ?>
-            <a class="permalink" href="<?php echo $context->getUrl() ?>" itemprop="url">
+            <a class="permalink dcf-txt-decor-hover" href="<?php echo $context->getUrl() ?>" itemprop="url">
         <?php endif; ?>
         <?php if ($isOrg): ?>
             <span class="cn" itemprop="name"><?php echo $context->cn ?></span>
@@ -129,7 +129,7 @@ $showKnowledge = $context->shouldShowKnowledge();
                     <?php else: ?>
                         <a href="https://maps.unl.edu/<?php echo strtoupper($address['unlBuildingCode']) ?>" itemprop="hasMap"><?php echo $address['unlBuildingCode'] ?></a>
                     <?php endif; ?>
-                    
+
                     <?php echo str_replace($address['unlBuildingCode'], '', $address['street-address']) ?>
                 </span>
             <?php endif; ?>
