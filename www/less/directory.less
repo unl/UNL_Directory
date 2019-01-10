@@ -119,23 +119,11 @@
 	}
 }
 
-.result_head {
-	.sans-serif-font();
-	font-size: 0.697em;
-}
-
 .pfResult {
-	list-style: none;
-	padding: 0;
-	border-color: @ui04;
-	border-style: solid;
-	border-width: 1px 0 0;
-	background: #fff;
-	margin: 1em @inner-band-margin; // push the list to the page edge
 
 	> li {
 		padding: 1em;
-		border-bottom: 1px solid @ui04;
+		border-bottom: 1px solid #e3e3e2;
 		cursor: pointer;
 
 		&.selected {
@@ -192,6 +180,11 @@
 		}
 	}
 
+  > li:last-child {
+    border-bottom: 0;
+    margin-bottom: 0;
+  }
+
 	.fn {
 		font-size: 1.128em;
 		font-weight: bold;
@@ -215,7 +208,9 @@
 	}
 }
 
-.results, .pfResult {
+.results,
+.pfResult {
+
 	.vcard {
 		position: relative;
 
@@ -233,6 +228,10 @@
 			right: 0;
 		}
 	}
+}
+
+.results + .results {
+  margin-top: 2.37em;
 }
 
 .results-container {
@@ -850,12 +849,6 @@ This is a bandage until the issue is addressed in the framework
 	    .card-content {
 			padding: 0 1.899rem 2.369em;
 		}
-	}
-
-    .pfResult {
-		margin-left: 0;
-		margin-right: 0;
-		border-width: 1px 1px 0;
 	}
 
     .results-container,
