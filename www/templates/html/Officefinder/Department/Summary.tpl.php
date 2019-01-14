@@ -18,15 +18,16 @@ if (!empty($context->email)) {
 $onlySummary = $context->isSummaryView();
 ?>
 <div class="departmentInfo"<?php if ($onlySummary): ?> itemscope itemtype="http://schema.org/Organization"<?php endif; ?>>
-    <div class="vcard office<?php if($onlySummary): ?> card<?php endif; ?>" data-listing-id="<?php echo $context->id ?>" data-preferred-name="<?php echo $context->name ?>">
-        <div class="card-profile">
-            <img alt="Building Image" itemprop="image" src="<?php echo $context->getImageURL(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_LARGE); ?>" class="photo" />
+    <div class="vcard office<?php if($onlySummary): ?> card<?php endif; ?>" data-listing-id="<?php echo $context->id ?> dcf-mt-0 dcf-mb-0 dcf-mr-auto dcf-ml-auto dcf-measure" data-preferred-name="<?php echo $context->name ?>">
+        <div class="card-profile dcf-mb-3 dcf-w-100% dcf-ratio dcf-ratio-4x3">
+            <img class="photo dcf-ratio-child dcf-d-block dcf-w-100% dcf-obj-fit-cover" itemprop="image" src="<?php echo $context->getImageURL(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_LARGE); ?>" alt="Building Image" />
         </div>
-        <div class="vcardInfo<?php if($onlySummary): ?> card-content<?php endif; ?>">
+        <div class="vcardInfo<?php if($onlySummary): ?> card-content<?php endif; ?> unl-font-sans">
+            <div class="dcf-mb-5">
             <?php if (!$onlySummary): ?>
-                <h2 class="headline">
+                <h2 class="headline dcf-mb-0">
             <?php else: ?>
-                <div class="headline">
+                <div class="headline dcf-txt-h2 dcf-lh-2">
             <?php endif; ?>
                 <a class="permalink dcf-txt-decor-hover" href="<?php echo $context->getURL() ?>" itemprop="url">
                     <span class="fn org" itemprop="name"><?php echo $context->name ?></span>
@@ -38,11 +39,12 @@ $onlySummary = $context->isSummaryView();
             <?php endif; ?>
 
             <?php if (!$context->isOfficialDepartment()): ?>
-                 <div class="title" itemprop="parentOrganization" itemscope itemtype="http://schema.org/Organization"><a href="<?php echo $parent->getURL() ?>"><span itemprop="name"><?php echo $parent->name ?></span></a></div>
+                 <div class="title dcf-mt-3 dcf-txt-sm" itemprop="parentOrganization" itemscope itemtype="http://schema.org/Organization"><a href="<?php echo $parent->getURL() ?>"><span itemprop="name"><?php echo $parent->name ?></span></a></div>
             <?php endif; ?>
+            </div>
 
             <?php if ($context->hasAddress()): ?>
-                <div class="adr work attribute" itemprop="location" itemscope itemtype="http://schema.org/Place">
+                <div class="adr work attribute dcf-txt-sm" itemprop="location" itemscope itemtype="http://schema.org/Place">
                     <span class="icon-map-pin" aria-hidden="true"></span>
                     <span class="type">Address</span>
                     <?php if ($context->building): ?>
@@ -70,7 +72,7 @@ $onlySummary = $context->isSummaryView();
             <?php endif; ?>
 
             <?php if (!empty($context->phone)): ?>
-            <div class="tel work attribute">
+            <div class="tel work attribute dcf-txt-sm">
                 <span class="icon-phone" aria-hidden="true"></span>
                 <span class="type">Phone:</span>
                 <span class="value"><?php echo $savvy->render((object) [
@@ -81,7 +83,7 @@ $onlySummary = $context->isSummaryView();
             </div>
             <?php endif; ?>
             <?php if (!empty($context->fax)): ?>
-            <div class="tel work fax attribute">
+            <div class="tel work fax attribute dcf-txt-sm">
                 <span class="icon-print" aria-hidden="true"></span>
                 <span class="type">Fax:</span>
                 <span class="value"><?php echo $savvy->render((object) [
@@ -92,21 +94,21 @@ $onlySummary = $context->isSummaryView();
             </div>
             <?php endif; ?>
             <?php if ($encodedEmail): ?>
-            <div class="attribute">
+            <div class="attribute dcf-txt-sm">
                    <span class="icon-email" aria-hidden="true"></span>
                    <a class="email" href="mailto:<?php echo $encodedEmail ?>" itemprop="email"><?php echo $encodedEmail ?></a>
             </div>
             <?php endif; ?>
 
             <?php if (!empty($context->website)): ?>
-            <div class="attribute">
+            <div class="attribute dcf-txt-sm">
                 <span class="icon-website" aria-hidden="true"></span>
                 <a class="url" href="<?php echo $context->website; ?>"><?php echo $context->website; ?></a>
             </div>
             <?php endif; ?>
 
             <?php if ($context->isOfficialDepartment()): ?>
-                <div class="attribute">
+                <div class="attribute dcf-txt-sm">
                     <span class="icon-hierarchy" aria-hidden="true"></span>
                     Unit #<?php echo $context->org_unit ?>
                 </div>
@@ -121,12 +123,12 @@ $onlySummary = $context->isSummaryView();
                     <?php endif; ?>
                 </div>
             <?php else: ?>
-                <div class="department-correction">
+                <div class="department-correction dcf-mt-5 dcf-txt-2xs dcf-italic unl-dark-gray">
                     <?php echo $savvy->render($context->getEditors(), 'Officefinder/Department/UsersOrganizations.tpl.php') ?>
                 </div>
             <?php endif; ?>
         <?php elseif (!$userCanEdit): ?>
-            <div class="department-correction"></div>
+            <div class="department-correction dcf-mt-5 dcf-txt-2xs dcf-italic unl-dark-gray"></div>
         <?php endif; ?>
     </div>
 </div>

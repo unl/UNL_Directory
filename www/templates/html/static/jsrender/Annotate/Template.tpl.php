@@ -1,1 +1,1 @@
-<a href="{{:annotateUrl}}" title="Leave notes on the listing for {{:preferredName}}" class="wdn_annotate"><span class="icon-sticky-note" aria-hidden="true"></span><span class="wdn-text-hidden">sticky note icon </span>Your Notes</a>
+<a class="wdn_annotate dcf-btn dcf-btn-secondary dcf-b-0" href="{{:annotateUrl}}" title="Leave notes on the listing for {{:preferredName}}"><span class="icon-sticky-note" aria-hidden="true"></span><span class="wdn-text-hidden">sticky note icon </span>Your Notes</a>

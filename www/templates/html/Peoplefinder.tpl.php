@@ -36,7 +36,7 @@ if (in_array($context->options['view'], ['instructions', 'help', 'search'])) {
     $page->maincontentarea = $savvy->render($context->output);
 } else {
     //Wrap everything else
-    $page->maincontentarea = '<div class="dcf-bleed record-container"><div class="dcf-wrapper dcf-pt-8 dcf-pb-8">' . $savvy->render($context->output) . '</div></div>';
+    $page->maincontentarea = '<div class="dcf-bleed record-container unl-bg-lightest-gray"><div class="dcf-wrapper dcf-pt-8 dcf-pb-8">' . $savvy->render($context->output) . '</div></div>';
 }
 
 $page->maincontentarea .=  $savvy->render(null, 'static/modal.tpl.php');;
