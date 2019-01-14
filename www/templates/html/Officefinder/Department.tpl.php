@@ -47,9 +47,9 @@ $hasOfficialChildDepartments = count($officialChildren);
 			<?php echo $savvy->render($context, 'Officefinder/Department/EditBox.tpl.php') ?>
 		<?php endif ;?>
 	</div>
-	<div class="dcf-col-100% dcf-col-67%-end@md dcf-float-right">
-		<div class="card" id="listings" data-department-id="<?php echo $context->id ?>">
-            <h2 class="wdn-brand"><span class="icon-phone-book" aria-hidden="true"></span>Yellow Pages</h2>
+	<div class="dcf-col-100% dcf-col-67%-end@md">
+		<div class="card dcf-mb-7" id="listings" data-department-id="<?php echo $context->id ?>">
+      <h2 class="dcf-txt-h3 dcf-m-0"><span class="icon-phone-book" aria-hidden="true"></span>Yellow Pages</h2>
 			<div class="card-content<?php if ($userCanEdit): ?> editing<?php endif; ?>">
 				<?php if (count($listings)): ?>
 					<?php echo $savvy->render($listings, 'Officefinder/Department/Listings.tpl.php') ?>
@@ -74,30 +74,30 @@ $hasOfficialChildDepartments = count($officialChildren);
 		</div>
 
 		<?php if ($department): ?>
-			<div id="all_employees">
-				<h2 class="wdn-brand"><span class="icon-employees" aria-hidden="true"></span>All Employees</h2>
+			<div class="dcf-mb-7" id="all_employees">
+				<h2 class="dcf-txt-h3"><span class="icon-employees" aria-hidden="true"></span>All Employees</h2>
 				<?php echo $savvy->render($department) ?>
 			</div>
-			<div id="orgChart">
-				<h2 class="wdn-brand"><span class="icon-hierarchy" aria-hidden="true"></span>HR Organization Chart</h2>
+			<div class="dcf-mt-7 dcf-txt-center" id="orgChart">
+				<h2 class="dcf-txt-h3"><span class="icon-hierarchy" aria-hidden="true"></span>HR Organization Chart</h2>
 				<?php if (!$context->isRoot()): ?>
-					<ul>
-						<li><a href="<?php echo $hrParent->getURL() ?>">
+					<ul class="dcf-list-bare unl-font-sans">
+						<li><a class="dcf-txt-decor-hover" href="<?php echo $hrParent->getURL() ?>">
 							<?php echo $hrParent->name ?>
-							<span class="org-unit">(<?php echo $hrParent->org_unit ?>)</span>
+							<span class="org-unit dcf-d-block dcf-txt-xs">#<?php echo $hrParent->org_unit ?></span>
 						</a>
 				<?php endif; ?>
 
-				<ul<?php if (!$context->isRoot()): ?> class="icon-down-arrow"<?php endif; ?>>
+				<ul<?php if (!$context->isRoot()): ?> class="dcf-list-bare icon-down-arrow"<?php endif; ?>>
 					<li>
 						<strong><?php echo $context->name; ?></strong>
 						<?php if ($hasOfficialChildDepartments): ?>
-							<ul class="icon-down-arrow">
+							<ul class="dcf-list-bare icon-down-arrow">
 								<?php foreach ($officialChildren as $child): ?>
-									<li><a href="<?php echo $child->getURL(); ?>">
+									<li><a class="dcf-txt-decor-hover" href="<?php echo $child->getURL(); ?>">
 										<?php echo $child->name; ?>
 										<?php if ($child->isOfficialDepartment()): ?>
-											<span class="org-unit">(<?php echo $child->org_unit ?>)</span>
+											<span class="org-unit dcf-d-block dcf-txt-xs">#<?php echo $child->org_unit ?></span>
 										<?php endif; ?>
 									</a></li>
 								<?php endforeach; ?>
