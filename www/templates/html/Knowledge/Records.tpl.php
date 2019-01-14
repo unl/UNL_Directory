@@ -23,12 +23,12 @@ $sectionClassMap = [
 
 <?php foreach ($formatLabelMap as $section => $sectionLabel): ?>
     <?php if ($formattedData[$section]): ?>
-        <div class="directory-knowledge-section directory-knowledge-section-<?php echo $section ?>">
+        <div class="directory-knowledge-section directory-knowledge-section-<?php echo $section ?> dcf-mt-7">
             <?php if ($sectionLabel): ?>
-                <h2 class="wdn-brand"><span class="<?php echo $sectionClassMap[$section] ?>" aria-hidden="true"></span><span class="dcf-sr-only"><?php echo $sectionClassMap[$section] ?></span><?php echo $savvy->escape($sectionLabel) ?></h2>
+                <h2 class="directory-knowledge-section-heading dcf-relative dcf-txt-h3 dcf-regular"><span class="dcf-absolute dcf-pin-left <?php echo $sectionClassMap[$section] ?>" aria-hidden="true"></span><span class="dcf-sr-only"><?php echo $sectionClassMap[$section] ?></span><?php echo $savvy->escape($sectionLabel) ?></h2>
             <?php endif; ?>
             <?php if ($formattedData[$section] instanceof Traversable): ?>
-                <ul class="directory-knowledge-section-inner">
+                <ul class="directory-knowledge-section-inner dcf-list-bare dcf-ml-7">
                     <?php foreach ($formattedData[$section] as $sectionListItem): ?>
                         <li class="directory-knowledge-item"><?php echo $sectionListItem ?></li>
                     <?php endforeach; ?>
