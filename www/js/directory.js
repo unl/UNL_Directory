@@ -873,6 +873,9 @@ define([
 	};
 
 	var createStickyKit = function($sidebar) {
+		/* Disable for now, not sure if will want in 5.0 template version of directory
+
+		// TODO: Remove this function and all calls once determined not needed
 		require(['./vendor/jquery.sticky-kit.js'], function() {
 			var checkSticky = function() {
 				$(document.body).trigger('sticky_kit:recalc');
@@ -886,6 +889,7 @@ define([
 			$(window).on('resize', checkSticky);
 			checkSticky();
 		});
+		*/
 	};
 
 	var launchCorrectionModal = function($target) {
