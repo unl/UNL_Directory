@@ -25,7 +25,7 @@ $onlySummary = $context->isSummaryView();
         <div class="vcardInfo<?php if($onlySummary): ?> card-content<?php endif; ?> unl-font-sans">
             <div class="dcf-mb-5">
             <?php if (!$onlySummary): ?>
-                <h2 class="headline dcf-txt-h3 dcf-mb-0">
+                <h1 class="headline dcf-txt-h3 dcf-mb-0">
             <?php else: ?>
                 <div class="headline dcf-txt-h3 dcf-lh-2">
             <?php endif; ?>
@@ -35,7 +35,7 @@ $onlySummary = $context->isSummaryView();
             <?php if ($onlySummary): ?>
                 </div>
             <?php else: ?>
-                </h2>
+                </h1>
             <?php endif; ?>
 
             <?php if (!$context->isOfficialDepartment()): ?>
