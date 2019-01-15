@@ -12,7 +12,7 @@
     </div>
     <div class="dcf-form-group">
       <label class="dcf-label" for="your-correction">What is your correction? <small class="dcf-required">Required</small></label>
-      <textarea class="dcf-input-text" id="your-correction" name="message" required />
+      <textarea class="dcf-input-text" id="your-correction" name="message" required></textarea>
     </div>
     <input class="dcf-btn dcf-btn-primary" type="submit" value="Submit" />
     <input type="hidden" name="_type" value="correction" />
