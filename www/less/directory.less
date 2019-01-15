@@ -51,7 +51,7 @@
 	}
 
 	.card-content {
-		padding: 0 1.77em 1.33em;
+		padding: 0 1.77em;
 
 		> *:last-child,
 		> .attribute:last-child {
@@ -264,7 +264,6 @@
 
     .headline {
       letter-spacing: -.03em;
-      margin-left: -.03em;
     }
 
 		.attribute {
@@ -372,11 +371,6 @@
 	border: 0;
 }
 
-.directory-head {
-	background-color: @ui02;
-	.sans-serif-font();
-}
-
 .vcard-tools.primary > * {
   min-width: 25%;
   max-width: 50%;
@@ -399,10 +393,6 @@
 
 .directory-knowledge-section-heading {
   padding-left: 2.37rem;
-}
-
-.directory-knowledge-item + .directory-knowledge-item {
-  margin-top: .75em;
 }
 
 .knowledge-grid .vcard {
@@ -513,6 +503,7 @@
 }
 
 .modal-overlay {
+  background-color: rgba(254,253,250,.98);
 	opacity: 0;
 	overflow: auto;
 	transition: opacity 400ms, visibility 400ms;

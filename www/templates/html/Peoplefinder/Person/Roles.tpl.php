@@ -17,7 +17,7 @@
     ?>
     <li class="org parent-<?php echo $parentClass ?>">
         <?php if (isset($role->description)): ?>
-            <span class="title" itemprop="jobTitle"><?php echo $role->description ?></span>
+            <span class="title dcf-txt-sm" itemprop="jobTitle"><?php echo $role->description ?></span>
         <?php endif; ?>
         <span itemprop="worksFor" itemscope itemtype="http://schema.org/Organization">
             <span class="organization-unit dcf-txt-sm">

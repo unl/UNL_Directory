@@ -20,14 +20,14 @@ $onlySummary = $context->isSummaryView();
 <div class="departmentInfo"<?php if ($onlySummary): ?> itemscope itemtype="http://schema.org/Organization"<?php endif; ?>>
     <div class="vcard office<?php if($onlySummary): ?> card<?php endif; ?>" data-listing-id="<?php echo $context->id ?> dcf-mt-0 dcf-mb-0 dcf-mr-auto dcf-ml-auto dcf-measure" data-preferred-name="<?php echo $context->name ?>">
         <div class="card-profile dcf-mb-3 dcf-w-100% dcf-ratio dcf-ratio-4x3">
-            <img class="photo dcf-ratio-child dcf-d-block dcf-w-100% dcf-obj-fit-cover" itemprop="image" src="<?php echo $context->getImageURL(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_LARGE); ?>" alt="Building Image" />
+            <img class="photo dcf-ratio-child dcf-d-block dcf-obj-fit-cover" itemprop="image" src="<?php echo $context->getImageURL(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_LARGE); ?>" alt="Building Image" />
         </div>
         <div class="vcardInfo<?php if($onlySummary): ?> card-content<?php endif; ?> unl-font-sans">
             <div class="dcf-mb-5">
             <?php if (!$onlySummary): ?>
-                <h2 class="headline dcf-mb-0">
+                <h1 class="headline dcf-txt-h3 dcf-mb-0">
             <?php else: ?>
-                <div class="headline dcf-txt-h2 dcf-lh-2">
+                <div class="headline dcf-txt-h3 dcf-lh-2">
             <?php endif; ?>
                 <a class="permalink dcf-txt-decor-hover" href="<?php echo $context->getURL() ?>" itemprop="url">
                     <span class="fn org" itemprop="name"><?php echo $context->name ?></span>
@@ -35,7 +35,7 @@ $onlySummary = $context->isSummaryView();
             <?php if ($onlySummary): ?>
                 </div>
             <?php else: ?>
-                </h2>
+                </h1>
             <?php endif; ?>
 
             <?php if (!$context->isOfficialDepartment()): ?>
