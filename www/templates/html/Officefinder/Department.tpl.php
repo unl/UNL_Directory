@@ -49,7 +49,7 @@ $hasOfficialChildDepartments = count($officialChildren);
 	</div>
 	<div class="dcf-col-100% dcf-col-67%-end@md">
 		<div class="card dcf-mb-7" id="listings" data-department-id="<?php echo $context->id ?>">
-      <h2 class="dcf-txt-h3 dcf-m-0"><span class="icon-phone-book" aria-hidden="true"></span>Yellow Pages</h2>
+      <h3 class="dcf-txt-h4"><span class="icon-phone-book" aria-hidden="true"></span>Yellow Pages</h3>
 			<div class="card-content<?php if ($userCanEdit): ?> editing<?php endif; ?>">
 				<?php if (count($listings)): ?>
 					<?php echo $savvy->render($listings, 'Officefinder/Department/Listings.tpl.php') ?>
@@ -75,11 +75,11 @@ $hasOfficialChildDepartments = count($officialChildren);
 
 		<?php if ($department): ?>
 			<div class="dcf-mb-7" id="all_employees">
-				<h2 class="dcf-txt-h3"><span class="icon-employees" aria-hidden="true"></span>All Employees</h2>
+				<h3 class="dcf-txt-h4"><span class="icon-employees" aria-hidden="true"></span>All Employees</h3>
 				<?php echo $savvy->render($department) ?>
 			</div>
 			<div class="dcf-mt-7 dcf-txt-center" id="orgChart">
-				<h2 class="dcf-txt-h3"><span class="icon-hierarchy" aria-hidden="true"></span>HR Organization Chart</h2>
+				<h3 class="dcf-txt-h4"><span class="icon-hierarchy" aria-hidden="true"></span>HR Organization Chart</h3>
 				<?php if (!$context->isRoot()): ?>
 					<ul class="dcf-list-bare unl-font-sans">
 						<li><a class="dcf-txt-decor-hover" href="<?php echo $hrParent->getURL() ?>">
