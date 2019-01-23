@@ -2,12 +2,12 @@
 $end = count($context);
 ?>
 <?php if ($end): ?>
-	<div class="result_head"><?php echo $end ?> result<?php echo $end > 1 ? 's' : '' ?> found</div>
-	<ul class="pfResult departments">
+	<p class="result_head dcf-txt-xs dcf-mt-1 unl-font-sans unl-dark-gray"><?php echo $end ?> result<?php echo $end > 1 ? 's' : '' ?> found</p>
+	<ul class="pfResult departments dcf-list-bare">
 		<?php foreach ($context as $department): ?>
 			<?php echo $savvy->render($department, 'Officefinder/DepartmentList/ListItem.tpl.php') ?>
 		<?php endforeach; ?>
 	</ul>
 <?php else: ?>
-	<div class="result_head">No results</div>
+	<p class="result_head dcf-txt-xs dcf-mt-1 unl-font-sans unl-dark-gray">No results</p>
 <?php endif; ?>

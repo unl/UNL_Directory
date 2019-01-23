@@ -2,16 +2,16 @@
 $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized-dark.min.css', 'stylesheet');
 ?>
 
-<div class="wdn-grid-set">
-    <div class="bp3-wdn-col-three-fourths">
+<div class="dcf-grid dcf-col-gap-vw">
+    <div class="dcf-col-100% dcf-col-75%-start@md dcf-pb-6">
         <?php
         $resource = "UNL_Peoplefinder_Developers_" . $context->resource;
         $resource = new $resource;
         ?>
         <div class="resource">
-            <h1 id="instance" class="sec_main">API: <?php echo $resource->getTitle(); ?> Resource</h1>
+            <h2 id="instance" class="sec_main">API: <?php echo $resource->getTitle(); ?> Resource</h2>
 
-            <h2 id="instance-uri">Resource URI</h2>
+            <h3 id="instance-uri">Resource URI</h3>
             <p>
                 <code>
                     <?php
@@ -26,7 +26,7 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
 
             <p><?php echo $resource->getDescription() ?></p>
 
-            <h2 id="instance-get-example-1">Example</h2>
+            <h3 id="instance-get-example-1">Example</h3>
             <ul class="wdn_tabs">
                 <?php
                 foreach ($resource->getAvailableFormats() as $format) {
@@ -46,7 +46,7 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
                         <pre><code>GET <?php echo $url; ?></code></pre>
                         <?php if (count($resource->$method_name())): ?>
                             <h2>Resource Properties</h2>
-                            <table class="zentable neutral">
+                            <table class="zentable neutral dcf-table dcf-txt-sm">
                             <thead><tr><th>Property</th><th>Description</th></tr></thead>
                             <tbody>
                                 <?php foreach ($resource->$method_name() as $property => $description): ?>
@@ -87,7 +87,7 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
             </div>
         </div>
     </div>
-    <div class="bp3-wdn-col-one-fourth">
+    <div class="dcf-col-100% dcf-col-25%-end@md">
         <nav id="resources" aria-label="API Navigation" class="zenbox primary">
             <h2>Directory API</h2>
             <p>The following is a list of resources for Directory.</p>
@@ -109,10 +109,10 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
     </div>
 </div>
 
-<script>
-    require(['jquery', 'https://cdn.jsdelivr.net/highlight.js/9.2.0/highlight.min.js'], function ($, hljs) {
+<?php
+  $page->addScriptDeclaration("require(['jquery', 'https://cdn.jsdelivr.net/highlight.js/9.2.0/highlight.min.js'], function ($, hljs) {
         $('.resource pre.code code').each(function () {
             hljs.highlightBlock(this);
-        })
-    })
-</script>
+        });
+    })");
+?>

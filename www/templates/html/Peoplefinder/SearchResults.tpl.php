@@ -3,8 +3,8 @@ $start = 0;
 $end   = count($context);
 ?>
 <?php if ($end > $start): ?>
-	<div class="result_head"><?php echo $end ?> result<?php echo $end > 1 ? 's' : '' ?> found</div>
-	<ul class="pfResult">
+	<p class="result_head dcf-txt-xs dcf-mt-1 unl-font-sans unl-dark-gray"><?php echo $end ?> result<?php echo $end > 1 ? 's' : '' ?> found</p>
+	<ul class="pfResult dcf-list-bare">
 		<?php foreach ($context as $record): ?>
 			<?php if ($record->getRawObject() instanceof UNL_Peoplefinder_Record): ?>
 				<?php echo $savvy->render($record, 'Peoplefinder/RecordInList.tpl.php') ?>
@@ -14,5 +14,5 @@ $end   = count($context);
 		<?php endforeach; ?>
 	</ul>
 <?php else: ?>
-	<div class="result_head">No results</div>
+	<p class="result_head dcf-txt-xs dcf-mt-1 unl-font-sans unl-dark-gray">No results</p>
 <?php endif; ?>

@@ -31,9 +31,6 @@
         .on-campus-dialing + a {
             display: none;
         }
-        .on-campus-label {
-            display: none;
-        }
     </style>
 </head>
 <body>

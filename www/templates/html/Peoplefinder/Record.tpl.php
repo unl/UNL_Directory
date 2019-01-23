@@ -26,24 +26,24 @@ if (isset($context->mail) && !$context->isPrimarilyStudent()) {
 $showKnowledge = $context->shouldShowKnowledge();
 ?>
 <?php if ($showKnowledge): ?>
-<section class="wdn-grid-set knowledge-grid">
-    <div class="bp2-wdn-col-two-sevenths directory-knowledge-summary">
+<section class="dcf-grid dcf-col-gap-vw">
+    <div class="dcf-col-100% dcf-col-25%-start@md directory-knowledge-summary">
 <?php endif; ?>
 
 
-<div class="vcard <?php if (!$showKnowledge): ?>card <?php endif; ?><?php echo $context->eduPersonPrimaryAffiliation ?>" data-uid="<?php echo $context->uid ?>" data-preferred-name="<?php echo $preferredName ?>" itemscope itemtype="http://schema.org/<?php echo $itemtype ?>">
-    <a class="card-profile planetred_profile" href="<?php echo $context->getProfileUrl() ?>" aria-label="Planet Red profile for <?php echo $preferredName ?>" itemprop="url">
-        <img class="photo profile_pic" itemprop="image" src="<?php echo $context->getImageURL(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_LARGE) ?>" alt="Avatar for <?php echo $preferredName ?>" />
+<div class="vcard <?php if (!$showKnowledge): ?>card <?php endif; ?><?php echo $context->eduPersonPrimaryAffiliation ?> dcf-mt-0 dcf-mb-0 dcf-mr-auto dcf-ml-auto dcf-measure" data-uid="<?php echo $context->uid ?>" data-preferred-name="<?php echo $preferredName ?>" itemscope itemtype="http://schema.org/<?php echo $itemtype ?>">
+    <a class="card-profile planetred_profile dcf-d-block dcf-mb-3 dcf-h-10 dcf-w-10 dcf-ratio dcf-ratio-1x1" href="<?php echo $context->getProfileUrl() ?>" aria-label="Planet Red profile for <?php echo $preferredName ?>" itemprop="url">
+        <img class="photo profile_pic dcf-ratio-child dcf-circle dcf-d-block dcf-obj-fit-cover" itemprop="image" src="<?php echo $context->getImageURL(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_LARGE) ?>" alt="Avatar for <?php echo $preferredName ?>" />
     </a>
 
-    <div class="vcardInfo<?php if (!$showKnowledge): ?> card-content<?php endif; ?>">
+    <div class="vcardInfo<?php if (!$showKnowledge): ?> card-content<?php endif; ?> unl-font-sans">
     <?php if (!$context->isHcardFormat()): ?>
-        <h1 class="headline">
+        <h1 class="headline dcf-mb-0 dcf-txt-h2">
     <?php else: ?>
-        <div class="headline">
+        <div class="headline dcf-txt-h2 dcf-lh-2">
     <?php endif; ?>
         <?php if (!$isOrg): ?>
-            <a class="permalink" href="<?php echo $context->getUrl() ?>" itemprop="url">
+            <a class="permalink dcf-txt-decor-hover" href="<?php echo $context->getUrl() ?>" itemprop="url">
         <?php endif; ?>
         <?php if ($isOrg): ?>
             <span class="cn" itemprop="name"><?php echo $context->cn ?></span>
@@ -68,7 +68,7 @@ $showKnowledge = $context->shouldShowKnowledge();
     $affiliations = $context->formatAffiliations();
     ?>
     <?php if ($affiliations): ?>
-        <div class="eppa">(<?php echo $affiliations ?>)</div>
+        <div class="eppa dcf-mt-3 dcf-mb-3 dcf-txt-2xs dcf-uppercase unl-ls-1 unl-dark-gray"><?php echo $affiliations ?></div>
     <?php endif; ?>
 
     <?php if ($context->affiliationMightIncludeAppointments()): ?>
@@ -79,23 +79,23 @@ $showKnowledge = $context->shouldShowKnowledge();
         <?php if (count($roles)): ?>
             <?php echo $savvy->render($roles) ?>
         <?php elseif ($title): ?>
-            <div class="title" itemprop="jobTitle"><?php echo $title ?></div>
+            <div class="title dcf-txt-sm" itemprop="jobTitle"><?php echo $title ?></div>
         <?php endif; ?>
     <?php endif ?>
 
     <?php if ($context->hasStudentInformation()): ?>
-        <div class="sis-title">
+        <div class="sis-title dcf-txt-sm">
         <?php if (isset($context->unlSISClassLevel)): ?>
-            <span class="grade"><?php echo $context->formatClassLevel() ?></span>
+          <div class="grade"><?php echo $context->formatClassLevel() ?></div>
         <?php endif; ?>
         <?php if (isset($context->unlSISMajor)): ?>
             <?php foreach ($context->getRawObject()->unlSISMajor as $major): ?>
-                <span class="major"><?php echo $context->formatMajor($major) ?></span>
+              <div class="major"><?php echo $context->formatMajor($major) ?></div>
             <?php endforeach; ?>
         <?php endif; ?>
         <?php if (isset($context->unlSISMinor)): ?>
             <?php foreach ($context->getRawObject()->unlSISMinor as $minor): ?>
-                <span class="minor"><?php echo $context->formatMajor($minor) ?></span>
+              <div class="minor"><?php echo $context->formatMajor($minor) ?></div>
             <?php endforeach; ?>
         <?php endif; ?>
             <?php foreach ($context->getRawObject()->unlSISCollege as $college): ?>
@@ -103,9 +103,9 @@ $showKnowledge = $context->shouldShowKnowledge();
                 $college = $context->formatCollege($college);
                 ?>
                 <?php if (is_string($college)): ?>
-                    <span class="icon-academic-cap college"><?php echo $college ?></span>
+                  <div class="icon-academic-cap college"><?php echo $college ?></div>
                 <?php else: ?>
-                    <span class="icon-academic-cap college">
+                    <div class="icon-academic-cap college">
                         <?php if (isset($college['link'])): ?>
                             <a href="<?php echo $college['link'] ?>">
                         <?php endif; ?>
@@ -113,14 +113,15 @@ $showKnowledge = $context->shouldShowKnowledge();
                         <?php if (isset($college['org_unit_number'])): ?>
                             </a>
                         <?php endif; ?>
-                    </span>
+                    </div>
                 <?php endif; ?>
             <?php endforeach; ?>
         </div>
     <?php endif; ?>
 
     <?php if (($address = $context->formatPostalAddress()) && count($address)): ?>
-        <div class="adr work attribute icon-map-pin" itemprop="workLocation" itemscope itemtype="http://schema.org/Place">
+        <div class="adr work attribute dcf-txt-sm" itemprop="workLocation" itemscope itemtype="http://schema.org/Place">
+            <span class="icon-map-pin" aria-hidden="true"></span>
             <span class="type">Work</span>
             <?php if (!empty($address['unlBuildingCode'])): ?>
                 <span class="street-address">
@@ -129,7 +130,7 @@ $showKnowledge = $context->shouldShowKnowledge();
                     <?php else: ?>
                         <a href="https://maps.unl.edu/<?php echo strtoupper($address['unlBuildingCode']) ?>" itemprop="hasMap"><?php echo $address['unlBuildingCode'] ?></a>
                     <?php endif; ?>
-                    
+
                     <?php echo str_replace($address['unlBuildingCode'], '', $address['street-address']) ?>
                 </span>
             <?php endif; ?>
@@ -146,7 +147,8 @@ $showKnowledge = $context->shouldShowKnowledge();
     <?php endif; ?>
 
     <?php if (isset($context->telephoneNumber)): ?>
-        <div class="tel work icon-phone attribute">
+        <div class="tel work attribute dcf-txt-sm">
+            <span class="icon-phone" aria-hidden="true"></span>
             <span class="type">Work</span>
             <span class="value"><?php echo $savvy->render((object) [
                 'number' => $context->telephoneNumber,
@@ -157,7 +159,7 @@ $showKnowledge = $context->shouldShowKnowledge();
     <?php endif; ?>
 
     <?php if (isset($context->unlSISLocalPhone)): ?>
-        <div class="tel home">
+        <div class="tel home dcf-txt-sm">
             <span class="type">Phone</span>
             <span class="value"><?php echo $savvy->render((object) [
                 'number' => $context->unlSISLocalPhone,
@@ -168,22 +170,23 @@ $showKnowledge = $context->shouldShowKnowledge();
     <?php endif; ?>
 
     <?php if ($displayEmail): ?>
-        <div class="icon-email attribute">
+        <div class="attribute dcf-txt-sm">
+            <span class="icon-email" aria-hidden="true"></span>
             <a class="email" href="mailto:<?php echo $encodedEmail ?>" itemprop="email"> <?php echo $encodedEmail ?></a>
         </div>
     <?php endif; ?>
     </div>
 
-    <div class="vcard-tools wdn_vcardTools primary">
-        <a href="<?php echo $context->getVcardUrl() ?>"><span class="icon-vcard" aria-hidden="true"></span><span class="wdn-text-hidden">v-card icon </span><span class="wdn-text-hidden">Download </span>vCard<span class="wdn-text-hidden"> for <?php echo $preferredName ?></span></a>
-        <a href="<?php echo $context->getQRCodeUrl($savvy->render($context, 'templates/vcard/Peoplefinder/Record.tpl.php')) ?>"><span class="icon-qr-code" aria-hidden="true"></span><span class="wdn-text-hidden">Q R code icon </span>QR Code<span class="wdn-text-hidden"> vCard for <?php echo $preferredName ?></span></a>
-        <button><span class="icon-print" aria-hidden="true"></span><span class="wdn-text-hidden">printer icon </span>Print<span class="wdn-text-hidden"> listing for <?php echo $preferredName ?></span></button>
+    <div class="vcard-tools wdn_vcardTools primary dcf-d-flex dcf-flex-row dcf-flex-wrap dcf-ai-start dcf-jc-around dcf-txt-sm dcf-mt-5 dcf-pt-3 dcf-pb-3 dcf-bt-1 dcf-bt-solid unl-bt-light-gray">
+        <a class="dcf-btn dcf-btn-secondary dcf-b-0" href="<?php echo $context->getVcardUrl() ?>"><span class="icon-vcard" aria-hidden="true"></span><span class="dcf-sr-only">v-card icon </span><span class="dcf-sr-only">Download </span>vCard<span class="dcf-sr-only"> for <?php echo $preferredName ?></span></a>
+        <a class="dcf-btn dcf-btn-secondary dcf-b-0" href="<?php echo $context->getQRCodeUrl($savvy->render($context, 'templates/vcard/Peoplefinder/Record.tpl.php')) ?>"><span class="icon-qr-code" aria-hidden="true"></span><span class="dcf-sr-only">Q R code icon </span>QR Code<span class="dcf-sr-only"> vCard for <?php echo $preferredName ?></span></a>
+        <button class="dcf-btn dcf-btn-secondary dcf-b-0"><span class="icon-print" aria-hidden="true"></span><span class="dcf-sr-only">printer icon </span>Print<span class="dcf-sr-only"> listing for <?php echo $preferredName ?></span></button>
     </div>
 </div>
 
 <?php if ($showKnowledge): ?>
     </div>
-    <div class="bp2-wdn-col-five-sevenths wdn-pull-right">
+    <div class="dcf-col-100% dcf-col-75%-end@md">
         <div class="card">
             <div class="card-content">
                 <?php echo $savvy->render($context->getKnowledge()) ?>

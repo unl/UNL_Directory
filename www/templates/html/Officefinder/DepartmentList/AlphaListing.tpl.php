@@ -7,7 +7,7 @@ foreach ($context as $listing)
     $listings = $listing->department->getChildren();
     if (count($listings)) :
         ?>
-        <div id="listings">
+        <div class="dcf-mb-7" id="listings">
         <?php
         echo $savvy->render($listings, 'Officefinder/Department/Listings.tpl.php');
         ?>

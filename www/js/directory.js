@@ -1,13 +1,12 @@
 define([
 	'jquery',
 	'wdn',
-	'modernizr',
 	'require',
 	'idm',
 	'notice',
 	'tooltip',
 	'./vendor/jsrender.js'
-], function($, WDN, Modernizr, require, idm) {
+], function($, WDN, require, idm) {
 	"use strict";
 
 	var serviceURL = 'https://directory.unl.edu/';
@@ -24,7 +23,7 @@ define([
 	var searchNoticeSelector = '#noticeTemplate';
 	var genericErrorSelector = '#genericErrorTemplate';
 	var lengthErrorSelector = '#queryLengthTemplate';
-	var mainSelector = '#maincontent';
+	var mainSelector = '#dcf-main';
 	var annotateSelector = '#annotateTemplate';
 	var correctionButtonSelector = '#correctionButtonTemplate';
 	var mainStates = ['searching', 'single', 'single-dept'];
@@ -108,10 +107,10 @@ define([
 			} else {
 				$filters.addClass('many-results');
 			}
-			
+
 			$('.skipnav a', $filters).on('click', function() {
 				$('#results').focus();
-				
+
 				//Stop the default action and don't propagate. Changing the page hash will remove results
 				return false;
 			});
@@ -237,13 +236,13 @@ define([
 			return string.split(' ').join('').replace(/&|,/gi, '');
 		}
 	};
-	
+
 	var updateNumResults = function() {
 		var $summary = $('.summary', $results);
-		
+
 		//Remove the old container if it exists
 		$('.num-results', $summary).remove();
-		
+
 		//Always append the number of results
 		var numResultText = $('div.results ul li:visible').length;
 		if (numResultText === 1) {
@@ -257,7 +256,7 @@ define([
 
 	/**
 	 * [0:'searching', 1:'single', 2:'single-dept']
-	 * 
+	 *
 	 * @param state
 	 */
 	var setMainState = function(state) {
@@ -389,7 +388,7 @@ define([
 
 			var $card = $(data).hide();
 			liRecord.append($card);
-			
+
 			//Add a close button
 			var closeButton = $('<button>', {
 				'class': 'close-full-record',
@@ -516,7 +515,7 @@ define([
 
 	var bindRecordListeners = function ($container) {
 		$container.on('click', '.icon-print', function(e) {
-			
+
 			if (currentMainState === 1) {
 				// allow the event to bubble to the printer
 				window.print();
@@ -529,7 +528,7 @@ define([
 				// don't allow this to bubble to printer
 				return false;
 			}
-			
+
 			var uid = $vcard.data('uid');
 			var preferredName = $vcard.data('preferred-name');
 
@@ -541,7 +540,7 @@ define([
 		$container.on('click', '.icon-qr-code', function() {
 			//Grab the closest 'a' element, because a child of the a element likely triggered this event.
 			var self = $(this).closest('a');
-			
+
 			var onReady = function() {
 				modalReady = true;
 				$(self).colorbox({open:true, photo:true});
@@ -684,12 +683,12 @@ define([
 		var $oldForm;
 
 		if (!$modalClose) {
-			$modalClose = $('<button>', {"class": 'cancel wdn-button'})
+			$modalClose = $('<button>', {"class": 'cancel dcf-absolute dcf-pin-top dcf-pin-right dcf-mt-1 dcf-mr-1 dcf-btn dcf-btn-tertiary'})
 				.click(function() {
 					closeModalAndRestoreContent();
 				})
 				.append($('<span>', {"class": 'wdn-icon-cancel', 'aria-hidden': 'true'}))
-				.append($('<span>', {"class": 'wdn-text-hidden'}).text('Close'));
+				.append($('<span>', {"class": 'dcf-sr-only'}).text('Close'));
 		} else {
 			$modalClose.detach();
 		}
@@ -874,11 +873,14 @@ define([
 	};
 
 	var createStickyKit = function($sidebar) {
+		/* Disable for now, not sure if will want in 5.0 template version of directory
+
+		// TODO: Remove this function and all calls once determined not needed
 		require(['./vendor/jquery.sticky-kit.js'], function() {
 			var checkSticky = function() {
 				$(document.body).trigger('sticky_kit:recalc');
 
-				if (Modernizr.mq('only screen and (min-width: 768px)')) {
+				if (window.matchMedia('only screen and (min-width: 768px)').matches) {
 					$sidebar.stick_in_parent({spacer:false});
 				} else {
 					$sidebar.trigger('sticky_kit:detach');
@@ -887,6 +889,7 @@ define([
 			$(window).on('resize', checkSticky);
 			checkSticky();
 		});
+		*/
 	};
 
 	var launchCorrectionModal = function($target) {
@@ -997,7 +1000,7 @@ define([
 
 							//we finally have results, or else we've abandonded the search options
 							$results.html(data);
-							
+
 							// remove DOM-0 event listeners
 							$('ul.pfResult li', $results).each(function(){
 								$('.fn a', this).removeAttr('onclick');
@@ -1332,7 +1335,7 @@ define([
 						$success.text('There was an error submitting the correction, please try again later.').focus();
 					});
 				});
-				
+
 				$('body').on('focusout', function(e) {
 					var $target = $(e.target);
 					if ($target.hasClass('programmatically-focused')) {

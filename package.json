@@ -8,7 +8,7 @@
     "grunt-contrib-less": "^1.0.1",
     "grunt-contrib-uglify": "^2.0.0",
     "grunt-contrib-watch": "^1.0.0",
-    "grunt-curl": "^2.2.0",
+    "grunt-curl": "^2.5.0",
     "less-plugin-autoprefix": "^1.4.2",
     "less-plugin-clean-css": "^1.5.1",
     "load-grunt-tasks": "^3.2.0",

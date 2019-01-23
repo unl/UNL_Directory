@@ -4,14 +4,14 @@ $page->pagetitle = '<h1>Faculty Educational Credentials</h1>';
 $page->head      = $page->getRaw('head').'<link rel="stylesheet" type="text/css" media="screen" href="//directory.unl.edu/wdn/templates_3.0/css/content/pagination.css" />';
 ?>
 <p>The following is a list of faculty educational credentials as of <?php echo $context->getDateLastUpdated(); ?></p>
-<div class="wdn-grid-set">
-    <div class="wdn-col-one-fourth">
+<div class="dcf-grid">
+    <div class="dcf-col-100% dcf-col-25%-start@md">
         <?php echo $savvy->render(null, 'Peoplefinder/SearchResults/Filters.tpl.php'); ?>
     </div>
-    <div class="wdn-col-three-fourths">
+    <div class="dcf-col-100% dcf-col-75%-end@md">
         <div class="results affiliation faculty">
         <h3>Faculty</h3>
-        <div class="result_head">Results 1 - <?php echo count($context); ?></div>
+        <p class="result_head dcf-txt-xs dcf-mt-1 unl-font-sans unl-dark-gray">Results 1 - <?php echo count($context); ?></p>
         <ul class="wdn_pagination">
         <?php foreach (range('A', 'Z') as $letter): ?>
             <li><a href="#<?php echo $letter; ?>"><?php echo $letter; ?></a></li>
@@ -26,7 +26,7 @@ $page->head      = $page->getRaw('head').'<link rel="stylesheet" type="text/css"
         <tbody>
         <?php
         $current_letter = false;
-        
+
         $limited = new LimitIterator($context, $context->options['offset'], $context->options['limit']);
         foreach ($limited as $faculty) {
             try {
@@ -34,14 +34,14 @@ $page->head      = $page->getRaw('head').'<link rel="stylesheet" type="text/css"
             } catch (Exception $e) {
                 $record = false;
             }
-        
+
             // If we're in a section with a new first letter, add the appropriate ID attribute
             $id = '';
             if (substr($faculty->employee_name, 0, 1) !== $current_letter) {
                 $current_letter = substr($faculty->employee_name, 0, 1);
                 $id = 'id="'.$current_letter.'"';
             }
-        
+
             echo '<tr class="ppl_Sresult faculty" '.$id.'>';
             echo '<td>';
             if ($record) {
@@ -81,8 +81,6 @@ $page->head      = $page->getRaw('head').'<link rel="stylesheet" type="text/css"
         </div>
     </div>
 </div>
-<script type="text/javascript">
-WDN.loadJS('<?php echo $url; ?>scripts/filters.js', function(){
-	filters.initialize();
-});
-</script>
+<?php
+$page->addScriptDeclaration("WDN.loadJS('" . $url . "scripts/filters.js', function(){ filters.initialize(); });");
+?>

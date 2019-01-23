@@ -12,19 +12,19 @@ if ($parent) {
 }
 ?>
 <li class="<?php echo $li_class ?>" data-href="<?php echo $context->getURL() ?>">
-    <div class="overflow">
-        <div class="profile_pic" href="<?php echo $context->getURL() ?>">
-            <img alt="Building Image" src="<?php echo $context->getImageUrl(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_SMALL) ?>" class="photo" />
+    <div class="overflow dcf-d-flex">
+        <div class="profile_pic dcf-mr-4 dcf-h-9 dcf-w-9 dcf-ratio dcf-ratio-1x1" href="<?php echo $context->getURL() ?>">
+            <img class="photo dcf-ratio-child dcf-circle dcf-d-block dcf-obj-fit-cover" src="<?php echo $context->getImageUrl(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_LARGE) ?>" alt="Building Image"  />
         </div>
-        <div class="recordDetails">
-            <div class="fn">
-                <a href="<?php echo $context->getURL() ?>"><?php echo $context->name ?></a>
+        <div class="recordDetails unl-font-sans">
+            <div class="fn dcf-txt-lg dcf-bold unl-lh-crop">
+                <a class="dcf-txt-decor-hover" href="<?php echo $context->getURL() ?>"><?php echo $context->name ?></a>
             </div>
             <?php if ($title): ?>
-                <div class="title"><?php echo $title ?></div>
+                <div class="title dcf-txt-sm"><?php echo $title ?></div>
             <?php endif; ?>
             <?php if (!empty($context->phone)): ?>
-                <div class="tel"><?php echo $savvy->render($context->phone, 'Peoplefinder/Record/TelephoneNumber.tpl.php') ?></div>
+                <div class="tel dcf-txt-sm dcf-mt-1"><?php echo $savvy->render($context->phone, 'Peoplefinder/Record/TelephoneNumber.tpl.php') ?></div>
             <?php endif; ?>
         </div>
     </div>

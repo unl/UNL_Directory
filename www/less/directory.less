@@ -10,14 +10,7 @@
 @inner-band-margin: percentage(-1 * @mobile-pad / (100% - 2 * @mobile-pad));
 
 .search-band {
-	text-align: center;
 	background: #38431b url(../images/050419.jpg) 50% 50% no-repeat;
-	background-size: cover;
-
-	.wdn-input-group {
-		max-width: 30em;
-		margin: 0 auto;
-	}
 
 	p {
 		margin-bottom: 0;
@@ -35,12 +28,6 @@
 	}
 }
 
-@media @bp-under768w {
-	#q {
-		font-size: 16px;
-	}
-}
-
 #directory-disclaim {
 
     a {
@@ -53,32 +40,18 @@
     }
 }
 
-.heading-block {
-	width: 100%;
-	margin: 0 0 1rem;
-	padding: 1.069em 1.425rem 1em;
-	.sans-serif-font();
-	font-size: 0.923rem;
-	text-transform: uppercase;
-	color: #fff;
-	background-color: mix(@ui09, @page-background, 95%);
-
-	a {
-		float: right;
-		color: #fff;
-		margin-left: 0.451em;
-	}
-}
-
 .card {
 	margin-bottom: 1em;
 	border-top: 5px solid @scarlet;
 	background-color: #fff;
 	box-shadow: 0 0 1px 1px fadeout(@ui14, 80%);
-	transition: all 0.2s ease-out;
+
+	.card-profile {
+		margin: 1.33em 0 .75em 1.77em;
+	}
 
 	.card-content {
-		padding: 0 1.425rem 1.777em;
+		padding: 0 1.77em;
 
 		> *:last-child,
 		> .attribute:last-child {
@@ -86,15 +59,7 @@
 		}
 	}
 
-	h1 {
-		font-size: 2.618rem;
-	}
-
-	h2 {
-		font-size: 2.321rem;
-	}
-
-	.wdn-subhead {
+	.dcf-subhead {
 		margin-bottom: 0;
 	}
 
@@ -103,12 +68,11 @@
 		padding-top: 1em;
 		border-top: 1px solid @ui04;
 	}
-}
 
-.help-container,
-.results-container,
-.record-container {
-	background-color: @ui02;
+	.vcard-tools {
+  	padding-left: 1.77em;
+  	padding-right: 1.77em;
+	}
 }
 
 .help-container {
@@ -119,28 +83,15 @@
 	}
 }
 
-.result_head {
-	.sans-serif-font();
-	font-size: 0.697em;
-}
-
 .pfResult {
-	list-style: none;
-	padding: 0;
-	border-color: @ui04;
-	border-style: solid;
-	border-width: 1px 0 0;
-	background: #fff;
-	margin: 1em @inner-band-margin; // push the list to the page edge
+  background-color: #fff;
+  border: 1px solid #e3e3e2;
 
 	> li {
-		padding: 1em;
-		border-bottom: 1px solid @ui04;
+		border-bottom: 1px solid #e3e3e2;
 		cursor: pointer;
-
-		&.selected {
-
-		}
+		margin-bottom: 0;
+		padding: 1.33em 1.77em;
 
 		&:focus {
 			box-shadow: 0 0 10px @triad;
@@ -148,37 +99,16 @@
 	}
 
 	.overflow {
-		display: flex;
-
-		> .profile_pic {
-			width: 40px;
-			min-width: 40px;
-			margin-right: 1em;
-		}
 
 		> .recordDetails {
 			flex: 1 1 auto;
 			align-self: center;
 		}
 
-		.photo {
-			border-radius: 50%;
-			margin-top: 0.375em;
-			width: 100%;
-			height: 40px;
-			object-fit: cover;
-		}
 		.roles {
-			padding: 0;
-			margin: 0;
-			list-style: none;
 
-			li {
-				margin-bottom: 0.618rem;
-
-				&:last-child {
-					margin-bottom: 0;
-				}
+			li:last-child {
+				margin-bottom: 0;
 			}
 
 			.title,
@@ -192,10 +122,10 @@
 		}
 	}
 
-	.fn {
-		font-size: 1.128em;
-		font-weight: bold;
-	}
+  > li:last-child {
+    border-bottom: 0;
+    margin-bottom: 0;
+  }
 
 	.given-name {
 		margin-left: 1em;
@@ -215,7 +145,9 @@
 	}
 }
 
-.results, .pfResult {
+.results,
+.pfResult {
+
 	.vcard {
 		position: relative;
 
@@ -233,6 +165,14 @@
 			right: 0;
 		}
 	}
+}
+
+.affiliation-heading {
+  margin-bottom: 0;
+}
+
+.results + .results {
+  margin-top: 2.37em;
 }
 
 .results-container {
@@ -261,12 +201,6 @@
 		}
 	}
 
-	.dep_result {
-
-		.title {
-			font-style: italic;
-		}
-	}
 }
 
 .record-container {
@@ -305,40 +239,11 @@
 
 #filters {
 
-	h2 {
-		margin-top: 0;
-	}
-
-	.filters {
-		line-height: 1.425;
-		.sans-serif-font();
-	}
-
-	input {
-		margin-right: 0.2em;
-	}
-
-	button {
-		border: 0;
-		border-bottom: 1px solid @ui04;
-		padding: 0;
-		background: none;
-		text-transform: uppercase;
-		text-align: left;
-		display: block;
-		margin-bottom: 1em;
-	}
-
 	ol {
 		list-style: none;
-		padding: 0;
+		padding-left: 0;
 	}
 
-	li {
-		text-indent: -1.3em;
-		padding-left: 1.3em;
-		margin-bottom: 0.5em;
-	}
 }
 
 #results {
@@ -352,52 +257,31 @@
 .record-container {
 
 	.vcard {
-		max-width: 480px;
-		margin: 0 auto;
-
 
 		.card-profile {
-			background-color: @ui05;
-			text-align: center;
 			display: block;
-
-			.photo {
-				display: block;
-				height: 200px;
-				margin: 0 auto;
-				width: auto;
-			}
 		}
 
-		.headline {
-			font-size: 2.618rem;
-			line-height: 1;
-			margin-top: 1em;
-			margin-bottom: 1rem;
-
-			a {
-				.heading-font();
-			}
-
-			+ .title {
-				margin: 1em 0;
-			}
-		}
+    .headline {
+      letter-spacing: -.03em;
+    }
 
 		.attribute {
-			.sans-serif-font();
-			font-size: 0.935rem;
-			padding-left: 1.7em;
-			text-indent: -1.7em;
-			margin-bottom: 0.618rem;
+			padding-left: 1.77em;
+			text-indent: -1.77em;
+			margin-top: .75em;
 
 			* {
 				text-indent: 0;
 			}
 
-			&:before {
+			&::before {
 				text-indent: 0;
 			}
+		}
+
+		.roles + .attribute {
+  		margin-top: 1.33em;
 		}
 
 		.adr {
@@ -406,7 +290,7 @@
 				display: none;
 
 				+ * {
-					margin-top: -1.8em;
+					margin-top: -1.77em;
 					display: block;
 				}
 			}
@@ -428,40 +312,15 @@
 
 			a.tel {
 				display: block;
-				margin-top: -1.8em;
-			}
-		}
-
-		.sis-title {
-			margin: 1em 0;
-			.sans-serif-font();
-			line-height: 1.333;
-			text-transform: uppercase;
-			color: @ui08;
-
-			.grade {
-				display: block;
-			}
-
-			.major,
-			.college {
-				font-size: 0.786em;
-				display: block;
+				margin-top: -1.5em;
 			}
 		}
 
 		.roles {
-			list-style: none;
-			padding: 0;
-			margin: 1em 0;
 			border-bottom: 1px solid @ui04;
 
-			> .org {
-				margin: 1em 0;
-				.sans-serif-font();
-				line-height: 1.333;
-				text-transform: uppercase;
-				color: @ui08;
+			> .org:last-child {
+				margin-bottom: 1.33em;
 			}
 
 			.title {
@@ -470,7 +329,6 @@
 
 			.organization-unit {
 				display: block;
-				font-size: 0.786em;
 			}
 
 			.parent-unl {
@@ -479,11 +337,6 @@
 					display: none;
 				}
 			}
-		}
-
-		.eppa {
-			font-style: italic;
-			margin: 1em 0;
 		}
 
 		.fn,
@@ -518,91 +371,28 @@
 	border: 0;
 }
 
-.directory-head {
-	background-color: @ui02;
-	.brand-font();
+.vcard-tools.primary > * {
+  min-width: 25%;
+  max-width: 50%;
+  flex-basis: calc((23.68rem - 100%) * 999);
 }
 
-.directory-foot {
-	margin: 1.777em 0;
-	padding-top: 0.75em;
-	border-top: 1px solid @ui04;
-	font-size:.8em;
-	text-align: right;
+.vcard-tools.primary span[class^='icon-'] {
+  display: block;
+  font-size: 2.37em;
 }
 
-.department-correction {
-	border-top: 1px solid #eae9e6;
-	font-size: .697em;
+.vcard-tools.primary span[class^='icon-']::before {
+  margin-right: 0;
 }
 
-.vcard-tools {
-	display: flex;
-    padding-top: 1em;
-    padding-bottom: 1em;
-	text-align: center;
-	font-size: 0.935rem;
-	border-top: 1px solid @ui04;
-
-	a,
-	button {
-		flex: 1 1 auto;
-		display: block;
-		padding: 0;
-		line-height: 1.333;
-		color: @brand;
-	}
-
-	a:visited,
-	a:hover {
-		color: @brand;
-	}
-
-    &.primary {
-        .sans-serif-font();
-        flex-flow: row wrap;
-
-        span[class^='icon-'] {
-            display: block;
-            font-size: 1.618rem;
-
-        	&:before {
-                margin-right: 0;
-            }
-        }
-    }
+.directory-knowledge-section + .directory-knowledge-section {
+  border-top: 1px solid @ui04;
+  padding-top: 1.33em;
 }
 
-.directory-knowledge-section {
-
-	& + & {
-    	margin-top: 2.369em;
-    	border-top: 1px solid @ui04;
-	}
-
-    h2 {
-        position: relative;
-        padding-left: 3.157rem;
-
-        > span[class*='icon-'] {
-            position: absolute;
-            left: 0;
-        }
-    }
-}
-
-.directory-knowledge-section-bio {
-	margin-top: 2.321em;
-}
-
-.directory-knowledge-section-inner {
-    margin: 1.333em 0;
-    padding-left: 3.157rem;
-	list-style: none;
-
-	li + li {
-		margin-top: 1em;
-	}
+.directory-knowledge-section-heading {
+  padding-left: 2.37rem;
 }
 
 .knowledge-grid .vcard {
@@ -611,7 +401,7 @@
 
 #editBox {
 
-	.icon-help:before {
+	.icon-help::before {
 		font-size: 1rem;
 		vertical-align: middle;
 	}
@@ -641,12 +431,10 @@
 }
 
 #listings {
-	margin: 1em @inner-band-margin;
 
 	h2 {
-		background-color: #FFFFCC;
-		margin: 0;
-		padding: 1em 1.899rem 1rem;
+		background-color: #ffc;
+		padding: 1em 1.77rem 1rem;
 	}
 
 	.editing {
@@ -715,103 +503,70 @@
 }
 
 .modal-overlay {
-	display: flex;
-	background-color: fadeout(#fff, 25%);
-	position: fixed;
-	visibility: hidden;
+  background-color: rgba(254,253,250,.98);
 	opacity: 0;
-	z-index: 300;
 	overflow: auto;
-	left: 0px;
-	top: 0px;
-	width: 100%;
-	height: 100%;
 	transition: opacity 400ms, visibility 400ms;
+	visibility: hidden;
+	z-index: 300;
 
 	&.show {
-		visibility: visible;
 		opacity: 1;
 		transition: opacity 400ms, visibility 0s;
+		visibility: visible;
+	}
+}
+
+.modal-overlay::before,
+.modal-overlay::after {
+  content: '';
+  display: block;
+  flex-grow: 1;
+  height: 1.77em;
+  min-height: 1.77em;
+}
+
+.modal-content {
+	max-width: 42.09em;
+	box-shadow: 0 0 1px 1px fadeout(@ui14, 80%);
+
+	&:focus {
+		outline: 0;
 	}
 
-	.modal-content {
-		width: 90%;
-		max-width: 780px;
-		max-height: 70vh;
-		padding: 0 7.1%;
-		background-color: #FFF;
-		position: relative;
-		overflow-y: auto;
-		overflow-x: hidden;
-		margin: auto;
-		box-shadow: 0 0 1px 1px fadeout(@ui14, 80%);
+	.icon-trash {
+		margin: 1em 0;
+	}
 
-		&:focus {
-			outline: 0;
+	.forms {
+		margin: 8% 0;
+
+		.delete, .sortform {
+			display: none;
 		}
 
-		.cancel {
-		    display: block;
-		    position: absolute;
-		    top: 1em;
-		    right: 0.618em;
-		    border: 0px none;
-
-		    &:before {
-		    	margin: 0;
-		    }
+		.add-form {
+			display: none;
 		}
 
-		.icon-trash {
-			margin: 1em 0;
-		}
-
-		.forms {
-			margin: 8% 0;
-
-			.delete, .sortform {
+		&.show-add {
+			> * {
 				display: none;
 			}
 
 			.add-form {
-				display: none;
-			}
-
-			&.show-add {
-				> * {
-					display: none;
-				}
-
-				.add-form {
-					display: block;
-				}
+				display: block;
 			}
 		}
 	}
 }
 
-#orgChart {
-	text-align: center;
+.modal-content .wdn-icon-cancel::before {
+  margin-right: 0;
+}
 
-	ul {
-		list-style: none;
-		padding: 0;
-
-		li {
-			margin-bottom: 0.618rem;
-		}
-
-		&:before {
-			font-size: 1.435em;
-		}
-	}
-
-	.org-unit {
-		display: block;
-		font-style: italic;
-		font-size: 0.786em;
-		color: @ui10;
-	}
+#orgChart ul::before {
+  font-size: 1.33em; // Enlarge arrow icon
 }
 
 .corrections-template {
@@ -821,78 +576,6 @@
 // Manually hide
 [data-uid="kfarrell2"] .given-name {
 	display: none;
-}
-
-/**
-TODO: remove once fixed in framework
-Temp fix for mobile rendering of nav items. New updates do not work so well with framework hide classes.
-This is a bandage until the issue is addressed in the framework
-**/
-@media @bp-nav-hidden {
-
-	.hide-wdn_navigation_wrapper #wdn-main-share-button {
-		margin-left: 6em;
-		height: 40px;
-	}
-
-	.hide-wdn_navigation_wrapper .wdn-menu-trigger {
-		height: 40px;
-	}
-}
-
-@media @bp768 {
-
-    .heading-block {
-		padding: 1.069em 1.899rem 1em;
-		font-size: 0.802rem;
-	}
-
-    .card {
-
-	    .card-content {
-			padding: 0 1.899rem 2.369em;
-		}
-	}
-
-    .pfResult {
-		margin-left: 0;
-		margin-right: 0;
-		border-width: 1px 1px 0;
-	}
-
-    .results-container,
-    .record-container {
-
-        .vcard {
-
-            .attribute {
-                font-size: .8rem;
-            }
-        }
-    }
-
-    .vcard-tools {
-        font-size: .75rem;
-    }
-
-    #listings {
-		margin: 0;
-	}
-}
-
-@media (min-width: 48em) and (max-width: 80em) {
-
-    .vcard-tools.primary {
-
-        a,
-        button {
-            flex: 1 1 50%;
-
-            &:nth-child(-n+2) {
-                margin-bottom: .75em;
-            }
-        }
-    }
 }
 
 .programmatically-focused:focus {

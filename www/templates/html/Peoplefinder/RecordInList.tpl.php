@@ -24,15 +24,17 @@ $title = $context->formatTitle();
 ?>
 
 <li class="<?php echo $class ?>" data-href="<?php echo $context->getUrl() ?>" data-uid="<?php echo $context->uid ?>">
-    <div class="overflow" itemscope itemtype="http://schema.org/Person">
+    <div class="overflow dcf-d-flex" itemscope itemtype="http://schema.org/Person">
         <?php if ($controller->options['view'] != 'alphalisting'): ?>
-            <div class="profile_pic">
-                <img class="photo" itemprop="image" src="<?php echo $context->getImageUrl(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_SMALL) ?>" alt="Avatar for <?php echo $context->displayName ?>" />
+            <div class="profile_pic dcf-mr-4 dcf-h-9 dcf-w-9 dcf-ratio dcf-ratio-1x1">
+                <img class="photo dcf-ratio-child dcf-circle dcf-d-block dcf-obj-fit-cover" itemprop="image" src="<?php echo $context->getImageUrl(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_LARGE) ?>" alt="Avatar for <?php echo $context->displayName ?>" />
             </div>
         <?php endif; ?>
 
-        <div class="recordDetails">
-            <div class="fn" itemprop="name"><a itemprop="url" href="<?php echo $context->getUrl() ?>"<?php echo $onclick ?> aria-label="Show more information about <?php echo $name ?>"><?php echo $name ?></a></div>
+        <div class="recordDetails unl-font-sans">
+            <div class="fn dcf-txt-lg dcf-bold unl-lh-crop" itemprop="name">
+              <a class="dcf-txt-decor-hover" itemprop="url" href="<?php echo $context->getUrl() ?>"<?php echo $onclick ?> aria-label="Show more information about <?php echo $name ?>"><?php echo $name ?></a>
+            </div>
             <?php if (isset($context->unlHROrgUnitNumber)): ?>
                 <?php
                 $roles = $context->getRoles();
@@ -42,12 +44,12 @@ $title = $context->formatTitle();
                 <?php if (count($roles)): ?>
                     <?php echo $savvy->render($roles) ?>
                 <?php elseif ($title): ?>
-                    <div class="title" itemprop="jobTitle"><?php echo $title ?></div>
+                    <div class="title dcf-txt-sm" itemprop="jobTitle"><?php echo $title ?></div>
                 <?php endif; ?>
             <?php endif; ?>
 
         <?php if (!empty($context->telephoneNumber)): ?>
-            <div class="tel"><?php echo $savvy->render($context->telephoneNumber, 'Peoplefinder/Record/TelephoneNumber.tpl.php') ?></div>
+            <div class="tel dcf-txt-sm"><?php echo $savvy->render($context->telephoneNumber, 'Peoplefinder/Record/TelephoneNumber.tpl.php') ?></div>
         <?php endif; ?>
 
         </div>

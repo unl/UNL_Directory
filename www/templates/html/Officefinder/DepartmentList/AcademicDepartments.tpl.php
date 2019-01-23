@@ -1,4 +1,4 @@
-<?php 
+<?php
 UNL_Officefinder::setReplacementData('doctitle', 'Academic Departments | Directory | University of Nebraska&ndash;Lincoln');
 UNL_Officefinder::setReplacementData('breadcrumbs', '
     <ul>
@@ -8,14 +8,14 @@ UNL_Officefinder::setReplacementData('breadcrumbs', '
     </ul>');
 UNL_Officefinder::setReplacementData('pagetitle', '<h1>Academic Departments</h1>');
 ?>
-<script type="text/javascript">
-WDN.loadJS('../scripts/filters.js', function(){
+<?php
+$page->addScriptDeclaration("WDN.loadJS('../scripts/filters.js', function(){
 	WDN.jQuery('#filters').show();
 	filters.findClasses();
-});
-</script>
-<div class="wdn-grid-set">
-    <div id="filters" class="wdn-col-one-fourth">
+});");
+?>
+<div class="dcf-grid">
+    <div id="filters" class="dcf-grid-fourths@md">
         <div class="wdn_filterset">
             <h4 class="formal">Filter Results</h4>
             <form class="filters" action="#" method="post">
@@ -35,7 +35,7 @@ WDN.loadJS('../scripts/filters.js', function(){
                                 60  => 'Business Administration',
                                 144 => 'Education &amp; Human Sciences',
                                 121 => 'Engineering',
-                                70  => 'Fine &amp; Performing Arts', 
+                                70  => 'Fine &amp; Performing Arts',
                                 139 => 'Journalism &amp; Mass Communications',
                                 75  => 'Law',
                             ) as $college_id=>$college_name): ?>
@@ -48,7 +48,7 @@ WDN.loadJS('../scripts/filters.js', function(){
             </form>
         </div>
     </div>
-    <div class="wdn-col-three-fourths">
+    <div class="dcf-grid-fourths@md">
         <div class="results departments" id="dir_departmentListing">
         <?php
         $used_letters     = array();
@@ -64,7 +64,7 @@ WDN.loadJS('../scripts/filters.js', function(){
                 if ($firstLetter != 'A') {
                     $department_lists .= '</ul>';
                 }
-                $department_lists .= '<h4 id="'.$firstLetter.'" class="section">'.$firstLetter.'<span><a href="#dir_nav">Back to the top</a></span></h4><ul class="pfResult departments">';
+                $department_lists .= '<h4 id="'.$firstLetter.'" class="section">'.$firstLetter.'<span><a href="#dir_nav">Back to the top</a></span></h4><ul class="pfResult departments dcf-list-bare">';
             }
             $department_lists .= $savvy->render($listing, 'Officefinder/DepartmentList/ListItem.tpl.php');
         }
