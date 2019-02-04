@@ -49,7 +49,7 @@ $hasOfficialChildDepartments = count($officialChildren);
 	</div>
 	<div class="dcf-col-100% dcf-col-67%-end@md">
 		<div class="card dcf-mb-7" id="listings" data-department-id="<?php echo $context->id ?>">
-      <h2 class="dcf-txt-h4"><span class="icon-phone-book" aria-hidden="true"></span>Yellow Pages</h2>
+      <h2 class="dcf-txt-h4 dcf-ml-0"><span class="icon-phone-book" aria-hidden="true"></span>Yellow Pages</h2>
 			<div class="card-content<?php if ($userCanEdit): ?> editing<?php endif; ?>">
 				<?php if (count($listings)): ?>
 					<?php echo $savvy->render($listings, 'Officefinder/Department/Listings.tpl.php') ?>
