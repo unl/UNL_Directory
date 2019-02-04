@@ -503,15 +503,8 @@
 }
 
 
-#listings ol {
-  list-style: none;
-  padding: 0;
-}
-
-
-#listings ol li {
-  border-bottom: 1px dotted @ui04;
-  padding: .5em 0;
+#listings .listing:not(:last-child) {
+  border-bottom: 1px solid #e3e3e2;
 }
 
 
@@ -529,16 +522,6 @@
 #listings ol ol li:last-child {
   border-bottom: 0;
   margin-bottom: -.5em;
-}
-
-
-#listings .adr,
-#listings .email,
-#listings .phone,
-#listings .postal-code,
-#listings .room,
-#listings .website {
-  display: block;
 }
 
 
