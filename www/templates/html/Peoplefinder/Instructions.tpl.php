@@ -11,13 +11,13 @@ $baseUrl = UNL_Peoplefinder::getURL();
 <div class="dcf-bleed help-container dcf-pb-8 unl-bg-lightest-gray">
   <div class="dcf-wrapper">
     <h1 class="dcf-sr-only">Welcome to the University of Nebraska–Lincoln Directory</h1>
-    <div class="dcf-grid-halves@md dcf-col-gap-vw dcf-row-gap-5 dcf-pt-8">
+    <div class="dcf-grid-halves@sm dcf-col-gap-vw dcf-row-gap-5 dcf-pt-8">
       <div id="instructions_people" class="card">
         <img class="hero-img" src="<?php echo $baseUrl ?>images/130912_Herbie_104.jpg" alt="Portrait photo of mascot Herbie Husker" />
-        <div class="card-content dcf-pt-6">
+        <div class="card-content dcf-pt-6 dcf-pb-6">
           <h2 class="dcf-txt-h3"><span class="dcf-subhead unl-dark-gray">Search </span>People</h2>
-          <p>Find contact information for faculty, staff and students. Search by:</p>
-          <ul>
+          <p class="dcf-txt-sm">Find contact information for faculty, staff and students. Search by:</p>
+          <ul class="dcf-txt-sm">
             <li>First name</li>
             <li>Last name</li>
             <li>Both first and last name</li>
@@ -27,10 +27,10 @@ $baseUrl = UNL_Peoplefinder::getURL();
       </div>
       <div id="instructions_departments" class="card">
         <img class="hero-img" src="<?php echo $baseUrl ?>images/110606_Canfield_S_3.jpg" alt="Exterior view of Canfield Administration Building on a sunny day" />
-        <div class="card-content dcf-pt-6">
-          <h2 class="dcf-txt-h3"><span class="dcf-subhead">Search </span>Departments</h2>
-          <p>Find departments by entering a full or partial department name. Information available:</p>
-          <ul>
+        <div class="card-content dcf-pt-6 dcf-pb-6">
+          <h2 class="dcf-txt-h3"><span class="dcf-subhead unl-dark-gray">Search </span>Departments</h2>
+          <p class="dcf-txt-sm">Find departments by entering a full or partial department name. Information available:</p>
+          <ul class="dcf-txt-sm">
             <li>Department contact information and location on campus</li>
             <li>Complete list of department employees</li>
             <li>Organizational hierarchy of department</li>
