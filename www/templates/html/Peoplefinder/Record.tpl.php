@@ -40,7 +40,7 @@ $showKnowledge = $context->shouldShowKnowledge();
     <?php if (!$context->isHcardFormat()): ?>
         <h1 class="headline dcf-mb-0 dcf-txt-h2">
     <?php else: ?>
-        <div class="headline dcf-txt-h2 dcf-lh-2">
+        <div class="headline dcf-txt-h2 dcf-bold dcf-lh-2">
     <?php endif; ?>
         <?php if (!$isOrg): ?>
             <a class="permalink dcf-txt-decor-hover" href="<?php echo $context->getUrl() ?>" itemprop="url">

@@ -27,7 +27,7 @@ $onlySummary = $context->isSummaryView();
             <?php if (!$onlySummary): ?>
                 <h1 class="headline dcf-txt-h3 dcf-mb-0">
             <?php else: ?>
-                <div class="headline dcf-txt-h3 dcf-lh-2">
+                <div class="headline dcf-txt-h3 dcf-bold dcf-lh-2">
             <?php endif; ?>
                 <a class="permalink dcf-txt-decor-hover" href="<?php echo $context->getURL() ?>" itemprop="url">
                     <span class="fn org" itemprop="name"><?php echo $context->name ?></span>
