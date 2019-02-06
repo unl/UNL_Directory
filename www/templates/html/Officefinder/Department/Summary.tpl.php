@@ -18,16 +18,16 @@ if (!empty($context->email)) {
 $onlySummary = $context->isSummaryView();
 ?>
 <div class="departmentInfo"<?php if ($onlySummary): ?> itemscope itemtype="http://schema.org/Organization"<?php endif; ?>>
-    <div class="vcard office<?php if($onlySummary): ?> card<?php endif; ?>" data-listing-id="<?php echo $context->id ?> dcf-mt-0 dcf-mb-0 dcf-mr-auto dcf-ml-auto dcf-measure" data-preferred-name="<?php echo $context->name ?>">
-        <div class="card-profile dcf-mb-3 dcf-w-100% dcf-ratio dcf-ratio-4x3">
-            <img class="photo dcf-ratio-child dcf-d-block dcf-obj-fit-cover" itemprop="image" src="<?php echo $context->getImageURL(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_LARGE); ?>" alt="Building Image" />
+    <div class="vcard office<?php if($onlySummary): ?> card<?php endif; ?>" data-listing-id="<?php echo $context->id ?> dcf-measure" data-preferred-name="<?php echo $context->name ?>">
+        <div class="card-profile dcf-mb-3 dcf-h-10 dcf-w-10 dcf-ratio dcf-ratio-1x1">
+            <img class="photo dcf-ratio-child dcf-d-block dcf-obj-fit-cover dcf-circle" itemprop="image" src="<?php echo $context->getImageURL(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_LARGE); ?>" alt="Building Image" />
         </div>
         <div class="vcardInfo<?php if($onlySummary): ?> card-content<?php endif; ?> unl-font-sans">
             <div class="dcf-mb-5">
             <?php if (!$onlySummary): ?>
                 <h1 class="headline dcf-txt-h3 dcf-mb-0">
             <?php else: ?>
-                <div class="headline dcf-txt-h3 dcf-lh-2">
+                <div class="headline dcf-txt-h3 dcf-bold dcf-lh-2">
             <?php endif; ?>
                 <a class="permalink dcf-txt-decor-hover" href="<?php echo $context->getURL() ?>" itemprop="url">
                     <span class="fn org" itemprop="name"><?php echo $context->name ?></span>
@@ -75,7 +75,7 @@ $onlySummary = $context->isSummaryView();
             <div class="tel work attribute dcf-txt-sm">
                 <span class="icon-phone" aria-hidden="true"></span>
                 <span class="type">Phone:</span>
-                <span class="value"><?php echo $savvy->render((object) [
+                <span class="value dcf-mr-1"><?php echo $savvy->render((object) [
                     'number' => $context->phone,
                     'itemprop' => 'telephone',
                 ], 'Peoplefinder/Record/NumberItemprop.tpl.php') ?></span>
@@ -86,7 +86,7 @@ $onlySummary = $context->isSummaryView();
             <div class="tel work fax attribute dcf-txt-sm">
                 <span class="icon-print" aria-hidden="true"></span>
                 <span class="type">Fax:</span>
-                <span class="value"><?php echo $savvy->render((object) [
+                <span class="value dcf-mr-1"><?php echo $savvy->render((object) [
                     'number' => $context->fax,
                     'itemprop' => 'faxNumber',
                 ], 'Peoplefinder/Record/NumberItemprop.tpl.php') ?></span>

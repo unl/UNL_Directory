@@ -31,7 +31,7 @@ $showKnowledge = $context->shouldShowKnowledge();
 <?php endif; ?>
 
 
-<div class="vcard <?php if (!$showKnowledge): ?>card <?php endif; ?><?php echo $context->eduPersonPrimaryAffiliation ?> dcf-mt-0 dcf-mb-0 dcf-mr-auto dcf-ml-auto dcf-measure" data-uid="<?php echo $context->uid ?>" data-preferred-name="<?php echo $preferredName ?>" itemscope itemtype="http://schema.org/<?php echo $itemtype ?>">
+<div class="vcard <?php if (!$showKnowledge): ?>card <?php endif; ?><?php echo $context->eduPersonPrimaryAffiliation ?> dcf-measure" data-uid="<?php echo $context->uid ?>" data-preferred-name="<?php echo $preferredName ?>" itemscope itemtype="http://schema.org/<?php echo $itemtype ?>">
     <a class="card-profile planetred_profile dcf-d-block dcf-mb-3 dcf-h-10 dcf-w-10 dcf-ratio dcf-ratio-1x1" href="<?php echo $context->getProfileUrl() ?>" aria-label="Planet Red profile for <?php echo $preferredName ?>" itemprop="url">
         <img class="photo profile_pic dcf-ratio-child dcf-circle dcf-d-block dcf-obj-fit-cover" itemprop="image" src="<?php echo $context->getImageURL(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_LARGE) ?>" alt="Avatar for <?php echo $preferredName ?>" />
     </a>
@@ -40,7 +40,7 @@ $showKnowledge = $context->shouldShowKnowledge();
     <?php if (!$context->isHcardFormat()): ?>
         <h1 class="headline dcf-mb-0 dcf-txt-h2">
     <?php else: ?>
-        <div class="headline dcf-txt-h2 dcf-lh-2">
+        <div class="headline dcf-txt-h2 dcf-bold dcf-lh-2">
     <?php endif; ?>
         <?php if (!$isOrg): ?>
             <a class="permalink dcf-txt-decor-hover" href="<?php echo $context->getUrl() ?>" itemprop="url">
@@ -150,7 +150,7 @@ $showKnowledge = $context->shouldShowKnowledge();
         <div class="tel work attribute dcf-txt-sm">
             <span class="icon-phone" aria-hidden="true"></span>
             <span class="type">Work</span>
-            <span class="value"><?php echo $savvy->render((object) [
+            <span class="value dcf-mr-1"><?php echo $savvy->render((object) [
                 'number' => $context->telephoneNumber,
                 'itemprop' => 'telephone',
             ], 'Peoplefinder/Record/NumberItemprop.tpl.php') ?></span>
@@ -161,7 +161,7 @@ $showKnowledge = $context->shouldShowKnowledge();
     <?php if (isset($context->unlSISLocalPhone)): ?>
         <div class="tel home dcf-txt-sm">
             <span class="type">Phone</span>
-            <span class="value"><?php echo $savvy->render((object) [
+            <span class="value dcf-mr-1"><?php echo $savvy->render((object) [
                 'number' => $context->unlSISLocalPhone,
                 'itemprop' => 'telephone',
             ], 'Peoplefinder/Record/NumberItemprop.tpl.php') ?></span>
