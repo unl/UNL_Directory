@@ -75,7 +75,7 @@ $onlySummary = $context->isSummaryView();
             <div class="tel work attribute dcf-txt-sm">
                 <span class="icon-phone" aria-hidden="true"></span>
                 <span class="type">Phone:</span>
-                <span class="value"><?php echo $savvy->render((object) [
+                <span class="value dcf-mr-1"><?php echo $savvy->render((object) [
                     'number' => $context->phone,
                     'itemprop' => 'telephone',
                 ], 'Peoplefinder/Record/NumberItemprop.tpl.php') ?></span>
@@ -86,7 +86,7 @@ $onlySummary = $context->isSummaryView();
             <div class="tel work fax attribute dcf-txt-sm">
                 <span class="icon-print" aria-hidden="true"></span>
                 <span class="type">Fax:</span>
-                <span class="value"><?php echo $savvy->render((object) [
+                <span class="value dcf-mr-1"><?php echo $savvy->render((object) [
                     'number' => $context->fax,
                     'itemprop' => 'faxNumber',
                 ], 'Peoplefinder/Record/NumberItemprop.tpl.php') ?></span>

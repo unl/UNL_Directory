@@ -150,7 +150,7 @@ $showKnowledge = $context->shouldShowKnowledge();
         <div class="tel work attribute dcf-txt-sm">
             <span class="icon-phone" aria-hidden="true"></span>
             <span class="type">Work</span>
-            <span class="value"><?php echo $savvy->render((object) [
+            <span class="value dcf-mr-1"><?php echo $savvy->render((object) [
                 'number' => $context->telephoneNumber,
                 'itemprop' => 'telephone',
             ], 'Peoplefinder/Record/NumberItemprop.tpl.php') ?></span>
@@ -161,7 +161,7 @@ $showKnowledge = $context->shouldShowKnowledge();
     <?php if (isset($context->unlSISLocalPhone)): ?>
         <div class="tel home dcf-txt-sm">
             <span class="type">Phone</span>
-            <span class="value"><?php echo $savvy->render((object) [
+            <span class="value dcf-mr-1"><?php echo $savvy->render((object) [
                 'number' => $context->unlSISLocalPhone,
                 'itemprop' => 'telephone',
             ], 'Peoplefinder/Record/NumberItemprop.tpl.php') ?></span>
