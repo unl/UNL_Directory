@@ -79,7 +79,8 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
         $results = $this->query("SELECT * FROM unl_appointments_listed_unca appointments, unl_biodemo biodemo WHERE
             biodemo.biodemo_id = appointments.biodemo_id 
             AND biodemo.netid = :user_identification_string 
-            AND appointments.end_date >= '" . date('Y-m-d') . "'", 
+            AND appointments.end_date >= '" . date('Y-m-d') . "'
+            ORDER BY appointments.directory_order ASC",
             array(
                 'user_identification_string' => $uid, 
             ));
