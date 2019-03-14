@@ -9,3 +9,4 @@ $version = UNL_Peoplefinder::$staticFileVersion;
 
 <link rel="home" href="<?php echo $baseUrl ?>">
 <link rel="stylesheet" href="<?php echo $baseUrl ?>css/directory.css?v=<?php echo $version ?>">
+<link rel="stylesheet" href="<?php echo $baseUrl ?>css/directory-print.css?v=<?php echo $version ?>" media="print">

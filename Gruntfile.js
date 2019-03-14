@@ -9,6 +9,7 @@ module.exports = function (grunt) {
 
 	var cssFiles = [
 		'directory',
+		'directory-print',
 	];
 
 	var jsFiles = [
