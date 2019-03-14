@@ -2,7 +2,7 @@
 $baseUrl = UNL_Peoplefinder::getURL();
 ?>
 
-<div class="dcf-bleed search-band dcf-txt-center dcf-bg-cover">
+<div class="dcf-bleed dcf-txt-center dcf-bg-center dcf-bg-no-repeat dcf-bg-cover unl-bg-darker-gray dir-search-bg search-band">
   <div class="dcf-wrapper dcf-pt-7 dcf-pb-7">
     <?php echo $savvy->render($context, 'Peoplefinder/StandardForm.tpl.php') ?>
   </div>
