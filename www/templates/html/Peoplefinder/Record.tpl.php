@@ -177,7 +177,7 @@ $showKnowledge = $context->shouldShowKnowledge();
     <?php endif; ?>
     </div>
 
-    <div class="vcard-tools wdn_vcardTools primary dcf-d-flex dcf-flex-row dcf-flex-wrap dcf-ai-start dcf-jc-around dcf-txt-sm dcf-mt-5 dcf-pt-3 dcf-pb-3 dcf-bt-1 dcf-bt-solid unl-bt-light-gray">
+    <div class="vcard-tools wdn_vcardTools primary dcf-d-flex dcf-flex-row dcf-flex-wrap dcf-ai-start dcf-jc-around dcf-txt-sm dcf-mt-5 dcf-pt-3 dcf-pb-3 dcf-bt-1 dcf-bt-solid unl-bt-light-gray dcf-d-none@print">
         <a class="dcf-btn dcf-btn-secondary dcf-b-0" href="<?php echo $context->getVcardUrl() ?>"><span class="icon-vcard" aria-hidden="true"></span><span class="dcf-sr-only">v-card icon </span><span class="dcf-sr-only">Download </span>vCard<span class="dcf-sr-only"> for <?php echo $preferredName ?></span></a>
         <a class="dcf-btn dcf-btn-secondary dcf-b-0" href="<?php echo $context->getQRCodeUrl($savvy->render($context, 'templates/vcard/Peoplefinder/Record.tpl.php')) ?>"><span class="icon-qr-code" aria-hidden="true"></span><span class="dcf-sr-only">Q R code icon </span>QR Code<span class="dcf-sr-only"> vCard for <?php echo $preferredName ?></span></a>
         <button class="dcf-btn dcf-btn-secondary dcf-b-0"><span class="icon-print" aria-hidden="true"></span><span class="dcf-sr-only">printer icon </span>Print<span class="dcf-sr-only"> listing for <?php echo $preferredName ?></span></button>

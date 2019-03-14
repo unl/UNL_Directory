@@ -1,36 +1,22 @@
-// hide things that shouldn't print
+///////////////////
+// DIRECTORY: PRINT
+///////////////////
 
-@media print {
 
 .qtip,
-.vcard-tools,
-#visitorChat,
-script {
+script,
+a.permalink::after,
+a.card-profile::after,
+a.email::after,
+.tel a::after,
+.street-address a::after,
+.organization-unit a::after {
 	display: none !important;
 }
 
-a.permalink,
-a.card-profile,
-a.email,
-.tel a,
-.street-address a,
-.organization-unit a {
-	&::after {
-		display: none !important;
-	}
-}
 
-#maincontent {
-	a.tel,
-	a.card-profile,
-	a.permalink {
-		border: 0;
-		text-decoration: none;
-	}
-}
-
-.record-container .vcard .card-profile .photo {
-	height: 100px
-}
-
+#dcf-main a.tel,
+#dcf-main a.card-profile,
+#dcf-main a.permalink {
+	text-decoration: none !important;
 }
