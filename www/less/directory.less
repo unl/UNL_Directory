@@ -25,11 +25,6 @@
 }
 
 
-.single .search-band {
-  display: none !important;
-}
-
-
 #directory-disclaim a {
   background-color: fadeout(#000, 85%);
   border-radius: .317em;
@@ -82,12 +77,6 @@
 }
 
 
-.single .help-container,
-.searching .help-container {
-  display: none !important;
-}
-
-
 .pfResult {
   background-color: #fff;
   border: 1px solid #e3e3e2;
@@ -118,17 +107,6 @@
 }
 
 
-.pfResult .overflow .roles .organization-unit,
-.pfResult .overflow .roles .title {
-  display: block;
-}
-
-
-.pfResult .overflow .roles .organization-name{
-  display: none;
-}
-
-
 .pfResult > li:last-child {
   border-bottom: 0;
   margin-bottom: 0;
@@ -141,11 +119,6 @@
   font-size: 1rem;
   margin-left: 1em;
   text-transform: uppercase;
-}
-
-
-#all_employees ~ .pfResult .overflow .organization-unit  {
-  display: none;
 }
 
 
@@ -183,51 +156,13 @@
 }
 
 
-.results-container {
-  display: none !important;
-}
-
-
-.results-container.empty-filters #filters,
-.results-container.empty-filters .summary {
-  display: none;
-}
-
-
 .results-container.empty-filters #results {
   width: 100%;
 }
 
 
-.searching .results-container {
-  display: block !important;
-}
-
-
 .results-container .results .vcard {
   margin-top: 1.33em;
-}
-
-
-.results-container ~ .record-container,
-.searching .record-container {
-  display: none !important;
-}
-
-
-.record-container .record-single {
-  display: none;
-}
-
-
-.single .record-container {
-  display: block !important;
-}
-
-
-.single .record-container .knowledge-grid,
-.single .record-container .record-single {
-  display: block;
 }
 
 
@@ -253,11 +188,6 @@
 }
 
 
-.record-container .vcard .card-profile,
-.results-container .vcard .card-profile {
-  display: block;
-}
-
 .record-container .vcard .headline,
 .results-container .vcard .headline {
   letter-spacing: -.03em;
@@ -273,11 +203,7 @@
 
 
 .record-container .vcard .attribute *,
-.results-container .vcard .attribute * {
-  text-indent: 0;
-}
-
-
+.results-container .vcard .attribute *,
 .record-container .vcard .attribute::before,
 .results-container .vcard .attribute::before {
   text-indent: 0;
@@ -289,33 +215,10 @@
 }
 
 
-.record-container .vcard .adr .type,
-.results-container .vcard .adr .type {
-  display: none;
-}
-
-
 .record-container .vcard .adr .type + *,
 .results-container .vcard .adr .type + * {
   display: block;
   margin-top: -1.77em;
-}
-
-
-.record-container .vcard .adr .street-address,
-.results-container .vcard .adr .street-address {
-  display: block;
-}
-
-
-.record-container .vcard .adr .country-name,
-.results-container .vcard .adr .country-name {
-  display: none;
-}
-
-.record-container .vcard .tel .type,
-.results-container .vcard .tel .type {
-  display: none;
 }
 
 
@@ -335,24 +238,6 @@
 .record-container .vcard .roles > .org:last-child,
 .results-container .vcard .roles > .org:last-child {
   margin-bottom: 1.33em;
-}
-
-
-.record-container .vcard .roles .title,
-.results-container .vcard .roles .title {
-  display: block;
-}
-
-
-.record-container .vcard .roles .organization-unit,
-.results-container .vcard .roles .organization-unit {
-  display: block;
-}
-
-
-.record-container .vcard .roles .parent-unl .organization-name,
-.results-container .vcard .roles .parent-unl .organization-name {
-  display: none;
 }
 
 
@@ -464,11 +349,6 @@
 }
 
 
-#editBox .forms {
-  display: none;
-}
-
-
 #listings h2 {
   background-color: #ffc;
   padding: 1em 1.77rem 1rem;
@@ -490,11 +370,6 @@
   position: absolute;
   right: 0;
   top: .5em;
-}
-
-
-#listings .editing .forms {
-  display: none;
 }
 
 
@@ -577,27 +452,6 @@
 }
 
 
-.modal-content .forms .delete,
-.modal-content .forms .sortform {
-  display: none;
-}
-
-
-.modal-content .forms .add-form {
-  display: none;
-}
-
-
-.modal-content .forms.show-add > * {
-	display: none;
-}
-
-
-.modal-content .forms.show-add .add-form {
-	display: block;
-}
-
-
 .modal-content .wdn-icon-cancel::before {
   margin-right: 0;
 }
@@ -608,14 +462,62 @@
 }
 
 
-.corrections-template {
+.pfResult .overflow .roles .organization-unit,
+.pfResult .overflow .roles .title,
+.single .record-container .knowledge-grid,
+.single .record-container .record-single,
+.record-container .vcard .adr .street-address,
+.results-container .vcard .adr .street-address,
+.record-container .vcard .roles .title,
+.results-container .vcard .roles .title,
+.record-container .vcard .roles .organization-unit,
+.results-container .vcard .roles .organization-unit,
+.modal-content .forms.show-add .add-form {
+	display: block;
+}
+
+
+.searching .results-container,
+.single .record-container {
+  display: block !important;
+}
+
+
+.pfResult .overflow .roles .organization-name,
+#all_employees ~ .pfResult .overflow .organization-unit,
+.results-container.empty-filters #filters,
+.results-container.empty-filters .summary,
+.record-container .record-single,
+.record-container .vcard .card-profile,
+.results-container .vcard .card-profile,
+.record-container .vcard .adr .type,
+.results-container .vcard .adr .type,
+.record-container .vcard .adr .country-name,
+.results-container .vcard .adr .country-name,
+.record-container .vcard .tel .type,
+.results-container .vcard .tel .type,
+.record-container .vcard .roles .parent-unl .organization-name,
+.results-container .vcard .roles .parent-unl .organization-name,
+#editBox .forms,
+#listings .editing .forms,
+.modal-content .forms .delete,
+.modal-content .forms .sortform,
+.modal-content .forms .add-form,
+.modal-content .forms.show-add > *,
+.corrections-template,
+// Manually hide
+[data-uid="kfarrell2"] .given-name {
   display: none;
 }
 
 
-// Manually hide
-[data-uid="kfarrell2"] .given-name {
-  display: none;
+.single .search-band,
+.single .help-container,
+.searching .help-container,
+.results-container,
+.results-container ~ .record-container,
+.searching .record-container {
+  display: none !important;
 }
 
 
