@@ -8,4 +8,4 @@ $version = UNL_Peoplefinder::$staticFileVersion;
 <meta name="author" content="University of Nebraska–Lincoln Office of University Communication">
 
 <link rel="home" href="<?php echo $baseUrl ?>">
-<link rel="stylesheet" type="text/css" media="all" href="<?php echo $baseUrl ?>css/directory.css?v=<?php echo $version ?>">
+<link rel="stylesheet" href="<?php echo $baseUrl ?>css/directory.css?v=<?php echo $version ?>">
