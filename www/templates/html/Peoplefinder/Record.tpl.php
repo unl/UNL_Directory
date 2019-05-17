@@ -23,7 +23,8 @@ if (isset($context->mail) && !$context->isPrimarilyStudent()) {
     $encodedEmail = htmlentities($context->getRaw('mail'), ENT_QUOTES | ENT_HTML5);
 }
 
-$showKnowledge = $context->shouldShowKnowledge();
+// check if should display knowledge and that it contains content
+$showKnowledge = $context->shouldShowKnowledge() && !empty(trim($savvy->render($context->getKnowledge())));
 ?>
 <?php if ($showKnowledge): ?>
 <section class="dcf-grid dcf-col-gap-vw">
