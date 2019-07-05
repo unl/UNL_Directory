@@ -4,8 +4,69 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "70fac11915a6a12cdd7a773205353a31",
+    "content-hash": "a15fbe40686c16c7c2a83b42ee5dfe61",
     "packages": [
+        {
+            "name": "deruli/html-minifier",
+            "version": "0.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/derUli/html-minifier.git",
+                "reference": "c07f1a732fb27e27e438ad2010c0af48461dc1c1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/derUli/html-minifier/zipball/c07f1a732fb27e27e438ad2010c0af48461dc1c1",
+                "reference": "c07f1a732fb27e27e438ad2010c0af48461dc1c1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "satooshi/php-coveralls": "v2.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "zz": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Google inc",
+                    "homepage": "http://www.chromium.org/blink",
+                    "role": "Author"
+                },
+                {
+                    "name": "zaininnari",
+                    "homepage": "https://github.com/zaininnari/",
+                    "role": "Developer"
+                },
+                {
+                    "name": "raivisdejus",
+                    "homepage": "https://github.com/raivisdejus/",
+                    "role": "Developer"
+                },
+                {
+                    "name": "derUli",
+                    "homepage": "https://github.com/derUli/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "The Blink HTMLTokenizer ported to PHP. Fork by derUli.",
+            "homepage": "https://github.com/derUli/html-minifier",
+            "keywords": [
+                "Blink",
+                "HTML minify",
+                "php"
+            ],
+            "time": "2019-02-24T18:52:13+00:00"
+        },
         {
             "name": "guzzlehttp/guzzle",
             "version": "6.3.3",
@@ -342,62 +403,6 @@
                 "response"
             ],
             "time": "2016-08-06T14:39:51+00:00"
-        },
-        {
-            "name": "raivisdejus/html-minifier",
-            "version": "0.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/raivisdejus/html-minifier.git",
-                "reference": "93e990fc264d9bf72f1df961afd54953617710b1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/raivisdejus/html-minifier/zipball/93e990fc264d9bf72f1df961afd54953617710b1",
-                "reference": "93e990fc264d9bf72f1df961afd54953617710b1",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "satooshi/php-coveralls": "v2.0.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "zz": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Google inc",
-                    "homepage": "http://www.chromium.org/blink",
-                    "role": "Author"
-                },
-                {
-                    "name": "zaininnari",
-                    "homepage": "https://github.com/zaininnari/",
-                    "role": "Developer"
-                },
-                {
-                    "name": "raivisdejus",
-                    "homepage": "https://github.com/raivisdejus/",
-                    "role": "Developer"
-                }
-            ],
-            "description": "The Blink HTMLTokenizer ported to PHP.",
-            "homepage": "https://github.com/raivisdejus/html-minifier",
-            "keywords": [
-                "Blink",
-                "HTML minify",
-                "php"
-            ],
-            "time": "2018-06-11T06:36:44+00:00"
         },
         {
             "name": "ralouphie/getallheaders",
@@ -1596,6 +1601,7 @@
                 "mock",
                 "xunit"
             ],
+            "abandoned": true,
             "time": "2017-06-30T09:13:00+00:00"
         },
         {
