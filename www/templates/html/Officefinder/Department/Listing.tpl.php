@@ -13,27 +13,27 @@ if (!empty($context->email)) {
 }
 ?>
 <div class="listingDetails">
-    <?php echo $context->name ?>
+    <span class="dcf-d-block dcf-txt-lg dcf-bold"><?php echo $context->name ?></span>
     <?php if (isset($context->email)): ?>
-    <span class="email"><span class="icon-email" aria-hidden="true"></span><span class="dcf-sr-only">Email:</span><a href="mailto:<?php echo $encodedEmail ?>"><?php echo $encodedEmail ?></a></span>
+    <span class="email dcf-d-block dcf-txt-sm"><span class="icon-email" aria-hidden="true"></span><span class="dcf-sr-only">Email:</span><a href="mailto:<?php echo $encodedEmail ?>"><?php echo $encodedEmail ?></a></span>
     <?php endif; ?>
     <?php if (!empty($context->phone)): ?>
-    <span class="phone"><span class="icon-phone" aria-hidden="true"></span><span class="dcf-sr-only">Phone number:</span><?php echo $savvy->render($context->phone, 'Peoplefinder/Record/TelephoneNumber.tpl.php') ?></span>
+    <span class="phone dcf-d-block dcf-txt-sm"><span class="icon-phone" aria-hidden="true"></span><span class="dcf-sr-only">Phone number:</span><?php echo $savvy->render($context->phone, 'Peoplefinder/Record/TelephoneNumber.tpl.php') ?></span>
     <?php endif; ?>
     <?php if (!empty($context->fax)): ?>
-    <span class="phone"><span class="icon-print" aria-hidden="true"></span><span class="dcf-sr-only">fax:</span><?php echo $savvy->render($context->fax, 'Peoplefinder/Record/TelephoneNumber.tpl.php') ?></span>
+    <span class="phone dcf-d-block dcf-txt-sm"><span class="icon-print" aria-hidden="true"></span><span class="dcf-sr-only">fax:</span><?php echo $savvy->render($context->fax, 'Peoplefinder/Record/TelephoneNumber.tpl.php') ?></span>
     <?php endif; ?>
     <?php if (isset($context->building)): ?>
-    <span class="room"><span class="icon-map-pin" aria-hidden="true"></span><span class="dcf-sr-only">Location:</span><a class="location mapurl" href="https://maps.unl.edu/<?php echo $context->building ?>"><?php echo $context->building ?></a> <?php echo $context->room ?></span>
+    <span class="room dcf-d-block dcf-txt-sm"><span class="icon-map-pin" aria-hidden="true"></span><span class="dcf-sr-only">Location:</span><a class="location mapurl" href="https://maps.unl.edu/<?php echo $context->building ?>"><?php echo $context->building ?></a> <?php echo $context->room ?></span>
     <?php endif; ?>
     <?php if (!empty($context->address)): ?>
-    <span class="adr"><?php echo $context->address; ?></span>
+    <span class="adr dcf-d-block dcf-txt-sm"><?php echo $context->address; ?></span>
     <?php endif; ?>
     <?php if (isset($context->postal_code)): ?>
-    <span class="postal-code"><?php echo $context->postal_code; ?></span>
+    <span class="postal-code dcf-d-block dcf-txt-sm"><?php echo $context->postal_code; ?></span>
     <?php endif; ?>
     <?php if (isset($context->website)): ?>
-    <span class="website"><span class="icon-website" aria-hidden="true"></span><span class="dcf-sr-only">Website:</span><a href="<?php echo $context->website; ?>"><?php echo $context->website; ?></a></span>
+    <span class="website dcf-d-block dcf-txt-sm"><span class="icon-website" aria-hidden="true"></span><span class="dcf-sr-only">Website:</span><a href="<?php echo $context->website; ?>"><?php echo $context->website; ?></a></span>
     <?php endif; ?>
 
     <?php if ($userCanEdit): ?>

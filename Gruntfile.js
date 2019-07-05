@@ -9,13 +9,14 @@ module.exports = function (grunt) {
 
 	var cssFiles = [
 		'directory',
+		'directory-print',
 	];
 
 	var jsFiles = [
 		jsDir + '/directory.js'
 	];
 
-	var wdnMixinLibBaseUrl = 'https://raw.githubusercontent.com/unl/wdntemplates/master/wdn/templates_4.1/less/_mixins/';
+	var wdnMixinLibBaseUrl = 'https://raw.githubusercontent.com/unl/wdntemplates/4.1/wdn/templates_4.1/less/_mixins/';
 	var wdnMixins = [
 		'breakpoints.less',
 		'colors.less',

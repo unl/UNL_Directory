@@ -7,500 +7,440 @@
 
 @import "directory-icon.less";
 
-@inner-band-margin: percentage(-1 * @mobile-pad / (100% - 2 * @mobile-pad));
 
-.search-band {
-	background: #38431b url(../images/050419.jpg) 50% 50% no-repeat;
+.dir-search-bg {
+  background-image: url('../images/dir-search-bg-640.jpg');
 
-	p {
-		margin-bottom: 0;
-		text-align: right;
-		margin: 1.5em auto 0;
+  @media (min-width: 640px) { background-image: url('../images/dir-search-bg-960.jpg'); }
+  @media (min-width: 960px) { background-image: url('../images/dir-search-bg-1280.jpg'); }
+  @media (min-width: 1280px) { background-image: url('../images/dir-search-bg-1920.jpg'); }
+  @media (min-width: 1920px) { background-image: url('../images/dir-search-bg-2560.jpg'); }
 
-		a {
-			color: white;
-			font-size: 0.8em;
-		}
-	}
+  @media
+  only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (min-resolution: 192dpi),
+  only screen and (min-resolution: 2dppx) {
+    background-image: url('../images/dir-search-bg-1280.jpg');
 
-	.single & {
-		display: none !important;
-	}
+    @media (min-width: 640px) { background-image: url('../images/dir-search-bg-1920.jpg'); }
+    @media (min-width: 960px) { background-image: url('../images/dir-search-bg-2560.jpg'); }
+  }
+
 }
 
-#directory-disclaim {
 
-    a {
-    	color: @ui03;
-        text-decoration: none;
-        text-shadow: none;
-        background-color: fadeout(#000, 85%);
-        border-radius: 0.317em;
-        padding: 0.451em 0.802em;
-    }
+.webp .dir-search-bg {
+  background-image: url('../images/dir-search-bg-640.webp');
+
+  @media (min-width: 640px) { background-image: url('../images/dir-search-bg-960.webp'); }
+  @media (min-width: 960px) { background-image: url('../images/dir-search-bg-1280.webp'); }
+  @media (min-width: 1280px) { background-image: url('../images/dir-search-bg-1920.webp'); }
+  @media (min-width: 1920px) { background-image: url('../images/dir-search-bg-2560.webp'); }
+
+  @media
+  only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (min-resolution: 192dpi),
+  only screen and (min-resolution: 2dppx) {
+    background-image: url('../images/dir-search-bg-1280.webp');
+
+    @media (min-width: 640px) { background-image: url('../images/dir-search-bg-1920.webp'); }
+    @media (min-width: 960px) { background-image: url('../images/dir-search-bg-2560.webp'); }
+  }
+
 }
+
+
+.search-band p {
+  margin: 1.5em auto 0;
+  text-align: right
+}
+
+
+.search-band p a {
+  color: white;
+  font-size: .8em;
+}
+
+
+#directory-disclaim a {
+  background-color: fadeout(#000, 85%);
+  border-radius: .317em;
+  color: @ui03;
+  padding: .451em .802em;
+  text-decoration: none;
+  text-shadow: none;
+}
+
 
 .card {
-	margin-bottom: 1em;
-	border-top: 5px solid @scarlet;
-	background-color: #fff;
-	box-shadow: 0 0 1px 1px fadeout(@ui14, 80%);
-
-	.card-profile {
-		margin: 1.33em 0 .75em 1.77em;
-	}
-
-	.card-content {
-		padding: 0 1.77em;
-
-		> *:last-child,
-		> .attribute:last-child {
-			margin-bottom: 0;
-		}
-	}
-
-	.dcf-subhead {
-		margin-bottom: 0;
-	}
-
-	.description {
-		margin: 1em 0 0;
-		padding-top: 1em;
-		border-top: 1px solid @ui04;
-	}
-
-	.vcard-tools {
-  	padding-left: 1.77em;
-  	padding-right: 1.77em;
-	}
+  background-color: #fff;
+  border-top: 5px solid #d00000;
+  box-shadow: 0 0 1px 1px rgba(20,20,20,.2);
+  margin-bottom: 1em;
 }
 
-.help-container {
 
-	.single &,
-	.searching & {
-		display: none !important;
-	}
+.card .card-profile {
+  margin: 1.33em 0 .75em 1.77em;
 }
+
+
+.card .card-content {
+  padding: 0 1.77em;
+}
+
+
+.card .card-content > .attribute:last-child,
+.card .card-content > :last-child {
+  margin-bottom: 0;
+}
+
+
+.card .dcf-subhead {
+  margin-bottom: 0;
+}
+
+
+.card .description {
+  border-top: 1px solid #e3e3e2;
+  margin: 1em 0 0;
+  padding-top: 1em;
+}
+
+
+.card .vcard-tools {
+  padding-left: 1.77em;
+  padding-right: 1.77em;
+}
+
 
 .pfResult {
   background-color: #fff;
   border: 1px solid #e3e3e2;
-
-	> li {
-		border-bottom: 1px solid #e3e3e2;
-		cursor: pointer;
-		margin-bottom: 0;
-		padding: 1.33em 1.77em;
-
-		&:focus {
-			box-shadow: 0 0 10px @triad;
-		}
-	}
-
-	.overflow {
-
-		> .recordDetails {
-			flex: 1 1 auto;
-			align-self: center;
-		}
-
-		.roles {
-
-			li:last-child {
-				margin-bottom: 0;
-			}
-
-			.title,
-			.organization-unit {
-				display: block;
-			}
-
-			.organization-name {
-				display: none;
-			}
-		}
-	}
-
-  > li:last-child {
-    border-bottom: 0;
-    margin-bottom: 0;
-  }
-
-	.given-name {
-		margin-left: 1em;
-		font-size: 1rem;
-		.sans-serif-font();
-		text-transform: uppercase;
-		color: @ui08;
-	}
 }
 
-#all_employees ~ .pfResult {
 
-	.overflow {
-		.organization-unit {
-			display: none;
-		}
-	}
+.pfResult > li {
+  border-bottom: 1px solid #e3e3e2;
+  cursor: pointer;
+  margin-bottom: 0;
+  padding: 1.33em 1.77em
 }
 
-.results,
-.pfResult {
 
-	.vcard {
-		position: relative;
-
-		//Don't visually display by default, but keep it in the tab order
-		button.close-full-record {
-			position: absolute;
-			right: 999em;
-			display: block;
-		}
-
-		//on focus (via keyboard), visually display it
-		button.close-full-record:focus {
-			position: absolute;
-			z-index: 5;
-			right: 0;
-		}
-	}
+.pfResult > li:focus {
+  box-shadow: 0 0 10px #137cbd;
 }
+
+
+.pfResult .overflow > .recordDetails{
+  align-self: center;
+  flex: 1 1 auto;
+}
+
+
+.pfResult .overflow .roles li:last-child {
+  margin-bottom: 0;
+}
+
+
+.pfResult > li:last-child {
+  border-bottom: 0;
+  margin-bottom: 0;
+}
+
+
+.pfResult .given-name {
+  color: #5b5b5a;
+  .sans-serif-font();
+  font-size: 1rem;
+  margin-left: 1em;
+  text-transform: uppercase;
+}
+
+
+.pfResult .vcard,
+.results .vcard {
+  position: relative;
+}
+
+
+// Don't visually display by default, but keep it in the tab order
+.pfResult .vcard button.close-full-record,
+.results .vcard button.close-full-record {
+  display: block;
+  position: absolute;
+  right: 999em;
+}
+
+
+// On focus (via keyboard), visually display it
+.pfResult .vcard button.close-full-record:focus,
+.results .vcard button.close-full-record:focus {
+  position: absolute;
+  right: 0;
+  z-index: 5;
+}
+
 
 .affiliation-heading {
   margin-bottom: 0;
 }
 
+
 .results + .results {
   margin-top: 2.37em;
 }
 
-.results-container {
-	display: none !important;
 
-	&.empty-filters {
-
-		#filters,
-		.summary {
-			display: none;
-		}
-
-		#results {
-			width: 100%;
-		}
-	}
-
-	.searching & {
-		display: block !important;
-	}
-
-	.results {
-
-		.vcard {
-			margin-top: 1em;
-		}
-	}
-
-}
-
-.record-container {
-
-	.results-container ~ &,
-	.searching & {
-		display: none !important;
-	}
-
-	.record-single {
-		display: none;
-	}
-
-	.single & {
-		display: block !important;
-
-		.knowledge-grid,
-		.record-single {
-			display: block;
-		}
-	}
-
-	.vcard .headline a {
-		color: inherit;
-	}
+.results-container.empty-filters #results {
+  width: 100%;
 }
 
 
-#results,
-.filter-options {
-
-	&:focus {
-		outline: none;
-	}
+.results-container .results .vcard {
+  margin-top: 1.33em;
 }
 
-#filters {
 
-	ol {
-		list-style: none;
-		padding-left: 0;
-	}
-
+.record-container .vcard .headline a {
+  color: inherit;
 }
 
-#results {
 
-	> *:first-child {
-		margin-top: 0;
-	}
+#results:focus,
+.filter-options:focus {
+  outline: none;
 }
 
-.results-container,
-.record-container {
 
-	.vcard {
-
-		.card-profile {
-			display: block;
-		}
-
-    .headline {
-      letter-spacing: -.03em;
-    }
-
-		.attribute {
-			padding-left: 1.77em;
-			text-indent: -1.77em;
-			margin-top: .75em;
-
-			* {
-				text-indent: 0;
-			}
-
-			&::before {
-				text-indent: 0;
-			}
-		}
-
-		.roles + .attribute {
-  		margin-top: 1.33em;
-		}
-
-		.adr {
-
-			.type {
-				display: none;
-
-				+ * {
-					margin-top: -1.77em;
-					display: block;
-				}
-			}
-
-			.street-address {
-				display: block;
-			}
-
-			.country-name {
-				display: none;
-			}
-		}
-
-		.tel {
-
-			.type {
-				display: none;
-			}
-
-			a.tel {
-				display: block;
-				margin-top: -1.5em;
-			}
-		}
-
-		.roles {
-			border-bottom: 1px solid @ui04;
-
-			> .org:last-child {
-				margin-bottom: 1.33em;
-			}
-
-			.title {
-				display: block;
-			}
-
-			.organization-unit {
-				display: block;
-			}
-
-			.parent-unl {
-
-				.organization-name {
-					display: none;
-				}
-			}
-		}
-
-		.fn,
-		.given-name,
-		.icon-link {
-			vertical-align: middle;
-		}
-
-		.given-name {
-			margin-left: 1em;
-			font-size: 1rem;
-			.sans-serif-font();
-			text-transform: uppercase;
-			color: @ui08;
-		}
-
-		button {
-			border: 0;
-			background: none;
-			color: @brand;
-
-			&:focus {
-				outline: 1px dotted;
-			}
-		}
-	}
+#filters ol {
+  list-style: none;
+  padding-left: 0;
 }
+
+
+#results > *:first-child {
+  margin-top: 0;
+}
+
+
+.record-container .vcard .headline,
+.results-container .vcard .headline {
+  letter-spacing: -.03em;
+}
+
+
+.record-container .vcard .attribute,
+.results-container .vcard .attribute {
+  margin-top: .75em;
+  padding-left: 1.77em;
+  text-indent: -1.77em;
+}
+
+
+.record-container .vcard .attribute *,
+.results-container .vcard .attribute *,
+.record-container .vcard .attribute::before,
+.results-container .vcard .attribute::before {
+  text-indent: 0;
+}
+
+.record-container .vcard .roles+.attribute,
+.results-container .vcard .roles+.attribute {
+  margin-top: 1.33em;
+}
+
+
+.record-container .vcard .adr .type + *,
+.results-container .vcard .adr .type + * {
+  display: block;
+  margin-top: -1.77em;
+}
+
+
+.record-container .vcard .tel a.tel,
+.results-container .vcard .tel a.tel {
+  display: block;
+  margin-top: -1.5em;
+}
+
+
+.record-container .vcard .roles,
+.results-container .vcard .roles {
+  border-bottom: 1px solid #e3e3e2;
+}
+
+
+.record-container .vcard .roles > .org:last-child,
+.results-container .vcard .roles > .org:last-child {
+  margin-bottom: 1.33em;
+}
+
+
+.record-container .vcard .fn,
+.record-container .vcard .given-name,
+.record-container .vcard .icon-link,
+.results-container .vcard .fn,
+.results-container .vcard .given-name,
+.results-container .vcard .icon-link {
+  vertical-align: middle;
+}
+
+
+.record-container .vcard .given-name,
+.results-container .vcard .given-name {
+  color: @ui08;
+  .sans-serif-font();
+  font-size: 1rem;
+  margin-left: 1em;
+  text-transform: uppercase;
+}
+
+
+.record-container .vcard button,
+.results-container .vcard button {
+  background: 0 0;
+  border: 0;
+  color: @brand;
+}
+
+
+.record-container .vcard button:focus,
+.results-container .vcard button:focus {
+  outline: 1px dotted;
+}
+
 
 .wdn_annotate_note {
-	width: 100%;
-	height: 100%;
-	border: 0;
+  border: 0;
+  height: 100%;
+  width: 100%;
 }
 
+
 .vcard-tools.primary > * {
-  min-width: 25%;
+  flex-basis: calc(~'(23.68rem - 100%) * 999');
   max-width: 50%;
-  flex-basis: calc((23.68rem - 100%) * 999);
+  min-width: 25%;
 }
+
 
 .vcard-tools.primary span[class^='icon-'] {
   display: block;
   font-size: 2.37em;
 }
 
+
 .vcard-tools.primary span[class^='icon-']::before {
   margin-right: 0;
 }
 
+
 .directory-knowledge-section + .directory-knowledge-section {
-  border-top: 1px solid @ui04;
+  border-top: 1px solid #e3e3e2;
   padding-top: 1.33em;
 }
+
+
+.directory-knowledge-section:last-child {
+  padding-bottom: 1.77em;
+}
+
 
 .directory-knowledge-section-heading {
   padding-left: 2.37rem;
 }
 
+
 .knowledge-grid .vcard {
-	margin-bottom: 1em;
+  margin-bottom: 1em;
 }
 
-#editBox {
 
-	.icon-help::before {
-		font-size: 1rem;
-		vertical-align: middle;
-	}
-
-	.aliases,
-	.users {
-		ul {
-			list-style: none;
-			padding: 0 0 1em;
-			border-bottom: 1px solid @ui04;
-			margin-bottom: 1em;
-
-			li {
-				padding: .5em 0;
-				clear: both;
-			}
-
-			form {
-				float: right;
-			}
-		}
-	}
-
-	.forms {
-		display: none;
-	}
+#editBox .icon-help::before {
+  font-size: 1rem;
+  vertical-align: middle;
 }
 
-#listings {
 
-	h2 {
-		background-color: #ffc;
-		padding: 1em 1.77rem 1rem;
-	}
-
-	.editing {
-		li {
-			position: relative;
-
-			.listingDetails {
-				min-height: 2.313em; // ensure the positioned edit button has clearance
-				margin-right: 4em;
-			}
-
-			.tools {
-				position: absolute;
-				top: 0.5em;
-				right: 0;
-			}
-		}
-
-		.forms {
-			display: none;
-		}
-	}
-
-	.ui-sortable {
-		li > div {
-			cursor: move;
-		}
-	}
-
-	> ol > li:first-child {
-		padding-top: 0;
-	}
-
-	ol {
-		list-style: none;
-		padding: 0;
-
-		li {
-			border-bottom: 1px dotted @ui04;
-			padding: 0.5em 0;
-		}
-
-		ol {
-			padding-left: 1.5em;
-
-			li {
-				border-left: 1px dotted @ui04;
-				padding: 0.5em 0 0.5em 0.5em;
-
-				&:last-child {
-					border-bottom: 0;
-					margin-bottom: -0.5em;
-				}
-			}
-		}
-	}
-
-	.phone,
-	.website,
-	.email,
-	.room,
-	.adr,
-	.postal-code {
-		display: block;
-	}
+#editBox .aliases ul,
+#editBox .users ul {
+  border-bottom: 1px solid #e3e3e2;
+  list-style: none;
+  margin-bottom: 1em;
+  padding: 0 0 1em;
 }
+
+
+#editBox .aliases ul li,
+#editBox .users ul li {
+  clear: both;
+  padding: .5em 0;
+}
+
+
+#editBox .aliases ul form,
+#editBox .users ul form {
+  float: right;
+}
+
+
+#listings h2 {
+  background-color: #ffc;
+  padding: 1em 1.77rem 1rem;
+}
+
+
+#listings .editing li {
+  position: relative;
+}
+
+
+#listings .editing li .listingDetails {
+  margin-right: 4em;
+  min-height: 2.313em; // ensure the positioned edit button has clearance
+}
+
+
+#listings .editing li .tools {
+  position: absolute;
+  right: 0;
+  top: .5em;
+}
+
+
+#listings .ui-sortable li > div {
+  cursor: move;
+}
+
+
+#listings > ol > li:first-child {
+  padding-top: 0;
+}
+
+
+#listings .listing:not(:last-child) {
+  border-bottom: 1px solid #e3e3e2;
+}
+
+
+#listings ol ol {
+  padding-left: 1.5em;
+}
+
+
+#listings ol ol li {
+  border-left: 1px dotted #e3e3e2;
+  padding: .5em 0 .5em .5em;
+}
+
+
+#listings ol ol li:last-child {
+  border-bottom: 0;
+  margin-bottom: -.5em;
+}
+
 
 .modal-overlay {
   background-color: rgba(254,253,250,.98);
@@ -509,13 +449,14 @@
 	transition: opacity 400ms, visibility 400ms;
 	visibility: hidden;
 	z-index: 300;
-
-	&.show {
-		opacity: 1;
-		transition: opacity 400ms, visibility 0s;
-		visibility: visible;
-	}
 }
+
+.modal-overlay.show {
+  opacity: 1;
+  transition: opacity 400ms, visibility 0s;
+  visibility: visible;
+}
+
 
 .modal-overlay::before,
 .modal-overlay::after {
@@ -526,61 +467,98 @@
   min-height: 1.77em;
 }
 
+
 .modal-content {
-	max-width: 42.09em;
-	box-shadow: 0 0 1px 1px fadeout(@ui14, 80%);
-
-	&:focus {
-		outline: 0;
-	}
-
-	.icon-trash {
-		margin: 1em 0;
-	}
-
-	.forms {
-		margin: 8% 0;
-
-		.delete, .sortform {
-			display: none;
-		}
-
-		.add-form {
-			display: none;
-		}
-
-		&.show-add {
-			> * {
-				display: none;
-			}
-
-			.add-form {
-				display: block;
-			}
-		}
-	}
+  box-shadow: 0 0 1px 1px fadeout(@ui14, 80%);
+  max-width: 42.09em;
 }
+
+
+.modal-content:focus {
+  outline: 0;
+}
+
+
+.modal-content .icon-trash {
+  margin: 1em 0;
+}
+
+
+.modal-content .forms {
+  margin: 8% 0;
+}
+
 
 .modal-content .wdn-icon-cancel::before {
   margin-right: 0;
 }
 
+
 #orgChart ul::before {
   font-size: 1.33em; // Enlarge arrow icon
 }
 
-.corrections-template {
-	display: none;
+
+.pfResult .overflow .roles .organization-unit,
+.pfResult .overflow .roles .title,
+.single .record-container .knowledge-grid,
+.single .record-container .record-single,
+.record-container .vcard .adr .street-address,
+.results-container .vcard .adr .street-address,
+.record-container .vcard .roles .title,
+.results-container .vcard .roles .title,
+.record-container .vcard .roles .organization-unit,
+.results-container .vcard .roles .organization-unit,
+.modal-content .forms.show-add .add-form {
+	display: block;
 }
 
+
+.searching .results-container,
+.single .record-container {
+  display: block !important;
+}
+
+
+.pfResult .overflow .roles .organization-name,
+#all_employees ~ .pfResult .overflow .organization-unit,
+.results-container.empty-filters #filters,
+.results-container.empty-filters .summary,
+.record-container .record-single,
+.record-container .vcard .card-profile,
+.results-container .vcard .card-profile,
+.record-container .vcard .adr .type,
+.results-container .vcard .adr .type,
+.record-container .vcard .adr .country-name,
+.results-container .vcard .adr .country-name,
+.record-container .vcard .tel .type,
+.results-container .vcard .tel .type,
+.record-container .vcard .roles .parent-unl .organization-name,
+.results-container .vcard .roles .parent-unl .organization-name,
+#editBox .forms,
+#listings .editing .forms,
+.modal-content .forms .delete,
+.modal-content .forms .sortform,
+.modal-content .forms .add-form,
+.modal-content .forms.show-add > *,
+.corrections-template,
 // Manually hide
 [data-uid="kfarrell2"] .given-name {
-	display: none;
+  display: none;
 }
+
+
+.single .search-band,
+.single .help-container,
+.searching .help-container,
+.results-container,
+.results-container ~ .record-container,
+.searching .record-container {
+  display: none !important;
+}
+
 
 .programmatically-focused:focus {
-    //don't show visual focus on these programmatic actions, as focus change is indicated in other ways (such as the showing of new content). JS will remove this class when focus is changed again.
-    outline: none;
+  //don't show visual focus on these programmatic actions, as focus change is indicated in other ways (such as the showing of new content). JS will remove this class when focus is changed again.
+  outline: none;
 }
-
-@import "directory-print.less";

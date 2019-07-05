@@ -23,7 +23,8 @@ if (isset($context->mail) && !$context->isPrimarilyStudent()) {
     $encodedEmail = htmlentities($context->getRaw('mail'), ENT_QUOTES | ENT_HTML5);
 }
 
-$showKnowledge = $context->shouldShowKnowledge();
+// check if should display knowledge and that it contains content
+$showKnowledge = $context->shouldShowKnowledge() && !empty(trim($savvy->render($context->getKnowledge())));
 ?>
 <?php if ($showKnowledge): ?>
 <section class="dcf-grid dcf-col-gap-vw">
@@ -31,7 +32,7 @@ $showKnowledge = $context->shouldShowKnowledge();
 <?php endif; ?>
 
 
-<div class="vcard <?php if (!$showKnowledge): ?>card <?php endif; ?><?php echo $context->eduPersonPrimaryAffiliation ?> dcf-mt-0 dcf-mb-0 dcf-mr-auto dcf-ml-auto dcf-measure" data-uid="<?php echo $context->uid ?>" data-preferred-name="<?php echo $preferredName ?>" itemscope itemtype="http://schema.org/<?php echo $itemtype ?>">
+<div class="vcard <?php if (!$showKnowledge): ?>card <?php endif; ?><?php echo $context->eduPersonPrimaryAffiliation ?> dcf-measure" data-uid="<?php echo $context->uid ?>" data-preferred-name="<?php echo $preferredName ?>" itemscope itemtype="http://schema.org/<?php echo $itemtype ?>">
     <a class="card-profile planetred_profile dcf-d-block dcf-mb-3 dcf-h-10 dcf-w-10 dcf-ratio dcf-ratio-1x1" href="<?php echo $context->getProfileUrl() ?>" aria-label="Planet Red profile for <?php echo $preferredName ?>" itemprop="url">
         <img class="photo profile_pic dcf-ratio-child dcf-circle dcf-d-block dcf-obj-fit-cover" itemprop="image" src="<?php echo $context->getImageURL(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_LARGE) ?>" alt="Avatar for <?php echo $preferredName ?>" />
     </a>
@@ -40,7 +41,7 @@ $showKnowledge = $context->shouldShowKnowledge();
     <?php if (!$context->isHcardFormat()): ?>
         <h1 class="headline dcf-mb-0 dcf-txt-h2">
     <?php else: ?>
-        <div class="headline dcf-txt-h2 dcf-lh-2">
+        <div class="headline dcf-txt-h2 dcf-bold dcf-lh-2">
     <?php endif; ?>
         <?php if (!$isOrg): ?>
             <a class="permalink dcf-txt-decor-hover" href="<?php echo $context->getUrl() ?>" itemprop="url">
@@ -150,7 +151,7 @@ $showKnowledge = $context->shouldShowKnowledge();
         <div class="tel work attribute dcf-txt-sm">
             <span class="icon-phone" aria-hidden="true"></span>
             <span class="type">Work</span>
-            <span class="value"><?php echo $savvy->render((object) [
+            <span class="value dcf-mr-1"><?php echo $savvy->render((object) [
                 'number' => $context->telephoneNumber,
                 'itemprop' => 'telephone',
             ], 'Peoplefinder/Record/NumberItemprop.tpl.php') ?></span>
@@ -161,7 +162,7 @@ $showKnowledge = $context->shouldShowKnowledge();
     <?php if (isset($context->unlSISLocalPhone)): ?>
         <div class="tel home dcf-txt-sm">
             <span class="type">Phone</span>
-            <span class="value"><?php echo $savvy->render((object) [
+            <span class="value dcf-mr-1"><?php echo $savvy->render((object) [
                 'number' => $context->unlSISLocalPhone,
                 'itemprop' => 'telephone',
             ], 'Peoplefinder/Record/NumberItemprop.tpl.php') ?></span>
@@ -177,7 +178,7 @@ $showKnowledge = $context->shouldShowKnowledge();
     <?php endif; ?>
     </div>
 
-    <div class="vcard-tools wdn_vcardTools primary dcf-d-flex dcf-flex-row dcf-flex-wrap dcf-ai-start dcf-jc-around dcf-txt-sm dcf-mt-5 dcf-pt-3 dcf-pb-3 dcf-bt-1 dcf-bt-solid unl-bt-light-gray">
+    <div class="vcard-tools wdn_vcardTools primary dcf-d-flex dcf-flex-row dcf-flex-wrap dcf-ai-start dcf-jc-around dcf-txt-sm dcf-mt-5 dcf-pt-3 dcf-pb-3 dcf-bt-1 dcf-bt-solid unl-bt-light-gray dcf-d-none@print">
         <a class="dcf-btn dcf-btn-secondary dcf-b-0" href="<?php echo $context->getVcardUrl() ?>"><span class="icon-vcard" aria-hidden="true"></span><span class="dcf-sr-only">v-card icon </span><span class="dcf-sr-only">Download </span>vCard<span class="dcf-sr-only"> for <?php echo $preferredName ?></span></a>
         <a class="dcf-btn dcf-btn-secondary dcf-b-0" href="<?php echo $context->getQRCodeUrl($savvy->render($context, 'templates/vcard/Peoplefinder/Record.tpl.php')) ?>"><span class="icon-qr-code" aria-hidden="true"></span><span class="dcf-sr-only">Q R code icon </span>QR Code<span class="dcf-sr-only"> vCard for <?php echo $preferredName ?></span></a>
         <button class="dcf-btn dcf-btn-secondary dcf-b-0"><span class="icon-print" aria-hidden="true"></span><span class="dcf-sr-only">printer icon </span>Print<span class="dcf-sr-only"> listing for <?php echo $preferredName ?></span></button>
