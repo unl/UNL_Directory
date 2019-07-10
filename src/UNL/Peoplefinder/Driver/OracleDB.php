@@ -76,7 +76,7 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
 
     public function getRoles($uid)
     {
-        $results = $this->query("SELECT * FROM unl_appointments_listed_unca appointments, unl_biodemo biodemo WHERE
+        $results = $this->query("SELECT * FROM unl_appointments_listed_unca_00 appointments, unl_biodemo biodemo WHERE
             biodemo.biodemo_id = appointments.biodemo_id 
             AND biodemo.netid = :user_identification_string 
             AND appointments.end_date >= '" . date('Y-m-d') . "'
@@ -120,7 +120,7 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
 
     public function getHROrgUnitNumberMatches($query, $affiliation = null)
     {
-        $results = $this->query("SELECT DISTINCT biodemo.netid FROM unl_appointments_listed_unca appointments, unl_biodemo biodemo WHERE
+        $results = $this->query("SELECT DISTINCT biodemo.netid FROM unl_appointments_listed_unca_00 appointments, unl_biodemo biodemo WHERE
             biodemo.biodemo_id = appointments.biodemo_id 
             AND appointments.org_unit = :org_unit
             AND appointments.end_date >= '" . date('Y-m-d') . "'", 
@@ -148,7 +148,7 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
             $binding_array[$key] = $query[$i];
         }
 
-        $results = $this->query("SELECT DISTINCT biodemo.netid FROM unl_appointments_listed_unca appointments, unl_biodemo biodemo WHERE
+        $results = $this->query("SELECT DISTINCT biodemo.netid FROM unl_appointments_listed_unca_00 appointments, unl_biodemo biodemo WHERE
             biodemo.biodemo_id = appointments.biodemo_id 
             AND appointments.org_unit IN (" . implode(', ', $binding_list) . ")
             AND appointments.end_date >= '" . date('Y-m-d') . "'", 
