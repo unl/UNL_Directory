@@ -224,10 +224,10 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
             $i++;
         }
         
-        // UNL_EMAILS_UNCA.TYPE = 'USERINFO' is the work email address that we want
-        $query = "SELECT UNL_BIODEMO.NETID, UNL_BIODEMO.NU_FERPA, UNL_EMAILS_UNCA.EMAIL as mail
+        // UNL_EMAILS_00.TYPE = 'USERINFO' is the work email address that we want
+        $query = "SELECT UNL_BIODEMO.NETID, UNL_BIODEMO.NU_FERPA, UNL_EMAILS_00.EMAIL as mail
             FROM UNL_BIODEMO
-            LEFT JOIN UNL_EMAILS_UNCA ON UNL_BIODEMO.BIODEMO_ID = UNL_EMAILS_UNCA.BIODEMO_ID AND UNL_EMAILS_UNCA.TYPE = 'USERINFO'
+            LEFT JOIN UNL_EMAILS_00 ON UNL_BIODEMO.BIODEMO_ID = UNL_EMAILS_00.BIODEMO_ID AND UNL_EMAILS_00.TYPE = 'USERINFO'
             WHERE UNL_BIODEMO.NETID IN (" . implode(', ', $binding_list) . ")";
 
         $results = $this->query($query, $binding_array);
