@@ -26,6 +26,10 @@ $page->titlegraphic = '<a class="dcf-txt-h5" href="' . UNL_Peoplefinder::getURL(
 
 $page->head .= $savvy->render(null, 'static/head.tpl.php');
 
+// Add WDN Deprecated Styles
+$page->head .= '<link rel="preload" href="https://unlcms.unl.edu/wdn/templates_5.0/css/deprecated.css" as="style" onload="this.onload=null;this.rel=\'stylesheet\'"> <noscript><link rel="stylesheet" href="https://unlcms.unl.edu/wdn/templates_5.0/css/deprecated.css"></noscript>';
+
+
 if (isset($context->options['q']) || isset($context->options['cn']) || isset($context->options['sn'])) {
     // Don't let search engines index these pages
     $page->head .= $savvy->render(null, 'static/meta-robots.tpl.php');
