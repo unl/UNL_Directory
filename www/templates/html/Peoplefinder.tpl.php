@@ -79,6 +79,10 @@ require(['" . $baseUrl . "js/directory.min.js?v=" . $version ."'], function(dire
 $jsBodyMarker = '<!-- InstanceBeginEditable name="jsbody" -->';
 $html = str_replace($jsBodyMarker, $jsBodyMarker . $scriptTag, $html);
 
+if (in_array($_SERVER['SERVER_NAME'], UNL_Peoplefinder::$testDomains)) {
+  $html = str_replace('unlcms.unl.edu', 'unlcms-staging.unl.edu', $html);
+}
+
 if (UNL_Peoplefinder::$minifyHtml) {
     echo zz\Html\HTMLMinify::minify($html, [
         'optimizationLevel' => zz\Html\HTMLMinify::OPTIMIZATION_SIMPLE,

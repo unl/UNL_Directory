@@ -38,6 +38,8 @@ class UNL_Peoplefinder
 
     static public $use_oracle = TRUE;
 
+    static public $testDomains = array('directory-test.unl.edu');
+
     static protected $instance;
 
     /**
