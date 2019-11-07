@@ -20,15 +20,15 @@ $baseUrl = UNL_Peoplefinder::getURL();
                           <?php echo $baseUrl ?>images/130912herbie-898.webp 898w,
                           <?php echo $baseUrl ?>images/130912herbie-1197.webp 1197w,
                           <?php echo $baseUrl ?>images/130912herbie-1597.webp 1597w"
-                  sizes="(min-width: 41.956em) 43vw, 89vw" />
+                  sizes="(min-width: 41.956em) 43vw, 89vw">
                 <source
                   srcset="<?php echo $baseUrl ?>images/130912herbie-505.jpg 505w,
                           <?php echo $baseUrl ?>images/130912herbie-673.jpg 673w,
                           <?php echo $baseUrl ?>images/130912herbie-898.jpg 898w,
                           <?php echo $baseUrl ?>images/130912herbie-1197.jpg 1197w,
                           <?php echo $baseUrl ?>images/130912herbie-1597.jpg 1597w"
-                  sizes="(min-width: 41.956em) 43vw, 89vw" />
-              	<img class="hero-img" src="data:image/gif;base64,R0lGODlhAQABAAAAADs=" alt="Portrait photo of mascot Herbie Husker" />
+                  sizes="(min-width: 41.956em) 43vw, 89vw">
+              	<img class="hero-img" src="data:image/gif;base64,R0lGODlhAQABAAAAADs=" alt="Portrait photo of mascot Herbie Husker">
             </picture>
             <div class="dcf-card-block">
                 <h2 class="dcf-txt-h3"><span class="dcf-subhead unl-dark-gray dcf-mb-1">Search </span>People</h2>
@@ -50,15 +50,15 @@ $baseUrl = UNL_Peoplefinder::getURL();
                           <?php echo $baseUrl ?>images/110606canfield-898.webp 898w,
                           <?php echo $baseUrl ?>images/110606canfield-1197.webp 1197w,
                           <?php echo $baseUrl ?>images/110606canfield-1597.webp 1597w"
-                  sizes="(min-width: 41.956em) 43vw, 89vw" />
+                  sizes="(min-width: 41.956em) 43vw, 89vw">
                 <source
                   srcset="<?php echo $baseUrl ?>images/110606canfield-505.jpg 505w,
                           <?php echo $baseUrl ?>images/110606canfield-673.jpg 673w,
                           <?php echo $baseUrl ?>images/110606canfield-898.jpg 898w,
                           <?php echo $baseUrl ?>images/110606canfield-1197.jpg 1197w,
                           <?php echo $baseUrl ?>images/110606canfield-1597.jpg 1597w"
-                  sizes="(min-width: 41.956em) 43vw, 89vw" />
-              	<img class="hero-img" src="data:image/gif;base64,R0lGODlhAQABAAAAADs=" alt="Exterior view of Canfield Administration Building on a sunny day" />
+                  sizes="(min-width: 41.956em) 43vw, 89vw">
+              	<img class="hero-img" src="data:image/gif;base64,R0lGODlhAQABAAAAADs=" alt="Exterior view of Canfield Administration Building on a sunny day">
             </picture>
             <div class="dcf-card-block">
                 <h2 class="dcf-txt-h3"><span class="dcf-subhead unl-dark-gray dcf-mb-1">Search </span>Departments</h2>
