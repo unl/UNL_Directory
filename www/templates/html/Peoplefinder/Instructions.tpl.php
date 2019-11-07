@@ -8,11 +8,10 @@ $baseUrl = UNL_Peoplefinder::getURL();
   </div>
 </div>
 
-<div class="dcf-bleed help-container dcf-pb-8 unl-bg-lightest-gray">
-  <div class="dcf-wrapper">
+<div class="dcf-bleed dcf-wrapper help-container dcf-pb-8 unl-bg-lighter-gray">
     <h1 class="dcf-sr-only">Welcome to the University of Nebraska–Lincoln Directory</h1>
-    <div class="dcf-grid-halves@sm dcf-col-gap-vw dcf-row-gap-5 dcf-pt-8">
-      <div id="instructions_people" class="card">
+    <div class="dcf-grid-halves@sm dcf-col-gap-vw dcf-row-gap-5 dcf-pt-8 dcf-pb-4">
+      <div class="dcf-card unl-frame-quad unl-bg-cream" id="instructions_people">
         <picture>
           <source
             type="image/webp"
@@ -31,18 +30,18 @@ $baseUrl = UNL_Peoplefinder::getURL();
             sizes="(min-width: 41.956em) 43vw, 89vw" />
         	<img class="hero-img" src="data:image/gif;base64,R0lGODlhAQABAAAAADs=" alt="Portrait photo of mascot Herbie Husker" />
         </picture>
-        <div class="card-content dcf-pt-6 dcf-pb-6">
-          <h2 class="dcf-txt-h3"><span class="dcf-subhead unl-dark-gray">Search </span>People</h2>
+        <div class="dcf-card-block">
+          <h2 class="dcf-txt-h3"><span class="dcf-subhead unl-dark-gray dcf-mb-1">Search </span>People</h2>
           <p class="dcf-txt-sm">Find contact information for faculty, staff and students. Search by:</p>
-          <ul class="dcf-txt-sm">
+          <ul class="dcf-txt-sm dcf-mb-0">
             <li>First name</li>
             <li>Last name</li>
             <li>Both first and last name</li>
-            <li>Last 3 or more digits of telephone</li>
+            <li class="dcf-mb-0">Last 3 or more digits of telephone</li>
           </ul>
         </div>
       </div>
-      <div id="instructions_departments" class="card">
+      <div class="dcf-card unl-frame-quad unl-bg-cream" id="instructions_departments">
         <picture>
           <source
             type="image/webp"
@@ -61,19 +60,20 @@ $baseUrl = UNL_Peoplefinder::getURL();
             sizes="(min-width: 41.956em) 43vw, 89vw" />
         	<img class="hero-img" src="data:image/gif;base64,R0lGODlhAQABAAAAADs=" alt="Exterior view of Canfield Administration Building on a sunny day" />
         </picture>
-        <div class="card-content dcf-pt-6 dcf-pb-6">
-          <h2 class="dcf-txt-h3"><span class="dcf-subhead unl-dark-gray">Search </span>Departments</h2>
+        <div class="dcf-card-block">
+          <h2 class="dcf-txt-h3"><span class="dcf-subhead unl-dark-gray dcf-mb-1">Search </span>Departments</h2>
           <p class="dcf-txt-sm">Find departments by entering a full or partial department name. Information available:</p>
-          <ul class="dcf-txt-sm">
+          <ul class="dcf-txt-sm dcf-mb-0">
             <li>Department contact information and location on campus</li>
             <li>Complete list of department employees</li>
-            <li>Organizational hierarchy of department</li>
+            <li class="dcf-mb-0">Organizational hierarchy of department</li>
           </ul>
         </div>
       </div>
     </div>
-    <p class="dcf-mb-0 dcf-pt-4 dcf-txt-xs dcf-bt-1 dcf-bt-solid unl-bt-light-gray">A <a href="<?php echo UNL_Officefinder::getURL(); ?>yellow-pages">printer-friendly version</a> of the Yellow Page Directory is available to university users only.<br>Please be aware this is a very large document and may take some time to fully load.</p>
-  </div>
+    <div class="dcf-pt-4 dcf-bt-1 dcf-bt-solid unl-bt-light-gray">
+        <small class="dcf-d-block dcf-w-max-lg dcf-mb-0 dcf-txt-xs">A <a href="<?php echo UNL_Officefinder::getURL(); ?>yellow-pages">printer-friendly version</a> of the Yellow Page Directory is available to university users only. Please be aware this is a very large document and may take some time to fully load.</small>
+    </div>
 </div>
 
 <div class="dcf-bleed results-container unl-bg-lightest-gray">
