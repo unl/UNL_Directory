@@ -106,7 +106,7 @@ $hasOfficialChildDepartments = count($officialChildren);
                 </a>
                 <?php endif; ?>
 
-                    <ul<?php if (!$context->isRoot()): ?> class="dcf-list-bare icon-down-arrow"<?php endif; ?>>
+                    <ul<?php if (!$context->isRoot()): ?> class="dcf-list-bare"<?php endif; ?>>
                         <li>
                             <strong><?php echo $context->name; ?></strong>
                             <?php if ($hasOfficialChildDepartments): ?>
