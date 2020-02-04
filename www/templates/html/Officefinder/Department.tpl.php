@@ -48,7 +48,7 @@ $hasOfficialChildDepartments = count($officialChildren);
     <div class="dcf-col-100% dcf-col-67%-end@md">
         <div class="dcf-mb-7 dcf-bg-white dcf-b-1 dcf-b-solid unl-b-light-gray" id="listings" data-department-id="<?php echo $context->id ?>">
             <h2 class="dcf-txt-h4 dcf-mb-0 dcf-ml-0">
-                <svg class="dcf-mr-1 dcf-h-4 dcf-w-4 dcf-fill-current dcf-txt-top" aria-hidden="true" focusable="false" height="24" width="24" viewBox="0 0 24 24">
+                <svg class="dcf-h-4 dcf-w-4 dcf-fill-current dcf-txt-top" aria-hidden="true" focusable="false" height="24" width="24" viewBox="0 0 24 24">
                     <path d="M14.74 19.77c.402.266.861.396 1.318.396.619 0 1.232-.237 1.692-.697l.733-.733a1.758 1.758 0 00.001-2.493l-1.338-1.338c-.666-.666-1.827-.666-2.491 0l-.123.122a29.517 29.517 0 01-3.392-3.391l.123-.123c.334-.333.518-.775.518-1.247 0-.471-.184-.912-.516-1.243l-1.34-1.338a1.762 1.762 0 00-2.492 0l-.734.734a2.4 2.4 0 00-.3 3.01 29.723 29.723 0 008.341 8.341zM7.406 9.126l.734-.734a.76.76 0 011.079 0l1.338 1.34a.76.76 0 01-.001 1.075l-.446.446a.5.5 0 00-.033.671 30.346 30.346 0 004.169 4.167.502.502 0 00.67-.033l.446-.445a.781.781 0 011.077 0l1.338 1.338a.758.758 0 010 1.076l-.733.733a1.396 1.396 0 01-1.751.175 28.736 28.736 0 01-8.059-8.058 1.394 1.394 0 01.172-1.751z"></path>
                     <path d="M21.5 4h-17C3.673 4 3 3.327 3 2.5S3.673 1 4.5 1h17a.5.5 0 000-1h-17a2.503 2.503 0 00-2.476 2.847A.48.48 0 002 3v4h-.5a.5.5 0 000 1H2v2h-.5a.5.5 0 000 1H2v2h-.5a.5.5 0 000 1H2v2h-.5a.5.5 0 000 1H2v2h-.5a.5.5 0 000 1H2v1.5C2 22.879 3.122 24 4.5 24h17a.5.5 0 00.5-.5v-19a.5.5 0 00-.5-.5zM21 23H4.5c-.827 0-1.5-.673-1.5-1.5V20h.5a.5.5 0 000-1H3v-2h.5a.5.5 0 000-1H3v-2h.5a.5.5 0 000-1H3v-2h.5a.5.5 0 000-1H3V8h.5a.5.5 0 000-1H3V4.499c.418.314.938.501 1.5.501H21v18z"></path>
                     <path d="M4.5 2a.5.5 0 000 1h16a.5.5 0 000-1h-16z"></path>
@@ -83,7 +83,7 @@ $hasOfficialChildDepartments = count($officialChildren);
         <?php if ($department): ?>
         <div class="dcf-mb-7" id="all_employees">
             <h2 class="dcf-txt-h4">
-                <svg class="dcf-mr-1 dcf-h-4 dcf-w-4 dcf-fill-current dcf-txt-top" aria-hidden="true" focusable="false" height="24" width="24" viewBox="0 0 24 24">
+                <svg class="dcf-h-4 dcf-w-4 dcf-fill-current dcf-txt-top" aria-hidden="true" focusable="false" height="24" width="24" viewBox="0 0 24 24">
                     <path d="M21.5 4h-16C4.673 4 4 3.327 4 2.5S4.673 1 5.5 1h16a.5.5 0 000-1h-16A2.503 2.503 0 003 2.5V7h-.5a.5.5 0 000 1H3v2h-.5a.5.5 0 000 1H3v2h-.5a.5.5 0 000 1H3v2h-.5a.5.5 0 000 1H3v2h-.5a.5.5 0 000 1H3v1.5C3 22.878 4.122 24 5.5 24h16a.5.5 0 00.5-.5v-19a.5.5 0 00-.5-.5zM21 23H5.5c-.827 0-1.5-.673-1.5-1.5V20h.5a.5.5 0 000-1H4v-2h.5a.5.5 0 000-1H4v-2h.5a.5.5 0 000-1H4v-2h.5a.5.5 0 000-1H4V8h.5a.5.5 0 000-1H4V4.499c.418.314.938.501 1.5.501H21v18z"></path>
                     <path d="M5.5 2a.5.5 0 000 1h15a.5.5 0 000-1h-15zM8 20h10a.5.5 0 00.5-.5V18c0-.772-.582-1.543-1.325-1.755L15 15.623v-.765c.904-.683 1.5-1.81 1.5-3.088C16.5 9.691 14.93 8 13 8s-3.5 1.691-3.5 3.771c0 1.278.596 2.405 1.5 3.088v.765l-2.177.622C8.081 16.458 7.5 17.229 7.5 18v1.5a.5.5 0 00.5.5zm5-11c1.126 0 2.07.835 2.381 1.972a1.28 1.28 0 01-.56.04c-.232-.034-.654-.154-.881-.578a.498.498 0 00-.794-.116c-.729.73-1.821.788-2.492.527C11 9.773 11.916 9 13 9zm-2.493 2.852a3.468 3.468 0 002.911-.463c.326.324.763.54 1.257.613a2.18 2.18 0 00.805-.024c-.097 1.431-1.167 2.565-2.481 2.565-1.353-.001-2.452-1.201-2.492-2.691zM8.5 18c0-.325.285-.704.598-.793l2.539-.726A.5.5 0 0012 16v-.633c.319.103.65.175 1 .175s.681-.072 1-.175V16a.5.5 0 00.363.481l2.538.726c.314.089.6.468.6.793v1h-9v-1z"></path>
                 </svg>
@@ -93,7 +93,7 @@ $hasOfficialChildDepartments = count($officialChildren);
         </div>
         <div class="dcf-mt-7 dcf-txt-center" id="orgChart">
             <h2 class="dcf-txt-h4">
-                <svg class="dcf-mr-1 dcf-h-4 dcf-w-4 dcf-fill-current dcf-txt-top" aria-hidden="true" focusable="false" height="24" width="24" viewBox="0 0 24 24">
+                <svg class="dcf-h-4 dcf-w-4 dcf-fill-current dcf-txt-top" aria-hidden="true" focusable="false" height="24" width="24" viewBox="0 0 24 24">
                     <path d="M23.5 18.001H21v-5.5a.5.5 0 00-.5-.5h-8v-6h7a.5.5 0 00.5-.5v-4a.5.5 0 00-.5-.5h-15a.5.5 0 00-.5.5v4a.5.5 0 00.5.5h7v6h-8a.5.5 0 00-.5.5v5.5H.5a.5.5 0 00-.5.5v5a.5.5 0 00.5.5h5a.5.5 0 00.5-.5v-5a.5.5 0 00-.5-.5H4v-5h7.5v5h-2a.5.5 0 00-.5.5v5a.5.5 0 00.5.5h5a.5.5 0 00.5-.5v-5a.5.5 0 00-.5-.5h-2v-5H20v5h-1.5a.5.5 0 00-.5.5v5a.5.5 0 00.5.5h5a.5.5 0 00.5-.5v-5a.5.5 0 00-.5-.5zM5 5.001v-3h14v3h-6.5V5h-1v.001H5zm0 14v4H1v-4h4zm9 4h-4v-4h4v4zm9 0h-4v-4h4v4z"></path>
                 </svg>
                 HR Organization Chart
