@@ -1,4 +1,4 @@
-<h2 class="wdn-brand">
+<h2>
     Editors
     <svg class="dcf-ml-1 dcf-h-4 dcf-w-4 dcf-fill-current" role="img" height="24" width="24" viewBox="0 0 24 24">
         <title>Give others permission to edit this entry and all children.</title>
