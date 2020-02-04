@@ -514,7 +514,7 @@ define([
 	};
 
 	var bindRecordListeners = function ($container) {
-		$container.on('click', '.icon-print', function(e) {
+		$container.on('click', '.dir-btn-print-vcard', function(e) {
 
 			if (currentMainState === 1) {
 				// allow the event to bubble to the printer
@@ -537,7 +537,7 @@ define([
 			e.preventDefault();
 		});
 
-		$container.on('click', '.icon-qr-code', function() {
+		$container.on('click', '.dir-btn-qr-code-vcard', function() {
 			//Grab the closest 'a' element, because a child of the a element likely triggered this event.
 			var self = $(this).closest('a');
 
@@ -1143,7 +1143,7 @@ define([
 				}
 
 				// listen for print button clicks
-				$(document).on('click', 'button.icon-print', function(e) {
+				$(document).on('click', 'button.dir-btn-print-vcard', function(e) {
 					setTimeout(window.print, 10);
 					e.preventDefault();
 				});
@@ -1206,14 +1206,14 @@ define([
 					bindRecordListeners($employees);
 					createStickyKit($summarySection);
 
-					$summarySection.on('click', '.vcard-tools .icon-pencil', function(e) {
+					$summarySection.on('click', '.vcard-tools .dir-btn-suggest-correction', function(e) {
 						showModalForm($editBox, '.forms', this);
 						return false;
-					}).on('click', '.vcard-tools .icon-trash', function(e) {
+					}).on('click', '.vcard-tools .dir-btn-delete', function(e) {
 						if (!confirm(deleteDepartmentWarning)) {
 							return false;
 						}
-					}).on('click', '.aliases .icon-trash', function() {
+					}).on('click', '.aliases .dir-btn-delete', function() {
 						if (!confirm('Are you sure? This will delete the alias.')) {
 							return false;
 						}
@@ -1232,7 +1232,7 @@ define([
 					}).on('submit', '.aliases form.delete', function(e) {
 						e.preventDefault();
 						ajaxSubmitRemoveDepartmentList(this);
-					}).on('click', '.users .icon-trash', function() {
+					}).on('click', '.users .dir-btn-delete', function() {
 						if (!confirm('Are you sure? This will remove editing access for this user.')) {
 							return false;
 						}
@@ -1278,7 +1278,7 @@ define([
 						$.post(this.action + '?' + $.param({redirect: 0}), $(this).serialize());
 					});
 
-					$modal.on('click.listings', '.icon-trash', function(e) {
+					$modal.on('click.listings', '.dir-btn-delete', function(e) {
 						if (!confirm(deleteDepartmentWarning)) {
 							return false;
 						}

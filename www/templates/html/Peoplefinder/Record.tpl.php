@@ -186,7 +186,7 @@ $showKnowledge = $context->shouldShowKnowledge() && !empty(trim($savvy->render($
             </svg>
             <span class="dcf-sr-only">Download </span>vCard<span class="dcf-sr-only"> for <?php echo $preferredName ?></span>
         </a>
-        <a class="dcf-btn dcf-btn-secondary dcf-b-0 dcf-d-flex dcf-flex-col dcf-ai-center" href="<?php echo $context->getQRCodeUrl($savvy->render($context, 'templates/vcard/Peoplefinder/Record.tpl.php')) ?>">
+        <a class="dir-btn-qr-code-vcard dcf-btn dcf-btn-secondary dcf-b-0 dcf-d-flex dcf-flex-col dcf-ai-center" href="<?php echo $context->getQRCodeUrl($savvy->render($context, 'templates/vcard/Peoplefinder/Record.tpl.php')) ?>">
             <svg class="dcf-mb-2 dcf-h-7 dcf-w-7 dcf-fill-current" aria-hidden="true" focusable="false" height="24" width="24" viewBox="0 0 24 24">
                 <path d="M7.505 0h-7a.5.5 0 00-.5.5v7a.5.5 0 00.5.5h7a.5.5 0 00.5-.5v-7a.5.5 0 00-.5-.5zm-.5 7h-6V1h6v6z"></path>
                 <path d="M2.505 6h3a.5.5 0 00.5-.5v-3a.5.5 0 00-.5-.5h-3a.5.5 0 00-.5.5v3a.5.5 0 00.5.5zm.5-3h2v2h-2V3zm4.5 13h-7a.5.5 0 00-.5.5v7a.5.5 0 00.5.5h7a.5.5 0 00.5-.5v-7a.5.5 0 00-.5-.5zm-.5 7h-6v-6h6v6z"></path>
@@ -196,7 +196,7 @@ $showKnowledge = $context->shouldShowKnowledge() && !empty(trim($savvy->render($
             </svg>
             QR Code<span class="dcf-sr-only"> vCard for <?php echo $preferredName ?></span>
         </a>
-        <button class="dcf-btn dcf-btn-secondary dcf-b-0 dcf-d-flex dcf-flex-col dcf-ai-center">
+        <button class="dir-btn-print-vcard dcf-btn dcf-btn-secondary dcf-b-0 dcf-d-flex dcf-flex-col dcf-ai-center">
             <svg class="dcf-mb-2 dcf-h-7 dcf-w-7 dcf-fill-current" aria-hidden="true" focusable="false" height="24" width="24" viewBox="0 0 24 24">
                 <path d="M21.5 7h-19A2.503 2.503 0 000 9.5v6C0 16.878 1.122 18 2.5 18H5v4.5a.5.5 0 00.5.5h13a.5.5 0 00.5-.5V18h2.5c1.378 0 2.5-1.122 2.5-2.5v-6C24 8.122 22.878 7 21.5 7zM18 22H6v-7h12v7zm5-6.5c0 .827-.673 1.5-1.5 1.5H19v-2.5a.5.5 0 00-.5-.5h-13a.5.5 0 00-.5.5V17H2.5c-.827 0-1.5-.673-1.5-1.5v-6C1 8.673 1.673 8 2.5 8h19c.827 0 1.5.673 1.5 1.5v6zM5.5 6a.5.5 0 00.5-.5V2h9v2.5a.5.5 0 00.5.5H18v.5a.5.5 0 001 0v-1a.499.499 0 00-.147-.354l-2.999-2.999A.51.51 0 0015.5 1h-10a.5.5 0 00-.5.5v4a.5.5 0 00.5.5zM16 2.707L17.293 4H16V2.707z"></path>
                 <path d="M3.5 9C2.673 9 2 9.673 2 10.5S2.673 12 3.5 12 5 11.327 5 10.5 4.327 9 3.5 9zm0 2a.5.5 0 110-1 .5.5 0 010 1zm13 5h-9a.5.5 0 000 1h9a.5.5 0 000-1zm0 2h-9a.5.5 0 000 1h9a.5.5 0 000-1zm0 2h-9a.5.5 0 000 1h9a.5.5 0 000-1z"></path>
