@@ -538,8 +538,8 @@ define([
 		});
 
 		$container.on('click', '.dir-btn-qr-code-vcard', function() {
-			//Grab the closest 'a' element, because a child of the a element likely triggered this event.
-			var self = $(this).closest('a');
+
+			var self = $(this);
 
 			var onReady = function() {
 				modalReady = true;
@@ -1143,7 +1143,7 @@ define([
 				}
 
 				// listen for print button clicks
-				$(document).on('click', 'button.dir-btn-print-vcard', function(e) {
+				$(document).on('click', 'a.dir-btn-print-vcard', function(e) {
 					setTimeout(window.print, 10);
 					e.preventDefault();
 				});
