@@ -13,6 +13,6 @@
 	</div>
 </div>
 <aside>
-	<h2>My Departments</h2>
+	<h2 class="dcf-txt-h5">My Departments</h2>
 	<?php echo $savvy->render(new UNL_Officefinder_User_Departments(), 'Officefinder/User/DepartmentList.tpl.php') ?>
 </aside>
