@@ -17,7 +17,7 @@ if (!empty($context->email)) {
 
 $onlySummary = $context->isSummaryView();
 ?>
-<div class="departmentInfo"<?php if ($onlySummary): ?> itemscope itemtype="http://schema.org/Organization"<?php endif; ?>>
+<div class="departmentInfo"<?php if ($onlySummary): ?> itemscope itemtype="https://schema.org/Organization"<?php endif; ?>>
     <div class="vcard office<?php if($onlySummary): ?> card<?php endif; ?>" data-listing-id="<?php echo $context->id ?> dcf-measure" data-preferred-name="<?php echo $context->name ?>">
         <div class="card-profile dcf-mb-3 dcf-h-10 dcf-w-10 dcf-ratio dcf-ratio-1x1">
             <img class="photo dcf-ratio-child dcf-d-block dcf-obj-fit-cover dcf-circle" itemprop="image" src="<?php echo $context->getImageURL(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_LARGE); ?>" alt="Building Image" />
@@ -39,12 +39,12 @@ $onlySummary = $context->isSummaryView();
             <?php endif; ?>
 
             <?php if (!$context->isOfficialDepartment()): ?>
-                 <div class="title dcf-mt-3 dcf-txt-sm" itemprop="parentOrganization" itemscope itemtype="http://schema.org/Organization"><a href="<?php echo $parent->getURL() ?>"><span itemprop="name"><?php echo $parent->name ?></span></a></div>
+                 <div class="title dcf-mt-3 dcf-txt-sm" itemprop="parentOrganization" itemscope itemtype="https://schema.org/Organization"><a href="<?php echo $parent->getURL() ?>"><span itemprop="name"><?php echo $parent->name ?></span></a></div>
             <?php endif; ?>
             </div>
 
             <?php if ($context->hasAddress()): ?>
-                <div class="adr work attribute dcf-txt-sm" itemprop="location" itemscope itemtype="http://schema.org/Place">
+                <div class="adr work attribute dcf-txt-sm" itemprop="location" itemscope itemtype="https://schema.org/Place">
                     <span class="icon-map-pin" aria-hidden="true"></span>
                     <span class="type">Address</span>
                     <?php if ($context->building): ?>
@@ -53,7 +53,7 @@ $onlySummary = $context->isSummaryView();
                             <?php echo $context->room ?>
                         </span>
                     <?php endif; ?>
-                    <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                    <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
                         <?php if (!empty($context->address)): ?>
                             <span class="street-address" itemprop="streetAddress"><?php echo $context->address ?></span>
                         <?php endif; ?>
