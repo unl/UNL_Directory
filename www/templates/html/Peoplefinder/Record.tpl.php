@@ -32,7 +32,7 @@ $showKnowledge = $context->shouldShowKnowledge() && !empty(trim($savvy->render($
 <?php endif; ?>
 
 
-<div class="vcard <?php if (!$showKnowledge): ?>card <?php endif; ?><?php echo $context->eduPersonPrimaryAffiliation ?> dcf-measure" data-uid="<?php echo $context->uid ?>" data-preferred-name="<?php echo $preferredName ?>" itemscope itemtype="http://schema.org/<?php echo $itemtype ?>">
+<div class="vcard <?php if (!$showKnowledge): ?>card <?php endif; ?><?php echo $context->eduPersonPrimaryAffiliation ?> dcf-measure" data-uid="<?php echo $context->uid ?>" data-preferred-name="<?php echo $preferredName ?>" itemscope itemtype="https://schema.org/<?php echo $itemtype ?>">
     <a class="card-profile planetred_profile dcf-d-block dcf-mb-3 dcf-h-10 dcf-w-10 dcf-ratio dcf-ratio-1x1" href="<?php echo $context->getProfileUrl() ?>" aria-label="Planet Red profile for <?php echo $preferredName ?>" itemprop="url">
         <img class="photo profile_pic dcf-ratio-child dcf-circle dcf-d-block dcf-obj-fit-cover" itemprop="image" src="<?php echo $context->getImageURL(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_LARGE) ?>" alt="Avatar for <?php echo $preferredName ?>" />
     </a>
@@ -121,7 +121,7 @@ $showKnowledge = $context->shouldShowKnowledge() && !empty(trim($savvy->render($
     <?php endif; ?>
 
     <?php if (($address = $context->formatPostalAddress()) && count($address)): ?>
-        <div class="adr work attribute dcf-txt-sm" itemprop="workLocation" itemscope itemtype="http://schema.org/Place">
+        <div class="adr work attribute dcf-txt-sm" itemprop="workLocation" itemscope itemtype="https://schema.org/Place">
             <span class="icon-map-pin" aria-hidden="true"></span>
             <span class="type">Work</span>
             <?php if (!empty($address['unlBuildingCode'])): ?>
@@ -135,7 +135,7 @@ $showKnowledge = $context->shouldShowKnowledge() && !empty(trim($savvy->render($
                     <?php echo str_replace($address['unlBuildingCode'], '', $address['street-address']) ?>
                 </span>
             <?php endif; ?>
-            <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+            <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
                 <?php if (empty($address['unlBuildingCode'])): ?>
                     <span class="street-address" itemprop="streetAddress"><?php echo $address['street-address'] ?></span>
                 <?php endif; ?>

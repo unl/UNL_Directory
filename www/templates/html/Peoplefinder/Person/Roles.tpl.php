@@ -19,7 +19,7 @@
         <?php if (isset($role->description)): ?>
             <span class="title dcf-txt-sm" itemprop="jobTitle"><?php echo $role->description ?></span>
         <?php endif; ?>
-        <span itemprop="worksFor" itemscope itemtype="http://schema.org/Organization">
+        <span itemprop="worksFor" itemscope itemtype="https://schema.org/Organization">
             <span class="organization-unit dcf-txt-sm">
                 <?php if ($renderLinks): ?>
                     <a href="<?php echo $dept_url ?>" itemprop="url">
@@ -29,7 +29,7 @@
                     </a>
                 <?php endif; ?>
             </span>
-            <span class="organization-name dcf-txt-sm" itemprop="parentOrganization" itemscope itemtype="http://schema.org/Organization"><span itemprop="name"><?php echo $parent_name ?></span></span>
+            <span class="organization-name dcf-txt-sm" itemprop="parentOrganization" itemscope itemtype="https://schema.org/Organization"><span itemprop="name"><?php echo $parent_name ?></span></span>
         </span>
     </li>
     <?php endforeach; ?>
