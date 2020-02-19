@@ -26,15 +26,22 @@ updateOfficialDepartment($sap_dept);
  */
 function updateOfficialDepartment(UNL_Peoplefinder_Department $sap_dept, UNL_Officefinder_Department &$parent = null)
 {
-
     if (!($dept = UNL_Officefinder_Department::getByorg_unit($sap_dept->org_unit))) {
         // Uhoh, new department!
         $dept = new UNL_Officefinder_Department();
 
-        // Now update all fields with the official data from SAP
-        updateFields($dept, $sap_dept);
+        // Now add department with the official data from SAP
+        addDepartment($dept, $sap_dept);
         
-        echo 'New department found:'.$dept->name.' ('.$dept->org_unit.')'.PHP_EOL;
+        echo 'New department found: '.$dept->name.' ('.$dept->org_unit.')'.PHP_EOL;
+    } elseif (hasUpdate($dept, $sap_dept)) {
+
+        // Found changes in existing department so update it
+        echo PHP_EOL . 'Existing department found with changes: '.$dept->name.' ('.$dept->org_unit.')'.PHP_EOL;
+        updateDepartment($dept, $sap_dept);
+        echo "\tExisting department updated with changes: ".$dept->name.' ('.$dept->org_unit.')'.PHP_EOL;
+    } else {
+        echo PHP_EOL . 'Existing department with NO changes: '.$dept->name.' ('.$dept->org_unit.')'.PHP_EOL;
     }
 
     if ($parent) {
@@ -63,17 +70,72 @@ function updateOfficialDepartment(UNL_Peoplefinder_Department $sap_dept, UNL_Off
  * @param $old Object with the old data
  * @param $new Object with the new data
  */
-function updateFields(UNL_Officefinder_Department $old, UNL_Peoplefinder_Department $new)
+function addDepartment(UNL_Officefinder_Department $old, UNL_Peoplefinder_Department $new)
 {
-    foreach ($old as $key=>$val) {
-        if (isset($new->$key)
-            && $key != 'options') {
-            $old->$key = $new->$key;
+    try {
+        foreach ($old as $key => $val) {
+            echo "\t" . $key . ": " . $val . PHP_EOL;
+            if (isset($new->$key)
+                && $key != 'options') {
+                $old->$key = $new->$key;
+            }
         }
+
+        // Set updated by attributes
+        $old->uidlastupdated = 'hr_tree';
+        $old->dateupdated = date('Y-m-d H:m:s');
+
         // Save it
         $old->save();
         if (!empty($new->org_abbr)) {
             $old->addAlias($new->org_abbr);
         }
+    } catch (Exception $e) {
+        echo 'Warning caught exception when adding ' . $old->name . ': ',  $e->getMessage(), PHP_EOL;
     }
+}
+
+/**
+ * This method is used to update data within the UNL directory. It allows updates
+ * only on certain fields.
+ *
+ * @param $old Object with the old data
+ * @param $new Object with the new data
+ */
+function updateDepartment(UNL_Officefinder_Department $old, UNL_Peoplefinder_Department $new)
+{
+    try {
+        foreach ($old as $key => $val) {
+            if (isset($new->$key) && $key != 'options') {
+                echo "\tUpdating field " . $key . ": from '" . $val . "' to '" . $new->$key . "'" . PHP_EOL;
+                $old->$key = $new->$key;
+            }
+        }
+
+        // Set updated by attributes
+        $old->uidlastupdated = 'hr_tree';
+        $old->dateupdated = date('Y-m-d H:m:s');
+
+        // Save it
+        $old->save();
+    } catch (Exception $e) {
+        echo 'Warning caught exception when updating ' . $old->name . ': ',  $e->getMessage(), PHP_EOL;
+    }
+}
+
+/**
+ * This method is used to compare the department objects for changes to help determin if it should be
+ * updated.
+ *
+ * @param $old Object with the old data
+ * @param $new Object with the new data
+ */
+function hasUpdate(UNL_Officefinder_Department $old, UNL_Peoplefinder_Department $new)
+{
+    foreach ($old as $key => $val) {
+        if (isset($new->$key) && $key != 'options' && $old->$key != $new->$key) {
+            return true;
+        }
+    }
+    return false;
 }
