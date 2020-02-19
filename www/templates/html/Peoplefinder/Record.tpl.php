@@ -24,7 +24,8 @@ if (isset($context->mail) && !$context->isPrimarilyStudent()) {
 }
 
 // check if should display knowledge and that it contains content
-$showKnowledge = $context->shouldShowKnowledge() && !empty(trim($savvy->render($context->getKnowledge())));
+$hasKnowledge = !empty(trim($savvy->render($context->getKnowledge())));
+$showKnowledge = $context->shouldShowKnowledge() === TRUE && $hasKnowledge === TRUE;
 ?>
 <?php if ($showKnowledge): ?>
 <section class="dcf-grid dcf-col-gap-vw">
@@ -176,6 +177,13 @@ $showKnowledge = $context->shouldShowKnowledge() && !empty(trim($savvy->render($
             <a class="email" href="mailto:<?php echo $encodedEmail ?>" itemprop="email"> <?php echo $encodedEmail ?></a>
         </div>
     <?php endif; ?>
+
+    <?php if ($context->isHcardFormat() && $hasKnowledge === TRUE && !$showKnowledge) :?>
+        <div class="dcf-mt-6 dcf-txt-xs dcf-bt-1 dcf-bt-solid unl-bt-light-gray">
+            <?php echo $savvy->render($context->getKnowledge()) ?>
+        </div>
+    <?php endif; ?>
+
     </div>
 
     <div class="vcard-tools wdn_vcardTools primary dcf-d-flex dcf-flex-row dcf-flex-wrap dcf-ai-start dcf-jc-around dcf-txt-sm dcf-mt-5 dcf-pt-3 dcf-pb-3 dcf-bt-1 dcf-bt-solid unl-bt-light-gray dcf-d-none@print">
