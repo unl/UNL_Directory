@@ -86,7 +86,7 @@ $showKnowledge = $context->shouldShowKnowledge() === TRUE && $hasKnowledge === T
     <?php endif ?>
 
     <?php if ($context->hasStudentInformation()): ?>
-        <div class="sis-title dcf-txt-sm">
+        <div class="sis-title dcf-txt-sm dcf-mt-5">
         <?php if (isset($context->unlSISClassLevel)): ?>
           <div class="grade"><?php echo $context->formatClassLevel() ?></div>
         <?php endif; ?>
@@ -179,7 +179,7 @@ $showKnowledge = $context->shouldShowKnowledge() === TRUE && $hasKnowledge === T
     <?php endif; ?>
 
     <?php if ($context->isHcardFormat() && $hasKnowledge === TRUE && !$showKnowledge) :?>
-        <div class="dcf-mt-6 dcf-txt-xs dcf-bt-1 dcf-bt-solid unl-bt-light-gray">
+        <div class="dcf-mt-5 dcf-txt-xs dcf-bt-1 dcf-bt-solid unl-bt-light-gray">
             <?php echo $savvy->render($context->getKnowledge()) ?>
         </div>
     <?php endif; ?>
