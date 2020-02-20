@@ -37,11 +37,9 @@ function updateOfficialDepartment(UNL_Peoplefinder_Department $sap_dept, UNL_Off
     } elseif (hasUpdate($dept, $sap_dept)) {
 
         // Found changes in existing department so update it
-        echo PHP_EOL . 'Existing department found with changes: '.$dept->name.' ('.$dept->org_unit.')'.PHP_EOL;
+        echo PHP_EOL . 'Existing department found with updateable changes: '.$dept->name.' ('.$dept->org_unit.')'.PHP_EOL;
         updateDepartment($dept, $sap_dept);
         echo "\tExisting department updated with changes: ".$dept->name.' ('.$dept->org_unit.')'.PHP_EOL;
-    } else {
-        echo PHP_EOL . 'Existing department with NO changes: '.$dept->name.' ('.$dept->org_unit.')'.PHP_EOL;
     }
 
     if ($parent) {
@@ -106,7 +104,7 @@ function updateDepartment(UNL_Officefinder_Department $old, UNL_Peoplefinder_Dep
 {
     try {
         foreach ($old as $key => $val) {
-            if (isset($new->$key) && $key != 'options') {
+            if (isUpdateableField($key) && isset($new->$key) && $key != 'options') {
                 echo "\tUpdating field " . $key . ": from '" . $val . "' to '" . $new->$key . "'" . PHP_EOL;
                 $old->$key = $new->$key;
             }
@@ -133,9 +131,27 @@ function updateDepartment(UNL_Officefinder_Department $old, UNL_Peoplefinder_Dep
 function hasUpdate(UNL_Officefinder_Department $old, UNL_Peoplefinder_Department $new)
 {
     foreach ($old as $key => $val) {
-        if (isset($new->$key) && $key != 'options' && $old->$key != $new->$key) {
+        if (isUpdateableField($key) && isset($new->$key) && $key != 'options' && $old->$key != $new->$key) {
             return true;
         }
     }
     return false;
+}
+
+/**
+ * This method determines if field maybe updated on department from SAP value
+ * Note: Most fields are not updateable since the officefinder version is maintained via directory and
+ * we want to preserve those customized values.
+ * @param $field
+ * @return bool
+ */
+function isUpdateableField($field) {
+    // Note org_unit will never be updateable since it's an unique identifier for a department
+    // These fields should probably only be fields provided by SAP but not editable via directory admin
+    $updateableFields = array(
+        'business_center_org_unit',
+        'business_center_name'
+    );
+
+    return in_array($field, $updateableFields);
 }

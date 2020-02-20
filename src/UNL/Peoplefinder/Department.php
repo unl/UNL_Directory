@@ -31,6 +31,20 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
     public $org_abbr;
 
     /**
+     * The organizational unit number of department's primary business center.
+     *
+     * @var number
+     */
+    public $business_center_org_unit;
+
+    /**
+     * The name of department's primary business center.
+     *
+     * @var string
+     */
+    public $business_center_name;
+
+    /**
      * Building the department main office is in.
      *
      * @var string
