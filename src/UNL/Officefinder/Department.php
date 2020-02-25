@@ -8,9 +8,9 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
 
     public $org_unit;
 
-    public $business_center_org_unit;
+    public bc_org_unit;
 
-    public $business_center_name;
+    public $bc_name;
 
     public $building;
 

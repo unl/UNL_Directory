@@ -56,8 +56,8 @@ CREATE TABLE `departments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   `org_unit` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Corresponds to official HR Org number, eg: 5000XXX',
-  `business_center_org_unit` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `business_center_name` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `bc_org_unit` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `bc_name` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   `building` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   `room` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   `city` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -84,8 +84,8 @@ CREATE TABLE `departments` (
   KEY `parent_id` (`parent_id`),
   KEY `academic` (`academic`),
   KEY `suppress` (`suppress`),
-  KEY `business_center_org_unit` (`business_center_org_unit`),
-  KEY `business_center_name` (`business_center_name`(255))
+  KEY `bc_org_unit` (`bc_org_unit`),
+  KEY `bc_name` (`bc_name`(255))
 ) ENGINE=InnoDB AUTO_INCREMENT=6131 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

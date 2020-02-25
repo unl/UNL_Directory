@@ -1,5 +1,5 @@
 ALTER TABLE `departments`
-    ADD `business_center_org_unit` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL AFTER `org_unit`,
-    ADD `business_center_name` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL AFTER `business_center_org_unit`,
-ADD INDEX ( `business_center_org_unit` ),
-ADD INDEX ( `business_center_name`(255) );
+    ADD `bc_org_unit` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL AFTER `org_unit`,
+    ADD `bc_name` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL AFTER `bc_org_unit`,
+ADD INDEX ( `bc_org_unit` ),
+ADD INDEX ( `bc_name`(255) );

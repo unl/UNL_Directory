@@ -149,8 +149,8 @@ function isUpdateableField($field) {
     // Note org_unit will never be updateable since it's an unique identifier for a department
     // These fields should probably only be fields provided by SAP but not editable via directory admin
     $updateableFields = array(
-        'business_center_org_unit',
-        'business_center_name'
+        'bc_org_unit',
+        'bc_name'
     );
 
     return in_array($field, $updateableFields);

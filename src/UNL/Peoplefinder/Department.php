@@ -35,14 +35,14 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
      *
      * @var number
      */
-    public $business_center_org_unit;
+    public $bc_org_unit;
 
     /**
      * The name of department's primary business center.
      *
      * @var string
      */
-    public $business_center_name;
+    public $bc_name;
 
     /**
      * Building the department main office is in.
