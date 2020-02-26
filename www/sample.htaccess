@@ -14,8 +14,8 @@ RewriteRule ^people/(.*)$ index.php?uid=$1 [QSA]
 
 RewriteRule ^developers/$ index.php?view=developers [QSA]
 
-RewriteRule ^departments/(5000[\d]{4})$ index.php?view=department&sap=$1 [QSA]
-RewriteRule ^departments/(5000[\d]{4})/personnelsubtree$ index.php?view=personnelsubtree&org_unit=$1 [QSA]
+RewriteRule ^departments/(500[\d]{5})$ index.php?view=department&sap=$1 [QSA]
+RewriteRule ^departments/(500[\d]{5})/personnelsubtree$ index.php?view=personnelsubtree&org_unit=$1 [QSA]
 RewriteRule ^departments/([\d]+)/edit$ index.php?view=department&id=$1&render=editing [QSA]
 RewriteRule ^departments/([\d]+)/new$ index.php?view=department&parent_id=$1&render=editing [QSA]
 RewriteRule ^departments/([\d]+)$ index.php?view=department&id=$1 [QSA]
