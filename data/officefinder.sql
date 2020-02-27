@@ -90,6 +90,53 @@ CREATE TABLE `departments` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Temporary table structure for view `departments_with_business_center`
+--
+
+DROP TABLE IF EXISTS `departments_with_business_center`;
+/*!50001 DROP VIEW IF EXISTS `departments_with_business_center`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `departments_with_business_center` AS SELECT 
+ 1 AS `id`,
+ 1 AS `name`,
+ 1 AS `org_unit`,
+ 1 AS `mapped_bc_org_unit`,
+ 1 AS `mapped_bc_name`,
+ 1 AS `building`,
+ 1 AS `room`,
+ 1 AS `city`,
+ 1 AS `state`,
+ 1 AS `postal_code`,
+ 1 AS `address`,
+ 1 AS `phone`,
+ 1 AS `fax`,
+ 1 AS `email`,
+ 1 AS `website`,
+ 1 AS `academic`,
+ 1 AS `suppress`,
+ 1 AS `parent_id`,
+ 1 AS `bc_id`,
+ 1 AS `bc_name`,
+ 1 AS `bc_org_unit`,
+ 1 AS `bc_bc_org_unit`,
+ 1 AS `bc_bc_name`,
+ 1 AS `bc_building`,
+ 1 AS `bc_room`,
+ 1 AS `bc_city`,
+ 1 AS `bc_state`,
+ 1 AS `bc_postal_code`,
+ 1 AS `bc_address`,
+ 1 AS `bc_phone`,
+ 1 AS `bc_fax`,
+ 1 AS `bc_email`,
+ 1 AS `bc_website`,
+ 1 AS `bc_academic`,
+ 1 AS `bc_suppress`,
+ 1 AS `bc_parent_id`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `telecom_unidaslt_to_departments`
 --
 
@@ -102,6 +149,24 @@ CREATE TABLE `telecom_unidaslt_to_departments` (
   PRIMARY KEY (`lMaster_id`,`department_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Final view structure for view `departments_with_business_center`
+--
+
+/*!50001 DROP VIEW IF EXISTS `departments_with_business_center`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`jsturek`@`%` SQL SECURITY DEFINER */
+/*!50001 VIEW `departments_with_business_center` AS select `d`.`id` AS `id`,`d`.`name` AS `name`,`d`.`org_unit` AS `org_unit`,`d`.`bc_org_unit` AS `mapped_bc_org_unit`,`d`.`bc_name` AS `mapped_bc_name`,`d`.`building` AS `building`,`d`.`room` AS `room`,`d`.`city` AS `city`,`d`.`state` AS `state`,`d`.`postal_code` AS `postal_code`,`d`.`address` AS `address`,`d`.`phone` AS `phone`,`d`.`fax` AS `fax`,`d`.`email` AS `email`,`d`.`website` AS `website`,`d`.`academic` AS `academic`,`d`.`suppress` AS `suppress`,`d`.`parent_id` AS `parent_id`,`bc`.`id` AS `bc_id`,`bc`.`name` AS `bc_name`,`bc`.`org_unit` AS `bc_org_unit`,`bc`.`bc_org_unit` AS `bc_bc_org_unit`,`bc`.`bc_name` AS `bc_bc_name`,`bc`.`building` AS `bc_building`,`bc`.`room` AS `bc_room`,`bc`.`city` AS `bc_city`,`bc`.`state` AS `bc_state`,`bc`.`postal_code` AS `bc_postal_code`,`bc`.`address` AS `bc_address`,`bc`.`phone` AS `bc_phone`,`bc`.`fax` AS `bc_fax`,`bc`.`email` AS `bc_email`,`bc`.`website` AS `bc_website`,`bc`.`academic` AS `bc_academic`,`bc`.`suppress` AS `bc_suppress`,`bc`.`parent_id` AS `bc_parent_id` from (`departments` `d` left join `departments` `bc` on((`d`.`bc_org_unit` = `bc`.`org_unit`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -112,4 +177,4 @@ CREATE TABLE `telecom_unidaslt_to_departments` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-02-20 12:01:10
+-- Dump completed on 2020-02-27 12:30:30
