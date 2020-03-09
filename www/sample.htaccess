@@ -6,6 +6,7 @@ RewriteRule ^help/$ index.php?view=help [QSA]
 RewriteRule ^search/(.*) index.php?q=$1
 RewriteRule ^vcards/(.*) index.php?format=vcard&uid=$1
 RewriteRule ^hcards/(.*) index.php?format=hcard&uid=$1
+RewriteRule ^hcards-full/(.*) index.php?format=hcard&allow-knowledge=1&uid=$1
 RewriteRule ^avatar/(.*) index.php?view=avatar&uid=$1 [QSA]
 # REST-Style URL's for people records
 RewriteRule ^people/(.*)\.vcf$ index.php?uid=$1&format=vcard
