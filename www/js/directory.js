@@ -324,7 +324,7 @@ define([
 		if (recordType === 'org') {
 			url = recordId + '/summary?format=partial';
 		} else {
-			url = serviceURL + 'hcards/' + recordId;
+			url = serviceURL + 'hcards-full/' + recordId;
 		}
 
 		return $.ajax({url: url});

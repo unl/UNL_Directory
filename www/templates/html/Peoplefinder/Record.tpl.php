@@ -178,7 +178,7 @@ $showKnowledge = $context->shouldShowKnowledge() === TRUE && $hasKnowledge === T
         </div>
     <?php endif; ?>
 
-    <?php if ($context->isHcardFormat() && $hasKnowledge === TRUE && !$showKnowledge) :?>
+    <?php if (!empty($_GET['allow-knowledge']) && $context->isHcardFormat() && $hasKnowledge === TRUE && !$showKnowledge) :?>
         <div class="dcf-mt-5 dcf-txt-xs dcf-bt-1 dcf-bt-solid unl-bt-light-gray">
             <?php echo $savvy->render($context->getKnowledge()) ?>
         </div>
