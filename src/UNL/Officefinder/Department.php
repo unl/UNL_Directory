@@ -8,6 +8,10 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
 
     public $org_unit;
 
+    public $bc_org_unit;
+
+    public $bc_name;
+
     public $building;
 
     public $room;
@@ -121,9 +125,21 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
             return false;
         }
 
-        // Remove any base so we can retrieve departments from anywhere
-        UNL_Peoplefinder_Department::setXPathBase('');
         return UNL_Peoplefinder_Department::getById($this->org_unit, $this->options);
+    }
+
+    public function hasBusinessCenterDepartment()
+    {
+        return !empty($this->bc_org_unit);
+    }
+
+    public function getBusinessCenterDepartment()
+    {
+        if (empty($this->bc_org_unit)) {
+            return false;
+        }
+
+        return $this->getByorg_unit($this->bc_org_unit);
     }
 
     public function hasOfficialChildDepartments()
@@ -407,6 +423,15 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
     function jsonSerialize()
     {
         $data = $this->getPublicProperties();
+
+        // Append Business Center Info if available
+        if ($this->hasBusinessCenterDepartment()) {
+            $businessCenter = $this->getBusinessCenterDepartment();
+            if ($businessCenter) {
+                $data['business_center'] = $businessCenter->getPublicProperties();
+            }
+        }
+
         $data['children'] = [];
         $data['unofficial_children'] = [];
 
