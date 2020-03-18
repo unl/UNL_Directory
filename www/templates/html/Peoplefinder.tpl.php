@@ -9,10 +9,10 @@ if (in_array($context->options['view'], ['alphalisting'])) {
 use UNL\Templates\Templates;
 
 Templates::setCachingService(new UNL\Templates\CachingService\NullService());
-$page = Templates::factory('App', Templates::VERSION_5);
+$page = Templates::factory('AppLocal', Templates::VERSION_5_1);
 $wdnIncludePath = dirname(dirname(__DIR__));
 
-if (file_exists($wdnIncludePath . '/wdn/templates_5.0')) {
+if (file_exists($wdnIncludePath . '/wdn/templates_5.1')) {
     $page->setLocalIncludePath($wdnIncludePath);
 }
 
