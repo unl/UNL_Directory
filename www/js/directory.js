@@ -4,7 +4,6 @@ define([
 	'require',
 	'idm',
 	'notice',
-	'tooltip',
 	'./vendor/jsrender.js'
 ], function($, WDN, require, idm) {
 	"use strict";
