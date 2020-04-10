@@ -1,6 +1,12 @@
 <?php
 
 /**
+ * To use:
+ * Copy this file to /data/test-data.inc.php
+ * Make sure the lines related to this file and UNL_Peoplefinder::$sampleUID are uncommented in config.inc.php
+ */
+
+/**
  * Sample of the result of the query in UNL_Peoplefinder_Driver_OracleDB->fixLDAPEntries()
  * Simulates the result for one person: hhusker1
  */

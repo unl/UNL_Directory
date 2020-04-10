@@ -74,6 +74,21 @@ php scripts/import_sis_data.php
 
 Note: this needs to be ran at least once a day to keep the data in the cache
 
+## Sample User (Optional)
+
+The idea is to simulate a person record that doesn't exist in the official identity system.
+
+Reasons to do this:
+- So there is a permanent person (that won't quit or retire) for another system to use for testing.
+- As a test/development record for possible schema changes or to see how different data affects output.
+- As an Easter egg.
+
+To enable and use the sample user:
+To use:
+1) Copy /data/test-data.inc_sample.php to /data/test-data.inc.php and edit if desired.
+2) Make sure the include of /data/test-data.inc.php and the setting of UNL_Peoplefinder::$sampleUID are uncommented in config.inc.php
+
+
 ## INSTALL
 
 1) Run: 'npm install; grunt; composer install'
