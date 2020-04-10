@@ -107,6 +107,9 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
     public $lastQuery;
     public $lastResult;
 
+    /** Sample Data Set in Config File */
+    public static $samplePersonLDAP;
+
     public function __construct()
     {
     }
@@ -405,11 +408,17 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
      */
     public function getUID($uid)
     {
-        $filter = new UNL_Peoplefinder_Driver_LDAP_UIDFilter($uid);
-        $r = $this->query($filter->__toString(), $this->detailAttributes, false);
+        if ($uid == UNL_Peoplefinder::$sampleUID) {
+            $r = self::normalizeLdapEntries(self::$samplePersonLDAP);
+        } else {
+            $filter = new UNL_Peoplefinder_Driver_LDAP_UIDFilter($uid);
+            $r = $this->query($filter->__toString(), $this->detailAttributes, false);
+        }
+
         if (empty($r)) {
             throw new Exception('Cannot find that UID.', 404);
         }
+
         return self::recordFromLDAPEntry(current($r));
     }
 
