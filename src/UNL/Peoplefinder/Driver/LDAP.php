@@ -316,12 +316,22 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
      */
     public function getExactMatches($query, $affiliation = null)
     {
-        if ($affiliation) {
-            $filter = new UNL_Peoplefinder_Driver_LDAP_AffiliationFilter($query, $affiliation, '&', false);
-        } else {
-            $filter = new UNL_Peoplefinder_Driver_LDAP_StandardFilter($query, '&', false);
+        // Load the Sample User so a string comparison to their name can be done.
+        if (isset(UNL_Peoplefinder::$sampleUID)) {
+            $result = self::normalizeLdapEntries(self::$samplePersonLDAP);
+            $sampleRecord = self::recordFromLDAPEntry(current($result));
+            $this->lastResult = $result;
         }
-        $this->query($filter->__toString(), $this->detailAttributes);
+
+        // If the query doesn't exactly match the Sample User's Display Name then run the query.
+        if (!isset($sampleRecord) || $query !== (string)$sampleRecord->displayName) {
+            if ($affiliation) {
+                $filter = new UNL_Peoplefinder_Driver_LDAP_AffiliationFilter($query, $affiliation, '&', false);
+            } else {
+                $filter = new UNL_Peoplefinder_Driver_LDAP_StandardFilter($query, '&', false);
+            }
+            $this->query($filter->__toString(), $this->detailAttributes);
+        }
         return $this->getRecordsFromResults();
     }
 
