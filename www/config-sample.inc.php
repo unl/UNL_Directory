@@ -44,3 +44,7 @@ UNL_Peoplefinder_Driver_OracleDB::$connection_service = "SAPTPRD";
 
 // Test domains used in Peoplefinder.tpl.php
 UNL_Peoplefinder::$testDomains = array('directory-test.unl.edu', 'localhost');
+
+// Sample user ID
+//UNL_Peoplefinder::$sampleUID = 'hhusker1';
+//include_once __DIR__ . '/../data/test-data.inc.php';

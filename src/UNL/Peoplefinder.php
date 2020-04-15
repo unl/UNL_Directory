@@ -40,6 +40,8 @@ class UNL_Peoplefinder
 
     static public $testDomains = array('directory-test.unl.edu');
 
+    static public $sampleUID;
+
     static protected $instance;
 
     /**
