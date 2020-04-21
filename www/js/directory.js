@@ -329,7 +329,7 @@ define([
 		return $.ajax({url: url});
 	};
 
-	var loadFullRecord = function(recordType, liRecord) {
+	var loadFullRecord = function(recordType, liRecord, closeSelected) {
 		var slidingSelector = '.vcard';
 		var overviewSelector = '.overflow';
 		var infoData;
@@ -346,13 +346,16 @@ define([
 
 		if (liRecord.hasClass('selected')) {
 			console.log('li selected');
-			return;
-			//$overview.slideDown();
-			//$loadedChild.slideUp();
-			$loadedChild.hide('slow', function() { $overview.show('slow'); });
-			liRecord.removeClass('selected');
-			//Send focus to the result for accessibility
-			$('a:first', $overview).addClass('programmatically-focused').focus();
+
+			// only do close if specified
+			if (closeSelected) {
+				//$overview.slideDown();
+				//$loadedChild.slideUp();
+				$loadedChild.hide('slow', function() { $overview.show('slow'); });
+				liRecord.removeClass('selected');
+				//Send focus to the result for accessibility
+				$('a:first', $overview).addClass('programmatically-focused').focus();
+			}
 			return;
 		}
 
@@ -395,13 +398,14 @@ define([
 
 			//Add a close button
 			var closeButton = $('<button>', {
-				'class': 'close-full-record',
+				'class': 'close-full-record dcf-float-right',
 				'aria-label': 'close this record'
 			});
 			closeButton.click(function() {
 				//close
 				console.log('close button clicked');
-				loadFullRecord(recordType, liRecord);
+
+				loadFullRecord(recordType, liRecord, true);
 				return false;
 			});
 			closeButton.text('X');
