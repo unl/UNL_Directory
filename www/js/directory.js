@@ -345,6 +345,7 @@ define([
 		var $overview = liRecord.children(overviewSelector);
 
 		if (liRecord.hasClass('selected')) {
+			console.log('li selected');
 			$overview.slideDown();
 			$loadedChild.slideUp();
 			liRecord.removeClass('selected');
@@ -359,6 +360,7 @@ define([
 
 		if ($loadedChild.length) {
 			// we already loaded the record
+			console.log('alreaded loaded');	
 			$overview.slideUp();
 			$loadedChild.slideDown();
 			//Send focus to the result for accessibility
@@ -395,6 +397,7 @@ define([
 			});
 			closeButton.click(function() {
 				//close
+				console.log('close button clicked');
 				loadFullRecord(recordType, liRecord);
 				return false;
 			});
@@ -410,6 +413,7 @@ define([
 				addCorrectionTool($card.data('preferred-name'), $card.find('.vcard'));
 			}
 
+			console.log('fetch record sliding');
 			$overview.slideUp();
 			$card.slideDown();
 			//Send focus to the result for accessibility
