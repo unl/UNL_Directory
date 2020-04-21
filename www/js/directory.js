@@ -348,7 +348,7 @@ define([
 			console.log('li selected');
 			//$overview.slideDown();
 			//$loadedChild.slideUp();
-			$loadedChild.hide('slow', function() { $overview.slideDown('slow'); });
+			$loadedChild.hide('slow', function() { $overview.show('slow'); });
 			liRecord.removeClass('selected');
 			//Send focus to the result for accessibility
 			$('a:first', $overview).addClass('programmatically-focused').focus();
@@ -364,7 +364,7 @@ define([
 			console.log('alreaded loaded');	
 			//$overview.slideUp();
 			//$loadedChild.slideDown();
-			$overview.hide('slow', function() { $loadedChild.slideDown('slow'); });
+			$overview.hide('slow', function() { $loadedChild.show('slow'); });
 			//Send focus to the result for accessibility
 			$('a:first', $loadedChild).addClass('programmatically-focused').focus();
 			return;
@@ -418,7 +418,7 @@ define([
 			console.log('fetch record sliding');
 			//$overview.slideUp();
 			//$card.slideDown();
-			$overview.hide('slow', function() { $card.slideDown('slow'); } );
+			$overview.hide('slow', function() { $card.show('slow'); } );
 			//Send focus to the result for accessibility
 			$('a:first', $card).addClass('programmatically-focused').focus();
 			clearTimeout(loadIndicatorTimeout);
