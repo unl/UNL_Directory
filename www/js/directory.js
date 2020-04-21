@@ -346,6 +346,7 @@ define([
 
 		if (liRecord.hasClass('selected')) {
 			console.log('li selected');
+			return;
 			//$overview.slideDown();
 			//$loadedChild.slideUp();
 			$loadedChild.hide('slow', function() { $overview.show('slow'); });
