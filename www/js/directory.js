@@ -455,7 +455,7 @@ define([
 
 	var bindResultsListeners = function($container) {
 		// listen for people result clicks
-		$container.on('click', '.ppl_Sresult', function(e) {
+		$container.on('click', '.overview', function(e) {
 			var $target = $(e.target);
 			var $anchor = $target.closest('a');
 			var $fn = $anchor.closest('.fn');
