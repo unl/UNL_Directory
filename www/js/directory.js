@@ -456,20 +456,24 @@ define([
 	var bindResultsListeners = function($container) {
 		// listen for people result clicks
 		$container.on('click', '.overview', function(e) {
+			console.log('container click 0');
 			var $target = $(e.target);
 			var $anchor = $target.closest('a');
 			var $fn = $anchor.closest('.fn');
+
 
 			if ($anchor.length && !$fn.length) {
 				// allow vCard and non-name link clicks to bubble
 				return;
 			}
+			console.log('container click 1');
 
 			if ($target.closest('.correction').length) {
 				//Launch the correction modal
 				launchCorrectionModal($target);
 				return;
 			}
+			console.log('container click 2');
 
 			loadFullRecord('person', $(this));
 			return false;
