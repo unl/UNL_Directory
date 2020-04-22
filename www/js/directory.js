@@ -349,9 +349,8 @@ define([
 
 			// only do close if specified
 			if (closeSelected) {
-				//$overview.slideDown();
-				//$loadedChild.slideUp();
-				$loadedChild.hide('slow', function() { $this.removeClass('dcf-d-flex'); $overview.show('slow'); });
+				$overview.slideDown('slow', function() { $this.removeClass('dcf-d-flex'); });
+				$loadedChild.slideUp();
 				liRecord.removeClass('selected');
 				//Send focus to the result for accessibility
 				$('a:first', $overview).addClass('programmatically-focused').focus();
@@ -366,9 +365,8 @@ define([
 		if ($loadedChild.length) {
 			// we already loaded the record
 			console.log('alreaded loaded');	
-			//$overview.slideUp();
-			//$loadedChild.slideDown();
-			$overview.hide('slow', function() { $this.addClass('dcf-d-flex'); $loadedChild.show('slow'); });
+			$overview.slideUp('slow', function() { $this.addClass('dcf-d-flex'); });
+			$loadedChild.slideDown();
 			//Send focus to the result for accessibility
 			$('a:first', $loadedChild).addClass('programmatically-focused').focus();
 			return;
@@ -421,9 +419,8 @@ define([
 			}
 
 			console.log('fetch record sliding');
-			//$overview.slideUp();
-			//$card.slideDown();
-			$overview.hide('slow', function() { $this.removeClass('dcf-d-flex'); $card.show('slow'); } );
+			$overview.slideUp('slow', function() { $this.addClass('dcf-d-flex'); });
+			$card.slideDown();
 			//Send focus to the result for accessibility
 			$('a:first', $card).addClass('programmatically-focused').focus();
 			clearTimeout(loadIndicatorTimeout);
