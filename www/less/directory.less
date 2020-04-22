@@ -127,7 +127,7 @@
   padding: 1.33em 1.77em
 }
 
-.pfResult.selected > li {
+.pfResult > li.selected {
   cursor: none;
 }
 
@@ -179,9 +179,9 @@
 
 // On focus (via keyboard) or result selected, visually display it
 .pfResult .vcard button.close-full-record:focus,
-.pfResult.selected .vcard button.close-full-record,
+.pfResult > li.selected .vcard button.close-full-record,
 .results .vcard button.close-full-record:focus,
-.results.selected .vcard button.close-full-record {
+.results > li.selected .vcard button.close-full-record {
   position: absolute;
   right: 0;
   z-index: 5;
