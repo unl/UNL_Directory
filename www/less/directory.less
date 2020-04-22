@@ -127,6 +127,10 @@
   padding: 1.33em 1.77em
 }
 
+.pfResult.selected > li {
+  cursor: none;
+}
+
 
 .pfResult > li:focus {
   box-shadow: 0 0 10px #137cbd;
@@ -173,15 +177,15 @@
   right: 999em;
 }
 
-
-// On focus (via keyboard), visually display it
+// On focus (via keyboard) or result selected, visually display it
 .pfResult .vcard button.close-full-record:focus,
-.results .vcard button.close-full-record:focus {
+.pfResult.selected .vcard button.close-full-record,
+.results .vcard button.close-full-record:focus,
+.results.selected .vcard button.close-full-record {
   position: absolute;
   right: 0;
   z-index: 5;
 }
-
 
 .affiliation-heading {
   margin-bottom: 0;
