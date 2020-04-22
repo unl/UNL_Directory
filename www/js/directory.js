@@ -403,7 +403,7 @@ define([
 
 			//Add a close button
 			var closeButton = $('<button>', {
-				'class': 'close-full-record dcf-float-right',
+				'class': 'close-full-record',
 				'aria-label': 'close this record'
 			});
 			closeButton.click(function() {
