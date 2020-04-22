@@ -349,8 +349,8 @@ define([
 
 			// only do close if specified
 			if (closeSelected) {
-				$loadedChild.slideUp('fast', function() {
-					$overview.slideDown('fast', function() { $(this).addClass('dcf-d-flex'); });
+				$loadedChild.hide('fast', function() {
+					$overview.show('fast', function() { $(this).addClass('dcf-d-flex'); });
 				});
 				//$overview.slideDown('fast', function() { $(this).addClass('dcf-d-flex'); });
 				//$loadedChild.slideUp('fast');
@@ -368,9 +368,9 @@ define([
 		if ($loadedChild.length) {
 			// we already loaded the record
 			console.log('alreaded loaded');
-			$overview.slideUp('fast', function() { 
+			$overview.hide('fast', function() { 
 				$(this).removeClass('dcf-d-flex');
-				$loadedChild.slideDown('fast');
+				$loadedChild.show('fast');
 			});
 			//$overview.slideUp('fast', function() { $(this).removeClass('dcf-d-flex'); });
 			//$loadedChild.slideDown('fast');
@@ -425,9 +425,9 @@ define([
 			}
 
 			console.log('fetch record sliding');
-			$overview.slideUp('fast', function() { 
+			$overview.hide('fast', function() { 
 				$(this).removeClass('dcf-d-flex');
-				$card.slideDown('fast');
+				$card.show('fast');
 			});
 
 			//$overview.slideUp('fast', function() { $(this).removeClass('dcf-d-flex'); });
