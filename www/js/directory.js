@@ -349,9 +349,11 @@ define([
 
 			// only do close if specified
 			if (closeSelected) {
-
-				$overview.slideDown('fast', function() { $(this).addClass('dcf-d-flex'); });
-				$loadedChild.slideUp('fast');
+				$loadedChild.slideUp('fast', function() {
+					$overview.slideDown('fast', function() { $(this).addClass('dcf-d-flex'); });
+				});
+				//$overview.slideDown('fast', function() { $(this).addClass('dcf-d-flex'); });
+				//$loadedChild.slideUp('fast');
 				liRecord.removeClass('selected');
 				//Send focus to the result for accessibility
 				$('a:first', $overview).addClass('programmatically-focused').focus();
@@ -366,8 +368,12 @@ define([
 		if ($loadedChild.length) {
 			// we already loaded the record
 			console.log('alreaded loaded');
-			$overview.slideUp('fast', function() { $(this).removeClass('dcf-d-flex'); });
-			$loadedChild.slideDown('fast');
+			$overview.slideUp('fast', function() { 
+				$(this).removeClass('dcf-d-flex');
+				$loadedChild.slideDown('fast');
+			});
+			//$overview.slideUp('fast', function() { $(this).removeClass('dcf-d-flex'); });
+			//$loadedChild.slideDown('fast');
 			//Send focus to the result for accessibility
 			$('a:first', $loadedChild).addClass('programmatically-focused').focus();
 			return;
@@ -419,8 +425,13 @@ define([
 			}
 
 			console.log('fetch record sliding');
-			$overview.slideUp('fast', function() { $(this).removeClass('dcf-d-flex'); });
-			$card.slideDown('fast');
+			$overview.slideUp('fast', function() { 
+				$(this).removeClass('dcf-d-flex');
+				$card.slideDown('fast');
+			});
+
+			//$overview.slideUp('fast', function() { $(this).removeClass('dcf-d-flex'); });
+			//$card.slideDown('fast');
 			//Send focus to the result for accessibility
 			$('a:first', $card).addClass('programmatically-focused').focus();
 			clearTimeout(loadIndicatorTimeout);
