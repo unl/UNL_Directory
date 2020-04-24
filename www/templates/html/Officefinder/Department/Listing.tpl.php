@@ -64,10 +64,7 @@ if (!empty($context->email)) {
 <script>
     // hide edit buttons so may be shown when ready. Needs directory.js loaded so modal opens on click'
     var editButtons = document.getElementsByClassName("edit-button");
-    var i;
-    for (i = 0; i < editButtons.length; i++) {
-        if (editButtons[i].classList.contains('dcf-d-none')) {
-          editButtons[i].classList.remove('dcf-d-none');
-        }
+    for (var i = 0; i < editButtons.length; i++) {
+        editButtons[i].classList.add('dcf-d-none');
     }
 </script>
