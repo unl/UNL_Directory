@@ -801,6 +801,11 @@ define([
 
 			return false;
 		});
+
+		// show hidden edit buttons (hidden with dcf-d-none)
+		$('.edit-button').each(function() {
+  			$(this).find('*').removeClass('dcf-d-none');
+		});
 	};
 
 	var ajaxSubmitToDepartmentList = function(form, context, listClass, tmpl, data) {
