@@ -1,4 +1,4 @@
-<h2 class="dcf-txt-h5">
+<h2 class="dcf-txt-h5 dcf-mt-6">
     Editors
     <svg class="dcf-h-4 dcf-w-4 dcf-fill-current" role="img" height="24" width="24" viewBox="0 0 24 24">
         <title>Give others permission to edit this entry and all children.</title>

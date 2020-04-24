@@ -38,18 +38,18 @@ if (!empty($context->email)) {
 
     <?php if ($userCanEdit): ?>
         <div class="tools">
-            <a href="<?php echo $context->getURL() . '/edit' ?>" class="dcf-btn dcf-btn-primary edit-button">
+            <a href="<?php echo $context->getURL() . '/edit' ?>" class="dcf-btn dcf-btn-primary edit-button" disabled>
                 <svg class="dcf-h-4 dcf-w-4 dcf-fill-current dcf-txt-top" aria-hidden="true" focusable="false" height="24" width="24" viewBox="0 0 24 24">
                     <path d="M22.94 2.732l-1.672-1.671a2.502 2.502 0 00-3.535 0L2.647 16.146a.595.595 0 00-.125.207l-2 6.5a.5.5 0 00.625.625c.193-.059 6.326-1.944 6.516-2.01a.493.493 0 00.19-.115L22.94 6.268c.471-.471.73-1.098.73-1.768a2.49 2.49 0 00-.73-1.768zM19.5 8.293L15.707 4.5l.793-.793L20.293 7.5l-.793.793zM4.2 21.492l-1.692-1.691.726-2.36.413.413A.5.5 0 004 18h2v2a.5.5 0 00.147.354l.413.413-2.36.725zM6.293 17H4.207l-.5-.5L15 5.207l1.543 1.543L6.293 17zm-4.118 3.882l.943.943-1.362.419.419-1.362zm5.325-.589l-.5-.5v-2.086l10.25-10.25L18.793 9 7.5 20.293zM22.232 5.561L21 6.793 17.207 3l1.232-1.232a1.503 1.503 0 012.121 0l1.672 1.671c.282.282.438.659.438 1.061 0 .403-.155.779-.438 1.061z"></path>
                 </svg>
                 <span class="dcf-sr-only">Edit listing for <?php echo $context->name ?></span>
             </a>
             <div class="forms" data-listing-id="<?php echo $context->id ?>">
-                <a class="dcf-btn dcf-btn-primary listing-add" href="<?php echo $context->getNewChildURL() ?>">Add<span class="dcf-sr-only"> a new child listing</span></a>
+                <a class="dcf-btn dcf-btn-primary dcf-mb-3 listing-add" href="<?php echo $context->getNewChildURL() ?>">Add<span class="dcf-sr-only"> a new child listing</span></a>
                 <div class="form"></div>
                 <div class="add-form"></div>
                 <?php echo $savvy->render($context, 'Officefinder/Department/DeleteForm.tpl.php') ?>
-                <button class="dir-btn-delete dcf-btn dcf-btn-primary" type="submit" form="deletedepartment_<?php echo $context->id ?>">
+                <button class="dir-btn-delete dcf-btn dcf-btn-primary dcf-mt-1" type="submit" form="deletedepartment_<?php echo $context->id ?>">
                     <svg class="dcf-h-4 dcf-w-4 dcf-fill-current" aria-hidden="true" focusable="false" height="24" width="24" viewBox="0 0 24 24">
                         <path d="M23 3h-7V.5a.5.5 0 00-.5-.5h-8a.5.5 0 00-.5.5V3H1a.5.5 0 000 1h2v19.5a.5.5 0 00.5.5h16a.5.5 0 00.5-.5V4h3a.5.5 0 000-1zM8 1h7v2H8V1zm11 22H4V4h15v19z"></path>
                         <path d="M7.5 6.5A.5.5 0 007 7v12a.5.5 0 001 0V7a.5.5 0 00-.5-.5zm4 0a.5.5 0 00-.5.5v12a.5.5 0 001 0V7a.5.5 0 00-.5-.5zM15 7v12a.5.5 0 001 0V7a.5.5 0 00-1 0z"></path>
