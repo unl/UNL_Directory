@@ -62,7 +62,7 @@ $hasOfficialChildDepartments = count($officialChildren);
                 <?php endif; ?>
                 <?php if ($userCanEdit): ?>
                 <div class="edit-tools">
-                    <a class="dcf-btn dcf-btn-primary listing-add" href="<?php echo $context->getNewChildURL() ?>">Add<span class="dcf-sr-only"> a new child listing</span></a>
+                    <a class="dcf-btn dcf-btn-primary dcf-mb-6 listing-add" href="<?php echo $context->getNewChildURL() ?>">Add<span class="dcf-sr-only"> a new child listing</span></a>
                     <div class="forms">
                         <div class="form">
                         </div>

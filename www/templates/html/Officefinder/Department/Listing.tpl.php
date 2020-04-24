@@ -45,11 +45,11 @@ if (!empty($context->email)) {
                 <span class="dcf-sr-only">Edit listing for <?php echo $context->name ?></span>
             </a>
             <div class="forms" data-listing-id="<?php echo $context->id ?>">
-                <a class="dcf-btn dcf-btn-primary listing-add" href="<?php echo $context->getNewChildURL() ?>">Add<span class="dcf-sr-only"> a new child listing</span></a>
+                <a class="dcf-btn dcf-btn-primary dcf-mb-3 listing-add" href="<?php echo $context->getNewChildURL() ?>">Add<span class="dcf-sr-only"> a new child listing</span></a>
                 <div class="form"></div>
                 <div class="add-form"></div>
                 <?php echo $savvy->render($context, 'Officefinder/Department/DeleteForm.tpl.php') ?>
-                <button class="dir-btn-delete dcf-btn dcf-btn-primary" type="submit" form="deletedepartment_<?php echo $context->id ?>">
+                <button class="dir-btn-delete dcf-btn dcf-btn-primary dcf-mt-1" type="submit" form="deletedepartment_<?php echo $context->id ?>">
                     <svg class="dcf-h-4 dcf-w-4 dcf-fill-current" aria-hidden="true" focusable="false" height="24" width="24" viewBox="0 0 24 24">
                         <path d="M23 3h-7V.5a.5.5 0 00-.5-.5h-8a.5.5 0 00-.5.5V3H1a.5.5 0 000 1h2v19.5a.5.5 0 00.5.5h16a.5.5 0 00.5-.5V4h3a.5.5 0 000-1zM8 1h7v2H8V1zm11 22H4V4h15v19z"></path>
                         <path d="M7.5 6.5A.5.5 0 007 7v12a.5.5 0 001 0V7a.5.5 0 00-.5-.5zm4 0a.5.5 0 00-.5.5v12a.5.5 0 001 0V7a.5.5 0 00-.5-.5zM15 7v12a.5.5 0 001 0V7a.5.5 0 00-1 0z"></path>
@@ -60,3 +60,11 @@ if (!empty($context->email)) {
         </div>
     <?php endif; ?>
 </div>
+
+<script>
+    // hide edit buttons so may be shown when ready. Needs directory.js loaded so modal opens on click'
+    var editButtons = document.getElementsByClassName("edit-button");
+    for (var i = 0; i < editButtons.length; i++) {
+        editButtons[i].classList.add('dcf-d-none');
+    }
+</script>

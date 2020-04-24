@@ -22,7 +22,7 @@ $fields = [
     'website' => 'Always include http://'
 ];
 ?>
-<form id="editdepartment_<?php echo $context->id; ?>" action="<?php echo $actionUrl ?>" class="edit" method="post">
+<form id="editdepartment_<?php echo $context->id; ?>" action="<?php echo $actionUrl ?>" class="dcf-form edit" method="post">
     <input type="hidden" name="_type" value="department" />
     <?php if (isset($context->id)): ?>
         <input type="hidden" name="id" value="<?php echo $context->id; ?>" />

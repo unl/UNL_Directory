@@ -1,4 +1,4 @@
-<h2 class="dcf-txt-h5">
+<h2 class="dcf-txt-h5 dcf-mt-6">
     Also known as
     <svg class="dcf-h-4 dcf-w-4 dcf-fill-current" role="img" height="24" width="24" viewBox="0 0 24 24">
         <title>Additional names which identify your department. &lsquo;Sometimes people refer to us as&hellip;&rsquo;</title>
