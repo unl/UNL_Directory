@@ -65,8 +65,9 @@ if (!empty($context->email)) {
     // hide edit buttons so may be shown when ready. Needs directory.js loaded so modal opens on click'
     var editButtons = document.getElementsByClassName("edit-button");
     var i;
-    var reg = new RegExp('(\\s|^)dcf-d-none(\\s|$)');
     for (i = 0; i < editButtons.length; i++) {
-        editButtons.className=editButtons.className.replace(reg,' ');
+        if (editButtons[i].classList.contains('dcf-d-none')) {
+          editButtons[i].classList.remove('dcf-d-none');
+        }
     }
 </script>
