@@ -4,7 +4,7 @@ class UNL_Officefinder_TreeView extends FilterIterator
     public function __construct($options = array())
     {
         // retrieve the left and right value of the $root node
-        $root = UNL_Officefinder_Department::getByorg_unit('50000002');
+        $root = UNL_Officefinder_Department::getByorg_unit('50000001');
         //$root = UNL_Officefinder_Department::getByname('Office of University Communications');
         $iterator = new UNL_Officefinder_DepartmentList(array($root));
 

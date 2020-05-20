@@ -91,7 +91,7 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
     /**
      * @var string Prefix added to all xpath queries
      */
-    protected static $_xpath_base = '//attribute[@name="org_unit"][@value="50000002"]/..';
+    protected static $_xpath_base = '//attribute[@name="org_unit"][@value="50000001"]/..';
 
     public $options = [];
 
