@@ -21,7 +21,7 @@ class UNL_Peoplefinder_Department_Search implements Countable, Iterator
         $this->options = $options + $this->options;
         $q = strtolower(str_replace('"', '', $this->options['q']));
         $this->xml = new SimpleXMLElement(file_get_contents(UNL_Peoplefinder::getDataDir().'/hr_tree.xml'));
-        $this->results = $this->xml->xpath('//attribute[@name="org_unit"][@value="50000003"]/..//attribute[@name="name"][contains(translate(@value,"ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz"),"'.$q.'")]');
+        $this->results = $this->xml->xpath('//attribute[@name="org_unit"][@value="50000002"]/..//attribute[@name="name"][contains(translate(@value,"ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz"),"'.$q.'")]');
     }
     
     function current()
