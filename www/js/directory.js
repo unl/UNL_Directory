@@ -329,7 +329,7 @@ define([
 		return $.ajax({url: url});
 	};
 
-	var loadFullRecord = function(recordType, liRecord) {
+	var loadFullRecord = function(recordType, liRecord, closeSelected) {
 		var slidingSelector = '.vcard';
 		var overviewSelector = '.overflow';
 		var infoData;
@@ -345,11 +345,19 @@ define([
 		var $overview = liRecord.children(overviewSelector);
 
 		if (liRecord.hasClass('selected')) {
-			$overview.slideDown();
-			$loadedChild.slideUp();
-			liRecord.removeClass('selected');
-			//Send focus to the result for accessibility
-			$('a:first', $overview).addClass('programmatically-focused').focus();
+			console.log('li selected');
+
+			// only do close if specified
+			if (closeSelected) {
+				$loadedChild.hide(0, function() {
+					$overview.show('fast', function() { $(this).addClass('dcf-d-flex'); });
+				});
+
+				liRecord.removeClass('selected');
+
+				//Send focus to the result for accessibility
+				$('a:first', $overview).addClass('programmatically-focused').focus();
+			}
 			return;
 		}
 
@@ -359,8 +367,11 @@ define([
 
 		if ($loadedChild.length) {
 			// we already loaded the record
-			$overview.slideUp();
-			$loadedChild.slideDown();
+			console.log('alreaded loaded');
+			$overview.hide(0, function() { 
+				$(this).removeClass('dcf-d-flex');
+				$loadedChild.show('fast');
+			});
 			//Send focus to the result for accessibility
 			$('a:first', $loadedChild).addClass('programmatically-focused').focus();
 			return;
@@ -395,7 +406,8 @@ define([
 			});
 			closeButton.click(function() {
 				//close
-				loadFullRecord(recordType, liRecord);
+				console.log('close button clicked');
+				loadFullRecord(recordType, liRecord, true);
 				return false;
 			});
 			closeButton.text('X');
@@ -410,8 +422,12 @@ define([
 				addCorrectionTool($card.data('preferred-name'), $card.find('.vcard'));
 			}
 
-			$overview.slideUp();
-			$card.slideDown();
+			console.log('fetch record sliding');
+			$overview.hide(0, function() { 
+				$(this).removeClass('dcf-d-flex');
+				$card.show('fast');
+			});
+
 			//Send focus to the result for accessibility
 			$('a:first', $card).addClass('programmatically-focused').focus();
 			clearTimeout(loadIndicatorTimeout);
@@ -787,6 +803,9 @@ define([
 		});
 	};
 
+	// show hidden edit buttons (hidden with dcf-d-none)
+	$(".edit-button").removeClass("dcf-d-none");
+	
 	var ajaxSubmitToDepartmentList = function(form, context, listClass, tmpl, data) {
 		$.post(form.action + '?' + $.param({redirect: '0'}), $(form).serialize(), function() {
 			var $newItem = $(tmpl.render(data)).hide();
