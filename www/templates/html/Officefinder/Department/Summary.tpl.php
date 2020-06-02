@@ -109,10 +109,16 @@ $onlySummary = $context->isSummaryView();
                 <?php endif; ?>
 
                 <?php if ($context->isOfficialDepartment()): ?>
-                    <div class="attribute dcf-txt-sm">
-                        <span class="icon-hierarchy" aria-hidden="true"></span>
-                        Unit #<?php echo $context->org_unit ?>
-                    </div>
+                <div class="attribute dcf-txt-sm">
+                    <span class="icon-hierarchy" aria-hidden="true"></span>
+                    Unit #<?php echo $context->org_unit ?>
+                </div>
+                <?php endif; ?>
+
+                <?php if ($onlySummary): ?>
+                <div class="dcf-d-flex dcf-jc-center dcf-txt-sm dcf-pt-3 dcf-pb-3 dcf-d-none@print">
+                    <a class="dcf-btn dcf-btn-secondary dcf-b-0" href="<?php echo $context->getURL() ?>">View Full Department</a>
+                </div>
                 <?php endif; ?>
             </div>
             <?php if (!$onlySummary): ?>
