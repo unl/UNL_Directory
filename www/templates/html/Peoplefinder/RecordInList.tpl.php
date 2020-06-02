@@ -35,7 +35,7 @@ $title = $context->formatTitle();
             <div class="fn dcf-txt-lg dcf-bold unl-lh-crop" itemprop="name">
               <a class="dcf-txt-decor-hover" itemprop="url" href="<?php echo $context->getUrl() ?>"<?php echo $onclick ?> aria-label="Show more information about <?php echo $name ?>"><?php echo $name ?></a>
             </div>
-            <?php if (isset($context->unlHROrgUnitNumber)): ?>
+            <?php if (isset($context->unlHROrgUnitNumber) && $context->affiliationMightIncludeAppointments()): ?>
                 <?php
                 $roles = $context->getRoles();
                 $roles->enableRenderLinks(false);
