@@ -485,20 +485,17 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
             $entry = new UNL_Peoplefinder_Driver_LDAP_Entry($entry);
         }
 
-        if (!$entry instanceof UNL_Peoplefinder_Driver_LDAP_Entry) {
-            return false;
-        }
+        if ($entry instanceof UNL_Peoplefinder_Driver_LDAP_Entry) {
+            // Must have a displayable afflilation
+            $affiliations = isset($entry['eduPersonAffiliation']) && $entry['eduPersonAffiliation'] instanceof UNL_Peoplefinder_Driver_LDAP_Multivalue ? $entry['eduPersonAffiliation']->jsonSerialize() : null;
 
-        // Must have a displayable afflilation
-        $affiliations = isset($entry['eduPersonAffiliation']) && $entry['eduPersonAffiliation'] instanceof UNL_Peoplefinder_Driver_LDAP_Multivalue ? $entry['eduPersonAffiliation']->jsonSerialize() : null;
-
-        if (is_array($affiliations) && count(array_intersect($affiliations, UNL_Peoplefinder::$displayedAffiliations))) {
-            return true;
+            if (is_array($affiliations) && count(array_intersect($affiliations, UNL_Peoplefinder::$displayedAffiliations))) {
+                return true;
+            }
         }
 
         return false;
     }
-
 
     public static function recordFromLDAPEntry($entry)
     {
