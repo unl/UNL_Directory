@@ -425,7 +425,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
             $r = $this->query($filter->__toString(), $this->detailAttributes, false);
         }
 
-        if (empty($r)) {
+        if (empty($r) || !self::displayableLDAPEntry(current($r))) {
             throw new Exception('Cannot find that UID.', 404);
         }
 
@@ -446,7 +446,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
     {
         $filter = new UNL_Peoplefinder_Driver_LDAP_NUIDFilter($nuid);
         $r = $this->query($filter->__toString(), $this->detailAttributes, false);
-        if (empty($r)) {
+        if (empty($r) || !self::displayableLDAPEntry(current($r))) {
             throw new Exception('Cannot find that NUID.', 404);
         }
         return self::recordFromLDAPEntry(current($r));
@@ -478,6 +478,23 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
         $results = $oracle->fixLDAPEntries($results);
 
         return $results;
+    }
+
+    public static function displayableLDAPEntry($entry) {
+        if (is_array($entry)) {
+            $entry = new UNL_Peoplefinder_Driver_LDAP_Entry($entry);
+        }
+
+        if ($entry instanceof UNL_Peoplefinder_Driver_LDAP_Entry) {
+            // Must have a displayable afflilation
+            $affiliations = isset($entry['eduPersonAffiliation']) && $entry['eduPersonAffiliation'] instanceof UNL_Peoplefinder_Driver_LDAP_Multivalue ? $entry['eduPersonAffiliation']->jsonSerialize() : null;
+
+            if (is_array($affiliations) && count(array_intersect($affiliations, UNL_Peoplefinder::$displayedAffiliations))) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public static function recordFromLDAPEntry($entry)
