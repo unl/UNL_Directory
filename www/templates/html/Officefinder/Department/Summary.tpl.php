@@ -18,7 +18,7 @@ if (!empty($context->email)) {
 $onlySummary = $context->isSummaryView();
 ?>
 <div class="departmentInfo"<?php if ($onlySummary): ?> itemscope itemtype="https://schema.org/Organization"<?php endif; ?>>
-    <div class="vcard office<?php if($onlySummary): ?> card<?php endif; ?>" data-listing-id="<?php echo $context->id ?> dcf-measure" data-preferred-name="<?php echo $context->name ?>">
+    <div class="vcard office<?php if($onlySummary): ?> card<?php endif; ?> dcf-measure" data-listing-id="<?php echo $context->id ?>" data-preferred-name="<?php echo $context->name ?>">
         <div class="dcf-pt-6 dcf-pb-6">
             <div class="card-profile dcf-mb-3 dcf-h-10 dcf-w-10 dcf-ratio dcf-ratio-1x1">
                 <img class="photo dcf-ratio-child dcf-d-block dcf-obj-fit-cover dcf-circle" itemprop="image" src="<?php echo $context->getImageURL(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_LARGE); ?>" alt="Building Image" />
