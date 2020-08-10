@@ -23,7 +23,7 @@
     "saltybeagle/savvy": "^0.9.0",
     "unl/unl_cache_lite": "0.1.*",
     "unl/common": "0.6.*",
-    "unl/php-wdn-templates": "^5.1",
+    "unl/php-wdn-templates": "^5.2",
     "guzzlehttp/guzzle": "~6.0",
     "jasig/phpcas": "1.3.x-dev",
     "swiftmailer/swiftmailer": "^5.4",

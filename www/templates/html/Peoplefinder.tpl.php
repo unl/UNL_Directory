@@ -9,10 +9,10 @@ if (in_array($context->options['view'], ['alphalisting'])) {
 use UNL\Templates\Templates;
 
 Templates::setCachingService(new UNL\Templates\CachingService\NullService());
-$page = Templates::factory('AppLocal', Templates::VERSION_5_1);
+$page = Templates::factory('AppLocal', Templates::VERSION_5_2);
 $wdnIncludePath = dirname(dirname(__DIR__));
 
-if (file_exists($wdnIncludePath . '/wdn/templates_5.1')) {
+if (file_exists($wdnIncludePath . '/wdn/templates_5.2')) {
     $page->setLocalIncludePath($wdnIncludePath);
 }
 
@@ -27,7 +27,7 @@ $page->titlegraphic = '<a class="dcf-txt-h5" href="' . UNL_Peoplefinder::getURL(
 $page->head .= $savvy->render(null, 'static/head.tpl.php');
 
 // Add WDN Deprecated Styles
-$page->head .= '<link rel="preload" href="/wdn/templates_5.1/css/deprecated.css" as="style" onload="this.onload=null;this.rel=\'stylesheet\'"> <noscript><link rel="stylesheet" href="/wdn/templates_5.1/css/deprecated.css"></noscript>';
+$page->head .= '<link rel="preload" href="/wdn/templates_5.2/css/deprecated.css" as="style" onload="this.onload=null;this.rel=\'stylesheet\'"> <noscript><link rel="stylesheet" href="/wdn/templates_5.2/css/deprecated.css"></noscript>';
 
 
 if (isset($context->options['q']) || isset($context->options['cn']) || isset($context->options['sn'])) {
