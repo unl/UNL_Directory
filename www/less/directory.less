@@ -62,18 +62,8 @@
 }
 
 
-#directory-disclaim a {
-  background-color: fadeout(#000, 85%);
-  border-radius: .317em;
-  color: @ui03;
-  padding: .451em .802em;
-  text-decoration: none;
-  text-shadow: none;
-}
-
-
 .card {
-  background-color: #fff;
+  background-color: var(--bg-card);
   border-top: 5px solid #d00000;
   box-shadow: 0 0 1px 1px rgba(20,20,20,.2);
   margin-bottom: 1em;
@@ -102,7 +92,7 @@
 
 
 .card .description {
-  border-top: 1px solid #e3e3e2;
+  border-top: 1px solid var(--b);
   margin: 1em 0 0;
   padding-top: 1em;
 }
@@ -115,13 +105,13 @@
 
 
 .pfResult {
-  background-color: #fff;
-  border: 1px solid #e3e3e2;
+  background-color: var(--bg-card);
+  border: 1px solid var(--b);
 }
 
 
 .pfResult > li {
-  border-bottom: 1px solid #e3e3e2;
+  border-bottom: 1px solid var(--b);
   cursor: pointer;
   margin-bottom: 0;
   padding: 1.33em 1.77em
@@ -155,7 +145,6 @@
 
 .pfResult .given-name {
   color: #5b5b5a;
-  .sans-serif-font();
   font-size: 1rem;
   margin-left: 1em;
   text-transform: uppercase;
@@ -271,7 +260,7 @@
 
 .record-container .vcard .roles,
 .results-container .vcard .roles {
-  border-bottom: 1px solid #e3e3e2;
+  border-bottom: 1px solid var(--b);
 }
 
 
@@ -294,18 +283,9 @@
 .record-container .vcard .given-name,
 .results-container .vcard .given-name {
   color: @ui08;
-  .sans-serif-font();
   font-size: 1rem;
   margin-left: 1em;
   text-transform: uppercase;
-}
-
-
-.record-container .vcard button,
-.results-container .vcard button {
-  background: 0 0;
-  border: 0;
-  color: @brand;
 }
 
 
@@ -341,7 +321,7 @@
 
 
 .directory-knowledge-section + .directory-knowledge-section {
-  border-top: 1px solid #e3e3e2;
+  border-top: 1px solid var(--b);
   padding-top: 1.33em;
 }
 
@@ -369,7 +349,7 @@
 
 #editBox .aliases ul,
 #editBox .users ul {
-  border-bottom: 1px solid #e3e3e2;
+  border-bottom: 1px solid var(--b);
   list-style: none;
   margin-bottom: 1em;
   padding: 0 0 1em;
@@ -424,7 +404,7 @@
 
 
 #listings .listing:not(:last-child) {
-  border-bottom: 1px solid #e3e3e2;
+  border-bottom: 1px solid var(--b);
 }
 
 
@@ -434,7 +414,7 @@
 
 
 #listings ol ol li {
-  border-left: 1px dotted #e3e3e2;
+  border-left: 1px dotted var(--b);
   padding: .5em 0 .5em .5em;
 }
 
