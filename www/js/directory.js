@@ -368,7 +368,7 @@ define([
 		if ($loadedChild.length) {
 			// we already loaded the record
 			console.log('alreaded loaded');
-			$overview.hide(0, function() { 
+			$overview.hide(0, function() {
 				$(this).removeClass('dcf-d-flex');
 				$loadedChild.show('fast');
 			});
@@ -401,7 +401,7 @@ define([
 
 			//Add a close button
 			var closeButton = $('<button>', {
-				'class': 'close-full-record',
+				'class': 'close-full-record dcf-btn dcf-btn-tertiary',
 				'aria-label': 'close this record'
 			});
 			closeButton.click(function() {
@@ -423,7 +423,7 @@ define([
 			}
 
 			console.log('fetch record sliding');
-			$overview.hide(0, function() { 
+			$overview.hide(0, function() {
 				$(this).removeClass('dcf-d-flex');
 				$card.show('fast');
 			});
@@ -805,7 +805,7 @@ define([
 
 	// show hidden edit buttons (hidden with dcf-d-none)
 	$(".edit-button").removeClass("dcf-d-none");
-	
+
 	var ajaxSubmitToDepartmentList = function(form, context, listClass, tmpl, data) {
 		$.post(form.action + '?' + $.param({redirect: '0'}), $(form).serialize(), function() {
 			var $newItem = $(tmpl.render(data)).hide();
