@@ -19,14 +19,16 @@ UNL_Officefinder::setReplacementData('pagetitle', '<h1>Departmental Hierarchy</h
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAUAQMAAACK1e4oAAAABlBMVEUAAwCIiIgd2JB2AAAAAXRSTlMAQObYZgAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9YIBhQIJYVaFGwAAAARSURBVAjXY2hgQIf%2FGTDFGgDSkwqATqpCHAAAAABJRU5ErkJggg%3D%3D) no-repeat;
   }
   #dcf-main ul.tree li:last-child {
-    background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAUAQMAAACK1e4oAAAABlBMVEUAAwCIiIgd2JB2AAAAAXRSTlMAQObYZgAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9YIBhQIIhs%2Bgc8AAAAQSURBVAjXY2hgQIf%2FGbAAAKCTBYBUjWvCAAAAAElFTkSuQmCC) no-repeat;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAUAQMAAACK1e4oAAAABlBMVEUAAwCIiIgd2JB2AAAAAXRSTlMAQObYZgAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9YIBhQIIhs%2Bgc8AAAAQSURBVAjXY2hgQIf%2FGbAAAKCTBYBUjWvCAAAAAElFTkSuQmCC);
+    background-color: var(--bg-body);
+    background-repeat: no-repeat;
   }
   .academic {
-      background-color:#C2FFE0;
+      font-style: italic;
   }
   .org_unit {
       font-size:75%;
-      color:black;
+      color: var(--body);
   }
   .suppressed {
       text-decoration:line-through;
@@ -35,7 +37,7 @@ UNL_Officefinder::setReplacementData('pagetitle', '<h1>Departmental Hierarchy</h
 <div class="dcf-grid">
     <div class="dcf-col-100% dcf-col-25%-start@md">
       <ul>
-        <li><span class="academic">Green</span> listings are shown on the <a href="academic">Academic Departments list</a></li>
+        <li><span class="dcf-italic">Italic</span> listings are shown on the <a href="academic">Academic Departments list</a></li>
         <li><span class="suppressed">Struck</span> listings have no SAP appointments or child listings, and are hidden from the public</li>
       </ul>
     </div>
