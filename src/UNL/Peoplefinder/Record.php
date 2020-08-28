@@ -64,7 +64,7 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
 
     public function __construct($options = [])
     {
-        if (isset($options['uid'])) { var_dump($options['uid']);exit;
+        if (isset($options['uid'])) {
             $peoplefinder = isset($options['peoplefinder']) ? $options['peoplefinder'] : UNL_Peoplefinder::getInstance();
             $remoteRecord = self::factory($options['uid'], $peoplefinder);
 
