@@ -64,7 +64,7 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
 
     public function __construct($options = [])
     {
-        if (isset($options['uid'])) {
+        if (isset($options['uid'])) { var_dump($options['uid']);exit;
             $peoplefinder = isset($options['peoplefinder']) ? $options['peoplefinder'] : UNL_Peoplefinder::getInstance();
             $remoteRecord = self::factory($options['uid'], $peoplefinder);
 
@@ -86,7 +86,15 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
             $peoplefinder = UNL_Peoplefinder::getInstance();
         }
 
-        return $peoplefinder->getUID($uid);
+        if (preg_match('/\d{8}$/', $uid)) {
+            // $uid has been requested as an NUID such as '01234567'
+            $record = $peoplefinder->getByNUID($uid);
+        } else {
+            // $uid has been requested as a My.UNL ID such as 'hhusker1'
+            $record = $peoplefinder->getUID($uid);
+        }
+
+        return $record;
     }
 
     public static function getCleanPhoneNumber($phone)
