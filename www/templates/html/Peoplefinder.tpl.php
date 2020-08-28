@@ -35,6 +35,11 @@ if (isset($context->options['q']) || isset($context->options['cn']) || isset($co
     $page->head .= $savvy->render(null, 'static/meta-robots.tpl.php');
 }
 
+if (in_array($context->options['view'], ['record'])) {
+    // Include a canonical link since a record can be accessed with both My.UNL ID and NUID.
+    $page->head .= PHP_EOL . '<link rel="canonical" href="' . $savvy->render($context->output->getUrl()) . '" />';
+}
+
 if (in_array($context->options['view'], ['instructions', 'help', 'search'])) {
     //Don't wrap the home page, because we want it to use bands
     $page->maincontentarea = $savvy->render($context->output);
