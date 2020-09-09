@@ -1216,7 +1216,7 @@ define([
 					var $employees = $('#all_employees');
 					var $listings = $('#listings');
 					var $editableListings = $('.editing > ol.listings', $listings);
-					var deleteDepartmentWarning = 'Are you sure? This will permanently delete this department and all its children.';
+					var deleteDepartmentWarning = 'Are you sure? This will permanently delete this record and any child records.';
 
 					initialMainState = 2;
 					setMainState(initialMainState);
