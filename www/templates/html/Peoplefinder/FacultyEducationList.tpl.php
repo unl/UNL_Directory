@@ -18,7 +18,7 @@ $page->head      = $page->getRaw('head').'<link rel="stylesheet" type="text/css"
         <?php endforeach; ?>
         </ul>
         <table class="zentable cool">
-            <caption>Faculty List</caption>
+            <caption class="dcf-sr-only">Faculty List</caption>
             <thead>
                 <tr>
                     <th scope="col">Name</th>

@@ -47,7 +47,7 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
                         <?php if (count($resource->$method_name())): ?>
                             <h2>Resource Properties</h2>
                             <table class="zentable neutral dcf-table dcf-txt-sm">
-                                <caption>Resource Properties Table</caption>
+                                <caption class="dcf-sr-only">Resource Properties Table</caption>
                                 <thead>
                                     <tr>
                                         <th scope="col">Property</th>
