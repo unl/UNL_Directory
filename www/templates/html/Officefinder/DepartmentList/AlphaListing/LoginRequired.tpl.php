@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
     <title>University of Nebraska–Lincoln Directory</title>
     <style>
