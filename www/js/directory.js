@@ -4,7 +4,7 @@ define([
 	'require',
 	'idm',
 	'notice',
-	'./vendor/jsrender.js'
+	'./vendor/jsrender.min.js'
 ], function($, WDN, require, idm) {
 	"use strict";
 
