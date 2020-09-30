@@ -47,16 +47,22 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
                         <?php if (count($resource->$method_name())): ?>
                             <h2>Resource Properties</h2>
                             <table class="zentable neutral dcf-table dcf-txt-sm">
-                            <thead><tr><th>Property</th><th>Description</th></tr></thead>
-                            <tbody>
-                                <?php foreach ($resource->$method_name() as $property => $description): ?>
+                                <caption>Resource Properties Table</caption>
+                                <thead>
                                     <tr>
-                                      <td><?php echo $property ?></td>
-                                      <td><?php echo $description ?></td>
+                                        <th scope="col">Property</th>
+                                        <th scope="col">Description</th>
                                     </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($resource->$method_name() as $property => $description): ?>
+                                        <tr>
+                                          <td><?php echo $property ?></td>
+                                          <td><?php echo $description ?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
                         <?php endif; ?>
                         <h2>Response</h2>
                         <?php
