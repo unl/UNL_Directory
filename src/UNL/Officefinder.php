@@ -149,7 +149,6 @@ class UNL_Officefinder
             $auth->forceAuthentication();
             if (!$auth->isLoggedIn()) {
                 throw new Exception('You must log in to view this resource!');
-                exit();
             }
         }
     }
