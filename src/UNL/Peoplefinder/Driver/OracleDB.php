@@ -231,10 +231,15 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
             $results = self::$sampleFixLDAPEntries;
         } else {
             // UNL_EMAILS_00.TYPE = 'USERINFO' is the work email address that we want
-            $query = "SELECT UNL_BIODEMO.NETID, UNL_BIODEMO.NU_FERPA, UNL_EMAILS_00.EMAIL as mail
+            $query = "
+            SELECT UNL_BIODEMO.NETID, UNL_BIODEMO.NU_FERPA, UNL_EMAILS_00.EMAIL as MAIL,
+                LISTAGG(UNL_AFFILIATIONS_00.AFFILIATION, ';') WITHIN GROUP (ORDER BY UNL_AFFILIATIONS_00.AFFILIATION) as AFFILIATION
             FROM UNL_BIODEMO
+            LEFT JOIN UNL_AFFILIATIONS_00 ON UNL_AFFILIATIONS_00.BIODEMO_ID = UNL_BIODEMO.BIODEMO_ID
             LEFT JOIN UNL_EMAILS_00 ON UNL_BIODEMO.BIODEMO_ID = UNL_EMAILS_00.BIODEMO_ID AND UNL_EMAILS_00.TYPE = 'USERINFO'
-            WHERE UNL_BIODEMO.NETID IN (" . implode(', ', $binding_list) . ")";
+                        WHERE UNL_BIODEMO.NETID IN (" . implode(', ', $binding_list) . ")
+            GROUP BY UNL_BIODEMO.NETID, UNL_BIODEMO.NU_FERPA, UNL_EMAILS_00.EMAIL
+            ";
 
             $results = $this->query($query, $binding_array);
         }
@@ -249,6 +254,17 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
                 
                 $entries[$key]['mail'] = $value;
             }
+
+            // Use the affiliations from Oracle. There is additional processing being done on the UNL_AFFILIATIONS_00
+            // view before it reaches us to remove affiliations associated with "Directory Order=NL" appointments.
+            if (!empty($row['AFFILIATION'])) {
+                $affiliations = explode(';', $row['AFFILIATION']);
+                $affiliations = array_map('strtolower', $affiliations);
+                $value = new UNL_Peoplefinder_Driver_LDAP_Multivalue($affiliations);
+
+                $entries[$key]['edupersonaffiliation'] = $value;
+            }
+
             // Remove the student affiliation if the privacy flag is set
             if (!empty($row['NU_FERPA']) && isset($entries[$key]['edupersonaffiliation'])) {
                 $value = new UNL_Peoplefinder_Driver_LDAP_Multivalue(
