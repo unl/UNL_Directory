@@ -365,7 +365,7 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
             $affiliations = $affiliations->getArrayCopy();
         }
 
-        $affiliations = array_intersect(UNL_Peoplefinder::$displayedAffiliations, array_unique($affiliations));
+        $affiliations = array_intersect(UNL_Peoplefinder::$displayedAffiliations, $affiliations);
 
         return implode(', ', $affiliations);
     }
