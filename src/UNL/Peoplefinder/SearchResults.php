@@ -24,10 +24,7 @@ class UNL_Peoplefinder_SearchResults extends ArrayIterator
 
         foreach ($results as $record) {
             if (isset($record->eduPersonAffiliation)) {
-                $affiliations = $record->eduPersonAffiliation;
-                if ($affiliations instanceof ArrayIterator) {
-                    $affiliations = $affiliations->getArrayCopy();
-                }
+                $affiliations = static::affiliationsToArray($record->eduPersonAffiliation);
                 foreach (array_unique($affiliations) as $affiliation) {
                     if (!in_array($affiliation, UNL_Peoplefinder::$displayedAffiliations)) {
                         // This is an affiliation we do not want displayed
@@ -41,6 +38,13 @@ class UNL_Peoplefinder_SearchResults extends ArrayIterator
             }
         }
         return $by_affiliation;
+    }
+
+    public static function affiliationsToArray($affiliations) {
+        if ($affiliations instanceof ArrayIterator) {
+            $affiliations = $affiliations->getArrayCopy();
+        }
+        return $affiliations;
     }
 
     public static function affiliationSort($affiliation1, $affiliation2)
