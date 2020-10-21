@@ -259,7 +259,7 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
             // view before it reaches us to remove affiliations associated with "Directory Order=NL" appointments.
             if (!empty($row['AFFILIATION'])) {
                 $affiliations = explode(';', $row['AFFILIATION']);
-                $affiliations = array_map('strtolower', $affiliations);
+                $affiliations = array_unique(array_map('strtolower', $affiliations));
                 $value = new UNL_Peoplefinder_Driver_LDAP_Multivalue($affiliations);
 
                 $entries[$key]['edupersonaffiliation'] = $value;
