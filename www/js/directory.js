@@ -917,6 +917,11 @@ define([
 		var name =  idm.getDisplayName() || '';
 		var email =  idm.getEmailAddress() || '';
 
+		// Verify form and bail if missing
+		if (!$form[0]) {
+		  return;
+		}
+
 		//Initialize values
 		$form[0].reset();
 		if (name) {
