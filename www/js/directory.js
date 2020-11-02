@@ -1225,7 +1225,7 @@ define([
 					createStickyKit($summarySection);
 
 					$summarySection.on('click', '.vcard-tools .dir-btn-suggest-correction', function(e) {
-						showModalForm($editBox, '.forms', this);
+						launchCorrectionModal($(e.target));
 						return false;
 					}).on('click', '.vcard-tools .dir-btn-delete', function(e) {
 						if (!confirm(deleteDepartmentWarning)) {
