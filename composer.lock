@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "74c0e93cf870ad5af082f07bd93518d7",
+    "content-hash": "b803602b2a9a34a2677199b71a5826f5",
     "packages": [
         {
             "name": "deruli/html-minifier",
@@ -723,16 +723,16 @@
         },
         {
             "name": "unl/php-wdn-templates",
-            "version": "v5.2.1",
+            "version": "v5.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/unl/phpunltemplates.git",
-                "reference": "7648850d99cc8b6f03307a7feca7d31b18e9a233"
+                "reference": "090d6c7c8ac8ab2828165bd06574ecb48caf1a88"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/unl/phpunltemplates/zipball/7648850d99cc8b6f03307a7feca7d31b18e9a233",
-                "reference": "7648850d99cc8b6f03307a7feca7d31b18e9a233",
+                "url": "https://api.github.com/repos/unl/phpunltemplates/zipball/090d6c7c8ac8ab2828165bd06574ecb48caf1a88",
+                "reference": "090d6c7c8ac8ab2828165bd06574ecb48caf1a88",
                 "shasum": ""
             },
             "require": {
@@ -776,7 +776,11 @@
             ],
             "description": "A PHP library for rendering the UNL templates",
             "homepage": "http://wdn.unl.edu/",
-            "time": "2020-07-16T20:24:35+00:00"
+            "support": {
+                "issues": "https://github.com/unl/phpunltemplates/issues",
+                "source": "https://github.com/unl/phpunltemplates/tree/v5.3.0"
+            },
+            "time": "2021-01-27T17:05:21+00:00"
         },
         {
             "name": "unl/unl_cache_lite",
@@ -2355,5 +2359,6 @@
     "platform-dev": [],
     "platform-overrides": {
         "php": "5.6.1"
-    }
+    },
+    "plugin-api-version": "2.0.0"
 }
