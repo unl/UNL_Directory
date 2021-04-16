@@ -22,7 +22,7 @@ $deptOrgUnits = array(
 echo time() . "\n\n";
 foreach ($deptOrgUnits as $orgUnit) {
 	echo "Start " . $orgUnit . ' at ' . time() . "\n";
-	$url = 'https://directory-test.unl.edu/departments/' . $orgUnit . '/personnelsubtree?format=xml&nocache=1';
+	$url = 'https://directory-test.unl.edu/departments/' . $orgUnit . '/personnelsubtree?format=xml&reset-cache';
 	$ch = curl_init();
 	$timeout = 400;
 
