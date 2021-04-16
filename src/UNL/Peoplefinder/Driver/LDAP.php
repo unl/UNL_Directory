@@ -26,6 +26,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
     static public $baseDN             = 'ou=people,dc=unl,dc=edu';
     static public $ldapTimeout        = 10;
     static public $cacheTimeout       = 28800; //8 hours
+    static public $checkCache         = TRUE;
 
     /**
      * Attribute arrays
@@ -183,7 +184,9 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
             $dn = self::$baseDN;
         }
 
-        $cache = $this->getCache();
+        if (self::$checkCache === TRUE) {
+            $cache = $this->getCache();
+        }
 
         $cache_key = $filter . '-' . implode(',', $attributes) . '-' . $setResult . '-' . $dn;
         //Our key will most likely exceed the memcached key length limit, so reduce it

@@ -125,6 +125,11 @@ class UNL_Peoplefinder
         $this->driver = $options['driver'];
         $this->oracle_driver = new UNL_Peoplefinder_Driver_OracleDB();
 
+        if (isset($options['reset-cache']) && $this->driver instanceof UNL_Peoplefinder_Driver_LDAP) {
+            $this->driver::$checkCache = FALSE;
+            $this->driver::$cacheTimeout = 86400; // cache for one day
+        }
+
         $this->options = $options + $this->options;
 
         try {
