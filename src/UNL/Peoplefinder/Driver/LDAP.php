@@ -184,15 +184,13 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
             $dn = self::$baseDN;
         }
 
-        if (self::$checkCache === TRUE) {
-            $cache = $this->getCache();
-        }
+        $cache = $this->getCache();
 
         $cache_key = $filter . '-' . implode(',', $attributes) . '-' . $setResult . '-' . $dn;
         //Our key will most likely exceed the memcached key length limit, so reduce it
         $cache_key = 'ldap-'.md5($cache_key);
 
-        if ($result = $cache->get($cache_key)) {
+        if (self::$checkCache === TRUE && $result = $cache->get($cache_key)) {
             $result = unserialize($result);
 
             if ($setResult) {
