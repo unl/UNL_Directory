@@ -466,9 +466,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
     protected static function normalizeLdapEntries(array $entries, $resetCache = FALSE)
     {
         $entries = UNL_Peoplefinder_Driver_LDAP_Util::filterArrayByKeys($entries, 'is_int');
-        if ($resetCache) {
-						$entry = current($entries);
-        }
+	      $entry = current($entries);
         if ($entry instanceof UNL_Peoplefinder_Driver_LDAP_Entry) {
             return $entries;
         }
@@ -481,7 +479,9 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
 
         // Attempt to fix the data based on Oracle sourced information such as the `mail` attribute.
         $oracle =  new UNL_Peoplefinder_Driver_OracleDB();
-        $oracle->resetCache();
+        if ($resetCache) {
+            $oracle->resetCache();
+        }
 
         $results = $oracle->fixLDAPEntries($results);
 
