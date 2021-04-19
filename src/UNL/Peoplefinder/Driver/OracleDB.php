@@ -307,7 +307,7 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
         return $cache;
     }
 
-    protected function resetCache() {
+    public function resetCache() {
         $this->resetCache = TRUE;
     }
 }
