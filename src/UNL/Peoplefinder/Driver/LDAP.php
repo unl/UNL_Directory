@@ -251,7 +251,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
             return [];
         }
 
-        $result = self::normalizeLdapEntries(@ldap_get_entries($this->linkID, $sr));
+        $result = self::normalizeLdapEntries(@ldap_get_entries($this->linkID, $sr), $this->resetCache);
 
         if ($setResult) {
             $this->lastResult = $this->caseInsensitiveSortLDAPResults($result);
@@ -324,7 +324,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
     {
         // Load the Sample User so a string comparison to their name can be done.
         if (isset(UNL_Peoplefinder::$sampleUID)) {
-            $result = self::normalizeLdapEntries(self::$samplePersonLDAP);
+            $result = self::normalizeLdapEntries(self::$samplePersonLDAP, $this->resetCache);
             $sampleRecord = self::recordFromLDAPEntry(current($result));
             $this->lastResult = $result;
         }
@@ -425,7 +425,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
     public function getUID($uid)
     {
         if ($uid == UNL_Peoplefinder::$sampleUID) {
-            $r = self::normalizeLdapEntries(self::$samplePersonLDAP);
+            $r = self::normalizeLdapEntries(self::$samplePersonLDAP, $this->resetCache);
         } else {
             $filter = new UNL_Peoplefinder_Driver_LDAP_UIDFilter($uid);
             $r = $this->query($filter->__toString(), $this->detailAttributes, false);
@@ -465,10 +465,12 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
         return new UNL_Peoplefinder_Person_Roles(['iterator' => new ArrayIterator($results)]);
     }
 
-    protected static function normalizeLdapEntries(array $entries)
+    protected static function normalizeLdapEntries(array $entries, $resetCache = FALSE)
     {
         $entries = UNL_Peoplefinder_Driver_LDAP_Util::filterArrayByKeys($entries, 'is_int');
-        $entry = current($entries);
+        if ($resetCache) {
+						$entry = current($entries);
+        }
         if ($entry instanceof UNL_Peoplefinder_Driver_LDAP_Entry) {
             return $entries;
         }
@@ -482,7 +484,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
         // Attempt to fix the data based on Oracle sourced information such as the `mail` attribute.
         $oracle =  new UNL_Peoplefinder_Driver_OracleDB();
         $oracle->resetCache();
-        
+
         $results = $oracle->fixLDAPEntries($results);
 
         return $results;
