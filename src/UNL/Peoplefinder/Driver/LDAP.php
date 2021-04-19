@@ -481,6 +481,9 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
 
         // Attempt to fix the data based on Oracle sourced information such as the `mail` attribute.
         $oracle =  new UNL_Peoplefinder_Driver_OracleDB();
+        if ($this->resetCache === TRUE) {
+            $oracle->resetCache();
+        }
         $results = $oracle->fixLDAPEntries($results);
 
         return $results;
