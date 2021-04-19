@@ -19,9 +19,7 @@ $deptOrgUnits = array(
 	50000905
 );
 
-echo time() . "\n\n";
 foreach ($deptOrgUnits as $orgUnit) {
-	echo "Start " . $orgUnit . ' at ' . time() . "\n";
 	$url = 'https://directory-test.unl.edu/departments/' . $orgUnit . '/personnelsubtree?format=xml&reset-cache';
 	$ch = curl_init();
 	$timeout = 400;
@@ -32,8 +30,5 @@ foreach ($deptOrgUnits as $orgUnit) {
 	curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
 
 	$lines_string = curl_exec($ch);
-	echo !empty($lines_string) ? "successful curl\n" : "failed curl\n";;
 	curl_close($ch);
-	echo 'End ' . $orgUnit . ' at ' . time() . "\n\n";
 }
-echo time() . "\n";
