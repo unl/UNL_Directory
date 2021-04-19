@@ -129,7 +129,6 @@ class UNL_Peoplefinder
             $this->oracle_driver->resetCache();
             if ($this->driver instanceof UNL_Peoplefinder_Driver_LDAP) {
                 $this->driver->resetCache();
-                $this->driver::$cacheTimeout = 86400; // cache for one day
             }
         }
 
