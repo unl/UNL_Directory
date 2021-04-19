@@ -40,7 +40,7 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
         //Use md5 so we don't exceed the memcached key length
         $cache_key = 'oracle_query_' .  md5($statement) . '--' . md5(serialize($params));
 
-        if ($this->resetCache) {
+        if ($this->resetCache === TRUE) {
             $cache->remove($cache_key);
         }
 
