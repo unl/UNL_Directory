@@ -6,7 +6,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
      *
      * @param string
      */
-    static public $ldapServer = 'ldaps://ldap.unl.edu';
+    public static $ldapServer = 'ldaps://ldap.unl.edu';
 
     /**
      * LDAP Connection bind distinguised name
@@ -14,7 +14,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
      * @var string
      * @ignore
      */
-    static public $bindDN = 'uid=insertyouruidhere,ou=service,dc=unl,dc=edu';
+    public static $bindDN = 'uid=insertyouruidhere,ou=service,dc=unl,dc=edu';
 
     /**
      * LDAP connection password.
@@ -22,11 +22,11 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
      * @var string
      * @ignore
      */
-    static public $bindPW             = 'putyourpasswordhere';
-    static public $baseDN             = 'ou=people,dc=unl,dc=edu';
-    static public $ldapTimeout        = 10;
-    static public $cacheTimeout       = 28800; //8 hours
-    static public $checkCache         = TRUE;
+    public static $bindPW             = 'putyourpasswordhere';
+    public static $baseDN             = 'ou=people,dc=unl,dc=edu';
+    public static $ldapTimeout        = 10;
+    public static $cacheTimeout       = 86400; // cache for one day
+    public static $resetCache         = FALSE;
 
     /**
      * Attribute arrays
@@ -190,7 +190,11 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
         //Our key will most likely exceed the memcached key length limit, so reduce it
         $cache_key = 'ldap-'.md5($cache_key);
 
-        if (self::$checkCache === TRUE && $result = $cache->get($cache_key)) {
+        if (self::$resetCache) {
+           $cache->remove($cache_key);
+        }
+
+        if ($result = $cache->get($cache_key)) {
             $result = unserialize($result);
 
             if ($setResult) {

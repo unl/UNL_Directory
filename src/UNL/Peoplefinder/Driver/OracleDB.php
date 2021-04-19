@@ -9,6 +9,7 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
     public static $connection_host;
     public static $connection_port;
     public static $connection_service;
+    public static $resetCache = FALSE;
 
     private $conn;
 
@@ -38,6 +39,10 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
         
         //Use md5 so we don't exceed the memcached key length
         $cache_key = 'oracle_query_' .  md5($statement) . '--' . md5(serialize($params));
+
+        if (self::$resetCache) {
+            $cache->remove($cache_key);
+        }
 
         if ($result = $cache->get($cache_key)) {
             $result = unserialize($result);

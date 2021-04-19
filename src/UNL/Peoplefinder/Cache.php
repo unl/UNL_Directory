@@ -108,6 +108,7 @@ class UNL_Peoplefinder_Cache
 	public function remove($key)
 	{
 		$this->fastCache->delete($key);
+		$this->fastCache->delete($this->getPrefixedKey($key));
 		$this->slowCache->remove($key, 'default', true);
 	}
 
