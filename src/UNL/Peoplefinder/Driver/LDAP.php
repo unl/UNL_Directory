@@ -26,7 +26,8 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
     public static $baseDN             = 'ou=people,dc=unl,dc=edu';
     public static $ldapTimeout        = 10;
     public static $cacheTimeout       = 86400; // cache for one day
-    public static $resetCache         = FALSE;
+
+    private $resetCache = FALSE;
 
     /**
      * Attribute arrays
@@ -190,7 +191,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
         //Our key will most likely exceed the memcached key length limit, so reduce it
         $cache_key = 'ldap-'.md5($cache_key);
 
-        if (self::$resetCache) {
+        if ($this->resetCache) {
            $cache->remove($cache_key);
         }
 
@@ -553,5 +554,9 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
     public function __destruct()
     {
         $this->unbind();
+    }
+
+    public function resetCache() {
+        $this->resetCache = TRUE;
     }
 }
