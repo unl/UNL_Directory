@@ -193,9 +193,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
 
         if ($this->resetCache === TRUE) {
            $cache->remove($cache_key);
-        }
-
-        if ($result = $cache->get($cache_key)) {
+        } elseif ($result = $cache->get($cache_key)) {
             $result = unserialize($result);
 
             if ($setResult) {
