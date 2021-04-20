@@ -3,9 +3,11 @@ require_once __DIR__.'/../www/config.inc.php';
 
 // Departments to cache personnel
 $deptOrgUnits = array(
+	50000955,
 	50000907,
 	50000897,
-	50000955,
+	50000905,
+	50000928,
 	50001078,
 	50000834,
 	50000908,
@@ -13,10 +15,8 @@ $deptOrgUnits = array(
 	50007300,
 	50001088,
 	50000899,
-	50000928,
 	50000828,
-	50000829,
-	50000905
+	50000829
 );
 
 foreach ($deptOrgUnits as $orgUnit) {
