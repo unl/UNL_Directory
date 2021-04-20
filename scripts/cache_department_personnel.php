@@ -20,6 +20,8 @@ $deptOrgUnits = array(
 );
 
 foreach ($deptOrgUnits as $orgUnit) {
+	$start = time();
+	echo $orgUnit . " started at " . date("h:i:s", $start) . "\n";
 	$url = 'https://directory-test.unl.edu/departments/' . $orgUnit . '/personnelsubtree?format=xml&reset-cache';
 	$ch = curl_init();
 	$timeout = 400;
@@ -31,4 +33,7 @@ foreach ($deptOrgUnits as $orgUnit) {
 
 	$lines_string = curl_exec($ch);
 	curl_close($ch);
+	$end = time();
+	$duration = ($end - $start) / 60;
+	echo $orgUnit . " finished at " . date("h:i:s", $end) . "took " . $duration . "minutes\n";
 }
