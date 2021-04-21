@@ -1,6 +1,11 @@
 <?php
 require_once __DIR__.'/../www/config.inc.php';
 
+$baseURL = isset($argv) && !empty($argv[1]) ? $argv[1] : '';
+if (empty($baseURL)) {
+	die('Missing baseurl arg.  i.e. > php cache_department_personnel.php https://directory.unl.edu');
+}
+
 // Departments to cache personnel
 $deptOrgUnits = array(
 	50000955,
@@ -22,7 +27,7 @@ $deptOrgUnits = array(
 foreach ($deptOrgUnits as $orgUnit) {
 	$start = time();
 	echo $orgUnit . " started at " . date("h:i:sa", $start) . "\n";
-	$url = 'https://directory-test.unl.edu/departments/' . $orgUnit . '/personnelsubtree?format=xml&reset-cache';
+	$url = $baseURL . '/departments/' . $orgUnit . '/personnelsubtree?format=xml&reset-cache';
 	$ch = curl_init();
 	$timeout = 400;
 
