@@ -24,6 +24,7 @@ $deptOrgUnits = array(
 	50000829
 );
 
+echo "\n\nProcessing org unit " . $baseURL . "/personnelsubstree pages with reset cache\n";
 foreach ($deptOrgUnits as $orgUnit) {
 	$start = time();
 	echo $orgUnit . " started at " . date("h:i:sa", $start) . "\n";
