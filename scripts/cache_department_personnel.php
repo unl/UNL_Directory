@@ -27,7 +27,7 @@ $deptOrgUnits = array(
 echo "\n\nProcessing org unit " . $baseURL . "/personnelsubstree pages with reset cache\n";
 foreach ($deptOrgUnits as $orgUnit) {
 	$start = time();
-	echo $orgUnit . " started at " . date("h:i:sa", $start) . "\n";
+	echo $orgUnit . " started at " . date("h:i:s a", $start) . "\n";
 	$url = $baseURL . '/departments/' . $orgUnit . '/personnelsubtree?format=xml&reset-cache';
 	$ch = curl_init();
 	$timeout = 400;
@@ -41,5 +41,5 @@ foreach ($deptOrgUnits as $orgUnit) {
 	curl_close($ch);
 	$end = time();
 	$duration = ($end - $start) / 60;
-	echo $orgUnit . " finished at " . date("h:i:sa", $end) . " took " . round($duration, 3) . " minutes\n\n";
+	echo $orgUnit . " finished at " . date("h:i:s a", $end) . " took " . round($duration, 3) . " minutes\n\n";
 }
