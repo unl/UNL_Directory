@@ -6,7 +6,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
      *
      * @param string
      */
-    static public $ldapServer = 'ldaps://ldap.unl.edu';
+    public static $ldapServer = 'ldaps://ldap.unl.edu';
 
     /**
      * LDAP Connection bind distinguised name
@@ -14,7 +14,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
      * @var string
      * @ignore
      */
-    static public $bindDN = 'uid=insertyouruidhere,ou=service,dc=unl,dc=edu';
+    public static $bindDN = 'uid=insertyouruidhere,ou=service,dc=unl,dc=edu';
 
     /**
      * LDAP connection password.
@@ -22,10 +22,12 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
      * @var string
      * @ignore
      */
-    static public $bindPW             = 'putyourpasswordhere';
-    static public $baseDN             = 'ou=people,dc=unl,dc=edu';
-    static public $ldapTimeout        = 10;
-    static public $cacheTimeout       = 28800; //8 hours
+    public static $bindPW             = 'putyourpasswordhere';
+    public static $baseDN             = 'ou=people,dc=unl,dc=edu';
+    public static $ldapTimeout        = 10;
+    public static $cacheTimeout       = 86400; // cache for one day
+
+    private $resetCache = FALSE;
 
     /**
      * Attribute arrays
@@ -189,6 +191,8 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
         //Our key will most likely exceed the memcached key length limit, so reduce it
         $cache_key = 'ldap-'.md5($cache_key);
 
+        $this->checkKeyForCacheReset($cache, $cache_key);
+
         if ($result = $cache->get($cache_key)) {
             $result = unserialize($result);
 
@@ -245,7 +249,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
             return [];
         }
 
-        $result = self::normalizeLdapEntries(@ldap_get_entries($this->linkID, $sr));
+        $result = self::normalizeLdapEntries(@ldap_get_entries($this->linkID, $sr), $this->resetCache);
 
         if ($setResult) {
             $this->lastResult = $this->caseInsensitiveSortLDAPResults($result);
@@ -318,7 +322,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
     {
         // Load the Sample User so a string comparison to their name can be done.
         if (isset(UNL_Peoplefinder::$sampleUID)) {
-            $result = self::normalizeLdapEntries(self::$samplePersonLDAP);
+            $result = self::normalizeLdapEntries(self::$samplePersonLDAP, $this->resetCache);
             $sampleRecord = self::recordFromLDAPEntry(current($result));
             $this->lastResult = $result;
         }
@@ -419,7 +423,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
     public function getUID($uid)
     {
         if ($uid == UNL_Peoplefinder::$sampleUID) {
-            $r = self::normalizeLdapEntries(self::$samplePersonLDAP);
+            $r = self::normalizeLdapEntries(self::$samplePersonLDAP, $this->resetCache);
         } else {
             $filter = new UNL_Peoplefinder_Driver_LDAP_UIDFilter($uid);
             $r = $this->query($filter->__toString(), $this->detailAttributes, false);
@@ -459,10 +463,10 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
         return new UNL_Peoplefinder_Person_Roles(['iterator' => new ArrayIterator($results)]);
     }
 
-    protected static function normalizeLdapEntries(array $entries)
+    protected static function normalizeLdapEntries(array $entries, $resetCache = FALSE)
     {
         $entries = UNL_Peoplefinder_Driver_LDAP_Util::filterArrayByKeys($entries, 'is_int');
-        $entry = current($entries);
+	      $entry = current($entries);
         if ($entry instanceof UNL_Peoplefinder_Driver_LDAP_Entry) {
             return $entries;
         }
@@ -475,6 +479,10 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
 
         // Attempt to fix the data based on Oracle sourced information such as the `mail` attribute.
         $oracle =  new UNL_Peoplefinder_Driver_OracleDB();
+        if ($resetCache) {
+            $oracle->resetCache();
+        }
+
         $results = $oracle->fixLDAPEntries($results);
 
         return $results;
@@ -548,5 +556,15 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
     public function __destruct()
     {
         $this->unbind();
+    }
+
+    public function resetCache() {
+        $this->resetCache = TRUE;
+    }
+
+    public function checkKeyForCacheReset($cache, $key) {
+        if ($this->resetCache === TRUE) {
+            $cache->remove($key);
+        }
     }
 }

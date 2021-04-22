@@ -11,6 +11,7 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
     public static $connection_service;
 
     private $conn;
+    private $resetCache = FALSE;
 
     /** Sample Data Set in Config File */
     public static $sampleFixLDAPEntries;
@@ -38,6 +39,10 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
         
         //Use md5 so we don't exceed the memcached key length
         $cache_key = 'oracle_query_' .  md5($statement) . '--' . md5(serialize($params));
+
+        if ($this->resetCache === TRUE) {
+            $cache->remove($cache_key);
+        }
 
         if ($result = $cache->get($cache_key)) {
             $result = unserialize($result);
@@ -300,5 +305,9 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
         ]);
 
         return $cache;
+    }
+
+    public function resetCache() {
+        $this->resetCache = TRUE;
     }
 }

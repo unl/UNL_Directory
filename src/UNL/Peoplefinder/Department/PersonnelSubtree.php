@@ -6,7 +6,7 @@ class UNL_Peoplefinder_Department_PersonnelSubtree extends ArrayIterator
     function __construct($mixed)
     {
         // Bump the allowed execution time to prevent timeouts due to potential slow load
-        set_time_limit (300); // 300 seconds = 5 minutes
+        set_time_limit (600); // 600 seconds = 10 minutes
 
         // Increase result limit for this type of search
         UNL_Peoplefinder::$resultLimit = 500;

@@ -26,21 +26,21 @@
  */
 class UNL_Peoplefinder
 {
-    static public $resultLimit = 250;
+    public static $resultLimit = 250;
 
-    static public $url = '';
+    public static $url = '';
 
-    static public $annotateUrl = 'http://annotate.unl.edu/';
+    public static $annotateUrl = 'http://annotate.unl.edu/';
 
-    static public $staticFileVersion = '4.1';
+    public static $staticFileVersion = '4.1';
 
-    static public $minifyHtml = true;
+    public static $minifyHtml = true;
 
-    static public $use_oracle = TRUE;
+    public static $use_oracle = TRUE;
 
-    static public $testDomains = array('directory-test.unl.edu');
+    public static $testDomains = array('directory-test.unl.edu');
 
-    static public $sampleUID;
+    public static $sampleUID;
 
     static protected $instance;
 
@@ -124,6 +124,13 @@ class UNL_Peoplefinder
 
         $this->driver = $options['driver'];
         $this->oracle_driver = new UNL_Peoplefinder_Driver_OracleDB();
+
+        if (isset($options['reset-cache'])) {
+            $this->oracle_driver->resetCache();
+            if ($this->driver instanceof UNL_Peoplefinder_Driver_LDAP) {
+                $this->driver->resetCache();
+            }
+        }
 
         $this->options = $options + $this->options;
 
