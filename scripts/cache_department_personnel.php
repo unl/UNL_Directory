@@ -1,5 +1,4 @@
 <?php
-require_once __DIR__.'/../www/config.inc.php';
 
 const MAX_RETRIES = 1;
 
@@ -25,7 +24,7 @@ $deptOrgUnits = array(
 	50000828,
 	50000829
 );
-//$deptOrgUnits = array(50000897, 50000829);
+$deptOrgUnits = array(50000829);
 
 echo "\n\nProcessing org unit " . $baseURL . "/personnelsubstree pages with reset cache.\n";
 foreach ($deptOrgUnits as $orgUnit) {
@@ -53,7 +52,7 @@ foreach ($deptOrgUnits as $orgUnit) {
 		} else {
 			$resultJSON = json_decode($result);
 			$personnelCount = 0;
-			if (is_array($resultJSON) && count($resultJSON) > 0 && is_object($resultJSON[0]) && isset($resultJSON[0]->dn)){
+			if (is_array($resultJSON) && count($resultJSON) >= 1 && is_object($resultJSON[0]) && isset($resultJSON[0]->dn)){
 				$success = TRUE;
 				$personnelCount = count($resultJSON);
 				echo "SUCCESS (" . $personnelCount . " personnel): " . $orgUnit . " finished at " . date("h:i:s a", $end) . " and took " . round($duration, 3) . " minutes.\n\n";
