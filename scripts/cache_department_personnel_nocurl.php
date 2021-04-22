@@ -21,9 +21,6 @@ $deptOrgUnits = array(
 	50000828,
 	50000829
 );
-$departments = new UNL_Officefinder_DepartmentList_OfficialOrgUnits();
-var_dump($departments);
-die();
 
 $driver = new UNL_Peoplefinder_Driver_LDAP();
 $peopleFinder = new UNL_Peoplefinder(array('driver' => $driver, 'reset-cache' => TRUE));
