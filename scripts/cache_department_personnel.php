@@ -1,5 +1,11 @@
 <?php
-require_once __DIR__.'/../www/config.inc.php';
+
+// Due to curl issues it's better to use the script `cache_department_personnel_nocurl.php` instead.
+
+const MAX_RETRIES = 1;
+const TIME_FORMAT = 'h:i:s a';
+const AND_TOOK = ' and took ';
+const MINUTES_LINE_END = " minutes.\n\n";
 
 $baseURL = isset($argv) && !empty($argv[1]) ? $argv[1] : '';
 if (empty($baseURL)) {
@@ -24,22 +30,40 @@ $deptOrgUnits = array(
 	50000829
 );
 
-echo "\n\nProcessing org unit " . $baseURL . "/personnelsubstree pages with reset cache\n";
+echo "\n\nProcessing org unit " . $baseURL . "/personnelsubstree pages with reset cache.\n";
 foreach ($deptOrgUnits as $orgUnit) {
-	$start = time();
-	echo $orgUnit . " started at " . date("h:i:s a", $start) . "\n";
-	$url = $baseURL . '/departments/' . $orgUnit . '/personnelsubtree?format=xml&reset-cache';
-	$ch = curl_init();
-	$timeout = 400;
+	$success = FALSE;
+	$attempts = 0;
+	while ($success === FALSE && $attempts < MAX_RETRIES) {
+		++$attempts;
+		$start = time();
+		echo "Attempt " . $attempts . " for " . $orgUnit . " started at " . date(TIME_FORMAT, $start) . "\n";
+		$url = $baseURL . '/departments/' . $orgUnit . '/personnelsubtree?format=json&reset-cache';
+		$ch = curl_init($url);
+		$timeout = 800;
 
-	curl_setopt($ch, CURLOPT_URL, $url);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
-	curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
+		curl_setopt($ch, CURLOPT_FAILONERROR, true);
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+		curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
+		$result = curl_exec($ch);
+		$end = time();
+		$duration = ($end - $start) / 60;
 
-	$lines_string = curl_exec($ch);
-	curl_close($ch);
-	$end = time();
-	$duration = ($end - $start) / 60;
-	echo $orgUnit . " finished at " . date("h:i:s a", $end) . " took " . round($duration, 3) . " minutes\n\n";
+		if ($result === FALSE) {
+			echo "Curl error : " . curl_error($ch) . " at " . date(TIME_FORMAT, $end) . AND_TOOK . round($duration, 3) . MINUTES_LINE_END;
+		} else {
+			$resultJSON = json_decode($result);
+			$personnelCount = 0;
+			if (!empty($resultJSON) && is_array($resultJSON) && is_object($resultJSON[0]) && isset($resultJSON[0]->dn)){
+				$success = TRUE;
+				$personnelCount = count($resultJSON);
+				echo "SUCCESS (" . $personnelCount . " personnel): " . $orgUnit . " finished at " . date(TIME_FORMAT, $end) . AND_TOOK . round($duration, 3) . MINUTES_LINE_END;
+			} else {
+				echo "FAILED: " . $orgUnit . " finished at " . date(TIME_FORMAT, $end) . AND_TOOK . round($duration, 3) . MINUTES_LINE_END;
+			}
+		}
+		curl_close($ch);
+	}
 }
