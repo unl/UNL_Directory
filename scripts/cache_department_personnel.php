@@ -1,7 +1,10 @@
 <?php
 
+// Due to curl issues it's better to use the script `cache_department_personnel_nocurl.php` instead.
+
 const MAX_RETRIES = 1;
 const TIME_FORMAT = 'h:i:s a';
+const AND_TOOK = ' and took ';
 const MINUTES_LINE_END = " minutes.\n\n";
 
 $baseURL = isset($argv) && !empty($argv[1]) ? $argv[1] : '';
@@ -26,7 +29,6 @@ $deptOrgUnits = array(
 	50000828,
 	50000829
 );
-$deptOrgUnits = array(50000829);
 
 echo "\n\nProcessing org unit " . $baseURL . "/personnelsubstree pages with reset cache.\n";
 foreach ($deptOrgUnits as $orgUnit) {
@@ -50,16 +52,16 @@ foreach ($deptOrgUnits as $orgUnit) {
 		$duration = ($end - $start) / 60;
 
 		if ($result === FALSE) {
-			echo "Curl error : " . curl_error($ch) . " at " . date(TIME_FORMAT, $end) . " and took " . round($duration, 3) . MINUTES_LINE_END;
+			echo "Curl error : " . curl_error($ch) . " at " . date(TIME_FORMAT, $end) . AND_TOOK . round($duration, 3) . MINUTES_LINE_END;
 		} else {
 			$resultJSON = json_decode($result);
 			$personnelCount = 0;
-			if (!empty($resultJSON) && is_array($resultJSON) && count($resultJSON) >= 1 && is_object($resultJSON[0]) && isset($resultJSON[0]->dn)){
+			if (!empty($resultJSON) && is_array($resultJSON) && is_object($resultJSON[0]) && isset($resultJSON[0]->dn)){
 				$success = TRUE;
 				$personnelCount = count($resultJSON);
-				echo "SUCCESS (" . $personnelCount . " personnel): " . $orgUnit . " finished at " . date(TIME_FORMAT, $end) . " and took " . round($duration, 3) . MINUTES_LINE_END;
+				echo "SUCCESS (" . $personnelCount . " personnel): " . $orgUnit . " finished at " . date(TIME_FORMAT, $end) . AND_TOOK . round($duration, 3) . MINUTES_LINE_END;
 			} else {
-				echo "FAILED: " . $orgUnit . " finished at " . date(TIME_FORMAT, $end) . " and took " . round($duration, 3) . MINUTES_LINE_END;
+				echo "FAILED: " . $orgUnit . " finished at " . date(TIME_FORMAT, $end) . AND_TOOK . round($duration, 3) . MINUTES_LINE_END;
 			}
 		}
 		curl_close($ch);
