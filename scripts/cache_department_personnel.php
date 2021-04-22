@@ -1,6 +1,8 @@
 <?php
 
 const MAX_RETRIES = 1;
+const TIME_FORMAT = 'h:i:s a';
+const MINUTES_LINE_END = " minutes.\n\n";
 
 $baseURL = isset($argv) && !empty($argv[1]) ? $argv[1] : '';
 if (empty($baseURL)) {
@@ -33,7 +35,7 @@ foreach ($deptOrgUnits as $orgUnit) {
 	while ($success === FALSE && $attempts < MAX_RETRIES) {
 		++$attempts;
 		$start = time();
-		echo "Attempt " . $attempts . " for " . $orgUnit . " started at " . date("h:i:s a", $start) . "\n";
+		echo "Attempt " . $attempts . " for " . $orgUnit . " started at " . date(TIME_FORMAT, $start) . "\n";
 		$url = $baseURL . '/departments/' . $orgUnit . '/personnelsubtree?format=json&reset-cache';
 		$ch = curl_init($url);
 		$timeout = 800;
@@ -48,16 +50,16 @@ foreach ($deptOrgUnits as $orgUnit) {
 		$duration = ($end - $start) / 60;
 
 		if ($result === FALSE) {
-			echo "Curl error : " . curl_error($ch) . " at " . date("h:i:s a", $end) . " and took " . round($duration, 3) . " minutes.\n\n";
+			echo "Curl error : " . curl_error($ch) . " at " . date(TIME_FORMAT, $end) . " and took " . round($duration, 3) . MINUTES_LINE_END;
 		} else {
 			$resultJSON = json_decode($result);
 			$personnelCount = 0;
-			if (is_array($resultJSON) && count($resultJSON) >= 1 && is_object($resultJSON[0]) && isset($resultJSON[0]->dn)){
+			if (!empty($resultJSON) && is_array($resultJSON) && count($resultJSON) >= 1 && is_object($resultJSON[0]) && isset($resultJSON[0]->dn)){
 				$success = TRUE;
 				$personnelCount = count($resultJSON);
-				echo "SUCCESS (" . $personnelCount . " personnel): " . $orgUnit . " finished at " . date("h:i:s a", $end) . " and took " . round($duration, 3) . " minutes.\n\n";
+				echo "SUCCESS (" . $personnelCount . " personnel): " . $orgUnit . " finished at " . date(TIME_FORMAT, $end) . " and took " . round($duration, 3) . MINUTES_LINE_END;
 			} else {
-				echo "FAILED: " . $orgUnit . " finished at " . date("h:i:s a", $end) . " and took " . round($duration, 3) . " minutes.\n\n";
+				echo "FAILED: " . $orgUnit . " finished at " . date(TIME_FORMAT, $end) . " and took " . round($duration, 3) . MINUTES_LINE_END;
 			}
 		}
 		curl_close($ch);
