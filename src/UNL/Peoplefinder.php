@@ -8,8 +8,8 @@
  * @package   UNL_Peoplefinder
  * @author    Brett Bieber <brett.bieber@gmail.com>
  * @copyright 2007 Regents of the University of Nebraska
- * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
- * @link      http://peoplefinder.unl.edu/
+ * @license   https://www1.unl.edu/wdn/wiki/Software_License BSD License
+ * @link      https://peoplefinder.unl.edu/
  */
 
 /**
@@ -21,8 +21,8 @@
  * @package   UNL_Peoplefinder
  * @author    Brett Bieber <brett.bieber@gmail.com>
  * @copyright 2007 Regents of the University of Nebraska
- * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
- * @link      http://peoplefinder.unl.edu/
+ * @license   https://www1.unl.edu/wdn/wiki/Software_License BSD License
+ * @link      https://peoplefinder.unl.edu/
  */
 class UNL_Peoplefinder
 {
@@ -30,7 +30,7 @@ class UNL_Peoplefinder
 
     public static $url = '';
 
-    public static $annotateUrl = 'http://annotate.unl.edu/';
+    public static $annotateUrl = 'https://annotate.unl.edu/';
 
     public static $staticFileVersion = '4.1';
 

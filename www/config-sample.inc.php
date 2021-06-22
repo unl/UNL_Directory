@@ -8,7 +8,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 UNL_Peoplefinder::$url = '/';
 
 //Set the annotation service's URL
-UNL_Peoplefinder::$annotateUrl = 'http://annotate.unl.edu/';
+UNL_Peoplefinder::$annotateUrl = 'https://annotate.unl.edu/';
 
 UNL_Peoplefinder::$staticFileVersion = '81a5098';
 

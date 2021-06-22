@@ -40,10 +40,6 @@ if (isset($context->unlSISPermaddr1)) {
     echo ";".@$context->unlSISPermCity.";".@$context->unlSISPermState.";".@$context->unlSISPermZip.";\n";
     echo "item2.X-ABLabel:permanent\n";
 }
-//echo "item1.X-ABADR:us\n";
-//echo "item2.X-ABADR:us\n";
-//echo "URL:http://www.unl.edu/\n";
-//echo "LOGO;VALUE=uri:http://www.unl.edu/unlpub/2004sharedgraphics/smcolor_wordmark.gif";
 if (isset($context->title)) {
     echo "item3.X-ABRELATEDNAMES;type=pref:".$context->title."\n";
     echo "item3.X-ABLabel:title\n";

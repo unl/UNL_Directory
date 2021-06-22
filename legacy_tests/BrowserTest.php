@@ -8,7 +8,7 @@ class BrowserTest extends PHPUnit_Framework_TestCase
     function setUp()
     {
         $this->verificationErrors = array();
-        $this->selenium = new Testing_Selenium("*firefox", "http://peoplefinder.unl.edu/");
+        $this->selenium = new Testing_Selenium("*firefox", "https://peoplefinder.unl.edu/");
         $result = $this->selenium->start();
     }
 
