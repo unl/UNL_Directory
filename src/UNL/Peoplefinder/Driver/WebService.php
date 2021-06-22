@@ -6,7 +6,7 @@ class UNL_Peoplefinder_Driver_WebService implements UNL_Peoplefinder_DriverInter
      * 
      * @var string
      */
-    public $service_url = 'http://peoplefinder.unl.edu/service.php';
+    public $service_url = 'https://peoplefinder.unl.edu/service.php';
 
     function __construct($options = array())
     {
@@ -119,7 +119,7 @@ class UNL_Peoplefinder_Driver_WebService implements UNL_Peoplefinder_DriverInter
     
     public function getHROrgUnitNumberMatches($query, $affiliation = null)
     {
-        $results = file_get_contents('http://directory.unl.edu/departments/?view=deptlistings&org_unit='.urlencode($query).'&format=php');
+        $results = file_get_contents('https://directory.unl.edu/departments/?view=deptlistings&org_unit='.urlencode($query).'&format=php');
         if ($results) {
             $results = unserialize($results);
         }

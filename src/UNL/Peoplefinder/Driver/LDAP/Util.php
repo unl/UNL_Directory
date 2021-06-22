@@ -6,7 +6,7 @@
  *
  * @category  Default
  * @package   UNL_Peoplefinder
- * @link      http://peoplefinder.unl.edu/
+ * @link      https://peoplefinder.unl.edu/
  */
 abstract class UNL_Peoplefinder_Driver_LDAP_Util
 {

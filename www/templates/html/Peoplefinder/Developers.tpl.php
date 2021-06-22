@@ -107,8 +107,8 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
             <h2>Format Information</h2>
             <p>The following is a list of formats used in Directory.</p>
             <ul>
-                <li><a href="http://www.json.org/">JSON (JavaScript Object Notation)</a></li>
-                <li><a href="http://en.wikipedia.org/wiki/XML">XML (Extensible Markup Language)</a></li>
+                <li><a href="https://www.json.org/">JSON (JavaScript Object Notation)</a></li>
+                <li><a href="https://en.wikipedia.org/wiki/XML">XML (Extensible Markup Language)</a></li>
                 <li>Partial - The un-themed main content area of the page.</li>
             </ul>
         </div>

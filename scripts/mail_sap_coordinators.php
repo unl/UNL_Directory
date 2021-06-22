@@ -11,7 +11,7 @@ $users = new UNL_Officefinder_Users();
 
 $email_prefix = <<<PREFIX
 <p>
-This is a reminder to please review all personnel and department listings currently online at <a style="outline: none;color: #ba0000;text-decoration: none;" href="http://directory.unl.edu/">http://directory.unl.edu/</a>. As your department's SAP coordinator, or assigned editor, you have permission to update your department listings (Note: personnel listings found in "Peoplefinder" are edited using SAP). All changes to departmental listings are made through a web browser and published immediately in the online directory.
+This is a reminder to please review all personnel and department listings currently online at <a style="outline: none;color: #ba0000;text-decoration: none;" href="https://directory.unl.edu/">https://directory.unl.edu/</a>. As your department's SAP coordinator, or assigned editor, you have permission to update your department listings (Note: personnel listings found in "Peoplefinder" are edited using SAP). All changes to departmental listings are made through a web browser and published immediately in the online directory.
 </p>
 <p>
 You are listed as an editor for the following departmental listings:
@@ -20,7 +20,7 @@ PREFIX;
 
 $email_suffix = <<<SUFFIX
 <p>
-Use the following link <a style="outline: none;color: #ba0000;text-decoration: none;" href="http://mediahub.unl.edu/channels/117">http://mediahub.unl.edu/channels/117</a> to access instructional videos on the procedures for logging in, editing listings, creating aliases and adding additional users.
+Use the following link <a style="outline: none;color: #ba0000;text-decoration: none;" href="https://mediahub.unl.edu/channels/117">https://mediahub.unl.edu/channels/117</a> to access instructional videos on the procedures for logging in, editing listings, creating aliases and adding additional users.
 Please feel free to call or email Linda Geisler (472-3713 or <a href="mailto:lgeisler1@unl.edu" style="outline: none;color: #ba0000;text-decoration: none;">lgeisler1@unl.edu</a>) if you have any questions or problems accessing the system to make edits.
 </p>
 <p>
@@ -53,7 +53,7 @@ foreach ($users as $user) {
     $departments = new UNL_Officefinder_User_Departments(array('uid'=>$user->uid));
     $email_body .= '<ul>';
     foreach ($departments as $department) {
-        $email_body .= '<li><a style="outline: none;color: #ba0000;text-decoration: none;" href="http://directory.unl.edu/departments/'.$department->id.'">'.$department->name.'</a></li>'.PHP_EOL;
+        $email_body .= '<li><a style="outline: none;color: #ba0000;text-decoration: none;" href="https://directory.unl.edu/departments/'.$department->id.'">'.$department->name.'</a></li>'.PHP_EOL;
     }
     $email_body .= '</ul>';
     $email_body .= $email_suffix;

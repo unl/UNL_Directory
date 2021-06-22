@@ -14,7 +14,7 @@ class UNL_Peoplefinder_Developers_Record extends UNL_Peoplefinder_Developers_Abs
      */
     public function getDescription()
     {
-        return 'Get detailed information about an individual person. For the most part, these fields are pulled directly from LDAP. For more information on specific fields, <a href="http://idm.unl.edu/ldap-misc-fields">see the IDM site</a>. All fields are from LDAP unless otherwise noted.';
+        return 'Get detailed information about an individual person. For the most part, these fields are pulled directly from LDAP. For more information on specific fields, <a href="https://idm.unl.edu/ldap-misc-fields">see the IDM site</a>. All fields are from LDAP unless otherwise noted.';
     }
 
     /**

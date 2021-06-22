@@ -8,8 +8,8 @@
  * @package   UNL_Peoplefinder
  * @author    Brett Bieber <brett.bieber@gmail.com>
  * @copyright 2010 Regents of the University of Nebraska
- * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
- * @link      http://peoplefinder.unl.edu/
+ * @license   https://www1.unl.edu/wdn/wiki/Software_License BSD License
+ * @link      https://peoplefinder.unl.edu/
  */
 class UNL_Officefinder_Record
 {
