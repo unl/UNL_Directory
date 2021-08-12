@@ -55,7 +55,7 @@ $hasOfficialChildDepartments = count($officialChildren);
                 Catalog
             </h2>
 
-            <div class="<?php if ($userCanEdit): ?> editing<?php endif; ?>">ß
+            <div class="<?php if ($userCanEdit): ?> editing<?php endif; ?>">
                 <?php if (count($listings)): ?>
                     <?php echo $savvy->render($listings, 'Officefinder/Department/Listings.tpl.php') ?>
                 <?php endif; ?>
