@@ -48,15 +48,14 @@ $hasOfficialChildDepartments = count($officialChildren);
     <div class="dcf-col-100% dcf-col-67%-end@md">
         <div class="dcf-mb-7 dcf-bg-white dcf-b-1 dcf-b-solid unl-b-light-gray" id="listings" data-department-id="<?php echo $context->id ?>">
             <h2 class="dcf-txt-h4 dcf-mb-0 dcf-ml-0">
-                <svg class="dcf-h-4 dcf-w-4 dcf-fill-current dcf-txt-top" aria-hidden="true" focusable="false" height="24" width="24" viewBox="0 0 24 24">
-                    <path d="M14.74 19.77c.402.266.861.396 1.318.396.619 0 1.232-.237 1.692-.697l.733-.733a1.758 1.758 0 00.001-2.493l-1.338-1.338c-.666-.666-1.827-.666-2.491 0l-.123.122a29.517 29.517 0 01-3.392-3.391l.123-.123c.334-.333.518-.775.518-1.247 0-.471-.184-.912-.516-1.243l-1.34-1.338a1.762 1.762 0 00-2.492 0l-.734.734a2.4 2.4 0 00-.3 3.01 29.723 29.723 0 008.341 8.341zM7.406 9.126l.734-.734a.76.76 0 011.079 0l1.338 1.34a.76.76 0 01-.001 1.075l-.446.446a.5.5 0 00-.033.671 30.346 30.346 0 004.169 4.167.502.502 0 00.67-.033l.446-.445a.781.781 0 011.077 0l1.338 1.338a.758.758 0 010 1.076l-.733.733a1.396 1.396 0 01-1.751.175 28.736 28.736 0 01-8.059-8.058 1.394 1.394 0 01.172-1.751z"></path>
-                    <path d="M21.5 4h-17C3.673 4 3 3.327 3 2.5S3.673 1 4.5 1h17a.5.5 0 000-1h-17a2.503 2.503 0 00-2.476 2.847A.48.48 0 002 3v4h-.5a.5.5 0 000 1H2v2h-.5a.5.5 0 000 1H2v2h-.5a.5.5 0 000 1H2v2h-.5a.5.5 0 000 1H2v2h-.5a.5.5 0 000 1H2v1.5C2 22.879 3.122 24 4.5 24h17a.5.5 0 00.5-.5v-19a.5.5 0 00-.5-.5zM21 23H4.5c-.827 0-1.5-.673-1.5-1.5V20h.5a.5.5 0 000-1H3v-2h.5a.5.5 0 000-1H3v-2h.5a.5.5 0 000-1H3v-2h.5a.5.5 0 000-1H3V8h.5a.5.5 0 000-1H3V4.499c.418.314.938.501 1.5.501H21v18z"></path>
-                    <path d="M4.5 2a.5.5 0 000 1h16a.5.5 0 000-1h-16z"></path>
+                <svg class="dcf-h-4 dcf-w-4 dcf-fill-current dcf-txt-top" aria-hidden="true" focusable="false" height="24" width="24" viewBox="0 0 24 24" style="fill: rgb(0, 0, 0);">
+                    <path d="M20.5,4H20V0.5C20,0.224,19.776,0,19.5,0h-14C4.121,0,3,1.122,3,2.5v19C3,22.878,4.121,24,5.5,24h15 c0.276,0,0.5-0.224,0.5-0.5v-19C21,4.224,20.776,4,20.5,4z M5.5,1H19v3h-1V2.5C18,2.224,17.776,2,17.5,2h-12 C5.224,2,5,2.224,5,2.5S5.224,3,5.5,3H17v1H5.5C4.673,4,4,3.327,4,2.5S4.673,1,5.5,1z M20,23H5.5C4.673,23,4,22.327,4,21.5V4.499 C4.418,4.813,4.938,5,5.5,5H20V23z"></path>
+                    <g><path fill="none" d="M0 0H24V24H0z"></path></g>
                 </svg>
-                Yellow Pages
+                Catalog
             </h2>
 
-            <div class="<?php if ($userCanEdit): ?> editing<?php endif; ?>">
+            <div class="<?php if ($userCanEdit): ?> editing<?php endif; ?>">ß
                 <?php if (count($listings)): ?>
                     <?php echo $savvy->render($listings, 'Officefinder/Department/Listings.tpl.php') ?>
                 <?php endif; ?>

@@ -55,7 +55,7 @@ if (isset($page)) {
                     As a <em>retiree</em>, if you have no current HR representative, you should contact the <a href="https://hr.unl.edu/benefits/">Benefits Office</a>.
                 </p>
                 <p>
-                    For <em>department (yellow pages) listings</em>, authorized users can make modifications by emailing <a href="mailto:operator&commat;unl&period;edu">operator&commat;unl&period;edu</a> with the directory URL of the listing and the information you'd like to update.
+                    For <em>department listings</em>, authorized users can make modifications by emailing <a href="mailto:operator&commat;unl&period;edu">operator&commat;unl&period;edu</a> with the directory URL of the listing and the information you'd like to update.
                 </p>
             </div>
             <div>
