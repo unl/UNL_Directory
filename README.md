@@ -6,11 +6,11 @@ directory information and perform searches.
 
 ## Maintenance Tasks
 
-The Officefinder departments & units portion of the site is stored in a mysql database.
+The Officefinder Departments & Units portion of the site is stored in a mysql database.
 
 ## Editors:
 
-Editors can be added for any departments & units listing and permissions are
+Editors can be added for any Departments & Units listing and permissions are
 hierarchical. We expect 
 
 When the print "Centrex" directory stopped being published, we used the HR

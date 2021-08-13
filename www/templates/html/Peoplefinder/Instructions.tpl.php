@@ -62,7 +62,7 @@ $baseUrl = UNL_Peoplefinder::getURL();
             </picture>
             <div class="dcf-card-block">
                 <h2 class="dcf-txt-h3"><span class="dcf-d-block dcf-subhead unl-dark-gray dcf-mb-1">Search </span>Departments &amp; Units</h2>
-                <p class="dcf-txt-sm">Find departments &amp; units by entering a full or partial name. Information available:</p>
+                <p class="dcf-txt-sm">Find departments and units by entering a full or partial name. Information available:</p>
                 <ul class="dcf-txt-sm dcf-mb-0">
                     <li>Contact information and location on campus</li>
                     <li>Complete list of employees</li>
