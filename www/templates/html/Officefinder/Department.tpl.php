@@ -46,6 +46,7 @@ $hasOfficialChildDepartments = count($officialChildren);
         <?php endif ;?>
     </div>
     <div class="dcf-col-100% dcf-col-67%-end@md">
+        <?php if ($userCanEdit || count($listings)): ?>
         <div class="dcf-mb-7 dcf-bg-white dcf-b-1 dcf-b-solid unl-b-light-gray" id="listings" data-department-id="<?php echo $context->id ?>">
             <h2 class="dcf-txt-h4 dcf-mb-0 dcf-ml-0">
                 <svg class="dcf-h-4 dcf-w-4 dcf-fill-current dcf-txt-top" aria-hidden="true" focusable="false" height="24" width="24" viewBox="0 0 24 24" style="fill: rgb(0, 0, 0);">
@@ -78,6 +79,7 @@ $hasOfficialChildDepartments = count($officialChildren);
                 <?php endif; ?>
             </div>
         </div>
+        <?php endif; ?>
 
         <?php if ($department): ?>
         <div class="dcf-mb-7" id="all_employees">
