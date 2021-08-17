@@ -1,4 +1,5 @@
 <?php
+unset($context->ou);
 if (isset($_GET['unsafe']) && $_GET['unsafe']) {
 	echo serialize($context);
 } elseif (isset($_GET['multivalue']) && $_GET['multivalue']) {
