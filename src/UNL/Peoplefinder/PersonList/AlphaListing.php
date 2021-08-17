@@ -37,8 +37,7 @@ class UNL_Peoplefinder_PersonList_AlphaListing extends AppendIterator
             'title',
             'uid',
             'unlHROrgUnitNumber',
-            'unlHRPrimaryDepartment',
-            'unlHRAddress',
+            'unlHRPrimaryDepartment'
         );
 
         $range = range('a', 'z');

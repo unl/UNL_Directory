@@ -33,7 +33,6 @@ class UNL_Peoplefinder_Developers_Record extends UNL_Peoplefinder_Developers_Abs
         return [
             'dn' => '(String) Distinguished name, a combination of uid, ou and dc',
             'cn' => '(Array) An array of common names',
-            'ou' => '(Array) An array of organizational units that this person is part of',
             'eduPersonAffiliation' => '(Array) An array of affiliation types',
             'eduPersonNickname' => 'The person\'s preferred nickname',
             'eduPersonPrimaryAffiliation' => '(Array) An array of primary affiliations',
@@ -48,7 +47,6 @@ class UNL_Peoplefinder_Developers_Record extends UNL_Peoplefinder_Developers_Abs
             'uid' => '(String) The person\'s unique ID',
             'unlHROrgUnitNumber' => '(Array) An array of HR organizational unit numbers',
             'unlHRPrimaryDepartment' => '(Array) An array of primary department names',
-            'unlHRAddress' => '(Array) An array of addresses for HR use',
             'unlSISClassLevel' => '(Array) An array of class levels',
             'unlSISCollege' => '(Array) An array of colleges that the student is a member of',
             'unlSISMajor' => '(Array) An array of majors that the student is working toward',
@@ -67,7 +65,6 @@ class UNL_Peoplefinder_Developers_Record extends UNL_Peoplefinder_Developers_Abs
         return [
             'dn' => 'Distinguished name, a combination of uid, ou and dc',
             'cn' => 'Common name (there can be multiples of these)',
-            'ou' => 'organizational unit name that this person is part of (there can be multiples of these)',
             'eduPersonAffiliation' => 'affiliation type (faculty/staff) (there can be multiples of these)',
             'eduPersonPrimaryAffiliation' => 'primary affiliation (there can be multiples of these)',
             'eduPersonPrincipalName' => 'Email Address (there can be multiples of these)',
@@ -81,7 +78,6 @@ class UNL_Peoplefinder_Developers_Record extends UNL_Peoplefinder_Developers_Abs
             'uid' => 'The person\'s unique ID',
             'unlHROrgUnitNumber' => 'HR organizational unit number (there can be multiples of these)',
             'unlHRPrimaryDepartment' => 'primary department name (there can be multiples of these)',
-            'unlHRAddress' => 'address, for HR use (there can be multiples of these)',
             'unlSISClassLevel' => 'class levels including NST (non-student), 2ND (2nd degree student), FR (freshmen), SO (Sophomore), JR (Junior), SR (senior), GR (Graduate student), P1-4 (Professional Student Year 1-4), 03-04 (Program student year 3-4)(there can be multiples of these)',
             'unlSISCollege' => 'college that the student is a member of (there can be multiples of these)',
             'unlSISMajor' => 'major that the student is working toward (there can be multiples of these)',
