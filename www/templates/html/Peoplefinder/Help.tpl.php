@@ -20,7 +20,6 @@ if (isset($page)) {
                 </p>
                 <p>
                     <strong><em>Student</em></strong> directory data is maintained in the university student information system.
-                    Because data restrictions don't allow for the distribution of student contact information to the general public, we recommend that students who would like to communicate with others in the university community use <a href="https://planetred.unl.edu/">Planet Red</a>, our social networking utility.
                 </p>
                 <p>
                     <strong><em>Faculty/Staff</em></strong> directory data is maintained in the university administrative and finance system, SAP.
