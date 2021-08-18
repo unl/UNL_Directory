@@ -7,7 +7,7 @@ if (isset($page)) {
     $page->doctitle = substr_replace($page->doctitle, 'Help | ', strlen('<title>'), 0);
 }
 ?>
-<section class="dcf-bleed unl-bg-lightest-gray dcf-pt-6  dcf-pb-6" id="data">
+<section class="dcf-bleed unl-bg-lightest-gray dcf-pt-6  dcf-pb-6 dcf-txt-sm" id="data">
     <div class="dcf-wrapper">
         <h2 class="dcf-txt-center clear-top">Finding Your Way Around the Directory</h2>
         <div class="dcf-grid-thirds@md dcf-col-gap-vw dcf-row-gap-3 dcf-pt-3">
@@ -19,11 +19,11 @@ if (isset($page)) {
                     Any solicitation of business, information, contributions or other response from individuals listed in this publication by mail, telephone or other means is forbidden.
                 </p>
                 <p>
-                    <em>Student</em> directory data is maintained in the university student information system.
+                    <strong><em>Student</em></strong> directory data is maintained in the university student information system.
                     Because data restrictions don't allow for the distribution of student contact information to the general public, we recommend that students who would like to communicate with others in the university community use <a href="https://planetred.unl.edu/">Planet Red</a>, our social networking utility.
                 </p>
                 <p>
-                    <em>Faculty/Staff</em> directory data is maintained in the university administrative and finance system, SAP.
+                    <strong><em>Faculty/Staff</em></strong> directory data is maintained in the university administrative and finance system, SAP.
                     The SAP data is the official, business-oriented information about each person employed by the university. This data includes:
                 </p>
                 <ul>
@@ -34,28 +34,27 @@ if (isset($page)) {
                     <li>campus address</li>
                     <li>campus phone number</li>
                     <li>campus email address</li>
-                    <li>nickname or &ldquo;known as&rdquo; name</li>
                 </ul>
                 <p>
-                    <em>Department/Listing</em> directory data is sourced from the university administrative and finance system, SAP, and augmented with information provided by departmental HR coordinators.
+                    <strong><em>Department/Listing</em></strong> directory data is sourced from the university administrative and finance system, SAP, and augmented with information provided by departmental HR coordinators.
                 </p>
             </div>
             <div>
                 <h4>Updating your information</h4>
+
+                <p><strong>Personal information</strong> is managed outside of the directory. See our <a href="https://www.unl.edu/how-manage-personal-information/">How to Manage Personal Information</a> page for options to update your information.</p>
+
+                <p>Directory specific personal information details:</p>
+                <ul>
+                    <li>As a <strong><em>student</em></strong>, you may request that your information not be listed in the directory by contacting the <a href="https://registrar.unl.edu/">Office of the University Registrar</a> to set a privacy flag on your account.
+                        If any information is displayed incorrectly, please consult your academic advisor.</li>
+                    <li>As a <strong><em>faculty/staff</em></strong> member, you may update your preferred <code>&commat;unl&period;edu</code> address by visiting the <a href="https://its.unl.edu/emailhome/activation">email activation site</a>.
+                        If you are also registered as a student, you will need to contact the <a href="https://registrar.unl.edu/">Office of the University Registrar</a> to set a privacy flag on your account to remove your student information from the directory.
+                        For all other data changes, contact your HR representative or departmental SAP support staff.</li>
+                    <li>As a <strong><em>retiree</em></strong>, if you have no current HR representative, you should contact the <a href="https://hr.unl.edu/benefits/">Benefits Office</a>.</li>
+                </ul>
                 <p>
-                    As a <em>student</em>, you may request that your information not be listed in the directory by contacting the <a href="https://registrar.unl.edu/">Office of the University Registrar</a> to set a privacy flag on your account.
-                    If any information is displayed incorrectly, please consult your academic advisor.
-                </p>
-                <p>
-                    As a <em>faculty/staff</em> member, you may update your preferred <code>&commat;unl&period;edu</code> address by visiting the <a href="https://its.unl.edu/emailhome/activation">email activation site</a>.
-                    If you are also registered as a student, you will need to contact the <a href="https://registrar.unl.edu/">Office of the University Registrar</a> to set a privacy flag on your account to remove your student information from the directory.
-                    For all other data changes, contact your HR representative or departmental SAP support staff.
-                </p>
-                <p>
-                    As a <em>retiree</em>, if you have no current HR representative, you should contact the <a href="https://hr.unl.edu/benefits/">Benefits Office</a>.
-                </p>
-                <p>
-                    For <em>department (yellow pages) listings</em>, authorized users can make modifications by emailing <a href="mailto:operator&commat;unl&period;edu">operator&commat;unl&period;edu</a> with the directory URL of the listing and the information you'd like to update.
+                    <strong>Department listings</strong> are managed within the directory. Directory information update requests may be emailed to <a href="mailto:operator&commat;unl&period;edu">operator&commat;unl&period;edu</a> with the directory URL of the listing and the information you'd like to update.
                 </p>
             </div>
             <div>
