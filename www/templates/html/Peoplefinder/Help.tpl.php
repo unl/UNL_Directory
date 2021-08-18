@@ -58,8 +58,10 @@ if (isset($page)) {
             </div>
             <div>
                 <h4 id="photo">Adding your photo</h4>
+                <div>
+                    <img class="dcf-obj-fit-cover dcf-mb-3" src="<?php echo $baseUrl ?>images/130912herbie-505.jpg" alt="Profile view of mascot Herbie Husker" />
+                </div>
                 <p>
-                    <img class="frame" src="<?php echo $baseUrl ?>images/130912herbie-505.jpg" alt="Profile view of mascot Herbie Husker" />
                     Want to show your photo on your Directory result instead of the default outline? We've got a couple of ways to do that.
                     Photos are pulled from two sources, <a href="https://planetred.unl.edu/">Planet Red</a> and <a href="https://en.gravatar.com/">Gravatar</a>.
                     If you don't currently use either of these services, getting started is pretty simple.
