@@ -29,7 +29,7 @@ if (isset($page)) {
                 <h3 class="dcf-txt-h5">Updating Your Information</h3>
                 <p><strong>Personal information</strong> is managed outside of the directory. See our <a href="https://www.unl.edu/how-manage-personal-information/">How to Manage Personal Information</a> page for options to update your information.</p>
                 <p>
-                    <b>Department / Unit listings</b> in directory have an HR coordinator who is responsible for their respective listing page. The "Suggest a correction" button on each department / unit listing page will submit a request to the editors for that respective listing.
+                    <strong>Department / Unit listings</strong> in directory have an HR coordinator who is responsible for their respective listing page. The "Suggest a correction" button on each department / unit listing page will submit a request to the editors for that respective listing.
                 </p>
             </div>
             <div class="dcf-col-100% dcf-col-33%-end@md">
