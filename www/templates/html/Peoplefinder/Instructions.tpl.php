@@ -61,18 +61,18 @@ $baseUrl = UNL_Peoplefinder::getURL();
               	<img class="hero-img" src="data:image/gif;base64,R0lGODlhAQABAAAAADs=" alt="Exterior view of Canfield Administration Building on a sunny day.">
             </picture>
             <div class="dcf-card-block">
-                <h2 class="dcf-txt-h3"><span class="dcf-d-block dcf-subhead unl-dark-gray dcf-mb-1">Search </span>Departments</h2>
-                <p class="dcf-txt-sm">Find departments by entering a full or partial department name. Information available:</p>
+                <h2 class="dcf-txt-h3"><span class="dcf-d-block dcf-subhead unl-dark-gray dcf-mb-1">Search </span>Departments &amp; Units</h2>
+                <p class="dcf-txt-sm">Find departments and units by entering a full or partial name. Information available:</p>
                 <ul class="dcf-txt-sm dcf-mb-0">
-                    <li>Department contact information and location on campus</li>
-                    <li>Complete list of department employees</li>
-                    <li class="dcf-mb-0">Organizational hierarchy of department</li>
+                    <li>Contact information and location on campus</li>
+                    <li>Complete list of employees</li>
+                    <li class="dcf-mb-0">Organizational hierarchy</li>
                 </ul>
             </div>
         </div>
     </div>
     <div class="dcf-pt-4 dcf-bt-1 dcf-bt-solid unl-bt-light-gray">
-        <small class="dcf-d-block dcf-w-max-lg dcf-mb-0 dcf-txt-xs">A <a href="<?php echo UNL_Officefinder::getURL(); ?>yellow-pages">printer-friendly version</a> of the Yellow Page Directory is available to university users only. Please be aware this is a very large document and may take some time to fully load.</small>
+        <small class="dcf-d-block dcf-w-max-lg dcf-mb-0 dcf-txt-xs">A <a href="<?php echo UNL_Officefinder::getURL(); ?>directory">printer-friendly version</a> of the Departments &amp; Units Directory is available to university users only. Please be aware this is a very large document and may take some time to fully load.</small>
     </div>
 </div>
 

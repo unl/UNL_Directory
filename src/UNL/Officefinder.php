@@ -357,7 +357,7 @@ class UNL_Officefinder
     }
 
     /**
-     * Get the URL to the officefinder/yellow pages or a specific object
+     * Get the URL to the officefinder or a specific object
      *
      * @param mixed  $mixed             Object to retrieve URL for
      * @param string $additional_params Additional querystring parameters to pass
