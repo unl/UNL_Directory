@@ -68,7 +68,6 @@ class UNL_Peoplefinder_Driver_LDAP_Entry extends ArrayObject
                 if ($entry['edupersonprimaryaffiliation'][$key] == 'student') {
                     unset(
                         $entry['telephonenumber'],
-                        $entry['unlhraddress'],
                         $entry['postaladdress'],
                         $entry['mail']
                     );

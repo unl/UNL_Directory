@@ -37,23 +37,10 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
     public $uid;
     public $unlHROrgUnitNumber;
     public $unlHRPrimaryDepartment;
-    public $unlHRAddress;
     public $unlSISClassLevel;
     public $unlSISCollege;
-//    public $unlSISLocalAddr1;
-//    public $unlSISLocalAddr2;
-//    public $unlSISLocalCity;
-//    public $unlSISLocalPhone;
-//    public $unlSISLocalState;
-//    public $unlSISLocalZip;
-//    public $unlSISPermAddr1;
-//    public $unlSISPermAddr2;
-//    public $unlSISPermCity;
-//    public $unlSISPermState;
-//    public $unlSISPermZip;
     public $unlSISMajor;
     public $unlSISMinor;
-    public $unlEmailAlias;
     public $unluncwid; // NUID
 
     protected $knowledge = false;
@@ -191,8 +178,6 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
     {
         if (isset($this->postalAddress)) {
             $postalAddress = $this->postalAddress;
-        } else {
-            $postalAddress = $this->unlHRAddress;
         }
 
         if (empty($postalAddress)) {

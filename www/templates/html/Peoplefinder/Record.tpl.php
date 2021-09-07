@@ -160,17 +160,6 @@ $showKnowledge = $context->shouldShowKnowledge() === TRUE && $hasKnowledge === T
         </div>
     <?php endif; ?>
 
-    <?php if (isset($context->unlSISLocalPhone)): ?>
-        <div class="tel home dcf-txt-sm">
-            <span class="type">Phone</span>
-            <span class="value dcf-mr-1"><?php echo $savvy->render((object) [
-                'number' => $context->unlSISLocalPhone,
-                'itemprop' => 'telephone',
-            ], 'Peoplefinder/Record/NumberItemprop.tpl.php') ?></span>
-            <?php echo $savvy->render($context->unlSISLocalPhone, 'Peoplefinder/Record/CampusNumber.tpl.php') ?>
-        </div>
-    <?php endif; ?>
-
     <?php if ($displayEmail): ?>
         <div class="attribute dcf-txt-sm">
             <span class="icon-email" aria-hidden="true"></span>

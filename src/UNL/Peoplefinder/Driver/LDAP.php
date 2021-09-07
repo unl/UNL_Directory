@@ -52,7 +52,6 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
         'title',
         'uid',
         'sAMAccountName',
-        'unlHRAddress',
         'unlHRPrimaryDepartment',
         'department',
         'unlHROrgUnitNumber',
@@ -65,7 +64,6 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
      * @var array
      */
     public $detailAttributes = array(
-        'ou',
         'cn', //different values (ldap=display name, ad=uid)
         'eduPersonAffiliation',
         'eduPersonNickname',
@@ -84,20 +82,6 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
         'departmentNumber',
         'unlHRPrimaryDepartment',
         'department',
-        'unlHRAddress',
-        'unlSISClassLevel', //missing
-        'unlSISCollege', //missing
-        'unlSISLocalAddr1', //missing
-        'unlSISLocalAddr2', //missing
-        'unlSISLocalCity', //missing
-        'unlSISLocalState', //missing
-        'unlSISLocalZip', //missing
-        'unlSISPermAddr1', //missing
-        'unlSISPermAddr2', //missing
-        'unlSISPermCity', //missing
-        'unlSISPermState', //missing
-        'unlSISPermZip', //missing
-        'unlSISMajor', //missing
         'unluncwid', // the NUID
     );
 

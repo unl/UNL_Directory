@@ -3,7 +3,7 @@ require_once __DIR__.'/../www/config.inc.php';
 
 $cache = UNL_Peoplefinder_Cache::factory();
 
-// This is the array that will store all of the data
+// This is the array that will store all the data
 $students = array();
 
 // First, load the bio info and create the initial structure

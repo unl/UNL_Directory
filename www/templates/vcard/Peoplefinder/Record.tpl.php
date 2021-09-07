@@ -20,26 +20,6 @@ if (isset($context->mail) && ($context->eduPersonPrimaryAffiliation != 'student'
 if ($context->eduPersonPrimaryAffiliation != "student") {
     echo "TEL;type=WORK;type=pref:".$context->telephoneNumber."\n";
 }
-//echo "TEL;type=CELL:(402) 555-1111\n";
-if (isset($context->unlSISLocalPhone)) {
-    echo "TEL;type=HOME:{$context->unlSISLocalPhone}\n";
-}
-if (isset($context->unlSISLocalAddr1)) {
-    echo "item1.ADR;type=WORK;type=pref:;;".$context->unlSISLocalAddr1;
-    if (isset($context->unlSISLocalAddr2)) {
-        echo "\\n".$context->unlSISLocalAddr2;
-    }
-    echo ";".$context->unlSISLocalCity.";".$context->unlSISLocalState.";".$context->unlSISLocalZip.";\n";
-    echo "item1.X-ABLabel:local\n";
-}
-if (isset($context->unlSISPermaddr1)) {
-    echo "item2.ADR;type=HOME;type=pref:;;".$context->unlSISPermAddr1;
-    if (isset($context->unlSISPermAddr2)) {
-        echo "\\n".$context->unlSISPermAddr2;
-    }
-    echo ";".@$context->unlSISPermCity.";".@$context->unlSISPermState.";".@$context->unlSISPermZip.";\n";
-    echo "item2.X-ABLabel:permanent\n";
-}
 if (isset($context->title)) {
     echo "item3.X-ABRELATEDNAMES;type=pref:".$context->title."\n";
     echo "item3.X-ABLabel:title\n";
