@@ -34,7 +34,7 @@ $fields = [
             <label for="name<?php echo $idSuffix ?>">
                 <span class="required">*</span>
                 Name
-                <span class="helper">The official name of this entity</span>
+                <span class="dcf-form-help">The official name of this entity</span>
             </label>
             <input type="text" id="name<?php echo $idSuffix ?>" name="name" value="<?php echo $context->name; ?>" />
         </li>
@@ -52,7 +52,7 @@ $fields = [
                 <label for="<?php echo $var . $idSuffix ?>">
                     <?php echo ucwords(str_replace('_', ' ', $var)) ?>
                     <?php if (!empty($description)): ?>
-                        <span class="helper"><?php echo $description ?></span>
+                        <span class="dcf-form-help"><?php echo $description ?></span>
                     <?php endif; ?>
                 </label>
                 <input type="text" id="<?php echo $var . $idSuffix ?>" name="<?php echo $var ?>" value="<?php echo $context->$var; ?>" />
