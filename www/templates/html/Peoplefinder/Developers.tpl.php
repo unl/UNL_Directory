@@ -26,20 +26,19 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
 
             <p><?php echo $resource->getDescription() ?></p>
 
-            <h3 id="instance-get-example-1">Example</h3>
-            <ul class="wdn_tabs">
-                <?php
-                foreach ($resource->getAvailableFormats() as $format) {
-                    echo '<li><a href="#'.$format.'">'.$format.'</a></li>';
-                }
-                ?>
-            </ul>
-            <div class="wdn_tabs_content">
+            <div class="dcf-tabs dcf-tabs-responsive dcf-mt-6 dcf-mb-9">
+                <h3 id="instance-get-example-1">Example</h3>
+                <ol>
+                    <?php
+                    foreach ($resource->getAvailableFormats() as $format) {
+                        echo '<li><a href="#'.$format.'">'.$format.'</a></li>';
+                    }
+                    ?>
+                </ol>
                 <?php foreach ($resource->getAvailableFormats() as $format): ?>
-
                     <?php
                     $url = str_replace('{format}', $format, $resource->getExampleURI());
-                    
+
                     $method_name = 'get' . ucfirst($format) . 'Properties';
                     ?>
                     <div id="<?php echo $format; ?>">
@@ -120,5 +119,7 @@ $page->addHeadLink('https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized
         $('.resource pre.code code').each(function () {
             hljs.highlightBlock(this);
         });
-    })");
+    });
+    WDN.initializePlugin('tabs');
+    ");
 ?>
