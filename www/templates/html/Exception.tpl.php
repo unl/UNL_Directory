@@ -10,12 +10,9 @@ if (isset($page)) {
 }
 ?>
 
-<div class="wdn_notice alert">
-    <div class="close">
-        <a href="#" title="Close this notice">Close this notice</a>
-    </div>
-    <div class="message">
-        <h4>Whoops! Sorry, there was an error:</h4>
+<div class="dcf-notice dcf-notice-warning" hidden>
+    <h2>Whoops! Sorry, there was an error:</h2>
+    <div>
         <p><?php echo $context->getMessage(); ?></p>
     </div>
 </div>
