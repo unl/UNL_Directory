@@ -5,7 +5,7 @@
 // Second, we allow "Like" results to be displayed after the exact matches
 $showing = 0;
 $resultCount = count($context->results);
-$deptResultCount = count($context->dept_results);
+$deptResultCount = !empty($context->dept_results) ? count($context->dept_results) : 0;
 
 // The HTML view prefers to have them grouped by affiliation
 $by_affiliation      = UNL_Peoplefinder_SearchResults::groupByAffiliation($context->getRaw('results'));
