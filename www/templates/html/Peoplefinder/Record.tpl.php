@@ -175,7 +175,7 @@ $showKnowledge = $context->shouldShowKnowledge() === TRUE && $hasKnowledge === T
 
     </div>
 
-    <div class="vcard-tools wdn_vcardTools primary dcf-d-flex dcf-flex-row dcf-flex-wrap dcf-ai-start dcf-jc-around dcf-txt-sm dcf-mt-5 dcf-pt-3 dcf-pb-3 dcf-bt-1 dcf-bt-solid unl-bt-light-gray dcf-d-none@print">
+    <div class="vcard-tools primary dcf-d-flex dcf-flex-row dcf-flex-wrap dcf-ai-start dcf-jc-around dcf-txt-sm dcf-mt-5 dcf-pt-3 dcf-pb-3 dcf-bt-1 dcf-bt-solid unl-bt-light-gray dcf-d-none@print">
         <a class="dcf-btn dcf-btn-secondary dcf-b-0 dcf-d-flex dcf-flex-col dcf-ai-center" href="<?php echo $context->getVcardUrl() ?>">
             <svg class="dcf-mb-2 dcf-h-7 dcf-w-7 dcf-fill-current" aria-hidden="true" focusable="false" height="24" width="24" viewBox="0 0 24 24">
                 <path d="M23.5 3H.5a.5.5 0 00-.5.5v17a.5.5 0 00.5.5h4a.5.5 0 00.5-.5V19c0-.689.561-1.25 1.25-1.25S7.5 18.311 7.5 19v1.5a.5.5 0 00.5.5h8a.5.5 0 00.5-.5V19c0-.689.561-1.25 1.25-1.25S19 18.311 19 19v1.5a.5.5 0 00.5.5h4a.5.5 0 00.5-.5v-17a.5.5 0 00-.5-.5zM23 20h-3v-1c0-1.241-1.009-2.25-2.25-2.25S15.5 17.759 15.5 19v1h-7v-1c0-1.241-1.009-2.25-2.25-2.25S4 17.759 4 19v1H1V4h22v16z"></path>

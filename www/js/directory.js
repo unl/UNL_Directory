@@ -570,7 +570,7 @@ define([
 			return false;
 		});
 
-		$container.on('click', '.wdn_annotate', function(e) {
+		$container.on('click', '.directory_annotate', function(e) {
 			var $this = $(this);
 
 			e.preventDefault();
@@ -581,7 +581,7 @@ define([
 					text: $('<iframe>', {
 						src: this.href,
 						scrolling: 'no',
-						"class": 'wdn_annotate_note',
+						"class": 'directory_annotate_note',
 						title: 'Your notes'
 					})
 				},

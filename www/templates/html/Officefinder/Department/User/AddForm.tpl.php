@@ -5,8 +5,6 @@
     <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
     <div class="dcf-input-group">
         <input type="text" name="uid" aria-label="Editor username" />
-    	<span class="wdn-input-group-btn">
-    		<input type="submit" value="Add" />
-    	</span>
+        <input class="dcf-btn dcf-btn-primary" type="submit" value="Add" />
     </div>
 </form>
