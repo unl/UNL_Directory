@@ -1,6 +1,5 @@
 <?php
 $page->doctitle  = '<title>Faculty Educational Credentials | University of Nebraska-Lincoln</title>';
-$page->pagetitle = '<h1>Faculty Educational Credentials</h1>';
 ?>
 <p>The following is a list of faculty educational credentials as of <?php echo $context->getDateLastUpdated(); ?></p>
 <div class="dcf-grid">
