@@ -702,7 +702,6 @@ define([
 				.click(function() {
 					closeModalAndRestoreContent();
 				})
-				.append($('<span>', {"class": 'wdn-icon-cancel', 'aria-hidden': 'true'}))
 				.append($('<span>', {"class": 'dcf-sr-only'}).text('Close'));
 		} else {
 			$modalClose.detach();
