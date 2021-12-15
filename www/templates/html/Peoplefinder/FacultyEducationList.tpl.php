@@ -1,7 +1,6 @@
 <?php
 $page->doctitle  = '<title>Faculty Educational Credentials | University of Nebraska-Lincoln</title>';
 $page->pagetitle = '<h1>Faculty Educational Credentials</h1>';
-$page->head      = $page->getRaw('head').'<link rel="stylesheet" type="text/css" media="screen" href="//directory.unl.edu/wdn/templates_3.0/css/content/pagination.css" />';
 ?>
 <p>The following is a list of faculty educational credentials as of <?php echo $context->getDateLastUpdated(); ?></p>
 <div class="dcf-grid">
@@ -12,11 +11,13 @@ $page->head      = $page->getRaw('head').'<link rel="stylesheet" type="text/css"
         <div class="results affiliation faculty">
         <h3>Faculty</h3>
         <p class="result_head dcf-txt-xs dcf-mt-1 unl-font-sans unl-dark-gray">Results 1 - <?php echo count($context); ?></p>
-        <ul class="wdn_pagination">
-        <?php foreach (range('A', 'Z') as $letter): ?>
-            <li><a href="#<?php echo $letter; ?>"><?php echo $letter; ?></a></li>
-        <?php endforeach; ?>
-        </ul>
+        <nav class="dcf-pagination">
+            <ol class="dcf-list-bare dcf-list-inline">
+            <?php foreach (range('A', 'Z') as $letter): ?>
+                <li><a href="#<?php echo $letter; ?>"><?php echo $letter; ?></a></li>
+            <?php endforeach; ?>
+            </ol>
+        </nav>
         <table class="zentable cool">
             <caption class="dcf-sr-only">Faculty List</caption>
             <thead>
@@ -84,4 +85,5 @@ $page->head      = $page->getRaw('head').'<link rel="stylesheet" type="text/css"
 </div>
 <?php
 $page->addScriptDeclaration("WDN.loadJS('" . $url . "scripts/filters.js', function(){ filters.initialize(); });");
+$page->addScriptDeclaration("WDN.initializePlugin('pagination');");
 ?>
