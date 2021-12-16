@@ -1,12 +1,15 @@
 @charset "UTF-8";
-
-@import "lib/breakpoints.less";
-@import "lib/colors.less";
-@import "lib/fonts.less";
-@import "lib/vars.less";
-
 @import "directory-icon.less";
 
+/* Cream */
+@cream: #fefdfa;
+@page-background: @cream; /* A color to represent the page background, used for WDN colors */
+
+/* UI */
+
+/* Dark (>50%) */
+@ui08: mix(#000, @cream, 64%); /* #5b5b5a */
+@ui14: mix(#000, @cream, 92%); /* #141414 */
 
 .dir-search-bg {
   background-image: url('../images/dir-search-bg-640.jpg');
