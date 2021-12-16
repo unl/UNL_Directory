@@ -1,4 +1,4 @@
-<form action="<?php echo $context->getURL(); ?>" method="post" id="adduser_<?php echo $context->id; ?>" class="add">
+<form action="<?php echo $context->getURL(); ?>" method="post" id="adduser_<?php echo $context->id; ?>" class="dcf-form add">
     <input type="hidden" name="_type" value="add_dept_user" />
     <input type="hidden" name="department_id" value="<?php echo $context->id; ?>" />
     <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
