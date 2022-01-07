@@ -43,7 +43,7 @@ $page->addScriptDeclaration("WDN.loadJS('../scripts/filters.js', function(){
                             <?php endforeach; ?>
                         </ol>
                     </div>
-                    <input type="submit" disabled="disabled" value="Submit" />
+                    <input class="dcf-btn dcf-btn-primary" type="submit" disabled="disabled" value="Submit" />
                 </fieldset>
             </form>
         </div>
