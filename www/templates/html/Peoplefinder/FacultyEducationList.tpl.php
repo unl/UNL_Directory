@@ -17,7 +17,7 @@ $page->doctitle  = '<title>Faculty Educational Credentials | University of Nebra
             <?php endforeach; ?>
             </ol>
         </nav>
-        <table class="zentable cool">
+        <table class="zentable cool dcf-table">
             <caption class="dcf-sr-only">Faculty List</caption>
             <thead>
                 <tr>
