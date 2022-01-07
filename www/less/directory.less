@@ -1,12 +1,15 @@
 @charset "UTF-8";
-
-@import "lib/breakpoints.less";
-@import "lib/colors.less";
-@import "lib/fonts.less";
-@import "lib/vars.less";
-
 @import "directory-icon.less";
 
+/* Cream */
+@cream: #fefdfa;
+@page-background: @cream; /* A color to represent the page background, used for WDN colors */
+
+/* UI */
+
+/* Dark (>50%) */
+@ui08: mix(#000, @cream, 64%); /* #5b5b5a */
+@ui14: mix(#000, @cream, 92%); /* #141414 */
 
 .dir-search-bg {
   background-image: url('../images/dir-search-bg-640.jpg');
@@ -157,7 +160,7 @@
 }
 
 
-// Don't visually display by default, but keep it in the tab order
+/* Don't visually display by default, but keep it in the tab order */
 .pfResult .vcard button.close-full-record,
 .results .vcard button.close-full-record {
   display: block;
@@ -165,7 +168,7 @@
   right: 999em;
 }
 
-// On focus (via keyboard) or result selected, visually display it
+/* On focus (via keyboard) or result selected, visually display it */
 .pfResult .vcard button.close-full-record:focus,
 .pfResult > li.selected .vcard button.close-full-record,
 .results .vcard button.close-full-record:focus,
@@ -295,7 +298,7 @@
 }
 
 
-.wdn_annotate_note {
+.directory_annotate_note {
   border: 0;
   height: 100%;
   width: 100%;
@@ -303,7 +306,7 @@
 
 
 .vcard-tools.primary > * {
-  flex-basis: calc(~'(23.68rem - 100%) * 999');
+  flex-basis: calc((23.68rem - 100%) * 999);
   max-width: 50%;
   min-width: 25%;
 }
@@ -381,7 +384,7 @@
 
 #listings .editing li .listingDetails {
   margin-right: 4em;
-  min-height: 2.313em; // ensure the positioned edit button has clearance
+  min-height: 2.313em; /* ensure the positioned edit button has clearance */
 }
 
 
@@ -470,14 +473,8 @@
   margin: 8% 0;
 }
 
-
-.modal-content .wdn-icon-cancel::before {
-  margin-right: 0;
-}
-
-
 #orgChart ul::before {
-  font-size: 1.33em; // Enlarge arrow icon
+  font-size: 1.33em; /* Enlarge arrow icon */
 }
 
 
@@ -524,7 +521,7 @@
 .modal-content .forms .add-form,
 .modal-content .forms.show-add > *,
 .corrections-template,
-// Manually hide
+/* Manually hide */
 [data-uid="kfarrell2"] .given-name {
   display: none;
 }
@@ -541,6 +538,6 @@
 
 
 .programmatically-focused:focus {
-  //don't show visual focus on these programmatic actions, as focus change is indicated in other ways (such as the showing of new content). JS will remove this class when focus is changed again.
+  /* don't show visual focus on these programmatic actions, as focus change is indicated in other ways (such as the showing of new content). JS will remove this class when focus is changed again. */
   outline: none;
 }

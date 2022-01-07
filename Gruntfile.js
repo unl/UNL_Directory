@@ -16,17 +16,6 @@ module.exports = function (grunt) {
 		jsDir + '/directory.js'
 	];
 
-	var wdnMixinLibBaseUrl = 'https://raw.githubusercontent.com/unl/wdntemplates/4.1/wdn/templates_4.1/less/_mixins/';
-	var wdnMixins = [
-		'breakpoints.less',
-		'colors.less',
-		'fonts.less',
-		'vars.less',
-	];
-	var allMixinsExist = every(wdnMixins, function(value) {
-		return fs.existsSync(lessVendorDir + '/' + value);
-	});
-
 	var lessFiles = {};
 	cssFiles.forEach(function(file) {
 		lessFiles[cssDir + '/' + file + '.css'] = lessDir + '/' + file + '.less';
@@ -42,14 +31,6 @@ module.exports = function (grunt) {
 	require('load-grunt-tasks')(grunt);
 
 	grunt.initConfig({
-		'curl-dir': {
-			'less-libs': {
-				src: wdnMixins.map(function(file) {
-					return wdnMixinLibBaseUrl + file;
-				}),
-				dest: lessVendorDir
-			}
-		},
 		less: {
 			all: {
 				options: {
@@ -92,9 +73,6 @@ module.exports = function (grunt) {
 	// establish grunt default
 	var defaultTasks = ['less', 'uglify'];
 	var localTasks = defaultTasks.slice();
-	if (!allMixinsExist) {
-		defaultTasks.unshift('curl-dir');
-	}
 	grunt.registerTask('default', defaultTasks);
 	grunt.registerTask('all-local', localTasks);
 };

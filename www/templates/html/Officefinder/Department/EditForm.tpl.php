@@ -30,7 +30,7 @@ $fields = [
         <input type="hidden" name="parent_id" value="<?php echo (int)$context->options['parent_id']; ?>" />
     <?php endif; ?>
     <ol>
-        <li>
+        <li class="dcf-form-group">
             <label for="name<?php echo $idSuffix ?>">
                 <span class="required">*</span>
                 Name
@@ -38,7 +38,7 @@ $fields = [
             </label>
             <input type="text" id="name<?php echo $idSuffix ?>" name="name" value="<?php echo $context->name; ?>" />
         </li>
-        <li>
+        <li class="dcf-form-group">
             <label for="building<?php echo $idSuffix ?>">Campus Building</label>
             <select name="building" id="building<?php echo $idSuffix ?>">
                 <option value=""<?php if ($emptyBuildingSelection): ?> selected<?php endif; ?>>N/A</option>
@@ -48,7 +48,7 @@ $fields = [
             </select>
         </li>
         <?php foreach ($fields as $var => $description): ?>
-            <li>
+            <li class="dcf-form-group">
                 <label for="<?php echo $var . $idSuffix ?>">
                     <?php echo ucwords(str_replace('_', ' ', $var)) ?>
                     <?php if (!empty($description)): ?>
@@ -61,5 +61,5 @@ $fields = [
     </ol>
     <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>" />
     <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
-    <input type="submit" value="Submit" />
+    <input class="dcf-btn dcf-btn-primary" type="submit" value="Submit" />
 </form>

@@ -16,7 +16,7 @@ $page->addScriptDeclaration("WDN.loadJS('../scripts/filters.js', function(){
 ?>
 <div class="dcf-grid dcf-col-gap-vw dcf-row-gap-4">
     <div class="dcf-grid-100% dcf-grid-25%-start@sm" id="filters">
-        <div class="wdn_filterset">
+        <div>
             <h4 class="formal">Filter Results</h4>
             <form class="dcf-form filters" action="#" method="post">
                 <fieldset class="affiliation">
@@ -43,7 +43,7 @@ $page->addScriptDeclaration("WDN.loadJS('../scripts/filters.js', function(){
                             <?php endforeach; ?>
                         </ol>
                     </div>
-                    <input type="submit" disabled="disabled" value="Submit" />
+                    <input class="dcf-btn dcf-btn-primary" type="submit" disabled="disabled" value="Submit" />
                 </fieldset>
             </form>
         </div>

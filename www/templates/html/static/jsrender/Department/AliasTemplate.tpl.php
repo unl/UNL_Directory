@@ -1,6 +1,6 @@
 <li>
     <span>{{:name}}</span>
-    <form action="{{:url}}" method="post" class="delete">
+    <form action="{{:url}}" method="post" class="delete dcf-form">
         <input type="hidden" name="_type" value="delete_dept_alias" />
         <input type="hidden" name="department_id" value="{{:department}}" />
         <input type="hidden" name="name" value="{{:name}}" />
