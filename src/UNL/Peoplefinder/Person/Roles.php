@@ -39,7 +39,8 @@ class UNL_Peoplefinder_Person_Roles extends IteratorIterator implements Countabl
     }
 
     public function isDisplayableRole($role) {
-        if ($role->unlRoleHROrgUnitNumber == UNL_Peoplefinder::ORG_UNIT_NUMBER_RETIREE) {
+        if ($role->unlRoleHROrgUnitNumber == UNL_Peoplefinder::ORG_UNIT_NUMBER_RETIREE ||
+	        strtolower($role->description) == 'retiree') {
             return false;
         }
         return true;
