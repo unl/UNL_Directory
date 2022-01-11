@@ -26,6 +26,21 @@
  */
 class UNL_Peoplefinder
 {
+	const ORG_UNIT_NUMBER_RETIREE = 50001351;
+	const AFFILIATION_STUDENT = 'student';
+	const AFFILIATION_GRADUATED = 'graduated';
+	const AFFILIATION_FACULTY = 'faculty';
+	const AFFILIATION_STAFF = 'staff';
+	const AFFILIATION_AFFILIATE = 'affiliate';
+	const AFFILIATION_VOLUNTEER = 'volunteer';
+	const AFFILIATION_RETIREE = 'retiree';
+	const AFFILIATION_EMERITI = 'emeriti';
+	const AFFILIATION_GUEST = 'guest';
+	const AFFILIATION_CONTINUE_SERVICES = 'continue services';
+	const AFFILIATION_RIF = 'rif';
+	const AFFILIATION_OVERRIDE = 'override'; // (will exist in guest ou)
+	const AFFILIATION_SPONSORED = 'sponsored'; // (will exist in guest ou)
+
     public static $resultLimit = 250;
 
     public static $url = '';
@@ -93,19 +108,13 @@ class UNL_Peoplefinder
      * @var array
      */
     public static $displayedAffiliations = array(
-        'student',
-//        'graduated',
-        'faculty',
-        'staff',
-        'affiliate',
-        'volunteer',
-//        'retiree',
-        'emeriti',
-//        'continue services',
-//        'rif',
-//        'override',  // (will exist in guest ou)
-//        'sponsored', // (will exist in guest ou)
-        );
+	    self::AFFILIATION_STUDENT,
+	    self::AFFILIATION_FACULTY,
+	    self::AFFILIATION_STAFF,
+	    self::AFFILIATION_AFFILIATE,
+	    self::AFFILIATION_VOLUNTEER,
+	    self::AFFILIATION_EMERITI,
+	);
 
     protected static $replacement_data = array();
 

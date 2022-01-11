@@ -1,6 +1,11 @@
 <ul class="roles dcf-list-bare dcf-m-0">
     <?php foreach ($context as $role): ?>
     <?php
+    if (!$context->isDisplayableRole($role)) {
+        // skip roles flagged not to display
+        continue;
+    }
+
     if (!$org = UNL_Officefinder_Department::getByorg_unit($role->unlRoleHROrgUnitNumber)) {
         // Couldn't retrieve this org's record from officefinder
         continue;
