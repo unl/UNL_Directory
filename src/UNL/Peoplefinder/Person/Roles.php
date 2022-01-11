@@ -38,12 +38,12 @@ class UNL_Peoplefinder_Person_Roles extends IteratorIterator implements Countabl
         return $this;
     }
 
-	public function isDisplayableRole($role) {
-		if ($role->unlRoleHROrgUnitNumber === UNL_Peoplefinder::ORG_UNIT_NUMBER_RETIREE) {
-			return false;
-		}
-		return true;
-	}
+    public function isDisplayableRole($role) {
+        if ($role->unlRoleHROrgUnitNumber == UNL_Peoplefinder::ORG_UNIT_NUMBER_RETIREE) {
+            return false;
+        }
+        return true;
+    }
 
     /**
      * Get the number of roles this person has
