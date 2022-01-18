@@ -39,12 +39,12 @@ class UNL_Peoplefinder_Driver_LDAP_AdvancedFilter
         // Determine the eduPersonPrimaryAffiliation to query by
         switch ($eppa) {
             case 'stu':
-            case 'student':
+            case UNL_Peoplefinder::AFFILIATION_STUDENT:
                 $primaryAffiliation = '(eduPersonPrimaryAffiliation=student)';
                 break;
             case 'fs':
-            case 'faculty':
-            case 'staff':
+            case UNL_Peoplefinder::AFFILIATION_FACULTY:
+            case UNL_Peoplefinder::AFFILIATION_STAFF:
                 $primaryAffiliation = '(|(eduPersonPrimaryAffiliation=faculty)(eduPersonPrimaryAffiliation=staff))';
                 break;
             default:

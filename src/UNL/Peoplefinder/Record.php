@@ -368,10 +368,10 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
         }
         
         $affiliationsWithAppointments = [
-            'staff',
-            'faculty',
-            'volunteer',
-            'affiliate'
+            UNL_Peoplefinder::AFFILIATION_STAFF,
+            UNL_Peoplefinder::AFFILIATION_FACULTY,
+            UNL_Peoplefinder::AFFILIATION_VOLUNTEER,
+            UNL_Peoplefinder::AFFILIATION_AFFILIATE
         ];
 
         $affiliations = $this->eduPersonAffiliation;
@@ -407,13 +407,13 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
             }
         }
 
-        return $this->title;
+        return ucwords($this->title);
     }
 
     public function hasStudentInformation()
     {
         if ($this->eduPersonAffiliation instanceof ArrayIterator &&
-            !in_array('student', iterator_to_array($this->eduPersonAffiliation))) {
+            !in_array(UNL_Peoplefinder::AFFILIATION_STUDENT, iterator_to_array($this->eduPersonAffiliation))) {
             return false;
         }
 
@@ -615,7 +615,7 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
 
     public function isPrimarilyStudent()
     {
-        return $this->eduPersonPrimaryAffiliation == 'student';
+        return $this->eduPersonPrimaryAffiliation == UNL_Peoplefinder::AFFILIATION_STUDENT;
     }
 
     public function getRoles()

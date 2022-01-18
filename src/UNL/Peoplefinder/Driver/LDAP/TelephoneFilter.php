@@ -25,9 +25,9 @@ class UNL_Peoplefinder_Driver_LDAP_TelephoneFilter
         }
 
         switch ($affiliation) {
-            case 'faculty':
-            case 'staff':
-            case 'student':
+            case UNL_Peoplefinder::AFFILIATION_FACULTY:
+            case UNL_Peoplefinder::AFFILIATION_STAFF:
+            case UNL_Peoplefinder::AFFILIATION_STUDENT:
                 $this->affiliation = $affiliation;
                 break;
         }

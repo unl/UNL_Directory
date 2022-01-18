@@ -14,7 +14,7 @@ if (isset($context->unlHROrgUnitNumber)) {
     }
     
 }
-if (isset($context->mail) && ($context->eduPersonPrimaryAffiliation != 'student')) {
+if (isset($context->mail) && ($context->eduPersonPrimaryAffiliation != UNL_Peoplefinder::AFFILIATION_STUDENT)) {
     echo "EMAIL;type=INTERNET;type=WORK;type=pref:".$context->mail."\n";
 }
 if ($context->eduPersonPrimaryAffiliation != "student") {

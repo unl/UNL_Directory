@@ -338,7 +338,9 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
     {
         $records = [];
         foreach ((array) $results as $entry) {
-            $records[] = self::recordFromLDAPEntry($entry);
+            if (self::displayableLDAPEntry($entry)) {
+                $records[] = self::recordFromLDAPEntry($entry);
+            }
         }
 
         return $records;
@@ -450,7 +452,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
     protected static function normalizeLdapEntries(array $entries, $resetCache = FALSE)
     {
         $entries = UNL_Peoplefinder_Driver_LDAP_Util::filterArrayByKeys($entries, 'is_int');
-	      $entry = current($entries);
+        $entry = current($entries);
         if ($entry instanceof UNL_Peoplefinder_Driver_LDAP_Entry) {
             return $entries;
         }
@@ -482,6 +484,10 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
             $affiliations = isset($entry['eduPersonAffiliation']) && $entry['eduPersonAffiliation'] instanceof UNL_Peoplefinder_Driver_LDAP_Multivalue ? $entry['eduPersonAffiliation']->jsonSerialize() : null;
 
             if (is_array($affiliations) && count(array_intersect($affiliations, UNL_Peoplefinder::$displayedAffiliations))) {
+                // Don't allow records that are only retiree and volunteer
+                if (count($affiliations) === 2 && in_array(UNL_Peoplefinder::AFFILIATION_RETIREE, $affiliations) && in_array(UNL_Peoplefinder::AFFILIATION_VOLUNTEER, $affiliations)) {
+                    return false;
+                }
                 return true;
             }
         }

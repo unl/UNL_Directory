@@ -273,7 +273,7 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
             // Remove the student affiliation if the privacy flag is set
             if (!empty($row['NU_FERPA']) && isset($entries[$key]['edupersonaffiliation'])) {
                 $value = new UNL_Peoplefinder_Driver_LDAP_Multivalue(
-                    array_diff(iterator_to_array($entries[$key]['edupersonaffiliation']), array('student'))
+                    array_diff(iterator_to_array($entries[$key]['edupersonaffiliation']), array(UNL_Peoplefinder::AFFILIATION_STUDENT))
                 );
 
                 $entries[$key]['edupersonaffiliation'] = $value;
