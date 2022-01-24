@@ -48,3 +48,13 @@ UNL_Peoplefinder::$testDomains = array('directory-test.unl.edu', 'localhost');
 // Sample user ID
 //UNL_Peoplefinder::$sampleUID = 'hhusker1';
 //include_once __DIR__ . '/../data/test-data.inc.php';
+
+// Site Notice
+$siteNotice = new stdClass();
+$siteNotice->display = false;
+$siteNotice->noticePath = 'dcf-notice';
+$siteNotice->containerID = 'dcf-main';
+$siteNotice->type = 'dcf-notice-info';
+$siteNotice->title = 'Maintenance Notice';
+$siteNotice->message = 'We will be performing site maintenance on February 3rd from 4:30 to 5:00.  The site may not be available during this time.';
+global $siteNotice;

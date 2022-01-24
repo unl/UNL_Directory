@@ -18,6 +18,10 @@ if (file_exists($wdnIncludePath . '/wdn/templates_5.3')) {
 
 $savvy->addGlobal('page', $page);
 
+if (isset($siteNotice) && $siteNotice->display) {
+    $page->displayDCFNoticeMessage($siteNotice->title, $siteNotice->message, $siteNotice->type, $siteNotice->noticePath, $siteNotice->containerID);
+}
+
 // no menu items, so hide mobile menu
 $page->addStyleDeclaration("#dcf-mobile-toggle-menu {display: none!important}");
 
@@ -59,8 +63,8 @@ if (strpos($loginService, '//') === 0) {
 $loginUrl = 'https://shib.unl.edu/idp/profile/cas/login?service=' . urlencode($loginService);
 $logoutUrl = 'https://shib.unl.edu/idp/profile/cas/logout?url=' . urlencode($loginService);
 $page->addScriptDeclaration("require(['wdn'], function(WDN) {
-	WDN.setPluginParam('idm', 'login', '" . $loginUrl ."');
-	WDN.setPluginParam('idm', 'logout', '" . $logoutUrl ."');
+    WDN.setPluginParam('idm', 'login', '" . $loginUrl ."');
+    WDN.setPluginParam('idm', 'logout', '" . $logoutUrl ."');
 });");
 
 $html = $page->toHtml();
