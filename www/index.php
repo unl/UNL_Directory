@@ -68,6 +68,6 @@ switch($peoplefinder->options['format']) {
 
 $savvy->addGlobal('controller', $peoplefinder);
 if (isset($siteNotice)) {
-	$savvy->addGlobal('siteNotice', $siteNotice);
+    $savvy->addGlobal('siteNotice', $siteNotice);
 }
 echo $savvy->render($peoplefinder);
