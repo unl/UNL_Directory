@@ -701,7 +701,7 @@ define([
 			$modalClose = $('<button>', {"class": 'cancel dcf-absolute dcf-pin-top dcf-pin-right dcf-mt-1 dcf-mr-1 dcf-btn dcf-btn-tertiary'})
 				.click(function() {
 					closeModalAndRestoreContent();
-				})
+				}).text('X')
 				.append($('<span>', {"class": 'dcf-sr-only'}).text('Close'));
 		} else {
 			$modalClose.detach();
@@ -939,8 +939,8 @@ define([
 		}
 
 		//Initialize states
-		$form.removeClass('hidden');
-		$context.find('.success').addClass('hidden');
+		$form.removeClass('dcf-d-none');
+		$context.find('.success').addClass('dcf-d-none');
 
 		//Show that modal!
 		showModalForm($context, '.correction-form', $target);
@@ -1347,9 +1347,9 @@ define([
 					e.preventDefault();
 
 					var $container = $(this).closest('.correction-form');
-					$container.find('form').addClass('hidden');
+					$container.find('form').addClass('dcf-d-none');
 					var $success = $container.find('.success');
-					$success.text('Submitting...').removeClass('hidden').focus();
+					$success.text('Submitting...').removeClass('dcf-d-none').focus();
 
 					$.post(this.action + '?' + $.param({format: 'json'}), $(this).serialize()).done(function() {
 						$success.text('Thank you for your correction.').focus();
