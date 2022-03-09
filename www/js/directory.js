@@ -701,7 +701,7 @@ define([
 			$modalClose = $('<button>', {"class": 'cancel dcf-absolute dcf-pin-top dcf-pin-right dcf-mt-1 dcf-mr-1 dcf-btn dcf-btn-tertiary'})
 				.click(function() {
 					closeModalAndRestoreContent();
-				}).text('X')
+				}).html('<span aria-hidden="true">X</span>')
 				.append($('<span>', {"class": 'dcf-sr-only'}).text('Close'));
 		} else {
 			$modalClose.detach();
