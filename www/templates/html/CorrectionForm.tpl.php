@@ -1,7 +1,9 @@
 <div class="correction-form noprint forms">
-  <h2>Have a correction?</h2>
-  <p>If you'd like to correct your own entry, contact your departmental HR liaison. For corrections to another person's contact or department/unit information, use the form below.</p>
   <form class="dcf-form" method="post" action="<?php echo UNL_Officefinder::getURL() ?>">
+    <div class="dcf-form-group">
+      <h2>Have a correction?</h2>
+      <p>If you'd like to correct your own entry, contact your departmental HR liaison. For corrections to another person's contact or department/unit information, use the form below.</p>
+    </div>
     <div class="dcf-form-group">
       <label class="dcf-label" for="your-name">Your Name: <small class="dcf-required">Required</small></label>
       <input class="dcf-input-text" id="your-name" type="text" name="name" value="" required />
