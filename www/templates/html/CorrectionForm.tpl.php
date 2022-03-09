@@ -22,5 +22,5 @@
     <input type="hidden" name="kind" value="" />
     <input type="hidden" name="id" value="" />
   </form>
-  <p class="success dcf-d-none" tabindex="-1"></p>
+  <p class="success dcf-p-10 dcf-d-none" tabindex="-1"></p>
 </div>
