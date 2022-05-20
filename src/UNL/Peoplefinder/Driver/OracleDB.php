@@ -237,17 +237,16 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
         } else {
             // UNL_EMAILS_00.TYPE = 'USERINFO' is the work email address that we want
             $query = "
-            SELECT UNL_BIODEMO.NETID, UNL_BIODEMO.NU_FERPA, UNL_EMAILS_00.EMAIL as MAIL,
-                LISTAGG(UNL_AFFILIATIONS_02.EPA_AFFILIATION, ';') WITHIN GROUP (ORDER BY UNL_AFFILIATIONS_02.EPA_AFFILIATION) as AFFILIATION
+            SELECT UNL_BIODEMO.NETID, UNL_BIODEMO.BIODEMO_ID as BIODEMO_ID, UNL_BIODEMO.NU_FERPA, UNL_EMAILS_00.EMAIL as MAIL
             FROM UNL_BIODEMO
-            LEFT JOIN UNL_AFFILIATIONS_02 ON UNL_AFFILIATIONS_02.BIODEMO_ID = UNL_BIODEMO.BIODEMO_ID
             LEFT JOIN UNL_EMAILS_00 ON UNL_BIODEMO.BIODEMO_ID = UNL_EMAILS_00.BIODEMO_ID AND UNL_EMAILS_00.TYPE = 'USERINFO'
                         WHERE UNL_BIODEMO.NETID IN (" . implode(', ', $binding_list) . ")
-            GROUP BY UNL_BIODEMO.NETID, UNL_BIODEMO.NU_FERPA, UNL_EMAILS_00.EMAIL
             ";
-
             $results = $this->query($query, $binding_array);
         }
+
+        $biodemo_id_values = array();
+        $biodemo_id_binding = array();
         
         // Now stitch everything back together
         foreach ($results as $row) {
@@ -260,14 +259,12 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
                 $entries[$key]['mail'] = $value;
             }
 
-            // Use the affiliations from Oracle. There is additional processing being done on the UNL_AFFILIATIONS_00
-            // view before it reaches us to remove affiliations associated with "Directory Order=NL" appointments.
-            if (!empty($row['AFFILIATION'])) {
-                $affiliations = explode(';', $row['AFFILIATION']);
-                $affiliations = array_unique(array_map('strtolower', $affiliations));
-                $value = new UNL_Peoplefinder_Driver_LDAP_Multivalue($affiliations);
-
-                $entries[$key]['edupersonaffiliation'] = $value;
+            //prepares the BIODEMO_IDs to be used in the affiation query
+            if (!empty($row['BIODEMO_ID'])) {
+                $biodemo_key = ":uid_" . count($biodemo_id_binding);
+                $biodemo_id_binding[] = $biodemo_key;
+                $biodemo_key = substr($biodemo_key, 1);
+                $biodemo_id_values[$biodemo_key] = $row['BIODEMO_ID'];
             }
 
             // Remove the student affiliation if the privacy flag is set
@@ -276,6 +273,42 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
                     array_diff(iterator_to_array($entries[$key]['edupersonaffiliation']), array(UNL_Peoplefinder::AFFILIATION_STUDENT))
                 );
 
+                $entries[$key]['edupersonaffiliation'] = $value;
+            }
+        }
+
+        //if we have BIODEMO_IDs we can then search for their affiliations
+        if (!empty($biodemo_id_values)) {
+
+            $affiliation_query = "
+                SELECT UNL_AFFILIATIONS_02.EPA_AFFILIATION, UNL_AFFILIATIONS_02.NETID
+                FROM UNL_AFFILIATIONS_02 
+                WHERE UNL_AFFILIATIONS_02.BIODEMO_ID IN (" . implode(', ', $biodemo_id_binding) . ")
+            ";
+            $affiliation_results = $this->query($affiliation_query, $biodemo_id_values);     
+
+            //aggragating the results based on NETID
+            $agg_results = array();
+            foreach ($affiliation_results as $row) {
+                if (is_null($row['EPA_AFFILIATION'])) {
+                    continue;
+                }
+                if (isset($agg_results[$row['NETID']]) && !empty($agg_results[$row['NETID']])) {
+                    $agg_results[$row['NETID']] .= ";";
+                }
+                if (!isset($agg_results[$row['NETID']])) {
+                    $agg_results[$row['NETID']] = "";
+                }
+                $agg_results[$row['NETID']] .= $row['EPA_AFFILIATION'];
+            }
+
+            // Use the affiliations from Oracle. There is additional processing being done on the UNL_AFFILIATIONS_00
+            // view before it reaches us to remove affiliations associated with "Directory Order=NL" appointments.
+            foreach ($agg_results as $aff_NETID => $aff_AFFILIATION) {
+                $key = $uids[$aff_NETID];
+                $affiliations = explode(';', $aff_AFFILIATION);
+                $affiliations = array_unique(array_map('strtolower', $affiliations));
+                $value = new UNL_Peoplefinder_Driver_LDAP_Multivalue($affiliations);
                 $entries[$key]['edupersonaffiliation'] = $value;
             }
         }
