@@ -260,7 +260,7 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
             }
 
             //prepares the BIODEMO_IDs to be used in the affiation query
-            if(!empty($row['BIODEMO_ID'])){
+            if (!empty($row['BIODEMO_ID'])) {
                 $biodemo_key = ":uid_" . count($biodemo_id_binding);
                 $biodemo_id_binding[] = $biodemo_key;
                 $biodemo_key = substr($biodemo_key, 1);
@@ -279,7 +279,7 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
 
 
         //if we have BIODEMO_IDs we can then search for their affiliations
-        if(!empty($biodemo_id_values)){
+        if (!empty($biodemo_id_values) {
 
             $affiliation_query = "
                 SELECT UNL_AFFILIATIONS_02.BIODEMO_ID, UNL_AFFILIATIONS_02.NETID,
@@ -292,8 +292,8 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
 
             // Use the affiliations from Oracle. There is additional processing being done on the UNL_AFFILIATIONS_00
             // view before it reaches us to remove affiliations associated with "Directory Order=NL" appointments.
-            foreach($affiliation_results as $row){
-                if(empty($row['AFFILIATION'])){
+            foreach ($affiliation_results as $row) {
+                if (empty($row['AFFILIATION'])) {
                     continue;
                 }
                 $key = $uids[$row['NETID']];
