@@ -279,25 +279,36 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
 
 
         //if we have BIODEMO_IDs we can then search for their affiliations
-        if (!empty($biodemo_id_values) {
+        //if we have BIODEMO_IDs we can then search for their affiliations
+        if (!empty($biodemo_id_values)) {
 
             $affiliation_query = "
-                SELECT UNL_AFFILIATIONS_02.BIODEMO_ID, UNL_AFFILIATIONS_02.NETID,
-                    LISTAGG(UNL_AFFILIATIONS_02.EPA_AFFILIATION, ';') WITHIN GROUP (ORDER BY UNL_AFFILIATIONS_02.EPA_AFFILIATION) as AFFILIATION
+                SELECT UNL_AFFILIATIONS_02.EPA_AFFILIATION, UNL_AFFILIATIONS_02.NETID
                 FROM UNL_AFFILIATIONS_02 
                 WHERE UNL_AFFILIATIONS_02.BIODEMO_ID IN (" . implode(', ', $biodemo_id_binding) . ")
-                GROUP BY UNL_AFFILIATIONS_02.BIODEMO_ID, UNL_AFFILIATIONS_02.NETID
             ";
-            $affiliation_results = $this->query($affiliation_query, $biodemo_id_values);
+            $affiliation_results = $this->query($affiliation_query, $biodemo_id_values);     
+
+            //aggragating the results based on NETID
+            $agg_results = array();
+            foreach ($affiliation_results as $row) {
+                if (is_null($row['EPA_AFFILIATION'])) {
+                    continue;
+                }
+                if (isset($agg_results[$row['NETID']]) && !empty($agg_results[$row['NETID']])) {
+                    $agg_results[$row['NETID']] .= ";";
+                }
+                if (!isset($agg_results[$row['NETID']])) {
+                    $agg_results[$row['NETID']] = "";
+                }
+                $agg_results[$row['NETID']] .= $row['EPA_AFFILIATION'];
+            }
 
             // Use the affiliations from Oracle. There is additional processing being done on the UNL_AFFILIATIONS_00
             // view before it reaches us to remove affiliations associated with "Directory Order=NL" appointments.
-            foreach ($affiliation_results as $row) {
-                if (empty($row['AFFILIATION'])) {
-                    continue;
-                }
-                $key = $uids[$row['NETID']];
-                $affiliations = explode(';', $row['AFFILIATION']);
+            foreach ($agg_results as $aff_NETID => $aff_AFFILIATION) {
+                $key = $uids[$aff_NETID];
+                $affiliations = explode(';', $aff_AFFILIATION);
                 $affiliations = array_unique(array_map('strtolower', $affiliations));
                 $value = new UNL_Peoplefinder_Driver_LDAP_Multivalue($affiliations);
                 $entries[$key]['edupersonaffiliation'] = $value;
