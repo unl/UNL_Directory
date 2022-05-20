@@ -277,8 +277,6 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
             }
         }
 
-
-        //if we have BIODEMO_IDs we can then search for their affiliations
         //if we have BIODEMO_IDs we can then search for their affiliations
         if (!empty($biodemo_id_values)) {
 
