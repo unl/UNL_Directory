@@ -5,7 +5,7 @@
         <li><a href="https://wdn.unl.edu/documentation/unl-directory"><svg class="dcf-mr-1 dcf-h-4 dcf-w-4 dcf-fill-current" aria-hidden="true" focusable="false" height="16" width="16" viewBox="0 0 24 24"><path d="M15 0H9v20.707l3-3 3 3zM8 0H5.5a.5.5 0 00-.5.5v23a.5.5 0 00.853.354L8 21.707V0zm8 0h2.5a.5.5 0 01.5.5v23a.501.501 0 01-.854.354L16 21.707V0z"></path></svg>Developer Documentation</a></li>
     </ul>
     <p>Information obtained from this directory may not be used to provide addresses for mailings to students, faculty or staff. Any solicitation of business, information, contributions or other response from individuals listed in this publication by mail, telephone or other means is forbidden.</p>
-    <p>This application is a product of the <a href="https://dxg.unl.edu/">Digital Experience Group at Nebraska</a>. DXG is a partnership of <a href="https://ucomm.unl.edu/">University Communication</a> and <a href="https://its.unl.edu/">Information Technology Services</a>.</p>
+    <p>This application is a product of the <a href="https://dxg.unl.edu/">Digital Experience Group</a> at <a href="https://www.unl.edu/">Nebraska</a>. DXG is a part of <a href="https://ucomm.unl.edu/">University Communication & Marketing</a>.</p>
     <p>This website is protected against malicious content robots and abusive web browsers. If you experience an issue or receive an error/blocked message while browsing, please immediately report the problem to the <a href="https://its.unl.edu/helpcenter/">ITS Help Center</a>.</p>
 </div>
 <div id="dcf-footer-group-2">
