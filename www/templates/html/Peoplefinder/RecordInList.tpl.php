@@ -27,7 +27,7 @@ $title = $context->formatTitle();
     <div class="overflow dcf-d-flex" itemscope itemtype="https://schema.org/Person">
         <?php if ($controller->options['view'] != 'alphalisting'): ?>
             <div class="profile_pic dcf-flex-shrink-0 dcf-mr-4 dcf-h-9 dcf-w-9 dcf-ratio dcf-ratio-1x1">
-                <img class="photo dcf-ratio-child dcf-circle dcf-d-block dcf-obj-fit-cover" itemprop="image" src="<?php echo $context->getImageUrl(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_LARGE) ?>" alt="Avatar for <?php echo $context->displayName ?>" />
+                <img class="photo dcf-ratio-child dcf-circle dcf-d-block dcf-obj-fit-cover" itemprop="image" src="<?php echo $context->getImageUrl(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_LARGE) ?>" alt="" />
             </div>
         <?php endif; ?>
 
