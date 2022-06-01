@@ -4,7 +4,8 @@ define([
 	'require',
 	'idm',
 	'notice',
-	'./vendor/jsrender.js'
+	'./vendor/jsrender.js',
+	'./vendor/jquery.qtip.js'
 ], function($, WDN, require, idm) {
 	"use strict";
 
