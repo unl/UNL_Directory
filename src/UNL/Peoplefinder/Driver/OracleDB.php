@@ -189,6 +189,11 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
     {
         return array();
     }
+
+    function getBuildingMatches($query, $affiliation = null)
+    {
+        return array();
+    }
     
     public function getUID($uid)
     {

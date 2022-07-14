@@ -86,6 +86,7 @@ class UNL_Peoplefinder
     protected $uidViews = [
         'record',
         'avatar',
+        'buildinglisting',
     ];
 
     public $view_map = [
@@ -98,6 +99,7 @@ class UNL_Peoplefinder
         'developers' => 'UNL_Peoplefinder_Developers',
         'alphalisting' => 'UNL_Peoplefinder_PersonList_AlphaListing',
         'facultyedu' => 'UNL_Peoplefinder_FacultyEducationList',
+        'buildinglisting' => 'UNL_Peoplefinder_PersonList_Building',
     ];
 
     /**
