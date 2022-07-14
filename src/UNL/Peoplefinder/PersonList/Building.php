@@ -38,6 +38,7 @@ class UNL_Peoplefinder_PersonList_Building extends AppendIterator
             'uid',
             'unlHROrgUnitNumber',
             'unlHRPrimaryDepartment',
+            'postalAddress'
         );
 
         $results = $pf->getBuildingMatches($this->options['building'], 'faculty');
