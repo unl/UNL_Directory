@@ -41,7 +41,7 @@ class UNL_Peoplefinder_PersonList_Building extends AppendIterator
             'postalAddress'
         );
 
-        $results = $pf->getBuildingMatches($this->options['building'], 'faculty');
+        $results = $pf->getBuildingMatches($this->options['building']);
         $this->append(new UNL_Peoplefinder_SearchResults(array('results'=>$results)));
     }
 }
