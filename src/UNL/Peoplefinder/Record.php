@@ -362,6 +362,7 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
         $affiliationsWithAppointments = [
             UNL_Peoplefinder::AFFILIATION_STAFF,
             UNL_Peoplefinder::AFFILIATION_FACULTY,
+            UNL_Peoplefinder::AFFILIATION_EMERITI,
             UNL_Peoplefinder::AFFILIATION_VOLUNTEER,
             UNL_Peoplefinder::AFFILIATION_AFFILIATE
         ];
