@@ -39,6 +39,8 @@ define([
 	var resultsContainerSelector = '.results-container';
 	var emptyFilterClass = 'empty-filters';
 
+	$.views.settings.allowCode(true);
+
 	var filters = {
 		initialize : function() {
 			var $filterContainer = $('.filters', $filters);
