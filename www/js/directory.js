@@ -41,6 +41,8 @@ define([
 
 	$.views.settings.allowCode(true);
 
+	console.log($.js)
+
 	var filters = {
 		initialize : function() {
 			var $filterContainer = $('.filters', $filters);
