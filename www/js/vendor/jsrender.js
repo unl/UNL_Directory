@@ -11,9 +11,6 @@
 
 //jshint -W018, -W041
 
-console.log("Loaded");
-
-
 (function(factory) {
 	if (typeof define === "function" && define.amd) { // AMD script loader, e.g. RequireJS
 		define(["jquery"], factory);
