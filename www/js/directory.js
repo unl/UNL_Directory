@@ -39,8 +39,6 @@ define([
 	var resultsContainerSelector = '.results-container';
 	var emptyFilterClass = 'empty-filters';
 
-	$.views.settings.allowCode(true);
-
 	var filters = {
 		initialize : function() {
 			var $filterContainer = $('.filters', $filters);
@@ -992,7 +990,10 @@ define([
 							var splitQuery;
 							var nextAttempt = function(firstName, lastName) {
 								window.location.hash = 'q/' + firstName + '/' +lastName;
-								var tmpl = $.templates(searchNoticeSelector);
+								var tmpl = $.templates({
+										markup: searchNoticeSelector,
+										allowCode: true
+									});
 								var search = {
 									originalSearch: originalSearch,
 									firstName: firstName,
