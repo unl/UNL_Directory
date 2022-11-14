@@ -11,6 +11,8 @@
 
 //jshint -W018, -W041, -W120
 
+console.log("Loaded");
+
 (function(factory, global) {
 	// global var is the this object, which is window when running in the usual browser environment
 	var $ = global.jQuery;
