@@ -5,7 +5,7 @@
         So we tried a few more advanced searches and below is what we found for <span>First Name: {{:firstName}} AND Last Name: {{:lastName}}</span>.</p>
     </div>
 </div>
-<script>
+{{*
   require(['dcf-notice'], function(DCFNoticeModule) {
     const noticeTheme = new DCFNoticeModule.DCFNoticeTheme();
     noticeTheme.setThemeVariable('noticeContainerClassList', [ 'dcf-d-grid', 'dcf-w-max-xl', 'dcf-ml-auto', 'dcf-mr-auto', 'dcf-mb-6', 'dcf-rounded' ]);
@@ -18,4 +18,4 @@
     var notice = new DCFNoticeModule.DCFNotice(noticeTheme);
     notice.initialize();
   });
-</script>
+}}
