@@ -990,7 +990,10 @@ define([
 							var splitQuery;
 							var nextAttempt = function(firstName, lastName) {
 								window.location.hash = 'q/' + firstName + '/' +lastName;
-								var tmpl = $.templates(searchNoticeSelector);
+								var tmpl = $.templates({
+										markup: searchNoticeSelector,
+										allowCode: true
+									});
 								var search = {
 									originalSearch: originalSearch,
 									firstName: firstName,
