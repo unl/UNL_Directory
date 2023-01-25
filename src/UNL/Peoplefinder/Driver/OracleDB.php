@@ -263,8 +263,14 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
                     $entries[$key]['mail'] = $value;
                 } else {
                     // We only want to swap the email for a different one if the email domain is more preferred
-                    $newEmailDomain = substr(strtolower($row['MAIL']), strpos($row['MAIL'], '@') + 1);
-                    $currentEmailDomain = substr(strtolower($entries[$key]['mail']), strpos($entries[$key]['mail'], '@') + 1);
+                    $newEmailDomain = substr(
+                        strtolower($row['MAIL']),
+                        strpos($row['MAIL'], '@') + 1
+                    );
+                    $currentEmailDomain = substr(
+                        strtolower($entries[$key]['mail']),
+                        strpos($entries[$key]['mail'], '@') + 1
+                    );
 
                     // Initialize it to be bigger than the array
                     $newEmailRanking = count(self::$email_priority_list) + 1;
@@ -274,15 +280,15 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
                     $newEmailIndex = array_search($newEmailDomain, self::$email_priority_list);
                     $currentEmailIndex = array_search($currentEmailDomain, self::$email_priority_list);
 
-                    if ($newEmailIndex !== FALSE) {
+                    if ($newEmailIndex !== false) {
                         $newEmailRanking = $newEmailIndex;
                     }
-                    if ($currentEmailIndex !== FALSE) {
+                    if ($currentEmailIndex !== false) {
                         $currentEmailRanking = $currentEmailIndex;
                     }
 
                     // Ranking lower is better
-                    if ($newEmailRanking < $currentEmailRanking){
+                    if ($newEmailRanking < $currentEmailRanking) {
                         $value = new UNL_Peoplefinder_Driver_LDAP_Multivalue(array(
                             strtolower($row['MAIL'])
                         ));
