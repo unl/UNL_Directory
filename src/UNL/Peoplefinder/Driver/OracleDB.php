@@ -9,6 +9,7 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
     public static $connection_host;
     public static $connection_port;
     public static $connection_service;
+    public static $email_priority_list;
 
     private $conn;
     private $resetCache = FALSE;
@@ -252,11 +253,44 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
         foreach ($results as $row) {
             $key = $uids[$row['NETID']];
             if (!empty($row['MAIL'])) {
-                $value = new UNL_Peoplefinder_Driver_LDAP_Multivalue(array(
-                    strtolower($row['MAIL'])
-                ));
-                
-                $entries[$key]['mail'] = $value;
+
+                // if we have not stored an email yet the just store it
+                if (!isset($entries[$key]['mail']) || empty($entries[$key]['mail'])) {
+                    $value = new UNL_Peoplefinder_Driver_LDAP_Multivalue(array(
+                        strtolower($row['MAIL'])
+                    ));
+                    
+                    $entries[$key]['mail'] = $value;
+                } else {
+                    // We only want to swap the email for a different one if the email domain is more preferred
+                    $newEmailDomain = substr(strtolower($row['MAIL']), strpos($row['MAIL'], '@') + 1);
+                    $currentEmailDomain = substr(strtolower($entries[$key]['mail']), strpos($entries[$key]['mail'], '@') + 1);
+
+                    // Initialize it to be bigger than the array
+                    $newEmailRanking = count(self::$email_priority_list) + 1;
+                    $currentEmailRanking = count(self::$email_priority_list) + 1;
+
+                    // Finds the domain in the priority list
+                    $newEmailIndex = array_search($newEmailDomain, self::$email_priority_list);
+                    $currentEmailIndex = array_search($currentEmailDomain, self::$email_priority_list);
+
+                    if ($newEmailIndex !== FALSE) {
+                        $newEmailRanking = $newEmailIndex;
+                    }
+                    if ($currentEmailIndex !== FALSE) {
+                        $currentEmailRanking = $currentEmailIndex;
+                    }
+
+                    // Ranking lower is better
+                    if ($newEmailRanking < $currentEmailRanking){
+                        $value = new UNL_Peoplefinder_Driver_LDAP_Multivalue(array(
+                            strtolower($row['MAIL'])
+                        ));
+
+                        $entries[$key]['mail'] = $value;
+                    }
+                }
+
             }
 
             //prepares the BIODEMO_IDs to be used in the affiation query

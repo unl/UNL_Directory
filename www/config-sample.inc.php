@@ -41,6 +41,13 @@ UNL_Peoplefinder_Driver_OracleDB::$connection_password = 'PASS';
 UNL_Peoplefinder_Driver_OracleDB::$connection_host = '1.2.3.4';
 UNL_Peoplefinder_Driver_OracleDB::$connection_port = 1234;
 UNL_Peoplefinder_Driver_OracleDB::$connection_service = "SAPTPRD";
+UNL_Peoplefinder_Driver_OracleDB::$email_priority_list = array(
+    'huskers.com',
+    'nutechventures.org',
+    'unl.edu',
+    'nebraska.edu',
+    'huskers.unl.edu',
+);
 
 // Test domains used in Peoplefinder.tpl.php
 UNL_Peoplefinder::$testDomains = array('directory-test.unl.edu', 'localhost');
