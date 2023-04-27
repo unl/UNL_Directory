@@ -15,20 +15,20 @@ $baseUrl = UNL_Peoplefinder::getURL();
             <picture>
                 <source
                     type="image/webp"
-                    srcset="<?php echo $baseUrl ?>images/130912herbie-505.webp 505w,
-                            <?php echo $baseUrl ?>images/130912herbie-673.webp 673w,
-                            <?php echo $baseUrl ?>images/130912herbie-898.webp 898w,
-                            <?php echo $baseUrl ?>images/130912herbie-1197.webp 1197w,
-                            <?php echo $baseUrl ?>images/130912herbie-1597.webp 1597w"
+                    srcset="<?php echo $baseUrl ?>images/class-n-505.webp 505w,
+                            <?php echo $baseUrl ?>images/class-n-673.webp 673w,
+                            <?php echo $baseUrl ?>images/class-n-898.webp 898w,
+                            <?php echo $baseUrl ?>images/class-n-1197.webp 1197w,
+                            <?php echo $baseUrl ?>images/class-n-1597.webp 1597w"
                     sizes="(min-width: 41.956em) 43vw, 89vw">
                 <source
-                    srcset="<?php echo $baseUrl ?>images/130912herbie-505.jpg 505w,
-                            <?php echo $baseUrl ?>images/130912herbie-673.jpg 673w,
-                            <?php echo $baseUrl ?>images/130912herbie-898.jpg 898w,
-                            <?php echo $baseUrl ?>images/130912herbie-1197.jpg 1197w,
-                            <?php echo $baseUrl ?>images/130912herbie-1597.jpg 1597w"
+                    srcset="<?php echo $baseUrl ?>images/class-n-505.jpg 505w,
+                            <?php echo $baseUrl ?>images/class-n-673.jpg 673w,
+                            <?php echo $baseUrl ?>images/class-n-898.jpg 898w,
+                            <?php echo $baseUrl ?>images/class-n-1197.jpg 1197w,
+                            <?php echo $baseUrl ?>images/class-n-1597.jpg 1597w"
                     sizes="(min-width: 41.956em) 43vw, 89vw">
-              	<img class="hero-img" src="data:image/gif;base64,R0lGODlhAQABAAAAADs=" alt="Portrait photo of mascot Herbie Husker.">
+              	<img class="hero-img" src="data:image/gif;base64,R0lGODlhAQABAAAAADs=" alt="First year students tunnel walk">
             </picture>
             <div class="dcf-card-block">
                 <h2 class="dcf-txt-h3"><span class="dcf-d-block dcf-subhead unl-dark-gray dcf-mb-1">Search </span>People</h2>
