@@ -145,7 +145,7 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
 
     public function isHcardFormat()
     {
-        return (isset($this->options['format']) && $this->options['format'] === 'hcard');
+        return isset($this->options['format']) && $this->options['format'] === 'hcard';
     }
 
     function getUNLBuildingCode()
@@ -642,10 +642,10 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
         return self::PLANETRED_BASE_URL . 'profile/unl_' . $this->getProfileUid();
     }
 
-    public function getImageURL($size = UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_MEDIUM)
+    public function getImageURL($size = UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_ORIGINAL)
     {
         $url = $this->getRecordUrl('avatar');
-        if ($size !== UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_MEDIUM) {
+        if ($size !== UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_ORIGINAL) {
             $url .= '?' . http_build_query(['s' => $size]);
         }
         return $url;

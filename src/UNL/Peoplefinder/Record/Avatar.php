@@ -17,13 +17,14 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
     const AVATAR_SIZE_SMALL = 'small';
     const AVATAR_SIZE_MEDIUM = 'medium';
     const AVATAR_SIZE_LARGE = 'large';
+    const AVATAR_SIZE_ORIGINAL = 'original';
 
     protected $options;
 
     protected $record;
 
     protected $url;
-    
+
     protected $cache;
 
     public static function getBuildings()
@@ -79,8 +80,9 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
         ];
 
         $planetRedSizeMap = [
+            self::AVATAR_SIZE_ORIGINAL => '400', //default
             self::AVATAR_SIZE_LARGE => '200',
-            self::AVATAR_SIZE_MEDIUM => '100', //default
+            self::AVATAR_SIZE_MEDIUM => '100',
             self::AVATAR_SIZE_SMALL => '40',
             self::AVATAR_SIZE_TINY => '25',
             self::AVATAR_SIZE_TOPBAR => '16',
@@ -96,7 +98,7 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
     public function __construct($options = [])
     {
         $this->cache = UNL_Peoplefinder_Cache::factory();
-        
+
         if ($options instanceof UNL_Peoplefinder_Record || $options instanceof UNL_Officefinder_Department) {
             $this->record = $options;
             $this->options = [];
@@ -142,7 +144,7 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
         $options = array_merge($this->options, $options);
 
         if (!isset($options['s'])) {
-            $options['s'] = self::AVATAR_SIZE_MEDIUM;
+            $options['s'] = self::AVATAR_SIZE_ORIGINAL;
         }
 
         if ($this->record instanceof UNL_Officefinder_Department || $this->record->ou == 'org') {
@@ -159,16 +161,27 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
         $size = $options['s'];
         $supportSizes = self::getAvatarSizes();
         if (!isset($supportSizes[$size])) {
-            $size = self::AVATAR_SIZE_MEDIUM;
+            $size = self::AVATAR_SIZE_ORIGINAL;
+        }
+
+        $planetRedSize = $size;
+        if ($size === self::AVATAR_SIZE_ORIGINAL) {
+            $planetRedSize = 'master';
         }
 
         $planetRedUid = $this->record->getProfileUid();
-        $profileIconUrl = UNL_Peoplefinder_Record::PLANETRED_BASE_URL . 'icon/' . 'unl_' . $planetRedUid . '/' . $size . '/';
-        
+        $profileIconUrl = UNL_Peoplefinder_Record::PLANETRED_BASE_URL .
+            'icon/' .
+            'unl_' .
+            $planetRedUid .
+            '/' .
+            $planetRedSize .
+            '/';
+
         //check if we have the default profile icon used
         //this is being cached to reduce the number of requests being sent to planetred when directory is under high load
         $cachedFallbackURL = $this->cache->get($profileIconUrl);
-        
+
         if (!$cachedFallbackURL) {
             //no fallback URL was found, so we need a new request
             $effectiveUrl = $profileIconUrl;
@@ -204,7 +217,7 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
             } else {
                 //default image again.
                 $fallbackUrl = $effectiveUrl;
-                
+
                 //Cache this for a bit
                 $this->cache->set($profileIconUrl, $fallbackUrl, 3600);
             }
@@ -239,7 +252,7 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
         $size = $options['s'];
         $supportSizes = self::getAvatarSizes();
         if (!isset($supportSizes[$size])) {
-            $size = self::AVATAR_SIZE_MEDIUM;
+            $size = self::AVATAR_SIZE_ORIGINAL;
         }
 
         if ($this->record instanceof UNL_Officefinder_Department) {
