@@ -145,7 +145,7 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
 
     public function isHcardFormat()
     {
-        return (isset($this->options['format']) && $this->options['format'] === 'hcard');
+        return isset($this->options['format']) && $this->options['format'] === 'hcard';
     }
 
     function getUNLBuildingCode()
