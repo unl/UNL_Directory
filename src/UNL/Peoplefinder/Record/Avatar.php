@@ -144,7 +144,7 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
         $options = array_merge($this->options, $options);
 
         if (!isset($options['s'])) {
-            $options['s'] = self::AVATAR_SIZE_LARGE;
+            $options['s'] = self::AVATAR_SIZE_MEDIUM;
         }
 
         if ($this->record instanceof UNL_Officefinder_Department || $this->record->ou == 'org') {
@@ -161,7 +161,7 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
         $size = $options['s'];
         $supportSizes = self::getAvatarSizes();
         if (!isset($supportSizes[$size])) {
-            $size = self::AVATAR_SIZE_LARGE;
+            $size = self::AVATAR_SIZE_MEDIUM;
         }
 
         $planetRedSize = $size;
@@ -252,7 +252,7 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
         $size = $options['s'];
         $supportSizes = self::getAvatarSizes();
         if (!isset($supportSizes[$size])) {
-            $size = self::AVATAR_SIZE_LARGE;
+            $size = self::AVATAR_SIZE_MEDIUM;
         }
 
         if ($this->record instanceof UNL_Officefinder_Department) {
