@@ -29,7 +29,6 @@ define([
 	var mainStates = ['searching', 'single', 'single-dept'];
 	var $searcher;
 	var $results;
-	var $filters;
 	var departments = [];
 	var affiliations = [];
 	var modalReady = false;
@@ -39,22 +38,37 @@ define([
 	var resultsContainerSelector = '.results-container';
 	var emptyFilterClass = 'empty-filters';
 
+	const filter_form = document.getElementById('filter_form');
+	const filter_reset = document.getElementById('filter_reset');
+	const affiliation_filter = document.getElementById('affiliation_filter');
+	const department_filter = document.getElementById('department_filter');
+	const skip_sidebar = document.getElementById('skip_sidebar');
+	let search_summary;
+	let summary_search_query;
+	let summary_total_results;
+	let affiliation_filter_summary_container;
+	let affiliation_filter_summary;
+	let department_filter_summary_container;
+	let department_filter_summary;
+
 	var filters = {
 		initialize : function() {
-			var $filterContainer = $('.filters', $filters);
-			var $options = filters.clear();
 			var $resultLists = $('.results', $results);
-			var $summary = $('.summary', $results);
 			var $total = $('.ppl_Sresult', $results);
 
+			// If we do not have any results turn the filters off
 			if (!$resultLists.length || !$total.length) {
-				$filters.closest(resultsContainerSelector).addClass(emptyFilterClass);
+				document.querySelector(resultsContainerSelector).classList.add(emptyFilterClass);
 				return;
 			}
 
-			$filterContainer.addClass('loading');
-			$filters.closest(resultsContainerSelector).removeClass(emptyFilterClass);
+			// Puts the loading spinner in the filters
+			filter_form.classList.add('loading');
 
+			// Removed the class to make the filters hidden
+			document.querySelector(resultsContainerSelector).classList.remove(emptyFilterClass);
+
+			// Loop through all the results and find the organizations and affiliations
 			$('.results', $results).each(function() {
 				if (!$(this).hasClass('departments')) {
 					$('.organization-unit', this).each(function() {
@@ -71,53 +85,62 @@ define([
 					affiliations.push($(this).children('h2').eq(0).text());
 				}
 			});
+
+			// Sort them
 			departments.sort();
 			affiliations.sort();
 
-			filters.buildFilters(departments, 'department');
-			filters.buildFilters(affiliations, 'affiliation');
+			// Populate the filters using the found values
+			filters.buildFilterOptions(affiliation_filter, affiliations);
+			filters.buildFilterOptions(department_filter, departments);
 
-			if ($(window).width() >= 768) {
-				$options.slideDown(100);
-				$options.attr('aria-expanded', 'true');
-				$('.toggle', $filters).text('(Collapse)');
-			} else {
-				$options.slideUp(100);
-				$options.attr('aria-expanded', 'false');
-				$('.toggle', $filters).text('(Expand)');
-			}
-
-			$filterContainer.removeClass('loading');
-
-			if (!$summary.length) {
-				$summary = $($.templates('#summaryTemplate').render())
-					.append(filters.generateAllSummaryOption())
-					.prependTo($results);
-			}
-
+			// Removed loading spinner from filters
+			filter_form.classList.remove('loading');
+			
+			// Clears our values found for the next query
 			departments = [];
 			affiliations = [];
 
-			//Hide the filters if there is only a few results (on mobile)
-			$filters.removeClass('few-results');
-			$filters.removeClass('many-results');
-
-			if ($total.length <= 10) {
-				$filters.addClass('few-results');
-			} else {
-				$filters.addClass('many-results');
-			}
-
-			$('.skipnav a', $filters).on('click', function() {
-				$('#results').focus();
-
-				//Stop the default action and don't propagate. Changing the page hash will remove results
-				return false;
-			});
+			const summary_template = document.getElementById('summary_template');
+			let summary_element = summary_template.content.cloneNode('true');
+	
+			$results.prepend(summary_element);
+	
+			search_summary = document.getElementById('search_summary');
+			summary_search_query = document.getElementById('search_query');
+			summary_total_results = document.getElementById('total_results');
+			affiliation_filter_summary_container = document.getElementById('affiliation_filter_summary_container');
+			affiliation_filter_summary = document.getElementById('affiliation_filter_summary');
+			department_filter_summary_container = document.getElementById('department_filter_summary_container');
+			department_filter_summary = document.getElementById('department_filter_summary');
+	
+			summary_search_query.innerText = decodeURI(getCleanHash().slice(2).replace('/', ' '));
+			search_summary.classList.remove('dcf-d-none');
 		},
 
 		clear: function() {
-			return $('.filter-options', $filters).empty();
+
+			// Adds the loading spinner
+			filter_form.classList.add('loading');
+
+			// Gets the containers of the filter options
+			const affiliation_filter_container = affiliation_filter.querySelector('ol');
+			const department_filter_container = department_filter.querySelector('ol');
+			if (affiliation_filter_container == null) { throw new Error('Missing affiliation Filter OL'); }
+			if (department_filter_container == null) { throw new Error('Missing department Filter OL'); }
+
+			// Clears our the filter options
+			affiliation_filter_container.innerHTML = "";
+			department_filter_container.innerHTML = "";
+
+			// Removed the search summary and the filter summaries
+			if (search_summary !== undefined) {
+				search_summary.classList.add('dcf-d-none');
+				affiliation_filter_summary_container.classList.remove('dcf-d-block');
+				affiliation_filter_summary_container.classList.add('dcf-d-none');
+				department_filter_summary_container.classList.remove('dcf-d-block');
+				department_filter_summary_container.classList.add('dcf-d-none');
+			}
 		},
 
 		generateAllSummaryOption: function() {
@@ -125,110 +148,129 @@ define([
 			return $(tmpl.render());
 		},
 
-		buildFilters : function(array, type) {
-			var $optionContainer = $('#filters_' + type);
-			var $optionList = $('ol', $optionContainer);
-			var tmpl = $.templates('#filterOptionTemplate');
-			var options = [];
+		buildFilterOptions: function(filter_to_add_to, list_of_options) {
 
-			if (!$optionList.length) {
-				$optionList = $($.templates('#filterOptionListTempalte').render({type:type}))
-					.appendTo($optionContainer);
-			}
+			// Gets the variables of the filters
+			const filter_id = filter_to_add_to.id ?? 'filter';
+			const filter_container = filter_to_add_to.querySelector('ol');
+			const option_template = document.getElementById('filter_option_template');
+			if (filter_container == null) { throw new Error('Missing Filter OL'); }
+			if (option_template == null) { throw new Error('Missing Option Template'); }
 
-			$.each(array, function(key, value){
-				options.push($(tmpl.render({type:filters.scrubDept(value.toLowerCase()), label:value})));
+			// Loops through each option and creates a new checkbox for the filters
+			list_of_options.forEach((option, index) => {
+				let option_element = option_template.content.cloneNode('true');
+				let option_input = option_element.querySelector('input');
+				let option_label = option_element.querySelector('label');
+				if (option_input == null) { throw new Error('Missing Option Input In Template'); }
+				if (option_label == null) { throw new Error('Missing Option Label In Template'); }
+
+				const formattedText = filters.scrubDept(option.toLowerCase());
+
+				// Populates the values
+				option_input.id = filter_id + '_' + index + '_' + formattedText;
+				option_input.value = formattedText;
+				option_input.dataset.value = option;
+				option_label.setAttribute('for', option_input.id);
+				option_label.innerText = option;
+
+				// Appends the option
+				filter_container.append(option_element);
 			});
-
-			$optionList.append(options);
 		},
 
-		action : function(checkbox) {
-			var checked = [];
-			var resultsSelector = '.result_head, div.affiliation, div.results ul li';
-			var filterElement = 'input';
-			var stateProperty = 'checked';
-			var activeFilterSelector = filterElement + ':' + stateProperty;
-			var allFilterClass = 'filterAll';
-			var allFilterSelector = '.' + allFilterClass;
-			var $optionGroup = checkbox.closest('.filter-options');
-			var filterState = checkbox[0].checked;
+		action : function() {
+			// Gets the values of the checkboxes, and the results
+			const checked_options = filter_form.querySelectorAll('input:checked');
+			const result_elements = document.querySelectorAll('div.results ul li');
+			const result_containers = document.querySelectorAll('.result_head, .likeResults, div.results.departments, div.results.affiliation');
 
-			var showState = function() {
-				var $checkedFilters = $(activeFilterSelector, $filters).not(allFilterSelector);
+			// Hide the filters
+			affiliation_filter_summary_container.classList.add('dcf-d-none');
+			department_filter_summary_container.classList.add('dcf-d-none');
 
-				if (!$checkedFilters.length) {
-					// return to show everything
-					$(resultsSelector, $results).show();
-					return;
-				}
+			// No checked filter options
+			if (checked_options.length === 0) {
 
-				// selectively show records
-				$(resultsSelector, $results).hide();
-				$checkedFilters.each(function(){
-					var value = $(this).attr('value');
-					var id = $(this).attr('id');
-
-					if (this.checked) {
-						// make sure the corresponding content is shown.
-						$('li.' + value, $results).show()
-							.closest('.affiliation').show();
-						checked.push(id);
-					}
+				// Show everything
+				result_elements.forEach((result_elem) => {
+					result_elem.classList.remove('dcf-d-none');
 				});
-			};
-
-			var showAll = function(full) {
-				var $scope = $optionGroup;
-				if (full) {
-					$scope = $filters;
-				}
-				$(filterElement, $scope).not(allFilterSelector).prop(stateProperty, false);
-				$(allFilterSelector, $scope).prop(stateProperty, true);
-				showState();
-			};
-
-			if ((checkbox.hasClass(allFilterClass) && filterState) || !$(activeFilterSelector, $optionGroup).length) {
-				showAll();
-			} else {
-				$(allFilterSelector, $optionGroup).prop(stateProperty, false);
-				showState();
-			}
-
-			var $summary = $('.summary', $results);
-			$('.selected-options, .operator', $summary).remove();
-
-			if (checked.length < 1) {
-				//nothing in the array, therefore it's ALL
-				showAll(true);
-				$summary.append(filters.generateAllSummaryOption());
-			} else {
-				//at least one id exists in the array
-				var summaryOptions = [];
-				var tmpl = $.templates('#summaryFilterTemplate');
-				$.each(checked, function(key, value) {
-					var $selected = $('#' + value);
-
-					if (!$selected.length) {
-						return;
-					}
-
-					var $legend = $selected.closest('.filter-options').prev('button');
-					var templateData = {
-						filterType: $legend.clone().children().remove().end().text(),
-						filterValue: $selected.attr('value'),
-						filterLabel: $selected.siblings('label').text()
-					};
-
-					summaryOptions.push(document.createTextNode(' '));
-					summaryOptions.push(tmpl.render(templateData));
-					summaryOptions.push(document.createTextNode(' '));
+				result_containers.forEach((result_elem) => {
+					result_elem.classList.remove('dcf-d-none');
 				});
 
-				$summary.append(summaryOptions);
-				$('.operator:last-child', $summary).remove();
+			// We do have a filter option checked
+			} else {
+				// Hide everything
+				result_elements.forEach((result_elem) => {
+					result_elem.classList.add('dcf-d-none');
+				});
+
+				result_containers.forEach((result_elem) => {
+					result_elem.classList.add('dcf-d-none');
+				});
+
+				let affiliation_filters_used = [];
+				let department_filters_used = [];
+
+				checked_options.forEach((filter_option) => {
+					const filter_original_value = filter_option.dataset.value;
+					const filter_value = filter_option.value;
+					const filter_id = filter_option.id;
+
+					// Find all elements that 
+					result_elements.forEach((result_elem) => {
+						if (result_elem.classList.contains(filter_value)) {
+							result_elem.classList.remove('dcf-d-none');
+							result_elem.closest('.results.affiliation')?.classList.remove('dcf-d-none');
+							result_elem.closest('.likeResults')?.classList.remove('dcf-d-none');
+						}
+					});
+
+					// Check what kind of filter it is and add its original text to the list
+					if (filter_id.startsWith('affiliation')) {
+						affiliation_filters_used.push(filter_original_value);
+					}
+					if (filter_id.startsWith('department')) {
+						department_filters_used.push(filter_original_value);
+					}
+				});
+
+				// If we have any affiliation filters then show the text in the summary
+				if (affiliation_filters_used.length > 0) {
+					// Format the text all nice like
+					let affiliation_text = affiliation_filters_used[0];
+					if (affiliation_filters_used.length > 2) {
+						const last_option = affiliation_filters_used.pop();
+						affiliation_text = affiliation_filters_used.join(', ') + ', or ' + last_option;
+					} else if (affiliation_filters_used.length == 2) {
+						affiliation_text = affiliation_filters_used.join(' or ');
+					}
+
+					// Add the text and show the container
+					affiliation_filter_summary.innerText = 'Affiliations: ' + affiliation_text;
+					affiliation_filter_summary_container.classList.remove('dcf-d-none');
+				}
+
+				// If we have any affiliation filters then show the text in the summary
+				if (department_filters_used.length > 0) {
+					// Format the text all nice like
+					let department_text = department_filters_used[0];
+					if (department_filters_used.length > 2) {
+						const last_option = department_filters_used.pop();
+						department_text = department_filters_used.join(', ') + ', or ' + last_option;
+					} else if (department_filters_used.length == 2) {
+						department_text = department_filters_used.join(' or ');
+					}
+
+					// Add the text and show the container
+					department_filter_summary.innerText = 'Departments: ' + department_text;
+					department_filter_summary_container.classList.remove('dcf-d-none');
+				}
 			}
 
+			// Update the total results
 			updateNumResults();
 		},
 
@@ -238,20 +280,15 @@ define([
 	};
 
 	var updateNumResults = function() {
-		var $summary = $('.summary', $results);
-
-		//Remove the old container if it exists
-		$('.num-results', $summary).remove();
-
 		//Always append the number of results
 		var numResultText = $('div.results ul li:visible').length;
 		if (numResultText === 1) {
-			numResultText += ' result';
+			numResultText += ' total result';
 		} else {
-			numResultText += ' results';
+			numResultText += ' total results';
 		}
 
-		$summary.append($('<span>', {class: 'num-results'}).text(' - ' + numResultText));
+		summary_total_results.innerText = numResultText;
 	};
 
 	/**
@@ -612,7 +649,6 @@ define([
 	var startFromSearch = function() {
 		$searcher = $('#peoplefinder');
 		$results = $('#results');
-		$filters = $('#filters');
 
 		//on submit of the search form, redirect to hashchange
 		$searcher.submit(function(eventObject) {
@@ -621,6 +657,10 @@ define([
 			});
 
 			var query = $('#q').val().trim();
+
+			if (search_summary !== undefined) {
+				summary_search_query.innerText = query;
+			}
 
 			if (query.length) {
 				var newHash = '#q/' + encodeURIComponent(query);
@@ -640,28 +680,41 @@ define([
 		bindResultsListeners($results);
 		bindDeptResultsListeners($results);
 
-		$filters.on('click', 'button', function (e) {
-			var $header = $(this);
-			var $container = $header.next();
-			var $toggle = $('.toggle', $header);
-
-			$container.slideToggle(100, function () {
-				if ($container.is(":visible")) {
-					//Expanded
-					$toggle.text("(Collapse)");
-					$container.attr('aria-expanded', 'true');
-					$container.focus();
-				} else {
-					//Collapsed
-					$toggle.text("(Expand)");
-					$container.attr('aria-expanded', 'false');
+		affiliation_filter.addEventListener('ready', () => {
+			affiliation_filter.classList.remove('dcf-d-none');
+			affiliation_filter.addEventListener('click', (e) => {
+				if ( e.target.tagName.toUpperCase() === 'INPUT') {
+					filters.action();
 				}
 			});
 		});
-
-		$filters.on('click', 'input', function(e) {
-			filters.action($(this));
+	
+		department_filter.addEventListener('ready', () => {
+			department_filter.classList.remove('dcf-d-none');
+			department_filter.addEventListener('click', (e) => {
+				if ( e.target.tagName.toUpperCase() === 'INPUT') {
+					filters.action();
+				}
+			});
 		});
+	
+		// Set inputs to empty and submit if reset button is clicked
+		filter_reset.addEventListener('click', (e) => {
+			affiliation_filter.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
+				checkbox.checked = false;
+			});
+			department_filter.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
+				checkbox.checked = false;
+			});
+			filters.action();
+		});
+	
+		// This is needed because changing the page hash will remove results
+		skip_sidebar.addEventListener('click', (e) => {
+			document.getElementById('results').focus();
+		});
+	
+		WDN.initializePlugin('collapsible-fieldsets');
 	};
 
 	var showOrLoadInitialState = function(forcedState) {
@@ -990,6 +1043,8 @@ define([
 							var splitQuery;
 							var nextAttempt = function(firstName, lastName) {
 								window.location.hash = 'q/' + firstName + '/' +lastName;
+								summary_search_query.innerText = firstName + ' ' + lastName;
+
 								var tmpl = $.templates({
 										markup: searchNoticeSelector,
 										allowCode: true

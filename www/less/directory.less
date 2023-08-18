@@ -191,7 +191,7 @@
 }
 
 
-.results + .results {
+.results:not(.dcf-d-none) + .results {
   margin-top: 2.37em;
 }
 
@@ -222,10 +222,16 @@
   padding-left: 0;
 }
 
-
-#results > *:first-child {
-  margin-top: 0;
+.directory-h-max-filter {
+  max-height: 20rem;
 }
+.directory-filter-fieldset {
+  padding-bottom: 0px !important;
+}
+.directory-filter-fieldset-contents {
+  margin-right: calc(-3.16vw + 1px) !important;
+}
+
 
 
 .record-container .vcard .headline,
@@ -510,6 +516,8 @@
 .pfResult .overflow .roles .organization-name,
 #all_employees ~ .pfResult .overflow .organization-unit,
 .results-container.empty-filters #filters,
+.results-container.empty-filters aside,
+#filter_form:not(.loading) .dcf-progress-spinner,
 .results-container.empty-filters .summary,
 .record-container .record-single,
 .record-container .vcard .card-profile,
