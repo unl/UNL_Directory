@@ -183,7 +183,7 @@ define([
 			// Gets the values of the checkboxes, and the results
 			const checked_options = filter_form.querySelectorAll('input:checked');
 			const result_elements = document.querySelectorAll('div.results ul li');
-			const result_containers = document.querySelectorAll('.result_head, div.results.departments, div.results.affiliation');
+			const result_containers = document.querySelectorAll('.result_head, .likeResults, div.results.departments, div.results.affiliation');
 
 			// Hide the filters
 			affiliation_filter_summary_container.classList.add('dcf-d-none');
@@ -223,7 +223,8 @@ define([
 					result_elements.forEach((result_elem) => {
 						if (result_elem.classList.contains(filter_value)) {
 							result_elem.classList.remove('dcf-d-none');
-							result_elem.closest('.results.affiliation').classList.remove('dcf-d-none');
+							result_elem.closest('.results.affiliation')?.classList.remove('dcf-d-none');
+							result_elem.closest('.likeResults')?.classList.remove('dcf-d-none');
 						}
 					});
 
