@@ -179,7 +179,7 @@ define([
 			});
 		},
 
-		action : function(checkbox) {
+		action : function() {
 			// Gets the values of the checkboxes, and the results
 			const checked_options = filter_form.querySelectorAll('input:checked');
 			const result_elements = document.querySelectorAll('div.results ul li');
@@ -684,7 +684,7 @@ define([
 			affiliation_filter.classList.remove('dcf-d-none');
 			affiliation_filter.addEventListener('click', (e) => {
 				if ( e.target.tagName.toUpperCase() === 'INPUT') {
-					filters.action(e.target);
+					filters.action();
 				}
 			});
 		});
@@ -693,7 +693,7 @@ define([
 			department_filter.classList.remove('dcf-d-none');
 			department_filter.addEventListener('click', (e) => {
 				if ( e.target.tagName.toUpperCase() === 'INPUT') {
-					filters.action(e.target);
+					filters.action();
 				}
 			});
 		});
@@ -706,6 +706,7 @@ define([
 			department_filter.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
 				checkbox.checked = false;
 			});
+			filters.action();
 		});
 	
 		// This is needed because changing the page hash will remove results
