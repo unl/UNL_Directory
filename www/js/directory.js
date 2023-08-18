@@ -657,7 +657,9 @@ define([
 
 			var query = $('#q').val().trim();
 
-			summary_search_query.innerText = query;
+			if (search_summary !== undefined) {
+				summary_search_query.innerText = query;
+			}
 
 			if (query.length) {
 				var newHash = '#q/' + encodeURIComponent(query);
