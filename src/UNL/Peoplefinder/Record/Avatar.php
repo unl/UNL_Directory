@@ -104,7 +104,7 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
             $this->options = [];
         } elseif (isset($options['uid'])) {
             try {
-                $this->record = UNL_Peoplefinder_Record::factory($options['uid']);
+                $this->record = new UNL_Peoplefinder_Record(array('uid' => $options['uid']));
             } catch (Exception $e) {
                 if ($e->getCode() !== 404) {
                     throw $e;
