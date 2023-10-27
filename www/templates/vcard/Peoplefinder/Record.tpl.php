@@ -4,7 +4,7 @@ echo "BEGIN:VCARD\n";
 echo "VERSION:3.0\n";
 echo "N:".$context->sn.";".$context->givenName.";;;\n";
 echo "FN:".$context->givenName." ".$context->sn."\n";
-if (isset($context->unlHROrgUnitNumber)) {
+if (isset($context->unlHROrgUnitNumber) && is_iterable($context->unlHROrgUnitNumber)) {
     foreach ($context->unlHROrgUnitNumber as $orgUnit) {
         if (!$org = UNL_Officefinder_Department::getByorg_unit($orgUnit)) {
             // Couldn't retrieve this org's record from officefinder
