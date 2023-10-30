@@ -32,5 +32,7 @@ RewriteRule ^departments/directory index.php?view=alphalisting [QSA]
 RewriteRule ^departments/editor index.php?view=mydepts [QSA]
 RewriteRule ^departments/$ index.php [QSA]
 
+RewriteRule ^me/$ index.php [QSA]
+
 # Faculty page
 RewriteRule ^faculty/all$ index.php?view=facultyedu&limit=3000
