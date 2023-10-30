@@ -240,7 +240,7 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
     public static function getURL($mixed = null, $additional_params = [])
     {
 
-        $url = UNL_Peoplefinder::$url.'me/';
+        $url = UNL_Peoplefinder::$url.'myinfo/';
 
         if (is_object($mixed)) {
             switch (get_class($mixed)) {
