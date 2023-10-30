@@ -45,11 +45,14 @@ if (in_array($context->options['view'], ['instructions', 'help', 'search'])) {
 
 $page->maincontentarea .=  $savvy->render(null, 'static/modal.tpl.php');;
 
+if ($savvy->getGlobals()['controller'] instanceof UNL_PersonInfo_PageNoticeInterface && $context->has_notice()) {
+    $page->addScriptDeclaration("WDN.initializePlugin('notice');");
+    $page->displayDCFNoticeMessage($context->get_notice_title(), $context->get_notice_message(), $context->get_notice_type(), 'dcf-notice', 'dcf-main');
+}
 
 // add entry-point scripts
 $page->maincontentarea .= $savvy->render(null, 'static/after-main.tpl.php');
 $page->contactinfo = $savvy->render(null, 'static/contact-info.tpl.php');
-
 
 $loginService = UNL_Officefinder::getURL() . 'editor';
 if (strpos($loginService, '//') === 0) {
