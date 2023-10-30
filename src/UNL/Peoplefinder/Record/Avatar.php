@@ -150,13 +150,13 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
         if ($this->record instanceof UNL_Officefinder_Department || $this->record->ou == 'org') {
             $this->url = $this->generateOrgUrl($options);
         } else {
-            $this->url = $this->generatePersonUrl($options);
+            $this->url = $this->sendLocalUserImage($options);
         }
 
         return $this->url;
     }
 
-    protected function generatePersonUrl($options)
+    protected function sendLocalUserImage($options)
     {
         $size = $options['s'];
         $supportSizes = self::getAvatarSizes();
@@ -164,87 +164,13 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
             $size = self::AVATAR_SIZE_MEDIUM;
         }
 
-        $planetRedSize = $size;
-        if ($size === self::AVATAR_SIZE_ORIGINAL) {
-            $planetRedSize = 'master';
-        }
+        $this->record = new UNL_PersonInfo_Record($options['uid']);
+        $image_path = $this->record->get_image_path('original.png');
 
-        $planetRedUid = $this->record->getProfileUid();
-        $profileIconUrl = UNL_Peoplefinder_Record::PLANETRED_BASE_URL .
-            'icon/' .
-            'unl_' .
-            $planetRedUid .
-            '/' .
-            $planetRedSize .
-            '/';
+        header('Content-Type: image/png');
+        readfile($image_path);
 
-        //check if we have the default profile icon used
-        //this is being cached to reduce the number of requests being sent to planetred when directory is under high load
-        $cachedFallbackURL = $this->cache->get($profileIconUrl);
-
-        if (!$cachedFallbackURL) {
-            //no fallback URL was found, so we need a new request
-            $effectiveUrl = $profileIconUrl;
-            $onRedirect = function(
-                RequestInterface $request,
-                ResponseInterface $response,
-                UriInterface $uri
-            ) use (&$effectiveUrl) {
-                $effectiveUrl = (string) $uri;
-            };
-            $client = new Client([
-                'allow_redirects' => [
-                    'on_redirect' => $onRedirect
-                ],
-                'http_errors' => false,
-            ]);
-            $request = new Request('HEAD', $profileIconUrl);
-            $response = $client->send($request);
-
-            //check if it redirects to the default image
-            if ($effectiveUrl == $profileIconUrl) {
-                if ($response->getStatusCode() == 200) {
-                    //The old version of planetred is in use and will return a 200 response for images.
-                    return $effectiveUrl;
-                }
-
-                //request to planet red failed (404 or 500 like error) however
-                //if a user has not registered with planetred, it should still redirect to the default image
-                $fallbackUrl = 'mm';
-            } elseif (false === strpos($effectiveUrl, 'user/default') && false === strpos($effectiveUrl, 'mod/profile/graphics/default')) {
-                //looks like it isn't the default image. Serve this this one up.
-                return $effectiveUrl;
-            } else {
-                //default image again.
-                $fallbackUrl = $effectiveUrl;
-
-                //Cache this for a bit
-                $this->cache->set($profileIconUrl, $fallbackUrl, 3600);
-            }
-        } else {
-            $fallbackUrl = $cachedFallbackURL;
-            $effectiveUrl = $cachedFallbackURL;
-        }
-
-        // Do we have something Gravatar can use?
-        if (!$this->record->mail || !$this->record->eduPersonPrincipalName) {
-            return $effectiveUrl;
-        }
-
-        $gravatarParams = [
-            's' => $supportSizes[$size],
-            'd' => $fallbackUrl,
-        ];
-
-        if ($this->record->mail) {
-            $gravatarHash = md5($this->record->mail);
-        } else {
-            $gravatarHash = md5($this->record->eduPersonPrincipalName);
-        }
-
-        $profileIconUrl = self::GRAVATAR_BASE_URL . $gravatarHash . '?' . http_build_query($gravatarParams);
-
-        return $profileIconUrl;
+        exit();
     }
 
     protected function generateOrgUrl($options)
