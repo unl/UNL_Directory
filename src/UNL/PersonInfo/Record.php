@@ -56,15 +56,6 @@ class UNL_PersonInfo_Record
             throw new Exception('File Does Not Exist');
         }
 
-        try {
-            $image_details = getimagesize($path_to_file_to_save);
-            if (!is_array($image_details)) {
-                throw new Exception('Not an Image');
-            }
-        }catch (Exception $e) {
-            throw new Exception('Not an Image');
-        }
-
         $path_to_save_location = dirname(dirname(dirname(__DIR__))) . '/data/person_images/' . $this->uid . '/' . $file_name;
 
         if (!file_exists(dirname($path_to_save_location))) {
