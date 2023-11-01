@@ -42,6 +42,14 @@ class UNL_PersonInfo_Record
         return $got_record;
     }
 
+    public function clear_images() {
+        $path_to_save_location = dirname(dirname(dirname(__DIR__))) . '/data/person_images/' . $this->uid;
+        $tmp_files = array_diff(scandir($path_to_save_location), array('.','..'));
+        foreach ($tmp_files as $file) {
+            unlink($path_to_save_location . '/' . $file);
+        }
+    }
+
     public function save_image($path_to_file_to_save, $file_name):bool {
 
         if (!file_exists($path_to_file_to_save)) {
