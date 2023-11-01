@@ -100,6 +100,7 @@ $showKnowledge = $context->shouldShowKnowledge() === TRUE && $hasKnowledge === T
                 $sisCollege = array($sisCollege);
             }
         ?>
+        <div class="sis-title dcf-txt-sm dcf-mt-5">
         <?php if (isset($context->unlSISClassLevel)): ?>
             <div class="grade"><?php echo $context->formatClassLevel() ?></div>
         <?php endif; ?>
@@ -113,7 +114,6 @@ $showKnowledge = $context->shouldShowKnowledge() === TRUE && $hasKnowledge === T
                 <div class="minor"><?php echo $context->formatMajor($minor) ?></div>
             <?php endforeach; ?>
         <?php endif; ?>
-        <div class="sis-title dcf-txt-sm dcf-mt-5">
             <?php foreach ($sisCollege as $college): ?>
                 <?php
                     $college = $context->formatCollege($college);
