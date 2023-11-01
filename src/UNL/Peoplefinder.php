@@ -41,6 +41,8 @@ class UNL_Peoplefinder
 	const AFFILIATION_OVERRIDE = 'override'; // (will exist in guest ou)
 	const AFFILIATION_SPONSORED = 'sponsored'; // (will exist in guest ou)
 
+    public static $allowed_unluncwid_IPs = array();
+
     public static $resultLimit = 250;
 
     public static $url = '';
