@@ -103,7 +103,7 @@ define([
 
 			const summary_template = document.getElementById('summary_template');
 			let summary_element = summary_template.content.cloneNode('true');
-	
+
 			$results.prepend(summary_element);
 	
 			search_summary = document.getElementById('search_summary');
@@ -288,7 +288,10 @@ define([
 			numResultText += ' total results';
 		}
 
-		summary_total_results.innerText = numResultText;
+		if (summary_total_results !== undefined) {
+			summary_total_results.innerText = numResultText;
+		}
+
 	};
 
 	/**

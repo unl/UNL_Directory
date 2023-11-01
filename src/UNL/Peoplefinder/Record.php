@@ -340,6 +340,8 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
         $affiliations = $this->eduPersonAffiliation;
         if ($affiliations instanceof ArrayIterator) {
             $affiliations = $affiliations->getArrayCopy();
+        } elseif (is_string($affiliations)) {
+            $affiliations = array($affiliations);
         }
 
         $affiliations = array_intersect(UNL_Peoplefinder::$displayedAffiliations, $affiliations);
@@ -370,6 +372,8 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
         $affiliations = $this->eduPersonAffiliation;
         if ($affiliations instanceof ArrayIterator) {
             $affiliations = $affiliations->getArrayCopy();
+        } elseif (is_string($affiliations)) {
+            $affiliations = array($affiliations);
         }
         
         foreach ($affiliationsWithAppointments as $affiliation) {
