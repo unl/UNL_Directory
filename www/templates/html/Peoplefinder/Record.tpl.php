@@ -101,19 +101,19 @@ $showKnowledge = $context->shouldShowKnowledge() === TRUE && $hasKnowledge === T
             }
         ?>
         <div class="sis-title dcf-txt-sm dcf-mt-5">
-        <?php if (isset($context->unlSISClassLevel)): ?>
-            <div class="grade"><?php echo $context->formatClassLevel() ?></div>
-        <?php endif; ?>
-        <?php if (isset($context->unlSISMajor)): ?>
-            <?php foreach ($sisMajor as $major): ?>
-                <div class="major"><?php echo $context->formatMajor($major) ?></div>
-            <?php endforeach; ?>
-        <?php endif; ?>
-        <?php if (isset($context->unlSISMinor)): ?>
-            <?php foreach ($sisMinor as $minor): ?>
-                <div class="minor"><?php echo $context->formatMajor($minor) ?></div>
-            <?php endforeach; ?>
-        <?php endif; ?>
+            <?php if (isset($context->unlSISClassLevel)): ?>
+                <div class="grade"><?php echo $context->formatClassLevel() ?></div>
+            <?php endif; ?>
+            <?php if (isset($context->unlSISMajor)): ?>
+                <?php foreach ($sisMajor as $major): ?>
+                    <div class="major"><?php echo $context->formatMajor($major) ?></div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+            <?php if (isset($context->unlSISMinor)): ?>
+                <?php foreach ($sisMinor as $minor): ?>
+                    <div class="minor"><?php echo $context->formatMajor($minor) ?></div>
+                <?php endforeach; ?>
+            <?php endif; ?>
             <?php foreach ($sisCollege as $college): ?>
                 <?php
                     $college = $context->formatCollege($college);
