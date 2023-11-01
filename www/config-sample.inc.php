@@ -49,6 +49,9 @@ UNL_Peoplefinder_Driver_OracleDB::$email_priority_list = array(
     'huskers.unl.edu',
 );
 
+UNL_Peoplefinder::$allowed_unluncwid_IPs = array();
+
+
 // Test domains used in Peoplefinder.tpl.php
 UNL_Peoplefinder::$testDomains = array('directory-test.unl.edu', 'localhost');
 
