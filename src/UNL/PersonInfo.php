@@ -189,16 +189,53 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
         var_dump($_POST);
         var_dump($_FILES);
 
-        $extension = explode('.', $_FILES['profile_input']['name']);
-        $extension = end($extension);
+        // $extension = explode('.', $_FILES['profile_input']['name']);
+        // $extension = end($extension);
+
+        //TODO: Remove all previous images (Maybe move them to tmp folder in case something goes wrong)
+        // TODO: Convert image to standard type
+        //TODO: Crop Image
+        //TODO: Convert to different formats
+        //TODO: Convert to different sizes
+        //TODO: Save them all
+
+        //TODO: Save any other type of data we would want
 
         $user = UNL_PersonInfo::getUser(true);
         $user_record = new UNL_PersonInfo_Record($user);
+
         try {
-            $user_record->save_image($_FILES['profile_input']['tmp_name'], 'original.' . $extension);
+            $image_helper = new UNL_PersonInfo_ImageHelper(
+                $_FILES['profile_input']['tmp_name'],
+                array(
+                    'keep_files' => true,
+                )
+            );
+
+            $image_helper->crop_image($_POST['profile_square_pos_x'], $_POST['profile_square_pos_y'], $_POST['profile_square_size'], $_POST['profile_square_size']);
+
+            $image_helper->save_to_formats(array(
+                'jpeg',
+                'png',
+                'avif',
+                'webp',
+            ));
+
+            $image_helper->write_to_user($user_record);
+
+        } catch (UNL_PersonInfo_Exceptions_InvalidImage $e) {
+            $this->notice_title = "Error Updating Your Info";
+            $this->notice_message = $e->getMessage();
+            $this->notice_type = 'WARNING';
+            return;
+        } catch (UNL_PersonInfo_Exceptions_ImageProcessing $e) {
+            $this->notice_title = "Error Updating Your Info";
+            $this->notice_message = $e->getMessage();
+            $this->notice_type = 'WARNING';
+            return;
         } catch (Exception $e) {
             $this->notice_title = "Error Updating Your Info";
-            $this->notice_message = "We had an error trying to save your image";
+            $this->notice_message = $e->getMessage();
             $this->notice_type = 'WARNING';
             return;
         }
