@@ -1,6 +1,3 @@
-<?php
-    // var_dump($context->getUser());
-?>
 <div class=" dcf-bleed dcf-hero dcf-hero-default">
     <!-- TemplateEndEditable -->
     <div class="dcf-hero-group-1">
