@@ -164,6 +164,11 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
             $size = self::AVATAR_SIZE_MEDIUM;
         }
 
+        //TODO: Get the format
+        //TODO: Get the size
+        //TODO: Grab the correct image from that data
+        //TODO: Display it
+
         $this->record = new UNL_PersonInfo_Record($options['uid']);
         $image_path = $this->record->get_image_path('original.png');
 
