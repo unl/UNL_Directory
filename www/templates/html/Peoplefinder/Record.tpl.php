@@ -114,12 +114,6 @@ $showKnowledge = $context->shouldShowKnowledge() === TRUE && $hasKnowledge === T
             <?php endforeach; ?>
         <?php endif; ?>
         <div class="sis-title dcf-txt-sm dcf-mt-5">
-            <?php
-                $sisCollege = $context->getRawObject()->unlSISCollege;
-                if (is_string($sisCollege)) {
-                    $sisCollege = array($sisCollege);
-                }
-            ?>
             <?php foreach ($sisCollege as $college): ?>
                 <?php
                     $college = $context->formatCollege($college);
