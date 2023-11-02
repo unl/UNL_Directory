@@ -131,6 +131,7 @@ class UNL_PersonInfo_ImageHelper
             if ($saved_image === false) {
                 throw new UNL_PersonInfo_Exceptions_ImageProcessing('Error Saving JPEG Image');
             }
+            $this->files[] = $path;
         }
     }
 
@@ -146,6 +147,7 @@ class UNL_PersonInfo_ImageHelper
             if ($saved_image === false) {
                 throw new UNL_PersonInfo_Exceptions_ImageProcessing('Error Saving PNG Image');
             }
+            $this->files[] = $path;
         }
     }
 
@@ -161,6 +163,7 @@ class UNL_PersonInfo_ImageHelper
             if ($saved_image === false) {
                 throw new UNL_PersonInfo_Exceptions_ImageProcessing('Error Saving GIF Image');
             }
+            $this->files[] = $path;
         }
     }
 
@@ -176,6 +179,7 @@ class UNL_PersonInfo_ImageHelper
             if ($saved_image === false) {
                 throw new UNL_PersonInfo_Exceptions_ImageProcessing('Error Saving BMP Image');
             }
+            $this->files[] = $path;
         }
     }
 
@@ -191,6 +195,7 @@ class UNL_PersonInfo_ImageHelper
             if ($saved_image === false) {
                 throw new UNL_PersonInfo_Exceptions_ImageProcessing('Error Saving AVIF Image');
             }
+            $this->files[] = $path;
         }
     }
 
@@ -206,6 +211,7 @@ class UNL_PersonInfo_ImageHelper
             if ($saved_image === false) {
                 throw new UNL_PersonInfo_Exceptions_ImageProcessing('Error Saving WEBP Image');
             }
+            $this->files[] = $path;
         }
     }
 }
