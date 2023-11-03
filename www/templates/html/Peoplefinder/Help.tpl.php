@@ -56,11 +56,11 @@ if (isset($page)) {
                 </div>
                 <p>
                     Want to show your photo on your Directory result instead of the default outline? We've got a couple of ways to do that.
-                    Photos are pulled from two sources, <a href="https://planetred.unl.edu/">Planet Red</a> and <a href="https://en.gravatar.com/">Gravatar</a>.
+                    Photos are pulled from two sources, <a href="<?php echo UNL_PersonInfo::getURL(); ?>">My Info</a> and <a href="https://en.gravatar.com/">Gravatar</a>.
                     If you don't currently use either of these services, getting started is pretty simple.
                 </p>
-                <p>As a member of the university community, we've got a <a href="https://planetred.unl.edu/">Planet Red</a> profile waiting for you to upload a photo to. All you need to do is fill out a little profile information and we'll automatically pull your photo from there.</p>
-                <p>If you'd prefer not to create a Planet Red profile and you are a faculty or staff member that has been issued a campus email address, you can use that address to create a <a href="https://en.gravatar.com/">Gravatar</a> profile. Once you've got your profile loaded with an avatar, we'll automatically pull your photo from there.</p>
+                <p>Directory has avatar management built in so so uploading a new avatar or updating your current one is super easy. Just head over to the <a href="<?php echo UNL_PersonInfo::getURL(); ?>">My Info</a> page to edit your avatar.</p>
+                <p>If you'd prefer to not use the My Info page and you are a faculty or staff member that has been issued a campus email address, you can use that address to create a <a href="https://en.gravatar.com/">Gravatar</a> profile. Once you've got your profile loaded with an avatar, we'll automatically pull your photo from there.</p>
             </div>
         </div>
     </div>
