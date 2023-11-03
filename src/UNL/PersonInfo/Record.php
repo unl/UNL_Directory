@@ -67,8 +67,23 @@ class UNL_PersonInfo_Record
         return copy($path_to_file_to_save, $path_to_save_location);
     }
 
-    public function get_image_path($file_name):string {
-        return dirname(dirname(dirname(__DIR__))) . '/data/person_images/' . $this->uid . '/' . $file_name;
+    public function has_images()
+    {
+        $path_to_save_location = dirname(dirname(dirname(__DIR__))) . '/data/person_images/' . $this->uid;
+        if (!file_exists($path_to_save_location)) {
+            return false;
+        }
+        $tmp_files = array_diff(scandir($path_to_save_location), array('.','..'));
+        return !empty($tmp_files);
+    }
+
+    public function get_image_path($file_name)
+    {
+        $file_path = dirname(dirname(dirname(__DIR__))) . '/data/person_images/' . $this->uid . '/' . $file_name;
+        if (!file_exists($file_path)) {
+            return false;
+        }
+        return $file_path;
     }
 
     /**
