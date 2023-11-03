@@ -186,85 +186,153 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
      */
     public function handlePost()
     {
-        var_dump($_POST);
-        var_dump($_FILES);
+        UNL_PersonInfo::getUser(true);
 
-        // $extension = explode('.', $_FILES['profile_input']['name']);
-        // $extension = end($extension);
-
-        //TODO: Remove all previous images (Maybe move them to tmp folder in case something goes wrong)
-        // TODO: Convert image to standard type
-        //TODO: Crop Image
-        //TODO: Convert to different formats
-        //TODO: Convert to different sizes
-        //TODO: Save them all
-
-        //TODO: Save any other type of data we would want
-
-        $user = UNL_PersonInfo::getUser(true);
-        $user_record = new UNL_PersonInfo_Record($user);
-
-        try {
-            $image_helper = new UNL_PersonInfo_ImageHelper(
-                $_FILES['profile_input']['tmp_name'],
-                array(
-                    'keep_files' => true,
-                )
+        if (!$this->validateCSRF()) {
+            $this->create_notice(
+                "Error With Your Request",
+                "Invalid security token provided. If you think this was an error, please retry the request.",
+                "WARNING"
             );
 
-            $image_helper->crop_image($_POST['profile_square_pos_x'], $_POST['profile_square_pos_y'], $_POST['profile_square_size'], $_POST['profile_square_size']);
-
-            $image_helper->save_to_formats(array(
-                'jpeg',
-                'png',
-                'avif',
-                'webp',
-            ));
-
-            $image_helper->write_to_user($user_record);
-
-        } catch (UNL_PersonInfo_Exceptions_InvalidImage $e) {
-            $this->notice_title = "Error Updating Your Info";
-            $this->notice_message = $e->getMessage();
-            $this->notice_type = 'WARNING';
-            return;
-        } catch (UNL_PersonInfo_Exceptions_ImageProcessing $e) {
-            $this->notice_title = "Error Updating Your Info";
-            $this->notice_message = $e->getMessage();
-            $this->notice_type = 'WARNING';
-            return;
-        } catch (Exception $e) {
-            $this->notice_title = "Error Updating Your Info";
-            $this->notice_message = $e->getMessage();
-            $this->notice_type = 'WARNING';
-            return;
+            self::redirect(self::getURL(), true);
         }
 
-        $this->notice_title = "Updated Your Info";
-        $this->notice_message = "Your image was uploaded successfully";
-        $this->notice_type = 'SUCCESS';
+        if ($_POST['_type'] == 'set_avatar') {
+            $this->set_avatar();
+        }
+
+        if ($_POST['_type'] == 'delete_avatar') {
+            $this->delete_avatar();
+        }
     }
 
     public function has_notice():bool
     {
-        return $this->notice_title !== '' && $this->notice_type !== '';
+        return session_status() !== PHP_SESSION_NONE
+            && isset($_SESSION["person_info_notice_title"])
+            && !empty($_SESSION["person_info_notice_title"]);
     }
 
     public function get_notice_type(): string
     {
-        return $this->notice_types[$this->notice_type] ?? 'dcf-notice-info';
+        return $this->notice_types[strtoupper($_SESSION["person_info_notice_type"])] ?? 'dcf-notice-info';
     }
 
     public function get_notice_title(): string
     {
-        return $this->notice_title;
+        return $_SESSION["person_info_notice_title"];
     }
 
     public function get_notice_message(): string
     {
-        return $this->notice_message;
+        return $_SESSION["person_info_notice_message"];
     }
 
+    public function create_notice(string $notice_tile, string $notice_message, string $notice_type)
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        $_SESSION["person_info_notice_title"]   = $notice_tile;
+        $_SESSION["person_info_notice_message"] = $notice_message;
+        $_SESSION["person_info_notice_type"]    = $notice_type;
+    }
+
+    public function clear_notice()
+    {
+        unset($_SESSION["person_info_notice_title"]);
+        unset($_SESSION["person_info_notice_message"]);
+        unset($_SESSION["person_info_notice_type"]);
+    }
+
+    public function set_avatar()
+    {
+        $user = self::$user;
+        $user_record = new UNL_PersonInfo_Record($user);
+
+        // Try to manipulate the image
+        try {
+            // Create a new image helper
+            $image_helper = new UNL_PersonInfo_ImageHelper(
+                $_FILES['profile_input']['tmp_name'],
+                array(
+                    // 'keep_files' => true,
+                )
+            );
+
+            // Crop the image
+            $image_helper->crop_image($_POST['profile_square_pos_x'], $_POST['profile_square_pos_y'], $_POST['profile_square_size'], $_POST['profile_square_size']);
+
+            // Make many sizes and resolutions of the image
+            $image_helper->resize_image(array(16, 24, 40, 48, 72, 100, 120, 200, 240, 400, 800), array(72, 144));
+
+            // Save all the versions to these formats
+            $image_helper->save_to_formats(array(
+                'jpeg',
+                'avif',
+            ));
+
+            // Save those files to the user
+            $image_helper->write_to_user($user_record);
+
+        } catch (UNL_PersonInfo_Exceptions_InvalidImage $e) {
+            $this->create_notice(
+                "Error Updating Your Info",
+                $e->getMessage(),
+                "WARNING"
+            );
+            self::redirect(self::getURL(), true);
+        } catch (UNL_PersonInfo_Exceptions_ImageProcessing $e) {
+            $this->create_notice(
+                "Error Updating Your Info",
+                $e->getMessage(),
+                "WARNING"
+            );
+            self::redirect(self::getURL(), true);
+        } catch (Exception $e) {
+            $this->create_notice(
+                "Error Updating Your Info",
+                $e->getMessage(),
+                "WARNING"
+            );
+            self::redirect(self::getURL(), true);
+        }
+
+        // Let the user know things went well
+        $this->create_notice(
+            "Updated Your Info",
+            "Your image was uploaded successfully",
+            "SUCCESS"
+        );
+
+        self::redirect(self::getURL(), true);
+    }
+
+    public function delete_avatar()
+    {
+        $user = self::$user;
+        $user_record = new UNL_PersonInfo_Record($user);
+
+        try {
+            $user_record->clear_images();
+        } catch (Exception $e) {
+            $this->create_notice(
+                "Error Deleting Your Avatar",
+                $e->getMessage(),
+                "WARNING"
+            );
+            self::redirect(self::getURL(), true);
+        }
+
+        $this->create_notice(
+            "Deleted Your Avatar",
+            "Your avatar has been successfully deleted",
+            "SUCCESS"
+        );
+
+        self::redirect(self::getURL(), true);
+    }
 
     /**
      * Get the URL to the officefinder or a specific object

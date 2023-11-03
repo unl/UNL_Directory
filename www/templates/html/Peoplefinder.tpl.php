@@ -48,6 +48,7 @@ $page->maincontentarea .=  $savvy->render(null, 'static/modal.tpl.php');;
 if ($savvy->getGlobals()['controller'] instanceof UNL_PersonInfo_PageNoticeInterface && $context->has_notice()) {
     $page->addScriptDeclaration("WDN.initializePlugin('notice');");
     $page->displayDCFNoticeMessage($context->get_notice_title(), $context->get_notice_message(), $context->get_notice_type(), 'dcf-notice', 'dcf-main');
+    $context->clear_notice();
 }
 
 // add entry-point scripts
