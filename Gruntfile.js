@@ -13,7 +13,8 @@ module.exports = function (grunt) {
 	];
 
 	var jsFiles = [
-		jsDir + '/directory.js'
+		jsDir + '/directory.js',
+		jsDir + '/directory-person-info.js'
 	];
 
 	var lessFiles = {};
@@ -22,7 +23,8 @@ module.exports = function (grunt) {
 	});
 
 	var builtJsFiles = {};
-	builtJsFiles[jsDir + '/directory.min.js'] = jsFiles;
+	builtJsFiles[jsDir + '/directory.min.js'] = jsFiles[0];
+	builtJsFiles[jsDir + '/directory-person-info.min.js'] = jsFiles[1];
 
 	var autoprefixPlugin = new (require('less-plugin-autoprefix'))({browsers: ["last 2 versions"]});
 	var cleanCssPlugin = new (require('less-plugin-clean-css'))();
