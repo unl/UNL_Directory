@@ -165,13 +165,13 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
         if ($this->record instanceof UNL_Officefinder_Department || $this->record->ou == 'org') {
             $this->url = $this->generateOrgUrl($options);
         } else {
-            $this->url = $this->sendLocalUserImage($options);
+            $this->url = $this->generatePersonUrl($options);
         }
 
         return $this->url;
     }
 
-    protected function sendLocalUserImage($options)
+    protected function generatePersonUrl($options)
     {
         $size = $options['s'] ?? self::AVATAR_SIZE_MEDIUM;
         $dpi = $options['dpi'] ?? "";
@@ -190,11 +190,14 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
             if (!isset($format) || empty($format) || !in_array(strtolower($format), array('jpeg', 'avif'))) {
                 $format = 'jpeg';
             }
+
             $avatar_size = $supportSizes[$size];
-            $image_path = $personInfoRecord->get_image_path('cropped_' . $avatar_size . '_' . $dpi . '.' . $format);
-            header('Content-Type: image/' . $format);
-            readfile($image_path);
-            exit();
+            $image_file_name = 'cropped_' . $avatar_size . '_' . $dpi . '.' . $format;
+            $image_url = $personInfoRecord->get_image_url($image_file_name);
+
+            if ($image_url !== false) {
+                return $image_url;
+            }
         }
 
         $effectiveUrl = UNL_Peoplefinder::$url . 'images/default-avatar.jpg';
