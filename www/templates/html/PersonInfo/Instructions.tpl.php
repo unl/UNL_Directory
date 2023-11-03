@@ -14,6 +14,18 @@
 <div class="dcf-main-content">
     <div class="dcf-wrapper">
         <p>Welcome to the University of Nebraska–Lincoln Directory Personal Info Manager.</p>
+        <div class="dcf-grid">
+            <div class="dcf-col-25%-start">
+                <p>Current Avatar</p>
+                <img src="https://local-directory.unl.edu/avatar/tneumann9"></img>
+                <form id="delete_avatar">
+                    <input type="hidden" value="delete_avatar" name="_type" />
+                    <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>">
+                    <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
+                    <input class="dcf-btn dcf-btn-secondary" form="delete_avatar" type="submit" value="Delete Avatar" />
+                </form>
+            </div>
+            
             <form class="dcf-form dcf-col-75%-end" method="post" enctype="multipart/form-data" action="<?php echo UNL_PersonInfo::getURL() ?>" id="avatar">
                 <input type="hidden" value="set_avatar" name="_type" />
                 <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>">
@@ -36,6 +48,7 @@
                     <input id="submit_button" class="dcf-btn dcf-btn-primary" form="avatar" type="submit" value="Update Avatar" disabled />
                 </fieldset>
             </form>
+        </div>
     </div>
 </div>
 
