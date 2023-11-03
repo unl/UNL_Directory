@@ -21,4 +21,12 @@ class UNL_PersonInfo_Instructions
     public function getUser() {
         return $this->user;
     }
+
+    public function get_avatar_URL($size = UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_MEDIUM)
+    {
+        $avatar = new UNL_Peoplefinder_Record_Avatar(array(
+            'uid' => $this->user,
+        ));
+        return $avatar->getUrl(['s' => $size]);
+    }
 }

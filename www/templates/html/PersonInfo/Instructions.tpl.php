@@ -5,7 +5,7 @@
             <nav class="dcf-breadcrumbs" id="dcf-breadcrumbs" role="navigation" aria-label="breadcrumbs"></nav>
         </div>
         <header class="dcf-page-title" id="dcf-page-title">
-            <h1> Personal Info </h1>
+            <h1> My Info </h1>
         </header>
     </div>
     <div class="dcf-hero-group-2"></div>
@@ -13,11 +13,15 @@
 
 <div class="dcf-main-content">
     <div class="dcf-wrapper">
-        <p>Welcome to the University of Nebraska–Lincoln Directory Personal Info Manager.</p>
         <div class="dcf-grid">
             <div class="dcf-col-25%-start">
-                <p>Current Avatar</p>
-                <img src="https://local-directory.unl.edu/avatar/tneumann9"></img>
+                <p>Your current avatar</p>
+                <div class="card-profile dcf-d-block dcf-mb-3 dcf-h-10 dcf-w-10 dcf-ratio dcf-ratio-1x1">
+                    <img class="photo profile_pic dcf-ratio-child dcf-d-block dcf-obj-fit-cover" itemprop="image" src="<?php echo $context->get_avatar_URL(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_LARGE) ?>" alt="" />
+                </div>
+                <div class="card-profile dcf-d-block dcf-mb-3 dcf-h-10 dcf-w-10 dcf-ratio dcf-ratio-1x1">
+                    <img class="photo profile_pic dcf-ratio-child dcf-circle dcf-d-block dcf-obj-fit-cover" itemprop="image" src="<?php echo $context->get_avatar_URL(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_LARGE) ?>" alt="" />
+                </div>
                 <form id="delete_avatar">
                     <input type="hidden" value="delete_avatar" name="_type" />
                     <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>">
@@ -31,7 +35,7 @@
                 <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>">
                 <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
                 <fieldset>
-                    <legend>Your Info</legend>
+                    <legend>Upload a new avatar</legend>
                     <div class="dcf-grid dcf-grid-halves">
                         <div class="dcf-form-group">
                             <label for="profile_input">Avatar Photo Input</label>
