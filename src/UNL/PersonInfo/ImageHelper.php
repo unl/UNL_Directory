@@ -2,16 +2,22 @@
 
 class UNL_PersonInfo_ImageHelper
 {
+    /** @var string $original_image_path */
     protected $original_image_path;
 
     /** @var Array[Imagick] $images */
     protected $images = array();
+
     /** @var Array[string] $images */
     protected $files = array();
 
+    /** @var bool $keep_files */
     protected $keep_files = false;
 
+    /** @var string $random_id */
     protected $random_id;
+
+    /** @var string $tmp_path */
     protected $tmp_path;
 
     public function __construct(string $path_to_image, array $options = array())
@@ -86,9 +92,28 @@ class UNL_PersonInfo_ImageHelper
         $this->images['cropped'] = $tmp_image;
     }
 
-    public function resize(array $sizes)
+    public function resize_image(array $sizes, array $resolutions = array(72))
     {
-        
+        $images_to_resize = array('original' => $this->images['original']);
+        if (isset($this->images['cropped'])) {
+            $images_to_resize['cropped'] = $this->images['cropped'];
+        }
+
+        foreach ($sizes as $width) {
+            foreach ($resolutions as $dpi) {
+                foreach ($images_to_resize as $image_name => $current_image) {
+                    /** @var Imagick $current_image */
+                    $tmp_image = clone $current_image;
+    
+                    $tmp_image->setImageUnits(Imagick::RESOLUTION_PIXELSPERINCH);
+                    $tmp_image->setImageResolution($dpi, $dpi);
+
+                    $tmp_image->resizeImage($width, null, Imagick::FILTER_LANCZOS, 1);
+
+                    $this->images[$image_name . '_' . $width . '_' . $dpi] = $tmp_image;
+                }
+            }
+        }
     }
 
     public function save_to_formats(array $formats)
