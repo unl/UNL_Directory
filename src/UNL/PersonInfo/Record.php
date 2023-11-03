@@ -43,7 +43,7 @@ class UNL_PersonInfo_Record
     }
 
     public function clear_images() {
-        $path_to_save_location = dirname(dirname(dirname(__DIR__))) . '/data/person_images/' . $this->uid;
+        $path_to_save_location = dirname(dirname(dirname(__DIR__))) . '/www/person_images/' . $this->uid;
         if (file_exists($path_to_save_location)) {
             $tmp_files = array_diff(scandir($path_to_save_location), array('.','..'));
             foreach ($tmp_files as $file) {
@@ -58,7 +58,7 @@ class UNL_PersonInfo_Record
             throw new Exception('File Does Not Exist');
         }
 
-        $path_to_save_location = dirname(dirname(dirname(__DIR__))) . '/data/person_images/' . $this->uid . '/' . $file_name;
+        $path_to_save_location = dirname(dirname(dirname(__DIR__))) . '/www/person_images/' . $this->uid . '/' . $file_name;
 
         if (!file_exists(dirname($path_to_save_location))) {
             mkdir(dirname($path_to_save_location));
@@ -69,7 +69,7 @@ class UNL_PersonInfo_Record
 
     public function has_images()
     {
-        $path_to_save_location = dirname(dirname(dirname(__DIR__))) . '/data/person_images/' . $this->uid;
+        $path_to_save_location = dirname(dirname(dirname(__DIR__))) . '/www/person_images/' . $this->uid;
         if (!file_exists($path_to_save_location)) {
             return false;
         }
@@ -79,11 +79,20 @@ class UNL_PersonInfo_Record
 
     public function get_image_path($file_name)
     {
-        $file_path = dirname(dirname(dirname(__DIR__))) . '/data/person_images/' . $this->uid . '/' . $file_name;
+        $file_path = dirname(dirname(dirname(__DIR__))) . '/www/person_images/' . $this->uid . '/' . $file_name;
         if (!file_exists($file_path)) {
             return false;
         }
         return $file_path;
+    }
+
+    public function get_image_url($file_name)
+    {
+        $file_path = dirname(dirname(dirname(__DIR__))) . '/www/person_images/' . $this->uid . '/' . $file_name;
+        if (!file_exists($file_path)) {
+            return false;
+        }
+        return UNL_Peoplefinder::getURL() . 'images/avatars/' . $this->uid . '/' . $file_name;
     }
 
     /**

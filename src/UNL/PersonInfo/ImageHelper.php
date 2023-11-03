@@ -23,7 +23,7 @@ class UNL_PersonInfo_ImageHelper
     public function __construct(string $path_to_image, array $options = array())
     {
         $this->random_id = uniqid();
-        $this->tmp_path = dirname(dirname(dirname(__DIR__))) . '/data/person_images/tmp/' . $this->random_id . '/';
+        $this->tmp_path = dirname(dirname(dirname(__DIR__))) . '/www/person_images/tmp/' . $this->random_id . '/';
 
         if (!file_exists($this->tmp_path)) {
             mkdir($this->tmp_path);

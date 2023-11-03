@@ -34,5 +34,8 @@ RewriteRule ^departments/$ index.php [QSA]
 
 RewriteRule ^myinfo/?$ index.php [QSA]
 
+RewriteCond %{REQUEST_URI} ^/images/avatars/(.*)$
+RewriteRule (.*) /person_images/%1 [L]
+
 # Faculty page
 RewriteRule ^faculty/all$ index.php?view=facultyedu&limit=3000
