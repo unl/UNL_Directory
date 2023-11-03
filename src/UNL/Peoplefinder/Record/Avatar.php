@@ -19,6 +19,8 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
     const AVATAR_SIZE_LARGE = 'large';
     const AVATAR_SIZE_ORIGINAL = 'original';
 
+    public static $disable_gravatar = false;
+
     protected $options;
 
     protected $record;
@@ -79,13 +81,26 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
             self::AVATAR_SIZE_LARGE => 'lg',
         ];
 
+        //16, 24, 40, 48, 72, 100, 120, 200, 240, 400, 800
+
         $planetRedSizeMap = [
             self::AVATAR_SIZE_ORIGINAL => '400', //default
             self::AVATAR_SIZE_LARGE => '200',
             self::AVATAR_SIZE_MEDIUM => '100',
             self::AVATAR_SIZE_SMALL => '40',
-            self::AVATAR_SIZE_TINY => '25',
+            self::AVATAR_SIZE_TINY => '24',
             self::AVATAR_SIZE_TOPBAR => '16',
+            '800' => 800,
+            '400' => 400,
+            '240' => 240,
+            '200' => 200,
+            '120' => 120,
+            '100' => 100,
+            '72' => 72,
+            '48' => 48,
+            '40' => 40,
+            '24' => 24,
+            '16' => 16,
         ];
 
         if ($forBuilding) {
@@ -158,24 +173,55 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
 
     protected function sendLocalUserImage($options)
     {
-        $size = $options['s'];
+        $size = $options['s'] ?? self::AVATAR_SIZE_MEDIUM;
+        $dpi = $options['dpi'] ?? "";
+        $format = $options['format'] ?? "";
+
         $supportSizes = self::getAvatarSizes();
         if (!isset($supportSizes[$size])) {
             $size = self::AVATAR_SIZE_MEDIUM;
         }
 
-        //TODO: Get the format
-        //TODO: Get the size
-        //TODO: Grab the correct image from that data
-        //TODO: Display it
+        $personInfoRecord = new UNL_PersonInfo_Record($options['uid']);
+        if ($personInfoRecord->has_images()) {
+            if (!isset($dpi) || empty($dpi) || !in_array($dpi, array('72', '144'))) {
+                $dpi = '72';
+            }
+            if (!isset($format) || empty($format) || !in_array(strtolower($format), array('jpeg', 'avif'))) {
+                $format = 'jpeg';
+            }
+            $avatar_size = $supportSizes[$size];
+            $image_path = $personInfoRecord->get_image_path('cropped_' . $avatar_size . '_' . $dpi . '.' . $format);
+            header('Content-Type: image/' . $format);
+            readfile($image_path);
+            exit();
+        }
 
-        $this->record = new UNL_PersonInfo_Record($options['uid']);
-        $image_path = $this->record->get_image_path('original.png');
+        $effectiveUrl = UNL_Peoplefinder::$url . 'images/default-avatar.jpg';
+        $fallbackUrl = UNL_Peoplefinder::$url . 'images/default-avatar.jpg';
 
-        header('Content-Type: image/png');
-        readfile($image_path);
+        if (self::$disable_gravatar) {
+            return $effectiveUrl;
+        }
 
-        exit();
+        if (!$this->record->mail || !$this->record->eduPersonPrincipalName) {
+            return $effectiveUrl;
+        }
+
+        $gravatarParams = [
+            's' => $supportSizes[$size],
+            'd' => $fallbackUrl,
+        ];
+
+        if ($this->record->mail) {
+            $gravatarHash = md5($this->record->mail);
+        } else {
+            $gravatarHash = md5($this->record->eduPersonPrincipalName);
+        }
+
+        $profileIconUrl = self::GRAVATAR_BASE_URL . $gravatarHash . '?' . http_build_query($gravatarParams);
+
+        return $profileIconUrl;
     }
 
     protected function generateOrgUrl($options)
