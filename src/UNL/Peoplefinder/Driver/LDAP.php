@@ -400,6 +400,21 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
     }
 
     /**
+     * Get an array of records which matches by the building
+     *
+     * @param string $q           EG: 472-1598
+     * @param string $affiliation eduPersonAffiliation, eg staff/faculty/student
+     *
+     * @return array(UNL_Peoplefinder_Record)
+     */
+    public function getBuildingMatches($query, $affiliation = null)
+    {
+        $filter = new UNL_Peoplefinder_Driver_LDAP_BuildingFilter($query, $affiliation);
+        $this->query($filter->__toString(), $this->detailAttributes);
+        return $this->getRecordsFromResults();
+    }
+
+    /**
      * Get the ldap record for a specific uid eg:bbieber2
      *
      * @param string $uid The unique ID for the user you want to get.
@@ -414,6 +429,7 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
             $filter = new UNL_Peoplefinder_Driver_LDAP_UIDFilter($uid);
             $r = $this->query($filter->__toString(), $this->detailAttributes, false);
         }
+        debug_print_backtrace();
 
         if (empty($r) || !self::displayableLDAPEntry(current($r))) {
             throw new Exception('Cannot find that UID.', 404);

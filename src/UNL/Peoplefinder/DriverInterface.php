@@ -40,6 +40,14 @@ interface UNL_Peoplefinder_DriverInterface
     function getPhoneMatches($query, $affiliation = null);
 
     /**
+     * return matches for a building search
+     *
+     * @param string $query       Phone number eg: ALEX
+     * @param string $affiliation eduPersonAffiliation, eg staff/faculty/student
+     */
+    function getBuildingMatches($query, $affiliation = null);
+
+    /**
      * Get results by organization
      * 
      * @param string $query       The organization name, eg: University Communications

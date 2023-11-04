@@ -76,6 +76,23 @@ class UNL_Peoplefinder_Driver_WebService implements UNL_Peoplefinder_DriverInter
     }
 
     /**
+     * Get matches for a building search
+     * 
+     * @param string $query       Numerical search query
+     * @param string $affiliation eduPersonAffiliation, eg, student, staff, faculty
+     * 
+     * @return UNL_Peoplefinder_SearchResults
+     */
+    function getBuildingMatches($query, $affiliation = null)
+    {
+        $results = file_get_contents($this->service_url.'?q='.urlencode($query).'&format=php&affiliation='.urlencode($affiliation).'&method=getBuildingMatches');
+        if ($results) {
+            $results = unserialize($results);
+        }
+        return $results;
+    }
+
+    /**
      * Get an individual's record within the directory.
      * 
      * @param string $uid Unique ID for the user, eg: bbieber2
