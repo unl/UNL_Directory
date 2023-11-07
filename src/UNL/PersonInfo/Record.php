@@ -13,6 +13,7 @@
 class UNL_PersonInfo_Record
 {
     public $uid;
+    public $avatar_updated_on;
 
     protected $nonPersistentFields = [
         'nonPersistentFields',
@@ -63,6 +64,9 @@ class UNL_PersonInfo_Record
         if (!file_exists(dirname($path_to_save_location))) {
             mkdir(dirname($path_to_save_location));
         }
+
+        $this->avatar_updated_on = date('Y-m-d H:m:s');
+        $this->save();
 
         return copy($path_to_file_to_save, $path_to_save_location);
     }
