@@ -20,6 +20,8 @@ class UNL_PersonInfo_ImageHelper
     /** @var string $tmp_path */
     protected $tmp_path;
 
+    protected $original_key = 'original';
+
     public function __construct(string $path_to_image, array $options = array())
     {
         $this->random_id = uniqid();
@@ -55,7 +57,7 @@ class UNL_PersonInfo_ImageHelper
         $tmp_image->setImageOrientation(0);
 
         // Add it to the list of images
-        $this->images['original'] = $tmp_image;
+        $this->images[$this->original_key] = $tmp_image;
 
         // Set option
         if (isset($options['keep_files']) && $options['keep_files'] === true) {
@@ -78,10 +80,18 @@ class UNL_PersonInfo_ImageHelper
         }
     }
 
+    public function rename_original(string $new_name)
+    {
+        $tmp_image = $this->images[$this->original_key];
+        unset($this->images[$this->original_key]);
+        $this->original_key = $new_name;
+        $this->images[$this->original_key] = $tmp_image;
+    }
+
     public function crop_image($x_pos, $y_pos, $width, $height)
     {
         /** @var Imagick $tmp_image */
-        $tmp_image = clone $this->images['original'];
+        $tmp_image = clone $this->images[$this->original_key];
 
         $cropped_image = $tmp_image->cropImage($width, $height, $x_pos, $y_pos);
 
@@ -94,7 +104,7 @@ class UNL_PersonInfo_ImageHelper
 
     public function resize_image(array $sizes, array $resolutions = array(72))
     {
-        $images_to_resize = array('original' => $this->images['original']);
+        $images_to_resize = array($this->original_key => $this->images[$this->original_key]);
         if (isset($this->images['cropped'])) {
             $images_to_resize['cropped'] = $this->images['cropped'];
         }
@@ -136,9 +146,11 @@ class UNL_PersonInfo_ImageHelper
         }
     }
 
-    public function write_to_user(UNL_PersonInfo_Record $record)
+    public function write_to_user(UNL_PersonInfo_Record $record, bool $clear_previous_record = true)
     {
-        $record->clear_images();
+        if ($clear_previous_record) {
+            $record->clear_images();
+        }
         foreach ($this->files as $path) {
             $record->save_image($path, basename($path));
         }
