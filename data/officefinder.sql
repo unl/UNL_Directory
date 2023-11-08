@@ -109,7 +109,7 @@ DROP TABLE IF EXISTS `person_info`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `person_info` (
   `uid` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `avatar_updated_on` timestamp DEFAULT NULL,
+  `avatar_updated_on` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`uid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
