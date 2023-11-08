@@ -1,16 +1,16 @@
 <?php
 require_once dirname(__DIR__) . '/www/config.inc.php';
 
+// Get planet red users
 $planet_red_usernames_dump_file_path = "/Users/tneumann9/Downloads/elgg_users_entity.csv";
-
 $planet_red_usernames_dump = file_get_contents($planet_red_usernames_dump_file_path);
-
 if ($planet_red_usernames_dump === false) {
     echo "COULD NOT FIND FILE";
+    die();
 }
-
 $planet_red_usernames = explode("\n", $planet_red_usernames_dump);
 
+// Set up size map for planet red images and their size equivalents
 $size_map = array(
     'master' => array(800, 400, 240),
     'large' => array(200, 120),
@@ -18,6 +18,10 @@ $size_map = array(
     'small' => array(40, 24, 16),
 );
 
+// Loop through the plant red users
+// Checks they are in directory
+// Checks if they have an avatar
+// Download the avatars and saves it to their user
 foreach ($planet_red_usernames as $username) {
     // Make sure they are a UNL person
     $username = str_replace("\"", "", $username);
