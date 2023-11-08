@@ -1,6 +1,7 @@
 const profile_input = document.getElementById('profile_input');
 const profile_editor = document.getElementById('profile_editor');
 const profile_canvas = document.getElementById('profile_image');
+const profile_image_container = document.getElementById('profile_image_container');
 const profile_canvas_context = profile_canvas.getContext('2d');
 const profile_square_scale = document.getElementById('profile_square_scale');
 const profile_square_pos_x = document.getElementById('profile_square_pos_x');
@@ -41,6 +42,7 @@ profile_input.addEventListener('change', () => {
 
         profile_editor.classList.remove('dcf-d-none');
         submit_button.removeAttribute('disabled');
+        profile_image_container.focus();
     };
     profile_image.src = profile_image_url;
 });
@@ -101,7 +103,7 @@ profile_canvas.addEventListener('mouseup', (e) => {
     set_profile_square_pos();
 });
 
-profile_canvas.addEventListener('keydown', (e) => {
+profile_image_container.addEventListener('keydown', (e) => {
     console.log(e.code)
     let valid_key_pressed = false;
     switch (e.code) {
