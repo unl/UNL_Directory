@@ -71,7 +71,7 @@ class UNL_PersonInfo_ImageHelper
             $image_data->clear();
         }
 
-        if ($this->keep_files !== true) {
+        if ($this->keep_files !== true && file_exists($this->tmp_path)) {
             $tmp_files = array_diff(scandir($this->tmp_path), array('.','..'));
             foreach ($tmp_files as $file) {
                 unlink($this->tmp_path . '/' . $file);
