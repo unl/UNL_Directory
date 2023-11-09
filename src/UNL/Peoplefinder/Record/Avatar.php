@@ -81,8 +81,7 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
             self::AVATAR_SIZE_LARGE => 'lg',
         ];
 
-        //16, 24, 40, 48, 72, 100, 120, 200, 240, 400, 800
-
+        // TODO link this up to UNL_PersonInfo
         $planetRedSizeMap = [
             self::AVATAR_SIZE_ORIGINAL => '400', //default
             self::AVATAR_SIZE_LARGE => '200',
@@ -108,6 +107,19 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
         }
 
         return $planetRedSizeMap;
+    }
+
+    public static function getAvatarDPI($forBuilding = false)
+    {
+        $mapsDPIMap = array(72);
+
+        $planetRedDPIMap = array(72, 144);
+
+        if ($forBuilding) {
+            return $mapsDPIMap;
+        }
+
+        return $planetRedDPIMap;
     }
 
     public function __construct($options = [])
