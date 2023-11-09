@@ -36,7 +36,7 @@ $showKnowledge = $context->shouldShowKnowledge() === TRUE && $hasKnowledge === T
 
 
 <div class="vcard <?php if (!$showKnowledge): ?>card <?php endif; ?><?php echo $context->eduPersonPrimaryAffiliation ?> dcf-measure" data-uid="<?php echo $context->uid ?>" data-preferred-name="<?php echo $preferredName ?>" itemscope itemtype="https://schema.org/<?php echo $itemtype ?>">
-    <?php if ($user !== false && $context->uid === $user): ?>
+    <?php if ($user !== false && strval($context->uid) === $user): ?>
         <div class="card-profile dcf-relative dcf-d-block dcf-mb-3 dcf-h-10 dcf-w-10 dcf-ratio dcf-ratio-1x1">
             <?php echo $savvy->render($context, 'Peoplefinder/Record/AvatarImage.tpl.php'); ?>
 
