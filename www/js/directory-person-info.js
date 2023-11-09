@@ -19,7 +19,7 @@ let pointer_start_x = -1;
 let pointer_start_y = -1;
 
 profile_input.addEventListener('change', () => {
-    if (profile_input.files[0] === undefined) { return }
+    if (profile_input.files[0] === undefined) { return; }
 
     profile_image = new Image();
     let profile_file = profile_input.files[0];
@@ -71,8 +71,17 @@ profile_canvas.addEventListener('mousedown', (e) => {
     pointer_start_y = e.clientY;
 });
 
+profile_canvas.addEventListener('touchstart', (e) => {
+    if (e.targetTouches.length === 0 && e.targetTouches.length > 1) { return; }
+
+    pointer_start_x = e.targetTouches[0].clientX;
+    pointer_start_y = e.targetTouches[0].clientY;
+
+    e.preventDefault();
+});
+
 profile_canvas.addEventListener('mousemove', (e) => {
-    if (pointer_start_x === -1 || pointer_start_y === -1) { return }
+    if (pointer_start_x === -1 || pointer_start_y === -1) { return; }
     x_diff = pointer_start_x - e.clientX;
     y_diff = pointer_start_y - e.clientY;
 
@@ -86,21 +95,56 @@ profile_canvas.addEventListener('mousemove', (e) => {
 
     draw();
 });
+profile_canvas.addEventListener('touchmove', (e) => {
+    if (pointer_start_x === -1 || pointer_start_y === -1) { return; }
+    if (e.targetTouches.length === 0 && e.targetTouches.length > 1) { return; }
+
+
+    x_diff = pointer_start_x - e.targetTouches[0].clientX;
+    y_diff = pointer_start_y - e.targetTouches[0].clientY;
+
+    square_x_pos -= x_diff;
+    square_y_pos -= y_diff;
+
+    check_and_set_square_bounds();
+
+    pointer_start_x = e.targetTouches[0].clientX;
+    pointer_start_y = e.targetTouches[0].clientY;
+
+    draw();
+    e.preventDefault();
+});
 
 profile_canvas.addEventListener('mouseleave', (e) => {
-    if (pointer_start_x === -1 || pointer_start_y === -1) { return }
+    if (pointer_start_x === -1 || pointer_start_y === -1) { return; }
     pointer_start_x = -1;
     pointer_start_y = -1;
 
     set_profile_square_pos();
 });
-
-profile_canvas.addEventListener('mouseup', (e) => {
-    if (pointer_start_x === -1 || pointer_start_y === -1) { return }
+profile_canvas.addEventListener('touchcancel', (e) => {
+    if (pointer_start_x === -1 || pointer_start_y === -1) { return; }
     pointer_start_x = -1;
     pointer_start_y = -1;
 
     set_profile_square_pos();
+    e.preventDefault();
+});
+
+profile_canvas.addEventListener('mouseup', (e) => {
+    if (pointer_start_x === -1 || pointer_start_y === -1) { return; }
+    pointer_start_x = -1;
+    pointer_start_y = -1;
+
+    set_profile_square_pos();
+});
+profile_canvas.addEventListener('touchend', (e) => {
+    if (pointer_start_x === -1 || pointer_start_y === -1) { return; }
+    pointer_start_x = -1;
+    pointer_start_y = -1;
+
+    set_profile_square_pos();
+    e.preventDefault();
 });
 
 profile_image_container.addEventListener('keydown', (e) => {
