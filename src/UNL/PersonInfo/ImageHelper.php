@@ -136,12 +136,6 @@ class UNL_PersonInfo_ImageHelper
                 $this->save_png();
             } elseif (preg_match('/gif/i', $format)) {
                 $this->save_gif();
-            } elseif (preg_match('/bmp/i', $format)) {
-                $this->save_bmp();
-            } elseif (preg_match('/avif/i', $format)) {
-                $this->save_avif();
-            } elseif (preg_match('/webp/i', $format)) {
-                $this->save_webp();
             }
         }
     }
@@ -199,22 +193,6 @@ class UNL_PersonInfo_ImageHelper
 
             if ($saved_image === false) {
                 throw new UNL_PersonInfo_Exceptions_ImageProcessing('Error Saving GIF Image');
-            }
-            $this->files[] = $path;
-        }
-    }
-
-    public function save_bmp(): void
-    {
-        foreach ($this->images as $file_name => $image_data) {
-            /** @var Imagick $image_data */
-            /** @var string $file_name */
-            $path = $this->tmp_path . '/' . $file_name . '.bmp';
-            $image_data->setFormat('BMP');
-            $saved_image = $image_data->writeImage($path);
-
-            if ($saved_image === false) {
-                throw new UNL_PersonInfo_Exceptions_ImageProcessing('Error Saving BMP Image');
             }
             $this->files[] = $path;
         }

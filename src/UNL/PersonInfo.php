@@ -268,10 +268,7 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
             $image_helper->resize_image(array(16, 24, 40, 48, 72, 100, 120, 200, 240, 400, 800), array(72, 144));
 
             // Save all the versions to these formats
-            $image_helper->save_to_formats(array(
-                'jpeg',
-                'avif',
-            ));
+            $image_helper->save_to_formats(array('jpeg'));
 
             // Save those files to the user
             $image_helper->write_to_user($user_record);
