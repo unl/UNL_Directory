@@ -111,7 +111,7 @@ foreach ($planet_red_usernames as $username) {
     // Save all the different versions
     $image_helper = new UNL_PersonInfo_ImageHelper($tmp_file_name);
     $image_helper->resize_image(array(16, 24, 40, 48, 72, 100, 120, 200, 240, 400, 800), array(72, 144));
-    $image_helper->save_to_formats(array('JPEG'));
+    $image_helper->save_to_formats(array('JPEG', 'AVIF'));
     $image_helper->write_to_user($user_record);
     unset($image_helper);
 
@@ -145,7 +145,7 @@ foreach ($planet_red_usernames as $username) {
         $image_helper = new UNL_PersonInfo_ImageHelper($tmp_file_name);
         $image_helper->rename_original('cropped');
         $image_helper->resize_image($sizes, array(72, 144));
-        $image_helper->save_to_formats(array('JPEG'));
+        $image_helper->save_to_formats(array('JPEG', 'AVIF'));
         $image_helper->write_to_user($user_record, false);
         unset($image_helper);
 

@@ -199,7 +199,7 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
             if (!isset($dpi) || empty($dpi) || !in_array($dpi, array('72', '144'))) {
                 $dpi = '72';
             }
-            if (!isset($format) || empty($format) || !in_array(strtolower($format), array('jpeg'))) {
+            if (!isset($format) || empty($format) || !in_array(strtolower($format), array('jpeg', 'avif'))) {
                 $format = 'jpeg';
             }
 
