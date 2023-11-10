@@ -1,4 +1,5 @@
 const profile_input = document.getElementById('profile_input');
+const profile_input_error = document.getElementById('profile_input_error');
 const profile_editor = document.getElementById('profile_editor');
 const profile_canvas = document.getElementById('profile_image');
 const profile_image_container = document.getElementById('profile_image_container');
@@ -18,8 +19,21 @@ let square_y_pos = 0;
 let pointer_start_x = -1;
 let pointer_start_y = -1;
 
+
+
 profile_input.addEventListener('change', () => {
+    submit_button.setAttribute('disabled', 'disabled');
+    profile_editor.classList.add('dcf-d-none');
+    profile_input_error.classList.add('dcf-d-none');
+    profile_input_error.innerText = "";
+
     if (profile_input.files[0] === undefined) { return; }
+
+    if (MAX_FILE_UPLOAD_SIZE !== undefined && profile_input.files[0].size >= MAX_FILE_UPLOAD_SIZE) {
+        profile_input_error.classList.remove('dcf-d-none');
+        profile_input_error.innerText = "The image you have uploaded exceeds our maximum size, please upload a smaller image.";
+        return;
+    }
 
     profile_image = new Image();
     let profile_file = profile_input.files[0];
@@ -33,10 +47,10 @@ profile_input.addEventListener('change', () => {
         profile_canvas.height = 300 / aspect_ratio;
         square_size = Math.min(profile_canvas.width, profile_canvas.height);
         square_size_max = Math.min(profile_canvas.width, profile_canvas.height);
+        profile_square_scale.value = 100; // This is needed for changing images, not sure why it doesn't work without it
         square_x_pos = 0;
         square_y_pos = 0;
 
-        set_profile_square_size();
         set_profile_square_pos();
         draw();
 
@@ -205,7 +219,7 @@ function set_profile_square_pos() {
 
 function set_profile_square_size() {
     const profile_square_size_max = Math.min(profile_image.width, profile_image.height);
-    profile_square_size.value = ((profile_square_scale.value / 100) * profile_square_size_max).toString();
+    profile_square_size.value = ((profile_square_scale.value / 100) * profile_square_size_max);
 }
 
 function check_and_set_square_bounds() {

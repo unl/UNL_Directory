@@ -36,9 +36,10 @@
                         <div class="dcf-form-group">
                             <label for="profile_input">Avatar Photo Input</label>
                             <input id="profile_input" name="profile_input" type="file" accept="image/jpeg, image/png, image/avif" aria-describedby="profile_input_help">
-                            <p class="dcf-form-help" id="profile_input_help">Supports .jpg, and .png</p>
+                            <p class="dcf-form-help" id="profile_input_help">Supports .jpg, and .png. Max file upload size is <?php echo 10 * intval($context->file_upload_max_size() / 10000000); ?><abbr title="Megabytes">MB</abbr>.</p>
                         </div>
                         <div class="dcf-form-group">
+                            <p id="profile_input_error" class="dcf-d-none dcf-rounded dcf-p-2 dcf-txt-sm unl-bg-scarlet unl-cream" role="alert" aria-live="assertive"></p>
                             <input id="submit_button" class="dcf-btn dcf-btn-primary" form="avatar" type="submit" value="Update Avatar" disabled />
                             <input class="dcf-btn dcf-btn-secondary" form="delete_avatar" type="submit" value="Delete Avatar" />
                         </div>
@@ -77,5 +78,7 @@
     $baseUrl = UNL_Peoplefinder::getURL();
     $version = UNL_Peoplefinder::$staticFileVersion;
     $scriptURL = $baseUrl . 'js/directory-person-info.min.js?v=' . $version;
+    $max_file_upload_size = $context->file_upload_max_size();
 ?>
+<script>const MAX_FILE_UPLOAD_SIZE = <?php echo $max_file_upload_size; ?>;</script>
 <script defer src="<?php echo $scriptURL; ?>"></script>
