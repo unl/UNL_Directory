@@ -32,7 +32,7 @@ class UNL_PersonInfo_ImageHelper
         }
 
         if (!file_exists($path_to_image)) {
-            throw new UNL_PersonInfo_Exceptions_InvalidImage('Image does not exist');
+            throw new UNL_PersonInfo_Exceptions_InvalidImage('Image does not exist or has exceeded max upload size');
         }
 
         // Load the image
@@ -136,6 +136,10 @@ class UNL_PersonInfo_ImageHelper
                 $this->save_png();
             } elseif (preg_match('/gif/i', $format)) {
                 $this->save_gif();
+            } elseif (preg_match('/webp/i', $format)) {
+                $this->save_webp();
+            } elseif (preg_match('/avif/i', $format)) {
+                $this->save_avif();
             }
         }
     }
