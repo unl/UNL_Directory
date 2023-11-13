@@ -1,3 +1,18 @@
+<?php
+    function humanReadableBytes($size, $unit="") {
+        if ((!$unit && $size >= 1<<30) || $unit == "GB") {
+            return number_format($size/(1<<30)) . "<abbr title='Gigabytes'>GB</abbr>";
+        }
+        if ((!$unit && $size >= 1<<20) || $unit == "MB") {
+            return number_format($size/(1<<20)) . "<abbr title='Megabytes'>MB</abbr>";
+        }
+        if ((!$unit && $size >= 1<<10) || $unit == "KB") {
+            return number_format($size/(1<<10)) . "<abbr title='Kilobytes'>KB</abbr>";
+        }
+        return number_format($size) . " bytes";
+    }
+?>
+
 <div class=" dcf-bleed dcf-hero dcf-hero-default">
     <!-- TemplateEndEditable -->
     <div class="dcf-hero-group-1">
@@ -36,7 +51,7 @@
                         <div class="dcf-form-group">
                             <label for="profile_input">Avatar Photo Input</label>
                             <input id="profile_input" name="profile_input" type="file" accept="image/jpeg, image/png, image/avif" aria-describedby="profile_input_help">
-                            <p class="dcf-form-help" id="profile_input_help">Supports .jpg, and .png. Max file upload size is <?php echo 10 * intval($context->file_upload_max_size() / 10000000); ?><abbr title="Megabytes">MB</abbr>.</p>
+                            <p class="dcf-form-help" id="profile_input_help">Supports .jpg, and .png. Max file upload size is <?php echo humanReadableBytes($context->file_upload_max_size()); ?>.</p>
                         </div>
                         <div class="dcf-form-group">
                             <p id="profile_input_error" class="dcf-d-none dcf-rounded dcf-p-2 dcf-txt-sm unl-bg-scarlet unl-cream" role="alert" aria-live="assertive"></p>
