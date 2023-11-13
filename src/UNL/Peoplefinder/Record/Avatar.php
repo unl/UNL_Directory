@@ -65,7 +65,7 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
         }
 
         if (!$building || !isset($bldgs[$building])) {
-            $url = self::CAMPUS_MAPS_BASE_URL . 'images/building/icon_' . $supportSizes[$size] . '.png';
+            $url = UNL_Peoplefinder::$url . 'images/default-building.jpg';
         } else {
             $url = self::CAMPUS_MAPS_BASE_URL . 'building/' . urlencode($building) . '/image/1/' . $supportSizes[$size];
         }
