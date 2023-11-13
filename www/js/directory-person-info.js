@@ -10,6 +10,14 @@ const profile_square_pos_y = document.getElementById('profile_square_pos_y');
 const profile_square_size = document.getElementById('profile_square_size');
 const submit_button = document.getElementById('submit_button');
 
+const guides_fieldset = document.getElementById('guides_fieldset');
+guides_fieldset.addEventListener('ready', () => {
+    profile_square_grid_guides = document.getElementById('profile_square_grid_guides');
+    profile_square_center_guides = document.getElementById('profile_square_center_guides');
+    profile_square_grid_guides.addEventListener('change', draw);
+    profile_square_center_guides.addEventListener('change', draw);
+});
+
 let profile_image = new Image();
 let square_size_max = 300;
 let square_size = 300;
@@ -19,7 +27,8 @@ let square_y_pos = 0;
 let pointer_start_x = -1;
 let pointer_start_y = -1;
 
-
+profile_square_grid_guides.addEventListener('change', draw);
+profile_square_center_guides.addEventListener('change', draw);
 
 profile_input.addEventListener('change', () => {
     submit_button.setAttribute('disabled', 'disabled');
@@ -251,7 +260,52 @@ function draw() {
     profile_canvas_context.strokeStyle = "black";
     profile_canvas_context.lineWidth = 4;
     profile_canvas_context.strokeRect(square_x_pos, square_y_pos, square_size, square_size);
+
+    if (profile_square_center_guides.checked) {
+        profile_canvas_context.beginPath();
+        profile_canvas_context.moveTo(square_x_pos, square_y_pos);
+        profile_canvas_context.lineTo(square_x_pos + square_size, square_y_pos + square_size);
+        profile_canvas_context.moveTo(square_x_pos, square_y_pos + square_size);
+        profile_canvas_context.lineTo(square_x_pos + square_size, square_y_pos);
+        profile_canvas_context.stroke();
+    }
+
+    if (profile_square_grid_guides.checked) {
+        profile_canvas_context.beginPath();
+        profile_canvas_context.moveTo(square_x_pos + (square_size / 3), square_y_pos);
+        profile_canvas_context.lineTo(square_x_pos + (square_size / 3), square_y_pos + square_size);
+        profile_canvas_context.moveTo(square_x_pos + (2 * (square_size / 3)), square_y_pos);
+        profile_canvas_context.lineTo(square_x_pos + (2 * (square_size / 3)), square_y_pos + square_size);
+        profile_canvas_context.moveTo(square_x_pos, square_y_pos + (square_size / 3));
+        profile_canvas_context.lineTo(square_x_pos + square_size, square_y_pos + (square_size / 3));
+        profile_canvas_context.moveTo(square_x_pos, square_y_pos + (2 * (square_size / 3)));
+        profile_canvas_context.lineTo(square_x_pos + square_size, square_y_pos + (2 * (square_size / 3)));
+        profile_canvas_context.stroke();
+    }
+
     profile_canvas_context.strokeStyle = "white";
     profile_canvas_context.lineWidth = 2;
     profile_canvas_context.strokeRect(square_x_pos, square_y_pos, square_size, square_size);
+
+    if (profile_square_center_guides.checked) {
+        profile_canvas_context.beginPath();
+        profile_canvas_context.moveTo(square_x_pos, square_y_pos);
+        profile_canvas_context.lineTo(square_x_pos + square_size, square_y_pos + square_size);
+        profile_canvas_context.moveTo(square_x_pos, square_y_pos + square_size);
+        profile_canvas_context.lineTo(square_x_pos + square_size, square_y_pos);
+        profile_canvas_context.stroke();
+    }
+
+    if (profile_square_grid_guides.checked) {
+        profile_canvas_context.beginPath();
+        profile_canvas_context.moveTo(square_x_pos + (square_size / 3), square_y_pos);
+        profile_canvas_context.lineTo(square_x_pos + (square_size / 3), square_y_pos + square_size);
+        profile_canvas_context.moveTo(square_x_pos + (2 * (square_size / 3)), square_y_pos);
+        profile_canvas_context.lineTo(square_x_pos + (2 * (square_size / 3)), square_y_pos + square_size);
+        profile_canvas_context.moveTo(square_x_pos, square_y_pos + (square_size / 3));
+        profile_canvas_context.lineTo(square_x_pos + square_size, square_y_pos + (square_size / 3));
+        profile_canvas_context.moveTo(square_x_pos, square_y_pos + (2 * (square_size / 3)));
+        profile_canvas_context.lineTo(square_x_pos + square_size, square_y_pos + (2 * (square_size / 3)));
+        profile_canvas_context.stroke();
+    }
 }

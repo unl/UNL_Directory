@@ -62,15 +62,27 @@
                     <div id="profile_editor" class="dcf-form-group dcf-d-none">
                         <div id="profile_image_container" role="img" aria-label="Your uploaded image" aria-describedby="instructions" tabindex="0">
                             <canvas id="profile_image" class="dcf-b-grey dcf-b-2 dcf-b-solid dcf-w-100%" height="300" width="300" aria-hidden="true"></canvas>
-                            <div class="dcf-input-group dcf-col-gap-vw">
-                                <label for="profile_square_scale">Selection Size: </label>
+                            <div class="dcf-input-group dcf-col-gap-vw dcf-mb-3">
+                                <label for="profile_square_scale">Selection size: </label>
                                 <input id="profile_square_scale" type="range" min="50" max="100" value="100" />
                             </div>
+                            <fieldset class="dcf-collapsible-fieldset" data-start-expanded="false" id="guides_fieldset">
+                                <legend>Guides</legend>
+                                <div class="dcf-input-checkbox">
+                                    <input id="profile_square_grid_guides" type="checkbox"/>
+                                    <label for="profile_square_grid_guides">Grid guides </label>
+                                </div>
+                                <div class="dcf-input-checkbox">
+                                    <input id="profile_square_center_guides" type="checkbox" />
+                                    <label for="profile_square_center_guides">Center guides </label>
+                                </div>
+                            </fieldset>
 
                             <p id="instructions" class="dcf-txt-sm dcf-mt-3">
                                 To select a portion of your image for your avatar, click and drag the square to position
                                 it, or use the arrow keys for precise adjustments. Modify the size of the selected area
                                 using the slider or fine-tune with the plus and minus buttons for a personalized fit.
+                                Use the guides to help align your avatar.
                             </p>
                         </div>
                         <input id="profile_square_size" type="hidden" name="profile_square_size" value="0"/>
@@ -95,5 +107,10 @@
     $scriptURL = $baseUrl . 'js/directory-person-info.min.js?v=' . $version;
     $max_file_upload_size = $context->file_upload_max_size();
 ?>
-<script>const MAX_FILE_UPLOAD_SIZE = <?php echo $max_file_upload_size; ?>;</script>
+<script>
+    const MAX_FILE_UPLOAD_SIZE = <?php echo $max_file_upload_size; ?>;
+    window.addEventListener('inlineJSReady', function() {
+            WDN.initializePlugin('collapsible-fieldsets');
+    }, false);
+</script>
 <script defer src="<?php echo $scriptURL; ?>"></script>
