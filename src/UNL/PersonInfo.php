@@ -98,7 +98,7 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
      *
      * @return SimpleCAS
      */
-    protected static function _getAuth()
+    protected static function getAuth()
     {
         if (!self::$auth) {
             self::$auth = new UNL_Officefinder_Auth();
@@ -109,7 +109,7 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
 
     public static function checkLogout()
     {
-        $auth = self::_getAuth();
+        $auth = self::getAuth();
         if (isset($_GET['logout'])) {
             $auth->logout();
         }
@@ -125,7 +125,7 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
      */
     public static function authenticate($gateway = false)
     {
-        $auth = self::_getAuth();
+        $auth = self::getAuth();
 
         if ($auth->isAuthenticated()) {
             self::$user = $auth->getUsername();
@@ -155,7 +155,7 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
             return self::$user;
         }
 
-        $auth = self::_getAuth();
+        $auth = self::getAuth();
         if ($auth->isAuthenticated()) {
             return self::$user = $auth->getUsername();
         }
@@ -343,7 +343,7 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
      *
      * @return string
      */
-    public static function getURL($mixed = null, $additional_params = [])
+    public static function getURL($additional_params = [])
     {
         $url = UNL_Peoplefinder::$url.'myinfo/';
 
