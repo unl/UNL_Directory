@@ -261,8 +261,12 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
                 )
             );
 
+            $square_x = intval($_POST['profile_square_pos_x']);
+            $square_y = intval($_POST['profile_square_pos_y']);
+            $square_size = intval($_POST['profile_square_size']);
+
             // Crop the image
-            $image_helper->crop_image($_POST['profile_square_pos_x'], $_POST['profile_square_pos_y'], $_POST['profile_square_size'], $_POST['profile_square_size']);
+            $image_helper->crop_image($square_x, $square_y, $square_size, $square_size);
 
             // Make many sizes and resolutions of the image
             $image_helper->resize_image(array(16, 24, 40, 48, 72, 100, 120, 200, 240, 400, 800), array(72, 144));

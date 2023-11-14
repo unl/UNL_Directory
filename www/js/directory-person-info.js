@@ -251,6 +251,11 @@ function check_and_set_square_bounds() {
 
 
 function draw() {
+    // We want to draw around the square
+    const outerX = square_x_pos - 4;
+    const outerY = square_y_pos - 4;
+    const outerSize = square_size + 8;
+
     // Gray background
     profile_canvas_context.fillStyle = default_background_color;
     profile_canvas_context.fillRect(0, 0, profile_canvas.width, profile_canvas.height);
@@ -261,53 +266,57 @@ function draw() {
     // Selection Square
     profile_canvas_context.strokeStyle = "black";
     profile_canvas_context.lineWidth = 4;
-    profile_canvas_context.strokeRect(square_x_pos, square_y_pos, square_size, square_size);
+    profile_canvas_context.strokeRect(outerX, outerY, outerSize, outerSize);
 
+    // Diagonal lines corner to corner
     if (profile_square_center_guides.checked) {
         profile_canvas_context.beginPath();
-        profile_canvas_context.moveTo(square_x_pos, square_y_pos);
-        profile_canvas_context.lineTo(square_x_pos + square_size, square_y_pos + square_size);
-        profile_canvas_context.moveTo(square_x_pos, square_y_pos + square_size);
-        profile_canvas_context.lineTo(square_x_pos + square_size, square_y_pos);
+        profile_canvas_context.moveTo(outerX, outerY);
+        profile_canvas_context.lineTo(outerX + outerSize, outerY + outerSize);
+        profile_canvas_context.moveTo(outerX, outerY + outerSize);
+        profile_canvas_context.lineTo(outerX + outerSize, outerY);
         profile_canvas_context.stroke();
     }
 
+    // Grid lines vertical and horizontal
     if (profile_square_grid_guides.checked) {
         profile_canvas_context.beginPath();
-        profile_canvas_context.moveTo(square_x_pos + (square_size / 3), square_y_pos);
-        profile_canvas_context.lineTo(square_x_pos + (square_size / 3), square_y_pos + square_size);
-        profile_canvas_context.moveTo(square_x_pos + (2 * (square_size / 3)), square_y_pos);
-        profile_canvas_context.lineTo(square_x_pos + (2 * (square_size / 3)), square_y_pos + square_size);
-        profile_canvas_context.moveTo(square_x_pos, square_y_pos + (square_size / 3));
-        profile_canvas_context.lineTo(square_x_pos + square_size, square_y_pos + (square_size / 3));
-        profile_canvas_context.moveTo(square_x_pos, square_y_pos + (2 * (square_size / 3)));
-        profile_canvas_context.lineTo(square_x_pos + square_size, square_y_pos + (2 * (square_size / 3)));
+        profile_canvas_context.moveTo(outerX + (outerSize / 3), outerY);
+        profile_canvas_context.lineTo(outerX + (outerSize / 3), outerY + outerSize);
+        profile_canvas_context.moveTo(outerX + (2 * (outerSize / 3)), outerY);
+        profile_canvas_context.lineTo(outerX + (2 * (outerSize / 3)), outerY + outerSize);
+        profile_canvas_context.moveTo(outerX, outerY + (outerSize / 3));
+        profile_canvas_context.lineTo(outerX + outerSize, outerY + (outerSize / 3));
+        profile_canvas_context.moveTo(outerX, outerY + (2 * (outerSize / 3)));
+        profile_canvas_context.lineTo(outerX + outerSize, outerY + (2 * (outerSize / 3)));
         profile_canvas_context.stroke();
     }
 
     profile_canvas_context.strokeStyle = "white";
     profile_canvas_context.lineWidth = 2;
-    profile_canvas_context.strokeRect(square_x_pos, square_y_pos, square_size, square_size);
+    profile_canvas_context.strokeRect(outerX, outerY, outerSize, outerSize);
 
+    // Diagonal lines corner to corner
     if (profile_square_center_guides.checked) {
         profile_canvas_context.beginPath();
-        profile_canvas_context.moveTo(square_x_pos, square_y_pos);
-        profile_canvas_context.lineTo(square_x_pos + square_size, square_y_pos + square_size);
-        profile_canvas_context.moveTo(square_x_pos, square_y_pos + square_size);
-        profile_canvas_context.lineTo(square_x_pos + square_size, square_y_pos);
+        profile_canvas_context.moveTo(outerX, outerY);
+        profile_canvas_context.lineTo(outerX + outerSize, outerY + outerSize);
+        profile_canvas_context.moveTo(outerX, outerY + outerSize);
+        profile_canvas_context.lineTo(outerX + outerSize, outerY);
         profile_canvas_context.stroke();
     }
 
+    // Grid lines vertical and horizontal
     if (profile_square_grid_guides.checked) {
         profile_canvas_context.beginPath();
-        profile_canvas_context.moveTo(square_x_pos + (square_size / 3), square_y_pos);
-        profile_canvas_context.lineTo(square_x_pos + (square_size / 3), square_y_pos + square_size);
-        profile_canvas_context.moveTo(square_x_pos + (2 * (square_size / 3)), square_y_pos);
-        profile_canvas_context.lineTo(square_x_pos + (2 * (square_size / 3)), square_y_pos + square_size);
-        profile_canvas_context.moveTo(square_x_pos, square_y_pos + (square_size / 3));
-        profile_canvas_context.lineTo(square_x_pos + square_size, square_y_pos + (square_size / 3));
-        profile_canvas_context.moveTo(square_x_pos, square_y_pos + (2 * (square_size / 3)));
-        profile_canvas_context.lineTo(square_x_pos + square_size, square_y_pos + (2 * (square_size / 3)));
+        profile_canvas_context.moveTo(outerX + (outerSize / 3), outerY);
+        profile_canvas_context.lineTo(outerX + (outerSize / 3), outerY + outerSize);
+        profile_canvas_context.moveTo(outerX + (2 * (outerSize / 3)), outerY);
+        profile_canvas_context.lineTo(outerX + (2 * (outerSize / 3)), outerY + outerSize);
+        profile_canvas_context.moveTo(outerX, outerY + (outerSize / 3));
+        profile_canvas_context.lineTo(outerX + outerSize, outerY + (outerSize / 3));
+        profile_canvas_context.moveTo(outerX, outerY + (2 * (outerSize / 3)));
+        profile_canvas_context.lineTo(outerX + outerSize, outerY + (2 * (outerSize / 3)));
         profile_canvas_context.stroke();
     }
 }
