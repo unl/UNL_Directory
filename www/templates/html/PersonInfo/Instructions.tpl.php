@@ -29,7 +29,7 @@
 <div class="dcf-main-content">
     <div class="dcf-wrapper">
         <div>
-            <p>Your current avatar</p>
+            <p>Preview your avatar</p>
             <div class="dcf-d-flex dcf-ai-center dcf-col-gap-vw">
                 <div class="card-profile dcf-d-block dcf-mb-3 dcf-h-10 dcf-w-10 dcf-ratio dcf-ratio-1x1">
                     <img class="photo profile_pic dcf-ratio-child dcf-d-block dcf-obj-fit-cover" itemprop="image" src="<?php echo $context->get_avatar_URL(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_LARGE) ?>" alt="" />
@@ -49,10 +49,10 @@
                 <div class="dcf-grid-halves@md dcf-col-gap-vw dcf-row-gap-4">
                     <div>
                         <div class="dcf-form-group">
-                            <label for="profile_input">Avatar Photo Input</label>
+                            <label for="profile_input">Avatar photo file input</label>
                             <input id="profile_input" name="profile_input" type="file" accept="image/jpeg, image/png, image/avif" aria-describedby="profile_input_help">
                             <p class="dcf-form-help" id="profile_input_help">
-                                Supports .jpg, .png, .avif. <br>
+                                Supports .jpg, .png, and .avif. <br>
                                 Max file upload size is
                                 <?php echo humanReadableBytes($context->file_upload_max_size()); ?>. <br>
                                 Transparency will be saved as gray.
