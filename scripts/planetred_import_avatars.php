@@ -56,6 +56,12 @@ foreach ($planet_red_usernames as $username) {
     // Set up user record
     $user_record = new UNL_PersonInfo_Record($official_username);
 
+    // Check if user has image (We do not want to overwrite images)
+    if ($user_record->has_images()) {
+        echo 'Already has images' . PHP_EOL;
+        continue;
+    }
+
     // Set up users tmp directory
     $user_uniqid = uniqid("import_");
     $tmp_directory = dirname(__DIR__) . "/www/person_images/tmp/" . $user_uniqid;
