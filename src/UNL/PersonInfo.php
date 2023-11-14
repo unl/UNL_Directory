@@ -345,15 +345,7 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
      */
     public static function getURL($mixed = null, $additional_params = [])
     {
-
         $url = UNL_Peoplefinder::$url.'myinfo/';
-
-        if (is_object($mixed)) {
-            switch (get_class($mixed)) {
-            default:
-
-            }
-        }
 
         return UNL_Peoplefinder::addURLParams($url, $additional_params);
     }
@@ -425,13 +417,13 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
 
     /**
      * Validate a POST request for CSRF
-     * 
+     *
      * @return bool
      */
     public function validateCSRF()
     {
         $csrf = $this->getCSRFHelper();
-        
+
         if (!isset($_POST[$csrf->getTokenNameKey()])) {
             return false;
         }
@@ -439,10 +431,10 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
         if (!isset($_POST[$csrf->getTokenValueKey()])) {
             return false;
         }
-        
+
         $name = $_POST[$csrf->getTokenNameKey()];
         $value = $_POST[$csrf->getTokenValueKey()];
-        
+
         return $csrf->validateToken($name, $value);
     }
 

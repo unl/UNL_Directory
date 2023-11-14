@@ -10,6 +10,8 @@ const profile_square_pos_y = document.getElementById('profile_square_pos_y');
 const profile_square_size = document.getElementById('profile_square_size');
 const submit_button = document.getElementById('submit_button');
 
+let profile_square_grid_guides = document.getElementById('profile_square_grid_guides');
+let profile_square_center_guides = document.getElementById('profile_square_center_guides');
 const guides_fieldset = document.getElementById('guides_fieldset');
 guides_fieldset.addEventListener('ready', () => {
     profile_square_grid_guides = document.getElementById('profile_square_grid_guides');
@@ -107,8 +109,8 @@ profile_canvas.addEventListener('touchstart', (e) => {
 
 profile_canvas.addEventListener('mousemove', (e) => {
     if (pointer_start_x === -1 || pointer_start_y === -1) { return; }
-    x_diff = pointer_start_x - e.clientX;
-    y_diff = pointer_start_y - e.clientY;
+    let x_diff = pointer_start_x - e.clientX;
+    let y_diff = pointer_start_y - e.clientY;
 
     square_x_pos -= x_diff;
     square_y_pos -= y_diff;
@@ -124,9 +126,8 @@ profile_canvas.addEventListener('touchmove', (e) => {
     if (pointer_start_x === -1 || pointer_start_y === -1) { return; }
     if (e.targetTouches.length === 0 && e.targetTouches.length > 1) { return; }
 
-
-    x_diff = pointer_start_x - e.targetTouches[0].clientX;
-    y_diff = pointer_start_y - e.targetTouches[0].clientY;
+    let x_diff = pointer_start_x - e.targetTouches[0].clientX;
+    let y_diff = pointer_start_y - e.targetTouches[0].clientY;
 
     square_x_pos -= x_diff;
     square_y_pos -= y_diff;
@@ -215,7 +216,6 @@ profile_image_container.addEventListener('keydown', (e) => {
 })
 
 function set_profile_square_pos() {
-    const aspect_ratio = profile_image.width / profile_image.height;
     profile_square_pos_y.value = ((square_y_pos / profile_canvas.height) * profile_image.height).toString();
     profile_square_pos_x.value = ((square_x_pos / profile_canvas.width) * profile_image.width).toString();
 

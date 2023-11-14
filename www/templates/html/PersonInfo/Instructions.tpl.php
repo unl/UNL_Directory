@@ -32,25 +32,55 @@
             <p>Preview your avatar</p>
             <div class="dcf-d-flex dcf-ai-center dcf-col-gap-vw">
                 <div class="card-profile dcf-d-block dcf-mb-3 dcf-h-10 dcf-w-10 dcf-ratio dcf-ratio-1x1">
-                    <img class="photo profile_pic dcf-ratio-child dcf-d-block dcf-obj-fit-cover" itemprop="image" src="<?php echo $context->get_avatar_URL(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_LARGE) ?>" alt="" />
+                    <img
+                        class="photo profile_pic dcf-ratio-child dcf-d-block dcf-obj-fit-cover"
+                        itemprop="image"
+                        src="<?php echo $context->get_avatar_URL(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_LARGE) ?>"
+                        alt=""
+                    />
                 </div>
                 <div class="card-profile dcf-d-block dcf-mb-3 dcf-h-10 dcf-w-10 dcf-ratio dcf-ratio-1x1">
-                    <img class="photo profile_pic dcf-ratio-child dcf-circle dcf-d-block dcf-obj-fit-cover" itemprop="image" src="<?php echo $context->get_avatar_URL(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_LARGE) ?>" alt="" />
+                    <img
+                        class="photo profile_pic dcf-ratio-child dcf-circle dcf-d-block dcf-obj-fit-cover"
+                        itemprop="image"
+                        src="<?php echo $context->get_avatar_URL(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_LARGE) ?>"
+                        alt=""
+                    />
                 </div>
             </div>
         </div>
-        
-        <form class="dcf-form dcf-col-75%-end" method="post" enctype="multipart/form-data" action="<?php echo UNL_PersonInfo::getURL() ?>" id="avatar">
+
+        <form
+            class="dcf-form dcf-col-75%-end"
+            method="post"
+            enctype="multipart/form-data"
+            action="<?php echo UNL_PersonInfo::getURL() ?>"
+            id="avatar"
+        >
             <input type="hidden" value="set_avatar" name="_type" />
-            <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>">
-            <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
+            <input
+                type="hidden"
+                name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>"
+                value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>"
+            >
+            <input
+                type="hidden"
+                name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>"
+                value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>"
+            >
             <fieldset>
                 <legend>Upload your avatar</legend>
                 <div class="dcf-grid-halves@md dcf-col-gap-vw dcf-row-gap-4">
                     <div>
                         <div class="dcf-form-group">
                             <label for="profile_input">Avatar photo file input</label>
-                            <input id="profile_input" name="profile_input" type="file" accept="image/jpeg, image/png, image/avif" aria-describedby="profile_input_help">
+                            <input
+                                id="profile_input"
+                                name="profile_input"
+                                type="file"
+                                accept="image/jpeg, image/png, image/avif"
+                                aria-describedby="profile_input_help"
+                            >
                             <p class="dcf-form-help" id="profile_input_help">
                                 Supports .jpg, .png, and .avif. <br>
                                 Max file upload size is
@@ -59,15 +89,43 @@
                             </p>
                         </div>
                         <div class="dcf-form-group">
-                            <p id="profile_input_error" class="dcf-d-none dcf-rounded dcf-p-2 dcf-txt-sm unl-bg-scarlet unl-cream" role="alert" aria-live="assertive"></p>
-                            <input id="submit_button" class="dcf-btn dcf-btn-primary" form="avatar" type="submit" value="Update Avatar" disabled />
-                            <input class="dcf-btn dcf-btn-secondary" form="delete_avatar" type="submit" value="Delete Avatar" />
+                            <p
+                                id="profile_input_error"
+                                class="dcf-d-none dcf-rounded dcf-p-2 dcf-txt-sm unl-bg-scarlet unl-cream"
+                                role="alert"
+                                aria-live="assertive"
+                            ></p>
+                            <input
+                                id="submit_button"
+                                class="dcf-btn dcf-btn-primary"
+                                form="avatar"
+                                type="submit"
+                                value="Update Avatar"
+                                disabled
+                            />
+                            <input
+                                class="dcf-btn dcf-btn-secondary"
+                                form="delete_avatar"
+                                type="submit"
+                                value="Delete Avatar"
+                            />
                         </div>
                     </div>
                     <div id="profile_editor" class="dcf-form-group dcf-d-none">
-                        <div id="profile_image_container" role="img" aria-label="Your uploaded image" aria-describedby="instructions" tabindex="0">
+                        <div
+                            id="profile_image_container"
+                            role="img"
+                            aria-describedby="instructions"
+                            tabindex="0"
+                        >
                             <div class="dcf-d-flex dcf-jc-center dcf-ai-center dcf-mb-3">
-                                <canvas id="profile_image" class="dcf-b-grey dcf-b-2 dcf-b-solid " height="300" width="300" aria-hidden="true"></canvas>
+                                <canvas
+                                    id="profile_image"
+                                    class="dcf-b-grey dcf-b-2 dcf-b-solid"
+                                    height="300"
+                                    width="300"
+                                    aria-hidden="true"
+                                ></canvas>
                             </div>
                             <div class="dcf-input-group dcf-col-gap-vw dcf-mb-3">
                                 <label for="profile_square_scale">Selection size: </label>
@@ -104,8 +162,16 @@
 
 <form id="delete_avatar">
     <input type="hidden" value="delete_avatar" name="_type" />
-    <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>">
-    <input type="hidden" name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>" value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>">
+    <input
+        type="hidden"
+        name="<?php echo $controller->getCSRFHelper()->getTokenNameKey() ?>"
+        value="<?php echo $controller->getCSRFHelper()->getTokenName() ?>"
+    >
+    <input
+        type="hidden"
+        name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>"
+        value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>"
+    >
 </form>
 
 <?php

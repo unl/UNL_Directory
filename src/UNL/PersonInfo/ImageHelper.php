@@ -60,6 +60,7 @@ class UNL_PersonInfo_ImageHelper
             case 8:
                 $tmp_image->rotateImage('#000000', -90);
                 break;
+            default:
         }
         $tmp_image->setImageOrientation(0);
 

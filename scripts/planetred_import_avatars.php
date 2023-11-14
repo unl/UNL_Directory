@@ -82,11 +82,16 @@ foreach ($planet_red_usernames as $username) {
     echo $planet_red_url . PHP_EOL;
     $curl_for_redirect = curl_init();
     curl_setopt($curl_for_redirect, CURLOPT_URL, $planet_red_url);
-    curl_setopt($curl_for_redirect, CURLOPT_HEADER, true); // true to include the header in the output.
-    curl_setopt($curl_for_redirect, CURLOPT_FOLLOWLOCATION, true); // Must be set to true true to follow any "Location: " header that the server sends as part of the HTTP header.
-    curl_setopt($curl_for_redirect, CURLOPT_RETURNTRANSFER, true); // true to return the transfer as a string of the return value of curl_exec() instead of outputting it directly.
-    $results = curl_exec($curl_for_redirect); // $a will contain all headers
-    $finalUrl = curl_getinfo($curl_for_redirect, CURLINFO_EFFECTIVE_URL); // This is what you need, it will return you the last effective URL
+    // true to include the header in the output.
+    curl_setopt($curl_for_redirect, CURLOPT_HEADER, true);
+    // Must be set to true true to follow any "Location: " header that the server sends as part of the HTTP header.
+    curl_setopt($curl_for_redirect, CURLOPT_FOLLOWLOCATION, true);
+    // true to return the transfer as a string of the return value of curl_exec() instead of outputting it directly.
+    curl_setopt($curl_for_redirect, CURLOPT_RETURNTRANSFER, true);
+    // $a will contain all headers
+    $results = curl_exec($curl_for_redirect);
+    // This is what you need, it will return you the last effective URL
+    $finalUrl = curl_getinfo($curl_for_redirect, CURLINFO_EFFECTIVE_URL);
 
     echo $finalUrl . PHP_EOL;
     if (strpos($finalUrl, 'defaultmaster.gif') !== false) {

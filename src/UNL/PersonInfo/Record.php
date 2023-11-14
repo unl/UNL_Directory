@@ -15,6 +15,8 @@ class UNL_PersonInfo_Record
     public $uid;
     public $avatar_updated_on;
 
+    private $person_images_dir;
+
     protected $nonPersistentFields = [
         'nonPersistentFields',
         'options',
@@ -26,6 +28,8 @@ class UNL_PersonInfo_Record
     }
 
     public function __construct(string $uid) {
+        $this->person_images_dir = dirname(dirname(dirname(__DIR__))) . '/www/person_images/';
+
         $got_record = $this->getByUID($uid);
 
         if ($got_record === false) {
@@ -38,13 +42,11 @@ class UNL_PersonInfo_Record
 
     public function createRecord($uid): bool {
         $this->uid = $uid;
-        $got_record = $this->insert();
-
-        return $got_record;
+        return $this->insert();
     }
 
     public function clear_images() {
-        $path_to_save_location = dirname(dirname(dirname(__DIR__))) . '/www/person_images/' . $this->uid;
+        $path_to_save_location = $this->person_images_dir . $this->uid;
         if (file_exists($path_to_save_location)) {
             $tmp_files = array_diff(scandir($path_to_save_location), array('.','..'));
             foreach ($tmp_files as $file) {
@@ -56,10 +58,10 @@ class UNL_PersonInfo_Record
     public function save_image($path_to_file_to_save, $file_name):bool {
 
         if (!file_exists($path_to_file_to_save)) {
-            throw new Exception('File Does Not Exist');
+            throw new UNL_PersonInfo_Exceptions_InvalidImage('File Does Not Exist');
         }
 
-        $path_to_save_location = dirname(dirname(dirname(__DIR__))) . '/www/person_images/' . $this->uid . '/' . $file_name;
+        $path_to_save_location = $this->person_images_dir . $this->uid . '/' . $file_name;
 
         if (!file_exists(dirname($path_to_save_location))) {
             mkdir(dirname($path_to_save_location));
@@ -73,7 +75,7 @@ class UNL_PersonInfo_Record
 
     public function has_images()
     {
-        $path_to_save_location = dirname(dirname(dirname(__DIR__))) . '/www/person_images/' . $this->uid;
+        $path_to_save_location = $this->person_images_dir . $this->uid;
         if (!file_exists($path_to_save_location)) {
             return false;
         }
@@ -83,7 +85,7 @@ class UNL_PersonInfo_Record
 
     public function get_image_path($file_name)
     {
-        $file_path = dirname(dirname(dirname(__DIR__))) . '/www/person_images/' . $this->uid . '/' . $file_name;
+        $file_path = $this->person_images_dir . $this->uid . '/' . $file_name;
         if (!file_exists($file_path)) {
             return false;
         }
@@ -92,7 +94,7 @@ class UNL_PersonInfo_Record
 
     public function get_image_url($file_name)
     {
-        $file_path = dirname(dirname(dirname(__DIR__))) . '/www/person_images/' . $this->uid . '/' . $file_name;
+        $file_path = $this->person_images_dir . $this->uid . '/' . $file_name;
         if (!file_exists($file_path)) {
             return false;
         }
@@ -144,7 +146,7 @@ class UNL_PersonInfo_Record
      *
      * @return array
      */
-    function keys()
+    public function keys()
     {
         return ['uid'];
     }
@@ -155,7 +157,7 @@ class UNL_PersonInfo_Record
      *
      * @return bool
      */
-    function save()
+    public function save()
     {
         $key_set = true;
 
@@ -177,7 +179,7 @@ class UNL_PersonInfo_Record
      *
      * @return bool
      */
-    function insert()
+    public function insert()
     {
         $sql      = '';
         $fields   = $this->prepareInsertSQL($sql);
@@ -194,7 +196,7 @@ class UNL_PersonInfo_Record
      *
      * @return bool
      */
-    function update()
+    public function update()
     {
         $sql      = '';
         $fields   = $this->prepareUpdateSQL($sql);
@@ -248,15 +250,11 @@ class UNL_PersonInfo_Record
      *
      * @return string
      */
-    function getTypeString($fields)
+    public function getTypeString($fields)
     {
         $types = '';
         foreach ($fields as $name) {
-            switch($name) {
-            default:
-                $types .= 's';
-                break;
-            }
+            $types .= 's';
         }
         return $types;
     }
@@ -268,7 +266,7 @@ class UNL_PersonInfo_Record
      *
      * @return string|false
      */
-    function getDate($str)
+    public function getDate($str)
     {
         if ($time = strtotime($str)) {
             return date('Y-m-d', $time);
@@ -281,63 +279,6 @@ class UNL_PersonInfo_Record
         // strtotime couldn't handle it
         return false;
     }
-
-    // /**
-    //  * Delete this record in the database
-    //  *
-    //  * @return bool
-    //  */
-    // function delete()
-    // {
-    //     $mysqli = self::getDB();
-    //     $sql    = "DELETE FROM ".$this->getTable()." WHERE ";
-    //     foreach ($this->keys() as $key) {
-    //         if (empty($this->$key)) {
-    //             throw new Exception('Cannot delete this record.' .
-    //                                 'The primary key, '.$key.' is not set!',
-    //                                 400);
-    //         }
-    //         $value = $this->$key;
-    //         if ($this->getTypeString([$key]) == 's') {
-    //             $value = '"'.$mysqli->escape_string($value).'"';
-    //         }
-    //         $sql .= $key.'='.$value.' AND ';
-    //     }
-    //     $sql  = substr($sql, 0, -4);
-    //     $sql .= ' LIMIT 1;';
-    //     if ($result = $mysqli->query($sql)) {
-    //         return true;
-    //     }
-    //     return false;
-    // }
-
-    /**
-     * Magic method for static calls
-     *
-     * @param string $method Method called
-     * @param array  $args   Array of arguments passed to the method
-     *
-     * @method getBy[FIELD NAME]
-     *
-     * @throws Exception
-     *
-     * @return mixed
-     */
-    // public static function __callStatic($method, $args)
-    // {
-    //     switch (true) {
-    //     case preg_match('/getBy([\w]+)/', $method, $matches):
-    //         $class    = get_called_class();
-    //         $field    = strtolower($matches[1]);
-    //         $whereAdd = null;
-    //         if (isset($args[1])) {
-    //             $whereAdd = $args[1];
-    //         }
-    //         return self::getByAnyField($class, $field, $args[0], $whereAdd);
-
-    //     }
-    //     throw new Exception('Invalid static method called.');
-    // }
 
     public function getByUID($uid, $whereAdd = '')
     {

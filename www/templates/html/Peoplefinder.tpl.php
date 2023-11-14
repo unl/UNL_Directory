@@ -19,7 +19,13 @@ if (file_exists($wdnIncludePath . '/wdn/templates_5.3')) {
 $savvy->addGlobal('page', $page);
 
 if (isset($siteNotice) && $siteNotice->display) {
-    $page->displayDCFNoticeMessage($siteNotice->title, $siteNotice->message, $siteNotice->type, $siteNotice->noticePath, $siteNotice->containerID);
+    $page->displayDCFNoticeMessage(
+        $siteNotice->title,
+        $siteNotice->message,
+        $siteNotice->type,
+        $siteNotice->noticePath,
+        $siteNotice->containerID
+    );
 }
 
 // no menu items, so hide mobile menu
@@ -40,14 +46,23 @@ if (in_array($context->options['view'], ['instructions', 'help', 'search'])) {
     $page->maincontentarea = $savvy->render($context->output);
 } else {
     //Wrap everything else
-    $page->maincontentarea = '<div class="dcf-bleed record-container unl-bg-lightest-gray"><div class="dcf-wrapper dcf-pt-8 dcf-pb-8">' . $savvy->render($context->output) . '</div></div>';
+    $page->maincontentarea =
+        '<div class="dcf-bleed record-container unl-bg-lightest-gray"><div class="dcf-wrapper dcf-pt-8 dcf-pb-8">'
+        . $savvy->render($context->output)
+        . '</div></div>';
 }
 
 $page->maincontentarea .=  $savvy->render(null, 'static/modal.tpl.php');;
 
 if ($savvy->getGlobals()['controller'] instanceof UNL_PersonInfo_PageNoticeInterface && $context->has_notice()) {
     $page->addScriptDeclaration("WDN.initializePlugin('notice');");
-    $page->displayDCFNoticeMessage($context->get_notice_title(), $context->get_notice_message(), $context->get_notice_type(), 'dcf-notice', 'dcf-main');
+    $page->displayDCFNoticeMessage(
+        $context->get_notice_title(),
+        $context->get_notice_message(),
+        $context->get_notice_type(),
+        'dcf-notice',
+        'dcf-main'
+    );
     $context->clear_notice();
 }
 
