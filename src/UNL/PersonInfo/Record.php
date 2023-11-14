@@ -19,6 +19,7 @@ class UNL_PersonInfo_Record
 
     protected $nonPersistentFields = [
         'nonPersistentFields',
+        'person_images_dir',
         'options',
     ];
 
