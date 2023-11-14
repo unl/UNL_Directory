@@ -61,7 +61,9 @@
                     </div>
                     <div id="profile_editor" class="dcf-form-group dcf-d-none">
                         <div id="profile_image_container" role="img" aria-label="Your uploaded image" aria-describedby="instructions" tabindex="0">
-                            <canvas id="profile_image" class="dcf-b-grey dcf-b-2 dcf-b-solid dcf-w-100%" height="300" width="300" aria-hidden="true"></canvas>
+                            <div class="dcf-d-flex dcf-jc-center dcf-ai-center dcf-mb-3">
+                                <canvas id="profile_image" class="dcf-b-grey dcf-b-2 dcf-b-solid " height="300" width="300" aria-hidden="true"></canvas>
+                            </div>
                             <div class="dcf-input-group dcf-col-gap-vw dcf-mb-3">
                                 <label for="profile_square_scale">Selection size: </label>
                                 <input id="profile_square_scale" type="range" min="50" max="100" value="100" />
