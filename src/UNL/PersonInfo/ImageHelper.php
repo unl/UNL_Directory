@@ -42,6 +42,13 @@ class UNL_PersonInfo_ImageHelper
             throw new UNL_PersonInfo_Exceptions_InvalidImage('Error opening image');
         }
 
+        // set the background to white
+        $tmp_image->setImageBackgroundColor(new ImagickPixel('rgb(227, 227, 226)'));
+
+        // flattens multiple layers
+        $tmp_image->setImageAlphaChannel(Imagick::ALPHACHANNEL_REMOVE);
+        $tmp_image = $tmp_image->mergeImageLayers(Imagick::LAYERMETHOD_FLATTEN);
+
         // Fix the orientation of the image
         switch ($tmp_image->getImageOrientation()) {
             case 3:

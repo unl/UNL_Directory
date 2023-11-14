@@ -18,6 +18,8 @@ guides_fieldset.addEventListener('ready', () => {
     profile_square_center_guides.addEventListener('change', draw);
 });
 
+const default_background_color = "rgb(227, 227, 226)";
+
 let profile_image = new Image();
 let square_size_max = 300;
 let square_size = 300;
@@ -250,7 +252,7 @@ function check_and_set_square_bounds() {
 
 function draw() {
     // Gray background
-    profile_canvas_context.fillStyle = "grey";
+    profile_canvas_context.fillStyle = default_background_color;
     profile_canvas_context.fillRect(0, 0, profile_canvas.width, profile_canvas.height);
 
     // Draw Image
