@@ -160,7 +160,10 @@
     </div>
 </div>
 
-<form id="delete_avatar">
+<form id="delete_avatar"
+    method="post"
+    action="<?php echo UNL_PersonInfo::getURL() ?>"
+>
     <input type="hidden" value="delete_avatar" name="_type" />
     <input
         type="hidden"
