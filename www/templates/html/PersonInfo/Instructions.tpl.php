@@ -163,6 +163,7 @@
 <form id="delete_avatar"
     method="post"
     action="<?php echo UNL_PersonInfo::getURL() ?>"
+    onsubmit="return confirm('Are you sure you want to delete your avatar? There is no getting it back once it\'s deleted.');"
 >
     <input type="hidden" value="delete_avatar" name="_type" />
     <input
