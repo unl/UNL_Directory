@@ -1,7 +1,8 @@
 <picture>
     <source
         type="image/avif"
-        media="(-webkit-min-device-pixel-ratio: 2)"
+        media="(min-resolution: 144dpi)"
+        sizes="(max-width: 5.62em) 5.62em"
         srcset="
             <?php echo $context->getImageURL(48,  144, 'avif'); ?> 48w,
             <?php echo $context->getImageURL(72,  144, 'avif'); ?> 72w,
@@ -15,6 +16,7 @@
     />
     <source
         type="image/avif"
+        sizes="(max-width: 5.62em) 5.62em"
         srcset="
             <?php echo $context->getImageURL(48,  72, 'avif'); ?> 48w,
             <?php echo $context->getImageURL(72,  72, 'avif'); ?> 72w,
@@ -27,7 +29,8 @@
         "
     />
     <source
-        media="(-webkit-min-device-pixel-ratio: 2)"
+        media="(min-resolution: 144dpi)"
+        sizes="(max-width: 5.62em) 5.62em"
         srcset="
             <?php echo $context->getImageURL(48,  144); ?> 48w,
             <?php echo $context->getImageURL(72,  144); ?> 72w,
@@ -43,6 +46,7 @@
         class="photo profile_pic dcf-ratio-child dcf-circle dcf-d-block dcf-obj-fit-cover"
         itemprop="image"
         src="<?php echo $context->getImageURL(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_LARGE) ?>"
+        sizes="(max-width: 5.62em) 5.62em"
         srcset="
             <?php echo $context->getImageURL(48,  72); ?> 48w,
             <?php echo $context->getImageURL(72,  72); ?> 72w,
