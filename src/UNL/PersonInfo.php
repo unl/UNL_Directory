@@ -63,6 +63,10 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
     public $notice_type = '';
     public $notice_title = '';
 
+    public static $avatar_sizes = array(800, 400, 240, 200, 120, 100, 72, 48, 40, 24, 16);
+    public static $avatar_dpi = array(72, 144);
+    public static $avatar_formats = array('JPEG', 'AVIF');
+
     /**
      * Construct a new officefinder object
      *
@@ -269,10 +273,10 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
             $image_helper->crop_image($square_x, $square_y, $square_size, $square_size);
 
             // Make many sizes and resolutions of the image
-            $image_helper->resize_image(array(16, 24, 40, 48, 72, 100, 120, 200, 240, 400, 800), array(72, 144));
+            $image_helper->resize_image(self::$avatar_sizes, self::$avatar_dpi);
 
             // Save all the versions to these formats
-            $image_helper->save_to_formats(array('jpeg', 'avif'));
+            $image_helper->save_to_formats(self::$avatar_formats);
 
             // Save those files to the user
             $image_helper->write_to_user($user_record);

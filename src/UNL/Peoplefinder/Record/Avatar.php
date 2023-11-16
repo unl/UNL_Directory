@@ -81,26 +81,13 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
             self::AVATAR_SIZE_LARGE => 'lg',
         ];
 
-        // TODO link this up to UNL_PersonInfo
-        $planetRedSizeMap = [
-            self::AVATAR_SIZE_ORIGINAL => '400', //default
-            self::AVATAR_SIZE_LARGE => '200',
-            self::AVATAR_SIZE_MEDIUM => '100',
-            self::AVATAR_SIZE_SMALL => '40',
-            self::AVATAR_SIZE_TINY => '24',
-            self::AVATAR_SIZE_TOPBAR => '16',
-            '800' => 800,
-            '400' => 400,
-            '240' => 240,
-            '200' => 200,
-            '120' => 120,
-            '100' => 100,
-            '72' => 72,
-            '48' => 48,
-            '40' => 40,
-            '24' => 24,
-            '16' => 16,
-        ];
+        $planetRedSizeMap = array_combine(UNL_PersonInfo::$avatar_sizes, UNL_PersonInfo::$avatar_sizes);
+        $planetRedSizeMap[self::AVATAR_SIZE_ORIGINAL] = '400';
+        $planetRedSizeMap[self::AVATAR_SIZE_LARGE] = '200';
+        $planetRedSizeMap[self::AVATAR_SIZE_MEDIUM] = '100';
+        $planetRedSizeMap[self::AVATAR_SIZE_SMALL] = '40';
+        $planetRedSizeMap[self::AVATAR_SIZE_TINY] = '24';
+        $planetRedSizeMap[self::AVATAR_SIZE_TOPBAR] = '16';
 
         if ($forBuilding) {
             return $mapsSizeMap;
@@ -113,7 +100,7 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
     {
         $mapsDPIMap = array(72);
 
-        $planetRedDPIMap = array(72, 144);
+        $planetRedDPIMap = UNL_PersonInfo::$avatar_dpi;
 
         if ($forBuilding) {
             return $mapsDPIMap;
@@ -188,6 +175,7 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
         $size = $options['s'] ?? self::AVATAR_SIZE_MEDIUM;
         $dpi = $options['dpi'] ?? "";
         $format = $options['format'] ?? "";
+        $cropped = strtolower($options['cropped'] ?? "");
 
         $supportSizes = self::getAvatarSizes();
         if (!isset($supportSizes[$size])) {
@@ -196,15 +184,22 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
 
         $personInfoRecord = new UNL_PersonInfo_Record($options['uid']);
         if ($personInfoRecord->has_images()) {
-            if (!isset($dpi) || empty($dpi) || !in_array($dpi, array('72', '144'))) {
+            $supportDPI = self::getAvatarDPI();
+            if (!isset($dpi) || empty($dpi) || !in_array($dpi, $supportDPI)) {
                 $dpi = '72';
             }
-            if (!isset($format) || empty($format) || !in_array(strtolower($format), array('jpeg', 'avif'))) {
+            $supportFormats = UNL_PersonInfo::$avatar_formats;
+            if (!isset($format) || empty($format) || !in_array(strtoupper($format), $supportFormats)) {
                 $format = 'jpeg';
             }
 
+            $file_name_prefix = 'cropped';
+            if (isset($cropped) && in_array($cropped, array('false', '0'))) {
+                $file_name_prefix = 'original';
+            }
+
             $avatar_size = $supportSizes[$size];
-            $image_file_name = 'cropped_' . $avatar_size . '_' . $dpi . '.' . $format;
+            $image_file_name = $file_name_prefix . '_' . $avatar_size . '_' . $dpi . '.' . $format;
             $image_url = $personInfoRecord->get_image_url($image_file_name);
 
             if ($image_url !== false) {
