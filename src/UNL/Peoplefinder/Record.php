@@ -646,7 +646,7 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
         return self::PLANETRED_BASE_URL . 'profile/unl_' . $this->getProfileUid();
     }
 
-    public function getImageURL($size = UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_MEDIUM, $dpi=72)
+    public function getImageURL($size = UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_MEDIUM, $dpi=72, $format='jpeg')
     {
         $url = $this->getRecordUrl('avatar');
 
@@ -658,8 +658,12 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
             $dpi = 72;
         }
 
+        if (!in_array(strtoupper($format), UNL_PersonInfo::$avatar_formats)) {
+            $format = 'jpeg';
+        }
+
         if ($size !== UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_MEDIUM) {
-            $url .= '?' . http_build_query(['s' => $size, 'dpi' => $dpi]);
+            $url .= '?' . http_build_query(['s' => $size, 'dpi' => $dpi, 'format' => $format]);
         }
         return $url;
     }
