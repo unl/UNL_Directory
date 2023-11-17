@@ -12,8 +12,6 @@
  */
 class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable, JsonSerializable
 {
-    const PLANETRED_BASE_URL = 'https://planetred.unl.edu/pg/';
-
     const BAD_SAP_MAIL_PLACEHOLDER = 'none@none.none';
 
     const SERIALIZE_VERSION_SAFE = 1;
@@ -635,15 +633,6 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
     public function getProfileUid()
     {
         return str_replace('-', '_', $this->uid);
-    }
-
-    public function getProfileURL()
-    {
-        if ($this->ou === 'org') {
-            return false;
-        }
-
-        return self::PLANETRED_BASE_URL . 'profile/unl_' . $this->getProfileUid();
     }
 
     public function getImageURL($size = UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_MEDIUM, $dpi=72, $format='jpeg')

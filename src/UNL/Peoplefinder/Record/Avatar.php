@@ -81,32 +81,32 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
             self::AVATAR_SIZE_LARGE => 'lg',
         ];
 
-        $planetRedSizeMap = array_combine(UNL_PersonInfo::$avatar_sizes, UNL_PersonInfo::$avatar_sizes);
-        $planetRedSizeMap[self::AVATAR_SIZE_ORIGINAL] = '400';
-        $planetRedSizeMap[self::AVATAR_SIZE_LARGE] = '200';
-        $planetRedSizeMap[self::AVATAR_SIZE_MEDIUM] = '100';
-        $planetRedSizeMap[self::AVATAR_SIZE_SMALL] = '40';
-        $planetRedSizeMap[self::AVATAR_SIZE_TINY] = '24';
-        $planetRedSizeMap[self::AVATAR_SIZE_TOPBAR] = '16';
+        $personAvatarSizeMap = array_combine(UNL_PersonInfo::$avatar_sizes, UNL_PersonInfo::$avatar_sizes);
+        $personAvatarSizeMap[self::AVATAR_SIZE_ORIGINAL] = '400';
+        $personAvatarSizeMap[self::AVATAR_SIZE_LARGE] = '200';
+        $personAvatarSizeMap[self::AVATAR_SIZE_MEDIUM] = '100';
+        $personAvatarSizeMap[self::AVATAR_SIZE_SMALL] = '40';
+        $personAvatarSizeMap[self::AVATAR_SIZE_TINY] = '24';
+        $personAvatarSizeMap[self::AVATAR_SIZE_TOPBAR] = '16';
 
         if ($forBuilding) {
             return $mapsSizeMap;
         }
 
-        return $planetRedSizeMap;
+        return $personAvatarSizeMap;
     }
 
     public static function getAvatarDPI($forBuilding = false)
     {
         $mapsDPIMap = array(72);
 
-        $planetRedDPIMap = UNL_PersonInfo::$avatar_dpi;
+        $personAvatarDPIMap = UNL_PersonInfo::$avatar_dpi;
 
         if ($forBuilding) {
             return $mapsDPIMap;
         }
 
-        return $planetRedDPIMap;
+        return $personAvatarDPIMap;
     }
 
     public function __construct($options = [])
