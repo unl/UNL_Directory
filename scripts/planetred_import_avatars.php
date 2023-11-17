@@ -1,8 +1,10 @@
 <?php
 require_once dirname(__DIR__) . '/www/config.inc.php';
 
+$planet_red_base_url = "https://planetred.unl.edu/pg/";
+
 // Get planet red users
-$planet_red_usernames_dump_file_path = "/Users/tneumann9/Downloads/elgg_users_entity.csv";
+$planet_red_usernames_dump_file_path = $argv[1];
 $planet_red_usernames_dump = file_get_contents($planet_red_usernames_dump_file_path);
 if ($planet_red_usernames_dump === false) {
     echo "COULD NOT FIND FILE";
@@ -31,7 +33,7 @@ foreach ($planet_red_usernames as $username) {
     echo PHP_EOL . $username . PHP_EOL;
 
     // Creates user record
-    $official_username = str_replace("unl_", "", $username);
+    $official_username = str_replace("_", "-", str_replace("unl_", "", $username));
 
     //  __   ___   _    ___ ___   _ _____ ___
     //  \ \ / /_\ | |  |_ _|   \ /_\_   _| __|
@@ -74,7 +76,7 @@ foreach ($planet_red_usernames as $username) {
     //  |   / _|| |) | ||   / _| (__  | |
     //  |_|_\___|___/___|_|_\___\___| |_|
     // Check to see if we redirect to the default image
-    $planet_red_url = UNL_Peoplefinder_Record::PLANETRED_BASE_URL .
+    $planet_red_url = $planet_red_base_url .
         'icon/' .
         $username .
         '/master/';
@@ -105,7 +107,7 @@ foreach ($planet_red_usernames as $username) {
     //  | (_) |   /| | (_ || || .` |/ _ \| |__
     //   \___/|_|_\___\___|___|_|\_/_/ \_\____|
     // Get master image and save it as the original in all sizes
-    $planet_red_url = UNL_Peoplefinder_Record::PLANETRED_BASE_URL .
+    $planet_red_url = $planet_red_base_url .
         'icon/' .
         $username .
         '/master/';
@@ -137,7 +139,7 @@ foreach ($planet_red_usernames as $username) {
     // Planet red doesn't crop the images correctly so this will maximize the amount of correctly cropped images
     foreach ($size_map as $planet_red_size => $sizes) {
         // Set up file and url for the image
-        $planet_red_url = UNL_Peoplefinder_Record::PLANETRED_BASE_URL .
+        $planet_red_url = $planet_red_base_url .
             'icon/' .
             $username .
             '/' .
