@@ -70,6 +70,16 @@
             >
             <fieldset>
                 <legend>Upload your avatar</legend>
+                <?php if (UNL_Officefinder::isAdmin($context->user)): ?>
+                    <div class="unl-bg-orange dcf-form-group dcf-p-3 dcf-rounded" style="width: fit-content;">
+                        <label for="admin_user_uid_set" class="unl-darkest-gray@dark">User UID (Admin Override)</label>
+                        <input
+                            id="admin_user_uid_set"
+                            name="admin_user_uid_set"
+                            type="text"
+                            autocomplete="off">
+                    </div>
+                <?php endif; ?>
                 <div class="dcf-grid-halves@md dcf-col-gap-vw dcf-row-gap-4">
                     <div>
                         <div class="dcf-form-group">
@@ -176,6 +186,21 @@
         name="<?php echo $controller->getCSRFHelper()->getTokenValueKey() ?>"
         value="<?php echo $controller->getCSRFHelper()->getTokenValue() ?>"
     >
+    <?php if (UNL_Officefinder::isAdmin($context->user)): ?>
+    <input
+        type="hidden"
+        id="admin_user_uid_remove"
+        name="admin_user_uid_remove"
+        value=""
+    >
+    <script defer>
+        const admin_user_uid_set = document.getElementById('admin_user_uid_set');
+        const admin_user_uid_remove = document.getElementById('admin_user_uid_remove');
+        admin_user_uid_set.addEventListener('input', () => {
+            admin_user_uid_remove.value = admin_user_uid_set.value;
+        });
+    </script>
+    <?php endif; ?>
 </form>
 
 <?php

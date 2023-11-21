@@ -64,6 +64,7 @@ profile_input.addEventListener('change', () => {
         square_x_pos = 0;
         square_y_pos = 0;
 
+        set_profile_square_size();
         set_profile_square_pos();
         draw();
 

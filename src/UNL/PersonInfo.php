@@ -255,6 +255,11 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
         $user = self::$user;
         $user_record = new UNL_PersonInfo_Record($user);
 
+        // Admin override for the user, this is helpful for updating a user's avatar
+        if (UNL_Officefinder::isAdmin($user) && isset($_POST['admin_user_uid_set']) && !empty($_POST['admin_user_uid_set']) && $_POST['admin_user_uid_set'] !== $user) {
+            $user_record = new UNL_PersonInfo_Record($_POST['admin_user_uid_set']);
+        }
+
         // Try to manipulate the image
         try {
             // Create a new image helper
@@ -318,6 +323,11 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
     {
         $user = self::$user;
         $user_record = new UNL_PersonInfo_Record($user);
+
+        // Admin override for the user, this is helpful for removing a user's avatar
+        if (UNL_Officefinder::isAdmin($user) && isset($_POST['admin_user_uid_remove']) && !empty($_POST['admin_user_uid_remove']) && $_POST['admin_user_uid_remove'] !== $user) {
+            $user_record = new UNL_PersonInfo_Record($_POST['admin_user_uid_remove']);
+        }
 
         try {
             $user_record->clear_images();
