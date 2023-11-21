@@ -76,7 +76,7 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
 
     /**
      * Get an array of possible sizes for avatars
-     * 
+     *
      * @param bool $forBuilding True if it is for buildings and false for persons
      * @return string[] Associative array of sizes and their values
      */
@@ -105,7 +105,7 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
 
     /**
      * Get an array of possible DPIs for avatars
-     * 
+     *
      * @param bool $forBuilding True if it is for buildings and false for persons
      * @return int[] Array of DPIs valid for avatar
      */
