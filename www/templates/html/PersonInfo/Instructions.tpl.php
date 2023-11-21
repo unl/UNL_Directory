@@ -1,4 +1,12 @@
 <?php
+    /**
+     * Creates a human readable string for the bytes
+     * This is here and not in the src because savvy will escape the abbr tag
+     *
+     * @param int $size Size of data in bytes
+     * @param string $unit If we want to force a unit you can set this
+     * @return string HTML code for the human readable bytes
+     */
     function humanReadableBytes($size, $unit="") {
         if ((!$unit && $size >= 1<<30) || $unit == "GB") {
             return number_format($size/(1<<30)) . "<abbr title='Gigabytes'>GB</abbr>";

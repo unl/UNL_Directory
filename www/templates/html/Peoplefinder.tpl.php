@@ -54,6 +54,7 @@ if (in_array($context->options['view'], ['instructions', 'help', 'search'])) {
 
 $page->maincontentarea .=  $savvy->render(null, 'static/modal.tpl.php');;
 
+// If the controller implements the notice interface and it has a notice we can display it
 if ($savvy->getGlobals()['controller'] instanceof UNL_PersonInfo_PageNoticeInterface && $context->has_notice()) {
     $page->addScriptDeclaration("WDN.initializePlugin('notice');");
     $page->displayDCFNoticeMessage(

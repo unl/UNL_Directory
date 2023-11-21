@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * Interface for pages that would have notices after form submit
+ *
+ * PHP version 7.4
+ *
+ * @category  Interface
+ * @package   UNL_PersonInfo_PageNoticeInterface
+ * @author    Thomas Neumann <tneumann9@unl.edu>
+ * @copyright 2023 University Communications & Marketing
+ * @license   https://www1.unl.edu/wdn/wiki/Software_License BSD License
+ */
 interface UNL_PersonInfo_PageNoticeInterface
 {
     public function has_notice();

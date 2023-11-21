@@ -1,7 +1,7 @@
 <?php
 
 /**
- * TEMP FOR NOW
+ * Handling directory saved user specific info
  *
  * PHP version 7.4
  *
@@ -10,7 +10,7 @@
  * @author    Thomas Neumann <tneumann9@unl.edu>
  * @copyright 2023 University Communications & Marketing
  * @license   https://www1.unl.edu/wdn/wiki/Software_License BSD License
- * @link      https://directory.unl.edu/avatars/
+ * @link      https://directory.unl.edu/myinfo/
  */
 class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
 {
@@ -44,8 +44,6 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
      */
     protected static $auth;
 
-    public static $admins = [];
-
     /**
      * The currently logged in user.
      *
@@ -53,6 +51,7 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
      */
     protected static $user = false;
 
+    // Notice for the myinfo form
     public $notice_types = array(
         'INFO' => 'dcf-notice-info',
         'WARNING' => 'dcf-notice-warning',
@@ -63,6 +62,7 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
     public $notice_type = '';
     public $notice_title = '';
 
+    // Avatar variables
     public static $avatar_sizes = array(800, 400, 240, 200, 120, 100, 72, 48, 40, 24, 16);
     public static $avatar_dpi = array(72, 144);
     public static $avatar_formats = array('JPEG', 'AVIF');
@@ -77,17 +77,21 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
         $this->options = $options + $this->options;
         UNL_Peoplefinder::getInstance($this->options);
 
+        // Check if they are trying to logout
         self::checkLogout();
 
+        // If it is an HTML request check if they are authenticated
         if (in_array($this->options['format'], ['html'])) {
             self::authenticate(true);
         }
 
         try {
+            // Check if it is a post request
             if (!empty($_POST)) {
                 $this->handlePost();
             }
 
+            // Run the regular page builder
             $this->run();
         } catch(Exception $e) {
             if (!$e->getCode()) {
@@ -111,6 +115,9 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
         return self::$auth;
     }
 
+    /**
+     * Check if they are trying to logout
+     */
     public static function checkLogout()
     {
         $auth = self::getAuth();
@@ -192,6 +199,7 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
     {
         UNL_PersonInfo::getUser(true);
 
+        // Validate cross site protection
         if (!$this->validateCSRF()) {
             $this->create_notice(
                 "Error With Your Request",
@@ -202,15 +210,19 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
             self::redirect(self::getURL(), true);
         }
 
+        // Run the function based on the type
         if ($_POST['_type'] == 'set_avatar') {
             $this->set_avatar();
         }
-
         if ($_POST['_type'] == 'delete_avatar') {
             $this->delete_avatar();
         }
     }
 
+    /**
+     * Returns if we have a notice to display
+     * @return bool True if we have a notice to display
+     */
     public function has_notice():bool
     {
         return session_status() !== PHP_SESSION_NONE
@@ -218,40 +230,76 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
             && !empty($_SESSION["person_info_notice_title"]);
     }
 
+    /**
+     * Getter for notice type
+     * @return string Type of notice
+     */
     public function get_notice_type(): string
     {
         return $this->notice_types[strtoupper($_SESSION["person_info_notice_type"])] ?? 'dcf-notice-info';
     }
 
+    /**
+     * Getter for notice title
+     * @return string Type of title
+     */
     public function get_notice_title(): string
     {
         return $_SESSION["person_info_notice_title"];
     }
 
+    /**
+     * Getter for notice message
+     * @return string Type of message
+     */
     public function get_notice_message(): string
     {
         return $_SESSION["person_info_notice_message"];
     }
 
+    /**
+     * Function for saving a notice for after the page redirects
+     * This is helpful for PRG design
+     *
+     * @param string $notice_title Title of the notice to be displayed
+     * @param string $notice_message Message of the notice
+     * @param string $notice_type Type of the notice
+     * @return void
+     */
     public function create_notice(string $notice_tile, string $notice_message, string $notice_type)
     {
+        // Create a session if not started already
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
+
+        // Save the notice info in there
         $_SESSION["person_info_notice_title"]   = $notice_tile;
         $_SESSION["person_info_notice_message"] = $notice_message;
         $_SESSION["person_info_notice_type"]    = $notice_type;
     }
 
+    /**
+     * Function for clearing notice info after the redirect
+     * This is helpful for PRG design
+     *
+     * @return void
+     */
     public function clear_notice()
     {
+        // Unset the values of the session
         unset($_SESSION["person_info_notice_title"]);
         unset($_SESSION["person_info_notice_message"]);
         unset($_SESSION["person_info_notice_type"]);
     }
 
+    /**
+     * Function for handing set_avatar form post request
+     * @return void
+     */
     public function set_avatar()
     {
+        // Get the user and their record
         $user = self::$user;
         $user_record = new UNL_PersonInfo_Record($user);
 
@@ -270,6 +318,7 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
                 )
             );
 
+            // Get position and size of the square
             $square_x = intval($_POST['profile_square_pos_x']);
             $square_y = intval($_POST['profile_square_pos_y']);
             $square_size = intval($_POST['profile_square_size']);
@@ -289,21 +338,24 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
         } catch (UNL_PersonInfo_Exceptions_InvalidImage $e) {
             $this->create_notice(
                 "Error Updating Your Info",
-                $e->getMessage(),
+                "An invalid image was uploaded. This could be a result of large
+                    size of the image or the format of the image. Contact an
+                    administrator if the issue persists.",
                 "WARNING"
             );
             self::redirect(self::getURL(), true);
         } catch (UNL_PersonInfo_Exceptions_ImageProcessing $e) {
             $this->create_notice(
                 "Error Updating Your Info",
-                $e->getMessage(),
+                "An issue has occurred while trying to process your image.
+                    Contact an administrator if the issue persists.",
                 "WARNING"
             );
             self::redirect(self::getURL(), true);
         } catch (Exception $e) {
             $this->create_notice(
                 "Error Updating Your Info",
-                $e->getMessage(),
+                "Contact an administrator if the issue persists.",
                 "WARNING"
             );
             self::redirect(self::getURL(), true);
@@ -316,11 +368,17 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
             "SUCCESS"
         );
 
+        // Redirect the client, this is so we can't resubmit the form
         self::redirect(self::getURL(), true);
     }
 
+    /**
+     * Function for handing delete_avatar form post request
+     * @return void
+     */
     public function delete_avatar()
     {
+        // Get the user and their record
         $user = self::$user;
         $user_record = new UNL_PersonInfo_Record($user);
 
@@ -330,22 +388,25 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
         }
 
         try {
+            // Clears the user images
             $user_record->clear_images();
         } catch (Exception $e) {
             $this->create_notice(
                 "Error Deleting Your Avatar",
-                $e->getMessage(),
+                "Contact an administrator if the issue persists.",
                 "WARNING"
             );
             self::redirect(self::getURL(), true);
         }
 
+        // Let the user know things went well
         $this->create_notice(
             "Deleted Your Avatar",
             "Your avatar has been successfully deleted",
             "SUCCESS"
         );
 
+        // Redirect the client, this is so we can't resubmit the form
         self::redirect(self::getURL(), true);
     }
 
