@@ -122,13 +122,20 @@ foreach ($planet_red_usernames as $username) {
     echo "Saved original" . PHP_EOL;
 
     // Save all the different versions
-    $image_helper = new UNL_PersonInfo_ImageHelper($tmp_file_name);
-    $image_helper->resize_image(array(16, 24, 40, 48, 72, 100, 120, 200, 240, 400, 800), array(72, 144));
-    $image_helper->save_to_formats(array('JPEG', 'AVIF'));
-    $image_helper->write_to_user($user_record);
-    unset($image_helper);
+    try {
+        $image_helper = new UNL_PersonInfo_ImageHelper($tmp_file_name);
+        $image_helper->resize_image(array(16, 24, 40, 48, 72, 100, 120, 200, 240, 400, 800), array(72, 144));
+        $image_helper->save_to_formats(array('JPEG', 'AVIF'));
+        $image_helper->write_to_user($user_record);
+        unset($image_helper);
+    } catch(ImagickException $e) {
+        echo "Error Processing Image" . PHP_EOL;
+        unlink($tmp_file_name);
+        rmdir($tmp_directory);
+        continue;
+    }
 
-    // Delete the tmp file
+    // Delete the tmp filed
     unlink($tmp_file_name);
 
     //    ___ ___  ___  ___ ___ ___ ___
