@@ -1046,7 +1046,10 @@ define([
 							var splitQuery;
 							var nextAttempt = function(firstName, lastName) {
 								window.location.hash = 'q/' + firstName + '/' +lastName;
-								summary_search_query.innerText = firstName + ' ' + lastName;
+
+								if (summary_search_query !== undefined) {
+									summary_search_query.innerText = firstName + ' ' + lastName;
+								}
 
 								var tmpl = $.templates({
 										markup: searchNoticeSelector,
