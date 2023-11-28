@@ -67,18 +67,6 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
         if (!$building || !isset($bldgs[$building])) {
             // Default building image
             $url = UNL_Peoplefinder::$url . 'images/default-building.jpg';
-
-            $format = $options['format'] ?? "";
-
-            // Validate format
-            $supportFormats = UNL_PersonInfo::$avatar_formats;
-            if (!isset($format) || empty($format) || !in_array(strtoupper($format), $supportFormats)) {
-                $format = 'jpeg';
-            }
-
-            if ($format === 'avif') {
-                $url = UNL_Peoplefinder::$url . 'images/default-building.avif';
-            }
         } else {
             $url = self::CAMPUS_MAPS_BASE_URL . 'building/' . urlencode($building) . '/image/1/' . $supportSizes[$size];
         }
@@ -253,13 +241,15 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
         $effectiveUrl = UNL_Peoplefinder::$url . 'images/default-avatar.jpg';
         $fallbackUrl = UNL_Peoplefinder::$url . 'images/default-avatar.jpg';
 
-        if ($format === 'avif') {
-            $effectiveUrl = UNL_Peoplefinder::$url . 'images/default-avatar.avif';
-            $fallbackUrl = UNL_Peoplefinder::$url . 'images/default-avatar.avif';
-        }
-
         // Check if gravatar is disabled
         if (self::$disable_gravatar) {
+
+            // This is in here since gravatar does not support avif
+            if ($format === 'avif') {
+                $effectiveUrl = UNL_Peoplefinder::$url . 'images/default-avatar.avif';
+                $fallbackUrl = UNL_Peoplefinder::$url . 'images/default-avatar.avif';
+            }
+
             return $effectiveUrl;
         }
 
