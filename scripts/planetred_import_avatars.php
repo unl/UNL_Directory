@@ -68,7 +68,7 @@ foreach ($planet_red_usernames as $username) {
     $user_uniqid = uniqid("import_");
     $tmp_directory = dirname(__DIR__) . "/www/person_images/tmp/" . $user_uniqid;
     if (!file_exists($tmp_directory)) {
-        mkdir($tmp_directory);
+        mkdir($tmp_directory, 775);
     }
 
     //   ___ ___ ___ ___ ___ ___ ___ _____

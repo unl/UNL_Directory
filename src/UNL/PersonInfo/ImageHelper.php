@@ -42,7 +42,7 @@ class UNL_PersonInfo_ImageHelper
         $this->random_id = uniqid();
         $this->tmp_path = dirname(dirname(dirname(__DIR__))) . '/www/person_images/tmp/' . $this->random_id;
         if (!file_exists($this->tmp_path)) {
-            mkdir($this->tmp_path);
+            mkdir($this->tmp_path, 775);
         }
 
         // Validates the image exists
