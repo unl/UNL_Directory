@@ -12,8 +12,6 @@
  */
 class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable, JsonSerializable
 {
-    const PLANETRED_BASE_URL = 'https://planetred.unl.edu/pg/';
-
     const BAD_SAP_MAIL_PLACEHOLDER = 'none@none.none';
 
     const SERIALIZE_VERSION_SAFE = 1;
@@ -234,11 +232,11 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
                      //This is a zip code formatted without a dash after the 5 digit zip code. Add it.
                      $part = substr_replace($part, '-', 5, 0);
                  }
-                 
+
                  $address['postal-code'] = $part;
             }
         }
-        
+
         //find the building name
         if (isset($address['unlBuildingCode']) && isset($bldgs[strtoupper($address['unlBuildingCode'])])) {
             $address['unlBuildingName'] = $bldgs[strtoupper($address['unlBuildingCode'])];
@@ -309,11 +307,11 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
         if (empty($this->eduPersonNickname)) {
             return false;
         }
-        
+
         if ($this->eduPersonNickname == ' ') {
             return false;
         }
-        
+
         return true;
     }
 
@@ -352,7 +350,7 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
     /**
      * Determine if this person has an affiliation that is likely to contain an appointment
      * This is mostly done to reduce the number of database queries (and might not be needed)
-     * 
+     *
      * @return bool
      */
     public function affiliationMightIncludeAppointments()
@@ -360,7 +358,7 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
         if (!$this->eduPersonAffiliation) {
             return false;
         }
-        
+
         $affiliationsWithAppointments = [
             UNL_Peoplefinder::AFFILIATION_STAFF,
             UNL_Peoplefinder::AFFILIATION_FACULTY,
@@ -375,16 +373,16 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
         } elseif (is_string($affiliations)) {
             $affiliations = array($affiliations);
         }
-        
+
         foreach ($affiliationsWithAppointments as $affiliation) {
             if (in_array($affiliation, $affiliations)) {
                 return true;
             }
         }
-        
+
         return false;
     }
-    
+
     public function formatTitle()
     {
         if (!$this->title) {
@@ -637,22 +635,41 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
         return str_replace('-', '_', $this->uid);
     }
 
-    public function getProfileURL()
+    /**
+     * Get avatar image of user
+     *
+     * @param string|int $size Size of the profile image in pixels
+     * @param int $dpi The DPI of the image (Resolution)
+     * @param string $format Format of image (JPEG or AVIF)
+     * @return string|bool The URL of the image or false if organization
+     */
+    public function getImageURL($size = UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_MEDIUM, $dpi=72, $format='jpeg')
     {
+        // We do not want to return anything if it is an org
         if ($this->ou === 'org') {
             return false;
         }
 
-        return self::PLANETRED_BASE_URL . 'profile/unl_' . $this->getProfileUid();
-    }
-
-    public function getImageURL($size = UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_MEDIUM)
-    {
+        // Get avatar URL of record
         $url = $this->getRecordUrl('avatar');
-        if ($size !== UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_MEDIUM) {
-            $url .= '?' . http_build_query(['s' => $size]);
+
+        // Validate size
+        if (!in_array($size, UNL_Peoplefinder_Record_Avatar::getAvatarSizes(false))) {
+            $size = UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_MEDIUM;
         }
-        return $url;
+
+        // Validate DPI
+        if (!in_array($dpi, UNL_Peoplefinder_Record_Avatar::getAvatarDPI(false))) {
+            $dpi = 72;
+        }
+
+        // Validate format
+        if (!in_array(strtoupper($format), UNL_PersonInfo::$avatar_formats)) {
+            $format = 'jpeg';
+        }
+
+        // Returns URL with params
+        return $url .'?' . http_build_query(['s' => $size, 'dpi' => $dpi, 'format' => $format]);
     }
 
     protected function getRecordUrl($type)

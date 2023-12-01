@@ -180,7 +180,7 @@
 }
 
 .pfResult .profile_pic .photo{
-  background-image:    url('../images/default-profile.gif');
+  background-image:    url('../images/default-avatar.jpg');
   background-size:     cover;
   background-repeat:   no-repeat;
   background-position: center center;
@@ -309,6 +309,41 @@
 .record-container .vcard button:focus,
 .results-container .vcard button:focus {
   outline: 1px dotted;
+}
+
+
+.vcard .directory-edit-avatar {
+  // Total size of the button without the margin
+  --_size: 1.75rem;
+
+  // Padding can't be more than 1/2 the size
+  --_padding: 0.3rem;
+
+  // Size around the button
+  --_margin: 0rem;
+
+  // Size of the outline when hovering
+  --_outline_width: 0.1rem;
+
+  width: var(--_size);
+  height: var(--_size);
+  padding: var(--_padding);
+  margin: var(--_margin);
+  top: calc(100% - var(--_size) - (2 * var(--_margin)));
+  left: calc(100% - var(--_size) - (2 * var(--_margin)));
+}
+
+.vcard .directory-edit-avatar svg {
+  margin: var(--_padding);
+  width: calc(100% - (2 * var(--_padding)));
+  height: calc(100% - (2 * var(--_padding)));
+}
+
+.vcard .directory-edit-avatar-outline-hover {
+  margin: var(--_outline_width);
+}
+.vcard .directory-edit-avatar-outline-hover:hover {
+  outline: var(--_outline_width) solid currentColor;
 }
 
 

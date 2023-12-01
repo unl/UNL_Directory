@@ -14,22 +14,35 @@ if (isset($page)) {
             <div class="dcf-col-100% dcf-col-67%-start@md">
                 <h3 class="dcf-txt-h5">About the data</h3>
                 <p>
-                    The data used to build the <a href="https://directory.unl.edu/">Directory</a> is maintained in several source databases.
-                    Information obtained from the directory may <em>not</em> be used to provide addresses for mailings to students, faculty or staff.
-                    Any solicitation of business, information, contributions or other response from individuals listed in this publication by mail, telephone or other means is forbidden.
+                    The data used to build the <a href="https://directory.unl.edu/">Directory</a> is maintained
+                    in several source databases. Information obtained from the directory may <em>not</em> be
+                    used to provide addresses for mailings to students, faculty or staff. Any solicitation of
+                    business, information, contributions or other response from individuals listed in this
+                    publication by mail, telephone or other means is forbidden.
                 </p>
                 <p>
-                    <strong><em>Student</em></strong> directory data is maintained in the university student information system.
+                    <strong><em>Student</em></strong> directory data is maintained in the university
+                    student information system.
                 </p>
                 <p>
-                    <strong><em>Faculty/Staff</em></strong> directory data is maintained in the university administrative and finance system, SAP / Firefly.</p>
+                    <strong><em>Faculty/Staff</em></strong> directory data is maintained in the university
+                    administrative and finance system, SAP / Firefly.
+                </p>
                 <p>
-                    The <strong><em>Departments &amp; Units</em></strong> directory is primarily composed of information provided by departmental HR coordinators, and is augmented with data sourced from the university administrative and finance system.
+                    The <strong><em>Departments &amp; Units</em></strong> directory is primarily composed of
+                    information provided by departmental HR coordinators, and is augmented with data sourced
+                    from the university administrative and finance system.
                 </p>
                 <h3 class="dcf-txt-h5">Updating Your Information</h3>
-                <p><strong>Personal information</strong> is managed outside of the directory. See our <a href="https://www.unl.edu/how-manage-personal-information/">How to Manage Personal Information</a> page for options to update your information.</p>
                 <p>
-                    <strong>Department / Unit listings</strong> in directory have an HR coordinator who is responsible for their respective listing page. The "Suggest a correction" button on each department / unit listing page will submit a request to the editors for that respective listing.
+                    <strong>Personal information</strong> is managed outside of the directory.
+                    See our <a href="https://www.unl.edu/how-manage-personal-information/">How to Manage
+                    Personal Information</a> page for options to update your information.
+                </p>
+                <p>
+                    <strong>Department / Unit listings</strong> in directory have an HR coordinator who is
+                    responsible for their respective listing page. The "Suggest a correction" button on each
+                    department / unit listing page will submit a request to the editors for that respective listing.
                 </p>
             </div>
             <div class="dcf-col-100% dcf-col-33%-end@md">
@@ -51,16 +64,30 @@ if (isset($page)) {
                                     <?php echo $baseUrl ?>images/class-n-1197.jpg 1197w,
                                     <?php echo $baseUrl ?>images/class-n-1597.jpg 1597w"
                             sizes="(min-width: 41.956em) 43vw, 89vw">
-                        <img class="hero-img" src="data:image/gif;base64,R0lGODlhAQABAAAAADs=" alt="First year students tunnel walk">
+                        <img
+                            class="hero-img" src="data:image/gif;base64,R0lGODlhAQABAAAAADs="
+                            alt="First year students tunnel walk"
+                        >
                     </picture>
                 </div>
                 <p>
-                    Want to show your photo on your Directory result instead of the default outline? We've got a couple of ways to do that.
-                    Photos are pulled from two sources, <a href="https://planetred.unl.edu/">Planet Red</a> and <a href="https://en.gravatar.com/">Gravatar</a>.
+                    Want to show your photo on your Directory result instead of the default outline?
+                    We've got a couple of ways to do that.
+                    Photos are pulled from two sources, <a href="<?php echo UNL_PersonInfo::getURL(); ?>">My Info</a>
+                    and <a href="https://en.gravatar.com/">Gravatar</a>.
                     If you don't currently use either of these services, getting started is pretty simple.
                 </p>
-                <p>As a member of the university community, we've got a <a href="https://planetred.unl.edu/">Planet Red</a> profile waiting for you to upload a photo to. All you need to do is fill out a little profile information and we'll automatically pull your photo from there.</p>
-                <p>If you'd prefer not to create a Planet Red profile and you are a faculty or staff member that has been issued a campus email address, you can use that address to create a <a href="https://en.gravatar.com/">Gravatar</a> profile. Once you've got your profile loaded with an avatar, we'll automatically pull your photo from there.</p>
+                <p>
+                    Directory has avatar management built in so so uploading a new avatar or updating your
+                    current one is super easy. Just head over to the
+                    <a href="<?php echo UNL_PersonInfo::getURL(); ?>">My Info</a> page to edit your avatar.
+                </p>
+                <p>
+                    If you'd prefer to not use the My Info page and you are a faculty or staff member that
+                    has been issued a campus email address, you can use that address to create
+                    a <a href="https://en.gravatar.com/">Gravatar</a> profile. Once you've got your
+                    profile loaded with an avatar, we'll automatically pull your photo from there.
+                </p>
             </div>
         </div>
     </div>

@@ -19,6 +19,8 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
     const AVATAR_SIZE_LARGE = 'large';
     const AVATAR_SIZE_ORIGINAL = 'original';
 
+    public static $disable_gravatar = false;
+
     protected $options;
 
     protected $record;
@@ -63,7 +65,8 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
         }
 
         if (!$building || !isset($bldgs[$building])) {
-            $url = self::CAMPUS_MAPS_BASE_URL . 'images/building/icon_' . $supportSizes[$size] . '.png';
+            // Default building image
+            $url = UNL_Peoplefinder::$url . 'images/default-building.jpg';
         } else {
             $url = self::CAMPUS_MAPS_BASE_URL . 'building/' . urlencode($building) . '/image/1/' . $supportSizes[$size];
         }
@@ -71,6 +74,12 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
         return $url;
     }
 
+    /**
+     * Get an array of possible sizes for avatars
+     *
+     * @param bool $forBuilding True if it is for buildings and false for persons
+     * @return string[] Associative array of sizes and their values
+     */
     public static function getAvatarSizes($forBuilding = false)
     {
         $mapsSizeMap = [
@@ -79,20 +88,38 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
             self::AVATAR_SIZE_LARGE => 'lg',
         ];
 
-        $planetRedSizeMap = [
-            self::AVATAR_SIZE_ORIGINAL => '400', //default
-            self::AVATAR_SIZE_LARGE => '200',
-            self::AVATAR_SIZE_MEDIUM => '100',
-            self::AVATAR_SIZE_SMALL => '40',
-            self::AVATAR_SIZE_TINY => '25',
-            self::AVATAR_SIZE_TOPBAR => '16',
-        ];
+        $personAvatarSizeMap = array_combine(UNL_PersonInfo::$avatar_sizes, UNL_PersonInfo::$avatar_sizes);
+        $personAvatarSizeMap[self::AVATAR_SIZE_ORIGINAL] = '400';
+        $personAvatarSizeMap[self::AVATAR_SIZE_LARGE] = '200';
+        $personAvatarSizeMap[self::AVATAR_SIZE_MEDIUM] = '100';
+        $personAvatarSizeMap[self::AVATAR_SIZE_SMALL] = '40';
+        $personAvatarSizeMap[self::AVATAR_SIZE_TINY] = '24';
+        $personAvatarSizeMap[self::AVATAR_SIZE_TOPBAR] = '16';
 
         if ($forBuilding) {
             return $mapsSizeMap;
         }
 
-        return $planetRedSizeMap;
+        return $personAvatarSizeMap;
+    }
+
+    /**
+     * Get an array of possible DPIs for avatars
+     *
+     * @param bool $forBuilding True if it is for buildings and false for persons
+     * @return int[] Array of DPIs valid for avatar
+     */
+    public static function getAvatarDPI($forBuilding = false)
+    {
+        $mapsDPIMap = array(72);
+
+        $personAvatarDPIMap = UNL_PersonInfo::$avatar_dpi;
+
+        if ($forBuilding) {
+            return $mapsDPIMap;
+        }
+
+        return $personAvatarDPIMap;
     }
 
     public function __construct($options = [])
@@ -103,13 +130,17 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
             $this->record = $options;
             $this->options = [];
         } elseif (isset($options['uid'])) {
+
+            // Check if they have a record
             try {
                 $this->record = new UNL_Peoplefinder_Record(array('uid' => $options['uid']));
             } catch (Exception $e) {
+                // If not a 404 it will throw it
                 if ($e->getCode() !== 404) {
                     throw $e;
                 }
 
+                // If 404 then create a new record
                 $this->record = new UNL_Peoplefinder_Record();
                 $this->record->uid = $options['uid'];
             }
@@ -156,94 +187,92 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
         return $this->url;
     }
 
+    /**
+     * Generate a person's avatar URL
+     * @param mixed $options options to set
+     * @return string URL to redirect to
+     */
     protected function generatePersonUrl($options)
     {
-        $size = $options['s'];
+        // Set up variables
+        $size = $options['s'] ?? self::AVATAR_SIZE_MEDIUM;
+        $dpi = $options['dpi'] ?? "";
+        $format = $options['format'] ?? "";
+        $cropped = strtolower($options['cropped'] ?? "");
+
+        // Validate format
+        $supportFormats = UNL_PersonInfo::$avatar_formats;
+        if (!isset($format) || empty($format) || !in_array(strtoupper($format), $supportFormats)) {
+            $format = 'jpeg';
+        }
+
+        // Validate size
         $supportSizes = self::getAvatarSizes();
         if (!isset($supportSizes[$size])) {
             $size = self::AVATAR_SIZE_MEDIUM;
         }
 
-        $planetRedSize = $size;
-        if ($size === self::AVATAR_SIZE_ORIGINAL) {
-            $planetRedSize = 'master';
-        }
+        // Check if they have an avatar image
+        $personInfoRecord = new UNL_PersonInfo_Record($options['uid']);
+        if ($personInfoRecord->has_images()) {
 
-        $planetRedUid = $this->record->getProfileUid();
-        $profileIconUrl = UNL_Peoplefinder_Record::PLANETRED_BASE_URL .
-            'icon/' .
-            'unl_' .
-            $planetRedUid .
-            '/' .
-            $planetRedSize .
-            '/';
-
-        //check if we have the default profile icon used
-        //this is being cached to reduce the number of requests being sent to planetred when directory is under high load
-        $cachedFallbackURL = $this->cache->get($profileIconUrl);
-
-        if (!$cachedFallbackURL) {
-            //no fallback URL was found, so we need a new request
-            $effectiveUrl = $profileIconUrl;
-            $onRedirect = function(
-                RequestInterface $request,
-                ResponseInterface $response,
-                UriInterface $uri
-            ) use (&$effectiveUrl) {
-                $effectiveUrl = (string) $uri;
-            };
-            $client = new Client([
-                'allow_redirects' => [
-                    'on_redirect' => $onRedirect
-                ],
-                'http_errors' => false,
-            ]);
-            $request = new Request('HEAD', $profileIconUrl);
-            $response = $client->send($request);
-
-            //check if it redirects to the default image
-            if ($effectiveUrl == $profileIconUrl) {
-                if ($response->getStatusCode() == 200) {
-                    //The old version of planetred is in use and will return a 200 response for images.
-                    return $effectiveUrl;
-                }
-
-                //request to planet red failed (404 or 500 like error) however
-                //if a user has not registered with planetred, it should still redirect to the default image
-                $fallbackUrl = 'mm';
-            } elseif (false === strpos($effectiveUrl, 'user/default') && false === strpos($effectiveUrl, 'mod/profile/graphics/default')) {
-                //looks like it isn't the default image. Serve this this one up.
-                return $effectiveUrl;
-            } else {
-                //default image again.
-                $fallbackUrl = $effectiveUrl;
-
-                //Cache this for a bit
-                $this->cache->set($profileIconUrl, $fallbackUrl, 3600);
+            // Validate DPI
+            $supportDPI = self::getAvatarDPI();
+            if (!isset($dpi) || empty($dpi) || !in_array($dpi, $supportDPI)) {
+                $dpi = '72';
             }
-        } else {
-            $fallbackUrl = $cachedFallbackURL;
-            $effectiveUrl = $cachedFallbackURL;
+
+            // Validate prefix
+            $file_name_prefix = 'cropped';
+            if (isset($cropped) && in_array($cropped, array('false', '0'))) {
+                $file_name_prefix = 'original';
+            }
+
+            // Build the URL from the file and return it if its valid
+            $avatar_size = $supportSizes[$size];
+            $image_file_name = $file_name_prefix . '_' . $avatar_size . '_' . $dpi . '.' . $format;
+            $image_url = $personInfoRecord->get_image_url($image_file_name);
+            if ($image_url !== false) {
+                return $image_url;
+            }
         }
 
-        // Do we have something Gravatar can use?
+        // Get the default avatar image
+        $effectiveUrl = UNL_Peoplefinder::$url . 'images/default-avatar.jpg';
+        $fallbackUrl = UNL_Peoplefinder::$url . 'images/default-avatar.jpg';
+
+        // Check if gravatar is disabled
+        if (self::$disable_gravatar) {
+
+            // This is in here since gravatar does not support avif
+            if ($format === 'avif') {
+                $effectiveUrl = UNL_Peoplefinder::$url . 'images/default-avatar.avif';
+                $fallbackUrl = UNL_Peoplefinder::$url . 'images/default-avatar.avif';
+            }
+
+            return $effectiveUrl;
+        }
+
+        // Check if they have the right info for gravatar
         if (!$this->record->mail || !$this->record->eduPersonPrincipalName) {
             return $effectiveUrl;
         }
 
+        // Set up the gravatar variables
         $gravatarParams = [
             's' => $supportSizes[$size],
             'd' => $fallbackUrl,
         ];
 
+        // Generate the gravatar URL
         if ($this->record->mail) {
             $gravatarHash = md5($this->record->mail);
         } else {
             $gravatarHash = md5($this->record->eduPersonPrincipalName);
         }
-
         $profileIconUrl = self::GRAVATAR_BASE_URL . $gravatarHash . '?' . http_build_query($gravatarParams);
 
+        // Return the URL to redirect to
         return $profileIconUrl;
     }
 

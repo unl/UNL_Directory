@@ -3,6 +3,8 @@
 $preferredFirstName = $context->getPreferredFirstName();
 $preferredName = $preferredFirstName . ' ' . $context->sn;
 
+$user = UNL_PersonInfo::getUser();
+
 $isOrg = $context->ou == 'org';
 $itemtype = 'Person';
 if ($isOrg) {
@@ -34,9 +36,56 @@ $showKnowledge = $context->shouldShowKnowledge() === TRUE && $hasKnowledge === T
 
 
 <div class="vcard <?php if (!$showKnowledge): ?>card <?php endif; ?><?php echo $context->eduPersonPrimaryAffiliation ?> dcf-measure" data-uid="<?php echo $context->uid ?>" data-preferred-name="<?php echo $preferredName ?>" itemscope itemtype="https://schema.org/<?php echo $itemtype ?>">
-    <a class="card-profile planetred_profile dcf-d-block dcf-mb-3 dcf-h-10 dcf-w-10 dcf-ratio dcf-ratio-1x1" href="<?php echo $context->getProfileUrl() ?>" aria-label="Planet Red profile for <?php echo $preferredName ?>" itemprop="url">
-        <img class="photo profile_pic dcf-ratio-child dcf-circle dcf-d-block dcf-obj-fit-cover" itemprop="image" src="<?php echo $context->getImageURL(UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_LARGE) ?>" alt="" />
-    </a>
+    <?php if ($user !== false && strval($context->uid) === $user): ?>
+        <div class="card-profile dcf-relative dcf-d-block dcf-mb-3 dcf-h-10 dcf-w-10 dcf-ratio dcf-ratio-1x1">
+            <?php echo $savvy->render($context, 'Peoplefinder/Record/AvatarImage.tpl.php'); ?>
+
+            <div class="directory-edit-avatar dcf-absolute dcf-d-block dcf-ratio dcf-ratio-1x1">
+                <a
+                    class="directory-edit-avatar-outline-hover dcf-ratio-child unl-bg-cerulean unl-cream dcf-circle"
+                    href="<?php echo UNL_PersonInfo::getURL(); ?>"
+                    title="Edit Your Avatar"
+                >
+                    <svg
+                        class="dcf-fill-current"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                        focusable="false"
+                    >
+                        <path
+                            d="M23.5,10h-2.855c-0.2-0.79-0.454-1.667-0.778-2.332l2.032-2.032c0.195-0.195,
+                            0.195-0.512,0-0.707
+                            L19.07,2.102 c-0.195-0.196-0.512-0.196-0.707,0l-2.033,2.031
+                            C15.665,3.809,14.789,3.555,14,3.356V0.5
+                            C14,0.224,13.776,0,13.5,0h-3
+                            C10.224,0,10,0.224,10,0.5v2.856
+                            C9.21,3.555,8.333,3.809,7.669,4.133
+                            L5.636,2.102c-0.195-0.196-0.512-0.196-0.707,0
+                            L2.1,4.929 c-0.195,0.195-0.195,0.512,0,0.707l2.033,2.033
+                            C3.81,8.332,3.555,9.209,3.355,10H0.5
+                            C0.224,10,0,10.224,0,10.5v3
+                            C0,13.776,0.224,14,0.5,14h2.855c0.201,0.791,0.456,1.668,0.779,2.331
+                            L2.1,18.365c-0.195,0.195-0.195,0.511,0,0.707l2.829,2.828 c0.188,0.188,
+                            0.52,0.188,0.707,0l2.033-2.033c0.663,0.323,1.54,0.578,2.332,
+                            0.779V23.5c0,0.276,0.224,0.5,0.5,0.5h3 c0.276,0,0.5-0.224,
+                            0.5-0.5v-2.854c0.79-0.201,1.668-0.456,2.331-0.778l2.034,
+                            2.032c0.195,0.195,0.512,0.195,0.707,0l2.828-2.828 c0.195-0.195,
+                            0.195-0.512,0-0.707l-2.032-2.033c0.323-0.663,0.578-1.54,
+                            0.778-2.331H23.5c0.276,0,0.5-0.224,0.5-0.5v-3
+                            C24,10.224,23.776,10,23.5,10z
+                            M12,16c-2.206,0-4-1.795-4-4s1.794-4,4-4s4,1.795,4,4S14.206,16,12,16z"
+                        ></path>
+                    </svg>
+                </a>
+            </div>
+
+        </div>
+    <?php else: ?>
+        <div class="card-profile dcf-d-block dcf-mb-3 dcf-h-10 dcf-w-10 dcf-ratio dcf-ratio-1x1">
+            <?php echo $savvy->render($context, 'Peoplefinder/Record/AvatarImage.tpl.php'); ?>
+        </div>
+    <?php endif; ?>
 
     <div class="vcardInfo<?php if (!$showKnowledge): ?> card-content<?php endif; ?> unl-font-sans">
     <?php if (!$context->isHcardFormat()): ?>

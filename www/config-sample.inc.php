@@ -26,7 +26,7 @@ UNL_Officefinder::$db_user = 'officefinder';
 UNL_Officefinder::$db_pass = 'officefinder';
 UNL_Officefinder_CorrectionEmail::$defaultRecipient = 'nobody@unl.edu';
 
-// Officefinder editing admins
+// Officefinder editing admins, and for PersonInfo admin overrides
 UNL_Officefinder::$admins = array('hhusker1');
 
 UNL_Knowledge_Driver_REST::$service_user = 'unl/web_service_unlwebcv';

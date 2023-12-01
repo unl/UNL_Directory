@@ -84,7 +84,8 @@ class UNL_Peoplefinder_Driver_WebService implements UNL_Peoplefinder_DriverInter
      */
     function getUID($uid)
     {
-        $record = file_get_contents($this->service_url.'?uid='.urlencode($uid).'&format=php');
+        // We can ignore the error for 404 because it will return false
+        $record = @file_get_contents($this->service_url.'?uid='.urlencode($uid).'&format=php');
 
         if (false === $record) {
             throw new Exception('Could not find that user!', 404);
