@@ -150,7 +150,10 @@ class UNL_PersonInfo_Record
         if (!file_exists($file_path)) {
             return false;
         }
-        return UNL_Peoplefinder::getURL() . 'images/avatars/' . $this->uid . '/' . $file_name;
+
+        // 1701470075 is unix timestamp of when this was first inputted
+        $cache_busting_time = isset($this->avatar_updated_on) ? strtotime($this->avatar_updated_on) : 1701470075;
+        return UNL_Peoplefinder::getURL() . 'images/avatars/' . $this->uid . '/' . $file_name . '?v=' . date('U', $cache_busting_time);
     }
 
     /**
