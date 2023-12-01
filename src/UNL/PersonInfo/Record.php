@@ -92,7 +92,7 @@ class UNL_PersonInfo_Record
         // Creates path to the new file save location and checks that the parent directory exists
         $path_to_save_location = $this->person_images_dir . $this->uid . '/' . $file_name;
         if (!file_exists(dirname($path_to_save_location))) {
-            mkdir(dirname($path_to_save_location), 775);
+            mkdir(dirname($path_to_save_location), 0775);
         }
 
         // Updates database record
