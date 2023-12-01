@@ -313,6 +313,7 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
             $user_record = new UNL_PersonInfo_Record($_POST['admin_user_uid_set']);
         }
 
+        set_time_limit(300);
         // Try to manipulate the image
         try {
             // Create a new image helper
@@ -360,7 +361,7 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
         } catch (Exception $e) {
             $this->create_notice(
                 "Error Updating Your Info",
-                "Contact an administrator if the issue persists.",
+                $e->getMessage(),
                 "WARNING"
             );
             self::redirect(self::getURL(), true);
