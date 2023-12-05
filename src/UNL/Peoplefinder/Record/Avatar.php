@@ -131,6 +131,9 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
             $this->options = [];
         } elseif (isset($options['uid'])) {
 
+            // Remove trailing slash
+            $options['uid'] = rtrim($options['uid'], '/');
+
             // Check if they have a record
             try {
                 $this->record = new UNL_Peoplefinder_Record(array('uid' => $options['uid']));
@@ -212,8 +215,10 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
             $size = self::AVATAR_SIZE_MEDIUM;
         }
 
+        $options['uid']
+
         // Check if they have an avatar image
-        $personInfoRecord = new UNL_PersonInfo_Record($options['uid']);
+        $personInfoRecord = new UNL_PersonInfo_Record();
         if ($personInfoRecord->has_images()) {
 
             // Validate DPI
