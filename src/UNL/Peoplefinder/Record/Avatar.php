@@ -215,10 +215,8 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
             $size = self::AVATAR_SIZE_MEDIUM;
         }
 
-        $options['uid']
-
         // Check if they have an avatar image
-        $personInfoRecord = new UNL_PersonInfo_Record();
+        $personInfoRecord = new UNL_PersonInfo_Record($this->record->uid);
         if ($personInfoRecord->has_images()) {
 
             // Validate DPI
