@@ -646,7 +646,7 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
     public function getImageURL($size = UNL_Peoplefinder_Record_Avatar::AVATAR_SIZE_MEDIUM, $dpi=72, $format='jpeg')
     {
         // We do not want to return anything if it is an org
-        if ($this->ou === 'org') {
+        if (isset($this->ou) && $this->ou === 'org') {
             return false;
         }
 
@@ -680,7 +680,7 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
     public function getCleanImageURL()
     {
         // We do not want to return anything if it is an org
-        if ($this->ou === 'org') {
+        if (isset($this->ou) && $this->ou === 'org') {
             return false;
         }
 
