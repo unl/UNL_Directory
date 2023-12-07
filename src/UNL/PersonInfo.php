@@ -303,6 +303,16 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
         $user = self::$user;
         $user_record = new UNL_PersonInfo_Record($user);
 
+        $file_mime_type = mime_content_type($_FILES['profile_input']['tmp_name']);
+        if (!in_array($file_mime_type, array('image/jpeg', 'image/png', 'image/avif', 'application/octet-stream'))) {
+            $this->create_notice(
+                "Error Updating Your Info",
+                "An invalid image was uploaded. This could be a result of large size of the image or the format of the image. Contact an administrator if the issue persists.",
+                "WARNING"
+            );
+            self::redirect(self::getURL(), true);
+        }
+
         // Admin override for the user, this is helpful for updating a user's avatar
         if (
             UNL_Officefinder::isAdmin($user)
@@ -344,17 +354,14 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
         } catch (UNL_PersonInfo_Exceptions_InvalidImage $e) {
             $this->create_notice(
                 "Error Updating Your Info",
-                "An invalid image was uploaded. This could be a result of large
-                    size of the image or the format of the image. Contact an
-                    administrator if the issue persists.",
+                "An invalid image was uploaded. This could be a result of large size of the image or the format of the image. Contact an administrator if the issue persists.",
                 "WARNING"
             );
             self::redirect(self::getURL(), true);
         } catch (UNL_PersonInfo_Exceptions_ImageProcessing $e) {
             $this->create_notice(
                 "Error Updating Your Info",
-                "An issue has occurred while trying to process your image.
-                    Contact an administrator if the issue persists.",
+                "An issue has occurred while trying to process your image. Contact an administrator if the issue persists.",
                 "WARNING"
             );
             self::redirect(self::getURL(), true);
