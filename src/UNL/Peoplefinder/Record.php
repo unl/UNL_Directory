@@ -672,6 +672,25 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
         return $url .'?' . http_build_query(['s' => $size, 'dpi' => $dpi, 'format' => $format]);
     }
 
+    /**
+     * Get avatar image of user with no URL params
+     *
+     * @return string|bool The URL of the image or false if organization
+     */
+    public function getCleanImageURL()
+    {
+        // We do not want to return anything if it is an org
+        if ($this->ou === 'org') {
+            return false;
+        }
+
+        // Get avatar URL of record
+        $url = $this->getRecordUrl('avatar');
+
+        // Returns URL with params
+        return $url;
+    }
+
     protected function getRecordUrl($type)
     {
         return UNL_Peoplefinder::getURL() . $type . '/' . $this->uid;
@@ -783,7 +802,7 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
 
         if ($this->uid) {
             // inject methods as properties
-            $data['imageURL'] = $this->getImageURL();
+            $data['imageURL'] = $this->getCleanImageURL();
 
             if ($address = $this->formatPostalAddress()) {
                 $data['unlDirectoryAddress'] = $address;
@@ -841,7 +860,7 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
         $data['uid'] = (string) $this->uid;
 
         // inject method as property
-        $data['imageURL'] = $this->getImageURL();
+        $data['imageURL'] = $this->getCleanImageURL();
 
         if ($address = $this->formatPostalAddress()) {
             $data['unlDirectoryAddress'] = $address;
