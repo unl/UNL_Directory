@@ -494,8 +494,8 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
 
         $colleges = [
             'CBA' => [
-                'title' => 'College of Business Administration',
-                'abbr' => 'CBA',
+                'title' => 'College of Business',
+                'abbr' => 'CoB',
                 'org_unit_number' => '50000897',
             ],
             'FPA' => [
@@ -578,7 +578,7 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
                 'abbr' => 'Intercampus',
             ],
             'EEO' => [
-                'title' => 'Online & Distance Education',
+                'title' => 'Online Education',
                 'abbr' => 'ODE',
                 'org_unit_number' => '50000791',
             ],
