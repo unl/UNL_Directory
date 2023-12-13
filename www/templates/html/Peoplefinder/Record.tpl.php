@@ -174,8 +174,8 @@ $showKnowledge = $context->shouldShowKnowledge() === TRUE && $hasKnowledge === T
                         <?php if (isset($college['link'])): ?>
                             <a href="<?php echo $college['link'] ?>">
                         <?php endif; ?>
-                        <abbr title="<?php echo $college['title'] ?>"><?php echo $college['abbr'] ?></abbr>
-                        <?php if (isset($college['org_unit_number'])): ?>
+                        <?php echo $college['title'] ?>
+                        <?php if (isset($college['link'])): ?>
                             </a>
                         <?php endif; ?>
                     </div>
