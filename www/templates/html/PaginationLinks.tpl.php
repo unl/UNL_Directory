@@ -3,7 +3,7 @@
     const AMP_OFFSET = '&amp;offset=';
 ?>
 <nav class="dcf-pagination">
-    <ol class="dcf-list-bare dcf-list-inline">
+    <ol class="dcf-list-inline" role="list">
         <?php if ($context->offset != 0) :?>
         <li><a class="dcf-pagination-prev" href="<?php echo $context->url.AMP_LIMIT.$context->limit.AMP_OFFSET.($context->offset-$context->limit); ?>">Prev</a></li>
         <?php endif; ?>

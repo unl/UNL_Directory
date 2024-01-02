@@ -28,7 +28,7 @@ $sectionClassMap = [
                 <h2 class="directory-knowledge-section-heading dcf-relative dcf-txt-h4 dcf-regular"><span class="dcf-absolute dcf-pin-left unl-dark-gray <?php echo $sectionClassMap[$section] ?>" aria-hidden="true"></span><span class="dcf-sr-only"><?php echo $sectionClassMap[$section] ?></span><?php echo $savvy->escape($sectionLabel) ?></h2>
             <?php endif; ?>
             <?php if ($formattedData[$section] instanceof Traversable): ?>
-                <ul class="directory-knowledge-section-inner dcf-list-bare dcf-ml-7">
+                <ul class="directory-knowledge-section-inner dcf-ml-7" role="list">
                     <?php foreach ($formattedData[$section] as $sectionListItem): ?>
                         <li class="directory-knowledge-item"><?php echo $sectionListItem ?></li>
                     <?php endforeach; ?>

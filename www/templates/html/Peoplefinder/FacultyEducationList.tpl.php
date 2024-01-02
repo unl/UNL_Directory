@@ -11,7 +11,7 @@ $page->doctitle  = '<title>Faculty Educational Credentials | University of Nebra
         <h3>Faculty</h3>
         <p class="result_head dcf-txt-xs dcf-mt-1 unl-font-sans unl-dark-gray">Results 1 - <?php echo count($context); ?></p>
         <nav class="dcf-pagination">
-            <ol class="dcf-list-bare dcf-list-inline">
+            <ol class="dcf-list-inline" role="list">
             <?php foreach (range('A', 'Z') as $letter): ?>
                 <li><a href="#<?php echo $letter; ?>"><?php echo $letter; ?></a></li>
             <?php endforeach; ?>
