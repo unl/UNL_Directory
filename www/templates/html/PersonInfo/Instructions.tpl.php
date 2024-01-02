@@ -99,12 +99,22 @@
                                 accept="image/jpeg, image/png, image/avif"
                                 aria-describedby="profile_input_help"
                             >
-                            <p class="dcf-form-help" id="profile_input_help">
-                                Supports .jpg, .png, and .avif. <br>
-                                Max file upload size is
-                                <?php echo humanReadableBytes($context->file_upload_max_size()); ?>. <br>
-                                Transparency will be saved as gray.
-                            </p>
+                            <ul class="dcf-form-help dcf-mt-4" id="profile_input_help">
+                                <li>
+                                    Supports .jpg, .png, and .avif.
+                                </li>
+                                <li>
+                                    Minimum recommended size is <abbr class="dcf-txt-nowrap" title="800 pixels by 800 pixels">800x800</abbr>
+                                    <br> with a resolution of <span class="dcf-txt-nowrap">144 DPI</span>.
+                                </li>
+                                <li>
+                                    Max file upload size is
+                                    <?php echo humanReadableBytes($context->file_upload_max_size()); ?>.
+                                </li>
+                                <li>
+                                    Transparency will be saved as gray.
+                                </li>
+                            </ul>
                         </div>
                         <div class="dcf-form-group">
                             <p
