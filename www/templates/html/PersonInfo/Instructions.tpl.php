@@ -108,7 +108,7 @@
                                     <br> with a resolution of <span class="dcf-txt-nowrap">144 DPI</span>.
                                 </li>
                                 <li>
-                                    Max file upload size is
+                                    Maximum file upload size is
                                     <?php echo humanReadableBytes($context->file_upload_max_size()); ?>.
                                 </li>
                                 <li>
