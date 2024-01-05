@@ -1,4 +1,4 @@
-<ol class="listings dcf-list-bare dcf-mb-0 unl-font-sans">
+<ol class="listings dcf-mb-0 unl-font-sans" role="list">
     <?php foreach ($context as $listing): ?>
         <?php
         if (isset($listing->org_unit)) {

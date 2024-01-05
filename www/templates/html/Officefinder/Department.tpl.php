@@ -100,21 +100,21 @@ $hasOfficialChildDepartments = count($officialChildren);
                 HR Organization Chart
             </h2>
             <?php if (!$context->isRoot()): ?>
-            <ul class="dcf-list-bare unl-font-sans">
+            <ul class="unl-font-sans" role="list">
                 <li><a class="dcf-txt-decor-hover" href="<?php echo $hrParent->getURL() ?>">
                     <?php echo $hrParent->name ?>
                     <span class="org-unit dcf-d-block dcf-txt-xs">#<?php echo $hrParent->org_unit ?></span>
                 </a>
                 <?php endif; ?>
 
-                    <ul<?php if (!$context->isRoot()): ?> class="dcf-list-bare"<?php endif; ?>>
+                    <ul<?php if (!$context->isRoot()): ?> role="list"<?php endif; ?>>
                         <li>
                             <strong><?php echo $context->name; ?></strong>
                             <?php if ($hasOfficialChildDepartments): ?>
                             <svg class="dcf-mt-2 dcf-h-5 dcf-w-5 dcf-fill-current" aria-hidden="true" focusable="false" height="24" width="24" viewBox="0 0 24 24">
                                 <path d="M23.277 12.227l-3.449-3.451a.502.502 0 00-.692-.015L15 12.57V.5a.5.5 0 00-.5-.5h-5a.5.5 0 00-.5.5v12.086L4.865 8.762a.5.5 0 00-.693.013L.721 12.226a.5.5 0 000 .708l10.926 10.924a.498.498 0 00.708 0l10.924-10.924a.5.5 0 00-.002-.707zM12 22.797L1.781 12.58l2.758-2.758 4.622 4.274a.501.501 0 00.84-.367V1h4v12.711a.5.5 0 00.839.368l4.622-4.257 2.756 2.758L12 22.797z"></path>
                             </svg>
-                            <ul class="dcf-list-bare">
+                            <ul role="list">
                                 <?php foreach ($officialChildren as $child): ?>
                                 <li><a class="dcf-txt-decor-hover" href="<?php echo $child->getURL(); ?>">
                                     <?php echo $child->name; ?>

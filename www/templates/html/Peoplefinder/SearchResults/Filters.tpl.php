@@ -16,7 +16,7 @@
       <legend>Affiliation</legend>
       <div class="directory-h-max-filter directory-filter-fieldset-contents dcf-overflow-y-auto">
       <div class="dcf-progress-spinner"></div>
-        <ol class="dcf-list-bare dcf-mb-0"></ol>
+        <ol class="dcf-mb-0" role="list"></ol>
       </div>
     </fieldset>
 
@@ -24,7 +24,7 @@
       <legend>Department</legend>
       <div class="directory-h-max-filter directory-filter-fieldset-contents dcf-overflow-y-auto">
         <div class="dcf-progress-spinner"></div>
-        <ol class="dcf-list-bare dcf-mb-0"></ol>
+        <ol class="dcf-mb-0" role="list"></ol>
       </div>
     </fieldset>
   </form>

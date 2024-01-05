@@ -64,7 +64,7 @@ $page->addScriptDeclaration("WDN.loadJS('../scripts/filters.js', function(){
                 if ($firstLetter != 'A') {
                     $department_lists .= '</ul>';
                 }
-                $department_lists .= '<h4 id="'.$firstLetter.'" class="section">'.$firstLetter.'<span>&nbsp;<a href="#dir_nav">Back to the top</a></span></h4><ul class="pfResult departments dcf-list-bare">';
+                $department_lists .= '<h4 id="'.$firstLetter.'" class="section">'.$firstLetter.'<span>&nbsp;<a href="#dir_nav">Back to the top</a></span></h4><ul class="pfResult departments" role="list">';
             }
             $department_lists .= $savvy->render($listing, 'Officefinder/DepartmentList/ListItem.tpl.php');
         }

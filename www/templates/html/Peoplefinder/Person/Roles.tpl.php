@@ -1,4 +1,4 @@
-<ul class="roles dcf-list-bare dcf-m-0">
+<ul class="roles dcf-m-0" role="list">
     <?php foreach ($context as $role): ?>
     <?php
     if (!$context->isDisplayableRole($role)) {
