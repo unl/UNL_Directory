@@ -206,7 +206,7 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
         // Validate format
         $supportFormats = UNL_PersonInfo::$avatar_formats;
         if (!isset($format) || empty($format) || !in_array(strtoupper($format), $supportFormats)) {
-            $format = 'jpeg';
+            $format = 'JPEG';
         }
 
         // Validate size
@@ -233,7 +233,7 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
 
             // Build the URL from the file and return it if its valid
             $avatar_size = $supportSizes[$size];
-            $image_file_name = $file_name_prefix . '_' . $avatar_size . '_' . $dpi . '.' . $format;
+            $image_file_name = $file_name_prefix . '_' . $avatar_size . '_' . $dpi . '.' . strtolower($format);
             $image_url = $personInfoRecord->get_image_url($image_file_name);
             if ($image_url !== false) {
                 return $image_url;
