@@ -34,6 +34,8 @@ RewriteRule ^departments/$ index.php [QSA]
 
 RewriteRule ^myinfo/?$ index.php [QSA]
 
+RewriteRule ^myinfo/signature-generator$ index.php?view=signature-generator [QSA]
+
 RewriteCond %{REQUEST_URI} ^/images/avatars/(.*)$
 RewriteRule (.*) /person_images/%1 [L]
 

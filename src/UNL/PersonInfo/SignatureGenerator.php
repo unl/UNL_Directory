@@ -15,9 +15,7 @@
 
  class UNL_PersonInfo_SignatureGenerator
 {
-
     public $options;
-
     public $user;
     public $record;
 
@@ -43,8 +41,4 @@
     public function getUser() {
         return $this->user;
     }
-
-    
-   
-
 }

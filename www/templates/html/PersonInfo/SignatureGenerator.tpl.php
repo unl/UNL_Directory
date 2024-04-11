@@ -289,9 +289,6 @@
 
 <script>
     const default_person_to_load = '<?php echo $context->getUser(); ?>';
-</script>
-
-<script>
     const logo_url = '<?php echo UNl_Peoplefinder::$url . 'images/logos/'; ?>';
 </script>
 
