@@ -35,6 +35,7 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
     public $view_map = [
         'instructions' => 'UNL_PersonInfo_Instructions',
         'avatar' => 'UNL_PersonInfo_Avatar',
+        'signature-generator' => 'UNL_PersonInfo_SignatureGenerator',
     ];
 
     /**
@@ -450,7 +451,14 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
      */
     public function determineView()
     {
-        $this->options['view'] = 'instructions';
+        switch(true) {
+            case !empty($this->options['q']):
+                $this->options['view'] = 'signature-generator';
+                return;
+            case isset($this->options['d']):
+                $this->options['view'] = 'instructions';
+                return;
+            }
     }
 
     /**
