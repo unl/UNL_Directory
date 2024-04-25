@@ -263,15 +263,15 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
 
         // Get the default avatar image
         $effectiveUrl = UNL_Peoplefinder::$url . 'images/default-avatar-' . $supportSizes[$size] . '.jpg';
-        $fallbackUrl = UNL_Peoplefinder::$url . 'images/default-avatar' . $supportSizes[$size] . '.jpg';
+        $fallbackUrl = UNL_Peoplefinder::$url . 'images/default-avatar-' . $supportSizes[$size] . '.jpg';
 
         // Check if gravatar is disabled
         if (self::$disable_gravatar) {
 
             // This is in here since gravatar does not support avif
             if ($format === 'avif') {
-                $effectiveUrl = UNL_Peoplefinder::$url . 'images/default-avatar' . $supportSizes[$size] . '.avif';
-                $fallbackUrl = UNL_Peoplefinder::$url . 'images/default-avatar' . $supportSizes[$size] . '.avif';
+                $effectiveUrl = UNL_Peoplefinder::$url . 'images/default-avatar-' . $supportSizes[$size] . '.avif';
+                $fallbackUrl = UNL_Peoplefinder::$url . 'images/default-avatar-' . $supportSizes[$size] . '.avif';
             }
 
             return $effectiveUrl;
