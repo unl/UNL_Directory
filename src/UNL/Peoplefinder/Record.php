@@ -60,7 +60,7 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
 
                 $this->$var = $value;
             }
-        } else if (isset($options['email'])) {
+        } elseif (isset($options['email'])) {
             $peoplefinder = isset($options['peoplefinder']) ? $options['peoplefinder'] : UNL_Peoplefinder::getInstance();
             $remoteRecord = self::factoryEmail($options['email'], $peoplefinder);
 

@@ -271,7 +271,6 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
             // This is in here since gravatar does not support avif
             if ($format === 'avif') {
                 $effectiveUrl = UNL_Peoplefinder::$url . 'images/default-avatar-' . $supportSizes[$size] . '.avif';
-                $fallbackUrl = UNL_Peoplefinder::$url . 'images/default-avatar-' . $supportSizes[$size] . '.avif';
             }
 
             return $effectiveUrl;
