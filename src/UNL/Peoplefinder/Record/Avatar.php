@@ -216,6 +216,9 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
      */
     protected function generatePersonUrl($options)
     {
+        /** @var UNL_Peoplefinder_Record $personRecord */
+        $personRecord = $this->record;
+
         // Set up variables
         $size = $options['s'] ?? self::AVATAR_SIZE_MEDIUM;
         $dpi = $options['dpi'] ?? "";
@@ -235,8 +238,8 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
         }
 
         // Check if they have an avatar image
-        if (isset($this->record->uid) && !empty($this->record->uid)) {
-            $personInfoRecord = new UNL_PersonInfo_Record($this->record->uid);
+        if (isset($personRecord->uid) && !empty($personRecord->uid)) {
+            $personInfoRecord = new UNL_PersonInfo_Record($personRecord->uid);
             if ($personInfoRecord->has_images()) {
     
                 // Validate DPI
@@ -277,7 +280,7 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
         }
 
         // Check if they have the right info for gravatar
-        if (!$this->record->mail || !$this->record->eduPersonPrincipalName) {
+        if (!$personRecord->mail || !$personRecord->eduPersonPrincipalName) {
             return $effectiveUrl;
         }
 
@@ -288,10 +291,10 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
         ];
 
         // Generate the gravatar URL
-        if ($this->record->mail) {
-            $gravatarHash = md5($this->record->mail);
+        if ($personRecord->mail) {
+            $gravatarHash = md5($personRecord->mail);
         } else {
-            $gravatarHash = md5($this->record->eduPersonPrincipalName);
+            $gravatarHash = md5($personRecord->eduPersonPrincipalName);
         }
         $profileIconUrl = self::GRAVATAR_BASE_URL . $gravatarHash . '?' . http_build_query($gravatarParams);
 
