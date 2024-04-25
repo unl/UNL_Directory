@@ -422,6 +422,18 @@ class UNL_Peoplefinder_Driver_LDAP implements UNL_Peoplefinder_DriverInterface
         return self::recordFromLDAPEntry(current($r));
     }
 
+    public function getEmail($email)
+    {
+        $filter = new UNL_Peoplefinder_Driver_LDAP_EmailFilter($email);
+        $r = $this->query($filter->__toString(), $this->detailAttributes, false);
+
+        if (empty($r) || !self::displayableLDAPEntry(current($r))) {
+            throw new Exception('Cannot find that UID.', 404);
+        }
+
+        return self::recordFromLDAPEntry(current($r));
+    }
+
     public function getUIDSForDepartment($uids, $error_if_empty = TRUE)
     {
         $filter = new UNL_Peoplefinder_Driver_LDAP_UIDSFilter($uids);
