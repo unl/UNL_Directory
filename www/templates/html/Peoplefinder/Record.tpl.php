@@ -1,7 +1,5 @@
 <?php
-
-$preferredFirstName = $context->getPreferredFirstName();
-$preferredName = $preferredFirstName . ' ' . $context->sn;
+$preferredName = $context->displayName;
 
 $user = UNL_PersonInfo::getUser();
 
