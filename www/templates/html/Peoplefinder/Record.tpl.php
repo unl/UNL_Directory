@@ -17,7 +17,7 @@ if (isset($page)) {
 
 $displayEmail = false;
 $encodedEmail = '';
-if (isset($context->mail) && !$context->isPrimarilyStudent()) {
+if (isset($context->mail) && (!$context->isPrimarilyStudent() || $user !== false)) {
     $displayEmail = true;
     // attempt to curb lazy email harvesting bots
     $encodedEmail = htmlentities($context->getRaw('mail'), ENT_QUOTES | ENT_HTML5);
