@@ -134,19 +134,38 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
             // Remove trailing slash
             $options['uid'] = rtrim($options['uid'], '/');
 
-            // Check if they have a record
-            try {
-                $this->record = new UNL_Peoplefinder_Record(array('uid' => $options['uid']));
-            } catch (Exception $e) {
-                // If not a 404 it will throw it
-                if ($e->getCode() !== 404) {
-                    throw $e;
-                }
+            if (filter_var($options['uid'], FILTER_VALIDATE_EMAIL)) {
+                // Check if they have a record
+                try {
+                    $this->record = new UNL_Peoplefinder_Record(array('email' => $options['uid']));
+                } catch (Exception $e) {
+                    // If not a 404 it will throw it
+                    if ($e->getCode() !== 404) {
+                        throw $e;
+                    }
 
-                // If 404 then create a new record
-                $this->record = new UNL_Peoplefinder_Record();
-                $this->record->uid = $options['uid'];
+                    // If 404 then create a new record
+                    $this->record = new UNL_Peoplefinder_Record();
+                    $this->record->mail = $options['uid'];
+                }
+            } else {
+                // Check if they have a record
+                try {
+                    $this->record = new UNL_Peoplefinder_Record(array('uid' => $options['uid']));
+                } catch (Exception $e) {
+                    // If not a 404 it will throw it
+                    if ($e->getCode() !== 404) {
+                        throw $e;
+                    }
+
+                    // If 404 then create a new record
+                    $this->record = new UNL_Peoplefinder_Record();
+                    $this->record->uid = $options['uid'];
+                }
             }
+
+
+            
             $this->options = $options;
         } elseif (isset($options['did'])) {
             $this->record = new UNL_Officefinder_Department(['id' => $options['did']]);
@@ -197,6 +216,9 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
      */
     protected function generatePersonUrl($options)
     {
+        /** @var UNL_Peoplefinder_Record $personRecord */
+        $personRecord = $this->record;
+
         // Set up variables
         $size = $options['s'] ?? self::AVATAR_SIZE_MEDIUM;
         $dpi = $options['dpi'] ?? "";
@@ -216,48 +238,49 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
         }
 
         // Check if they have an avatar image
-        $personInfoRecord = new UNL_PersonInfo_Record($this->record->uid);
-        if ($personInfoRecord->has_images()) {
-
-            // Validate DPI
-            $supportDPI = self::getAvatarDPI();
-            if (!isset($dpi) || empty($dpi) || !in_array($dpi, $supportDPI)) {
-                $dpi = '72';
-            }
-
-            // Validate prefix
-            $file_name_prefix = 'cropped';
-            if (isset($cropped) && in_array($cropped, array('false', '0'))) {
-                $file_name_prefix = 'original';
-            }
-
-            // Build the URL from the file and return it if its valid
-            $avatar_size = $supportSizes[$size];
-            $image_file_name = $file_name_prefix . '_' . $avatar_size . '_' . $dpi . '.' . strtolower($format);
-            $image_url = $personInfoRecord->get_image_url($image_file_name);
-            if ($image_url !== false) {
-                return $image_url;
+        if (isset($personRecord->uid) && !empty($personRecord->uid)) {
+            $personInfoRecord = new UNL_PersonInfo_Record($personRecord->uid);
+            if ($personInfoRecord->has_images()) {
+    
+                // Validate DPI
+                $supportDPI = self::getAvatarDPI();
+                if (!isset($dpi) || empty($dpi) || !in_array($dpi, $supportDPI)) {
+                    $dpi = '72';
+                }
+    
+                // Validate prefix
+                $file_name_prefix = 'cropped';
+                if (isset($cropped) && in_array($cropped, array('false', '0'))) {
+                    $file_name_prefix = 'original';
+                }
+    
+                // Build the URL from the file and return it if its valid
+                $avatar_size = $supportSizes[$size];
+                $image_file_name = $file_name_prefix . '_' . $avatar_size . '_' . $dpi . '.' . strtolower($format);
+                $image_url = $personInfoRecord->get_image_url($image_file_name);
+                if ($image_url !== false) {
+                    return $image_url;
+                }
             }
         }
 
         // Get the default avatar image
-        $effectiveUrl = UNL_Peoplefinder::$url . 'images/default-avatar.jpg';
-        $fallbackUrl = UNL_Peoplefinder::$url . 'images/default-avatar.jpg';
+        $effectiveUrl = UNL_Peoplefinder::$url . 'images/default-avatar-' . $supportSizes[$size] . '.jpg';
+        $fallbackUrl = UNL_Peoplefinder::$url . 'images/default-avatar-' . $supportSizes[$size] . '.jpg';
 
         // Check if gravatar is disabled
         if (self::$disable_gravatar) {
 
             // This is in here since gravatar does not support avif
             if ($format === 'avif') {
-                $effectiveUrl = UNL_Peoplefinder::$url . 'images/default-avatar.avif';
-                $fallbackUrl = UNL_Peoplefinder::$url . 'images/default-avatar.avif';
+                $effectiveUrl = UNL_Peoplefinder::$url . 'images/default-avatar-' . $supportSizes[$size] . '.avif';
             }
 
             return $effectiveUrl;
         }
 
         // Check if they have the right info for gravatar
-        if (!$this->record->mail || !$this->record->eduPersonPrincipalName) {
+        if (!$personRecord->mail || !$personRecord->eduPersonPrincipalName) {
             return $effectiveUrl;
         }
 
@@ -268,10 +291,10 @@ class UNL_Peoplefinder_Record_Avatar implements UNL_Peoplefinder_DirectOutput, U
         ];
 
         // Generate the gravatar URL
-        if ($this->record->mail) {
-            $gravatarHash = md5($this->record->mail);
+        if ($personRecord->mail) {
+            $gravatarHash = md5($personRecord->mail);
         } else {
-            $gravatarHash = md5($this->record->eduPersonPrincipalName);
+            $gravatarHash = md5($personRecord->eduPersonPrincipalName);
         }
         $profileIconUrl = self::GRAVATAR_BASE_URL . $gravatarHash . '?' . http_build_query($gravatarParams);
 

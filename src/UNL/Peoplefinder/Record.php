@@ -60,6 +60,17 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
 
                 $this->$var = $value;
             }
+        } elseif (isset($options['email'])) {
+            $peoplefinder = isset($options['peoplefinder']) ? $options['peoplefinder'] : UNL_Peoplefinder::getInstance();
+            $remoteRecord = self::factoryEmail($options['email'], $peoplefinder);
+
+            foreach (get_object_vars($remoteRecord) as $var => $value) {
+                if ($var === 'mail' && $value == UNL_Peoplefinder_Record::BAD_SAP_MAIL_PLACEHOLDER) {
+                    continue;
+                }
+
+                $this->$var = $value;
+            }
         }
 
         $this->options = $options;
@@ -72,6 +83,15 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
         }
 
         return $peoplefinder->getUID($uid);
+    }
+
+    public static function factoryEmail($email, $peoplefinder = null)
+    {
+        if (!$peoplefinder) {
+            $peoplefinder = UNL_Peoplefinder::getInstance();
+        }
+
+        return $peoplefinder->getEmail($email);
     }
 
     public static function getCleanPhoneNumber($phone)

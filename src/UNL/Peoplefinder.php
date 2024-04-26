@@ -278,6 +278,7 @@ class UNL_Peoplefinder
      * @param mixed  $args   Arguments
      *
      * @method UNL_Peoplefinder_Record getUID() getUID(string $uid) get a record
+     * @method UNL_Peoplefinder_Record getEmail() getEmail(string $email) get a record
      *
      * @return mixed
      */
