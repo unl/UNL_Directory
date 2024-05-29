@@ -19,7 +19,7 @@
 
     public $user;
     public $record;
-    
+
     public static $url = 'https://local-directory.unl.edu';
 
     public function __construct($options = array())
@@ -114,3 +114,4 @@
         return self::$url . $link;
     }
  }
+ 

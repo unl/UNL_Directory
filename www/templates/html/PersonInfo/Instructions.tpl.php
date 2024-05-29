@@ -34,7 +34,6 @@
     <div class="dcf-hero-group-2"></div>
 </div>
 
-
 <div class="dcf-bleed view-unl_ucbcn_mananger_welcome events-manager">
     <div class="dcf-wrapper">
         <section class="dcf-grid dcf-col-gap-vw dcf-pb-8">
@@ -43,17 +42,17 @@
                 style=
                     "background-color: #474746;
                     color: #ffff;
-                    display: block; 
-                    margin: 0; 
-                    padding: 1em; 
-                    font-size: .8em !important; 
+                    display: block;
+                    margin: 0;
+                    padding: 1em;
+                    font-size: .8em !important;
                     font-style: normal;
                     font-weight: 400;
                     text-transform: uppercase;
                     width: 100%;
                     border-bottom: 1px solid var(--b)"
                 >
-                    Welcome to directory 
+                    Welcome to directory
                 </h3>
                 <p>
                     Add content...
@@ -66,15 +65,15 @@
                 </ul>
             </div>
             <div class="dcf-col-100% dcf-col-25%-end@md">
-                <h3 
+                <h3
                     style=
-                    "text-align: center; 
+                    "text-align: center;
                     background-color: #474746;
                     color: #ffff;
-                    display: block; 
-                    margin: 0; 
-                    padding: 1em; 
-                    font-size: .8em !important; 
+                    display: block;
+                    margin: 0;
+                    padding: 1em;
+                    font-size: .8em !important;
                     font-style: normal;
                     font-weight: 400;
                     text-transform: uppercase;
