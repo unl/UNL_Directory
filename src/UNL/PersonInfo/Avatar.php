@@ -1,22 +1,25 @@
 <?php
 
 /**
- * Myinfo page for editing directory saved user specific info
+ * Handling directory saved user specific info
  *
  * PHP version 7.4
  *
  * @category  Services
- * @package   UNL_PersonInfo_Instructions
+ * @package   UNL_PersonInfo_Avatar
  * @author    Thomas Neumann <tneumann9@unl.edu>
  * @copyright 2023 University Communications & Marketing
  * @license   https://www1.unl.edu/wdn/wiki/Software_License BSD License
- * @link      https://directory.unl.edu/myinfo/
+ * @link      https://directory.unl.edu/myinfo/avatar
  */
-class UNL_PersonInfo_Instructions
-{
+
+ class UNL_PersonInfo_Avatar {
+    
     public $options;
+
     public $user;
     public $record;
+    
     public static $url = 'https://local-directory.unl.edu';
 
     public function __construct($options = array())
@@ -110,4 +113,4 @@ class UNL_PersonInfo_Instructions
     public static function getURL(string $link) {
         return self::$url . $link;
     }
-}
+ }

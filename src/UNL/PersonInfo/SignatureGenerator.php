@@ -1,5 +1,7 @@
 <?php
 
+use UNL\PerspnInfo\UNL_PersonInfo_Instructions;
+
 /**
  * Handling directory saved user specific info
  *
@@ -18,6 +20,7 @@
     public $options;
     public $user;
     public $record;
+    public static $url = 'https://local-directory.unl.edu';
 
     public function __construct($options = array())
     {
@@ -40,5 +43,9 @@
      */
     public function getUser() {
         return $this->user;
+    }
+
+    public static function getURL(string $link) {
+        return self::$url . $link;
     }
 }

@@ -120,6 +120,11 @@
     }
 </style>
 
+<!-- Back button to navigate back to myinfo/ page -->
+<div class="dcf-mb-6">
+    <a class="dcf-btn dcf-btn-secondary" href="<?php echo $context->getURL("/myinfo"); ?>">< Back To My Info</a>
+</div>
+
 <!-- Email Lookup Start -->
 <div class="dcf-grid dcf-grid-full dcf-grid-halves@md dcf-col-gap-vw dcf-row-gap-5 dcf-mb-8">
     <ol class="dcf-mb-0">
