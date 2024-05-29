@@ -35,6 +35,7 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
     public $view_map = [
         'instructions' => 'UNL_PersonInfo_Instructions',
         'avatar' => 'UNL_PersonInfo_Avatar',
+        'signature-generator' => 'UNL_PersonInfo_SignatureGenerator',
     ];
 
     /**
@@ -444,24 +445,12 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
     }
 
     /**
-     * Simple router to determine what view based on options present
-     *
-     * @return void
-     */
-    public function determineView()
-    {
-        $this->options['view'] = 'instructions';
-    }
-
-    /**
      * Construct output based on options
      *
      * @return void
      */
     public function run()
     {
-        $this->determineView();
-
         if (!isset($this->view_map[$this->options['view']])) {
             throw new Exception('Un-registered view', 404);
         }
@@ -470,7 +459,6 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
 
         $this->output = $view;
     }
-
 
     /**
      * Redirect user to the specified url

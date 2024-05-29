@@ -47,6 +47,8 @@ class UNL_Peoplefinder
 
     public static $url = '';
 
+    public static $logoUrl = 'https://local-directory.unl.edu/';
+
     public static $annotateUrl = 'https://annotate.unl.edu/';
 
     public static $staticFileVersion = '4.1';

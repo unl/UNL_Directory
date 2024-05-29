@@ -5,7 +5,7 @@ error_reporting(E_ALL|E_STRICT);
 require_once __DIR__ . '/../vendor/autoload.php';
 
 // Set the main URL for the site
-UNL_Peoplefinder::$url = '/';
+UNL_Peoplefinder::$url = 'https://local-directory.unl.edu/'; //trailing slash important
 
 //Set the annotation service's URL
 UNL_Peoplefinder::$annotateUrl = 'https://annotate.unl.edu/';
