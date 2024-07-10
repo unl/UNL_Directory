@@ -3,7 +3,7 @@ class UNL_Officefinder_DepartmentList extends ArrayIterator implements Recursive
 {
     public $options;
 
-    function current()
+    function current(): mixed
     {
         $current = parent::current();
         if (gettype($current) == 'string') {
@@ -15,12 +15,12 @@ class UNL_Officefinder_DepartmentList extends ArrayIterator implements Recursive
         return $dept;
     }
 
-    function hasChildren()
+    function hasChildren(): bool
     {
         return $this->current()->hasChildren();
     }
 
-    function getChildren()
+    function getChildren(): null|RecursiveIterator
     {
         return $this->current()->getChildren();
     }

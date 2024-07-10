@@ -842,6 +842,33 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
         return serialize($data);
     }
 
+    public function __serialize():array
+    {
+        $data = $this->getPublicProperties();
+
+        foreach ($data as $key => $value) {
+            if ($value instanceof Traversable) {
+                $data[$key] = iterator_to_array($value);
+            }
+        }
+
+        if ($this->uid) {
+            // inject methods as properties
+            $data['imageURL'] = $this->getCleanImageURL();
+
+            if ($address = $this->formatPostalAddress()) {
+                $data['unlDirectoryAddress'] = $address;
+            }
+
+            if ($this->shouldShowKnowledge()) {
+                $knowledge = $this->getKnowledge();
+                $data['knowledge'] = $knowledge->jsonSerialize();
+            }
+        }
+
+        return $data;
+    }
+
     public function unserialize($serialized)
     {
         $data = unserialize($serialized);
@@ -868,7 +895,33 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
         }
     }
 
-    public function jsonSerialize()
+    public function __unserialize(array $serialized): void
+    {
+        $data = $serialized;
+
+        foreach (array_keys($this->getPublicProperties()) as $var) {
+            if (isset($data[$var])) {
+                $value = $data[$var];
+
+
+                if (is_array($value)) {
+                    if ($var === 'mail' && in_array(self::BAD_SAP_MAIL_PLACEHOLDER, $value)) {
+                        continue;
+                    }
+
+                    $this->$var = new UNL_Peoplefinder_Driver_LDAP_Multivalue($value);
+                } else {
+                    if ($var === 'mail' && $value == UNL_Peoplefinder_Record::BAD_SAP_MAIL_PLACEHOLDER) {
+                        continue;
+                    }
+
+                    $this->$var = $value;
+                }
+            }
+        }
+    }
+
+    public function jsonSerialize(): mixed
     {
         $data = $this->getPublicProperties();
 

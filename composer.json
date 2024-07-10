@@ -6,7 +6,8 @@
   },
   "autoload": {
     "psr-0": {
-      "UNL": "src/"
+      "UNL": "src/",
+      "Savvy": "vendor/unl/savvy/src"
     }
   },
   "repositories": [
@@ -17,10 +18,22 @@
     {
       "type": "vcs",
       "url": "https://github.com/unlpear/UNL_Common.git"
+    },
+    {
+      "type":"package",
+      "package": {
+          "name": "unl/savvy",
+          "version": "master",
+          "source": {
+              "url": "https://github.com/unl/Savvy.git",
+              "type": "git",
+              "reference": "master"
+          }
+      }
     }
   ],
   "require": {
-    "saltybeagle/savvy": "^0.9.0",
+    "unl/savvy": "dev-master",
     "unl/unl_cache_lite": "0.1.*",
     "unl/common": "0.6.*",
     "unl/php-wdn-templates": "^5.3",

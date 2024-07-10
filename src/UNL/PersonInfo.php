@@ -368,7 +368,7 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
         } catch (Exception $e) {
             $this->create_notice(
                 "Error Updating Your Info",
-                "Contact an administrator if the issue persists.",
+                $e->getMessage(),
                 "WARNING"
             );
             self::redirect(self::getURL(), true);

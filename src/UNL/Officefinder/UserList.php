@@ -11,7 +11,7 @@ class UNL_Officefinder_UserList extends ArrayIterator
     /**
      * @return UNL_Peoplefinder_Record
      */
-    function current()
+    function current(): mixed
     {
         try {
             return self::getPeoplefinder()->getUID(parent::current());

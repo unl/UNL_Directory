@@ -420,7 +420,7 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
      * which is a value of any type other than a resource.
      * @since 5.4.0
      */
-    function jsonSerialize()
+    function jsonSerialize(): mixed
     {
         $data = $this->getPublicProperties();
 

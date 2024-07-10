@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b803602b2a9a34a2677199b71a5826f5",
+    "content-hash": "e3521850167856f2d990de6e75c03304",
     "packages": [
         {
             "name": "deruli/html-minifier",
@@ -500,44 +500,6 @@
             "time": "2019-03-08T08:55:37+00:00"
         },
         {
-            "name": "saltybeagle/savvy",
-            "version": "v0.9.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/saltybeagle/Savvy.git",
-                "reference": "e0b265c16096c82a032a6f6b1ca92133459b9398"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/saltybeagle/Savvy/zipball/e0b265c16096c82a032a6f6b1ca92133459b9398",
-                "reference": "e0b265c16096c82a032a6f6b1ca92133459b9398",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Savvy": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Brett Bieber (saltybeagle)",
-                    "email": "saltybeagle@php.net"
-                },
-                {
-                    "name": "Gregory Beaver (cellog)",
-                    "email": "cellog@php.net"
-                }
-            ],
-            "description": "Savvy is a powerful but lightweight object-oriented template system for PHP.",
-            "homepage": "http://wdn.unl.edu/",
-            "time": "2016-01-20T16:49:46+00:00"
-        },
-        {
             "name": "slim/csrf",
             "version": "0.8.3",
             "source": {
@@ -781,6 +743,16 @@
                 "source": "https://github.com/unl/phpunltemplates/tree/v5.3.4"
             },
             "time": "2022-01-24T19:05:47+00:00"
+        },
+        {
+            "name": "unl/savvy",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/unl/Savvy.git",
+                "reference": "master"
+            },
+            "type": "library"
         },
         {
             "name": "unl/unl_cache_lite",
@@ -2351,6 +2323,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "unl/savvy": 20,
         "jasig/phpcas": 20
     },
     "prefer-stable": false,
@@ -2360,5 +2333,5 @@
     "platform-overrides": {
         "php": "5.6.1"
     },
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.6.0"
 }

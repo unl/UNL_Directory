@@ -186,38 +186,38 @@ class UNL_Peoplefinder_Driver_LDAP_Entry extends ArrayObject
         return $entry;
     }
 
-    public function append($value)
+    public function append($value):void
     {
         throw new Exception('Unimplemented');
     }
 
-    public function exchangeArray($input)
+    public function exchangeArray($input): array
     {
         $input = self::normalizeEntry($input);
         return parent::exchangeArray($input);
     }
 
-    public function offsetExists($index)
+    public function offsetExists($index): bool
     {
         $index = strtolower($index);
         return parent::offsetExists($index);
     }
 
-    public function offsetGet($index)
+    public function offsetGet($index): mixed
     {
         $index = strtolower($index);
         return parent::offsetGet($index);
     }
 
-    public function offsetSet($index, $newval)
+    public function offsetSet($index, $newval): void
     {
         $index = strtolower($index);
-        return parent::offsetSet($index, $newval);
+        parent::offsetSet($index, $newval);
     }
 
-    public function offsetUnset($index)
+    public function offsetUnset($index): void
     {
         $index = strtolower($index);
-        return parent::offsetUnset($index);
+        parent::offsetUnset($index);
     }
 }

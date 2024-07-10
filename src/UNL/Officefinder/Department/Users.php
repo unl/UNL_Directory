@@ -26,7 +26,7 @@ class UNL_Officefinder_Department_Users extends UNL_Officefinder_UserList
         parent::__construct($users);
     }
 
-    public function current()
+    public function current(): mixed
     {
         $user = new UNL_Officefinder_Department_User();
         $user->department_id = $this->department_id;
