@@ -33,8 +33,7 @@
                         1.1.9 1.3 1.1.4 2.1.8 3.2 1.2 2.7 1 5.2 1.9 7.1 2.8-3.8
                         3.3-8.6 5-13.7 5-5.2 0-9.9-1.8-13.7-5z"
                     ></path>
-                </svg>
-                Update My Avatar
+                </svg>Update My Avatar
             </a>
         </li>
         <li>
@@ -52,8 +51,7 @@
                         A1.001 1.001 0 0111 6.004zm3.5 14h-6a.5.5 0 010-1h2.499v-8
                         H9.5a.5.5 0 010-1h2a.5.5 0 01.499.5v8.5H14.5a.5.5 0 010 1z"
                     ></path>
-                </svg>
-                Directory Help
+                </svg>Directory Help
             </a>
         </li>
         <li>
@@ -71,8 +69,7 @@
                         0h2.5a.5.5 0 01.5.5v23a.501.501 0 01-.854.354L16
                         21.707V0z"
                     ></path>
-                </svg>
-                Developer Documentation
+                </svg>Developer Documentation
             </a>
         </li>
     </ul>
