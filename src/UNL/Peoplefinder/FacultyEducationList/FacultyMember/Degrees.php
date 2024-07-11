@@ -10,7 +10,7 @@ class UNL_Peoplefinder_FacultyEducationList_FacultyMember_Degrees extends Filter
         parent::__construct($degrees);
     }
 
-    public function accept()
+    public function accept(): bool
     {
         $degree = trim($this->current());
         switch (substr($degree, 0, 1)) {

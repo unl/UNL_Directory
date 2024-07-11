@@ -147,7 +147,7 @@ class UNL_Knowledge_Records implements JsonSerializable
         return $getPublicProperties();
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $data = $this->getPublicProperties();
 

@@ -24,17 +24,17 @@ class UNL_Peoplefinder_Department_Search implements Countable, Iterator
         $this->results = $this->xml->xpath('//attribute[@name="org_unit"][@value="50000001"]/..//attribute[@name="name"][contains(translate(@value,"ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz"),"'.$q.'")]');
     }
     
-    function current()
+    function current(): mixed
     {
         return new UNL_Peoplefinder_Department(array('d'=>$this->results[$this->current]['value']));
     }
     
-    function next()
+    function next(): void
     {
         $this->current++;
     }
     
-    function valid()
+    function valid(): bool
     {
         if ($this->current < count($this->results)) {
             return true;
@@ -42,17 +42,17 @@ class UNL_Peoplefinder_Department_Search implements Countable, Iterator
         return false;
     }
     
-    function count()
+    function count(): int
     {
         return count($this->results);
     }
     
-    function rewind()
+    function rewind(): void
     {
         $this->current = 0;
     }
     
-    function key()
+    function key(): mixed
     {
         return $this->current()->name;
     }

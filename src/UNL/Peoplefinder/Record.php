@@ -96,7 +96,10 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
 
     public static function getCleanPhoneNumber($phone)
     {
-        return str_replace(array('(', ')', '-', ' '), '', $phone);
+        if (isset($phone)) {
+            return str_replace(array('(', ')', '-', ' '), '', $phone);
+        }
+        return '';
     }
 
     /**

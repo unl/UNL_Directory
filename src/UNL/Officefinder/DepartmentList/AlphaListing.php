@@ -37,7 +37,7 @@ class UNL_Officefinder_DepartmentList_AlphaListing extends FilterIterator
         return $sql;
     }
 
-    public function accept()
+    public function accept(): bool
     {
         if ($this->current()->department->hasChildren()
             || isset($this->current()->department->phone)) {
@@ -46,7 +46,7 @@ class UNL_Officefinder_DepartmentList_AlphaListing extends FilterIterator
         return false;
     }
 
-    public function current()
+    public function current(): mixed
     {
         $row = parent::current();
         return new UNL_Officefinder_DepartmentList_AlphaListing_Department($row[1],
