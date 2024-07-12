@@ -20,7 +20,7 @@ class UNL_Peoplefinder_Record_QRCode implements UNL_Peoplefinder_DirectOutput, U
 
     protected $record;
 
-    private $valid_formats = array('png', 'svg');
+    public static $valid_formats = array('png', 'svg');
 
     public static $icon_path_png;
     public static $icon_path_svg;
@@ -44,7 +44,7 @@ class UNL_Peoplefinder_Record_QRCode implements UNL_Peoplefinder_DirectOutput, U
         $this->format = 'png';
 
         $split_uid = explode('.', strtolower($this->uid));
-        if (in_array(end($split_uid), $this->valid_formats)) {
+        if (in_array(end($split_uid), self::$valid_formats)) {
             $this->format = end($split_uid);
             $temp_split_uid = array_slice($split_uid, 0, -1);
             $this->uid = implode('.', $temp_split_uid);
@@ -85,6 +85,11 @@ class UNL_Peoplefinder_Record_QRCode implements UNL_Peoplefinder_DirectOutput, U
     public function getUrl($options = [])
     {
         return UNL_Peoplefinder::$url . 'qrcode/' . $this->record->uid;
+    }
+
+    public static function getBaseURL()
+    {
+        return UNL_Peoplefinder::$url . 'qrcode/';
     }
 
     public function send()

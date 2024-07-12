@@ -745,16 +745,13 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
         return $this->getUrl(['print' => true]);
     }
 
-    public function getQRCodeUrl($content)
+    public function getQRCodeUrl($format='png')
     {
-        // WARNING: Google has officially deprecated this API on April 20, 2012
-        $options = [
-            'cht' => 'qr',
-            'chs' => '400x400',
-            'chl' => $content,
-            'chld' => 'L|1',
-        ];
-        return 'https://chart.googleapis.com/chart?' . http_build_query($options);
+        $validated_format = 'png';
+        if (in_array($format, UNL_Peoplefinder_Record_QRCode::$valid_formats)) {
+            $validated_format = $format;
+        }
+        return UNL_Peoplefinder_Record_QRCode::getBaseURL() . $this->uid . '.' . $validated_format;
     }
 
     public function getHRPrimaryDepartment()
