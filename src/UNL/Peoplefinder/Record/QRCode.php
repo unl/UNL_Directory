@@ -26,7 +26,12 @@ class UNL_Peoplefinder_Record_QRCode implements UNL_Peoplefinder_DirectOutput, U
     public static $icon_path_svg;
     public static $icon_size;
 
-    public static $cache_dir = __DIR__ . '/../../../../data/qr/cache/';
+    private static $tmp_dir = __DIR__ . '/../../../../tmp';
+
+    /**
+     * @var string no leading slashes
+     */
+    public static $cache_dir = 'qr/';
     public static $cache_prefix;
 
     public function __construct($options = [])
@@ -84,12 +89,17 @@ class UNL_Peoplefinder_Record_QRCode implements UNL_Peoplefinder_DirectOutput, U
 
     public function send()
     {
+        $qr_directory = realpath(self::$tmp_dir) . '/' . self::$cache_dir;
+        if (!file_exists($qr_directory)) {
+            mkdir(self::$cache_dir);
+        }
+
         $qrCodeHash = hash("sha512", $this->record->uid);
-        $qrCache = realpath(self::$cache_dir) . '/' . (self::$cache_prefix ?? "") . $qrCodeHash . '.' . $this->format;
+        $qrCache = $qr_directory . '/' . (self::$cache_prefix ?? "") . $qrCodeHash . '.' . $this->format;
 
         // Remove any old cached files
         if (isset(self::$cache_prefix) && !empty(self::$cache_prefix)) {
-            $file_pattern = realpath(self::$cache_dir) . '/*' . $qrCodeHash . '.' . $this->format;
+            $file_pattern = $qr_directory . '/*' . $qrCodeHash . '.' . $this->format;
             $files = glob($file_pattern, GLOB_BRACE);
             foreach ($files as $file) {
                 // Check the current cachePrefix is not in there before deleting
@@ -144,7 +154,7 @@ class UNL_Peoplefinder_Record_QRCode implements UNL_Peoplefinder_DirectOutput, U
             ->setSize(1080)
             ->setMargin(10)
             ->setRoundBlockSizeMode(RoundBlockSizeMode::Margin)
-            ->setForegroundColor(new Color(0, 0, 0))
+            ->setForegroundColor(new Color(35, 31, 32))
             ->setBackgroundColor(new Color(255, 255, 255));
 
         if (!empty(self::$icon_path_png) && !empty(self::$icon_size) && file_exists(self::$icon_path_png)) {
@@ -169,7 +179,7 @@ class UNL_Peoplefinder_Record_QRCode implements UNL_Peoplefinder_DirectOutput, U
             ->setSize(1080)
             ->setMargin(10)
             ->setRoundBlockSizeMode(RoundBlockSizeMode::Margin)
-            ->setForegroundColor(new Color(0, 0, 0))
+            ->setForegroundColor(new Color(35, 31, 32))
             ->setBackgroundColor(new Color(255, 255, 255));
 
         if (!empty(self::$icon_path_svg) && !empty(self::$icon_size) && file_exists(self::$icon_path_svg)) {
