@@ -1,7 +1,7 @@
 <?php
 require_once dirname(__FILE__).'/../www/config.inc.php';
 error_reporting(E_ALL | E_STRICT);
-$db = new mysqli('localhost', UNL_Officefinder::$db_user, UNL_Officefinder::$db_pass, 'officefinder');
+$db = new mysqli('localhost', UNL_Officefinder::$db_user, UNL_Officefinder::$db_pass, UNL_Officefinder::$db_name);
 echo '<pre>';
 // OK Wipe the DB
 $db->query('TRUNCATE departments');
