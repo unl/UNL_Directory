@@ -38,5 +38,8 @@
     "Directory"
   ],
   "author": "UNL Web Developer Network <wdn@unl.edu> (http://wdn.unl.edu/)",
-  "license": "BSD-3-Clause"
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "pm2": "^5.4.2"
+  }
 }

@@ -182,7 +182,7 @@ class UNL_PersonInfo_ImageHelper
                     $tmp_image->setImageResolution($dpi, $dpi);
 
                     // Resizes and this will resample the image at the new resolution
-                    $tmp_image->resizeImage($width, $newHeight, Imagick::FILTER_LANCZOS, 1, true);
+                    $tmp_image->resizeImage(intval($width), intval($newHeight), Imagick::FILTER_LANCZOS, 1, true);
 
                     // Saves the new image
                     $this->images[$image_name . '_' . $width . '_' . $dpi] = $tmp_image;

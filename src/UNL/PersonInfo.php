@@ -301,7 +301,6 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
     {
         // Get the user and their record
         $user = self::$user;
-        $user_record = new UNL_PersonInfo_Record($user);
 
         $file_mime_type = mime_content_type($_FILES['profile_input']['tmp_name']);
         if (!in_array($file_mime_type, array('image/jpeg', 'image/png', 'image/avif', 'application/octet-stream'))) {
@@ -326,30 +325,23 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
         set_time_limit(300);
         // Try to manipulate the image
         try {
-            // Create a new image helper
-            $image_helper = new UNL_PersonInfo_ImageHelper(
-                $_FILES['profile_input']['tmp_name'],
-                array(
-                    // 'keep_files' => true,
-                )
-            );
-
             // Get position and size of the square
             $square_x = intval($_POST['profile_square_pos_x']);
             $square_y = intval($_POST['profile_square_pos_y']);
             $square_size = intval($_POST['profile_square_size']);
 
-            // Crop the image
-            $image_helper->crop_image($square_x, $square_y, $square_size, $square_size);
+            $avatar_job_creation = new UNL_PersonInfo_AvatarJob();
+            $avatar_job = $avatar_job_creation->createRecord(
+                'tneumann9',
+                $_FILES['profile_input']['tmp_name'],
+                $square_x,
+                $square_y,
+                $square_size,
+            );
 
-            // Make many sizes and resolutions of the image
-            $image_helper->resize_image(self::$avatar_sizes, self::$avatar_dpi);
-
-            // Save all the versions to these formats
-            $image_helper->save_to_formats(self::$avatar_formats);
-
-            // Save those files to the user
-            $image_helper->write_to_user($user_record);
+            if ($avatar_job === false) {
+                throw new Exception('Failed to create record');
+            }
 
         } catch (UNL_PersonInfo_Exceptions_InvalidImage $e) {
             $this->create_notice(

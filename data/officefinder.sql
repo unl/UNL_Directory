@@ -114,6 +114,21 @@ CREATE TABLE `person_info` (
   PRIMARY KEY (`uid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+DROP TABLE IF EXISTS `person_info_avatar_job`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `person_info_avatar_job` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `status` ENUM('queued','working','finished','error') NOT NULL DEFAULT 'queued',
+  `file` LONGTEXT COLLATE utf8_unicode_ci DEFAULT NULL,
+  `square_x` int(11) NOT NULL,
+  `square_y` int(11) NOT NULL,
+  `square_size` int(11) NOT NULL,
+  `error` LONGTEXT COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
