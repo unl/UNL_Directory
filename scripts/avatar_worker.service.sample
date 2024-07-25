@@ -5,7 +5,7 @@ StartLimitIntervalSec=0
 [Service]
 Restart=always
 RestartSec=1
-ExecStart=/usr/bin/php /scripts/avatar_worker.php
+ExecStart=/usr/bin/php /var/www/html/directory.unl.edu/scripts/avatar_worker.php
 
 [Install]
 WantedBy=default.target
