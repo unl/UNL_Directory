@@ -125,7 +125,7 @@ class UNL_PersonInfo_Instructions
     }
 
     public function hasQueuedJob()
-    { 
+    {
         return $this->has_current_job && $this->has_current_queued_job;
     }
 }

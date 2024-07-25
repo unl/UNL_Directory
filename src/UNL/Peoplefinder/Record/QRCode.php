@@ -118,17 +118,21 @@ class UNL_Peoplefinder_Record_QRCode implements UNL_Peoplefinder_DirectOutput, U
         $savvy = new UNL_Peoplefinder_Savvy();
         $content = $savvy->render($this->record, 'templates/vcard/Peoplefinder/Record.tpl.php');
 
+        if (!isset($content) || empty($content)) {
+            throw new Exception('Could not get person vcard', 500);
+        }
+
         if (!file_exists($qrCache)) {
             if ($this->format === 'png') {
                 $this->createAndSavePNG($content, $qrCache);
-            } else if ($this->format === 'svg') {
+            } elseif ($this->format === 'svg') {
                 $this->createAndSaveSVG($content, $qrCache);
             }
         }
 
         if ($this->format === 'png') {
             $this->sendPNG($qrCache);
-        } else if ($this->format === 'svg') {
+        } elseif ($this->format === 'svg') {
             $this->sendSVG($qrCache);
         }
     }
@@ -145,7 +149,7 @@ class UNL_Peoplefinder_Record_QRCode implements UNL_Peoplefinder_DirectOutput, U
     private function sendSVG(string $file_path)
     {
         header('Content-Type: image/svg+xml');
-        include_once($file_path);
+        include_once $file_path ;
         exit;
     }
 

@@ -55,6 +55,7 @@ class UNL_PersonInfo_AvatarJob extends UNL_PersonInfo_BaseRecord
 
     public function __construct()
     {
+        // Nothing here
     }
 
     public function save_image_for_later(string $filename): string

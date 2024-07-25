@@ -186,13 +186,10 @@ class UNL_PersonInfo_BaseRecord
             if (isset($this->field_types) && !empty($this->field_types)) {
                 $types .= $this->field_types[$name] ?? 's';
             } else {
-                switch($name) {
-                    case 'id':
-                        $types .= 'i';
-                        break;
-                    default:
-                        $types .= 's';
-                        break;
+                if ($name == 'id') {
+                    $types .= 'i';
+                } else {
+                    $types .= 's';
                 }
             }
             
