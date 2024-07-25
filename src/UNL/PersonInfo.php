@@ -319,10 +319,9 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
             && !empty($_POST['admin_user_uid_set'])
             && $_POST['admin_user_uid_set'] !== $user
         ) {
-            $user_record = new UNL_PersonInfo_Record($_POST['admin_user_uid_set']);
+            $user = $_POST['admin_user_uid_set'];
         }
 
-        set_time_limit(300);
         // Try to manipulate the image
         try {
             // Get position and size of the square
@@ -332,7 +331,7 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
 
             $avatar_job_creation = new UNL_PersonInfo_AvatarJob();
             $avatar_job = $avatar_job_creation->createRecord(
-                'tneumann9',
+                $user,
                 $_FILES['profile_input']['tmp_name'],
                 $square_x,
                 $square_y,
