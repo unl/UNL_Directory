@@ -174,12 +174,12 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
      *
      * @return int
      */
-    public function count()
+    public function count(): int
     {
         return count($this->getLDAPResults());
     }
 
-    public function rewind()
+    public function rewind(): void
     {
         $this->getLDAPResults()->rewind();
     }
@@ -189,33 +189,33 @@ class UNL_Peoplefinder_Department implements Countable, Iterator
      *
      * @return UNL_Peoplefinder_Record
      */
-    public function current()
+    public function current(): mixed
     {
         return $this->getLDAPResults()->current();
     }
 
-    public function key()
+    public function key(): mixed
     {
         return $this->getLDAPResults()->key();
     }
 
-    public function next()
+    public function next(): void
     {
         $this->getLDAPResults()->next();
     }
 
-    public function valid()
+    public function valid(): bool
     {
         return $this->getLDAPResults()->valid();
     }
 
-    public function hasChildren()
+    public function hasChildren(): bool
     {
         $results = self::getXML()->xpath(self::$_xpath_base.'//attribute[@name="org_unit"][@value="'.$this->org_unit.'"]/../branch');
         return count($results)?true:false;
     }
 
-    public function getChildren()
+    public function getChildren(): array
     {
         $children = [];
         $results = self::getXML()->xpath(self::$_xpath_base.'//attribute[@name="org_unit"][@value="'.$this->org_unit.'"]/../branch');

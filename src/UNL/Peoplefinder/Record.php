@@ -96,7 +96,10 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
 
     public static function getCleanPhoneNumber($phone)
     {
-        return str_replace(array('(', ')', '-', ' '), '', $phone);
+        if (isset($phone)) {
+            return str_replace(array('(', ')', '-', ' '), '', $phone);
+        }
+        return '';
     }
 
     /**
@@ -742,16 +745,13 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
         return $this->getUrl(['print' => true]);
     }
 
-    public function getQRCodeUrl($content)
+    public function getQRCodeUrl($format='png')
     {
-        // WARNING: Google has officially deprecated this API on April 20, 2012
-        $options = [
-            'cht' => 'qr',
-            'chs' => '400x400',
-            'chl' => $content,
-            'chld' => 'L|1',
-        ];
-        return 'https://chart.googleapis.com/chart?' . http_build_query($options);
+        $validated_format = 'png';
+        if (in_array($format, UNL_Peoplefinder_Record_QRCode::$valid_formats)) {
+            $validated_format = $format;
+        }
+        return UNL_Peoplefinder_Record_QRCode::getBaseURL() . $this->uid . '.' . $validated_format;
     }
 
     public function getHRPrimaryDepartment()
@@ -842,6 +842,33 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
         return serialize($data);
     }
 
+    public function __serialize():array
+    {
+        $data = $this->getPublicProperties();
+
+        foreach ($data as $key => $value) {
+            if ($value instanceof Traversable) {
+                $data[$key] = iterator_to_array($value);
+            }
+        }
+
+        if ($this->uid) {
+            // inject methods as properties
+            $data['imageURL'] = $this->getCleanImageURL();
+
+            if ($address = $this->formatPostalAddress()) {
+                $data['unlDirectoryAddress'] = $address;
+            }
+
+            if ($this->shouldShowKnowledge()) {
+                $knowledge = $this->getKnowledge();
+                $data['knowledge'] = $knowledge->jsonSerialize();
+            }
+        }
+
+        return $data;
+    }
+
     public function unserialize($serialized)
     {
         $data = unserialize($serialized);
@@ -868,7 +895,33 @@ class UNL_Peoplefinder_Record implements UNL_Peoplefinder_Routable, Serializable
         }
     }
 
-    public function jsonSerialize()
+    public function __unserialize(array $serialized): void
+    {
+        $data = $serialized;
+
+        foreach (array_keys($this->getPublicProperties()) as $var) {
+            if (isset($data[$var])) {
+                $value = $data[$var];
+
+
+                if (is_array($value)) {
+                    if ($var === 'mail' && in_array(self::BAD_SAP_MAIL_PLACEHOLDER, $value)) {
+                        continue;
+                    }
+
+                    $this->$var = new UNL_Peoplefinder_Driver_LDAP_Multivalue($value);
+                } else {
+                    if ($var === 'mail' && $value == UNL_Peoplefinder_Record::BAD_SAP_MAIL_PLACEHOLDER) {
+                        continue;
+                    }
+
+                    $this->$var = $value;
+                }
+            }
+        }
+    }
+
+    public function jsonSerialize(): mixed
     {
         $data = $this->getPublicProperties();
 

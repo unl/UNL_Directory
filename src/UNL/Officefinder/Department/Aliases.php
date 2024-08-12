@@ -25,7 +25,7 @@ class UNL_Officefinder_Department_Aliases extends ArrayIterator
         parent::__construct($aliases);
     }
     
-    function current()
+    function current(): mixed
     {
         $alias                = new UNL_Officefinder_Department_Alias();
         $alias->department_id = $this->department_id;

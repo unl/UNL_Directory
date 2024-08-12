@@ -171,12 +171,18 @@ class UNL_PersonInfo_ImageHelper
                     /** @var Imagick $current_image */
                     $tmp_image = clone $current_image;
 
+                    $tmp_image_width = $tmp_image->getImageWidth();
+                    $tmp_image_height = $tmp_image->getImageHeight();
+                    $temp_image_aspect_ratio = $tmp_image_height / $tmp_image_width;
+
+                    $newHeight = $temp_image_aspect_ratio * $width;
+
                     // Sets the resolution
                     $tmp_image->setImageUnits(Imagick::RESOLUTION_PIXELSPERINCH);
                     $tmp_image->setImageResolution($dpi, $dpi);
 
                     // Resizes and this will resample the image at the new resolution
-                    $tmp_image->resizeImage($width, null, Imagick::FILTER_LANCZOS, 1);
+                    $tmp_image->resizeImage(intval($width), intval($newHeight), Imagick::FILTER_LANCZOS, 1, true);
 
                     // Saves the new image
                     $this->images[$image_name . '_' . $width . '_' . $dpi] = $tmp_image;

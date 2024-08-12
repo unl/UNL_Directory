@@ -16,8 +16,13 @@ class UNL_PersonInfo_Instructions
 {
     public $options;
 
+    public $json_output;
+
     public $user;
     public $record;
+    public $current_job;
+    public $has_current_job;
+    public $has_current_queued_job;
 
     public function __construct($options = array())
     {
@@ -31,6 +36,18 @@ class UNL_PersonInfo_Instructions
 
         // Get their record once they are logged in
         $this->record = new UNL_PersonInfo_Record($this->user);
+
+        $this->current_job = new UNL_PersonInfo_AvatarJob();
+        $this->has_current_job = $this->current_job->getByUID($this->user);
+        $this->has_current_queued_job = !$this->current_job->isCompleted();
+
+        if ($this->options['format'] === 'json') {
+            if ($this->has_current_job === true) {
+                $this->json_output = ['avatar_job_status' => $this->current_job->status];
+            } else {
+                $this->json_output = ['avatar_job_status' => null];
+            }
+        }
     }
 
     /**
@@ -105,5 +122,10 @@ class UNL_PersonInfo_Instructions
         } else {
             return round($size);
         }
+    }
+
+    public function hasQueuedJob()
+    {
+        return $this->has_current_job && $this->has_current_queued_job;
     }
 }

@@ -9,7 +9,7 @@ class UNL_Peoplefinder_Driver_LDAP_Multivalue extends ArrayIterator implements J
 		parent::__construct($attribute);
 	}
 
-	public function jsonSerialize()
+	public function jsonSerialize(): mixed
 	{
 		return $this->getArrayCopy();
 	}
@@ -19,7 +19,7 @@ class UNL_Peoplefinder_Driver_LDAP_Multivalue extends ArrayIterator implements J
      *
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         $firstValue = $this[0];
         return (string) $firstValue;

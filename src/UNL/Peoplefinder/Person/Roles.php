@@ -21,9 +21,20 @@ class UNL_Peoplefinder_Person_Roles extends IteratorIterator implements Countabl
         return serialize($this->getInnerIterator());
     }
 
+    public function __serialize(): array
+    {
+        return iterator_to_array($this->getInnerIterator());
+    }
+
     public function unserialize($serialized)
     {
         $iterator = unserialize($serialized);
+        parent::__construct($iterator);
+    }
+
+    public function __unserialize(array $serialized): void
+    {
+        $iterator = new ArrayIterator($serialized);
         parent::__construct($iterator);
     }
 
@@ -51,8 +62,8 @@ class UNL_Peoplefinder_Person_Roles extends IteratorIterator implements Countabl
      *
      * @see Countable::count()
      */
-    public function count()
+    public function count(): int
     {
-        return count($this->getInnerIterator());
+        return iterator_count($this->getInnerIterator());
     }
 }

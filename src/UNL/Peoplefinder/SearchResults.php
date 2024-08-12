@@ -42,8 +42,11 @@ class UNL_Peoplefinder_SearchResults extends ArrayIterator
     public static function affiliationSort($affiliation1, $affiliation2)
     {
         if ($affiliation1 == 'emeriti') {
-            return true;
+            return 1;
         }
-        return $affiliation1 > $affiliation2;
+        if ($affiliation1 == $affiliation2) {
+            return 0;
+        }
+        return ($affiliation1 < $affiliation2) ? -1 : 1;
     }
 }

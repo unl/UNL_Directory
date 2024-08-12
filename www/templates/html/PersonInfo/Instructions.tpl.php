@@ -34,6 +34,106 @@
     <div class="dcf-hero-group-2"></div>
 </div>
 
+<?php if ($context->hasQueuedJob()): ?>
+    <div id="avatar_job_notice" class="dcf-notice dcf-notice-info" data-no-close-button hidden>
+        <h2>Processing Your Avatar</h2>
+        <div id="avatar_job_notice_message" aria-live="polite">We are working on getting your avatar updated</div>
+    </div>
+
+    <template id="avatar_job_notice_success_icon">
+        <svg
+            class="dcf-h-100% dcf-w-100%"
+            aria-hidden="true"
+            focusable="false"
+            height="24"
+            width="24"
+            viewBox="0 0 24 24"
+        >
+            <path fill="#fefdfa" d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm5.5
+                9L10 16c-.1.1-.3.2-.5.2s-.4-.1-.5-.2l-2.5-2.5c-.1-.1-.2-.3-.2-.5s.1-.4.2-.5c.3-.3.8-.3
+                1.1 0l2 2 7-6.5c.1-.1.3-.2.5-.2s.4.1.5.2c.2.3.2.8-.1 1z"
+            >
+        </svg>
+    </template>
+
+    <template id="avatar_job_notice_danger_icon">
+        <svg
+            class="dcf-h-100% dcf-w-100%"
+            aria-hidden="true"
+            focusable="false"
+            height="24"
+            width="24"
+            viewBox="0 0 24 24"
+        >
+            <path fill="#fefdfa" d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm5.5
+                9L10 16c-.1.1-.3.2-.5.2s-.4-.1-.5-.2l-2.5-2.5c-.1-.1-.2-.3-.2-.5s.1-.4.2-.5c.3-.3.8-.3
+                1.1 0l2 2 7-6.5c.1-.1.3-.2.5-.2s.4.1.5.2c.2.3.2.8-.1 1z"
+            >
+        </svg>
+    </template>
+
+    <script>
+        const status_URL = '<?php echo UNL_PersonInfo::getURL(['format' => 'json']); ?>';
+        const status_finished = '<?php echo UNL_PersonInfo_AvatarJob::STATUS_FINISHED; ?>';
+        const status_error = '<?php echo UNL_PersonInfo_AvatarJob::STATUS_ERROR; ?>';
+
+        const notice_success_icon = document.getElementById('avatar_job_notice_success_icon')?.content?.querySelector('svg')?.cloneNode(true);
+        const notice_danger_icon = document.getElementById('avatar_job_notice_danger_icon')?.content?.querySelector('svg')?.cloneNode(true);
+
+        const avatar_job_notice = document.getElementById('avatar_job_notice');
+        
+        async function check_status() {
+            const avatar_job_notice_message = document.getElementById('avatar_job_notice_message');
+            const avatar_job_notice_icon = document.getElementById('avatar_job_notice').querySelector('.dcf-notice-icon');
+
+            try {
+                const response = await fetch(status_URL);
+                if (!response.ok) {
+                    console.error('Error getting data');
+                }
+
+                const parsed_json = await response.json();
+                console.log(parsed_json);
+                if (!('avatar_job_status' in parsed_json)) {
+                    console.error('Error parsing data');
+                }
+
+                if (parsed_json['avatar_job_status'] === 'finished') {
+                    console.log('DONE!');
+                    avatar_job_notice_message.innerHTML = 'Your avatar has finished processing. <a href=".">Please reload the page</a>';
+                    avatar_job_notice.classList.remove('dcf-notice-info');
+                    avatar_job_notice.classList.add('dcf-notice-success');
+                    if (notice_success_icon) {
+                        avatar_job_notice_icon.innerHTML = '';
+                        avatar_job_notice_icon.append(notice_success_icon);
+                    }
+                } else if (parsed_json['avatar_job_status'] === 'error') {
+                    avatar_job_notice_message.innerText = 'An error occurred while trying to process your avatar. Please let an administrator know if the issue persists.';
+                    avatar_job_notice.classList.remove('dcf-notice-info');
+                    avatar_job_notice.classList.add('dcf-notice-danger');
+                    if (notice_danger_icon) {
+                        avatar_job_notice_icon.querySelector('.dcf-notice-icon').innerHTML = '';
+                        avatar_job_notice_icon.querySelector('.dcf-notice-icon').append(notice_danger_icon);
+                    }
+                } else {
+                    setTimeout(check_status, 5000);
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        window.addEventListener('inlineJSReady', function() {
+            let timer = setInterval(() => {
+                if (avatar_job_notice.classList.contains('dcf-notice-initialized')) {
+                    clearInterval(timer);
+                    check_status();
+                }
+            }, 200);
+        }, false);
+    </script>
+<?php endif; ?>
+
 <div class="dcf-main-content">
     <div class="dcf-wrapper">
         <div>

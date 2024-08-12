@@ -16,36 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `department_aliases`
---
-
-DROP TABLE IF EXISTS `department_aliases`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `department_aliases` (
-  `department_id` int(11) NOT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`department_id`,`name`),
-  CONSTRAINT `FK_DEPT_ALIAS_DEPT` FOREIGN KEY (`department_id`) REFERENCES `departments` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `department_permissions`
---
-
-DROP TABLE IF EXISTS `department_permissions`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `department_permissions` (
-  `department_id` int(11) NOT NULL,
-  `uid` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`department_id`,`uid`),
-  CONSTRAINT `FK_DEPT_PERM_DEPT` FOREIGN KEY (`department_id`) REFERENCES `departments` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Table structure for table `departments`
 --
 
@@ -89,6 +59,37 @@ CREATE TABLE `departments` (
 ) ENGINE=InnoDB AUTO_INCREMENT=6131 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+
+--
+-- Table structure for table `department_aliases`
+--
+
+DROP TABLE IF EXISTS `department_aliases`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `department_aliases` (
+  `department_id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`department_id`,`name`),
+  CONSTRAINT `FK_DEPT_ALIAS_DEPT` FOREIGN KEY (`department_id`) REFERENCES `departments` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `department_permissions`
+--
+
+DROP TABLE IF EXISTS `department_permissions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `department_permissions` (
+  `department_id` int(11) NOT NULL,
+  `uid` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`department_id`,`uid`),
+  CONSTRAINT `FK_DEPT_PERM_DEPT` FOREIGN KEY (`department_id`) REFERENCES `departments` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
 --
 -- Table structure for table `telecom_unidaslt_to_departments`
 --
@@ -111,6 +112,21 @@ CREATE TABLE `person_info` (
   `uid` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   `avatar_updated_on` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`uid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+DROP TABLE IF EXISTS `person_info_avatar_job`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `person_info_avatar_job` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `status` ENUM('queued','working','finished','error') NOT NULL DEFAULT 'queued',
+  `file` LONGTEXT COLLATE utf8_unicode_ci DEFAULT NULL,
+  `square_x` int(11) NOT NULL,
+  `square_y` int(11) NOT NULL,
+  `square_size` int(11) NOT NULL,
+  `error` LONGTEXT COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

@@ -593,24 +593,6 @@ define([
 			e.preventDefault();
 		});
 
-		$container.on('click', '.dir-btn-qr-code-vcard', function() {
-
-			var self = $(this);
-
-			var onReady = function() {
-				modalReady = true;
-				$(self).colorbox({open:true, photo:true});
-			};
-
-			if (modalReady) {
-				onReady();
-			} else {
-				WDN.initializePlugin('modal', [onReady]);
-			}
-
-			return false;
-		});
-
 		$container.on('click', '.directory_annotate', function(e) {
 			var $this = $(this);
 

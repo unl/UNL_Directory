@@ -11,7 +11,7 @@ class UNL_Officefinder_TreeView extends FilterIterator
         parent::__construct(new RecursiveIteratorIterator($iterator, RecursiveIteratorIterator::SELF_FIRST));
     }
 
-    public function accept()
+    public function accept(): bool
     {
         if ($this->getInnerIterator()->current()->isOfficialDepartment()
             && strlen($this->getInnerIterator()->current()->org_unit) == 8) {

@@ -43,7 +43,7 @@ class UNL_Peoplefinder_FacultyEducationList extends FilterIterator implements Co
         return new UNL_Peoplefinder_FacultyEducationList_FacultyMember($data, $this->options);
     }
 
-    function accept()
+    function accept(): bool
     {
         $faculty = $this->current();
         if (in_array($faculty->nu_id, $this->seen_nuids)) {
@@ -55,7 +55,7 @@ class UNL_Peoplefinder_FacultyEducationList extends FilterIterator implements Co
         return true;
     }
 
-    public function count()
+    public function count(): int
     {
         $count = 0;
         // Reset the number of seen NUIDs

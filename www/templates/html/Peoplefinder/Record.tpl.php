@@ -244,7 +244,12 @@ $showKnowledge = $context->shouldShowKnowledge() === TRUE && $hasKnowledge === T
             </svg>
             <span class="dcf-sr-only">Download </span>vCard<span class="dcf-sr-only"> for <?php echo $preferredName ?></span>
         </a>
-        <a class="dir-btn-qr-code-vcard dcf-btn dcf-btn-secondary dcf-b-0 dcf-d-flex dcf-flex-col dcf-ai-center" href="<?php echo $context->getQRCodeUrl($savvy->render($context, 'templates/vcard/Peoplefinder/Record.tpl.php')) ?>">
+        <button
+            class="dcf-btn dcf-btn-secondary dcf-b-0 dcf-d-flex dcf-flex-col dcf-ai-center dcf-btn-toggle-modal"
+            data-toggles-modal="<?php echo $context->uid; ?>-qr-code-modal"
+            type="button"
+            disabled
+        >
             <svg class="dcf-mb-2 dcf-h-7 dcf-w-7 dcf-fill-current" aria-hidden="true" focusable="false" height="24" width="24" viewBox="0 0 24 24">
                 <path d="M7.505 0h-7a.5.5 0 00-.5.5v7a.5.5 0 00.5.5h7a.5.5 0 00.5-.5v-7a.5.5 0 00-.5-.5zm-.5 7h-6V1h6v6z"></path>
                 <path d="M2.505 6h3a.5.5 0 00.5-.5v-3a.5.5 0 00-.5-.5h-3a.5.5 0 00-.5.5v3a.5.5 0 00.5.5zm.5-3h2v2h-2V3zm4.5 13h-7a.5.5 0 00-.5.5v7a.5.5 0 00.5.5h7a.5.5 0 00.5-.5v-7a.5.5 0 00-.5-.5zm-.5 7h-6v-6h6v6z"></path>
@@ -253,7 +258,7 @@ $showKnowledge = $context->shouldShowKnowledge() === TRUE && $hasKnowledge === T
                 <path d="M14.505 22h5a.5.5 0 000-1h-4.5v-2a.5.5 0 00-1 0v2.5a.5.5 0 00.5.5zM11 16.5v3a.5.5 0 001 0V17h2.505a.5.5 0 000-1H11.5a.5.5 0 00-.5.5zM7.505 14h-2a.5.5 0 000 1h2a.5.5 0 000-1zm5.5-3h-2a.5.5 0 000 1h2a.5.5 0 000-1zm4.495 1a.5.5 0 00-.5.5V14h-1.5a.5.5 0 000 1h3a.5.5 0 000-1H18v-1.5a.5.5 0 00-.5-.5z"></path>
             </svg>
             QR Code<span class="dcf-sr-only"> vCard for <?php echo $preferredName ?></span>
-        </a>
+        </button>
         <button class="dir-btn-print-vcard dcf-btn dcf-btn-secondary dcf-b-0 dcf-d-flex dcf-flex-col dcf-ai-center">
             <svg class="dcf-mb-2 dcf-h-7 dcf-w-7 dcf-fill-current" aria-hidden="true" focusable="false" height="24" width="24" viewBox="0 0 24 24">
                 <path d="M21.5 7h-19A2.503 2.503 0 000 9.5v6C0 16.878 1.122 18 2.5 18H5v4.5a.5.5 0 00.5.5h13a.5.5 0 00.5-.5V18h2.5c1.378 0 2.5-1.122 2.5-2.5v-6C24 8.122 22.878 7 21.5 7zM18 22H6v-7h12v7zm5-6.5c0 .827-.673 1.5-1.5 1.5H19v-2.5a.5.5 0 00-.5-.5h-13a.5.5 0 00-.5.5V17H2.5c-.827 0-1.5-.673-1.5-1.5v-6C1 8.673 1.673 8 2.5 8h19c.827 0 1.5.673 1.5 1.5v6zM5.5 6a.5.5 0 00.5-.5V2h9v2.5a.5.5 0 00.5.5H18v.5a.5.5 0 001 0v-1a.499.499 0 00-.147-.354l-2.999-2.999A.51.51 0 0015.5 1h-10a.5.5 0 00-.5.5v4a.5.5 0 00.5.5zM16 2.707L17.293 4H16V2.707z"></path>
@@ -263,6 +268,53 @@ $showKnowledge = $context->shouldShowKnowledge() === TRUE && $hasKnowledge === T
         </button>
     </div>
 </div>
+
+<div class="dcf-modal" id="<?php echo $context->uid; ?>-qr-code-modal" hidden>
+  <div class="dcf-modal-wrapper">
+    <div class="dcf-modal-header">
+      <h2>QR Code for <?php echo $preferredName ?></h2>
+      <button class="dcf-btn-close-modal">Close</button>
+    </div>
+    <div class="
+        dcf-modal-content
+        dcf-wrapper
+        dcf-pb-4
+        dcf-mt-4
+        dcf-d-flex
+        dcf-flex-wrap
+        dcf-flex-row
+        dcf-ai-center
+        dcf-jc-evenly"
+    >
+        <figure class="dcf-mb-4">
+            <img style="max-height: 10rem;" src="<?php echo $context->getQRCodeUrl('png'); ?>" alt="">
+            <figcaption class="dcf-figcaption dcf-txt-center">
+                <a download="qr-<?php echo $context->uid; ?>.png" href="<?php echo $context->getQRCodeUrl('png'); ?>" title="Download PNG Version">
+                    PNG Version
+                </a>
+            </figcaption>
+        </figure>
+        <figure class="dcf-mb-4">
+            <img style="max-height: 10rem;" src="<?php echo $context->getQRCodeUrl('svg'); ?>" alt="">
+            <figcaption class="dcf-figcaption dcf-txt-center">
+                <a download="qr-<?php echo $context->uid; ?>.svg" href="<?php echo $context->getQRCodeUrl('svg'); ?>" title="Download SVG Version">
+                    SVG Version
+                </a>
+            </figcaption>
+        </figure>
+    </div>
+  </div>
+</div>
+
+<script class="dcf-d-none">
+    if (typeof WDN !== undefined) {
+        require (['dcf-modal', 'plugins/body-scroll-lock'], (modalModule, bodyScrollLock) => {
+            const modals = document.querySelectorAll('#<?php echo $context->uid; ?>-qr-code-modal');
+            const unlModal = new modalModule.DCFModal(modals, bodyScrollLock);
+            unlModal.initialize();
+        });
+    }
+</script>
 
 <?php if ($showKnowledge): ?>
     </div>
