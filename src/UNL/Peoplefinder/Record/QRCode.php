@@ -31,7 +31,7 @@ class UNL_Peoplefinder_Record_QRCode implements UNL_Peoplefinder_DirectOutput, U
     /**
      * @var string no leading slashes
      */
-    public static $cache_dir = 'qr/';
+    public static $cache_dir = 'qr';
     public static $cache_prefix;
 
     public function __construct($options = [])
