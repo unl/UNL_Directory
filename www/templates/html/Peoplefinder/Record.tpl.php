@@ -307,7 +307,7 @@ $showKnowledge = $context->shouldShowKnowledge() === TRUE && $hasKnowledge === T
 </div>
 
 <script class="dcf-d-none">
-    if (typeof WDN !== undefined) {
+    if (typeof WDN !== undefined && typeof require === 'function') {
         require (['dcf-modal', 'plugins/body-scroll-lock'], (modalModule, bodyScrollLock) => {
             const modals = document.querySelectorAll('#<?php echo $context->uid; ?>-qr-code-modal');
             const unlModal = new modalModule.DCFModal(modals, bodyScrollLock);
