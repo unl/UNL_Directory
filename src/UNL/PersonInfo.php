@@ -339,6 +339,18 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
             );
 
             if ($avatar_job === false) {
+                $current_job = new UNL_PersonInfo_AvatarJob();
+                $has_current_job = $current_job->getByUID($user);
+                $has_current_queued_job = !$current_job->isCompleted();
+
+                if ($has_current_job && $has_current_queued_job) {
+                    $this->create_notice(
+                        "Failed to Upload",
+                        "We are currently working on processing your avatar. Please wait until this current process is complete.",
+                        "WARNING"
+                    );
+                    self::redirect(self::getURL(), true);
+                }
                 throw new Exception('Failed to create record');
             }
 

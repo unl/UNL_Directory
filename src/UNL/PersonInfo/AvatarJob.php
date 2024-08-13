@@ -85,6 +85,10 @@ class UNL_PersonInfo_AvatarJob extends UNL_PersonInfo_BaseRecord
      */
     public function createRecord(string $uid, string $filename, int $square_x, int $square_y, int $square_size): bool
     {
+        if (!$this->checkForUncompletedRecord($uid)) {
+            return false;
+        }
+
         // Delete any current jobs for that UID
         $this->deleteAllCompletedRecords($uid);
 
@@ -97,6 +101,22 @@ class UNL_PersonInfo_AvatarJob extends UNL_PersonInfo_BaseRecord
         $this->square_y = $square_y;
         $this->square_size = $square_size;
         return $this->insert();
+    }
+
+    public function checkForUncompletedRecord(string $uid): bool
+    {
+        $mysqli = self::getDB();
+        $sql = 'SELECT * FROM ' . $this->getTable()
+        . ' WHERE uid = "' . $mysqli->escape_string($uid) . '"'
+        . ' AND NOT (status = "' . self::STATUS_FINISHED . '"'
+        . ' OR status = "' . self::STATUS_ERROR . '")';
+        $result = $mysqli->query($sql);
+
+        if ($result === false) {
+            throw new Exception('Error talking to database', 500);
+        }
+
+        return $result->num_rows === 0;
     }
 
     public function deleteAllCompletedRecords(string $uid): bool
@@ -113,7 +133,32 @@ class UNL_PersonInfo_AvatarJob extends UNL_PersonInfo_BaseRecord
 
     public function getFirstQueued(): bool
     {
-        return $this->getByWhere('status', self::STATUS_QUEUED);
+        $initial_result = $this->getByWhere('status', self::STATUS_QUEUED);
+        if ($initial_result === false) {
+            return false;
+        }
+
+        // Delete all the other rows for that UID
+        // If we have multiple rows per UID we get an error in the worker service
+        $mysqli = self::getDB();
+        $sql = 'DELETE FROM ' . $this->getTable()
+        . ' WHERE uid = "' . $this->uid . '"'
+        . ' AND id NOT IN ( '
+        . ' SELECT id '
+        . ' FROM ( '
+        . '    SELECT id '
+        . '    FROM ' . $this->getTable()
+        . '    ORDER BY id DESC '
+        . '    LIMIT 1 '
+        . ' ) foo '
+        . ' );';
+        $delete_old_queued = $mysqli->query($sql);
+
+        if ($delete_old_queued  === false) {
+            throw new Exception('Error talking to database', 500);
+        }
+
+        return $initial_result;
     }
 
     public function isCompleted()
