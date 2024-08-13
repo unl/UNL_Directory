@@ -11,8 +11,7 @@ $SIGQUIT = 3;
 
 function shutdown()
 {
-    // Clean Up Files
-    echo PHP_EOL;
+    // Image helper __destruct will clean up files
     exit;
 }
 

@@ -133,32 +133,42 @@ class UNL_PersonInfo_AvatarJob extends UNL_PersonInfo_BaseRecord
 
     public function getFirstQueued(): bool
     {
-        $initial_result = $this->getByWhere('status', self::STATUS_QUEUED);
-        if ($initial_result === false) {
+
+        // Get Next Queued Job
+        $mysqli = self::getDB();
+        $get_where_sql    = 'SELECT * FROM '
+                    . $this->getTable()
+                    . ' WHERE '
+                    . ' status = "' . self::STATUS_QUEUED . '"'
+                    . ' ORDER BY ID DESC '
+                    . ' LIMIT 1 ';
+
+        $get_where_stmt = $mysqli->prepare($get_where_sql);
+        $get_where_stmt->execute();
+        $result = $get_where_stmt->get_result();
+
+        if ($result === false
+            || $result->num_rows == 0) {
             return false;
         }
+
+        // Synchronize this object
+        $this->synchronizeWithArray($result->fetch_assoc());
 
         // Delete all the other rows for that UID
         // If we have multiple rows per UID we get an error in the worker service
         $mysqli = self::getDB();
         $sql = 'DELETE FROM ' . $this->getTable()
         . ' WHERE uid = "' . $this->uid . '"'
-        . ' AND id NOT IN ( '
-        . ' SELECT id '
-        . ' FROM ( '
-        . '    SELECT id '
-        . '    FROM ' . $this->getTable()
-        . '    ORDER BY id DESC '
-        . '    LIMIT 1 '
-        . ' ) foo '
-        . ' );';
+        . ' AND id <> ' . $this->id;
+
         $delete_old_queued = $mysqli->query($sql);
 
-        if ($delete_old_queued  === false) {
-            throw new Exception('Error talking to database', 500);
+        if ($delete_old_queued === false) {
+            return false;
         }
 
-        return $initial_result;
+        return true;
     }
 
     public function isCompleted()
