@@ -72,7 +72,15 @@ function addDepartment(UNL_Officefinder_Department $old, UNL_Peoplefinder_Depart
 {
     try {
         foreach ($old as $key => $val) {
-            echo "\t" . $key . ": " . $val . PHP_EOL;
+            $output_key = $key;
+            if (is_array($key)) {
+                $output_key = implode('\n', $key);
+            }
+            $output_val = $val;
+            if (is_array($val)) {
+                $output_val = implode('\n', $val);
+            }
+            echo "\t" . $output_key . ": " . $output_val . PHP_EOL;
             if (isset($new->$key)
                 && $key != 'options') {
                 $old->$key = $new->$key;
@@ -122,7 +130,7 @@ function updateDepartment(UNL_Officefinder_Department $old, UNL_Peoplefinder_Dep
 }
 
 /**
- * This method is used to compare the department objects for changes to help determin if it should be
+ * This method is used to compare the department objects for changes to help determine if it should be
  * updated.
  *
  * @param $old Object with the old data

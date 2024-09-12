@@ -299,7 +299,7 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
 
             }
 
-            //prepares the BIODEMO_IDs to be used in the affiation query
+            //prepares the BIODEMO_IDs to be used in the affiliation query
             if (!empty($row['BIODEMO_ID'])) {
                 $biodemo_key = ":uid_" . count($biodemo_id_binding);
                 $biodemo_id_binding[] = $biodemo_key;
@@ -327,7 +327,7 @@ class UNL_Peoplefinder_Driver_OracleDB implements UNL_Peoplefinder_DriverInterfa
             ";
             $affiliation_results = $this->query($affiliation_query, $biodemo_id_values);     
 
-            //aggragating the results based on NETID
+            //aggregating the results based on NETID
             $agg_results = array();
             foreach ($affiliation_results as $row) {
                 if (is_null($row['EPA_AFFILIATION'])) {
