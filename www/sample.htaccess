@@ -40,3 +40,5 @@ RewriteRule (.*) /person_images/%1 [L]
 
 # Faculty page
 RewriteRule ^faculty/all$ index.php?view=facultyedu&limit=3000
+
+RewriteRule ^api/v1/emailToUID index.php [QSA]
