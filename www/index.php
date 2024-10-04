@@ -9,6 +9,11 @@ if (strpos($_SERVER['REQUEST_URI'], 'service.php') !== false) {
 $options = $_GET + $options;
 $options['driver'] = $driver;
 
+if (strpos($_SERVER['REQUEST_URI'], '/api/v1') === 0) {
+    new UNL_APIController($options);
+    exit();
+}
+
 if (strpos($_SERVER['REQUEST_URI'], '/departments/') !== false) {
     $peoplefinder = new UNL_Officefinder($options);
 } elseif (strpos($_SERVER['REQUEST_URI'], '/myinfo') !== false) {
