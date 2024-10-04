@@ -20,7 +20,7 @@ class UNL_APIController
 
     /**
      * Converts the user's email to a UID
-     * 
+     *
      * @param array $options These are the options made in www/index.php
      * @return array Returns the UID in message.data or returns the error
      */
@@ -46,7 +46,7 @@ class UNL_APIController
 
         // Try to get the user
         try {
-            $peoplefinder = new UNL_Peoplefinder($options);
+            new UNL_Peoplefinder($options);
             $user_record = new UNL_Peoplefinder_Record(array('email' => $_GET['email']));
         } catch (Exception $e) {
             if ($e->getMessage() === 'Cannot find that Email.') {
