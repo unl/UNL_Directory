@@ -34,8 +34,20 @@ function process_avatar($current_job)
         $current_job->file
     );
 
+    $square_x = $current_job->square_x;
+    $square_y = $current_job->square_y;
+    $square_size = $current_job->square_size;
+    if ($square_x === 0) {
+        $square_x = 1;
+        $square_size = $square_size - 1;
+    }
+    if ($square_y === 0) {
+        $square_y = 1;
+        $square_size = $square_size - 1;
+    }
+
     // Crop the image
-    $image_helper->crop_image($current_job->square_x, $current_job->square_y, $current_job->square_size, $current_job->square_size);
+    $image_helper->crop_image($square_x, $square_y, $square_size, $square_size);
 
     // Make many sizes and resolutions of the image
     $image_helper->resize_image(UNL_PersonInfo::$avatar_sizes, UNL_PersonInfo::$avatar_dpi);
