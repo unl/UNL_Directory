@@ -440,6 +440,10 @@ define([
 			var $card = $(data).hide();
 			liRecord.append($card);
 
+			// Hide any script tags
+			// F5 has a bad habit of adding script tags
+			$card.parent().find('script').addClass('dcf-d-none');
+
 			//Add a close button
 			var closeButton = $('<button>', {
 				'class': 'close-full-record dcf-btn dcf-btn-tertiary',
