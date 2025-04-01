@@ -171,7 +171,7 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
             return self::$user = $auth->getUsername();
         }
 
-        if (in_array('unl_sso', $_COOKIE) && !empty($_COOKIE['unl_sso'])) {
+        if (array_key_exists('unl_sso', $_COOKIE) && !empty($_COOKIE['unl_sso'])) {
             self::authenticate();
         }
 
