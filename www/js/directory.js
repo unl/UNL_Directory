@@ -666,8 +666,8 @@ define([
 		});
 
 		bindRecordListeners($results.add('.record-container'));
-		bindResultsListeners($results);
-		bindDeptResultsListeners($results);
+		// bindResultsListeners($results);
+		// bindDeptResultsListeners($results);
 
 		affiliation_filter.addEventListener('ready', () => {
 			affiliation_filter.classList.remove('dcf-d-none');
@@ -1275,7 +1275,7 @@ define([
 
 					initialMainState = 2;
 					setMainState(initialMainState);
-					bindResultsListeners($employees);
+					// bindResultsListeners($employees);
 					bindRecordListeners($employees);
 					createStickyKit($summarySection);
 
