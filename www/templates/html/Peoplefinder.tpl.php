@@ -76,7 +76,7 @@ if (strpos($loginService, '//') === 0) {
     $loginService = 'https:' . $loginService;
 }
 $loginUrl = 'https://shib.unl.edu/idp/profile/cas/login?service=' . urlencode($loginService);
-$logoutUrl = 'https://shib.unl.edu/idp/profile/cas/logout?url=' . urlencode($loginService);
+$logoutUrl = UNL_Peoplefinder::getURL() . 'logout';
 $page->addScriptDeclaration("require(['wdn'], function(WDN) {
     WDN.setPluginParam('idm', 'login', '" . $loginUrl ."');
     WDN.setPluginParam('idm', 'logout', '" . $logoutUrl ."');

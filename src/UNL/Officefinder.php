@@ -171,6 +171,10 @@ class UNL_Officefinder
             return self::$user = $auth->getUsername();
         }
 
+        if (in_array('unl_sso', $_COOKIE) && empty($_COOKIE['unl_sso'])) {
+            self::authenticate();
+        }
+
         if ($forceAuth) {
             self::authenticate();
         }

@@ -1,6 +1,8 @@
 RewriteEngine On
 RewriteBase /
 
+RewriteRule ^logout index.php [QSA]
+
 RewriteRule ^service.php index.php [QSA]
 RewriteRule ^help/?$ index.php?view=help [QSA]
 RewriteRule ^search/(.*) index.php?q=$1

@@ -18,7 +18,11 @@ if (strpos($_SERVER['REQUEST_URI'], '/departments/') !== false) {
     $peoplefinder = new UNL_Officefinder($options);
 } elseif (strpos($_SERVER['REQUEST_URI'], '/myinfo') !== false) {
     $peoplefinder = new UNL_PersonInfo($options);
-}  else {
+} elseif (strpos($_SERVER['REQUEST_URI'], '/logout') !== false) {
+    $auth = new UNL_Officefinder_Auth();
+    $auth->logout();
+    $auth->handleSingleLogOut();
+} else {
     $peoplefinder = new UNL_Peoplefinder($options);
 }
 
