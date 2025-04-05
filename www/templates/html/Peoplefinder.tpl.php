@@ -91,6 +91,9 @@ $baseUrl = UNL_Peoplefinder::getURL();
 $version = UNL_Peoplefinder::$staticFileVersion;
 $scriptTag = "
 <script id=\"main-entry\">
+requirejs.config({
+    waitSeconds: 300
+});
 require(['" . $baseUrl . "js/directory.min.js?v=" . $version ."'], function(directory) {
   directory.initialize('" . $baseUrl . "', '" . UNL_Peoplefinder::$annotateUrl . "');
  });

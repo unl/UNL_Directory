@@ -59,6 +59,10 @@ CREATE TABLE `departments` (
 ) ENGINE=InnoDB AUTO_INCREMENT=6131 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+-- Seed this for things to work --
+INSERT INTO `departments` (id, name,org_unit,bc_org_unit,bc_name,building,room,city,state,postal_code,address,phone,fax,email,website,academic,suppress,parent_id,sort_order,uid,uidlastupdated,dateupdated,rgt,lft,`level`) VALUES
+	(1, 'University of Nebraska–Lincoln','50000003',NULL,NULL,NULL,NULL,'Lincoln','NE','68588','1400 R Street',NULL,NULL,NULL,'https://www.unl.edu/',0,0,4643,1,NULL,NULL,'2023-10-26 16:27:50',NULL,NULL,NULL),
+	(4643, 'University of Nebraska Office of the President','50000001',NULL,NULL,'VARH',NULL,'Lincoln','NE','68583','3835 Holdrege Street','402-472-2111',NULL,NULL,'https://www.nebraska.edu/',0,0,NULL,15,NULL,'erasmussen2','2022-08-19 15:07:36',NULL,NULL,NULL);
 
 --
 -- Table structure for table `department_aliases`
