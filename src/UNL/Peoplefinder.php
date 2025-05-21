@@ -35,6 +35,7 @@ class UNL_Peoplefinder
 	const AFFILIATION_VOLUNTEER = 'volunteer';
 	const AFFILIATION_RETIREE = 'retiree';
 	const AFFILIATION_EMERITI = 'emeriti';
+	const AFFILIATION_STUDENT_WORKER = 'student worker';
 	const AFFILIATION_GUEST = 'guest';
 	const AFFILIATION_CONTINUE_SERVICES = 'continue services';
 	const AFFILIATION_RIF = 'rif';
@@ -118,6 +119,7 @@ class UNL_Peoplefinder
 	    self::AFFILIATION_AFFILIATE,
 	    self::AFFILIATION_VOLUNTEER,
 	    self::AFFILIATION_EMERITI,
+	    self::AFFILIATION_STUDENT_WORKER,
 	);
 
     protected static $replacement_data = array();
