@@ -81,8 +81,10 @@ class UNL_Officefinder
 
         self::checkLogout();
 
-        if (in_array($this->options['format'], ['html'])) {
-            self::authenticate(true);
+        if (array_key_exists('unl_sso', $_COOKIE) && !empty($_COOKIE['unl_sso'])) {
+            if (in_array($this->options['format'], ['html'])) {
+                self::authenticate(true);
+            }
         }
 
         // prevent unauthenticated edit rendering

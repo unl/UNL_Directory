@@ -82,7 +82,7 @@ class UNL_PersonInfo implements UNL_PersonInfo_PageNoticeInterface
 
         // If it is an HTML request check if they are authenticated
         if (in_array($this->options['format'], ['html'])) {
-            self::authenticate(true);
+            self::authenticate();
         }
 
         try {
