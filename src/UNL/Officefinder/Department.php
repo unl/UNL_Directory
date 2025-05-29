@@ -38,9 +38,19 @@ class UNL_Officefinder_Department extends UNL_Officefinder_Record_NestedSetAdjac
 
     public $uid;
 
+    public $dateupdated;
+
     public $uidlastupdated;
 
+    public $rgt;
+
+    public $lft;
+
+    public $level;
+
     protected $internal = [];
+
+    public $options;
 
     /**
      * Construct a new listing
