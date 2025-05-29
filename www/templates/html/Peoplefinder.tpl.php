@@ -77,10 +77,17 @@ if (strpos($loginService, '//') === 0) {
 }
 $loginUrl = 'https://shib.unl.edu/idp/profile/cas/login?service=' . urlencode($loginService);
 $logoutUrl = UNL_Peoplefinder::getURL() . 'logout';
-$page->addScriptDeclaration("require(['wdn'], function(WDN) {
+$page->addScriptDeclaration("
+if (window.WDN !== undefined) {
     WDN.setPluginParam('idm', 'login', '" . $loginUrl ."');
     WDN.setPluginParam('idm', 'logout', '" . $logoutUrl ."');
-});");
+} else {
+    require(['wdn'], function(WDN) {
+        WDN.setPluginParam('idm', 'login', '" . $loginUrl ."');
+        WDN.setPluginParam('idm', 'logout', '" . $logoutUrl ."');
+    });
+}
+");
 
 $html = $page->toHtml();
 unset($page);
@@ -91,6 +98,9 @@ $baseUrl = UNL_Peoplefinder::getURL();
 $version = UNL_Peoplefinder::$staticFileVersion;
 $scriptTag = "
 <script id=\"main-entry\">
+requirejs.config({
+    waitSeconds: 300,
+});
 require(['" . $baseUrl . "js/directory.min.js?v=" . $version ."'], function(directory) {
   directory.initialize('" . $baseUrl . "', '" . UNL_Peoplefinder::$annotateUrl . "');
  });
