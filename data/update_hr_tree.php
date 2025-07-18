@@ -26,37 +26,41 @@ updateOfficialDepartment($sap_dept);
  */
 function updateOfficialDepartment(UNL_Peoplefinder_Department $sap_dept, UNL_Officefinder_Department &$parent = null)
 {
-    if (!($dept = UNL_Officefinder_Department::getByorg_unit($sap_dept->org_unit))) {
-        // Uhoh, new department!
-        $dept = new UNL_Officefinder_Department();
+    if ($sap_dept->org_unit !== '50010251') {
+        if (!($dept = UNL_Officefinder_Department::getByorg_unit($sap_dept->org_unit))) {
+            // Uhoh, new department!
+            $dept = new UNL_Officefinder_Department();
 
-        // Now add department with the official data from SAP
-        addDepartment($dept, $sap_dept);
-        
-        echo 'New department found: '.$dept->name.' ('.$dept->org_unit.')'.PHP_EOL;
-    } elseif (hasUpdate($dept, $sap_dept)) {
+            // Now add department with the official data from SAP
+            addDepartment($dept, $sap_dept);
 
-        // Found changes in existing department so update it
-        echo PHP_EOL . 'Existing department found with updateable changes: '.$dept->name.' ('.$dept->org_unit.')'.PHP_EOL;
-        updateDepartment($dept, $sap_dept);
-        echo "\tExisting department updated with changes: ".$dept->name.' ('.$dept->org_unit.')'.PHP_EOL;
-    }
-
-    if ($parent) {
-        if ($dept->isChildOf($parent)) {
-            // All OK!
-        } else {
-            if (isset($dept->parent_id)) {
-                // This department has moved
-                echo 'Department move:'.$dept->name.' has moved from '.UNL_Officefinder_Department::getByID($dept->parent_id)->name.' to '.$parent->name.PHP_EOL;
-            }
-            $parent->addChild($dept, true);
+            echo 'New department found: ' . $dept->name . ' (' . $dept->org_unit . ')' . PHP_EOL;
         }
-    }
+        elseif (hasUpdate($dept, $sap_dept)) {
 
-    if ($sap_dept->hasChildren()) {
-        foreach ($sap_dept->getChildren() as $sap_sub_dept) {
-            updateOfficialDepartment($sap_sub_dept, $dept);
+            // Found changes in existing department so update it
+            echo PHP_EOL . 'Existing department found with updateable changes: ' . $dept->name . ' (' . $dept->org_unit . ')' . PHP_EOL;
+            updateDepartment($dept, $sap_dept);
+            echo "\tExisting department updated with changes: " . $dept->name . ' (' . $dept->org_unit . ')' . PHP_EOL;
+        }
+
+        if ($parent) {
+            if ($dept->isChildOf($parent)) {
+                // All OK!
+            }
+            else {
+                if (isset($dept->parent_id)) {
+                    // This department has moved
+                    echo 'Department move:' . $dept->name . ' has moved from ' . UNL_Officefinder_Department::getByID($dept->parent_id)->name . ' to ' . $parent->name . PHP_EOL;
+                }
+                $parent->addChild($dept, TRUE);
+            }
+        }
+
+        if ($sap_dept->hasChildren()) {
+            foreach ($sap_dept->getChildren() as $sap_sub_dept) {
+                updateOfficialDepartment($sap_sub_dept, $dept);
+            }
         }
     }
 }
