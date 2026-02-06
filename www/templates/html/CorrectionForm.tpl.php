@@ -25,12 +25,13 @@
   <p class="success dcf-p-10 dcf-d-none" tabindex="-1"></p>
   <h2>Have a correction?</h2>
   <p>
-    If you'd like to correct your own entry, contact your departmental HR liaison.
+    If you'd like to correct your own entry or another person's information
+    (e.g. phone number, email, address, name) contact your departmental HR liaison.
   </p>
   <p>
-    For corrections to another person's contact or department/unit information, please send us an email at
+    For corrections to a department/unit's information, please send us an email at
     <a href="mailto:dxg@lists.nebraska.edu">dxg@lists.nebraska.edu</a>. Be sure to include the specific
-    change needed and the name of the person or department involved. Including a link to the page you’re viewing is
+    change needed and department involved. Including a link to the page you’re viewing is
     also very helpful in ensuring the request is routed to the correct team.
   </p>
 </div>
