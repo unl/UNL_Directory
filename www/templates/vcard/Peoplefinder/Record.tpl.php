@@ -3,7 +3,7 @@
 echo "BEGIN:VCARD\n";
 echo "VERSION:3.0\n";
 echo "N:".$context->sn.";".$context->givenName.";;;\n";
-echo "FN:".$context->givenName." ".$context->sn."\n";
+echo "FN:".$context->displayName."\n";
 if (isset($context->unlHROrgUnitNumber) && is_iterable($context->unlHROrgUnitNumber)) {
     foreach ($context->unlHROrgUnitNumber as $orgUnit) {
         if (!$org = UNL_Officefinder_Department::getByorg_unit($orgUnit)) {
